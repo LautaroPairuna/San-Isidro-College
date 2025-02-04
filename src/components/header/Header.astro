@@ -1,0 +1,48 @@
+<div class="relative bg-white">
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-center bg-cover">
+    <nav class="grid grid-cols-2 items-center px-4 py-4 md:px-6 transition-all duration-500 ease-in-out">
+      
+      <!-- Columna Izquierda: Logo -->
+      <div class="flex justify-start ml-10">
+        <a href="/" class="flex items-center logo-container transition-all duration-500 ease-in-out" aria-label="San Isidro Home">
+          <img id="logo" src="/images/logo-san-isidro.svg" alt="Logo de San Isidro" class="h-16 w-auto md:h-20 transition-all duration-500 ease-in-out">
+        </a>
+      </div>
+
+      <!-- Columna Derecha: Enlaces y Menú Toggle -->
+      <div class="flex justify-end items-center space-x-4">
+        <div id="navLinks" class="hidden md:flex space-x-6">
+          <button class="bg-[#1e804b] text-white px-2 py-2 rounded-full">ESP</button>
+          <button class="bg-[#294161] text-white px-2 py-2 rounded-full ml-2">ING</button>
+          <button class="bg-[#c19516] ml-4 px-10 py-2 rounded-full text-white">☰ MENU</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const header = document.getElementById("header");
+    const logo = document.getElementById("logo");
+    const logoContainer = document.querySelector(".logo-container");
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled-header"); // Quita la imagen de fondo con transición suave
+        logoContainer.classList.add("scrolled-logo"); // Aplica fondo blanco al logo
+        logo.src = "/images/logo-san-isidro-2.svg"; // Cambia la imagen del logo
+      } else {
+        header.classList.remove("scrolled-header"); // Restaura la imagen de fondo suavemente
+        logoContainer.classList.remove("scrolled-logo"); // Quita el fondo blanco del logo con transición
+        logo.src = "/images/logo-san-isidro.svg"; // Restaura la imagen original del logo
+      }
+    });
+  });
+</script>
+
+
+
+

@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'AcuminVariableConcept';
+    src: url('/fonts/AcuminVariableConcept.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/GothamBold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/GothamBoldItalic.woff2') format('woff2');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/GothamBook.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/GothamBookItalic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/GothamLight.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Harlows';
+    src: url('/fonts/HARLOWSI.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Aplicar por defecto */
+body {
+    font-family: 'Gotham', sans-serif;
+}
+
+/* Transición suave en el header */
+#header {
+    transition: background 0.5s ease-in-out;
+}
+
+/* Cuando el usuario hace scroll: Header transparente */
+.scrolled-header {
+    background: transparent !important; /* Hace que el header sea completamente transparente */
+    backdrop-filter: none !important; /* Asegura que no haya desenfoque */
+}
+
+/* Transición suave en el logo */
+#logo {
+    transition: all 0.5s ease-in-out;
+}
+
+/* Contenedor del logo para aplicar la animación */
+.logo-container {
+    transition: all 0.5s ease-in-out;
+}
+
+/* Aplica el fondo blanco SOLO al logo cuando se hace scroll */
+.scrolled-logo {
+    background-color: white !important;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease-in-out;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+  
+  
+  
+  
+  
