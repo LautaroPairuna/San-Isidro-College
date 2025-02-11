@@ -30,22 +30,23 @@
 </div>
 
 <script>
-    document.querySelectorAll('.scroll-link').forEach(link => {
-        link.addEventListener('click', function (e) {
+  document.querySelectorAll('.scroll-link').forEach((link) => {
+    link.addEventListener('click', function (this: HTMLElement, e: Event) {
         e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1); // Obtener el ID de la sección
-        const targetElement = document.getElementById(targetId);
+        const targetId = this.getAttribute('href')?.substring(1); // Obtener el ID de la sección
+        if (!targetId) return; // Evitar errores si href no está definido
 
+        const targetElement = document.getElementById(targetId);
         if (targetElement) {
             const offset = 80; // Ajuste extra para evitar que se recorte en la parte superior
             const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
             const adjustedPosition = elementPosition - (window.innerHeight / 2) + (targetElement.clientHeight / 2) - offset;
 
             window.scrollTo({
-            top: adjustedPosition,
-            behavior: "smooth"
+                top: adjustedPosition,
+                behavior: "smooth"
             });
         }
-        });
     });
+  });
 </script>

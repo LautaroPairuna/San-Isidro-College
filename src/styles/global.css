@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'AcuminVariableConcept';
-    src: url('/fonts/AcuminVariableConcept.woff2') format('woff2');
+    src: url('/fonts/Acumin-Variable-Concept.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -52,6 +52,11 @@
 /* Aplicar por defecto */
 body {
     font-family: 'Gotham', sans-serif;
+}
+
+.titulo-home{
+    font-family: 'AcuminVariableConcept', sans-serif;
+    font-weight: 900;
 }
 
 /* Transición suave en el header */

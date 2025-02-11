@@ -1,112 +1,88 @@
 ---
 ---
 <section class="relative w-full h-auto py-10 bg-white">
-    <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
-      
-      <!-- Columna Izquierda: Logo y Texto en un rectángulo -->
-      <div class="col-span-4 relative flex flex-col justify-center">
-  
-        <!-- Contenedor del Texto -->
-        <div class="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-55 w-[90%] z-30">
-          <div class="text-gray-800 leading-relaxed">
-            <p>
-              Avenida Finca Yerba Buena 1500<br />
-              San Lorenzo Chico 4401<br />
-              A4401 San Lorenzo, Salta
-            </p>
-            <p class="mt-2">
-              <!-- El enlace mailto: para que abra el correo -->
-              <a 
-                href="mailto:info@colegiosanisidrosalta.edu.ar" 
-                class="hover:underline"
-              >
-                info@colegiosanisidrosalta.edu.ar
-              </a>
-            </p>
-          </div>
-          <hr class="my-6 border-gray-300" />
-          <div class="flex items-center justify-center gap-6">
-            <!-- Instagram -->
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
+  <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+    <!-- Columna Izquierda: Información de contacto -->
+    <div class="col-span-4 relative flex flex-col justify-center">
+      <!-- Contenedor del Texto (z-30) -->
+      <div class="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-55 w-[90%] z-30">
+        <div class="text-gray-800 leading-relaxed">
+          <p>
+            Avenida Finca Yerba Buena 1500<br />
+            San Lorenzo Chico 4401<br />
+            A4401 San Lorenzo, Salta
+          </p>
+          <p class="mt-2">
+            <a
+              href="mailto:info@colegiosanisidrosalta.edu.ar"
+              class="hover:underline"
             >
-              <!-- Reemplaza el siguiente SVG con el que prefieras -->
-              <svg 
-                class="w-5 h-5 text-white" 
-                fill="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07..."/>
-              </svg>
+              info@colegiosanisidrosalta.edu.ar
             </a>
-        
-            <!-- Facebook -->
-            <a 
-              href="https://facebook.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-            >
-              <!-- Ícono de Facebook -->
-              <svg 
-                class="w-5 h-5 text-white" 
-                fill="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.35..."/>
-              </svg>
-            </a>
-        
-            <!-- YouTube -->
-            <a 
-              href="https://youtube.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-            >
-              <!-- Ícono de YouTube -->
-              <svg
-                class="w-5 h-5 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19.615 3.184C21.955 3.507 24 5.124 24..."/>
-              </svg>
-            </a>
-        
-            <!-- LinkedIn -->
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-            >
-              <!-- Ícono de LinkedIn -->
-              <svg
-                class="w-5 h-5 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761..."/>
-              </svg>
-            </a>
-          </div>
+          </p>
         </div>
-  
-        <!-- Línea decorativa -->
-        <div class="absolute -top-5 -left-90 w-225">
-          <img src="/images/formas/forma-home-4.svg" alt="Decoración" class="w-full h-full">
-        </div>
-  
+        <hr class="my-6 border-gray-300" />
+        <div class="flex items-center justify-center gap-6">
+          <!-- Instagram -->
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
+          >
+            <img src="/images/ico-instagram.svg" alt="Instagram" class="w-5 h-5" />
+          </a>
+          <!-- Facebook -->
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
+          >
+            <img src="/images/ico-facebook.svg" alt="Facebook" class="w-5 h-5" />
+          </a>
+          <!-- YouTube -->
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
+          >
+            <img src="/images/ico-youtube.svg" alt="YouTube" class="w-5 h-5" />
+          </a>
+          <!-- LinkedIn -->
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
+          >
+            <img src="/images/ico-linkedin.svg" alt="LinkedIn" class="w-5 h-5" />
+          </a>
+        </div>        
       </div>
-  
-      <!-- Columna Derecha: Imagen -->
-      <div class="col-span-8 z-20">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.0870169140185!2d-65.48649632374536!3d-24.79247370797458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941be9dda29c6329%3A0x960b145b5c2957ed!2sSAN%20ISIDRO%20COLLEGE!5e0!3m2!1ses-419!2sar!4v1738620563995!5m2!1ses-419!2sar" width="840" height="740" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <!-- Línea decorativa -->
+      <div class="absolute -top-5 -left-90 w-225">
+        <img
+          src="/images/formas/forma-home-4.svg"
+          alt="Decoración"
+          class="w-full h-full"
+        />
       </div>
-  
     </div>
+
+    <!-- Columna Derecha: Mapa (z-20) -->
+    <div class="col-span-8 z-20">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.0870169140185!2d-65.48649632374536!3d-24.79247370797458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941be9dda29c6329%3A0x960b145b5c2957ed!2sSAN%20ISIDRO%20COLLEGE!5e0!3m2!1ses-419!2sar!4v1738620563995!5m2!1ses-419!2sar"
+        width="840"
+        height="740"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
 </section>

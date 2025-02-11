@@ -1,48 +1,88 @@
-<div class="relative bg-white">
-  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-center bg-cover">
-    <nav class="grid grid-cols-2 items-center px-4 py-4 md:px-6 transition-all duration-500 ease-in-out">
-      
-      <!-- Columna Izquierda: Logo -->
-      <div class="flex justify-start ml-10">
-        <a href="/" class="flex items-center logo-container transition-all duration-500 ease-in-out" aria-label="San Isidro Home">
-          <img id="logo" src="/images/logo-san-isidro.svg" alt="Logo de San Isidro" class="h-16 w-auto md:h-20 transition-all duration-500 ease-in-out">
+---
+import HeaderMenu from "./HeaderMenu.jsx";
+---
+
+<div id="container" class="relative bg-white">
+  <!-- Overlay (máscara de sombra) -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 transition-opacity duration-300"></div>
+
+  <!-- Header fijo -->
+  <header
+    id="header"
+    class="fixed top-0 left-0 right-0 z-60 transition-all duration-500 ease-in-out bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-center bg-cover"
+  >
+    <nav class="flex items-center justify-between px-6 py-4 md:px-12">
+      <!-- Logo -->
+      <div>
+        <a href="/" aria-label="San Isidro Home" class="flex items-center logo-container transition-all duration-500 ease-in-out">
+          <img
+            id="logo"
+            src="/images/logo-san-isidro.svg"
+            alt="Logo de San Isidro"
+            class="h-16 w-auto md:h-20 transition-all duration-500 ease-in-out"
+          />
         </a>
       </div>
-
-      <!-- Columna Derecha: Enlaces y Menú Toggle -->
-      <div class="flex justify-end items-center space-x-4">
-        <div id="navLinks" class="hidden md:flex space-x-6">
-          <button class="bg-[#1e804b] text-white px-2 py-2 rounded-full">ESP</button>
-          <button class="bg-[#294161] text-white px-2 py-2 rounded-full ml-2">ING</button>
-          <button class="bg-[#c19516] ml-4 px-10 py-2 rounded-full text-white">☰ MENU</button>
+      <!-- Botones de idioma y menú -->
+      <div class="flex items-center space-x-4">
+        <div class="flex space-x-2">
+          <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
+          <button class="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
         </div>
+        <button id="menuToggle" class="bg-[#c19516] px-6 py-3 rounded-full text-white">
+          ☰ MENÚ
+        </button>
       </div>
     </nav>
   </header>
+
+  <!-- Menú desplegable -->
+  <div id="dropdownMenu" class="fixed top-0 left-0 right-0 z-50 hidden">
+    <div
+      class="menu-panel bg-[#c19516] text-white w-full rounded-b-lg shadow-lg p-6 transform -translate-y-full transition-transform duration-300 ease-in-out"
+    >
+      <!-- Botón para cerrar -->
+      <button id="closeMenu" class="absolute top-4 right-6 text-3xl text-white">&times;</button>
+      <!-- Contenido del menú -->
+      <div class="flex justify-between items-center mb-6">
+        <a href="/" class="flex items-center logo-container transition-all duration-500 ease-in-out">
+          <img
+            id="menuLogo"
+            src="/images/logo-san-isidro.svg"
+            alt="Logo de San Isidro"
+            class="h-16 md:h-20"
+          />
+        </a>
+        <div class="flex space-x-2">
+          <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
+          <button class="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="border-b md:border-b-0 md:border-r border-white pb-4 md:pb-0 md:pr-4">
+          <h3 class="text-xl font-bold">Colegio</h3>
+          <ul class="mt-2 space-y-2">
+            <li><a href="/colegio" class="hover:underline">Sobre el colegio</a></li>
+          </ul>
+        </div>
+        <div class="border-b md:border-b-0 md:border-r border-white pb-4 md:pb-0 md:pr-4">
+          <h3 class="text-xl font-bold">Académico</h3>
+          <ul class="mt-2 space-y-2">
+            <li><a href="#" class="hover:underline">Vida Estudiantil</a></li>
+            <li><a href="/vida-estudiantil-mas-info" class="hover:underline">Más información</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold">Contacto</h3>
+          <ul class="mt-2 space-y-2">
+            <li><a href="#" class="hover:underline">Ubicación</a></li>
+            <li><a href="#" class="hover:underline">Redes Sociales</a></li>
+            <li><a href="#" class="hover:underline">Email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <HeaderMenu client:load />
 </div>
-
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const header = document.getElementById("header");
-    const logo = document.getElementById("logo");
-    const logoContainer = document.querySelector(".logo-container");
-
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 50) {
-        header.classList.add("scrolled-header"); // Quita la imagen de fondo con transición suave
-        logoContainer.classList.add("scrolled-logo"); // Aplica fondo blanco al logo
-        logo.src = "/images/logo-san-isidro-2.svg"; // Cambia la imagen del logo
-      } else {
-        header.classList.remove("scrolled-header"); // Restaura la imagen de fondo suavemente
-        logoContainer.classList.remove("scrolled-logo"); // Quita el fondo blanco del logo con transición
-        logo.src = "/images/logo-san-isidro.svg"; // Restaura la imagen original del logo
-      }
-    });
-  });
-</script>
-
-
-
-
