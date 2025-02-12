@@ -1,6 +1,8 @@
 ---
-import SectionCarrusel from "./paginasComponents/sectionCarrusel.astro"
-import SectionMapa from "./paginasComponents/sectionMapa.astro"
+import Carousel from '../components/paginasComponents/sectionCarrusel.tsx';
+import SectionMapa from "./paginasComponents/sectionMapa.astro";
+import SmoothLink from '../components/paginasComponents/SmoothLink';
+import AsideMenu from '../components/paginasComponents/AsideMenu';
 ---
 <section class="relative w-full min-h-screen bg-[#71af8d] px-60 overflow-x-hidden scroll-smooth">
   <!-- CONTENEDOR CENTRAL CON FONDO BLANCO -->
@@ -56,7 +58,7 @@ import SectionMapa from "./paginasComponents/sectionMapa.astro"
     </div>
 
     <!-- MISIÓN -->
-    <div class="space-y-4" id="kindergarden">
+    <div class="space-y-4" id="kindergarten">
       <h3 class="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
         Kindergarten
       </h3>
@@ -135,100 +137,28 @@ import SectionMapa from "./paginasComponents/sectionMapa.astro"
   </div> <!-- Fin del contenedor blanco -->
 
   <!-- ASIDE SUPERPUESTO EN EL COSTADO (ESPACIO VERDE) -->
-  <div class="w-1/3 relative">
-    <aside id="asideMenu" class="absolute right-10 transform -translate-y-1/2 w-64 text-gray-800 z-20">
-      <hr>
-      <h3 class="text-xl font-bold uppercase mb-4">ACADÉMICO</h3>
-      <ul class="space-y-3 m-0">
-        <li><a href="#proyecto" class="scroll-link hover:underline transition-all duration-300">Proyecto Educativo</a></li>
-        <li><a href="#kindergarden" class="scroll-link hover:underline transition-all duration-300">Kindergarden</a></li>
-        <li><a href="#primary" class="scroll-link hover:underline transition-all duration-300">Primary</a></li>
-        <li><a href="#secondary" class="scroll-link hover:underline transition-all duration-300">Secondary</a></li>
+  <div class="w-1/4 relative">
+    <AsideMenu client:load>
+      <hr class="border-t border-black mb-3" />
+      <h3 class="text-xl italic text-gray-900 mb-6">ACADEMICO</h3>
+      <ul class="space-y-5">
+        <li class="font-bold">
+          <SmoothLink href="#proyecto">Proyecto Bilingüe</SmoothLink>
+        </li>
+        <li class="space-y-1 font-bold">
+          <SmoothLink href="#kindergarten">Kindergarten</SmoothLink><br />
+          <SmoothLink href="#primary">Primary</SmoothLink><br />
+          <SmoothLink href="#secondary">Secondary</SmoothLink>
+        </li>
       </ul>
-    </aside>
+    </AsideMenu>
   </div>
 </section>
-<SectionCarrusel />
+
+{/* Componente del carrusel (se carga en el cliente) */}
+<Carousel client:load />
+
+{/* Componente de mapa (se mantiene en Astro) */}
 <SectionMapa />
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const carousel = document.getElementById("carousel");
-    if (!carousel) return; // Evitar errores si el elemento no existe
-
-    const slides = carousel.children.length;
-    let index = 0;
-
-    function showSlide(i: number) {
-      index = (i + slides) % slides;
-      if (carousel instanceof HTMLElement) {
-        carousel.style.transform = `translateX(-${index * 100}%)`;
-      }
-    }
-
-    const prevButton = document.getElementById("prev");
-    const nextButton = document.getElementById("next");
-
-    if (prevButton) {
-      prevButton.addEventListener("click", () => showSlide(index - 1));
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener("click", () => showSlide(index + 1));
-    }
-
-    // Cambio automático de imagen cada 5 segundos
-    setInterval(() => showSlide(index + 1), 5000);
-
-    const aside = document.getElementById("asideMenu");
-    if (!aside) return;
-
-    const container = aside.parentElement;
-    if (!container) return;
-
-    const topOffset = 375; // Ajuste para que no suba demasiado
-    let isFixed = false; // Variable para controlar el estado del menú
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!aside) return;
-        if (entry.isIntersecting) {
-          aside.style.position = "absolute";
-          aside.style.top = `${topOffset}px`;
-          isFixed = false; // Resetear estado cuando vuelve al inicio del contenedor
-        } else {
-          aside.style.position = "fixed";
-          aside.style.top = `${topOffset}px`;
-          isFixed = true; // Guardamos que está en estado "fijo"
-        }
-      },
-      { rootMargin: "-80px 0px 0px 0px", threshold: 0 }
-    );
-
-    observer.observe(container);
-
-    // Detectar cuando el menú llega al final del contenedor y detenerlo ahí
-    function checkAsidePosition() {
-      if (!container || !aside) return;
-
-      const containerRect = container.getBoundingClientRect();
-      const asideRect = aside.getBoundingClientRect();
-
-      // Si el aside llega al final del contenedor, lo fijamos abajo
-      if (asideRect.bottom > containerRect.bottom) {
-        aside.style.position = "absolute";
-        aside.style.top = `${container.scrollHeight - aside.clientHeight}px`;
-        isFixed = false; // Cambiamos el estado a "no fijo"
-      }
-
-      // Si el usuario vuelve a subir al mismo punto donde se activó "fixed", restaurarlo
-      if (window.scrollY < container.offsetTop && !isFixed) {
-        aside.style.position = "absolute";
-        aside.style.top = `${topOffset}px`;
-      }
-    }
-
-    window.addEventListener("scroll", checkAsidePosition);
-  });
-</script>
 

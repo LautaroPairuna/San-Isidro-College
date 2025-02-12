@@ -1,20 +1,27 @@
 ---
-import HeaderMenu from "./HeaderMenu.jsx";
+import HeaderMenu from "./HeaderMenu.tsx";
 ---
-
 <div id="container" class="relative bg-white">
   <!-- Overlay (máscara de sombra) -->
-  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 transition-opacity duration-300"></div>
+  <div
+    id="overlay"
+    class="fixed inset-0 bg-black opacity-65 hidden z-50 transition-opacity duration-300"
+  ></div>
 
   <!-- Header fijo -->
   <header
     id="header"
     class="fixed top-0 left-0 right-0 z-60 transition-all duration-500 ease-in-out bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-center bg-cover"
   >
-    <nav class="flex items-center justify-between px-6 py-4 md:px-12">
+    <!-- Se incrementa el padding vertical para hacer el header más alto -->
+    <nav class="flex items-center justify-between px-6 py-12 md:px-12">
       <!-- Logo -->
       <div>
-        <a href="/" aria-label="San Isidro Home" class="flex items-center logo-container transition-all duration-500 ease-in-out">
+        <a
+          href="/"
+          aria-label="San Isidro Home"
+          class="flex items-center logo-container transition-all duration-500 ease-in-out"
+        >
           <img
             id="logo"
             src="/images/logo-san-isidro.svg"
@@ -25,10 +32,12 @@ import HeaderMenu from "./HeaderMenu.jsx";
       </div>
       <!-- Botones de idioma y menú -->
       <div class="flex items-center space-x-4">
-        <div class="flex space-x-2">
+        <!-- Botones de idioma: ocultos en pantallas pequeñas -->
+        <div class="hidden md:flex space-x-2">
           <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
           <button class="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
         </div>
+        <!-- Botón para abrir el menú (visible en todas las resoluciones) -->
         <button id="menuToggle" class="bg-[#c19516] px-6 py-3 rounded-full text-white">
           ☰ MENÚ
         </button>
@@ -45,7 +54,10 @@ import HeaderMenu from "./HeaderMenu.jsx";
       <button id="closeMenu" class="absolute top-4 right-6 text-3xl text-white">&times;</button>
       <!-- Contenido del menú -->
       <div class="flex justify-between items-center mb-6">
-        <a href="/" class="flex items-center logo-container transition-all duration-500 ease-in-out">
+        <a
+          href="/"
+          class="flex items-center logo-container transition-all duration-500 ease-in-out"
+        >
           <img
             id="menuLogo"
             src="/images/logo-san-isidro.svg"
@@ -53,6 +65,7 @@ import HeaderMenu from "./HeaderMenu.jsx";
             class="h-16 md:h-20"
           />
         </a>
+        <!-- Botones de idioma para el menú (visible en cualquier tamaño) -->
         <div class="flex space-x-2">
           <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
           <button class="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
@@ -62,22 +75,34 @@ import HeaderMenu from "./HeaderMenu.jsx";
         <div class="border-b md:border-b-0 md:border-r border-white pb-4 md:pb-0 md:pr-4">
           <h3 class="text-xl font-bold">Colegio</h3>
           <ul class="mt-2 space-y-2">
-            <li><a href="/colegio" class="hover:underline">Sobre el colegio</a></li>
+            <li>
+              <a href="/colegio" class="hover:underline">Sobre el colegio</a>
+            </li>
           </ul>
         </div>
         <div class="border-b md:border-b-0 md:border-r border-white pb-4 md:pb-0 md:pr-4">
           <h3 class="text-xl font-bold">Académico</h3>
           <ul class="mt-2 space-y-2">
-            <li><a href="#" class="hover:underline">Vida Estudiantil</a></li>
-            <li><a href="/vida-estudiantil-mas-info" class="hover:underline">Más información</a></li>
+            <li>
+              <a href="#" class="hover:underline">Vida Estudiantil</a>
+            </li>
+            <li>
+              <a href="/vida-estudiantil-mas-info" class="hover:underline">Más información</a>
+            </li>
           </ul>
         </div>
         <div>
           <h3 class="text-xl font-bold">Contacto</h3>
           <ul class="mt-2 space-y-2">
-            <li><a href="#" class="hover:underline">Ubicación</a></li>
-            <li><a href="#" class="hover:underline">Redes Sociales</a></li>
-            <li><a href="#" class="hover:underline">Email</a></li>
+            <li>
+              <a href="#" class="hover:underline">Ubicación</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Redes Sociales</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Email</a>
+            </li>
           </ul>
         </div>
       </div>
