@@ -14,19 +14,19 @@ import HeaderMenu from "./HeaderMenu.tsx";
     class="fixed top-0 left-0 right-0 z-60 transition-all duration-500 ease-in-out bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-center bg-cover"
   >
     <!-- Se incrementa el padding vertical para hacer el header más alto -->
-    <nav class="flex items-center justify-between px-6 py-12 md:px-12">
+    <nav class="flex items-center justify-between px-6 py-6 md:py-12">
       <!-- Logo -->
       <div>
         <a
           href="/"
           aria-label="San Isidro Home"
-          class="flex items-center logo-container transition-all duration-500 ease-in-out"
+          class="flex items-center logo-container transition-all duration-500 ease-in-out ms-0 md:ms-10"
         >
           <img
             id="logo"
             src="/images/logo-san-isidro.svg"
             alt="Logo de San Isidro"
-            class="h-16 w-auto md:h-20 transition-all duration-500 ease-in-out"
+            class="h-12 w-auto md:h-20 transition-all duration-500 ease-in-out"
           />
         </a>
       </div>
@@ -84,10 +84,16 @@ import HeaderMenu from "./HeaderMenu.tsx";
           <h3 class="text-xl font-bold">Académico</h3>
           <ul class="mt-2 space-y-2">
             <li>
-              <a href="#" class="hover:underline">Vida Estudiantil</a>
+              <a href="/vida-estudiantil" class="hover:underline">Vida Estudiantil</a>
             </li>
             <li>
               <a href="/vida-estudiantil-mas-info" class="hover:underline">Más información</a>
+            </li>
+            <li>
+              <a href="/deportes" class="hover:underline">Deportes</a>
+            </li>
+            <li>
+              <a href="/deportes-mas-info" class="hover:underline">Deportes - Más información</a>
             </li>
           </ul>
         </div>

@@ -1,0 +1,219 @@
+---
+import SectionMapa from "./paginasComponents/sectionMapa.astro";
+import Carousel from '../components/paginasComponents/sectionCarrusel.tsx';
+---
+
+<div id="container">
+  <!-- Incluimos el Header con sus elementos interactivos -->
+
+  <!-- Sección 1: Imagen de fondo y texto -->
+  <section class="relative w-full h-auto grid grid-cols-12">
+    <!-- Columna Izquierda: Texto y botón (z-40) -->
+    <div class="col-span-4 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative">
+      <div class="absolute top-[60%] left-[77%] transform -translate-x-1/2 z-40">
+        <h1 class="titulo-estudiantil text-6xl font-black text-white leading-tight">
+          I am <br>
+          <em class="italic font-medium">because</em> <br>
+          we are
+        </h1>        
+      </div>
+    </div>
+  
+    <!-- Columna Derecha: Imagen de fondo y botón (z-40) -->
+    <div class="col-span-8 relative w-full h-full">
+      <img
+        src="/images/fondo-home.webp"
+        alt="Imagen de fondo"
+        class="w-full h-full object-cover"
+      />
+      
+      <!-- Recuadro blanco con texto -->
+      <div 
+        class="absolute top-[70%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 z-40
+               bg-white p-6 md:p-8 w-[400px] md:w-[550px] rounded-3xl shadow-lg"
+      >
+        <h2 class="text-3xl font-bold mb-2">Deportes</h2>
+        <p class="text-gray-700 mb-4">
+          San Isidro Collipie, ubicado en un marco natural privilegiado,
+          desarrolla un variado programa en el área de Educación Física.
+          Como parte del Proyecto Pedagógico, se propone contribuir
+          a la elaboración de un proyecto de vida.
+        </p>
+        <div class="text-center mt-5">
+          <a href="/deportes-mas-info" class="text-[#1e804b] font-semibold hover:underline">
+            Leer más
+          </a>
+        </div>
+      </div>
+      <!-- Fin recuadro blanco -->
+  
+      <!-- Botón ADMISIONES -->
+      <button 
+        class="absolute bottom-6 right-6 flex items-center gap-3 px-6 py-3 
+               bg-[#1e804b] text-white rounded-full shadow-lg transition z-40"
+      >
+        <img 
+          src="/images/ico-admisiones.svg" 
+          alt="Ver Admisiones" 
+          width="32" 
+          height="32"
+        > 
+        ADMISIONES
+      </button>
+    </div>
+  
+    <!-- Figura decorativa -->
+    <img
+      src="/images/formas/forma-home-1.svg"
+      alt="Forma decorativa"
+      class="absolute top-0 left-[32%] transform -translate-x-1/2 h-full pointer-events-none"
+    />
+  </section>
+  
+
+  <!-- Sección 2: Bienvenida -->
+  <section class="relative w-full h-auto py-10 bg-white">
+    <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+      <!-- Columna Izquierda: Texto en recuadro (z-20) -->
+      <div class="col-span-4 relative flex flex-col justify-center">
+        <div class="absolute top-55 left-41 w-[550px] z-20">
+          <img src="/images/logo-club-rugby-hockey.svg" width="128" height="128" alt="" class="mx-auto mb-5">
+          <div class="bg-white shadow-xl rounded-xl p-8 ">
+            <h2 class="text-2xl font-bold text-gray-900 text-center">
+              CLUB DE RUGBY Y HOCKEY
+            </h2>
+            <p class="mt-4 text-gray-700 leading-relaxed">
+              Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.
+            </p>
+          </div>
+        </div>
+        <!-- Línea decorativa -->
+        <div class="absolute -top-5 -left-60 w-[550px] z-10">
+          <img
+            src="/images/formas/forma-home-2.svg"
+            alt="Decoración"
+            class="w-full h-full"
+          />
+        </div>
+      </div>
+      <!-- Columna Derecha: Imagen -->
+      <div class="col-span-8">
+        <img
+          src="/images/fondo-bienvenida.webp"
+          alt="Imagen del colegio"
+          class="w-full h-auto rounded-xl shadow-lg"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 3: Sección de iconos y estadísticas -->
+  <section class="relative w-full h-screen bg-white py-5">
+    <!-- Imagen decorativa superpuesta (z-10) -->
+    <img
+      src="/images/formas/forma-home-5.svg"
+      alt="Forma decorativa"
+      class="absolute top-25 right-25 w-[650px] h-auto z-10"
+    />
+    <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto h-full px-4">
+      <!-- Columna Izquierda: Imagen principal -->
+      <div class="col-span-8 flex items-center justify-center">
+        <img
+          src="/images/fondo-iconos.webp"
+          alt="Imagen principal"
+          class="w-full h-auto rounded-md shadow-md"
+        />
+      </div>
+      <!-- Columna Derecha: Iconos (z-20) -->
+      <div class="absolute col-span-4 flex items-center justify-center z-20 top-[65%] left-[22%]">
+        <div class="absolute -top-75 left-103 w-[650px] z-20">
+          <img src="/images/logo-dojo.svg" width="128" height="128" alt="" class="mx-auto mb-5">
+          <div class="bg-white shadow-xl rounded-xl p-8 ">
+            <h2 class="text-2xl font-bold text-gray-900 text-center">
+              SAN ISIDRO COLLEGE DOJO
+            </h2>
+            <p class="mt-4 text-gray-700 leading-relaxed">
+              El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full h-auto py-10 bg-[#71af8d]">
+    <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+      <!-- Columna Izquierda: Texto en recuadro (z-20) -->
+      <div class="col-span-4 relative flex flex-col justify-center">
+        <div class="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
+          <h2 class="text-2xl font-bold text-gray-900 text-center">
+            VIDA ESTUDIANTIL
+          </h2>
+          <p class="mt-4 text-gray-700 leading-relaxed">
+            San Isidro College fomenta un ambiente positivo y dinámico donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés, ser resilientes y estar listos para los exámenes, con el apoyo del departamento de Servicios Estudiantiles y tutorías.
+          </p>
+          <div class="text-center mt-5">
+            <a href="/deportes-mas-info" class="text-[#1e804b] font-semibold hover:underline">
+              Leer más
+            </a>
+          </div>
+        </div>
+        <!-- Línea decorativa -->
+        <div class="absolute -top-5 -left-45 w-[550px]">
+          <img
+            src="/images/formas/forma-home-5.svg"
+            alt="Decoración"
+            class="w-full h-full"
+          />
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Imagen -->
+      <div class="col-span-8">
+        <img
+          src="/images/fondo-bienvenida.webp"
+          alt="Imagen del colegio"
+          class="w-full h-auto rounded-xl shadow-lg"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="relative w-full h-screen bg-white">
+    <!-- Imagen decorativa superpuesta (z-10) -->
+    <img
+      src="/images/formas/forma-home-2.svg"
+      alt="Forma decorativa"
+      class="absolute top-10 right-5 w-[650px] h-auto z-10"
+    />
+    <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto h-full px-4">
+      <!-- Columna Izquierda: Imagen principal -->
+      <div class="col-span-8 flex items-center justify-center">
+        <img
+          src="/images/fondo-iconos.webp"
+          alt="Imagen principal"
+          class="w-full h-auto rounded-md shadow-md"
+        />
+      </div>
+      <!-- Columna Derecha: Iconos (z-20) -->
+      <div class="absolute col-span-4 flex items-center justify-center z-20 top-[65%] left-[22%]">
+        <div class="absolute -top-85 left-110 w-[550px] z-20">
+          <div class="bg-white shadow-xl rounded-xl p-8 ">
+            <img src="/images/logo-SIC-play.svg" width="192" height="192" alt="" class="mx-auto mb-10">
+            <p class="mt-4 text-gray-700 leading-relaxed">
+              <strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por los talentosos alumnos del San Isidro College. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes.
+            </p>
+            <p class="mt-4 text-gray-700 leading-relaxed">
+              Una tradición esperada cada año, San Isidro Play celebra el talento y esfuerzo de nuestra comunidad educativa, ofreciendo un espectáculo inolvidable para toda la familia. ¡Te esperamos para vivir esta mágica experiencia!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Carousel client:load />
+
+  <!-- Sección 4: Mapa y datos de contacto -->
+  <SectionMapa />
+</div>

@@ -2,6 +2,10 @@ import { useEffect } from "react";
 
 const HeaderMenu: React.FC = () => {
   useEffect(() => {
+    // Pre-cargar la imagen alterna para evitar retrasos en el cambio
+    const preloadImage = new Image();
+    preloadImage.src = "/images/logo-san-isidro-2.svg";
+
     // Obtener elementos del DOM con las conversiones de tipo necesarias
     const header = document.getElementById("header") as HTMLElement | null;
     const logo = document.getElementById("logo") as HTMLImageElement | null;
@@ -35,10 +39,10 @@ const HeaderMenu: React.FC = () => {
         logoContainers.forEach((el) => {
           el.classList.add("scrolled-logo", "bg-white", "shadow-md", "p-2", "rounded-lg");
         });
+        // Cambiar a la imagen pre-cargada
         logo.src = "/images/logo-san-isidro-2.svg";
         menuLogo.src = "/images/logo-san-isidro-2.svg";
       } else {
-        // Si el menú está cerrado, restauramos estilos
         if (dropdownMenu.classList.contains("hidden")) {
           header.classList.remove("scrolled-header");
           logoContainers.forEach((el) => {
@@ -52,22 +56,15 @@ const HeaderMenu: React.FC = () => {
 
     // Función para abrir el menú
     const openMenu = () => {
-      // Ocultar el header para que el menú lo reemplace
       header.classList.add("hidden");
       dropdownMenu.classList.remove("hidden");
-      // Activar el overlay
       overlay.classList.remove("hidden");
       // Forzar reflow para activar la transición
       void menuPanel.offsetWidth;
       menuPanel.classList.remove("-translate-y-full");
 
-      // Aplicar estilos del logo (similar al efecto de scroll)
-      header.classList.add("scrolled-header");
-      logoContainers.forEach((el) => {
-        el.classList.add("scrolled-logo", "bg-white", "shadow-md", "p-2", "rounded-lg");
-      });
-      logo.src = "/images/logo-san-isidro-2.svg";
-      menuLogo.src = "/images/logo-san-isidro-2.svg";
+      logo.src = "/images/logo-san-isidro-3.svg";
+      menuLogo.src = "/images/logo-san-isidro-3.svg";
     };
 
     // Función para cerrar el menú
@@ -76,9 +73,7 @@ const HeaderMenu: React.FC = () => {
       setTimeout(() => {
         dropdownMenu.classList.add("hidden");
         header.classList.remove("hidden");
-        // Desactivar el overlay
         overlay.classList.add("hidden");
-        // Restaurar estilos si el scroll es menor a 50
         if (window.scrollY < 50) {
           header.classList.remove("scrolled-header");
           logoContainers.forEach((el) => {

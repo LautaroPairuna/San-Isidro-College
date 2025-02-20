@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 interface FixedAsideProps {
   children: React.ReactNode;
+  scrollThreshold?: number; // Hacemos que sea opcional
 }
 
-const FixedAside: React.FC<FixedAsideProps> = ({ children }) => {
+const AsideMenu: React.FC<FixedAsideProps> = ({ children, scrollThreshold = 2000 }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Puedes ajustar el umbral según tus necesidades
-      if (window.scrollY > 2000) {
+      if (window.scrollY > scrollThreshold) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -23,13 +23,12 @@ const FixedAside: React.FC<FixedAsideProps> = ({ children }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrollThreshold]);
 
-  // Se construyen las clases de Tailwind condicionalmente
-  const asideClasses = `fixed right-10 top-60 w-56 text-gray-800 z-20 transition-all duration-300 
+  const asideClasses = `fixed right-20 top-60 w-56 text-gray-800 z-20 transition-all duration-300 
     ${scrolled ? 'bg-gray-200 shadow-md p-5 rounded-lg' : ''}`;
 
   return <aside className={asideClasses}>{children}</aside>;
 };
 
-export default FixedAside;
+export default AsideMenu;
