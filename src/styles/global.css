@@ -63,6 +63,11 @@ body {
         10px 10px 10px rgba(0, 0, 0, 0.1); /* Sombra aún más alejada */
 }
 
+.text-shadow-bold {
+    text-shadow:
+    -5px 2px 0px #1e804b;
+}
+
 
 
 .titulo-home em {

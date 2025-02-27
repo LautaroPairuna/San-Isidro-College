@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 545 261">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 27.38px;
+        letter-spacing: -.03em;
+      }
+
+      .cls-2 {
+        font-size: 13.13px;
+        letter-spacing: -.03em;
+      }
+
+      .cls-3 {
+        fill: #1e804b;
+        opacity: .8;
+        stroke-width: 0px;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        font-family: Gotham-Bold, Gotham;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <rect class="cls-3" width="545" height="261" rx="35.04" ry="35.04"/>
+    <g>
+      <text class="cls-4" transform="translate(41.45 78.35)"><tspan class="cls-1"><tspan x="0" y="0">Y1 </tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">6 años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 1</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+      <text class="cls-4" transform="translate(163.79 78.35)"><tspan class="cls-1"><tspan x="0" y="0">Y2 </tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">7 años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 1</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+      <text class="cls-4" transform="translate(286.12 78.35)"><tspan class="cls-1"><tspan x="0" y="0">Y3 </tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">8 años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 1</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+      <text class="cls-4" transform="translate(41.45 175.01)"><tspan class="cls-1"><tspan x="0" y="0">Y4 </tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">9 años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 2</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+      <text class="cls-4" transform="translate(163.79 175.01)"><tspan class="cls-1"><tspan x="0" y="0">Y5 </tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">10años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 2</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+      <text class="cls-4" transform="translate(286.12 175.01)"><tspan class="cls-1"><tspan x="0" y="0">Y6</tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">11 años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 2</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+      <text class="cls-4" transform="translate(408.45 175.01)"><tspan class="cls-1"><tspan x="0" y="0">Y7</tspan></tspan><tspan class="cls-2"><tspan x="0" y="12.55">12 años</tspan></tspan><tspan class="cls-2"><tspan x="0" y="25.1">Junior 2</tspan></tspan><tspan class="cls-2"><tspan x="0" y="37.65">Jornada Doble</tspan></tspan></text>
+    </g>
+  </g>
+</svg>
