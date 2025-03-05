@@ -1,11 +1,9 @@
----
----
 <section class="relative w-full h-auto py-10 bg-white">
-  <div class="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto">
     <!-- Columna Izquierda: Información de contacto -->
-    <div class="col-span-4 relative flex flex-col justify-center">
-      <!-- Contenedor del Texto (z-30) -->
-      <div class="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-55 w-[90%] z-30">
+    <div class="relative flex flex-col justify-center lg:col-span-4">
+      <!-- Contenedor del Texto (flotante, sin modificar) -->
+      <div class="bg-white shadow-xl rounded-xl p-8 absolute top-15 lg:top-65 left-10 md:left-20 lg:left-55 w-[80%] lg:w-[90%] z-30">
         <div class="text-gray-800 leading-relaxed">
           <p>
             Avenida Finca Yerba Buena 1500<br />
@@ -13,10 +11,7 @@
             A4401 San Lorenzo, Salta
           </p>
           <p class="mt-2">
-            <a
-              href="mailto:info@colegiosanisidrosalta.edu.ar"
-              class="hover:underline"
-            >
+            <a href="mailto:info@colegiosanisidrosalta.edu.ar" class="hover:underline">
               info@colegiosanisidrosalta.edu.ar
             </a>
           </p>
@@ -24,65 +19,51 @@
         <hr class="my-6 border-gray-300" />
         <div class="flex items-center justify-center gap-6">
           <!-- Instagram -->
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-          >
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full">
             <img src="/images/ico-instagram.svg" alt="Instagram" class="w-5 h-5" />
           </a>
           <!-- Facebook -->
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-          >
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full">
             <img src="/images/ico-facebook.svg" alt="Facebook" class="w-5 h-5" />
           </a>
           <!-- YouTube -->
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-          >
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full">
             <img src="/images/ico-youtube.svg" alt="YouTube" class="w-5 h-5" />
           </a>
           <!-- LinkedIn -->
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full"
-          >
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center justify-center w-10 h-10 bg-black rounded-full">
             <img src="/images/ico-linkedin.svg" alt="LinkedIn" class="w-5 h-5" />
           </a>
-        </div>        
+        </div>
       </div>
 
-      <!-- Línea decorativa -->
-      <div class="absolute -top-5 -left-90 w-225">
-        <img
-          src="/images/formas/forma-home-4.svg"
-          alt="Decoración"
-          class="w-full h-full"
-        />
+      <!-- Línea decorativa para pantallas chicas y medianas -->
+      <div class="block lg:hidden absolute top-0 left-0 w-[620px]">
+        <img src="/images/formas/forma-home-4.svg" alt="Decoración" class="w-full h-full" />
+      </div>
+
+      <!-- Línea decorativa para escritorio (sin modificar) -->
+      <div class="hidden lg:block absolute -top-5 -left-90 w-210">
+        <img src="/images/formas/forma-home-4.svg" alt="Decoración" class="w-full h-full" />
       </div>
     </div>
 
     <!-- Columna Derecha: Mapa (z-20) -->
-    <div class="col-span-8 z-20">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.0870169140185!2d-65.48649632374536!3d-24.79247370797458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941be9dda29c6329%3A0x960b145b5c2957ed!2sSAN%20ISIDRO%20COLLEGE!5e0!3m2!1ses-419!2sar!4v1738620563995!5m2!1ses-419!2sar"
-        width="840"
-        height="740"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
+    <div class="lg:col-span-8 z-20 px-5 mt-[250px] lg:mt-0">
+      <div class="w-full h-[350px] lg:h-[740px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.0870169140185!2d-65.48649632374536!3d-24.79247370797458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x941be9dda29c6329%3A0x960b145b5c2957ed!2sSAN%20ISIDRO%20COLLEGE!5e0!3m2!1ses-419!2sar!4v1738620563995!5m2!1ses-419!2sar"
+          class="w-full h-full"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </div>
   </div>
 </section>
