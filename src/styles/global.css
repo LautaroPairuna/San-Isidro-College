@@ -54,6 +54,12 @@ body {
     font-family: 'Gotham', sans-serif;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
+
 .titulo-home {
     font-weight: 750;
     font-variation-settings: "wght" 800;

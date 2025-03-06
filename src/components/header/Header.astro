@@ -1,14 +1,6 @@
 ---
-import HeaderMenu from "./HeaderMenu";
+import HeaderMenu from "./HeaderMenu.tsx";
 ---
-
-<style>
-  /* Forzamos que nada se desborde horizontalmente */
-  html, body {
-    overflow-x: hidden;
-  }
-</style>
-
 <div id="container" class="relative bg-white overflow-x-hidden">
   <!-- Overlay (máscara de sombra) -->
   <div
@@ -16,20 +8,12 @@ import HeaderMenu from "./HeaderMenu";
     class="fixed inset-0 bg-black opacity-65 hidden z-50 transition-opacity duration-300"
   ></div>
 
-  <!-- Header fijo con fondo SVG -->
+  <!-- Header fijo -->
   <header
     id="header"
-    class="
-      fixed top-0 left-0 right-0 z-[60]
-      min-h-[80px]
-      transition-all duration-500 ease-in-out
-      bg-[url('/images/fondo-header.svg')]
-      bg-no-repeat
-      bg-center
-      bg-cover
-    "
+    class="fixed top-0 left-0 right-0 w-full z-60 transition-all duration-500 ease-in-out bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-left md:bg-center bg-cover"
   >
-    <nav class="flex items-center justify-between px-6 py-4 md:py-12">
+    <nav class="flex items-center justify-between px-6 py-6 md:py-12">
       <!-- Logo -->
       <div>
         <a
@@ -45,17 +29,12 @@ import HeaderMenu from "./HeaderMenu";
           />
         </a>
       </div>
-
       <!-- Botones de idioma y menú -->
       <div class="flex items-center space-x-4">
-        <!-- Botones de idioma: ocultos en pantallas pequeñas -->
+        <!-- Botones de idioma (ocultos en móvil) -->
         <div class="hidden md:flex space-x-2">
-          <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">
-            ESP
-          </button>
-          <button class="bg-[#294161] text-white px-4 py-2 rounded-full">
-            ING
-          </button>
+          <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
+          <button class="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
         </div>
         <!-- Botón para abrir el menú -->
         <button id="menuToggle" class="bg-[#c19516] px-6 py-3 rounded-full text-white">
@@ -66,22 +45,13 @@ import HeaderMenu from "./HeaderMenu";
   </header>
 
   <!-- Menú desplegable -->
-  <div id="dropdownMenu" class="fixed inset-0 z-50 hidden">
+  <div id="dropdownMenu" class="fixed top-0 left-0 right-0 z-50 hidden">
     <div
-      class="
-        relative w-full h-full
-        bg-[#c19516] text-white shadow-lg p-6
-        transform -translate-y-full
-        transition-transform duration-300 ease-in-out
-        overflow-x-hidden overflow-y-auto menu-panel
-      "
+      class="menu-panel bg-[#c19516] text-white w-full rounded-b-lg shadow-lg p-6 transform -translate-y-full transition-transform duration-300 ease-in-out overflow-x-hidden overflow-y-auto max-h-screen"
     >
       <!-- Botón para cerrar -->
-      <button id="closeMenu" class="absolute top-4 right-6 text-3xl text-white">
-        &times;
-      </button>
-
-      <!-- Encabezado del menú (logo + idioma) -->
+      <button id="closeMenu" class="absolute top-4 right-6 text-3xl text-white">&times;</button>
+      <!-- Contenido del menú -->
       <div class="flex justify-between items-center mb-6">
         <a
           href="/"
@@ -94,17 +64,12 @@ import HeaderMenu from "./HeaderMenu";
             class="h-16 md:h-20"
           />
         </a>
+        <!-- Botones de idioma en menú móvil -->
         <div class="flex space-x-2">
-          <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">
-            ESP
-          </button>
-          <button class="bg-[#294161] text-white px-4 py-2 rounded-full">
-            ING
-          </button>
+          <button class="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
+          <button class="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
         </div>
       </div>
-
-      <!-- Secciones del menú en grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="border-b md:border-b-0 md:border-r border-white pb-4 md:pb-0 md:pr-4">
           <h3 class="text-xl font-bold">Colegio</h3>
@@ -134,15 +99,21 @@ import HeaderMenu from "./HeaderMenu";
         <div>
           <h3 class="text-xl font-bold">Contacto</h3>
           <ul class="mt-2 space-y-2">
-            <li><a href="#" class="hover:underline">Ubicación</a></li>
-            <li><a href="#" class="hover:underline">Redes Sociales</a></li>
-            <li><a href="#" class="hover:underline">Email</a></li>
+            <li>
+              <a href="#" class="hover:underline">Ubicación</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Redes Sociales</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Email</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Importar la lógica del menú -->
+  <!-- Importar HeaderMenu para animaciones y lógica JS -->
   <HeaderMenu client:load />
 </div>
