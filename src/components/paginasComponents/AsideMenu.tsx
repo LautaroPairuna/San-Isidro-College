@@ -25,7 +25,7 @@ const AsideMenu: React.FC<FixedAsideProps> = ({ children, scrollThreshold = 2000
     };
   }, [scrollThreshold]);
 
-  const asideClasses = `fixed right-20 top-60 w-56 text-gray-800 z-20 transition-all duration-300 
+  const asideClasses = `fixed lg:-right-0 xl:right-5 top-60 w-56 text-gray-800 z-50 transition-all duration-300 
     ${scrolled ? 'bg-gray-200 shadow-md p-5 rounded-lg' : ''}`;
 
   return <aside className={asideClasses}>{children}</aside>;
