@@ -54,12 +54,6 @@ body {
     font-family: 'Gotham', sans-serif;
 }
 
-html,
-body {
-  overflow-x: hidden;
-}
-
-
 .titulo-home {
     font-weight: 750;
     font-variation-settings: "wght" 800;
@@ -70,58 +64,57 @@ body {
 }
 
 .text-shadow-bold {
-    text-shadow:
-    -5px 2px 0px #1e804b;
+    text-shadow: -5px 2px 0px #1e804b;
 }
 
 .text-shadow-bold-movil {
-    text-shadow:
-    3px 4px 0px #c19516;
+    text-shadow: 3px 4px 0px #c19516;
     color: #294161;
 }
-
-
 
 .titulo-home em {
     font-weight: 500; /* Ajustar el peso para "because" */
 }
 
-
-/* Transición suave en el header */
+/* Header base - MODIFICADO */
 #header {
-    transition: background 0.5s ease-in-out;
-}
-
-/* Cuando el usuario hace scroll: Header transparente */
-.scrolled-header {
-    background: transparent !important; /* Hace que el header sea completamente transparente */
-    backdrop-filter: none !important; /* Asegura que no haya desenfoque */
-}
-
-/* Transición suave en el logo */
-#logo {
+    background: url('/images/fondo-header.svg') no-repeat center/cover;
     transition: all 0.5s ease-in-out;
+    will-change: background-image, background-color;
 }
 
-/* Contenedor del logo para aplicar la animación */
+/* Header scrolled - MODIFICADO */
+.scrolled-header {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* Logo base - MODIFICADO */
 .logo-container {
     transition: all 0.5s ease-in-out;
+    border-radius: 15px;
+    padding: 0.5rem;
+    will-change: background-color, padding, box-shadow;
 }
 
-/* Aplica el fondo blanco SOLO al logo cuando se hace scroll */
+/* Logo scrolled - MODIFICADO */
 .scrolled-logo {
     background-color: white !important;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem !important;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Imágenes del logo - AGREGADO */
+#logo, #menuLogo {
     transition: all 0.5s ease-in-out;
 }
 
-html {
-    scroll-behavior: smooth;
+/* Z-index ajustados - AGREGADO */
+#header {
+    z-index: 50;
 }
-  
-  
-  
-  
-  
+
+#dropdownMenu, #overlay {
+    z-index: 60;
+}
