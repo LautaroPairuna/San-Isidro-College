@@ -1,12 +1,12 @@
 "use client";
 
-// app/colegio/page.tsx
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import SmoothLink from "@/components/SmoothLink";
 import AsideMenu from "@/components/AsideMenu";
+import VideoEmbed from "@/components/VideoEmbed";
 
-// Se cargan de forma dinámica para reducir el bundle inicial
+// Carga dinámica para reducir el bundle inicial
 const Carousel = dynamic(() => import("@/components/sectionCarrusel"), { ssr: false });
 const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: false });
 
@@ -69,17 +69,10 @@ export default function ColegioPage() {
           <h3 className="text-2xl md:text-3xl font-bold uppercase mt-10 mb-4 text-gray-800">
             INSTALACIONES
           </h3>
-          <div className="aspect-w-16 aspect-h-9 mb-8">
-            <iframe
-              className="w-full h-full rounded shadow"
-              src="https://www.youtube.com/embed/VIDEO_ID"
-              title="YouTube video player"
-              frameBorder="0"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
+          <VideoEmbed
+            videoId="VIDEO_ID"
+            placeholderSrc="/ruta/a/tu/imagen-placeholder.jpg"
+          />
 
           {/* MISIÓN */}
           <h3
@@ -194,17 +187,30 @@ export default function ColegioPage() {
             <h3 className="text-xl italic text-gray-900 mb-6">EL COLEGIO</h3>
             <ul className="space-y-5">
               <li className="font-bold">
-                <SmoothLink href="#proyecto">Proyecto Educativo</SmoothLink>
+                <SmoothLink href="#proyecto" aria-label="Ir a Proyecto Educativo">
+                  Proyecto Educativo
+                </SmoothLink>
               </li>
               <li className="space-y-1 font-bold">
-                <SmoothLink href="#mision">Misión</SmoothLink>
+                <SmoothLink href="#mision" aria-label="Ir a Misión">
+                  Misión
+                </SmoothLink>
                 <br />
-                <SmoothLink href="#vision">Visión</SmoothLink>
+                <SmoothLink href="#vision" aria-label="Ir a Visión">
+                  Visión
+                </SmoothLink>
                 <br />
-                <SmoothLink href="#valores">Valores</SmoothLink>
+                <SmoothLink href="#valores" aria-label="Ir a Valores">
+                  Valores
+                </SmoothLink>
               </li>
               <li className="space-y-1 font-bold">
-                <SmoothLink href="#educacion">Educación Personalizada</SmoothLink>
+                <SmoothLink
+                  href="#educacion"
+                  aria-label="Ir a Educación Personalizada"
+                >
+                  Educación Personalizada
+                </SmoothLink>
                 <br />
               </li>
             </ul>

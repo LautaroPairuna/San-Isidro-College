@@ -65,14 +65,16 @@ export default function HomePage() {
           </button>
         </div>
 
-        {/* Figura decorativa */}
+        {/* Figura decorativa (LCP optimizada) */}
         <Image
           src="/images/formas/forma-home-1.svg"
           alt="Forma decorativa"
           width={1000}
           height={1000}
+          priority
           sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
-          className="absolute top-0 left-4/12 transform -translate-x-1/2 h-full pointer-events-none max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
+          className="absolute top-0 left-4/12 transform -translate-x-1/2 h-full pointer-events-none
+                     max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
         />
       </section>
 
