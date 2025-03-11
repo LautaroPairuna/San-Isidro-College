@@ -8,17 +8,17 @@ export default function HomePage() {
     <div id="container">
       {/* Sección 1: Imagen de fondo y texto */}
       <section className="relative w-full h-auto grid grid-cols-12">
-        {/* Columna Izquierda */}
+        {/* Columna Izquierda: Contenido superpuesto */}
         <div className="col-span-5 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative max-sm:col-span-12 max-sm:items-center max-sm:px-6 max-sm:py-24">
-        <Image 
-          src="/images/eslogan.svg" 
-          alt="I am because we are" 
-          width={250}
-          height={250}
-          className="absolute top-[55%] left-[80%] transform -translate-x-1/2 z-40
-                    max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
-                    max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px]"
-        />
+          <Image 
+            src="/images/eslogan.svg" 
+            alt="I am because we are" 
+            width={250}
+            height={250}
+            className="absolute top-[55%] left-[80%] transform -translate-x-1/2 z-40
+                      max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
+                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px]"
+          />
           {/* Botón para móvil */}
           <button className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 sm:hidden">
             <Image
@@ -37,18 +37,16 @@ export default function HomePage() {
           </button>
         </div>
 
-        {/* Columna Derecha: Imagen de fondo y botón */}
+        {/* Columna Derecha: Imagen de fondo (LCP) y botón */}
         <div className="col-span-7 relative w-full h-full max-sm:col-span-12">
           <Image
             src="/images/fondo-home.webp"
             alt="Imagen de fondo"
             width={1920}
             height={1080}
-            sizes="(max-width: 640px) 100vw,
-                   (max-width: 1024px) 50vw,
-                   1000px"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 1000px"
             className="w-full h-full object-cover"
-            priority 
+            priority
           />
           <button className="absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 hidden sm:flex">
             <Image
@@ -73,10 +71,8 @@ export default function HomePage() {
           alt="Forma decorativa"
           width={1000}
           height={1000}
-          sizes="(max-width: 640px) 75vw,
-                 (max-width: 1024px) 50vw,
-                 100vw"
-          className="absolute top-0 left-4/12 transform -translate-x-1/2 h-full pointer-events-none max-sm:w-3/4 max-sm:-top-35 max-sm:left-40  max-sm:-translate-x-1/2"
+          sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
+          className="absolute top-0 left-4/12 transform -translate-x-1/2 h-full pointer-events-none max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
         />
       </section>
 
@@ -102,9 +98,7 @@ export default function HomePage() {
               alt="Decoración"
               width={550}
               height={300}
-              sizes="(max-width: 640px) 600px,
-                     (max-width: 1024px) 550px,
-                     550px"
+              sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
               className="absolute -top-5 -left-60 w-[550px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
             />
           </div>
@@ -116,16 +110,14 @@ export default function HomePage() {
               alt="Imagen del colegio"
               width={800}
               height={600}
-              sizes="(max-width: 640px) 100vw,
-                     (max-width: 1024px) 50vw,
-                     800px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               className="w-full h-auto rounded-xl shadow-lg"
             />
           </div>
         </div>
       </section>
 
-      {/* Sección 3: Fondo verde con íconos y imagen */}
+      {/* Sección 3: Fondo verde con íconos e imagen */}
       <section className="relative w-full bg-[#71af8d] py-10">
         {/* Forma decorativa detrás */}
         <Image
@@ -133,9 +125,7 @@ export default function HomePage() {
           alt="Forma decorativa"
           width={800}
           height={500}
-          sizes="(max-width: 640px) 100vw,
-                 (max-width: 1024px) 750px,
-                 1000px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 750px, 1000px"
           className="absolute top-25 md:-top-5 -right-0 w-[1000px] md:w-[750px] z-10"
         />
 
@@ -184,9 +174,7 @@ export default function HomePage() {
                 alt="Imagen principal"
                 width={800}
                 height={600}
-                sizes="(max-width: 640px) 100vw,
-                       (max-width: 1024px) 50vw,
-                       800px"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
                 className="w-full h-auto rounded-md shadow-md"
               />
             </div>
@@ -238,9 +226,7 @@ export default function HomePage() {
               alt="Imagen principal"
               width={800}
               height={600}
-              sizes="(max-width: 640px) 100vw,
-                     (max-width: 1024px) 50vw,
-                     800px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               className="w-full h-auto rounded-md shadow-md"
             />
           </div>

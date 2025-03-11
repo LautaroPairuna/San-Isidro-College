@@ -27,7 +27,6 @@ const ContactSection = () => {
             </div>
             <hr className="my-6 border-gray-300" />
             <div className="flex items-center justify-center gap-6">
-              {/* Iconos Sociales */}
               {[
                 { href: 'https://instagram.com', src: '/images/ico-instagram.svg', alt: 'Instagram' },
                 { href: 'https://facebook.com',  src: '/images/ico-facebook.svg',  alt: 'Facebook' },
@@ -53,18 +52,18 @@ const ContactSection = () => {
             </div>
           </div>
           
-          {/* Forma decorativa en mobile (block) */}
+          {/* Forma decorativa en mobile */}
           <div className="block lg:hidden absolute top-0 left-0 pointer-events-none">
             <Image
               src="/images/formas/forma-home-4.svg"
               alt="Decoración"
-              width={620}    // Ajusta si la quieres más pequeña
+              width={620}
               height={300}
               className="w-[620px] max-w-none h-auto"
             />
           </div>
           
-          {/* Forma decorativa en desktop (lg:block) */}
+          {/* Forma decorativa en desktop */}
           <div className="hidden lg:block absolute -top-5 -left-[70%] pointer-events-none w-210">
             <Image
               src="/images/formas/forma-home-4.svg"
