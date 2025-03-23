@@ -6,7 +6,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface Props {
   images: string[];
-  alt?: string;
+  altText?: string;
   className?: string;
   autoPlayInterval?: number;
 }
@@ -23,7 +23,7 @@ const useInterval = (callback: () => void, delay: number | null) => {
 
 export default function ImageCarousel({
   images,
-  alt = "",
+  altText = "",
   className = "",
   autoPlayInterval = 5000,
 }: Props) {
@@ -46,7 +46,7 @@ export default function ImageCarousel({
           <div key={i} className="min-w-full">
             <Image
               src={src}
-              alt={alt}
+              alt={altText}
               fill
               style={{ objectFit: "cover" }}
               placeholder="blur"
