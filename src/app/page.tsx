@@ -21,17 +21,18 @@ export default function HomePage() {
           />
           {/* Botón para móvil */}
           <button className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 sm:hidden">
-            <Image
-              src="/images/ico-admisiones.svg"
-              alt="Ver Admisiones"
-              width={24}
-              height={24}
-              sizes="(max-width: 640px) 24px, 24px"
-            />
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
               target="_blank"
+              className='flex items-center gap-2'
             >
+              <Image
+                src="/images/ico-admisiones.svg"
+                alt="Ver Admisiones"
+                width={24}
+                height={24}
+                sizes="(max-width: 640px) 24px, 24px"
+              />
               ADMISIONES
             </Link>
           </button>
@@ -49,17 +50,18 @@ export default function HomePage() {
             priority
           />
           <button className="absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 hidden sm:flex">
-            <Image
-              src="/images/ico-admisiones.svg"
-              alt="Ver Admisiones"
-              width={32}
-              height={32}
-              sizes="32px"
-            />
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
               target="_blank"
+              className='flex items-center gap-2'
             >
+              <Image
+                src="/images/ico-admisiones.svg"
+                alt="Ver Admisiones"
+                width={32}
+                height={32}
+                sizes="32px"
+              />
               ADMISIONES
             </Link>
           </button>

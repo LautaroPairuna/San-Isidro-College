@@ -98,17 +98,14 @@ export default function DeportesPage() {
 
           {/* Versión ESCRITORIO: Botón ADMISIONES en esquina inferior derecha */}
           <div className="hidden md:block">
-            <button className="flex items-center gap-3 px-4 py-2 md:px-6 md:py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 md:absolute md:bottom-6 md:right-6">
-              <Image
-                src="/images/ico-admisiones.svg"
-                alt="Ver Admisiones"
-                width={32}
-                height={32}
-              />
-              <Link
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-                target="_blank"
-              >
+            <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
+              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
+                <Image
+                  src="/images/ico-admisiones.svg"
+                  alt="Ver Admisiones"
+                  width={32}
+                  height={32}
+                />
                 ADMISIONES
               </Link>
             </button>

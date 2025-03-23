@@ -8,7 +8,7 @@ export default function VidaEstudiantilPage() {
   return (
     <div id="container">
       {/* SECCIÓN 1: Fondo verde en toda la pantalla sin imagen de fondo */}
-      <section className="relative w-full h-[640px] md:h-screen grid grid-cols-1 md:grid-cols-12 overflow-x-hidden">
+      <section className="relative w-full h-[640px] md:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
         {/* Columna Izquierda: Texto y fondo verde */}
         <div className="relative col-span-1 md:col-span-4 bg-[#71af8d] flex items-end justify-end">
           {/* Versión Escritorio: Texto absolutamente posicionado */}
@@ -31,14 +31,14 @@ export default function VidaEstudiantilPage() {
               className="transform -translate-x-1/2 z-40
                         max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px]"
             />
-            <button className="inline-flex items-center gap-2 px-4 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition text-sm">
-              <Image
-                src="/images/ico-admisiones.svg"
-                alt="Ver Admisiones"
-                width={24}
-                height={24}
-              />
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank">
+            <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
+              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
+                <Image
+                  src="/images/ico-admisiones.svg"
+                  alt="Ver Admisiones"
+                  width={32}
+                  height={32}
+                />
                 ADMISIONES
               </Link>
             </button>
@@ -80,13 +80,13 @@ export default function VidaEstudiantilPage() {
           </div>
           {/* Botón ADMISIONES en escritorio (absoluto, abajo a la derecha) */}
           <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
-            <Image
-              src="/images/ico-admisiones.svg"
-              alt="Ver Admisiones"
-              width={32}
-              height={32}
-            />
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank">
+            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
+              <Image
+                src="/images/ico-admisiones.svg"
+                alt="Ver Admisiones"
+                width={32}
+                height={32}
+              />
               ADMISIONES
             </Link>
           </button>
@@ -105,7 +105,7 @@ export default function VidaEstudiantilPage() {
       </section>
 
       {/* SECCIÓN KINDERGARTEN */}
-      <section className="relative w-full h-auto py-10 bg-white overflow-x-hidden">
+      <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda: Texto y elementos decorativos */}
           <div className="col-span-1 md:col-span-4 relative flex flex-col justify-center order-1 md:order-none">
@@ -191,7 +191,7 @@ export default function VidaEstudiantilPage() {
       </section>
 
       {/* SECCIÓN PRIMARY */}
-      <section className="bg-white py-5 overflow-x-hidden">
+      <section className="bg-white py-5 overflow-hidden">
         {/* Versión Escritorio */}
         <div className="hidden md:block relative w-full h-screen">
           <Image
@@ -274,7 +274,7 @@ export default function VidaEstudiantilPage() {
       </section>
 
       {/* SECCIÓN SECONDARY */}
-      <section className="relative w-full h-auto py-10 bg-white overflow-x-hidden">
+      <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
         {/* Versión Escritorio */}
         <div className="hidden md:block">
           <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">

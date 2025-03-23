@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 interface VideoEmbedProps {
@@ -9,40 +9,47 @@ interface VideoEmbedProps {
 }
 
 export default function VideoEmbed({ videoId, placeholderSrc }: VideoEmbedProps) {
-  const [showIframe, setShowIframe] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="aspect-w-16 aspect-h-9 relative mb-8">
-      {showIframe ? (
+    <div ref={ref} className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+      {loaded ? (
         <iframe
-          className="w-full h-full rounded shadow"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+          className="absolute inset-0 w-full h-full"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
           title="Video de las instalaciones del colegio"
-          frameBorder="0"
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe>
+        />
       ) : (
-        <div
-          className="cursor-pointer relative w-full h-full"
-          onClick={() => setShowIframe(true)}
-        >
-          <Image
-            src={placeholderSrc}
-            alt="Previsualización del video"
-            layout="fill"
-            objectFit="cover"
-            className="rounded shadow"
-          />
-          {/* Overlay con ícono de play */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="30" fill="rgba(0,0,0,0.5)" />
-              <polygon points="25,20 45,30 25,40" fill="#fff" />
-            </svg>
-          </div>
-        </div>
+        <Image
+          src={placeholderSrc}
+          alt="Previsualización del video"
+          fill
+          style={{ objectFit: "cover" }}
+          placeholder="blur"
+          blurDataURL="/placeholder.png"
+        />
       )}
     </div>
   );
