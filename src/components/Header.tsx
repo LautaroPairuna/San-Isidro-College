@@ -8,18 +8,21 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Controla el scroll para aplicar estilos al header
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Selecciona el logo dependiendo del estado del menú y del scroll
   const getLogoSrc = () => {
     if (menuOpen) return "/images/logo-san-isidro-3.svg";
     if (scrolled) return "/images/logo-san-isidro-2.svg";
     return "/images/logo-san-isidro.svg";
   };
 
+  // Cierra el menú cuando se hace clic en un enlace
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
@@ -29,16 +32,18 @@ const Header: React.FC = () => {
         id="header"
         className="fixed top-0 left-0 right-0 z-60 min-h-[120px] transition-all duration-500 ease-in-out"
       >
+        {/* Fondo SVG con transición */}
         <div
           className={`
-            absolute inset-0
-            bg-[url('/images/fondo-header.svg')] bg-no-repeat bg-left md:bg-center bg-cover
+            absolute inset-0 bg-[url('/images/fondo-header.svg')]
+            bg-no-repeat bg-left md:bg-center bg-cover
             transition-opacity duration-500 ease-in-out
             z-0 ${scrolled ? "opacity-0" : "opacity-100"}
           `}
         ></div>
         <nav className="relative z-10 h-full px-6 py-6 md:py-12">
           <div className="container mx-auto flex items-center justify-between px-2">
+            {/* Logo */}
             <div
               className={`
                 logo-container transition-all duration-500 ease-in-out
@@ -56,6 +61,7 @@ const Header: React.FC = () => {
                 />
               </Link>
             </div>
+            {/* Botones de idioma y menú */}
             <div className="flex items-center space-x-2">
               <div className="hidden md:flex space-x-1">
                 <button className="flex items-center justify-center bg-[#1e804b] text-white px-4 py-2 rounded-full">
@@ -86,26 +92,26 @@ const Header: React.FC = () => {
         `}
         onClick={() => setMenuOpen(false)}
       >
-        {/* Overlay negro visible solo en pantallas medianas en adelante */}
-        <div className="hidden md:block absolute inset-0 bg-black transition-opacity duration-500 ease-in-out opacity-65 pointer-events-none"></div>
-        {/* Panel del menú con animación y que abarca toda la pantalla en móvil */}
+        {/* Panel del menú: abarca toda la pantalla en móviles */}
         <div
           className={`
             relative transition-transform duration-500 ease-in-out
-            ${menuOpen ? "translate-y-0" : "-translate-y-full"}
-            h-full
+            ${menuOpen ? "translate-y-0" : "-translate-y-full"} h-full
           `}
+          // Detiene la propagación para que los clics dentro del panel no cierren el menú
           onClick={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         >
           <div className="menu-panel bg-[#c19516] text-white w-full h-full p-4 md:rounded-b-lg md:shadow-lg md:h-auto">
             <button
               id="closeMenu"
               className="absolute top-4 right-6 text-3xl text-white"
               onClick={() => setMenuOpen(false)}
+              aria-label="Cerrar menú"
             >
               &times;
             </button>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
               <Link
                 href="/"
                 onClick={handleLinkClick}
@@ -120,7 +126,7 @@ const Header: React.FC = () => {
                   className="h-14 w-auto md:h-20"
                 />
               </Link>
-              <div className="flex space-x-1 me-6">
+              <div className="flex space-x-1 mt-4 md:mt-0">
                 <button className="flex items-center justify-center bg-[#1e804b] text-white px-3 py-1 rounded-full">
                   ESP
                 </button>
