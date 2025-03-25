@@ -109,7 +109,11 @@ const Header: React.FC = () => {
           }
         `}
       >
-        <div className="menu-panel bg-[#c19516] text-white w-full rounded-b-lg shadow-lg p-4">
+        {/* Se agrega onTouchStart para detener la propagación de eventos táctiles en iOS */}
+        <div
+          className="menu-panel bg-[#c19516] text-white w-full rounded-b-lg shadow-lg p-4"
+          onTouchStart={(e) => e.stopPropagation()}
+        >
           <button
             id="closeMenu"
             className="absolute top-4 right-6 text-3xl text-white"
