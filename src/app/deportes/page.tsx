@@ -17,7 +17,7 @@ export default function DeportesPage() {
         {/* ────────────── COL. VERDE ────────────── */}
         <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
           {/* Versión MÓVIL: Forma decorativa abarcando toda la columna */}
-          <div className="block md:hidden absolute inset-0 pointer-events-none">
+          <div className="block lg:hidden absolute inset-0 pointer-events-none">
             <Image
               src="/images/formas/forma-home-1.svg"
               alt="Forma decorativa móvil"
@@ -26,7 +26,7 @@ export default function DeportesPage() {
             />
           </div>
           {/* Versión MÓVIL: Contenido con slogan y botón */}
-          <div className="md:hidden relative flex justify-between items-end h-full pt-32 pb-12 z-20">
+          <div className="lg:hidden relative flex justify-between items-end h-full pt-32 pb-12 z-20 md:w-[80%] w-full">
             <Image 
               src="/images/eslogan.svg" 
               alt="I am because we are" 
@@ -51,7 +51,7 @@ export default function DeportesPage() {
             </div>
           </div>
           {/* Versión ESCRITORIO: Se mantiene la posición original */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <Image 
               src="/images/eslogan.svg" 
               alt="I am because we are" 
@@ -78,7 +78,7 @@ export default function DeportesPage() {
           {/* Recuadro blanco con texto */}
           <div className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
                           absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                          z-40 md:top-[70%] md:left-[30%]">
+                          z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]">
             <h1 className="text-2xl md:text-3xl font-bold mb-2">Deportes</h1>
             <p className="text-gray-700 mb-4 text-sm md:text-base">
               San Isidro College, ubicado en un marco natural privilegiado,
@@ -97,8 +97,8 @@ export default function DeportesPage() {
           </div>
 
           {/* Versión ESCRITORIO: Botón ADMISIONES en esquina inferior derecha */}
-          <div className="hidden md:block">
-            <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
+          <div className="hidden lg:block">
+            <button className="hidden lg:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
               <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
                 <Image
                   src="/images/ico-admisiones.svg"
@@ -113,7 +113,7 @@ export default function DeportesPage() {
         </div>
 
         {/* ────────────── FORMA DECORATIVA ESCRITORIO ────────────── */}
-        <div className="hidden md:block absolute top-0 left-[32%] transform -translate-x-1/2 pointer-events-none z-0">
+        <div className="hidden lg:block absolute top-0 left-[32%] transform -translate-x-1/2 pointer-events-none z-0">
           <Image
             src="/images/formas/forma-home-1.svg"
             alt="Forma decorativa escritorio"
@@ -125,7 +125,7 @@ export default function DeportesPage() {
       </section>
 
       {/* Sección 2: Bienvenida – Club de Rugby y Hockey */}
-      <section className="relative w-full h-auto pt-96 md:py-10 bg-white overflow-hidden">
+      <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white overflow-hidden mx-auto">
         {/* Forma decorativa */}
         <Image
           src="/images/formas/forma-home-2.svg"
@@ -207,7 +207,7 @@ export default function DeportesPage() {
       {/* Sección 3: Sección de iconos y estadísticas */}
       <section className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden h-auto sm:h-auto">
         {/* Versión Escritorio */}
-        <div className="hidden sm:block">
+        <div className="hidden sm:block max-w-[1200px] mx-auto">
           <Image
             src="/images/formas/forma-home-5.svg"
             alt="Decoración"
@@ -216,7 +216,7 @@ export default function DeportesPage() {
             sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
             className="absolute top-5 right-35 w-[550px] h-auto max-sm:hidden"
           />
-          <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto h-full">
+          <div className="grid grid-cols-12 gap-8 mx-auto h-full">
             {/* Columna Izquierda: Carrusel */}
             <div className="col-span-8">
               <ImageCarousel
@@ -304,7 +304,7 @@ export default function DeportesPage() {
       {/* Sección 4: VIDA ESTUDIANTIL */}
       <section className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-[#71af8d] overflow-hidden">
         {/* Versión Escritorio */}
-        <div className="hidden sm:grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+        <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
@@ -323,7 +323,7 @@ export default function DeportesPage() {
                 </a>
               </div>
             </div>
-            <div className="absolute -top-5 -left-45 w-[550px]">
+            <div className="absolute -top-5 -left-36 w-[550px]">
               <Image
                 src="/images/formas/forma-home-5.svg"
                 alt="Decoración"
@@ -400,7 +400,7 @@ export default function DeportesPage() {
       {/* Sección 5: Imagen principal e iconos */}
       <section className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-white overflow-hidden">
         {/* Versión Escritorio */}
-        <div className="hidden sm:block">
+        <div className="hidden sm:block ">
           <Image
             src="/images/formas/forma-home-2.svg"
             alt="Forma decorativa"
@@ -409,7 +409,7 @@ export default function DeportesPage() {
             sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
             className="absolute top-25 right-25 w-[550px] h-auto z-10 max-sm:hidden"
           />
-          <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto h-full px-4">
+          <div className="grid grid-cols-12 gap-8 mx-auto h-full px-4 max-w-[1200px]">
             <div className="col-span-8 max-sm:col-span-12 flex items-center justify-center">
               <ImageCarousel
                 images={[
@@ -421,7 +421,7 @@ export default function DeportesPage() {
                 className="rounded-md shadow-md"
               />
             </div>
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[65%] left-[22%]
+            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[65%] xl:left-[22%] left-[23%]
                             max-sm:relative max-sm:top-10 max-sm:left-0 max-sm:mx-auto max-sm:w-full max-sm:px-4">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 left-110 w-[550px] z-20
                               max-sm:relative max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:mx-auto">

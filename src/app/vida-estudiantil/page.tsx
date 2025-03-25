@@ -8,7 +8,7 @@ export default function VidaEstudiantilPage() {
   return (
     <div id="container">
       {/* SECCIÓN 1: Fondo verde en toda la pantalla sin imagen de fondo */}
-      <section className="relative w-full h-[640px] md:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
+      <section className="relative w-full h-[640px] lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
         {/* Columna Izquierda: Texto y fondo verde */}
         <div className="relative col-span-1 md:col-span-4 bg-[#71af8d] flex items-end justify-end">
           {/* Versión Escritorio: Texto absolutamente posicionado */}
@@ -17,12 +17,12 @@ export default function VidaEstudiantilPage() {
             alt="I am because we are" 
             width={250}
             height={250}
-            className="hidden md:block absolute top-[60%] left-[77%] transform -translate-x-1/2 z-40
+            className="hidden lg:block absolute top-[60%] left-[77%] transform -translate-x-1/2 z-40
                       max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
                       max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] items-end justify-end"
           />
           {/* Versión Móvil: Texto en flujo normal + Botón juntos */}
-          <div className="flex md:hidden p-6 z-20 justify-between items-end mt-28 relative">
+          <div className="flex lg:hidden p-6 z-20 justify-between items-end mt-28 relative">
             <Image 
               src="/images/eslogan.svg" 
               alt="I am because we are" 
@@ -47,7 +47,7 @@ export default function VidaEstudiantilPage() {
         {/* Columna Derecha: Fondo verde, recuadro y botón en escritorio */}
         <div className="relative col-span-1 md:col-span-8 bg-[#71af8d] w-full h-full flex flex-col items-center md:items-start">
           {/* Recuadro blanco en escritorio (absoluto) */}
-          <div className="hidden md:block absolute top-[70%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 z-40 bg-white p-6 md:p-8 w-[400px] md:w-[550px] rounded-3xl shadow-lg">
+          <div className="hidden md:block absolute 2xl:top-[70%] 2xl:left-[30%] top-[60%] left-[45%] transform -translate-x-1/2 -translate-y-1/2 z-40 bg-white p-6 md:p-8 w-[400px] md:w-[550px] rounded-3xl shadow-lg">
             <h2 className="text-3xl font-bold mb-2 text-left">
               Proyecto bilingüe de jornada Completa o extendida
             </h2>
@@ -106,13 +106,13 @@ export default function VidaEstudiantilPage() {
 
       {/* SECCIÓN KINDERGARTEN */}
       <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
           {/* Columna Izquierda: Texto y elementos decorativos */}
           <div className="col-span-1 md:col-span-4 relative flex flex-col justify-center order-1 md:order-none">
             {/* Versión Desktop */}
-            <div className="hidden md:block">
-              <div className="absolute top-[30%] left-[55%] w-[650px] z-20">
-                <h2 className="text-5xl font-bold text-white text-center text-shadow-bold mb-5">
+            <div className="hidden lg:block">
+              <div className="absolute top-[15%] left-[75%] w-[450px] z-20">
+                <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
                   KINDER<br />GARTEN
                 </h2>
                 <div className="bg-white shadow-xl rounded-3xl p-8">
@@ -132,9 +132,9 @@ export default function VidaEstudiantilPage() {
                 alt="Decorativo Kindergarten"
                 width={250}
                 height={250}
-                className="absolute top-25 -left-15 z-20"
+                className="absolute top-10 left-5 z-20"
               />
-              <div className="absolute -top-5 -left-40 w-[650px] z-10">
+              <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px] z-10">
                 <Image
                   src="/images/formas/forma-home-6.svg"
                   alt="Decoración"
@@ -145,7 +145,7 @@ export default function VidaEstudiantilPage() {
               </div>
             </div>
             {/* Versión Móvil */}
-            <div className="block md:hidden w-full px-4 mt-32">
+            <div className="block lg:hidden w-full px-4 mt-32">
               <div className="relative z-10">
                 <h2 className="text-5xl font-bold text-left mb-5 text-shadow-bold-movil">
                   KINDER<br />GARTEN
@@ -174,7 +174,7 @@ export default function VidaEstudiantilPage() {
               alt="Decorativo Kindergarten móvil"
               width={500}
               height={300}
-              className="block md:hidden w-full px-5 mt-5 mb-3 z-10"
+              className="block lg:hidden w-full px-5 mt-5 mb-3 z-10"
             />
           </div>
           {/* Columna Derecha: Imagen */}
@@ -191,17 +191,17 @@ export default function VidaEstudiantilPage() {
       </section>
 
       {/* SECCIÓN PRIMARY */}
-      <section className="bg-white py-5 overflow-hidden">
+      <section className="bg-white overflow-hidden">
         {/* Versión Escritorio */}
-        <div className="hidden md:block relative w-full h-screen">
+        <div className="hidden lg:block relative w-full h-screen">
           <Image
             src="/images/formas/forma-home-3.svg"
             alt="Forma decorativa"
             width={750}
             height={500}
-            className="absolute top-25 right-15 w-[750px] h-auto z-10"
+            className="absolute 2xl:top-30 2xl:right-45 top-5 -right-10 w-[650px] h-auto z-10"
           />
-          <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto h-full px-4">
+          <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             {/* Columna Izquierda: Imagen principal */}
             <div className="col-span-8 flex items-center justify-center">
               <Image
@@ -213,7 +213,7 @@ export default function VidaEstudiantilPage() {
               />
             </div>
             {/* Bloque con texto "PRIMARY" */}
-            <div className="absolute top-50 left-[40%] w-[550px] z-20">
+            <div className="absolute 2xl:top-45 2xl:left-[40%] top-15 left-[40%] w-[550px] z-20">
               <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
                 PRIMARY
               </h2>
@@ -224,7 +224,7 @@ export default function VidaEstudiantilPage() {
               </div>
             </div>
             {/* Columna Derecha: Iconos */}
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[60%] left-[50%]">
+            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[55%] left-[50%]">
               <Image
                 src="/images/cuadro-primary.svg"
                 alt="Sección de iconos y estadísticas"
@@ -236,7 +236,7 @@ export default function VidaEstudiantilPage() {
           </div>
         </div>
         {/* Versión Móvil */}
-        <div className="block md:hidden relative w-full">
+        <div className="block lg:hidden relative w-full">
           <div className="absolute top-15 -left-30 w-[650px] z-0">
             <Image
               src="/images/formas/forma-home-6.svg"
@@ -276,12 +276,12 @@ export default function VidaEstudiantilPage() {
       {/* SECCIÓN SECONDARY */}
       <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
         {/* Versión Escritorio */}
-        <div className="hidden md:block">
-          <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+        <div className="hidden lg:block">
+          <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
             {/* Columna Izquierda: Texto */}
             <div className="col-span-4 relative flex flex-col justify-center">
-              <div className="absolute top-[30%] left-[55%] w-[650px] z-20">
-                <h2 className="text-5xl font-bold text-white text-center text-shadow-bold mb-5">
+              <div className="absolute top-[10%] left-[75%] w-[450px] z-20">
+                <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
                   SECONDARY
                 </h2>
                 <div className="bg-white shadow-xl rounded-3xl p-8">
@@ -293,11 +293,11 @@ export default function VidaEstudiantilPage() {
                   </p>
                 </div>
               </div>
-              <div className="absolute top-50 -left-45 w-[355px] z-20 bg-white/80 p-4 rounded-xl text-[#1e804b]">
+              <div className="absolute 2xl:top-40 2xl:-left-20 top-10 left-0 2xl:w-[355px] w-[255px] z-20 bg-white/80 p-4 rounded-xl text-[#1e804b]">
                 <h4 className="font-bold text-xl text-center">
                   Diploma Dual
                 </h4>
-                <p className="text-justify">
+                <p className="2xl:text-justify text-left">
                   Nuestros alumnos, de manera independiente, cursan la doble titulación del <span className="font-bold">Bachillerato de Estados Unidos</span>. Esta opción les brinda una <span className="font-bold">ventaja competitiva</span>, permitiéndoles obtener un <span className="font-bold">diploma secundario argentino y estadounidense</span> al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.
                 </p>
                 <Image
@@ -308,7 +308,7 @@ export default function VidaEstudiantilPage() {
                   className="mx-auto mt-5"
                 />
               </div>
-              <div className="absolute -top-5 -left-40 w-[650px]">
+              <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px]">
                 <Image
                   src="/images/formas/forma-home-6.svg"
                   alt="Decoración"
@@ -331,7 +331,7 @@ export default function VidaEstudiantilPage() {
           </div>
         </div>
         {/* Versión Móvil */}
-        <div className="block md:hidden relative w-full">
+        <div className="block lg:hidden relative w-full">
           <div className="absolute top-15 -left-30 w-[650px] z-0">
             <Image
               src="/images/formas/forma-home-6.svg"

@@ -1,81 +1,69 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import Image from "next/image";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import React, { useEffect, useRef, useState } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-interface Props {
-  images: string[];
+interface ImageCarouselProps {
+  images?: string[];  // Opcional para evitar errores
   altText?: string;
   className?: string;
-  autoPlayInterval?: number;
 }
 
-const useInterval = (callback: () => void, delay: number | null) => {
-  const saved = useRef(callback);
-  useEffect(() => { saved.current = callback }, [callback]);
-  useEffect(() => {
-    if (delay === null) return;
-    const id = setInterval(() => saved.current(), delay);
-    return () => clearInterval(id);
-  }, [delay]);
-};
-
-export default function ImageCarousel({
-  images,
-  altText = "",
-  className = "",
-  autoPlayInterval = 5000,
-}: Props) {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images = [], altText = "", className = "" }) => {
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
-  const total = images.length;
+  const totalSlides = images.length;
 
-  const go = useCallback((i: number) => setIndex((i + total) % total), [total]);
+  const showSlide = (i: number) => {
+    if (totalSlides === 0) return;
+    const newIndex = (i + totalSlides) % totalSlides;
+    setIndex(newIndex);
+  };
 
-  useInterval(() => go(index + 1), total > 1 ? autoPlayInterval : null);
+  // Autoavance cada 5 segundos
+  useEffect(() => {
+    if (totalSlides === 0) return;
+    const interval = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1) % totalSlides);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [totalSlides]);
 
-  if (!total) return null;
+  // Actualizar la transformación del contenedor al cambiar el índice
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.style.transform = `translateX(-${index * 100}%)`;
+    }
+  }, [index]);
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <div
-        className="flex transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${index * 100}%)` }}
-      >
-        {images.map((src, i) => (
-          <div key={i} className="min-w-full">
-            <Image
-              src={src}
-              alt={altText}
-              fill
-              style={{ objectFit: "cover" }}
-              placeholder="blur"
-              blurDataURL="/placeholder.png"
-            />
+    <div className={`relative w-full overflow-hidden ${className}`}>
+      <div ref={carouselRef} className="flex transition-transform duration-500 ease-in-out">
+        {images.map((src, idx) => (
+          <div key={idx} className="min-w-full">
+            <img src={src} alt={altText} className="w-full h-auto object-cover" />
           </div>
         ))}
       </div>
-
-      <div className="absolute bottom-4 inset-x-0 flex justify-center items-center gap-4 bg-black/50 px-4 py-2 rounded-full">
-        <button aria-label="Previous slide" onClick={() => go(index - 1)}>
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-4 bg-black/50 px-4 py-2 rounded-full">
+        <button onClick={() => showSlide(index - 1)} className="text-white hover:text-gray-200 transition">
           <FiChevronLeft size={24} />
         </button>
         <div className="flex gap-2">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => go(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`w-3 h-3 rounded-full transition-transform ${
-                i === index ? "scale-110 bg-white" : "bg-gray-400"
-              }`}
+          {images.map((_, idx) => (
+            <div
+              key={idx}
+              onClick={() => showSlide(idx)}
+              className={`w-3 h-3 rounded-full cursor-pointer transition-all ${idx === index ? 'bg-white scale-110' : 'bg-gray-300'}`}
             />
           ))}
         </div>
-        <button aria-label="Next slide" onClick={() => go(index + 1)}>
+        <button onClick={() => showSlide(index + 1)} className="text-white hover:text-gray-200 transition">
           <FiChevronRight size={24} />
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default ImageCarousel;
