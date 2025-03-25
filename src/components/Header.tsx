@@ -9,9 +9,7 @@ const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -22,7 +20,6 @@ const Header: React.FC = () => {
     return "/images/logo-san-isidro.svg";
   };
 
-  // Cierra el menú al hacer clic en un enlace
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
@@ -61,12 +58,16 @@ const Header: React.FC = () => {
             </div>
             <div className="flex items-center space-x-2">
               <div className="hidden md:flex space-x-1">
-                <button className="bg-[#1e804b] text-white px-4 py-2 rounded-full">ESP</button>
-                <button className="bg-[#294161] text-white px-4 py-2 rounded-full">ING</button>
+                <button className="flex items-center justify-center bg-[#1e804b] text-white px-4 py-2 rounded-full">
+                  ESP
+                </button>
+                <button className="flex items-center justify-center bg-[#294161] text-white px-4 py-2 rounded-full">
+                  ING
+                </button>
               </div>
               <button
                 id="menuToggle"
-                className="bg-[#c19516] px-6 py-3 rounded-full text-white cursor-pointer"
+                className="flex items-center justify-center bg-[#c19516] px-6 py-3 rounded-full text-white"
                 onClick={() => setMenuOpen(true)}
               >
                 ☰ MENÚ
@@ -76,7 +77,7 @@ const Header: React.FC = () => {
         </nav>
       </header>
 
-      {/* MENÚ DESPLEGABLE: se renderiza siempre para animar entre estados */}
+      {/* MENÚ DESPLEGABLE: contenedor siempre renderizado para animar entre estados */}
       <div
         id="dropdownContainer"
         className={`
@@ -85,17 +86,18 @@ const Header: React.FC = () => {
         `}
         onClick={() => setMenuOpen(false)}
       >
-        {/* Máscara negra (overlay) */}
-        <div className="absolute inset-0 bg-black transition-opacity duration-500 ease-in-out opacity-65 pointer-events-none"></div>
-        {/* Panel del menú que se anima y detiene la propagación */}
+        {/* Overlay negro visible solo en pantallas medianas en adelante */}
+        <div className="hidden md:block absolute inset-0 bg-black transition-opacity duration-500 ease-in-out opacity-65 pointer-events-none"></div>
+        {/* Panel del menú con animación y que abarca toda la pantalla en móvil */}
         <div
           className={`
             relative transition-transform duration-500 ease-in-out
             ${menuOpen ? "translate-y-0" : "-translate-y-full"}
+            h-full
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="menu-panel bg-[#c19516] text-white w-full rounded-b-lg shadow-lg p-4">
+          <div className="menu-panel bg-[#c19516] text-white w-full h-full p-4 md:rounded-b-lg md:shadow-lg md:h-auto">
             <button
               id="closeMenu"
               className="absolute top-4 right-6 text-3xl text-white"
@@ -119,8 +121,12 @@ const Header: React.FC = () => {
                 />
               </Link>
               <div className="flex space-x-1 me-6">
-                <button className="bg-[#1e804b] text-white px-3 py-1 rounded-full">ESP</button>
-                <button className="bg-[#294161] text-white px-3 py-1 rounded-full">ING</button>
+                <button className="flex items-center justify-center bg-[#1e804b] text-white px-3 py-1 rounded-full">
+                  ESP
+                </button>
+                <button className="flex items-center justify-center bg-[#294161] text-white px-3 py-1 rounded-full">
+                  ING
+                </button>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -128,11 +134,7 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold">Colegio</h3>
                 <ul className="mt-1 space-y-1">
                   <li>
-                    <Link
-                      href="/colegio"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="/colegio" onClick={handleLinkClick} className="hover:underline">
                       Sobre el colegio
                     </Link>
                   </li>
@@ -142,38 +144,22 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold">Académico</h3>
                 <ul className="mt-1 space-y-1">
                   <li>
-                    <Link
-                      href="/vida-estudiantil"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="/vida-estudiantil" onClick={handleLinkClick} className="hover:underline">
                       Vida Estudiantil
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/vida-estudiantil-mas-info"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="/vida-estudiantil-mas-info" onClick={handleLinkClick} className="hover:underline">
                       Más información
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/deportes"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="/deportes" onClick={handleLinkClick} className="hover:underline">
                       Deportes
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/deportes-mas-info"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="/deportes-mas-info" onClick={handleLinkClick} className="hover:underline">
                       Deportes - Más información
                     </Link>
                   </li>
@@ -183,29 +169,17 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold">Contacto</h3>
                 <ul className="mt-1 space-y-1">
                   <li>
-                    <Link
-                      href="#"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="#" onClick={handleLinkClick} className="hover:underline">
                       Ubicación
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="#"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="#" onClick={handleLinkClick} className="hover:underline">
                       Redes Sociales
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="#"
-                      onClick={handleLinkClick}
-                      className="hover:underline"
-                    >
+                    <Link href="#" onClick={handleLinkClick} className="hover:underline">
                       Email
                     </Link>
                   </li>
