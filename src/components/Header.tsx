@@ -24,6 +24,7 @@ const Header: React.FC = () => {
 
   // Handler para cuando se haga clic en un enlace de navegación
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Se evita la propagación para que no se cierren otros elementos innecesariamente.
     e.stopPropagation();
     setMenuOpen(false);
   };
@@ -93,7 +94,7 @@ const Header: React.FC = () => {
         </nav>
       </header>
 
-      {/* MENÚ DESPLEGABLE */}
+      {/* MENÚ DESPLEGABLE con animaciones sin interferir en iOS */}
       <div
         id="dropdownContainer"
         className={`
@@ -102,14 +103,13 @@ const Header: React.FC = () => {
         `}
         onClick={() => setMenuOpen(false)}
       >
-        {/* Panel del menú sin onTouchStart, para permitir la interacción natural en iOS */}
+        {/* Panel del menú: se mantiene en el DOM para animar y detiene la propagación */}
         <div
           className={`
             relative transition-transform duration-500 ease-in-out h-full
             ${menuOpen ? "translate-y-0" : "-translate-y-full"}
           `}
           onClick={(e) => e.stopPropagation()}
-          // Se eliminó onTouchStart para evitar bloqueos en dispositivos táctiles
         >
           <div className="menu-panel bg-[#c19516] text-white w-full h-full p-4 md:rounded-b-lg md:shadow-lg md:h-auto">
             <button
@@ -136,12 +136,18 @@ const Header: React.FC = () => {
                 />
               </Link>
               <div className="flex space-x-1 mt-4 md:mt-0">
-                <button className="flex items-center justify-center bg-[#1e804b] text-white px-3 py-1 rounded-full">
+                <Link
+                  href="#"
+                  className="flex items-center justify-center bg-[#1e804b] text-white px-3 py-1 rounded-full"
+                >
                   ESP
-                </button>
-                <button className="flex items-center justify-center bg-[#294161] text-white px-3 py-1 rounded-full">
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center justify-center bg-[#294161] text-white px-3 py-1 rounded-full"
+                >
                   ING
-                </button>
+                </Link>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -152,7 +158,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/colegio"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Sobre el colegio
                     </Link>
@@ -166,7 +172,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/vida-estudiantil"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Vida Estudiantil
                     </Link>
@@ -175,7 +181,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/vida-estudiantil-mas-info"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Más información
                     </Link>
@@ -184,7 +190,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/deportes"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Deportes
                     </Link>
@@ -193,7 +199,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/deportes-mas-info"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Deportes - Más información
                     </Link>
@@ -207,7 +213,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/ubicacion"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Ubicación
                     </Link>
@@ -216,7 +222,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/redes-sociales"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Redes Sociales
                     </Link>
@@ -225,7 +231,7 @@ const Header: React.FC = () => {
                     <Link
                       href="/email"
                       onClick={handleNavClick}
-                      className="hover:underline"
+                      className="hover:underline block"
                     >
                       Email
                     </Link>
