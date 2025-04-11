@@ -22,8 +22,12 @@ const Header: React.FC = () => {
     return "/images/logo-san-isidro.svg";
   };
 
-  // Cierra el menú cuando se hace clic en un enlace
-  const handleLinkClick = () => setMenuOpen(false);
+  // Handler para cuando se haga clic en un enlace de navegación
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Si necesitas evitar la propagación, puedes descomentar la siguiente línea:
+    // e.stopPropagation();
+    setMenuOpen(false);
+  };
 
   return (
     <div id="container" className="relative bg-white w-full">
@@ -50,7 +54,12 @@ const Header: React.FC = () => {
                 ${scrolled ? "bg-white py-4 px-6 shadow-lg rounded-lg" : "px-3 py-2"}
               `}
             >
-              <Link href="/" aria-label="San Isidro Home" className="flex items-center">
+              <Link
+                href="/"
+                aria-label="San Isidro Home"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center"
+              >
                 <Image
                   id="logo"
                   src={getLogoSrc()}
@@ -83,22 +92,21 @@ const Header: React.FC = () => {
         </nav>
       </header>
 
-      {/* MENÚ DESPLEGABLE: contenedor siempre renderizado para animar entre estados */}
+      {/* MENÚ DESPLEGABLE con animaciones y sin interferir en la navegación */}
       <div
         id="dropdownContainer"
         className={`
-          fixed inset-0 z-80 transition-opacity duration-500 ease-in-out
+          fixed inset-0 z-80 transition-opacity duration-500 ease-in-out bg-black/50
           ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
         `}
         onClick={() => setMenuOpen(false)}
       >
-        {/* Panel del menú: abarca toda la pantalla en móviles */}
+        {/* Panel del menú: se mantiene en el DOM para animar, pero detiene la propagación */}
         <div
           className={`
-            relative transition-transform duration-500 ease-in-out
-            ${menuOpen ? "translate-y-0" : "-translate-y-full"} h-full
+            relative transition-transform duration-500 ease-in-out h-full
+            ${menuOpen ? "translate-y-0" : "-translate-y-full"}
           `}
-          // Detiene la propagación para que los clics dentro del panel no cierren el menú
           onClick={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
         >
@@ -111,10 +119,10 @@ const Header: React.FC = () => {
             >
               &times;
             </button>
-            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4 pe-10">
               <Link
                 href="/"
-                onClick={handleLinkClick}
+                onClick={handleNavClick}
                 className="flex items-center logo-container transition-all duration-500 ease-in-out px-2 py-1"
               >
                 <Image
@@ -140,7 +148,11 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold">Colegio</h3>
                 <ul className="mt-1 space-y-1">
                   <li>
-                    <Link href="/colegio" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/colegio"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Sobre el colegio
                     </Link>
                   </li>
@@ -150,22 +162,38 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold">Académico</h3>
                 <ul className="mt-1 space-y-1">
                   <li>
-                    <Link href="/vida-estudiantil" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/vida-estudiantil"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Vida Estudiantil
                     </Link>
                   </li>
                   <li>
-                    <Link href="/vida-estudiantil-mas-info" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/vida-estudiantil-mas-info"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Más información
                     </Link>
                   </li>
                   <li>
-                    <Link href="/deportes" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/deportes"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Deportes
                     </Link>
                   </li>
                   <li>
-                    <Link href="/deportes-mas-info" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/deportes-mas-info"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Deportes - Más información
                     </Link>
                   </li>
@@ -175,17 +203,29 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold">Contacto</h3>
                 <ul className="mt-1 space-y-1">
                   <li>
-                    <Link href="#" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/ubicacion"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Ubicación
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/redes-sociales"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Redes Sociales
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" onClick={handleLinkClick} className="hover:underline">
+                    <Link
+                      href="/email"
+                      onClick={handleNavClick}
+                      className="hover:underline"
+                    >
                       Email
                     </Link>
                   </li>

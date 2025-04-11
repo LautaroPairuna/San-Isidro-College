@@ -3,7 +3,7 @@ import MapEmbed from '@/components/mapEmbed';
 
 const ContactSection = () => {
   return (
-    <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
+    <section id='contacto' className="relative w-full h-auto py-10 bg-white overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto">
         {/* Columna Izquierda: Información de contacto */}
         <div className="relative flex flex-col justify-center lg:col-span-4">

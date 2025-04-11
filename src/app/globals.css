@@ -110,3 +110,16 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.5s ease-in-out;
 }
+
+@keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }

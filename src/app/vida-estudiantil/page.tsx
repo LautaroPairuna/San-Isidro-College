@@ -19,7 +19,7 @@ export default function VidaEstudiantilPage() {
             height={250}
             className="hidden lg:block absolute top-[60%] left-[77%] transform -translate-x-1/2 z-40
                       max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
-                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] items-end justify-end"
+                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] items-end justify-end drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
           {/* Versión Móvil: Texto en flujo normal + Botón juntos */}
           <div className="flex lg:hidden p-6 z-20 justify-between items-end mt-28 relative">
@@ -29,7 +29,7 @@ export default function VidaEstudiantilPage() {
               width={250}
               height={250}
               className="transform -translate-x-1/2 z-40
-                        max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px]"
+                        max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
             <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
               <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>

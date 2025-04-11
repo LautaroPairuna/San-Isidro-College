@@ -1,5 +1,7 @@
 // app/page.tsx
+"use client";
 import Contact from '@/components/sectionContact'; // Ajusta la ruta según tu estructura
+import Carousel from '@/components/sectionCarrusel';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -17,7 +19,7 @@ export default function HomePage() {
             height={250}
             className="absolute top-[55%] left-[80%] transform -translate-x-1/2 z-40
                       max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
-                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px]"
+                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
           {/* Botón para móvil */}
           <button className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 sm:hidden">
@@ -100,10 +102,9 @@ export default function HomePage() {
             <Image
               src="/images/formas/forma-home-2.svg"
               alt="Decoración"
-              width={550}
-              height={300}
-              sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
-              className="absolute -top-5 -left-60 w-[550px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+              width={650}
+              height={350}
+              className="absolute -top-0 -left-0 w-[650px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
             />
           </div>
 
@@ -123,108 +124,67 @@ export default function HomePage() {
 
       {/* Sección 3: Fondo verde con íconos e imagen */}
       <section className="relative w-full bg-[#71af8d] py-10">
-        {/* Forma decorativa detrás */}
-        <Image
-          src="/images/formas/forma-home-3.svg"
-          alt="Forma decorativa"
-          width={800}
-          height={500}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 750px, 1000px"
-          className="absolute top-25 md:-top-5 -right-0 w-[1000px] md:w-[750px] z-10"
-        />
+      {/* Imagen decorativa detrás */}
+      <Image
+        src="/images/formas/forma-home-3.svg"
+        alt="Forma decorativa"
+        width={800}
+        height={500}
+        sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
+        className="absolute top-25 md:-top-5 right-[5%] 2xl:w-[750px] xl:w-[700px] w-[500px] lg:z-20 z-10 pointer-events-none"
+      />
 
-        {/* Contenedor */}
-        <div className="relative max-w-screen-xl mx-auto h-full px-4">
-          {/* Escritorio (>= sm) */}
-          <div className="hidden sm:grid grid-cols-12 gap-8 h-full relative">
-            {/* Iconos (arriba de la imagen) */}
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[65%] left-[2%] lg:gap-30 md:gap-20 w-full">
-              <Image
-                src="/images/icons/ico-alumnos.svg"
-                alt="Alumnos"
-                width={150}
-                height={150}
-              />
-              <Image
-                src="/images/icons/ico-hectarias.svg"
-                alt="Hectáreas"
-                width={150}
-                height={150}
-              />
-              <Image
-                src="/images/icons/ico-m3-construidos.svg"
-                alt="M3 Construidos"
-                width={150}
-                height={150}
-              />
-              <Image
-                src="/images/icons/ico-alumnos-extranjeros.svg"
-                alt="Alumnos Extranjeros"
-                width={150}
-                height={150}
-              />
-              <Image
-                src="/images/icons/ico-certificados-internacionales.svg"
-                alt="Certificados Internacionales"
-                width={150}
-                height={150}
-              />
-            </div>
-
-            {/* Imagen principal */}
-            <div className="col-span-8 flex items-center justify-center z-10">
-              <Image
-                src="/images/fondo-iconos.webp"
-                alt="Imagen principal"
-                width={800}
-                height={600}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
-                className="w-full h-auto rounded-md shadow-md"
-              />
+      {/* Contenedor principal de la sección */}
+      <div className="relative max-w-screen-xl mx-auto px-4">
+        {/* --- VERSIÓN ESCRITORIO (>= md) --- */}
+        <div className="hidden md:grid grid-cols-12 gap-8 h-full relative">
+          {/* Carrusel de íconos, en posición absoluta sobre la imagen */}
+          <div
+            className="absolute col-span-4 z-20 top-[65%] left-[2%] w-[95%] overflow-hidden"
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            <div className="inline-block animate-marquee whitespace-nowrap">
+              {/* Primer set de íconos */}
+              {[
+                { src: '/images/icons/ico-alumnos.svg', alt: 'Alumnos' },
+                { src: '/images/icons/ico-hectarias.svg', alt: 'Hectáreas' },
+                { src: '/images/icons/ico-m3-construidos.svg', alt: 'M3 Construidos' },
+                { src: '/images/icons/ico-alumnos-extranjeros.svg', alt: 'Alumnos Extranjeros' },
+                { src: '/images/icons/ico-certificados-internacionales.svg', alt: 'Certificados Internacionales' },
+              ].map((icon, i) => (
+                <div key={i} className="inline-block px-8">
+                  <Image
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={150}
+                    height={150}
+                    className="transition-transform duration-300 hover:scale-110"
+                  />
+                </div>
+              ))}
+              {/* Segundo set duplicado para efecto infinito */}
+              {[
+                { src: '/images/icons/ico-alumnos.svg', alt: 'Alumnos' },
+                { src: '/images/icons/ico-hectarias.svg', alt: 'Hectáreas' },
+                { src: '/images/icons/ico-m3-construidos.svg', alt: 'M3 Construidos' },
+                { src: '/images/icons/ico-alumnos-extranjeros.svg', alt: 'Alumnos Extranjeros' },
+                { src: '/images/icons/ico-certificados-internacionales.svg', alt: 'Certificados Internacionales' },
+              ].map((icon, i) => (
+                <div key={`dup-${i}`} className="inline-block px-8">
+                  <Image
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={150}
+                    height={150}
+                    className="transition-transform duration-300 hover:scale-110"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Móvil (< sm) */}
-          <div className="sm:hidden flex flex-col items-center justify-start relative z-10 w-full h-full">
-            {/* Iconos arriba de la imagen */}
-            <div className="grid grid-cols-3 gap-4 w-full px-4 mt-4 mb-4">
-              <Image
-                src="/images/icons/ico-alumnos.svg"
-                alt="Alumnos"
-                width={100}
-                height={100}
-                className="w-full aspect-square object-contain"
-              />
-              <Image
-                src="/images/icons/ico-hectarias.svg"
-                alt="Hectáreas"
-                width={100}
-                height={100}
-                className="w-full aspect-square object-contain"
-              />
-              <Image
-                src="/images/icons/ico-m3-construidos.svg"
-                alt="M3 Construidos"
-                width={100}
-                height={100}
-                className="w-full aspect-square object-contain"
-              />
-              <Image
-                src="/images/icons/ico-alumnos-extranjeros.svg"
-                alt="Alumnos Extranjeros"
-                width={100}
-                height={100}
-                className="w-full aspect-square object-contain"
-              />
-              <Image
-                src="/images/icons/ico-certificados-internacionales.svg"
-                alt="Certificados Internacionales"
-                width={100}
-                height={100}
-                className="w-full aspect-square object-contain"
-              />
-            </div>
-            {/* Imagen principal debajo de los iconos en móvil */}
+          {/* Imagen principal de la sección (col-span-8) */}
+          <div className="col-span-8 flex items-center justify-center z-10 pointer-events-none">
             <Image
               src="/images/fondo-iconos.webp"
               alt="Imagen principal"
@@ -235,8 +195,66 @@ export default function HomePage() {
             />
           </div>
         </div>
-      </section>
 
+        {/* --- VERSIÓN MÓVIL (< md) --- */}
+        <div className="md:hidden flex flex-col items-center justify-start relative z-10 w-full">
+          {/* Carrusel de íconos en móvil */}
+          <div className="overflow-hidden relative w-full" style={{ whiteSpace: 'nowrap', fontSize: 0 }}>
+            <div className="inline-block animate-marquee whitespace-nowrap">
+              {/* Primer set de íconos (tamaños reducidos para móvil) */}
+              {[
+                { src: '/images/icons/ico-alumnos.svg', alt: 'Alumnos' },
+                { src: '/images/icons/ico-hectarias.svg', alt: 'Hectáreas' },
+                { src: '/images/icons/ico-m3-construidos.svg', alt: 'M3 Construidos' },
+                { src: '/images/icons/ico-alumnos-extranjeros.svg', alt: 'Alumnos Extranjeros' },
+                { src: '/images/icons/ico-certificados-internacionales.svg', alt: 'Certificados Internacionales' },
+              ].map((icon, i) => (
+                <div key={i} className="inline-block px-4">
+                  <Image
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={100}
+                    height={100}
+                    className="transition-transform duration-300 hover:scale-110"
+                  />
+                </div>
+              ))}
+              {/* Segundo set duplicado */}
+              {[
+                { src: '/images/icons/ico-alumnos.svg', alt: 'Alumnos' },
+                { src: '/images/icons/ico-hectarias.svg', alt: 'Hectáreas' },
+                { src: '/images/icons/ico-m3-construidos.svg', alt: 'M3 Construidos' },
+                { src: '/images/icons/ico-alumnos-extranjeros.svg', alt: 'Alumnos Extranjeros' },
+                { src: '/images/icons/ico-certificados-internacionales.svg', alt: 'Certificados Internacionales' },
+              ].map((icon, i) => (
+                <div key={`dup-${i}`} className="inline-block px-4">
+                  <Image
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={100}
+                    height={100}
+                    className="transition-transform duration-300 hover:scale-110"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Imagen principal debajo del carrusel en móvil */}
+          <div className="mt-4 flex justify-center">
+            <Image
+              src="/images/fondo-iconos.webp"
+              alt="Imagen principal"
+              width={800}
+              height={600}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
+              className="w-full h-auto rounded-md shadow-md"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <Carousel />
       {/* Sección 4: Mapa y datos de contacto */}
       <Contact />
     </div>

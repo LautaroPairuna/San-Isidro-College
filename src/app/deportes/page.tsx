@@ -32,7 +32,7 @@ export default function DeportesPage() {
               alt="I am because we are" 
               width={250}
               height={250}
-              className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px]"
+              className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
             <div className="text-center">
               <Link
@@ -59,7 +59,7 @@ export default function DeportesPage() {
               height={250}
               className="absolute top-[65%] left-[77%] transform -translate-x-1/2 z-40
                          max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80
-                         max-sm:translate-x-0 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px]"
+                         max-sm:translate-x-0 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function DeportesPage() {
           width={550}
           height={300}
           sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
-          className="absolute -top-5 left-32 w-[550px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+          className="absolute -top-5 -left-0 w-[550px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
         />
         
         {/* Contenedor de contenido */}
@@ -214,7 +214,7 @@ export default function DeportesPage() {
             width={550}
             height={300}
             sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
-            className="absolute top-5 right-35 w-[550px] h-auto max-sm:hidden"
+            className="absolute top-5 right-36 w-[550px] h-auto max-sm:hidden"
           />
           <div className="grid grid-cols-12 gap-8 mx-auto h-full">
             {/* Columna Izquierda: Carrusel */}
@@ -231,7 +231,7 @@ export default function DeportesPage() {
             </div>
             {/* Columna Derecha: Cuadro flotante */}
             <div className="absolute col-span-4 flex items-center justify-center z-20 top-65 left-[37%]">
-              <div className="absolute -top-[80px] left-[103px] w-[650px] z-20">
+              <div className="absolute -top-[120px] left-[115px] w-[650px] z-20">
                 <Image
                   src="/images/logo-dojo.svg"
                   alt="Logo Dojo"

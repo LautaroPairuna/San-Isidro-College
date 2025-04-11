@@ -12,9 +12,9 @@ const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: fals
 export default function DeportesMasInfoPage() {
   return (
     <>
-      <section className="relative w-full min-h-screen bg-[#71af8d] px-5 md:px-24 lg:px-60 overflow-hidden">
+      <section className="relative w-full min-h-screen bg-[#71af8d] px-5 md:px-24 lg:px-80 overflow-hidden">
         {/* CONTENEDOR CENTRAL CON FONDO BLANCO */}
-        <div className="relative max-w-[1200px] mx-auto bg-white min-h-screen px-8 pb-8 pt-60">
+        <div className="relative max-w-[1000px] mx-auto bg-white min-h-screen px-8 pb-8 pt-60">
           {/* CONTENIDO PRINCIPAL */}
           <h2
             id="proyecto"
