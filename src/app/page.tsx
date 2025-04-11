@@ -18,14 +18,14 @@ export default function HomePage() {
             width={250}
             height={250}
             className="absolute top-[55%] left-[80%] transform -translate-x-1/2 z-40
-                      max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
+                      max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
                       max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
           {/* Botón para móvil */}
           <Link
             href="https://docs.google.com/forms/d/e/..."
             target="_blank"
-            className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden"
+            className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center text-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden z-10"
           >
             <Image
               src="/images/ico-admisiones.svg"
@@ -34,7 +34,7 @@ export default function HomePage() {
               height={24}
               sizes="(max-width: 640px) 24px, 24px"
             />
-            ADMISIONES
+            <span className="leading-none">ADMISIONES</span>
           </Link>
         </div>
 
@@ -127,7 +127,7 @@ export default function HomePage() {
         src="/images/formas/forma-home-3.svg"
         alt="Forma decorativa"
         width={800}
-        height={500}
+        height={300}
         sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
         className="absolute top-25 md:-top-5 right-[5%] 2xl:w-[750px] xl:w-[700px] w-[500px] lg:z-20 z-10 pointer-events-none"
       />

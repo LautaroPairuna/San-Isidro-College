@@ -74,20 +74,20 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-2">
               {/* Botones de idioma independientes */}
               <div className="hidden md:flex space-x-1">
-                <button className="flex items-center justify-center bg-[#1e804b] text-white px-4 py-2 rounded-full">
-                  ESP
+                <button className="flex items-center justify-center text-center bg-[#1e804b] text-white px-4 py-2 rounded-full">
+                  <span className="leading-none">ES</span>
                 </button>
-                <button className="flex items-center justify-center bg-[#294161] text-white px-4 py-2 rounded-full">
-                  ING
+                <button className="flex items-center justify-center text-center bg-[#294161] text-white px-4 py-2 rounded-full">
+                  <span className="leading-none">EN</span>
                 </button>
               </div>
               {/* Botón para abrir el menú */}
               <button
                 id="menuToggle"
-                className="flex items-center justify-center bg-[#c19516] px-6 py-3 rounded-full text-white"
+                className="flex items-center justify-center text-center bg-[#c19516] px-6 py-3 rounded-full text-white"
                 onClick={() => setMenuOpen(true)}
               >
-                ☰ MENÚ
+                <span className="leading-none">☰ MENÚ</span>
               </button>
             </div>
           </div>
