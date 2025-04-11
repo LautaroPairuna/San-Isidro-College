@@ -24,8 +24,7 @@ const Header: React.FC = () => {
 
   // Handler para cuando se haga clic en un enlace de navegación
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Si necesitas evitar la propagación, puedes descomentar la siguiente línea:
-    // e.stopPropagation();
+    e.stopPropagation();
     setMenuOpen(false);
   };
 
