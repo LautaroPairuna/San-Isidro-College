@@ -22,22 +22,20 @@ export default function HomePage() {
                       max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
           {/* Botón para móvil */}
-          <button className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 sm:hidden">
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className='flex items-center gap-2'
-            >
-              <Image
-                src="/images/ico-admisiones.svg"
-                alt="Ver Admisiones"
-                width={24}
-                height={24}
-                sizes="(max-width: 640px) 24px, 24px"
-              />
-              ADMISIONES
-            </Link>
-          </button>
+          <Link
+            href="https://docs.google.com/forms/d/e/..."
+            target="_blank"
+            className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden"
+          >
+            <Image
+              src="/images/ico-admisiones.svg"
+              alt="Ver Admisiones"
+              width={24}
+              height={24}
+              sizes="(max-width: 640px) 24px, 24px"
+            />
+            ADMISIONES
+          </Link>
         </div>
 
         {/* Columna Derecha: Imagen de fondo (LCP) y botón */}

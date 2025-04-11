@@ -43,6 +43,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="description" content={metadata.description} />
+        <meta name="keywords" content={metadata.keywords.join(', ')} />
+        <meta name="author" content="San Isidro College" />
+        <meta name="robots" content="index, follow" />
+        {/* <meta name="googlebot" content="index, follow" />
+        <meta name="google" content="notranslate" /> */}
+        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> */}
         <style>{`
           html,
           body {

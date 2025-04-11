@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   // Handler para cuando se haga clic en un enlace de navegación
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Si necesitas evitar la propagación, puedes descomentar la siguiente línea:
-    e.stopPropagation();
+    // e.stopPropagation();
     setMenuOpen(false);
   };
 
@@ -72,6 +72,7 @@ const Header: React.FC = () => {
             </div>
             {/* Botones de idioma y menú */}
             <div className="flex items-center space-x-2">
+              {/* Botones de idioma independientes */}
               <div className="hidden md:flex space-x-1">
                 <button className="flex items-center justify-center bg-[#1e804b] text-white px-4 py-2 rounded-full">
                   ESP
@@ -80,6 +81,7 @@ const Header: React.FC = () => {
                   ING
                 </button>
               </div>
+              {/* Botón para abrir el menú */}
               <button
                 id="menuToggle"
                 className="flex items-center justify-center bg-[#c19516] px-6 py-3 rounded-full text-white"
@@ -92,7 +94,7 @@ const Header: React.FC = () => {
         </nav>
       </header>
 
-      {/* MENÚ DESPLEGABLE con animaciones y sin interferir en la navegación */}
+      {/* MENÚ DESPLEGABLE */}
       <div
         id="dropdownContainer"
         className={`
@@ -101,14 +103,14 @@ const Header: React.FC = () => {
         `}
         onClick={() => setMenuOpen(false)}
       >
-        {/* Panel del menú: se mantiene en el DOM para animar, pero detiene la propagación */}
+        {/* Panel del menú sin onTouchStart, para permitir la interacción natural en iOS */}
         <div
           className={`
             relative transition-transform duration-500 ease-in-out h-full
             ${menuOpen ? "translate-y-0" : "-translate-y-full"}
           `}
           onClick={(e) => e.stopPropagation()}
-          onTouchStart={(e) => e.stopPropagation()}
+          // Se eliminó onTouchStart para evitar bloqueos en dispositivos táctiles
         >
           <div className="menu-panel bg-[#c19516] text-white w-full h-full p-4 md:rounded-b-lg md:shadow-lg md:h-auto">
             <button
