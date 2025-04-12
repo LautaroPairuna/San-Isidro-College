@@ -58,7 +58,7 @@ const Header: React.FC = () => {
             <div
               className={`
                 logo-container transition-all duration-500 ease-in-out
-                ${scrolled ? "bg-white sm:py-8 py-4 sm:px-12 px-6 shadow-2xl rounded-br-4xl ms-0" : "px-3 py-2 sm:ms-10 ms-2"}
+                ${scrolled ? "bg-white sm:py-8 py-4 sm:px-12 px-6 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0" : "px-3 py-2 sm:ms-10 ms-2"}
               `}
             >
               <Link
