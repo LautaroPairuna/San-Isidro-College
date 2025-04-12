@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: false });
 const Carousel = dynamic(() => import("@/components/sectionCarrusel"), { ssr: false });
-const ImageCarousel = dynamic(() => import("@/components/ImageCarousel"), { ssr: false });
+const MediaCarousel = dynamic(() => import("@/components/MediaCarousel"), { ssr: false });
 
 export default function DeportesPage() {
   return (
@@ -66,15 +66,17 @@ export default function DeportesPage() {
 
         {/* ────────────── COL. DE LA IMAGEN ────────────── */}
         <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px]">
-          <div className="relative w-full h-full">
-            <Image
-              src="/images/Image-deportes.webp"
-              alt="Imagen de fondo"
-              fill
-              className="object-cover"
-            />
-          </div>
-
+          {/* Aquí se reemplaza la imagen estática por el MediaCarousel */}
+          <MediaCarousel
+            medias={[
+              "/images/Image-deportes.webp",
+              "/images/Image-deportes.webp",
+              "/images/Image-deportes.webp"
+            ]}
+            altText="Imagen de fondo"
+            className="w-full h-full object-cover"
+          />
+          
           {/* Recuadro blanco con texto */}
           <div className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
                           absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
@@ -99,7 +101,11 @@ export default function DeportesPage() {
           {/* Versión ESCRITORIO: Botón ADMISIONES en esquina inferior derecha */}
           <div className="hidden lg:block">
             <button className="hidden lg:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
+                target="_blank"
+                className='flex items-center gap-3'
+              >
                 <Image
                   src="/images/ico-admisiones.svg"
                   alt="Ver Admisiones"
@@ -159,8 +165,8 @@ export default function DeportesPage() {
             </div>
           </div>
           <div className="hidden sm:block col-span-8">
-            <ImageCarousel
-              images={[
+            <MediaCarousel
+              medias={[
                 "/images/Image-SIC-hockey.webp",
                 "/images/Image-SIC-hockey.webp",
                 "/images/Image-SIC-hockey.webp",
@@ -172,8 +178,8 @@ export default function DeportesPage() {
           
           {/* Versión Móvil */}
           <div className="sm:hidden col-span-12 relative pt-16">
-            <ImageCarousel
-              images={[
+            <MediaCarousel
+              medias={[
                 "/images/Image-SIC-hockey.webp",
                 "/images/Image-SIC-hockey.webp",
                 "/images/Image-SIC-hockey.webp",
@@ -219,8 +225,8 @@ export default function DeportesPage() {
           <div className="grid grid-cols-12 gap-8 mx-auto h-full">
             {/* Columna Izquierda: Carrusel */}
             <div className="col-span-8">
-              <ImageCarousel
-                images={[
+              <MediaCarousel
+                medias={[
                   "/images/Image-SIC-dojo.webp",
                   "/images/Image-SIC-dojo.webp",
                   "/images/Image-SIC-dojo.webp",
@@ -262,8 +268,8 @@ export default function DeportesPage() {
             sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
             className="absolute top-5 right-35 w-[550px] h-auto max-sm:absolute max-sm:-top-75 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
           />
-          <ImageCarousel
-            images={[
+          <MediaCarousel
+            medias={[
               "/images/Image-SIC-dojo.webp",
               "/images/Image-SIC-dojo.webp",
               "/images/Image-SIC-dojo.webp",
@@ -335,8 +341,8 @@ export default function DeportesPage() {
           </div>
           {/* Columna Derecha */}
           <div className="col-span-8">
-            <ImageCarousel
-              images={[
+            <MediaCarousel
+              medias={[
                 "/images/Image-vida-estudiantil.webp",
                 "/images/Image-vida-estudiantil.webp",
                 "/images/Image-vida-estudiantil.webp",
@@ -357,8 +363,8 @@ export default function DeportesPage() {
             sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
             className="absolute top-5 right-35 w-[550px] h-auto max-sm:absolute max-sm:-top-55 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
           />
-          <ImageCarousel
-            images={[
+          <MediaCarousel
+            medias={[
               "/images/Image-vida-estudiantil.webp",
               "/images/Image-vida-estudiantil.webp",
               "/images/Image-vida-estudiantil.webp",
@@ -411,8 +417,8 @@ export default function DeportesPage() {
           />
           <div className="grid grid-cols-12 gap-8 mx-auto h-full px-4 max-w-[1200px]">
             <div className="col-span-8 max-sm:col-span-12 flex items-center justify-center">
-              <ImageCarousel
-                images={[
+              <MediaCarousel
+                medias={[
                   "/images/image-SIC-play.webp",
                   "/images/image-SIC-play.webp",
                   "/images/image-SIC-play.webp",
@@ -454,8 +460,8 @@ export default function DeportesPage() {
             className="absolute top-5 right-35 w-[550px] h-auto max-sm:absolute max-sm:-top-70 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
           />
           <div className="relative w-full">
-            <ImageCarousel
-              images={[
+            <MediaCarousel
+              medias={[
                 "/images/image-SIC-play.webp",
                 "/images/image-SIC-play.webp",
                 "/images/image-SIC-play.webp",

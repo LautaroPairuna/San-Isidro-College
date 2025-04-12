@@ -1,9 +1,12 @@
 // app/page.tsx
 "use client";
-import Contact from '@/components/sectionContact'; // Ajusta la ruta según tu estructura
-import Carousel from '@/components/sectionCarrusel';
-import Link from 'next/link';
-import Image from 'next/image';
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import Image from "next/image";
+
+const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: false });
+const Carousel = dynamic(() => import("@/components/sectionCarrusel"), { ssr: false });
+const MediaCarousel = dynamic(() => import("@/components/MediaCarousel"), { ssr: false });
 
 export default function HomePage() {
   return (
@@ -38,16 +41,17 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Columna Derecha: Imagen de fondo (LCP) y botón */}
+        {/* Columna Derecha: MediaCarousel de fondo y botón */}
         <div className="col-span-7 relative w-full h-full max-sm:col-span-12">
-          <Image
-            src="/images/fondo-home.webp"
-            alt="Imagen de fondo"
-            width={1920}
-            height={1080}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 1000px"
+          {/* Reemplazamos el Image estático por el MediaCarousel */}
+          <MediaCarousel
+            medias={[
+              "/images/fondo-home.webp",
+              "/images/fondo-home.webp",
+              "/images/fondo-home.webp"
+            ]}
+            altText="Imagen de fondo"
             className="w-full h-full object-cover"
-            priority
           />
           <button className="absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 hidden sm:flex">
             <Link
@@ -76,7 +80,7 @@ export default function HomePage() {
           priority
           sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
           className="absolute top-0 left-4/12 transform -translate-x-1/2 h-full pointer-events-none
-                     max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
+                    max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
         />
       </section>
 

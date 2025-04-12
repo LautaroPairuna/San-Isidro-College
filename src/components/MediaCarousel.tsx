@@ -3,20 +3,20 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 
-interface ImageCarouselProps {
-  images?: string[];
+interface MediaCarouselProps {
+  medias?: string[]; // Arreglo de URLs que pueden ser imágenes o videos (ej. .mp4)
   altText?: string;
   className?: string;
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({
-  images = [],
+const MediaCarousel: React.FC<MediaCarouselProps> = ({
+  medias = [],
   altText = "",
   className = ""
 }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
-  const totalSlides = images.length;
+  const totalSlides = medias.length;
   const [isPaused, setIsPaused] = useState(false);
 
   // Para gestionar swipe
@@ -96,15 +96,26 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
     >
       {/* Contenedor de slides */}
       <div ref={carouselRef} className="flex transition-transform duration-500 ease-in-out">
-        {images.map((src, idx) => (
+        {medias.map((src, idx) => (
           <div key={idx} className="min-w-full relative aspect-[6/5]">
-            <Image
-              src={src}
-              alt={altText}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="100vw"
-            />
+            {src.endsWith('.mp4') ? (
+              <video
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Image
+                src={src}
+                alt={altText}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="100vw"
+              />
+            )}
           </div>
         ))}
       </div>
@@ -116,13 +127,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           className="text-white hover:text-gray-200 transition"
           aria-label="Slide anterior"
         >
-          {/* SVG izquierdo */}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         <div className="flex gap-2">
-          {images.map((_, idx) => (
+          {medias.map((_, idx) => (
             <button
               key={idx}
               onClick={() => showSlide(idx)}
@@ -136,7 +146,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           className="text-white hover:text-gray-200 transition"
           aria-label="Slide siguiente"
         >
-          {/* SVG derecho */}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
@@ -146,4 +155,4 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   );
 };
 
-export default ImageCarousel;
+export default MediaCarousel;
