@@ -24,7 +24,6 @@ const Header: React.FC = () => {
 
   // Handler para cuando se haga clic en un enlace de navegación
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Se evita la propagación para que no se cierren otros elementos innecesariamente.
     e.stopPropagation();
     setMenuOpen(false);
   };
@@ -45,13 +44,21 @@ const Header: React.FC = () => {
             z-0 ${scrolled ? "opacity-0" : "opacity-100"}
           `}
         ></div>
-        <nav className="relative z-10 h-full px-6 py-6 md:py-12">
-          <div className="container mx-auto flex items-center justify-between px-2">
+
+        {/* NAV con padding variable según scroll */}
+        <nav
+          className={`
+            relative z-10 h-full w-full transition-all duration-500 ease-in-out
+            ${scrolled ? "py-0 px-0" : "px-6 py-6 md:py-12"}
+          `}
+        >
+          {/* Flex principal sin container para “tocar la pared” */}
+          <div className="flex items-center justify-between w-full">
             {/* Logo */}
             <div
               className={`
                 logo-container transition-all duration-500 ease-in-out
-                ${scrolled ? "bg-white py-4 px-6 shadow-lg rounded-lg" : "px-3 py-2"}
+                ${scrolled ? "bg-white sm:py-8 py-4 sm:px-12 px-6 shadow-2xl rounded-br-4xl ms-0" : "px-3 py-2 sm:ms-10 ms-2"}
               `}
             >
               <Link
@@ -70,21 +77,22 @@ const Header: React.FC = () => {
                 />
               </Link>
             </div>
+
             {/* Botones de idioma y menú */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 sm:me-10 me-2">
               {/* Botones de idioma independientes */}
-              <div className="hidden md:flex space-x-1">
-                <button className="flex items-center justify-center text-center bg-[#1e804b] text-white px-4 py-2 rounded-full">
+              <div className="hidden md:flex space-x-2">
+                <button className="flex items-center justify-center text-center bg-[#1e804b] text-white px-2 py-3 rounded-full">
                   <span className="leading-none">ES</span>
                 </button>
-                <button className="flex items-center justify-center text-center bg-[#294161] text-white px-4 py-2 rounded-full">
+                <button className="flex items-center justify-center text-center bg-[#294161] text-white px-2 py-3 rounded-full">
                   <span className="leading-none">EN</span>
                 </button>
               </div>
               {/* Botón para abrir el menú */}
               <button
                 id="menuToggle"
-                className="flex items-center justify-center text-center bg-[#c19516] px-6 py-3 rounded-full text-white"
+                className="flex items-center justify-center text-center bg-[#c19516] px-8 py-3 rounded-full text-white"
                 onClick={() => setMenuOpen(true)}
               >
                 <span className="leading-none">☰ MENÚ</span>
@@ -94,7 +102,7 @@ const Header: React.FC = () => {
         </nav>
       </header>
 
-      {/* MENÚ DESPLEGABLE con animaciones sin interferir en iOS */}
+      {/* MENÚ DESPLEGABLE con animaciones */}
       <div
         id="dropdownContainer"
         className={`

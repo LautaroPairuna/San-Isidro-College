@@ -18,30 +18,33 @@ export default function VidaEstudiantilPage() {
             width={250}
             height={250}
             className="hidden lg:block absolute top-[60%] left-[77%] transform -translate-x-1/2 z-40
-                      max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
-                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] items-end justify-end drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+                      drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
-          {/* Versión Móvil: Texto en flujo normal + Botón juntos */}
-          <div className="flex lg:hidden p-6 z-20 justify-between items-end mt-28 relative">
+          {/* Versión Móvil: Eslogan y Botón en el mismo bloque, distribuidos con space-between */}
+          <div className="flex lg:hidden p-6 z-20 justify-between items-start mt-28 relative w-full">
             <Image 
               src="/images/eslogan.svg" 
               alt="I am because we are" 
               width={250}
               height={250}
-              className="transform -translate-x-1/2 z-40
-                        max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+              className="transform z-40
+                        max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px]
+                        drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
-            <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
-                <Image
-                  src="/images/ico-admisiones.svg"
-                  alt="Ver Admisiones"
-                  width={32}
-                  height={32}
-                />
-                ADMISIONES
-              </Link>
-            </button>
+            <Link
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
+              target="_blank"
+              className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center text-center gap-3 px-2 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden z-10"
+            >
+              <Image
+                src="/images/ico-admisiones.svg"
+                alt="Ver Admisiones"
+                width={24}
+                height={24}
+                sizes="(max-width: 640px) 24px, 24px"
+              />
+              <span className="leading-none">ADMISIONES</span>
+            </Link>
           </div>
         </div>
         {/* Columna Derecha: Fondo verde, recuadro y botón en escritorio */}
@@ -80,7 +83,7 @@ export default function VidaEstudiantilPage() {
           </div>
           {/* Botón ADMISIONES en escritorio (absoluto, abajo a la derecha) */}
           <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className='flex items-center gap-3'>
+            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className="flex items-center gap-3">
               <Image
                 src="/images/ico-admisiones.svg"
                 alt="Ver Admisiones"
@@ -96,13 +99,14 @@ export default function VidaEstudiantilPage() {
           <Image
             src="/images/formas/forma-home-1.svg"
             alt="Forma decorativa"
-            width={800}   // Asigna un valor mayor al necesario
-            height={800}  // Mantén la relación de aspecto 
+            width={800}
+            height={800}
             className="h-full w-auto"
-            priority      // Opcional: si deseas precargar la imagen
+            priority
           />
         </div>
       </section>
+
 
       {/* SECCIÓN KINDERGARTEN */}
       <section className="relative w-full h-auto py-10 bg-white overflow-hidden">

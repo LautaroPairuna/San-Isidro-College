@@ -3,8 +3,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 
-// Definición de los slides originales (dos slides)
-const rawSlides = [
+type Slide = {
+  src: string;
+  alt: string;
+};
+
+const rawSlides: Slide[][] = [
   [
     {
       src: '/images/google-education-logo.webp',
@@ -36,37 +40,45 @@ const rawSlides = [
 ];
 
 const Carousel = () => {
-  // Duplicamos los slides para lograr un loop infinito sin salto abrupto.
-  const slides = [...rawSlides, ...rawSlides]; // Resultado: 4 slides (los dos primeros son reales, los dos siguientes clones)
-  const totalRaw = rawSlides.length; // 2 slides reales
+  // Duplicamos los slides para lograr el efecto de loop infinito.
+  const slides = [...rawSlides, ...rawSlides];
+  const totalRaw = rawSlides.length; // cantidad de slides "reales"
+
   const [index, setIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+
   const carouselRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  // Controlamos si la transición CSS está activada o no (para poder reiniciar sin animación)
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
 
-  // Función para ir a un slide (ajustando el índice de manera circular)
-  const goToSlide = useCallback((newIndex: number) => {
-    setIndex(newIndex);
-  }, []);
+  // Ajustamos la función para aceptar número o función actualizadora
+  const goToSlide = useCallback(
+    (newIndex: number | ((prevIndex: number) => number)) => {
+      if (isAnimating) return; // Evita iniciar nueva transición si la actual no finalizó
+      setIsAnimating(true);
+      setIndex((prevIndex) =>
+        typeof newIndex === 'function' ? newIndex(prevIndex) : newIndex
+      );
+    },
+    [isAnimating]
+  );
 
-  // Autoavance cada 5 segundos (si no está pausado)
+  // Autoavance cada 5 segundos usando la función actualizadora
   useEffect(() => {
     if (!isPaused) {
       intervalRef.current = setInterval(() => {
-        goToSlide(index + 1);
+        goToSlide((prevIndex) => prevIndex + 1);
       }, 5000);
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [index, isPaused, goToSlide]);
+  }, [isPaused, goToSlide]);
 
-  // Actualiza la transformación del contenedor
+  // Actualiza la transformación del contenedor para mover el slider
   useEffect(() => {
     if (carouselRef.current) {
-      // Si la transición está deshabilitada, quitar la propiedad temporalmente
       carouselRef.current.style.transition = transitionEnabled
         ? 'transform 500ms ease-in-out'
         : 'none';
@@ -74,11 +86,9 @@ const Carousel = () => {
     }
   }, [index, transitionEnabled]);
 
-  // Al terminar la transición, si hemos llegado a una de las copias clonadas,
-  // se reinicia el índice sin transición para que el efecto sea infinito.
+  // Al finalizar la transición, verificamos si se debe reiniciar el índice
   const handleTransitionEnd = () => {
     if (index >= totalRaw) {
-      // Si el índice es mayor o igual a la cantidad de slides reales, restamos ese valor.
       setTransitionEnabled(false);
       setIndex(index - totalRaw);
     } else if (index < 0) {
@@ -87,9 +97,11 @@ const Carousel = () => {
     } else {
       setTransitionEnabled(true);
     }
+    // Se permite ejecutar otra transición una vez finalizada la actual.
+    setIsAnimating(false);
   };
 
-  // Re-activar la transición luego de un reinicio instantáneo
+  // Reactivamos la transición si fue desactivada temporalmente.
   useEffect(() => {
     if (!transitionEnabled) {
       const timer = setTimeout(() => {
@@ -99,22 +111,25 @@ const Carousel = () => {
     }
   }, [transitionEnabled]);
 
-  // Pausa/resume al mover el mouse
+  // Eventos para pausar/resumir el autoavance al pasar el mouse o tocar.
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
 
   // Navegación por teclado
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') goToSlide(index - 1);
-    else if (e.key === 'ArrowRight') goToSlide(index + 1);
-  };
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') goToSlide(index - 1);
+      else if (e.key === 'ArrowRight') goToSlide(index + 1);
+    },
+    [index, goToSlide]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [index]);
+  }, [handleKeyDown]);
 
-  // Soporte para swipe
+  // Soporte para swipe en dispositivos táctiles
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
@@ -143,22 +158,21 @@ const Carousel = () => {
       onTouchEnd={handleTouchEnd}
       className="relative w-full mx-auto overflow-hidden py-10 border-t-4 border-b-4 border-[#71af8d]"
     >
-      {/* Contenedor de slides */}
       <div
         ref={carouselRef}
         onTransitionEnd={handleTransitionEnd}
         className="flex transition-transform duration-500 ease-in-out"
       >
         {slides.map((slide, idx) => (
-          <div key={idx} className="min-w-full flex justify-center items-center gap-16">
+          <div key={idx} className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16">
             {slide.map((item, i) => (
-              <div key={i} className="relative h-32 w-40">
+              <div key={i} className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
                 <Image
                   src={item.src}
                   alt={item.alt}
                   fill
                   style={{ objectFit: 'contain' }}
-                  sizes="100vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             ))}
@@ -166,35 +180,32 @@ const Carousel = () => {
         ))}
       </div>
 
-      {/* Botón izquierdo con SVG */}
       <button
         onClick={() => goToSlide(index - 1)}
         aria-label="Anterior"
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20"
+        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
 
-      {/* Botón derecho con SVG */}
       <button
         onClick={() => goToSlide(index + 1)}
         aria-label="Siguiente"
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20"
+        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
-      {/* Indicadores de navegación */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
         {rawSlides.map((_, idx) => (
           <button
             key={idx}
             onClick={() => goToSlide(idx)}
-            className={`w-3 h-3 rounded-full ${ (index % totalRaw) === idx ? 'bg-[#71af8d]' : 'bg-gray-400'}`}
+            className={`w-3 h-3 rounded-full ${(index % totalRaw) === idx ? 'bg-[#71af8d]' : 'bg-gray-400'}`}
             aria-label={`Ir al slide ${idx + 1}`}
           />
         ))}

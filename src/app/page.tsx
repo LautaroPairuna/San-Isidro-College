@@ -23,7 +23,7 @@ export default function HomePage() {
           />
           {/* Botón para móvil */}
           <Link
-            href="https://docs.google.com/forms/d/e/..."
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
             target="_blank"
             className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center text-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden z-10"
           >
@@ -188,7 +188,6 @@ export default function HomePage() {
               alt="Imagen principal"
               width={800}
               height={600}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
               className="w-full h-auto rounded-md shadow-md"
             />
           </div>
