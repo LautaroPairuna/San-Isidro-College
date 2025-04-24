@@ -109,7 +109,7 @@ const Header: React.FC = () => {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="menu-panel bg-[#c19516] text-white w-full h-full p-6 md:rounded-b-lg md:shadow-lg md:h-auto">
+          <div className="menu-panel bg-[#c19516] text-white w-full h-full p-6 md:rounded-b-lg md:shadow-lg md:h-auto overflow-y-auto md:overflow-y-visible">
             <button
               id="closeMenu"
               className="absolute top-4 right-6 text-3xl"
