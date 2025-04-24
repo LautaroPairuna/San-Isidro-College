@@ -1,16 +1,12 @@
-// app/vida-estudiantil/layout.tsx
+// app/deportes/layout.tsx
 import { ReactNode } from 'react';
 
 export const metadata = {
-  title: 'Vida Estudiantil - San Isidro College',
-  description: 'Página Vida Estudiantil',
+  title: 'Deportes - San Isidro College',
+  description: 'Página Deportes',
 };
 
-export default function VidaEstudiantilLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function DeportesLayout({ children }: { children: ReactNode }) {
   return (
     <>
       {children}

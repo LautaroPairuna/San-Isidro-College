@@ -85,7 +85,7 @@ export default function HomePage() {
       </section>
 
       {/* Sección 2: Bienvenida */}
-      <section className="relative w-full h-auto py-10 bg-white">
+      <section className="relative w-full h-auto py-10 bg-white" id="bienvenida">
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center max-sm:col-span-12">
@@ -125,7 +125,7 @@ export default function HomePage() {
       </section>
 
       {/* Sección 3: Fondo verde con íconos e imagen */}
-      <section className="relative w-full bg-[#71af8d] py-10">
+      <section className="relative w-full bg-[#71af8d] py-10" id="infograma">
       {/* Imagen decorativa detrás */}
       <Image
         src="/images/formas/forma-home-3.svg"

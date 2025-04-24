@@ -136,7 +136,7 @@ export default function ColegioPage() {
 
           {/* EDUCACIÓN PERSONALIZADA */}
           <h3
-            id="educacion"
+            id="educacion-personalizada"
             className="text-2xl md:text-3xl font-bold uppercase mb-2 text-gray-800"
           >
             EDUCACIÓN PERSONALIZADA

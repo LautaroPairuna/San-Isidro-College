@@ -1,397 +1,498 @@
-// app/vida-estudiantil/page.tsx
-import Contact from '@/components/sectionContact';
-import Carousel from '@/components/sectionCarrusel';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
 
-export default function VidaEstudiantilPage() {
+// app/deportes/page.tsx
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import Image from "next/image";
+
+const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: false });
+const Carousel = dynamic(() => import("@/components/sectionCarrusel"), { ssr: false });
+const MediaCarousel = dynamic(() => import("@/components/MediaCarousel"), { ssr: false });
+
+export default function DeportesPage() {
   return (
     <div id="container">
-      {/* SECCIÓN 1: Fondo verde en toda la pantalla sin imagen de fondo */}
-      <section className="relative w-full h-[640px] lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
-        {/* Columna Izquierda: Texto y fondo verde */}
-        <div className="relative col-span-1 md:col-span-4 bg-[#71af8d] flex items-end justify-end">
-          {/* Versión Escritorio: Texto absolutamente posicionado */}
-          <Image 
-            src="/images/eslogan.svg" 
-            alt="I am because we are" 
-            width={250}
-            height={250}
-            className="hidden lg:block absolute top-[60%] left-[77%] transform -translate-x-1/2 z-40
-                      drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-          />
-          {/* Versión Móvil: Eslogan y Botón en el mismo bloque, distribuidos con space-between */}
-          <div className="flex lg:hidden p-6 z-20 justify-between items-start mt-28 relative w-full">
+      {/* Sección 1: Imagen de fondo y texto */}
+      <section className="relative w-full h-auto grid grid-cols-12 overflow-hidden">
+        {/* ────────────── COL. VERDE ────────────── */}
+        <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
+          {/* Versión MÓVIL: Forma decorativa abarcando toda la columna */}
+          <div className="block lg:hidden absolute inset-0 pointer-events-none">
+            <Image
+              src="/images/formas/forma-home-1.svg"
+              alt="Forma decorativa móvil"
+              fill
+              className="object-cover"
+            />
+          </div>
+          {/* Versión MÓVIL: Contenido con slogan y botón */}
+          <div className="lg:hidden relative flex justify-between items-end h-full pt-32 pb-12 z-20 md:w-[80%] w-full">
             <Image 
               src="/images/eslogan.svg" 
               alt="I am because we are" 
               width={250}
               height={250}
-              className="transform z-40
-                        max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px]
-                        drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+              className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center text-center gap-3 px-2 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden z-10"
-            >
-              <Image
-                src="/images/ico-admisiones.svg"
-                alt="Ver Admisiones"
-                width={24}
-                height={24}
-                sizes="(max-width: 640px) 24px, 24px"
-              />
-              <span className="leading-none">ADMISIONES</span>
-            </Link>
-          </div>
-        </div>
-        {/* Columna Derecha: Fondo verde, recuadro y botón en escritorio */}
-        <div className="relative col-span-1 md:col-span-8 bg-[#71af8d] w-full h-full flex flex-col items-center md:items-start">
-          {/* Recuadro blanco en escritorio (absoluto) */}
-          <div className="hidden md:block absolute 2xl:top-[70%] 2xl:left-[30%] top-[60%] left-[45%] transform -translate-x-1/2 -translate-y-1/2 z-40 bg-white p-6 md:p-8 w-[400px] md:w-[550px] rounded-3xl shadow-lg">
-            <h2 className="text-3xl font-bold mb-2 text-left">
-              Proyecto bilingüe de jornada Completa o extendida
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.
-            </p>
-            <div className="text-left mt-5">
-              <Link href="/vida-estudiantil-mas-info">
-                <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
-                  Leer más
-                </span>
+            <div className="text-center">
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
+                target="_blank"
+                className="inline-flex items-center gap-3 px-4 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition"
+              >
+                <Image
+                  src="/images/ico-admisiones.svg"
+                  alt="Ver Admisiones"
+                  width={24}
+                  height={24}
+                />
+                ADMISIONES
               </Link>
             </div>
           </div>
-          {/* Recuadro blanco en móvil (flujo normal, parte inferior) */}
-          <div className="block md:hidden mt-auto mb-6 bg-white p-6 w-[90%] rounded-3xl shadow-lg z-40">
-            <h2 className="text-xl font-bold mb-2 text-left">
-              Proyecto bilingüe de jornada Completa o extendida
-            </h2>
-            <p className="text-gray-700 mb-4 text-sm">
-              Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.
+          {/* Versión ESCRITORIO: Se mantiene la posición original */}
+          <div className="hidden lg:block">
+            <Image 
+              src="/images/eslogan.svg" 
+              alt="I am because we are" 
+              width={250}
+              height={250}
+              className="absolute top-[65%] left-[77%] transform -translate-x-1/2 z-40
+                         max-sm:relative max-sm:top-15 max-sm:-left-7 max-lg:top-60 max-lg:left-80
+                         max-sm:translate-x-0 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+            />
+          </div>
+        </div>
+
+        {/* ────────────── COL. DE LA IMAGEN ────────────── */}
+        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px]">
+          {/* Aquí se reemplaza la imagen estática por el MediaCarousel */}
+          <MediaCarousel
+            medias={[
+              "/images/Image-deportes.webp",
+              "/images/Image-deportes.webp",
+              "/images/Image-deportes.webp"
+            ]}
+            altText="Imagen de fondo"
+            className="w-full h-full object-cover"
+          />
+          
+          {/* Recuadro blanco con texto */}
+          <div className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
+                          absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                          z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]">
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Deportes</h1>
+            <p className="text-gray-700 mb-4 text-sm md:text-base">
+              San Isidro College, ubicado en un marco natural privilegiado,
+              desarrolla un variado programa en el área de Educación Física.
+              Como parte del Proyecto Pedagógico, se propone contribuir a la
+              elaboración de un proyecto de vida.
             </p>
-            <div className="text-left mt-5">
-              <Link href="/vida-estudiantil-mas-info">
-                <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
-                  Leer más
-                </span>
-              </Link>
+            <div className="text-center mt-5">
+              <a
+                href="/deportes-mas-info"
+                className="text-[#1e804b] font-semibold hover:underline"
+              >
+                Leer más
+              </a>
             </div>
           </div>
-          {/* Botón ADMISIONES en escritorio (absoluto, abajo a la derecha) */}
-          <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform" target="_blank" className="flex items-center gap-3">
-              <Image
-                src="/images/ico-admisiones.svg"
-                alt="Ver Admisiones"
-                width={32}
-                height={32}
-              />
-              ADMISIONES
-            </Link>
-          </button>
+
+          {/* Versión ESCRITORIO: Botón ADMISIONES en esquina inferior derecha */}
+          <div className="hidden lg:block">
+            <button className="hidden lg:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
+                target="_blank"
+                className='flex items-center gap-3'
+              >
+                <Image
+                  src="/images/ico-admisiones.svg"
+                  alt="Ver Admisiones"
+                  width={32}
+                  height={32}
+                />
+                ADMISIONES
+              </Link>
+            </button>
+          </div>
         </div>
-        {/* Figura decorativa (SVG) ocupando todo el alto de la sección */}
-        <div className="absolute top-0 left-[32%] transform -translate-x-1/2 h-full pointer-events-none">
+
+        {/* ────────────── FORMA DECORATIVA ESCRITORIO ────────────── */}
+        <div className="hidden lg:block absolute top-0 left-[32%] transform -translate-x-1/2 pointer-events-none z-0">
           <Image
             src="/images/formas/forma-home-1.svg"
-            alt="Forma decorativa"
-            width={800}
-            height={800}
-            className="h-full w-auto"
-            priority
+            alt="Forma decorativa escritorio"
+            width={700}
+            height={700}
+            className="object-contain"
           />
         </div>
       </section>
 
-
-      {/* SECCIÓN KINDERGARTEN */}
-      <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
-          {/* Columna Izquierda: Texto y elementos decorativos */}
-          <div className="col-span-1 md:col-span-4 relative flex flex-col justify-center order-1 md:order-none">
-            {/* Versión Desktop */}
-            <div className="hidden lg:block">
-              <div className="absolute top-[15%] left-[75%] w-[450px] z-20">
-                <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
-                  KINDER<br />GARTEN
-                </h2>
-                <div className="bg-white shadow-xl rounded-3xl p-8">
-                  <p className="text-gray-700 leading-relaxed">
-                    Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.
-                  </p>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
-                    Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.
-                  </p>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
-                    Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.
-                  </p>
-                </div>
-              </div>
+      {/* Sección 2: Bienvenida – Club de Rugby y Hockey */}
+      <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white overflow-hidden mx-auto" id="deportes">
+        {/* Forma decorativa */}
+        <Image
+          src="/images/formas/forma-home-2.svg"
+          alt="Decoración"
+          width={550}
+          height={300}
+          sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
+          className="absolute -top-5 -left-0 w-[550px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+        />
+        
+        {/* Contenedor de contenido */}
+        <div className="relative z-10 grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
+          {/* Versión Escritorio */}
+          <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
+            <div className="absolute top-55 left-41 w-[550px] z-20">
               <Image
-                src="/images/cuadro-kindergarten.svg"
-                alt="Decorativo Kindergarten"
-                width={250}
-                height={250}
-                className="absolute top-10 left-5 z-20"
+                src="/images/logo-club-rugby-hockey.svg"
+                alt="Logo Club Rugby y Hockey"
+                width={128}
+                height={128}
+                className="mx-auto mb-5"
               />
-              <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px] z-10">
-                <Image
-                  src="/images/formas/forma-home-6.svg"
-                  alt="Decoración"
-                  width={650}
-                  height={100}
-                  className="w-full h-full"
-                />
-              </div>
-            </div>
-            {/* Versión Móvil */}
-            <div className="block lg:hidden w-full px-4 mt-32">
-              <div className="relative z-10">
-                <h2 className="text-5xl font-bold text-left mb-5 text-shadow-bold-movil">
-                  KINDER<br />GARTEN
+              <div className="bg-white shadow-xl rounded-xl p-8">
+                <h2 className="text-2xl font-bold text-gray-900 text-center">
+                  CLUB DE RUGBY Y HOCKEY
                 </h2>
-                <div className="bg-white shadow-xl rounded-3xl p-6">
-                  <p className="text-gray-700 leading-relaxed">
-                    Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.
-                  </p>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
-                    Uno de nuestros objetivos es fortalecer el manejo de la lengua materna y facilitar la adquisición temprana del inglés.
-                  </p>
-                </div>
-              </div>
-              <div className="absolute -top-5 -left-30 w-[550px] z-0">
-                <Image
-                  src="/images/formas/forma-home-6.svg"
-                  alt="Decoración móvil"
-                  width={550}
-                  height={100}
-                  className="w-full h-full"
-                />
+                <p className="mt-4 text-gray-700 leading-relaxed">
+                  Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.
+                </p>
               </div>
             </div>
-            <Image
-              src="/images/cuadro-kindergarten-movil.svg"
-              alt="Decorativo Kindergarten móvil"
-              width={500}
-              height={300}
-              className="block lg:hidden w-full px-5 mt-5 mb-3 z-10"
+          </div>
+          <div className="hidden sm:block col-span-8">
+            <MediaCarousel
+              medias={[
+                "/images/Image-SIC-hockey.webp",
+                "/images/Image-SIC-hockey.webp",
+                "/images/Image-SIC-hockey.webp",
+              ]}
+              altText="Imagen del colegio"
+              className="rounded-xl shadow-lg"
             />
           </div>
-          {/* Columna Derecha: Imagen */}
-          <div className="col-span-1 md:col-span-8 order-2 md:order-none px-5">
-            <Image
-              src="/images/image-kindergarten.webp"
-              alt="Imagen del colegio"
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-xl shadow-lg"
+          
+          {/* Versión Móvil */}
+          <div className="sm:hidden col-span-12 relative pt-16">
+            <MediaCarousel
+              medias={[
+                "/images/Image-SIC-hockey.webp",
+                "/images/Image-SIC-hockey.webp",
+                "/images/Image-SIC-hockey.webp",
+              ]}
+              altText="Imagen del colegio"
+              className="w-full h-auto rounded-md shadow-lg"
             />
+            <div className="absolute -top-35 left-0 w-full px-4 z-20 transform -translate-y-1/2">
+              <Image
+                src="/images/logo-club-rugby-hockey.svg"
+                alt="Logo Club Rugby y Hockey"
+                width={128}
+                height={128}
+                className="mx-auto mb-5 w-32"
+              />
+              <div className="bg-white shadow-xl rounded-xl p-8 w-full">
+                <div className="flex flex-col items-center">
+                  <h2 className="text-2xl font-bold text-gray-900 text-center">
+                    CLUB DE RUGBY Y HOCKEY
+                  </h2>
+                  <p className="mt-4 text-gray-700 leading-relaxed text-center">
+                    Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN PRIMARY */}
-      <section className="bg-white overflow-hidden">
+      {/* Sección 3: Sección de iconos y estadísticas */}
+      <section className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden h-auto sm:h-auto">
         {/* Versión Escritorio */}
-        <div className="hidden lg:block relative w-full h-screen">
+        <div className="hidden sm:block max-w-[1200px] mx-auto">
           <Image
-            src="/images/formas/forma-home-3.svg"
-            alt="Forma decorativa"
-            width={750}
-            height={500}
-            className="absolute 2xl:top-30 2xl:right-45 top-5 -right-10 w-[650px] h-auto z-10"
+            src="/images/formas/forma-home-5.svg"
+            alt="Decoración"
+            width={550}
+            height={300}
+            sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
+            className="absolute top-5 right-36 w-[550px] h-auto max-sm:hidden"
           />
-          <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
-            {/* Columna Izquierda: Imagen principal */}
-            <div className="col-span-8 flex items-center justify-center">
-              <Image
-                src="/images/fondo-iconos.webp"
-                alt="Imagen principal"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-md shadow-md"
+          <div className="grid grid-cols-12 gap-8 mx-auto h-full">
+            {/* Columna Izquierda: Carrusel */}
+            <div className="col-span-8">
+              <MediaCarousel
+                medias={[
+                  "/images/Image-SIC-dojo.webp",
+                  "/images/Image-SIC-dojo.webp",
+                  "/images/Image-SIC-dojo.webp",
+                ]}
+                altText="Imagen principal"
+                className="rounded-md shadow-md"
               />
             </div>
-            {/* Bloque con texto "PRIMARY" */}
-            <div className="absolute 2xl:top-45 2xl:left-[40%] top-15 left-[40%] w-[550px] z-20">
-              <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
-                PRIMARY
-              </h2>
-              <div className="bg-white shadow-xl rounded-3xl p-8">
-                <p className="text-gray-700 leading-relaxed">
-                  Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.
-                </p>
-              </div>
-            </div>
-            {/* Columna Derecha: Iconos */}
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[55%] left-[50%]">
-              <Image
-                src="/images/cuadro-primary.svg"
-                alt="Sección de iconos y estadísticas"
-                width={450}
-                height={450}
-                className="w-[450px] h-auto"
-              />
-            </div>
-          </div>
-        </div>
-        {/* Versión Móvil */}
-        <div className="block lg:hidden relative w-full">
-          <div className="absolute top-15 -left-30 w-[650px] z-0">
-            <Image
-              src="/images/formas/forma-home-6.svg"
-              alt="Decoración móvil"
-              width={650}
-              height={400}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="relative z-10 px-5">
-            <h2 className="text-5xl font-bold text-left mb-5 mt-10 text-shadow-bold-movil">
-              PRIMARY
-            </h2>
-            <div className="bg-white shadow-xl rounded-3xl p-6 mb-6">
-              <p className="leading-relaxed text-gray-800">
-                Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.
-              </p>
-            </div>
-            <Image
-              src="/images/cuadro-primary.svg"
-              alt="Sección de iconos y estadísticas"
-              width={450}
-              height={450}
-              className="w-[450px] mx-auto h-auto mb-6"
-            />
-            <Image
-              src="/images/fondo-iconos.webp"
-              alt="Imagen principal"
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-md shadow-md mb-6"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* SECCIÓN SECONDARY */}
-      <section className="relative w-full h-auto py-10 bg-white overflow-hidden">
-        {/* Versión Escritorio */}
-        <div className="hidden lg:block">
-          <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
-            {/* Columna Izquierda: Texto */}
-            <div className="col-span-4 relative flex flex-col justify-center">
-              <div className="absolute top-[10%] left-[75%] w-[450px] z-20">
-                <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
-                  SECONDARY
-                </h2>
-                <div className="bg-white shadow-xl rounded-3xl p-8">
-                  <h4 className="font-bold text-xl">
-                    Líderes del futuro
-                  </h4>
-                  <p className="leading-relaxed text-gray-800">
-                    Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.
-                  </p>
-                </div>
-              </div>
-              <div className="absolute 2xl:top-40 2xl:-left-20 top-10 left-0 2xl:w-[355px] w-[255px] z-20 bg-white/80 p-4 rounded-xl text-[#1e804b]">
-                <h4 className="font-bold text-xl text-center">
-                  Diploma Dual
-                </h4>
-                <p className="2xl:text-justify text-left">
-                  Nuestros alumnos, de manera independiente, cursan la doble titulación del <span className="font-bold">Bachillerato de Estados Unidos</span>. Esta opción les brinda una <span className="font-bold">ventaja competitiva</span>, permitiéndoles obtener un <span className="font-bold">diploma secundario argentino y estadounidense</span> al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.
-                </p>
+            {/* Columna Derecha: Cuadro flotante */}
+            <div className="absolute col-span-4 flex items-center justify-center z-20 top-65 left-[37%]">
+              <div className="absolute -top-[120px] left-[115px] w-[650px] z-20">
                 <Image
-                  src="/images/logo-academia-internatiional-studies.svg"
-                  alt="Logo"
+                  src="/images/logo-dojo.svg"
+                  alt="Logo Dojo"
                   width={128}
                   height={128}
-                  className="mx-auto mt-5"
+                  className="mx-auto mb-5 w-20 sm:w-24 md:w-32 lg:w-40"
                 />
+                <div className="bg-white shadow-xl rounded-xl p-8">
+                  <h2 className="text-2xl font-bold text-gray-900 text-center">
+                    SAN ISIDRO COLLEGE DOJO
+                  </h2>
+                  <p className="mt-4 text-gray-700 leading-relaxed">
+                    El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!
+                  </p>
+                </div>
               </div>
-              <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px]">
-                <Image
-                  src="/images/formas/forma-home-6.svg"
-                  alt="Decoración"
-                  width={650}
-                  height={100}
-                  className="w-full h-full"
-                />
-              </div>
-            </div>
-            {/* Columna Derecha: Imagen */}
-            <div className="col-span-8">
-              <Image
-                src="/images/image-kindergarten.webp"
-                alt="Imagen del colegio"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
             </div>
           </div>
         </div>
+
         {/* Versión Móvil */}
-        <div className="block lg:hidden relative w-full">
-          <div className="absolute top-15 -left-30 w-[650px] z-0">
+        <div className="sm:hidden relative min-h-[350px]">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt="Decoración"
+            width={550}
+            height={300}
+            sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
+            className="absolute top-5 right-35 w-[550px] h-auto max-sm:absolute max-sm:-top-75 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+          />
+          <MediaCarousel
+            medias={[
+              "/images/Image-SIC-dojo.webp",
+              "/images/Image-SIC-dojo.webp",
+              "/images/Image-SIC-dojo.webp",
+            ]}
+            altText="Imagen principal"
+            className="w-full h-auto rounded-md shadow-md pt-56"
+          />
+          <div className="absolute top-0 left-0 w-full px-4 z-20 transform -translate-y-1/2">
             <Image
-              src="/images/formas/forma-home-6.svg"
-              alt="Decoración móvil"
-              width={650}
-              height={400}
-              className="w-full h-full object-cover"
+              src="/images/logo-dojo.svg"
+              alt="Logo Dojo"
+              width={128}
+              height={128}
+              className="mx-auto mb-5 w-20 sm:w-24 md:w-32 lg:w-40"
+            />
+            <div className="bg-white shadow-xl rounded-xl p-8 w-full">
+              <div className="flex flex-col items-center">
+                <h2 className="text-2xl font-bold text-gray-900 text-center">
+                  SAN ISIDRO COLLEGE DOJO
+                </h2>
+                <p className="mt-4 text-gray-700 leading-relaxed text-center">
+                  El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="hidden md:absolute inset-0 z-0">
+            <Image
+              src="/images/formas/forma-home-5.svg"
+              alt="Decoración"
+              fill
+              className="object-cover"
             />
           </div>
-          <div className="relative z-10 px-5">
-            <h2 className="text-5xl font-bold text-left text-shadow-bold-movil mb-5 mt-10">
-              SECONDARY
-            </h2>
-            <div className="bg-white shadow-xl rounded-3xl p-6 mb-6">
-              <h4 className="font-bold text-xl mb-2 text-left">
-                Líderes del futuro
-              </h4>
-              <p className="leading-relaxed text-gray-800">
-                Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.
+        </div>
+      </section>
+
+      {/* Sección 4: VIDA ESTUDIANTIL */}
+      <section className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-[#71af8d] overflow-hidden" id="bienestar-estudiantil">
+        {/* Versión Escritorio */}
+        <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
+          {/* Columna Izquierda */}
+          <div className="col-span-4 relative flex flex-col justify-center">
+            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
+              <h2 className="text-2xl font-bold text-gray-900 text-center">
+                VIDA ESTUDIANTIL
+              </h2>
+              <p className="mt-4 text-gray-700 leading-relaxed">
+                San Isidro College fomenta un ambiente positivo y dinámico donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés, ser resilientes y estar listos para los exámenes, con el apoyo del departamento de Servicios Estudiantiles y tutorías.
               </p>
+              <div className="text-center mt-5">
+                <a
+                  href="/deportes-mas-info"
+                  className="text-[#1e804b] font-semibold hover:underline"
+                >
+                  Leer más
+                </a>
+              </div>
             </div>
-            <Image
-              src="/images/cuadro-primary.svg"
-              alt="Sección de iconos y estadísticas"
-              width={450}
-              height={450}
-              className="w-[450px] mx-auto h-auto mb-6"
-            />
-            <Image
-              src="/images/image-kindergarten.webp"
-              alt="Imagen principal"
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-md shadow-md mb-6"
-            />
-            <div className="bg-white/80 shadow-xl rounded-xl p-4 text-[#1e804b] mb-6">
-              <h4 className="font-bold text-xl text-center">Diploma Dual</h4>
-              <p className="text-justify mt-2">
-                Nuestros alumnos, de manera independiente, cursan la doble titulación del <span className="font-bold">Bachillerato de Estados Unidos</span>. Esta opción les brinda una <span className="font-bold">ventaja competitiva</span>, permitiéndoles obtener un <span className="font-bold">diploma secundario argentino y estadounidense</span> al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.
-              </p>
+            <div className="absolute -top-5 -left-36 w-[550px]">
               <Image
-                src="/images/logo-academia-internatiional-studies.svg"
-                alt=""
-                width="96"
-                height="96"
-                className="mx-auto mt-4"
+                src="/images/formas/forma-home-5.svg"
+                alt="Decoración"
+                width={550}
+                height={300}
+                className="w-full h-full"
               />
+            </div>
+          </div>
+          {/* Columna Derecha */}
+          <div className="col-span-8">
+            <MediaCarousel
+              medias={[
+                "/images/Image-vida-estudiantil.webp",
+                "/images/Image-vida-estudiantil.webp",
+                "/images/Image-vida-estudiantil.webp",
+              ]}
+              altText="Imagen del colegio"
+              className="rounded-xl shadow-lg"
+            />
+          </div>
+        </div>
+
+        {/* Versión Móvil */}
+        <div className="sm:hidden relative min-h-[350px]">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt="Decoración"
+            width={550}
+            height={300}
+            sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
+            className="absolute top-5 right-35 w-[550px] h-auto max-sm:absolute max-sm:-top-55 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+          />
+          <MediaCarousel
+            medias={[
+              "/images/Image-vida-estudiantil.webp",
+              "/images/Image-vida-estudiantil.webp",
+              "/images/Image-vida-estudiantil.webp",
+            ]}
+            altText="Imagen del colegio"
+            className="w-full h-auto rounded-xl shadow-lg pt-36"
+          />
+          <div className="absolute top-0 left-0 w-full px-4 z-20 transform -translate-y-1/2">
+            <div className="bg-white shadow-xl rounded-xl p-8 w-full">
+              <div className="flex flex-col items-center">
+                <h2 className="text-2xl font-bold text-gray-900 text-center">
+                  VIDA ESTUDIANTIL
+                </h2>
+                <p className="mt-4 text-gray-700 leading-relaxed text-center">
+                  San Isidro College fomenta un ambiente positivo y dinámico donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés, ser resilientes y estar listos para los exámenes.
+                </p>
+                <div className="text-center mt-5">
+                  <a
+                    href="/deportes-mas-info"
+                    className="text-[#1e804b] font-semibold hover:underline"
+                  >
+                    Leer más
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="hidden md:absolute inset-0 z-0">
+            <Image
+              src="/images/formas/forma-home-5.svg"
+              alt="Decoración"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Sección 5: Imagen principal e iconos */}
+      <section className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-white overflow-hidden" id="play-habilidades-steam">
+        {/* Versión Escritorio */}
+        <div className="hidden sm:block ">
+          <Image
+            src="/images/formas/forma-home-2.svg"
+            alt="Forma decorativa"
+            width={550}
+            height={300}
+            sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
+            className="absolute top-25 right-25 w-[550px] h-auto z-10 max-sm:hidden"
+          />
+          <div className="grid grid-cols-12 gap-8 mx-auto h-full px-4 max-w-[1200px]">
+            <div className="col-span-8 max-sm:col-span-12 flex items-center justify-center">
+              <MediaCarousel
+                medias={[
+                  "/images/image-SIC-play.webp",
+                  "/images/image-SIC-play.webp",
+                  "/images/image-SIC-play.webp",
+                ]}
+                altText="Imagen principal"
+                className="rounded-md shadow-md"
+              />
+            </div>
+            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[65%] xl:left-[22%] left-[23%]
+                            max-sm:relative max-sm:top-10 max-sm:left-0 max-sm:mx-auto max-sm:w-full max-sm:px-4">
+              <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 left-110 w-[550px] z-20
+                              max-sm:relative max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:mx-auto">
+                <Image
+                  src="/images/logo-SIC-play.svg"
+                  alt="Logo San Isidro Play"
+                  width={128}
+                  height={128}
+                  className="mx-auto mb-10 w-20 sm:w-24 md:w-32 lg:w-40"
+                />
+                <p className="mt-4 text-gray-700 leading-relaxed">
+                  <strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por los talentosos alumnos del San Isidro College. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes.
+                </p>
+                <p className="mt-4 text-gray-700 leading-relaxed">
+                  Una tradición esperada cada año, San Isidro Play celebra el talento y esfuerzo de nuestra comunidad educativa, ofreciendo un espectáculo inolvidable para toda la familia. ¡Te esperamos para vivir esta mágica experiencia!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Versión Móvil */}
+        <div className="sm:hidden relative">
+          <Image
+            src="/images/formas/forma-home-2.svg"
+            alt="Decoración"
+            width={550}
+            height={300}
+            sizes="(max-width: 640px) 600px, (max-width: 1024px) 550px, 550px"
+            className="absolute top-5 right-35 w-[550px] h-auto max-sm:absolute max-sm:-top-70 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+          />
+          <div className="relative w-full">
+            <MediaCarousel
+              medias={[
+                "/images/image-SIC-play.webp",
+                "/images/image-SIC-play.webp",
+                "/images/image-SIC-play.webp",
+              ]}
+              altText="Imagen principal"
+              className="w-full h-full object-cover rounded-md shadow-md pt-56"
+            />
+          </div>
+          <div className="absolute top-0 left-0 w-full px-4 z-20 transform -translate-y-1/2">
+            <div className="bg-white shadow-xl rounded-xl p-8 w-full">
+              <div className="flex flex-col items-center">
+                <Image
+                  src="/images/logo-SIC-play.svg"
+                  alt="Logo San Isidro Play"
+                  width={128}
+                  height={128}
+                  className="mx-auto mb-10 w-20 sm:w-24 md:w-32 lg:w-40"
+                />
+                <p className="mt-4 text-gray-700 leading-relaxed text-center">
+                  <strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por los talentosos alumnos del San Isidro College. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes.
+                </p>
+                <p className="mt-4 text-gray-700 leading-relaxed text-center">
+                  Una tradición esperada cada año, San Isidro Play celebra el talento y esfuerzo de nuestra comunidad educativa, ofreciendo un espectáculo inolvidable para toda la familia. ¡Te esperamos para vivir esta mágica experiencia!
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Carousel */}
       <Carousel />
-
-      {/* Sección de Contacto */}
       <Contact />
     </div>
   );

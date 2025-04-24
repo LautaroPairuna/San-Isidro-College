@@ -150,67 +150,69 @@ const Carousel = () => {
   };
 
   return (
-    <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      className="relative w-full mx-auto overflow-hidden py-10 border-t-4 border-b-4 border-[#71af8d]"
-    >
+    <section id="alianzas">
       <div
-        ref={carouselRef}
-        onTransitionEnd={handleTransitionEnd}
-        className="flex transition-transform duration-500 ease-in-out"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className="relative w-full mx-auto overflow-hidden py-10 border-t-4 border-b-4 border-[#71af8d]"
       >
-        {slides.map((slide, idx) => (
-          <div key={idx} className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16">
-            {slide.map((item, i) => (
-              <div key={i} className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            ))}
-          </div>
-        ))}
+        <div
+          ref={carouselRef}
+          onTransitionEnd={handleTransitionEnd}
+          className="flex transition-transform duration-500 ease-in-out"
+        >
+          {slides.map((slide, idx) => (
+            <div key={idx} className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16">
+              {slide.map((item, i) => (
+                <div key={i} className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={() => goToSlide(index - 1)}
+          aria-label="Anterior"
+          className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          onClick={() => goToSlide(index + 1)}
+          aria-label="Siguiente"
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+          {rawSlides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              className={`w-3 h-3 rounded-full ${(index % totalRaw) === idx ? 'bg-[#71af8d]' : 'bg-gray-400'}`}
+              aria-label={`Ir al slide ${idx + 1}`}
+            />
+          ))}
+        </div>
       </div>
-
-      <button
-        onClick={() => goToSlide(index - 1)}
-        aria-label="Anterior"
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button
-        onClick={() => goToSlide(index + 1)}
-        aria-label="Siguiente"
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-        {rawSlides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => goToSlide(idx)}
-            className={`w-3 h-3 rounded-full ${(index % totalRaw) === idx ? 'bg-[#71af8d]' : 'bg-gray-400'}`}
-            aria-label={`Ir al slide ${idx + 1}`}
-          />
-        ))}
-      </div>
-    </div>
+    </section>
   );
 };
 
