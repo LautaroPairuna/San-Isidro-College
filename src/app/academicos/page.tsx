@@ -58,7 +58,7 @@ export default function VidaEstudiantilPage() {
               Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.
             </p>
             <div className="text-left mt-5">
-              <Link href="/vida-estudiantil-mas-info">
+              <Link href="/academicos-mas-info">
                 <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                   Leer más
                 </span>
@@ -74,7 +74,7 @@ export default function VidaEstudiantilPage() {
               Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.
             </p>
             <div className="text-left mt-5">
-              <Link href="/vida-estudiantil-mas-info">
+              <Link href="/academicos-mas-info">
                 <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                   Leer más
                 </span>
@@ -119,16 +119,21 @@ export default function VidaEstudiantilPage() {
                 <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
                   KINDER<br />GARTEN
                 </h2>
-                <div className="bg-white shadow-xl rounded-3xl p-8">
+                <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
                   <p className="text-gray-700 leading-relaxed">
                     Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.
                   </p>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
+                  <p className="text-gray-700 leading-relaxed">
                     Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.
                   </p>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
+                  <p className="text-gray-700 leading-relaxed">
                     Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.
                   </p>
+                  <Link href="/academicos-mas-info#kindergarten">
+                    <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                      Leer más
+                    </span>
+                  </Link>
                 </div>
               </div>
               <Image
@@ -151,16 +156,21 @@ export default function VidaEstudiantilPage() {
             {/* Versión Móvil */}
             <div className="block lg:hidden w-full px-4 mt-32">
               <div className="relative z-10">
-                <h2 className="text-5xl font-bold text-left mb-5 text-shadow-bold-movil">
+                <h2 className="text-5xl font-bold text-left mb-5 text-shadow-bold-movil space-y-4">
                   KINDER<br />GARTEN
                 </h2>
-                <div className="bg-white shadow-xl rounded-3xl p-6">
+                <div className="bg-white shadow-xl rounded-3xl p-6 space-y-4">
                   <p className="text-gray-700 leading-relaxed">
                     Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.
                   </p>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
+                  <p className=" text-gray-700 leading-relaxed">
                     Uno de nuestros objetivos es fortalecer el manejo de la lengua materna y facilitar la adquisición temprana del inglés.
                   </p>
+                  <Link href="/academicos-mas-info#kindergarten">
+                    <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                      Leer más
+                    </span>
+                  </Link>
                 </div>
               </div>
               <div className="absolute -top-5 -left-30 w-[550px] z-0">
@@ -217,18 +227,23 @@ export default function VidaEstudiantilPage() {
               />
             </div>
             {/* Bloque con texto "PRIMARY" */}
-            <div className="absolute 2xl:top-45 2xl:left-[40%] top-15 left-[40%] w-[550px] z-20">
+            <div className="absolute 2xl:top-[50%] 2xl:left-[40%] top-[10%] left-[40%] w-[550px] z-20">
               <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
                 PRIMARY
               </h2>
-              <div className="bg-white shadow-xl rounded-3xl p-8">
+              <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
                 <p className="text-gray-700 leading-relaxed">
                   Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.
                 </p>
+                <Link href="/academicos-mas-info#primary">
+                  <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                    Leer más
+                  </span>
+                </Link>
               </div>
             </div>
             {/* Columna Derecha: Iconos */}
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[55%] left-[50%]">
+            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[60%] left-[50%]">
               <Image
                 src="/images/cuadro-primary.svg"
                 alt="Sección de iconos y estadísticas"
@@ -254,10 +269,15 @@ export default function VidaEstudiantilPage() {
             <h2 className="text-5xl font-bold text-left mb-5 mt-10 text-shadow-bold-movil">
               PRIMARY
             </h2>
-            <div className="bg-white shadow-xl rounded-3xl p-6 mb-6">
+            <div className="bg-white shadow-xl rounded-3xl p-6 mb-6 space-y-4">
               <p className="leading-relaxed text-gray-800">
                 Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.
               </p>
+              <Link href="/academicos-mas-info#primary">
+                <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                  Leer más
+                </span>
+              </Link>
             </div>
             <Image
               src="/images/cuadro-primary.svg"
@@ -283,18 +303,23 @@ export default function VidaEstudiantilPage() {
         <div className="hidden lg:block">
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
             {/* Columna Izquierda: Texto */}
-            <div className="col-span-4 relative flex flex-col justify-center">
-              <div className="absolute top-[10%] left-[75%] w-[450px] z-20">
+            <div className="col-span-4 relative">
+              <div className="absolute top-[10%] left-[75%] w-[450px] z-20 flex flex-col justify-center">
                 <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
                   SECONDARY
                 </h2>
-                <div className="bg-white shadow-xl rounded-3xl p-8">
+                <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
                   <h4 className="font-bold text-xl">
                     Líderes del futuro
                   </h4>
                   <p className="leading-relaxed text-gray-800">
                     Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.
                   </p>
+                  <Link href="/academicos-mas-info#secondary">
+                    <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                      Leer más
+                    </span>
+                  </Link>
                 </div>
               </div>
               <div className="absolute 2xl:top-40 2xl:-left-20 top-10 left-0 2xl:w-[355px] w-[255px] z-20 bg-white/80 p-4 rounded-xl text-[#1e804b]">
@@ -349,13 +374,18 @@ export default function VidaEstudiantilPage() {
             <h2 className="text-5xl font-bold text-left text-shadow-bold-movil mb-5 mt-10">
               SECONDARY
             </h2>
-            <div className="bg-white shadow-xl rounded-3xl p-6 mb-6">
+            <div className="bg-white shadow-xl rounded-3xl p-6 mb-6 space-y-4">
               <h4 className="font-bold text-xl mb-2 text-left">
                 Líderes del futuro
               </h4>
               <p className="leading-relaxed text-gray-800">
                 Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.
               </p>
+              <Link href="/academicos-mas-info#secondary">
+                <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                  Leer más
+                </span>
+              </Link>
             </div>
             <Image
               src="/images/cuadro-primary.svg"

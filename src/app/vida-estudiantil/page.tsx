@@ -90,7 +90,7 @@ export default function DeportesPage() {
             </p>
             <div className="text-center mt-5">
               <a
-                href="/deportes-mas-info"
+                href="/vida-estudiantil-mas-info"
                 className="text-[#1e804b] font-semibold hover:underline"
               >
                 Leer más
