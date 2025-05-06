@@ -213,7 +213,7 @@ export default function VidaEstudiantilPage() {
             alt="Forma decorativa"
             width={750}
             height={500}
-            className="absolute 2xl:top-30 2xl:right-45 top-5 -right-10 w-[650px] h-auto z-10"
+            className="absolute 2xl:top-30 2xl:right-45 top-5 -right-10 w-[650px] h-auto z-10 pointer-events-none"
           />
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             {/* Columna Izquierda: Imagen principal */}
@@ -227,7 +227,7 @@ export default function VidaEstudiantilPage() {
               />
             </div>
             {/* Bloque con texto "PRIMARY" */}
-            <div className="absolute 2xl:top-[50%] 2xl:left-[40%] top-[10%] left-[40%] w-[550px] z-20">
+            <div className="absolute 2xl:top-[20%] 2xl:left-[45%] top-[20%] left-[40%] w-[550px] z-20">
               <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
                 PRIMARY
               </h2>
@@ -243,7 +243,7 @@ export default function VidaEstudiantilPage() {
               </div>
             </div>
             {/* Columna Derecha: Iconos */}
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[60%] left-[50%]">
+            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[60%] left-[50%] pointer-events-none">
               <Image
                 src="/images/cuadro-primary.svg"
                 alt="Sección de iconos y estadísticas"
@@ -262,7 +262,7 @@ export default function VidaEstudiantilPage() {
               alt="Decoración móvil"
               width={650}
               height={400}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover pointer-events-none"
             />
           </div>
           <div className="relative z-10 px-5">
@@ -343,7 +343,7 @@ export default function VidaEstudiantilPage() {
                   alt="Decoración"
                   width={650}
                   height={100}
-                  className="w-full h-full"
+                  className="w-full h-full pointer-events-none"
                 />
               </div>
             </div>
@@ -367,7 +367,7 @@ export default function VidaEstudiantilPage() {
               alt="Decoración móvil"
               width={650}
               height={400}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover pointer-events-none"
             />
           </div>
           <div className="relative z-10 px-5">

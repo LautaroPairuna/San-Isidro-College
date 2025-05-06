@@ -89,7 +89,7 @@ export default function HomePage() {
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center max-sm:col-span-12">
-            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[450px] z-20 max-sm:relative max-sm:top-35 max-sm:left-0 max-sm:w-[90%] max-sm:mx-auto">
+            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[475px] z-20 max-sm:relative max-sm:top-35 max-sm:left-0 max-sm:w-[90%] max-sm:mx-auto">
               <h1 className="text-2xl font-bold text-gray-900 text-center">
                 BIENVENIDOS A SAN ISIDRO
               </h1>

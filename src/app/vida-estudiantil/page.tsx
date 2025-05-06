@@ -210,8 +210,8 @@ export default function DeportesPage() {
         </div>
       </section>
 
-      {/* Sección 3: Sección de iconos y estadísticas */}
-      <section className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden h-auto sm:h-auto">
+      {/* Sección 3: Sección de SIC Dojo */}
+      <section className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-y-hidden h-auto sm:h-auto">
         {/* Versión Escritorio */}
         <div className="hidden sm:block max-w-[1200px] mx-auto">
           <Image
