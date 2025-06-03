@@ -1,0 +1,248 @@
+{
+  "home": {
+    "hero": {
+      "alt": "Hero Carousel",
+      "admisionButton": "ADMISSIONS",
+      "loading": "Loading Home…"
+    },
+    "bienvenida": {
+      "title": "WELCOME TO SAN ISIDRO",
+      "paragraph": "We understand that one of the most important decisions parents face is choosing a school for their children, an instance that will have a great impact on their lives. Therefore, it is vital to make the right decision.",
+      "fallbackAlt": "Welcome Image"
+    },
+    "section3": {
+      "fallbackAlt": "Section 3 Background"
+    }
+  },
+  "colegio": {
+    "proyectoTitle": "A SOLID AND INNOVATIVE EDUCATIONAL PROJECT FOR COMPREHENSIVE BILINGUAL DEVELOPMENT",
+    "introduccion": {
+      "p1": "With the aim of contributing to Salta a solid and innovative Educational Project, in 2016 San Isidro College opened its doors to the community through the design of a demanding and ambitious Educational Project, of Comprehensive Bilingual Formation and Catholic Orientation, integrating required national contents with high-standard international programs.",
+      "p2": "San Isidro College aims to achieve educational objectives in two languages. For this reason, English is taught intensively through multiple activities and contents. We guarantee natural incorporation of the second language.",
+      "p3": "From an early age, we work opening spaces so that each boy and girl achieves broad comprehension and expressive and communicative skills, along with correct pronunciation.",
+      "p4": "Due to the characteristics of the area, the establishment aspires to become a hub of school, recreational, cultural, and sports activities, thus fulfilling a significant and relevant function in its environment.",
+      "p5": "San Isidro College was conceived and developed by the most qualified and experienced professionals, with the aim of being the most solid Educational Project in our environment. Accompanied by Advisors from Salta, Bs. As. and abroad, who provide their great experience at different levels and in the English area, with agreements for the validation of International Exams and the opportunity for student exchanges with important foreign schools."
+    },
+    "instalacionesTitle": "FACILITIES",
+    "video": {
+      "id": "VIDEO_ID",
+      "placeholderSrc": "/path/to/your/placeholder-image.jpg"
+    },
+    "misionTitle": "MISSION",
+    "misionText": "San Isidro College is a Humanizing School that places the person first. Its mission is to form global citizens, promoting comprehensive education that nurtures the personal, intellectual, and emotional growth of our students. We are committed to providing a learning environment and autonomy that fosters curiosity, creativity, and critical thinking. Our goal is to support our students to become agents of change in society, providing tools that enable them to develop skills, promoting bilingualism, and providing a framework of principles based on example and Christian values.",
+    "visionTitle": "VISION",
+    "visionP1": "Our vision is to form resilient and creative leaders, capable of seizing opportunities and contributing to society’s progress in a constantly changing environment.",
+    "visionP2": "San Isidro College positions itself as a reference in education in our community, establishing a standard of excellence and adapting flexibly to the constant transformation of the modern world. We create a dynamic and ever-evolving educational environment that prepares our students to face the challenges of the 21st century. We are committed to providing quality education driven by innovation, technology, and the development of relevant skills.",
+    "valoresTitle": "VALUES",
+    "valoresAlt": "Values diagram",
+    "educacionPersonalizadaTitle": "PERSONALIZED EDUCATION",
+    "educacionPersonalizadaItalic": "We aim to instill in students the joy of attending school",
+    "educacionPersonalizada": {
+      "p1": "In a systematic and designed manner, we work on learning with values, turning this premise into a transversal axis that supports every human bond.",
+      "p2": "We hold that a confident child/adolescent can develop social skills that allow them to achieve better relationships through empathy and self-control, which in other words can be understood as respect, solidarity, and love for others, and as temperance.",
+      "p3": "They will be able to strengthen their affective bonds, make friends, and work in a team, without diminishing the demand of the curriculum contents in both languages.",
+      "p4": "A student who feels heard and supported emotionally is more motivated to participate, create, intervene, exchange ideas, question, pose problems, and dare to produce. Learn to learn. Because we believe that learning is built, expanded, and opens the person to other learnings."
+    },
+    "ultimoParrafo": "San Isidro College proposes to work fervently as a team so that every student is committed to their life project. For this, the family’s contribution is fundamental.",
+    "asideTitle": "THE SCHOOL",
+    "aside": {
+      "proyecto": "Educational Project",
+      "mision": "Mission",
+      "vision": "Vision",
+      "valores": "Values",
+      "educacionPersonalizada": "Personalized Education",
+      "aria": {
+        "proyecto": "Go to Educational Project",
+        "mision": "Go to Mission",
+        "vision": "Go to Vision",
+        "valores": "Go to Values",
+        "educacionPersonalizada": "Go to Personalized Education"
+      }
+    }
+  },
+  "academicosMasInfo": {
+    "proyectoTitulo": "Full-Day or Extended-Hour Bilingual Program",
+    "introduccion": {
+      "p1": "As a Bilingual School, San Isidro College aims to achieve its educational goals in two languages. For this reason, English will be taught intensively through multiple activities and content.",
+      "p2": "Our Bilingual Project develops and builds from the earliest years of life, with a strong emphasis on correct pronunciation.",
+      "p3": "From a very young age, our children come into contact with their second language, responding to their communication and interaction needs. In this way, they learn to study, carry out activities, and “live” in English, graduating with knowledge and familiarity in the language that allows them to integrate comfortably into different English-speaking academic and work environments.",
+      "p4": "For this, the integrated curriculum plan in English and Spanish includes the corresponding International Certifications.",
+      "p5": "We work to facilitate and ensure the construction of a solid bond with the second language and foster confidence in students regarding their ability to learn it.",
+      "bold1": "Through an intensive reading and oral production program, children naturally incorporate English in their daily lives, similar to the process of acquiring their mother tongue, using content that responds to their interests and needs.",
+      "bold2": "Learning English from an early age allows them to easily acquire sounds, rhythms, and intonation. This way, we train their ear, achieving proper phonetics, ensuring comprehension, and initiating oral expression in a fun and natural way."
+    },
+    "inglesTitulo": "English: Indispensable",
+    "ingles": {
+      "p1": "In a globalized world, learning a second language is an ever-growing necessity.",
+      "p2": "According to UNESCO documentation, in numerous international experiences, it is shown that teaching two or more languages reinforces other learning, especially the mother tongue (in both formative and instrumental aspects), and represents significant linguistic, cognitive, and socio-cultural benefits for students.",
+      "p3": "On the socio-cultural level, the benefit lies in the fact that knowing other languages allows people not only to expand their scope of action by communicating with members of other cultures but also to understand and value different customs and worldviews, thereby living with diversity.",
+      "p4": "Regarding how to access learning other languages, research shows that students’ learning is more meaningful and therefore longer-lasting when the language is used as a vehicle for learning other content and not only as an object of study in itself. Hence our Bilingual Educational Project proposal. Thus, bridges are built between the teaching of English and the rest of the curriculum areas: linguistic content is taught, and simultaneously, disciplinary content is approached."
+    },
+    "kindergarten": {
+      "titulo": "Kindergarten",
+      "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
+      "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language, promoting familiarization with it through daily situations inside and outside the classroom, coordinating articulation with the primary level so that the transition to the next stage of education is natural and safe.",
+      "p3": "Every day, we work with songs, dramatizations, puppets, stories, phrases, prompts, rhymes, intensified according to the group, until reaching full bilingualism at extended hours from age 5, where we work intensively with the English language to prepare them in the necessary language skills.",
+      "bold": "They can create, imagine, explore, and develop fantasy, observe their environment, develop their creative and artistic capacity, and acquire tools that foster oral and written language practices, problem-solving, and attitudes linked to empathy and respect for others.",
+      "subtituloJuego": "The Importance of Play in Early Childhood",
+      "juego": {
+        "p1": "Play, in all its forms, as content and work strategy",
+        "p2": "From the age of two, activities are based on play, the main source of learning for children. Play, spontaneous and natural in this stage, is the fundamental axis. It allows us to approach their interests, needs, and thought processes.",
+        "p3": "For them, learning through play is natural, so its value as a learning tool is indisputable.",
+        "p4": "Some benefits of play in children include its contribution to psychomotor, cognitive, social, and affective-moral development. Through play, they gain experiences about themselves and the world around them, rehearse adult roles and behaviors, train skills, practice routines and sequences of behavior that will be useful throughout their lives. They test their knowledge, learn the relevance of playing in groups, and learn to tolerate others’ viewpoints. Additionally, it helps strengthen affective bonds. The foundation and engine of all deep learning is this bond, which allows creating and strengthening trust."
+      },
+      "imagenAltDecoracion": "Kindergarten decoration",
+      "imagenAltDecoracionMovil": "Kindergarten mobile decoration"
+    },
+    "primary": {
+      "titulo": "Primary",
+      "subtitulo": "Our methodology is based on literature.",
+      "p1": "Mandatory subjects are carried out for all educational institutions (Jurisdictional Curriculum Design) and in English Areas: Language (Comprehension, Oral Language, Reading, Written Language, Creative Writing, Spelling), Drama, and Physical Education. Then the study plan adds: Literature, Social Studies, and Science.",
+      "p2": "In this level, it is important to promote the development of an attitude of effort, work, and responsibility in study and curiosity and interest in learning, strengthening confidence in one’s ability to learn.",
+      "p3": "Through play and varied activities appropriate to different ages, all aspects related to development and child evolution during the early years are covered. Special emphasis is placed on psychomotor, emotional, and intellectual development, stimulating curiosity, free thinking, moral awareness, and aesthetic enjoyment. We seek meaningful learning.",
+      "p4": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
+      "imagenAltDecoracion": "Primary decoration",
+      "imagenAltContenido": "Primary image"
+    },
+    "secondary": {
+      "titulo": "Secondary",
+      "subtitulo": "Leaders of the future",
+      "p1": "We prioritize a student-centered approach to develop key 21st-century skills such as autonomy, critical thinking, and creativity. With a solid bilingual foundation, we prepare our students for international exams and advanced technical English proficiency, tailored to their fields of study. We provide a space where learning comes to life.",
+      "p2Part1": "We integrate ",
+      "enfatizado": "Cambridge",
+      "p2Part2": " standards, ensuring international quality education. We offer exchanges and study trips that enrich their training and broaden their world view, preparing them for future challenges.",
+      "diplomaDualTitulo": "Dual Diploma",
+      "diplomaDualTexto": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",
+      "diplomaDualLogoAlt": "Academia International Studies Logo"
+    },
+    "aside": {
+      "titulo": "ACADEMIC",
+      "proyecto": "Bilingual Project",
+      "kindergarten": "Kindergarten",
+      "primary": "Primary",
+      "secondary": "Secondary"
+    }
+  },
+  "academicosHome": {
+    "loading": "Loading Student Life…",
+    "errorTitle": "Error loading media",
+    "hero": {
+      "alt": "I am because we are",
+      "title": "Full-Day or Extended-Hour Bilingual Program",
+      "description": "With various graphic and audiovisual resources, group and expression dynamics, exhibitions, games, dramatizations, songs, stories, etc., the expressive and productive stage is continuously strengthened, consolidated, and nourished.",
+      "readMore": "Read more"
+    },
+    "admissions": {
+      "alt": "Admissions Icon",
+      "label": "ADMISSIONS"
+    },
+    "kinder": {
+      "title": "KINDERGARTEN",
+      "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
+      "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language.",
+      "p3": "Furthermore, it promotes curricular articulation with the primary level, facilitating a natural and safe transition.",
+      "mobileBrief": "Our Bilingual Project starts in the nursery, K2, …",
+      "readMore": "Read more",
+      "decorAlt": "Kindergarten decoration",
+      "decorAltMobile": "Kindergarten mobile decoration"
+    },
+    "primary": {
+      "title": "PRIMARY",
+      "p1": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
+      "readMore": "Read more",
+      "decorAlt": "Primary decoration"
+    },
+    "secondary": {
+      "title": "SECONDARY",
+      "subtitle": "Leaders of the future",
+      "p1": "We prioritize a student-centered approach to develop key 21st-century skills such as autonomy, critical thinking, and creativity. With a solid bilingual foundation, we prepare our students for international exams and advanced technical English proficiency, tailored to their fields of study. We provide a space where learning comes to life.",
+      "readMore": "Read more",
+      "dualTitle": "Dual Diploma",
+      "dualText": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",
+      "dualLogoAlt": "Academia International Studies Logo",
+      "decorAlt": "Secondary frame"
+    },
+    "aside": {
+      "title": "ACADEMIC",
+      "proyecto": "Bilingual Project",
+      "kindergarten": "Kindergarten",
+      "primary": "Primary",
+      "secondary": "Secondary"
+    }
+  },
+  "vidaEstudiantilHome": {
+    "loading": "Loading Sports section…",
+    "errors": {
+      "title": "Error loading content:",
+      "hero": "Hero: {msg}",
+      "rugbyHockey": "Rugby/Hockey: {msg}",
+      "dojo": "Dojo: {msg}",
+      "vidaEstudiantil": "Student Life: {msg}",
+      "play": "Play: {msg}"
+    },
+    "hero": {
+      "alt": "I am because we are",
+      "carouselAlt": "Sports carousel",
+      "fallbackAlt": "Sports background",
+      "title": "Sports",
+      "description": "San Isidro College, located in a privileged natural environment, develops a varied Physical Education program. As part of our Pedagogical Project, we aim to contribute to shaping a life plan.",
+      "readMore": "Read more"
+    },
+    "admissions": {
+      "alt": "Admissions Icon",
+      "label": "ADMISSIONS"
+    },
+    "rugbyHockey": {
+      "logoAlt": "Rugby & Hockey Club logo",
+      "title": "RUGBY & HOCKEY CLUB",
+      "description": "School and Club united, building and sowing values that transcend the field. A strong, committed community for the benefit of our students.",
+      "carouselAlt": "Rugby & Hockey Club carousel",
+      "fallbackAlt": "Rugby & Hockey background"
+    },
+    "dojo": {
+      "logoAlt": "SIC Dojo logo",
+      "title": "SAN ISIDRO COLLEGE DOJO",
+      "description": "The San Isidro Dojo is the space where our students develop discipline, respect, and strength through judo. As part of our comprehensive education, we foster physical and emotional growth in an environment of camaraderie and effort.",
+      "descriptionMobile": "We develop discipline, respect, and strength through judo, promoting essential values in an environment of camaraderie and effort.",
+      "carouselAlt": "SIC Dojo carousel",
+      "fallbackAlt": "SIC Dojo background"
+    },
+    "vida": {
+      "title": "STUDENT LIFE",
+      "description": "San Isidro College fosters a positive environment where students can fully develop, guided by core values. We prepare our students for the 21st century by teaching them to manage stress and be resilient.",
+      "descriptionMobile": "We foster a positive, dynamic environment where students fully develop, guided by core values.",
+      "readMore": "Read more",
+      "carouselAlt": "Student Life carousel",
+      "fallbackAlt": "Student Life background"
+    },
+    "play": {
+      "logoAlt": "San Isidro Play logo",
+      "carouselAlt": "San Isidro Play carousel",
+      "fallbackAlt": "San Isidro Play background",
+      "description": "<strong>San Isidro Play</strong> is the annual English-language theatrical production starring our talented students. This event combines acting, singing, and dancing, showcasing not only English proficiency but also our students’ creativity and artistic skills.",
+      "invitation": "Join us for this magical family experience!",
+      "descriptionMobile": "San Isidro Play is the annual English-language theatrical production starring our talented students. It combines acting, singing, and dancing, highlighting creativity and artistic skills within our educational community."
+    }
+  },
+  "vidaEstudiantilMasInfo": {
+    "proyectoTitle": "Sports",
+    "intro": {
+      "p1": "San Isidro College, located in a privileged natural setting, develops a varied Physical Education program as part of the Pedagogical Project, which aims to contribute to shaping a life plan.",
+      "p2": "Physical Education represents much more than a curriculum area at our school. It becomes a fundamental discipline for the comprehensive education and formation of the human being, especially when implemented at an early age, as it allows children and adolescents to develop motor, cognitive, and affective skills essential for daily life and as part of a healthy lifestyle and social interaction. Through it, they express their spontaneity and learn to know, respect, and value themselves and others.",
+      "p3": "Therefore, it is essential to include and experience different activities in play, gymnastics, and sports, in order to implement them continuously, either in class or through educational projects. Creating a habit of physical activity allows students, beyond school, to feel healthy and active, incorporating these practices into their free time."
+    },
+    "bienestar": {
+      "title": "Student Well-Being",
+      "p1": "At San Isidro College, we value the well-being of our students, considering it essential for their holistic development. We strive to create an environment where they feel safe, content, and happy—key factors for them to excel and achieve success.",
+      "p2": "We promote student well-being through a patient, positive, and proactive approach led by trained and experienced teachers, involving the entire educational community. Our educational system, based on diversity and the PSHE curriculum, is designed to focus on each student’s comprehensive well-being.",
+      "p3": "Tutors play a crucial role by getting to know each student and building a trusting relationship, providing both practical and emotional support. Our tutoring system aims to foster personal and social growth, instilling a sense of responsibility and health awareness. We monitor academic progress and encourage good study habits.",
+      "p4": "We encourage parents to communicate with tutors about any concern, no matter how small, related to their child’s health and well-being. Through an enriching environment, we help students thrive both academically and emotionally."
+    },
+    "aside": {
+      "title": "ACADEMIC",
+      "deportes": "Sports",
+      "vidaEstudiantil": "Student Well-Being",
+      "play": "San Isidro Play"
+    }
+  }
+}

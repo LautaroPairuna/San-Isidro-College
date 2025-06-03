@@ -1,14 +1,15 @@
-// app/deportes/page.tsx
+// /app/[locale]/deportes/page.tsx
 'use client'
 
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import { useTranslations } from 'next-intl'
 import { useMedios } from '@/lib/hooks'
 import MediaCarousel from '@/components/MediaCarousel'
 
-const Contact  = dynamic(() => import('@/components/sectionContact'),   { ssr: false })
-const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
+const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+const SectionCarrusel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
 
 /* --------------------------------------------------------------------
  *  GRUPOS DE MEDIOS  (reemplaza los IDs por los que hayas creado
@@ -30,35 +31,57 @@ type MedioMinimal = {
   grupoMediosId: number
 }
 
-export default function DeportesPage () {
+export default function DeportesPage() {
+  const t = useTranslations('vidaEstudiantilHome')
+
   /* ------------------------------ CARGA DE MEDIOS ------------------------------ */
-  const { data: heroMediaRaw           = [], isLoading: lHero,   error: eHero   } = useMedios(HERO_GROUP_ID)
-  const { data: rugbyHockeyMediaRaw    = [], isLoading: lRH,     error: eRH     } = useMedios(RUGBY_HOCKEY_GROUP_ID)
-  const { data: dojoMediaRaw           = [], isLoading: lDojo,   error: eDojo   } = useMedios(DOJO_GROUP_ID)
-  const { data: vidaMediaRaw           = [], isLoading: lVida,   error: eVida   } = useMedios(VIDA_ESTUDIANTIL_GROUP_ID)
-  const { data: playMediaRaw           = [], isLoading: lPlay,   error: ePlay   } = useMedios(PLAY_GROUP_ID)
+  const {
+    data: heroMediaRaw          = [],
+    isLoading: lHero,
+    error: eHero,
+  } = useMedios(HERO_GROUP_ID)
+  const {
+    data: rugbyHockeyMediaRaw   = [],
+    isLoading: lRH,
+    error: eRH,
+  } = useMedios(RUGBY_HOCKEY_GROUP_ID)
+  const {
+    data: dojoMediaRaw          = [],
+    isLoading: lDojo,
+    error: eDojo,
+  } = useMedios(DOJO_GROUP_ID)
+  const {
+    data: vidaMediaRaw          = [],
+    isLoading: lVida,
+    error: eVida,
+  } = useMedios(VIDA_ESTUDIANTIL_GROUP_ID)
+  const {
+    data: playMediaRaw          = [],
+    isLoading: lPlay,
+    error: ePlay,
+  } = useMedios(PLAY_GROUP_ID)
 
   const isLoading = lHero || lRH || lDojo || lVida || lPlay
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center text-xl text-gray-600">
-        Cargando sección Deportes…
+        {t('loading')}
       </div>
     )
   }
 
   const errores = [
-    eHero  && `Hero: ${eHero.message}`,
-    eRH    && `Rugby/Hockey: ${eRH.message}`,
-    eDojo  && `Dojo: ${eDojo.message}`,
-    eVida  && `Vida Estudiantil: ${eVida.message}`,
-    ePlay  && `Play: ${ePlay.message}`,
+    eHero  && t('errors.hero', { msg: eHero.message }),
+    eRH    && t('errors.rugbyHockey', { msg: eRH.message }),
+    eDojo  && t('errors.dojo', { msg: eDojo.message }),
+    eVida  && t('errors.vidaEstudiantil', { msg: eVida.message }),
+    ePlay  && t('errors.play', { msg: ePlay.message }),
   ].filter(Boolean)
 
   if (errores.length > 0) {
     return (
       <div className="p-6 space-y-2 text-red-600">
-        <h2 className="font-bold">Error al cargar contenidos:</h2>
+        <h2 className="font-bold">{t('errors.title')}</h2>
         {errores.map((msg, idx) => (
           <p key={idx}>• {msg}</p>
         ))}
@@ -70,11 +93,11 @@ export default function DeportesPage () {
   const filterImgOrVideo = (arr: typeof heroMediaRaw) =>
     (arr as MedioMinimal[]).filter(m => m.tipo === 'IMAGEN' || m.tipo === 'VIDEO')
 
-  const heroMedia         = filterImgOrVideo(heroMediaRaw)
-  const rugbyHockeyMedia  = filterImgOrVideo(rugbyHockeyMediaRaw)
-  const dojoMedia         = filterImgOrVideo(dojoMediaRaw)
-  const vidaMedia         = filterImgOrVideo(vidaMediaRaw)
-  const playMedia         = filterImgOrVideo(playMediaRaw)
+  const heroMedia        = filterImgOrVideo(heroMediaRaw)
+  const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
+  const dojoMedia        = filterImgOrVideo(dojoMediaRaw)
+  const vidaMedia        = filterImgOrVideo(vidaMediaRaw)
+  const playMedia        = filterImgOrVideo(playMediaRaw)
 
   /* ------------------------------ HELPERS ------------------------------ */
   const mapUrls = (arr: MedioMinimal[]) =>
@@ -82,9 +105,6 @@ export default function DeportesPage () {
       .sort((a, b) => a.posicion - b.posicion)
       .map((m) => `/images/medios/${m.urlArchivo}`)
 
-  /* =======================================================================
-   *                               RENDER
-   * ===================================================================== */
   return (
     <div id="container">
       {/* ═════════════ SECCIÓN 1 — HERO ═════════════ */}
@@ -100,7 +120,7 @@ export default function DeportesPage () {
           <div className="lg:hidden relative flex justify-between items-end h-full pt-32 pb-12 z-20 md:w-[80%] w-full">
             <Image
               src="/images/eslogan.svg"
-              alt="I am because we are"
+              alt={t('hero.alt')}
               width={250}
               height={250}
               className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
@@ -110,8 +130,8 @@ export default function DeportesPage () {
               target="_blank"
               className="inline-flex items-center gap-3 px-4 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition"
             >
-              <Image src="/images/ico-admisiones.svg" alt="" width={24} height={24} />
-              ADMISIONES
+              <Image src="/images/ico-admisiones.svg" alt={t('admissions.alt')} width={24} height={24} />
+              {t('admissions.label')}
             </Link>
           </div>
 
@@ -119,7 +139,7 @@ export default function DeportesPage () {
           <div className="hidden lg:block">
             <Image
               src="/images/eslogan.svg"
-              alt="I am because we are"
+              alt={t('hero.alt')}
               width={250}
               height={250}
               className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
@@ -132,26 +152,36 @@ export default function DeportesPage () {
           {heroMedia.length > 0 ? (
             <MediaCarousel
               medias={mapUrls(heroMedia)}
-              altText="Hero Deportes"
+              altText={t('hero.carouselAlt')}
               className="w-full h-full"
             />
           ) : (
-            <Image src="/images/Image-deportes.webp" alt="" fill className="object-cover" />
+            <Image
+              src="/images/Image-deportes.webp"
+              alt={t('hero.fallbackAlt')}
+              fill
+              className="object-cover"
+            />
           )}
 
           {/* Recuadro blanco centrado */}
-          <div className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
-                          absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-                          z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">Deportes</h1>
+          <div
+            className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
+                        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                        z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]"
+          >
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">
+              {t('hero.title')}
+            </h1>
             <p className="text-gray-700 mb-4 text-sm md:text-base">
-              San Isidro College, ubicado en un marco natural privilegiado, desarrolla un variado
-              programa en el área de Educación Física. Como parte del Proyecto Pedagógico, se propone
-              contribuir a la elaboración de un proyecto de vida.
+              {t('hero.description')}
             </p>
             <div className="text-center mt-5">
-              <Link href="/vida-estudiantil-mas-info" className="text-[#1e804b] font-semibold hover:underline">
-                Leer más
+              <Link
+                href="/vida-estudiantil-mas-info"
+                className="text-[#1e804b] font-semibold hover:underline"
+              >
+                {t('hero.readMore')}
               </Link>
             </div>
           </div>
@@ -163,8 +193,8 @@ export default function DeportesPage () {
               target="_blank"
               className="absolute bottom-6 right-6 flex items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg z-40"
             >
-              <Image src="/images/ico-admisiones.svg" alt="" width={32} height={32} />
-              ADMISIONES
+              <Image src="/images/ico-admisiones.svg" alt={t('admissions.alt')} width={32} height={32} />
+              {t('admissions.label')}
             </Link>
           </div>
         </div>
@@ -180,7 +210,10 @@ export default function DeportesPage () {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
-      <section id="deportes" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section
+        id="deportes"
+        className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden"
+      >
         <Image
           src="/images/formas/forma-home-2.svg"
           alt=""
@@ -193,12 +226,19 @@ export default function DeportesPage () {
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
             <div className="absolute top-55 left-41 w-[550px] z-20">
-              <Image src="/images/logo-club-rugby-hockey.svg" alt="" width={128} height={128} className="mx-auto mb-5" />
+              <Image
+                src="/images/logo-club-rugby-hockey.svg"
+                alt={t('rugbyHockey.logoAlt')}
+                width={128}
+                height={128}
+                className="mx-auto mb-5"
+              />
               <div className="bg-white shadow-xl rounded-xl p-8">
-                <h2 className="text-2xl font-bold text-center">CLUB DE RUGBY Y HOCKEY</h2>
+                <h2 className="text-2xl font-bold text-center">
+                  {t('rugbyHockey.title')}
+                </h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">
-                  Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y
-                  comprometida en beneficio de nuestros chicos.
+                  {t('rugbyHockey.description')}
                 </p>
               </div>
             </div>
@@ -210,14 +250,14 @@ export default function DeportesPage () {
               <div className="w-full h-[645px]">
                 <MediaCarousel
                   medias={mapUrls(rugbyHockeyMedia)}
-                  altText="Club Rugby y Hockey"
+                  altText={t('rugbyHockey.carouselAlt')}
                   className="w-full h-full rounded-xl shadow-lg"
                 />
               </div>
             ) : (
               <Image
                 src="/images/Image-SIC-hockey.webp"
-                alt=""
+                alt={t('rugbyHockey.fallbackAlt')}
                 width={800}
                 height={600}
                 className="w-full h-auto rounded-xl shadow-lg"
@@ -231,14 +271,14 @@ export default function DeportesPage () {
               <div className="w-full h-[300px]">
                 <MediaCarousel
                   medias={mapUrls(rugbyHockeyMedia)}
-                  altText="Club Rugby y Hockey"
+                  altText={t('rugbyHockey.carouselAlt')}
                   className="w-full h-full rounded-md shadow-lg"
                 />
               </div>
             ) : (
               <Image
                 src="/images/Image-SIC-hockey.webp"
-                alt=""
+                alt={t('rugbyHockey.fallbackAlt')}
                 width={800}
                 height={600}
                 className="w-full h-auto rounded-md shadow-lg"
@@ -248,16 +288,17 @@ export default function DeportesPage () {
             <div className="absolute -top-35 left-0 w-full px-4 z-20 -translate-y-1/2">
               <Image
                 src="/images/logo-club-rugby-hockey.svg"
-                alt=""
+                alt={t('rugbyHockey.logoAlt')}
                 width={128}
                 height={128}
                 className="mx-auto mb-5 w-32"
               />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <h2 className="text-2xl font-bold">CLUB DE RUGBY Y HOCKEY</h2>
+                <h2 className="text-2xl font-bold">
+                  {t('rugbyHockey.title')}
+                </h2>
                 <p className="mt-4 text-gray-700">
-                  Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y
-                  comprometida en beneficio de nuestros chicos.
+                  {t('rugbyHockey.description')}
                 </p>
               </div>
             </div>
@@ -282,14 +323,14 @@ export default function DeportesPage () {
                 <div className="w-full h-[645px]">
                   <MediaCarousel
                     medias={mapUrls(dojoMedia)}
-                    altText="SIC Dojo"
+                    altText={t('dojo.carouselAlt')}
                     className="w-full h-full rounded-md shadow-md"
                   />
                 </div>
               ) : (
                 <Image
                   src="/images/Image-SIC-dojo.webp"
-                  alt=""
+                  alt={t('dojo.fallbackAlt')}
                   width={800}
                   height={600}
                   className="w-full h-auto rounded-md shadow-md"
@@ -300,17 +341,17 @@ export default function DeportesPage () {
               <div className="absolute -top-[120px] left-[115px] w-[650px]">
                 <Image
                   src="/images/logo-dojo.svg"
-                  alt=""
+                  alt={t('dojo.logoAlt')}
                   width={128}
                   height={128}
                   className="mx-auto mb-5 w-32"
                 />
                 <div className="bg-white shadow-xl rounded-xl p-8">
-                  <h2 className="text-2xl font-bold text-center">SAN ISIDRO COLLEGE DOJO</h2>
+                  <h2 className="text-2xl font-bold text-center">
+                    {t('dojo.title')}
+                  </h2>
                   <p className="mt-4 text-gray-700 leading-relaxed">
-                    El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través
-                    del judo. Como parte de nuestra formación integral, fomentamos el crecimiento físico y emocional en un ambiente de
-                    camaradería y esfuerzo.
+                    {t('dojo.description')}
                   </p>
                 </div>
               </div>
@@ -331,14 +372,14 @@ export default function DeportesPage () {
             <div className="w-full h-[290px]">
               <MediaCarousel
                 medias={mapUrls(dojoMedia)}
-                altText="SIC Dojo"
+                altText={t('dojo.carouselAlt')}
                 className="w-full h-full rounded-md shadow-md"
               />
             </div>
           ) : (
             <Image
               src="/images/Image-SIC-dojo.webp"
-              alt=""
+              alt={t('dojo.fallbackAlt')}
               width={800}
               height={600}
               className="w-full h-auto rounded-md shadow-md"
@@ -347,16 +388,17 @@ export default function DeportesPage () {
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <Image
               src="/images/logo-dojo.svg"
-              alt=""
+              alt={t('dojo.logoAlt')}
               width={128}
               height={128}
               className="mx-auto mb-5 w-24"
             />
             <div className="bg-white shadow-xl rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-bold">SAN ISIDRO COLLEGE DOJO</h2>
+              <h2 className="text-2xl font-bold">
+                {t('dojo.title')}
+              </h2>
               <p className="mt-4 text-gray-700">
-                Desarrollamos disciplina, respeto y fortaleza a través del judo, promoviendo valores esenciales en un ambiente de
-                camaradería y esfuerzo.
+                {t('dojo.descriptionMobile')}
               </p>
             </div>
           </div>
@@ -364,20 +406,26 @@ export default function DeportesPage () {
       </section>
 
       {/* ═════════════ SECCIÓN 4 — VIDA ESTUDIANTIL ═════════════ */}
-      <section id="bienestar-estudiantil" className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-[#71af8d] overflow-hidden">
+      <section
+        id="bienestar-estudiantil"
+        className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-[#71af8d] overflow-hidden"
+      >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
-              <h2 className="text-2xl font-bold text-center">VIDA ESTUDIANTIL</h2>
+              <h2 className="text-2xl font-bold text-center">
+                {t('vida.title')}
+              </h2>
               <p className="mt-4 text-gray-700 leading-relaxed">
-                San Isidro College fomenta un ambiente positivo donde los estudiantes pueden desarrollarse plenamente, guiados por
-                valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés y ser
-                resilientes.
+                {t('vida.description')}
               </p>
               <div className="text-center mt-5">
-                <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
-                  Leer más
+                <Link
+                  href="/deportes-mas-info"
+                  className="text-[#1e804b] font-semibold hover:underline"
+                >
+                  {t('vida.readMore')}
                 </Link>
               </div>
             </div>
@@ -394,14 +442,14 @@ export default function DeportesPage () {
               <div className="w-full h-[645px]">
                 <MediaCarousel
                   medias={mapUrls(vidaMedia)}
-                  altText="Vida Estudiantil"
+                  altText={t('vida.carouselAlt')}
                   className="w-full h-full rounded-xl shadow-lg"
                 />
               </div>
             ) : (
               <Image
                 src="/images/Image-vida-estudiantil.webp"
-                alt=""
+                alt={t('vida.fallbackAlt')}
                 width={800}
                 height={600}
                 className="w-full h-auto rounded-xl shadow-lg"
@@ -423,14 +471,14 @@ export default function DeportesPage () {
             <div className="w-full h-[290px]">
               <MediaCarousel
                 medias={mapUrls(vidaMedia)}
-                altText="Vida Estudiantil"
+                altText={t('vida.carouselAlt')}
                 className="w-full h-full rounded-xl shadow-lg"
               />
             </div>
           ) : (
             <Image
               src="/images/Image-vida-estudiantil.webp"
-              alt=""
+              alt={t('vida.fallbackAlt')}
               width={800}
               height={600}
               className="w-full h-auto rounded-xl shadow-lg"
@@ -438,14 +486,18 @@ export default function DeportesPage () {
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-bold">VIDA ESTUDIANTIL</h2>
+              <h2 className="text-2xl font-bold">
+                {t('vida.title')}
+              </h2>
               <p className="mt-4 text-gray-700 leading-relaxed">
-                Fomentamos un ambiente positivo y dinámico donde los estudiantes se desarrollan plenamente, guiados por valores
-                fundamentales.
+                {t('vida.descriptionMobile')}
               </p>
               <div className="mt-5">
-                <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
-                  Leer más
+                <Link
+                  href="/deportes-mas-info"
+                  className="text-[#1e804b] font-semibold hover:underline"
+                >
+                  {t('vida.readMore')}
                 </Link>
               </div>
             </div>
@@ -454,7 +506,10 @@ export default function DeportesPage () {
       </section>
 
       {/* ═════════════ SECCIÓN 5 — SAN ISIDRO PLAY ═════════════ */}
-      <section id="play-habilidades-steam" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-white overflow-hidden">
+      <section
+        id="play-habilidades-steam"
+        className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-white overflow-hidden"
+      >
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <Image
@@ -470,14 +525,14 @@ export default function DeportesPage () {
                 <div className="w-full h-[645px]">
                   <MediaCarousel
                     medias={mapUrls(playMedia)}
-                    altText="San Isidro Play"
+                    altText={t('play.carouselAlt')}
                     className="w-full h-full rounded-md shadow-md"
                   />
                 </div>
               ) : (
                 <Image
                   src="/images/image-SIC-play.webp"
-                  alt=""
+                  alt={t('play.fallbackAlt')}
                   width={800}
                   height={600}
                   className="w-full h-auto rounded-md shadow-md"
@@ -488,18 +543,16 @@ export default function DeportesPage () {
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 left-110 w-[550px]">
                 <Image
                   src="/images/logo-SIC-play.svg"
-                  alt=""
+                  alt={t('play.logoAlt')}
                   width={128}
                   height={128}
                   className="mx-auto mb-10 w-32"
                 />
                 <p className="mt-4 text-gray-700 leading-relaxed">
-                  <strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por nuestros talentosos alumnos.
-                  Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la
-                  creatividad y habilidades artísticas de nuestros estudiantes.
+                  {t('play.description')}
                 </p>
                 <p className="mt-4 text-gray-700 leading-relaxed">
-                  ¡Te esperamos para vivir esta mágica experiencia familiar!
+                  {t('play.invitation')}
                 </p>
               </div>
             </div>
@@ -519,14 +572,14 @@ export default function DeportesPage () {
             <div className="w-full h-[290px]">
               <MediaCarousel
                 medias={mapUrls(playMedia)}
-                altText="San Isidro Play"
+                altText={t('play.carouselAlt')}
                 className="w-full h-full rounded-md shadow-md"
               />
             </div>
           ) : (
             <Image
               src="/images/image-SIC-play.webp"
-              alt=""
+              alt={t('play.fallbackAlt')}
               width={800}
               height={600}
               className="w-full h-auto rounded-md shadow-md"
@@ -536,14 +589,13 @@ export default function DeportesPage () {
             <div className="bg-white shadow-xl rounded-xl p-8 text-center">
               <Image
                 src="/images/logo-SIC-play.svg"
-                alt=""
+                alt={t('play.logoAlt')}
                 width={128}
                 height={128}
                 className="mx-auto mb-10 w-32"
               />
               <p className="mt-4 text-gray-700 leading-relaxed">
-                <strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por nuestros talentosos alumnos.
-                Combina actuación, canto y baile, resaltando la creatividad y habilidades artísticas de nuestra comunidad educativa.
+                {t('play.descriptionMobile')}
               </p>
             </div>
           </div>
@@ -551,7 +603,7 @@ export default function DeportesPage () {
       </section>
 
       {/* Carrusel genérico + contacto */}
-      <Carousel />
+      <SectionCarrusel />
       <Contact />
     </div>
   )

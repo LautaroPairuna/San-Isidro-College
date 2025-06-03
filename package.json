@@ -21,6 +21,7 @@
     "mime-types": "^3.0.1",
     "next": "15.2.1",
     "next-auth": "^4.24.11",
+    "next-intl": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",

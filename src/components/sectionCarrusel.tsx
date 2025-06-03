@@ -70,28 +70,32 @@ export default function Carousel() {
   // 6) Función para ir a slide (acepta número o función)
   const goToSlide = useCallback(
     (newIndex: number | ((prev: number) => number)) => {
-      if (isAnimating) return
+      if (isAnimating || totalRaw === 0) return
       setIsAnimating(true)
       setIndex((prev) =>
         typeof newIndex === 'function' ? newIndex(prev) : newIndex
       )
     },
-    [isAnimating]
+    [isAnimating, totalRaw]
   )
 
-  // 7) Autoavance cada 5 segundos
+  // 7) Autoavance cada 5 segundos (ahora solo depende de isPaused y totalRaw)
   useEffect(() => {
-    if (!isPaused) {
-      intervalRef.current = setInterval(() => {
-        goToSlide((prev) => prev + 1)
-      }, 5000)
-    }
+    // Si no hay slides o está pausado, no iniciamos intervalo
+    if (isPaused || totalRaw === 0) return
+
+    intervalRef.current = setInterval(() => {
+      // Avanzamos índice; si se sale del rango, el handleTransitionEnd lo corrige
+      setIndex((prev) => prev + 1)
+    }, 5000)
+
+    // Cleanup
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [isPaused, goToSlide])
+  }, [isPaused, totalRaw])
 
-  // 8) Actualizamos transform/transition al cambiar índice
+  // 8) Actualizamos transform/transition al cambiar índice o transitionEnabled
   useEffect(() => {
     if (carouselRef.current) {
       carouselRef.current.style.transition = transitionEnabled
@@ -103,10 +107,14 @@ export default function Carousel() {
 
   // 9) Al terminar la transición, corregimos índice para loop infinito
   const handleTransitionEnd = () => {
+    if (totalRaw === 0) return
+
     if (index >= totalRaw) {
+      // Si llegamos al “duplicado” en la parte derecha, volvemos al principio sin animación
       setTransitionEnabled(false)
       setIndex(index - totalRaw)
     } else if (index < 0) {
+      // Si llegamos al “duplicado” en la parte izquierda, volvemos al final
       setTransitionEnabled(false)
       setIndex(index + totalRaw)
     } else {
@@ -174,7 +182,7 @@ export default function Carousel() {
       </div>
     )
   }
-  if (rawSlides.length === 0) {
+  if (totalRaw === 0) {
     return null
   }
 
@@ -199,7 +207,10 @@ export default function Carousel() {
               className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16"
             >
               {slideGroup.map((item, i) => (
-                <div key={i} className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
+                <div
+                  key={i}
+                  className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
+                >
                   <Image
                     src={item.src}
                     alt={item.alt}

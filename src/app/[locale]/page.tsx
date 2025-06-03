@@ -1,4 +1,4 @@
-// app/page.tsx
+// /app/[locale]/page.tsx
 'use client'
 
 import dynamic from 'next/dynamic'
@@ -7,49 +7,45 @@ import Image from 'next/image'
 import { useMedios } from '@/lib/hooks'
 import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
+import { useTranslations } from 'next-intl'
+import type { ReactNode } from 'react'
+import type { NextPage } from 'next'
 
-const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
-const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
-
-/**
- * Ahora TODOS los IDs corresponden a grupos (GrupoMedios), incluso
- * los “únicos” (UNICO) que actúan como medio individual.
- *
- * HERO_GROUP_ID:      GrupoMedios tipo CARRUSEL → carrusel de fondos.
- * BIENVENIDA_GROUP_ID: GrupoMedios tipo UNICO  → un único medio de bienvenida.
- * INFOGRAFIA_GROUP_ID: GrupoMedios tipo GALERIA/CARRUSEL → íconos de infografía.
- * SEC3_GROUP_ID:      GrupoMedios tipo UNICO  → un único fondo para sección 3.
- */
+// IDs de ejemplo (seguirán igual que antes)
 const HERO_GROUP_ID = 4
 const BIENVENIDA_GROUP_ID = 5
 const INFOGRAFIA_GROUP_ID = 6
 const SEC3_GROUP_ID = 7
 
+const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
 
-export default function HomePage() {
-  // 1) HERO: todos los medios dentro de HERO_GROUP_ID
+const HomePage: NextPage = () => {
+  // Hook de traducción: namespace 'home'
+  const t = useTranslations('home')
+
+  // 1) Hero (carrousel)
   const {
     data: heroMedia = [],
     isLoading: loadingHero,
     error: errorHero,
   } = useMedios(HERO_GROUP_ID)
 
-  // 2) BIENVENIDA: todos los medios dentro de BIENVENIDA_GROUP_ID
-  //    (en el caso UNICO, el arreglo tendrá a lo más 1 elemento)
+  // 2) Bienvenida (único)
   const {
     data: bienvenidaArr = [],
     isLoading: loadingBienvenida,
     error: errorBienvenida,
   } = useMedios(BIENVENIDA_GROUP_ID)
 
-  // 3) INFOGRAFÍA ÍCONOS: todos los medios dentro de INFOGRAFIA_GROUP_ID
+  // 3) Infografía íconos
   const {
     data: infografiaIcons = [],
     isLoading: loadingInfografia,
     error: errorInfografia,
   } = useMedios(INFOGRAFIA_GROUP_ID)
 
-  // 4) SECCIÓN 3 FONDO: todos los medios dentro de SEC3_GROUP_ID
+  // 4) Sección 3 fondo único
   const {
     data: sec3Arr = [],
     isLoading: loadingSec3,
@@ -62,16 +58,16 @@ export default function HomePage() {
   if (isAnyLoading) {
     return (
       <div className="flex h-screen items-center justify-center text-xl text-gray-600">
-        Cargando Home…
+        {t('hero.loading')}
       </div>
     )
   }
 
-  // Extraemos de los arreglos el medio único (si existe). Si no existe, queda undefined.
+  // Extraemos objetos únicos de welcome y sección 3
   const bienvenidaMedio = bienvenidaArr.length > 0 ? bienvenidaArr[0] : undefined
   const sec3Medio = sec3Arr.length > 0 ? sec3Arr[0] : undefined
 
-  // Chequeo de errores agrupados
+  // Agregamos chequeo de errores
   const errores = [
     errorHero && `Hero: ${errorHero.message}`,
     errorBienvenida && `Bienvenida: ${errorBienvenida.message}`,
@@ -98,7 +94,7 @@ export default function HomePage() {
         <div className="col-span-5 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative max-sm:col-span-12 max-sm:items-center max-sm:px-6 max-sm:py-24">
           <Image
             src="/images/eslogan.svg"
-            alt="I am because we are"
+            alt={t('hero.alt')}
             width={250}
             height={250}
             className="absolute top-[55%] left-[80%] -translate-x-1/2 z-40
@@ -112,26 +108,26 @@ export default function HomePage() {
           >
             <Image
               src="/images/ico-admisiones.svg"
-              alt="Ver Admisiones"
+              alt={t('hero.admisionButton')}
               width={24}
               height={24}
             />
-            <span className="leading-none">ADMISIONES</span>
+            <span className="leading-none">{t('hero.admisionButton')}</span>
           </Link>
         </div>
 
         {/* --- Columna Derecha: carrusel de heroMedia --- */}
-        <div className="col-span-7 relative w-full h-full max-sm:col-span-12">
+        <div className="col-span-7 relative w-full h-screen max-sm:col-span-12">
           {heroMedia.length > 0 ? (
             <MediaCarousel
               medias={heroMedia.map((m) => `/images/medios/${m.urlArchivo}`)}
-              altText="Hero Carousel"
+              altText={t('hero.alt')}
               className="w-full h-full object-contain"
             />
           ) : (
             <Image
               src="/images/fondo-home.webp"
-              alt="Hero Fallback"
+              alt={t('hero.alt')}
               fill
               className="object-contain"
               priority
@@ -146,11 +142,11 @@ export default function HomePage() {
             >
               <Image
                 src="/images/ico-admisiones.svg"
-                alt="Ver Admisiones"
+                alt={t('hero.admisionButton')}
                 width={32}
                 height={32}
               />
-              ADMISIONES
+              {t('hero.admisionButton')}
             </Link>
           </button>
         </div>
@@ -168,20 +164,17 @@ export default function HomePage() {
         />
       </section>
 
-      {/* ==================== SECCIÓN 2: BIENVENIDA (UNICO VIA GRUPO) ==================== */}
+      {/* =============== SECCIÓN 2: BIENVENIDA (MÉTODO UNICO) =============== */}
       <section className="relative w-full h-auto py-10 bg-white" id="bienvenida">
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center max-sm:col-span-12">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[475px] z-20 max-sm:relative max-sm:top-35 max-sm:left-0 max-sm:w-[90%] max-sm:mx-auto">
               <h1 className="text-2xl font-bold text-gray-900 text-center">
-                BIENVENIDOS A SAN ISIDRO
+                {t('bienvenida.title')}
               </h1>
               <p className="mt-4 text-gray-700 leading-relaxed">
-                Somos conscientes de que, probablemente, una de las decisiones
-                más importantes a la que como padres se enfrentan, es la elección
-                de un Colegio para sus hijos, instancia que generará gran impacto
-                en sus vidas. Por ello, es vital tomar la decisión correcta.
+                {t('bienvenida.paragraph')}
               </p>
             </div>
             {/* Línea decorativa */}
@@ -209,7 +202,7 @@ export default function HomePage() {
               ) : (
                 <Image
                   src={`/images/medios/${bienvenidaMedio.urlArchivo}`}
-                  alt={bienvenidaMedio.textoAlternativo ?? 'Bienvenida Image'}
+                  alt={bienvenidaMedio.textoAlternativo ?? t('bienvenida.fallbackAlt')}
                   width={800}
                   height={600}
                   className="w-full h-auto rounded-xl shadow-lg"
@@ -218,7 +211,7 @@ export default function HomePage() {
             ) : (
               <Image
                 src="/images/fondo-bienvenida.webp"
-                alt="Bienvenida Fallback"
+                alt={t('bienvenida.fallbackAlt')}
                 width={800}
                 height={600}
                 className="w-full h-auto rounded-xl shadow-lg"
@@ -228,9 +221,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== SECCIÓN 3: FONDO UNICO + MARQUEE ÍCONOS ==================== */}
+      {/* =========== SECCIÓN 3: FONDO UNICO + MARQUEE ÍCONOS =========== */}
       <section className="relative w-full bg-[#71af8d] py-10" id="infograma">
-        {/* --- Fondo único via grupo SEC3_GROUP_ID --- */}
+        {/* --- Fondo único via sec3Medio --- */}
         {sec3Medio ? (
           sec3Medio.tipo === 'VIDEO' ? (
             <video
@@ -243,7 +236,7 @@ export default function HomePage() {
           ) : (
             <Image
               src={`/images/medios/${sec3Medio.urlArchivo}`}
-              alt={sec3Medio.textoAlternativo ?? 'Sección 3 Fondo'}
+              alt={sec3Medio.textoAlternativo ?? t('section3.fallbackAlt')}
               fill
               className="object-cover -z-10"
             />
@@ -251,7 +244,7 @@ export default function HomePage() {
         ) : (
           <Image
             src="/images/fondo-iconos.webp"
-            alt="Sección 3 Fallback"
+            alt={t('section3.fallbackAlt')}
             fill
             className="object-cover -z-10"
           />
@@ -289,7 +282,7 @@ export default function HomePage() {
               </div>
             )}
 
-            {/* Imagen de fondo principal (invisible detrás del video/imágen) */}
+            {/* Imagen de fondo principal (invisible detrás del video/imagen) */}
             <div className="col-span-8 flex items-center justify-center z-10 pointer-events-none">
               <Image
                 src="/images/fondo-iconos.webp"
@@ -339,10 +332,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ==================== SECCIÓN 4: Galería de Logos (si aplica) ==================== */}
+      {/* =========== SECCIÓN 4: Galería de Logos (si aplica) =========== */}
       <section className="my-10" id="galeria-logos">
         {/*
-          // Si tienes un GrupoMedios con logos:
+          // Si tuvieras logos:
           // const { data: logos = [] } = useMedios(LOGOS_GROUP_ID)
           // <MediaCarousel medias={logos.map(m => `/images/medios/${m.urlArchivo}`)} …/>
         */}
@@ -354,3 +347,5 @@ export default function HomePage() {
     </div>
   )
 }
+
+export default HomePage

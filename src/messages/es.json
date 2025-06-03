@@ -1,0 +1,248 @@
+{
+  "home": {
+    "hero": {
+      "alt": "Carrusel Principal",
+      "admisionButton": "ADMISIONES",
+      "loading": "Cargando Home…"
+    },
+    "bienvenida": {
+      "title": "BIENVENIDOS A SAN ISIDRO",
+      "paragraph": "Somos conscientes de que, probablemente, una de las decisiones más importantes a la que como padres se enfrentan, es la elección de un Colegio para sus hijos, instancia que generará gran impacto en sus vidas. Por ello, es vital tomar la decisión correcta.",
+      "fallbackAlt": "Imagen de Bienvenida"
+    },
+    "section3": {
+      "fallbackAlt": "Sección 3 Fondo"
+    }
+  },
+  "colegio": {
+    "proyectoTitle": "UN PROYECTO EDUCATIVO SÓLIDO E INNOVADOR PARA LA FORMACIÓN INTEGRAL BILINGÜE",
+    "introduccion": {
+      "p1": "Con el fin de aportar a Salta un Proyecto Educativo sólido e innovador, en 2016 San Isidro College abrió sus puertas a la comunidad, a través del Diseño de un Proyecto Educativo exigente y ambicioso, de Formación Integral Bilingüe y de Orientación Católica, integrando contenidos nacionales exigidos, con programas internacionales de altos estándares académicos.",
+      "p2": "San Isidro College se propone lograr los objetivos educativos en dos idiomas. Por este motivo es que el inglés se enseña en forma intensiva a través de múltiples actividades y contenidos. Garantizamos una incorporación natural de la segunda lengua.",
+      "p3": "Desde pequeños se trabaja abriendo espacios, para que cada niño y niña logre amplia comprensión y habilidad de expresión y comunicación, junto a una correcta pronunciación.",
+      "p4": "Debido a las características de la zona, el establecimiento aspira a transformarse en un núcleo de actividades escolares, recreativas, culturales y deportivas, para cumplir, así, con una función significativa y relevante, en el medio dentro del cual se halla inserto.",
+      "p5": "San Isidro College fue pensado y desarrollado con los más calificados y experimentados profesionales, con el fin de ser el Proyectos Educativo más sólido de nuestro medio. Acompañados por Asesores de Salta, Bs. As. y el extranjero, quienes brindan su gran experiencia en los distintos niveles y en el área de Inglés, con Convenios para la validación de los Exámenes Internacionales y la oportunidad de intercambios estudiantiles con importantes Colegios del extranjero."
+    },
+    "instalacionesTitle": "INSTALACIONES",
+    "video": {
+      "id": "VIDEO_ID", 
+      "placeholderSrc": "/ruta/a/tu/imagen-placeholder.jpg"
+    },
+    "misionTitle": "MISIÓN",
+    "misionText": "San Isidro College es un Colegio Humanizador que ubica a la persona en primer lugar. Su misión es formar ciudadanos globales, promoviendo una educación integral que nutra el crecimiento personal, intelectual y emocional de nuestros estudiantes. Nos comprometemos a proporcionar un ambiente de aprendizaje y autonomía en el que se fomente la curiosidad, la creatividad y el pensamiento crítico. Nuestro objetivo es acompañar a nuestros estudiantes para que sean agentes de cambio en la sociedad, brindando herramientas que les permitan desarrollar habilidades, fomentando el bilingüismo y proporcionando un marco de principios basado en el ejemplo y en valores cristianos.",
+    "visionTitle": "VISIÓN",
+    "visionP1": "Nuestra visión es formar líderes resilientes y creativos, capaces de aprovechar las oportunidades y contribuir al progreso de la sociedad en un entorno en constante cambio.",
+    "visionP2": "San Isidro College se posiciona como referente en educación en nuestra comunidad, estableciendo un estándar de excelencia y adaptándose de manera flexible a la constante transformación del mundo moderno. Creamos un entorno educativo dinámico y en constante evolución, que prepara a nuestros estudiantes para enfrentar los desafíos del siglo XXI. Nos comprometemos a proporcionar una educación de calidad, impulsada por la innovación, la tecnología y el desarrollo de habilidades relevantes.",
+    "valoresTitle": "VALORES",
+    "valoresAlt": "Diagrama de valores",
+    "educacionPersonalizadaTitle": "EDUCACIÓN PERSONALIZADA",
+    "educacionPersonalizadaItalic": "Nos proponemos generar en los alumnos el placer de concurrir al colegio",
+    "educacionPersonalizada": {
+      "p1": "De manera sistemática y diseñada trabajamos aprendizajes con valores, convirtiendo esta premisa en un eje transversal que sustente todo vínculo humano.",
+      "p2": "Sostenemos que un niño/adolescente seguro y con confianza en sí mismo puede desarrollar habilidades sociales que le permiten lograr mejores vínculos gracias a la empatía y el autodominio, que en otras palabras pueden entenderse como respeto, solidaridad y amor al prójimo, y como templanza.",
+      "p3": "Podrá fortalecer sus vínculos afectivos, hacerse de amigos y trabajar en equipo, sin mengua de la exigencia de los contenidos del currículum en las dos lenguas.",
+      "p4": "Un estudiante que se siente escuchado y contenido desde lo emocional, está más motivado para participar, crear, intervenir, intercambiar ideas, cuestionar, plantear problemas y arriesgarse a producir. Aprende a aprender. Porque creemos que el aprendizaje se construye, se expande y abre a la persona a otros aprendizajes."
+    },
+    "ultimoParrafo": "San Isidro College, propone trabajar fervientemente en equipo para que todo estudiante se encuentre comprometido con su proyecto de vida. Para ello el aporte de la familia es fundamental.",
+    "asideTitle": "EL COLEGIO",
+    "aside": {
+      "proyecto": "Proyecto Educativo",
+      "mision": "Misión",
+      "vision": "Visión",
+      "valores": "Valores",
+      "educacionPersonalizada": "Educación Personalizada",
+      "aria": {
+        "proyecto": "Ir a Proyecto Educativo",
+        "mision": "Ir a Misión",
+        "vision": "Ir a Visión",
+        "valores": "Ir a Valores",
+        "educacionPersonalizada": "Ir a Educación Personalizada"
+      }
+    }
+  },
+  "academicosMasInfo": {
+    "proyectoTitulo": "Proyecto bilingüe de jornada completa o extenida",
+    "introduccion": {
+      "p1": "Como Colegio Bilingüe, San Isidro College se propone, lograr los objetivos educativos en dos idiomas. Por este motivo es que el inglés se enseñará en forma intensiva a través de múltiples actividades y contenidos.",
+      "p2": "Nuestro Proyecto Bilingüe se desarrolla y construye desde los primeros años de vida, con un gran acento en la correcta pronunciación.",
+      "p3": "Desde muy pequeños, nuestros niños toman contacto con su segunda lengua, respondiendo a sus necesidades de comunicación e interacción. Así aprenden a estudiar, desarrollar actividades y “vivir” en inglés, egresando con un conocimiento y habitualidad en la lengua, que les permite integrarse cómodamente en diferentes ámbitos, tanto laborales como académicos de habla inglesa.",
+      "p4": "Para esto el Plan de Estudios integrado en inglés y castellano, contempla las correspondientes Certificaciones Internacionales.",
+      "p5": "Trabajamos para facilitar y asegurar la construcción de un vínculo sólido con la su segunda lengua, y generar una actitud de confianza en los estudiantes con respecto a sus posibilidades de aprender la misma.",
+      "bold1": "Sobre un programa de lectura intensiva y producción oral, los niños en la cotidianidad, incorporan naturalmente el ingles, de un modo similar al proceso de adquisición de la lengua materna, por medio de contenidos que responden a sus intereses y necesidades.",
+      "bold2": "El aprendizaje del inglés desde temprana edad, permite adquirir fácilmente sonidos, ritmos y entonación. Así habituamos el oído, adquiriendo una fonética adecuada, asegurando la comprensión e iniciando la expresión oral, de manera divertida y natural."
+    },
+    "inglesTitulo": "Inglés, Indispensable",
+    "ingles": {
+      "p1": "En un mundo globalizado el aprender un segundo idioma, es una necesidad cada vez mayor.",
+      "p2": "Según documentación de la UNESCO, en el marco de numerosas experiencias internacionales, se demuestra que la enseñanza de dos lenguas o más, refuerza otros aprendizajes, especialmente el de la lengua materna (tanto en los aspectos formativos como instrumentales) y representa importantes beneficios lingüísticos, cognitivos y socio-culturales para los estudiantes.",
+      "p3": "En lo socio-cultural el beneficio radica en que el conocimiento de otras lenguas permite a las personas no sólo ampliar su área de acción al comunicarse con miembros de otras culturas sino también, entender y valorar diferentes costumbres y visiones del mundo, y por lo tanto convivir con la diversidad.",
+      "p4": "En cuanto a la manera de acceder al conocimiento de otras lenguas, las investigaciones demuestran que los aprendizajes de los alumnos son más significativos y por lo tanto duraderos, cuando la lengua es utilizada como vehículo para el aprendizaje de otros contenidos y no sólo como objeto de estudio en sí misma. De allí nuestra propuesta de Proyecto Educativo Bilingüe. De esta manera, se favorecen las articulaciones de contenidos entre la enseñanza del inglés y el resto de las áreas del currículo en general: se enseñan contenidos lingüísticos y simultáneamente, se produce un acercamiento a contenidos disciplinares."
+    },
+    "kindergarten": {
+      "titulo": "Kindergarten",
+      "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continua en K3, K4 y K5.",
+      "p2": "Uno de nuestros objetivos en esta etapa, es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma, favoreciendo la familiarización del mismo, a través de situaciones cotidianas dentro y fuera de la sala, coordinando la articulación con el nivel primario, para que la transición a la próxima etapa de su educación sea natural y segura.",
+      "p3": "En cada jornada, trabajamos con canciones, dramatizaciones, títeres, cuentos, frases, consignas, rimas, las que se intensifican según el grupo, hasta arribar al bilingüismo en horario extendido, a partir de los 5 años, donde trabajaremos fuertemente con la lengua inglesa, con el fin de prepararlos en las habilidades lingüísticas necesarias.",
+      "bold": "Pueden crear, imaginar, explorar y desarrollar la fantasía, la observación del ambiente que los rodea, el desarrollo de su capacidad creativa, artística, y la adquisición de herramientas que favorezcan las prácticas del lenguaje oral y escrito, la resolución de situaciones problemáticas y la promoción de actitudes vinculadas a la empatía y el respeto a los demás.ite mantener el interés sin esfuerzo.",
+      "subtituloJuego": "Valor del Juego en el nivel Inicial",
+      "juego": {
+        "p1": "El juego, en todas sus manifestaciones, como contenido y estrategia de trabajo",
+        "p2": "Desde la sala de dos años, las actividades están basadas en el juego, principal fuente de aprendizaje de los niños/as. El juego, actividad espontánea y natural en esta etapa, es el eje fundamental. Nos permite acercarnos a sus intereses, necesidades y procesos de pensamiento.",
+        "p3": "Lo natural para ellos, es aprender jugando, por eso su valor como instrumento de aprendizaje es indiscutible.",
+        "p4": "Algunos de los beneficios del juego en los niños, son su contribución al desarrollo Psicomotriz, Cognitivo, Social y Afectivo-Moral. Jugando, adquieren experiencias sobre sí mismos y el mundo que los rodea, ensayan roles y formas de actuación de la vida de los adultos, entrenan destrezas y habilidades, practican rutinas y secuencias de comportamiento que les serán útiles a lo largo de sus vidas. Ponen a prueba sus conocimientos, aprenden la relevancia de jugar en grupos, aprendiendo a tolerar la postura de los demás. Además, contribuye a estrechar los vínculos afectivos. La base y el motor de todo aprendizaje profundo es este vínculo, que permite crear y afianzar la confianza."
+      },
+      "imagenAltDecoracion": "Decoración Kindergarten",
+      "imagenAltDecoracionMovil": "Decoración Kindergarten móvil"
+    },
+    "primary": {
+      "titulo": "Primary",
+      "subtitulo": "Nuestra metodología se encuentra basada en la literatura.",
+      "p1": "Se llevan a cabo materias obligatorias para todas las Instituciones educativas (Diseño Curricular Juridiccional) y en las Áreas en Inglés: Language (Comprehension, Oral Language, Reading, Written Language, Creative Writing, Spelling), Drama y Physical Education. Luego se agregan al Plan de Estudios: Literature, Social Studies y Science.",
+      "p2": "En este Nivel es importante promover el desarrollo de una actitud de esfuerzo, trabajo y responsabilidad en el estudio y de curiosidad e interés por el aprendizaje, fortaleciendo la confianza en las propias posibilidades de aprender.",
+      "p3": "Por medio del juego, de actividades variadas y acordes a las distintas edades, se cubren todos los aspectos relacionados con el desarrollo y la evolución infantil durante los primeros años. Se pone especial acento en el desarrollo psicomotriz, emocional e intelectual, estimulando la curiosidad, el pensamiento libre, el despertar de una conciencia moral y el goce estético. Buscamos que el aprendizaje sea significativo.",
+      "p4": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
+      "imagenAltDecoracion": "Decoración Primary",
+      "imagenAltContenido": "Imagen Primary"
+    },
+    "secondary": {
+      "titulo": "Secondary",
+      "subtitulo": "Líderes del futuro",
+      "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida",
+      "p2Part1": "Integramos estándares de ",
+      "enfatizado": "Cambridge",
+      "p2Part2": ", garantizando una educación de calidad internacional. Ofrecemos intercambios y viajes de estudio que enriquecen su formación y amplían su visión del mundo, preparándolos para los desafíos del futuro.",
+      "diplomaDualTitulo": "Diploma Dual",
+      "diplomaDualTexto": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
+      "diplomaDualLogoAlt": "Logo Academia International Studies"
+    },
+    "aside": {
+      "titulo": "ACADÉMICO",
+      "proyecto": "Proyecto Bilingüe",
+      "kindergarten": "Kindergarten",
+      "primary": "Primary",
+      "secondary": "Secondary"
+    }
+  },
+  "academicosHome": {
+    "loading": "Cargando Vida Estudiantil…",
+    "errorTitle": "Error al cargar medios",
+    "hero": {
+      "alt": "I am because we are",
+      "title": "Proyecto bilingüe de jornada Completa o extendida",
+      "description": "Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.",
+      "readMore": "Leer más"
+    },
+    "admissions": {
+      "alt": "Icono Admisiones",
+      "label": "ADMISIONES"
+    },
+    "kinder": {
+      "title": "KINDERGARTEN",
+      "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.",
+      "p2": "Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.",
+      "p3": "Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.",
+      "mobileBrief": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, …",
+      "readMore": "Leer más",
+      "decorAlt": "Decoración Kindergarten",
+      "decorAltMobile": "Decoración Kindergarten móvil"
+    },
+    "primary": {
+      "title": "PRIMARY",
+      "p1": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
+      "readMore": "Leer más",
+      "decorAlt": "Decoración Primary"
+    },
+    "secondary": {
+      "title": "SECONDARY",
+      "subtitle": "Líderes del futuro",
+      "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.",
+      "readMore": "Leer más",
+      "dualTitle": "Diploma Dual",
+      "dualText": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
+      "dualLogoAlt": "Logo Academia International Studies",
+      "decorAlt": "Cuadro Secondary"
+    },
+    "aside": {
+      "title": "ACADÉMICO",
+      "proyecto": "Proyecto Bilingüe",
+      "kindergarten": "Kindergarten",
+      "primary": "Primary",
+      "secondary": "Secondary"
+    }
+  },
+  "vidaEstudiantilHome": {
+    "loading": "Cargando sección Deportes…",
+    "errors": {
+      "title": "Error al cargar contenidos:",
+      "hero": "Hero: {msg}",
+      "rugbyHockey": "Rugby/Hockey: {msg}",
+      "dojo": "Dojo: {msg}",
+      "vidaEstudiantil": "Vida Estudiantil: {msg}",
+      "play": "Play: {msg}"
+    },
+    "hero": {
+      "alt": "I am because we are",
+      "carouselAlt": "Carrusel Deportes",
+      "fallbackAlt": "Fondo Deportes",
+      "title": "Deportes",
+      "description": "San Isidro College, ubicado en un marco natural privilegiado, desarrolla un variado programa en el área de Educación Física. Como parte del Proyecto Pedagógico, se propone contribuir a la elaboración de un proyecto de vida.",
+      "readMore": "Leer más"
+    },
+    "admissions": {
+      "alt": "Ícono Admisiones",
+      "label": "ADMISIONES"
+    },
+    "rugbyHockey": {
+      "logoAlt": "Logo Club Rugby y Hockey",
+      "title": "CLUB DE RUGBY Y HOCKEY",
+      "description": "Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.",
+      "carouselAlt": "Carrusel Club Rugby y Hockey",
+      "fallbackAlt": "Fondo Club Rugby y Hockey"
+    },
+    "dojo": {
+      "logoAlt": "Logo SIC Dojo",
+      "title": "SAN ISIDRO COLLEGE DOJO",
+      "description": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo.",
+      "descriptionMobile": "Desarrollamos disciplina, respeto y fortaleza a través del judo, promoviendo valores esenciales en un ambiente de camaradería y esfuerzo.",
+      "carouselAlt": "Carrusel SIC Dojo",
+      "fallbackAlt": "Fondo SIC Dojo"
+    },
+    "vida": {
+      "title": "VIDA ESTUDIANTIL",
+      "description": "San Isidro College fomenta un ambiente positivo donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés y ser resilientes.",
+      "descriptionMobile": "Fomentamos un ambiente positivo y dinámico donde los estudiantes se desarrollan plenamente, guiados por valores fundamentales.",
+      "readMore": "Leer más",
+      "carouselAlt": "Carrusel Vida Estudiantil",
+      "fallbackAlt": "Fondo Vida Estudiantil"
+    },
+    "play": {
+      "logoAlt": "Logo San Isidro Play",
+      "carouselAlt": "Carrusel San Isidro Play",
+      "fallbackAlt": "Fondo San Isidro Play",
+      "description": "<strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por nuestros talentosos alumnos. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes.",
+      "invitation": "¡Te esperamos para vivir esta mágica experiencia familiar!",
+      "descriptionMobile": "San Isidro Play es la obra de teatro anual en inglés protagonizada por nuestros talentosos alumnos. Combina actuación, canto y baile, resaltando la creatividad y habilidades artísticas de nuestra comunidad educativa."
+    }
+  },
+  "vidaEstudiantilMasInfo": {
+    "proyectoTitle": "Deportes",
+    "intro": {
+      "p1": "San Isidro College, ubicado en un marco natural privilegiado, desarrolla un variado programa en el área de Educación Física, como parte del Proyecto Pedagógico que propone contribuir a la elaboración de un proyecto de vida.",
+      "p2": "La Educación Física representa en nuestro Colegio, mucho más que un área curricular. Se constituye como disciplina fundamental para la educación y formación integral del ser humano, especialmente si es implementada en edad temprana, por cuanto posibilita en el niño y adolescente, desarrollar destrezas motoras, cognitivas y afectivas, esenciales para su diario vivir y como proceso para su proyecto de vida, en el marco de una vida saludable y de interacción social. A través de ella, expresan su espontaneidad y aprenden a conocer, respetar y valorarse a sí mismos y a los demás.",
+      "p3": "Por ello, es indispensable la variedad y vivencia de las diferentes actividades en el juego, la gimnasia y el deporte, con el fin de implementarlas continuamente, ya sea en clase o mediante proyectos lúdico-pedagógicos. Generar el hábito por la actividad física para que los alumnos, más allá del Colegio, puedan sentirse sanos y activos, incorporando estas prácticas como parte de su tiempo libre."
+    },
+    "bienestar": {
+      "title": "Bienestar Estudiantil",
+      "p1": "En San Isidro College, valoramos el bienestar de nuestros estudiantes, considerándolo esencial para su desarrollo integral. Nos esforzamos en crear un entorno donde se sientan seguros, satisfechos y felices, clave para que puedan sobresalir y alcanzar el éxito.",
+      "p2": "Promovemos el bienestar estudiantil a través de un enfoque paciente, positivo y proactivo, dirigido por docentes capacitados y con experiencia, involucrando a toda la comunidad educativa. Nuestro sistema educativo, basado en la diversidad y el plan de estudios PSHE, está diseñado para centrarse en el bienestar integral de cada alumno.",
+      "p3": "Los tutores juegan un papel crucial, conociendo a cada estudiante y desarrollando una relación de confianza, brindando apoyo tanto práctico como moral. Nuestro sistema de tutoría busca promover el crecimiento personal y social, inculcando un sentido de responsabilidad y conciencia sobre la salud. Supervisamos el progreso académico y fomentamos buenos hábitos de estudio.",
+      "p4": "Alentamos a los padres a comunicarse con los tutores sobre cualquier inquietud, por mínima que sea, relacionada con la salud y bienestar de sus hijos. A través de un entorno enriquecedor, ayudamos a los estudiantes a prosperar tanto académica como emocionalmente."
+    },
+    "aside": {
+      "title": "ACADÉMICO",
+      "deportes": "Deportes",
+      "vidaEstudiantil": "Vida Estudiantil",
+      "play": "San Isidro Play"
+    }
+  }
+}
