@@ -38,7 +38,7 @@ model GrupoMedios {
   creadoEn       DateTime        @default(now())
   actualizadoEn  DateTime        @updatedAt
 
-  @@map("grupo_medios")
+  @@map("grupomedios")
 }
 
 model Medio {
