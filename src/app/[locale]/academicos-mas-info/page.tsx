@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl'
 const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
 const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
 
-export default function academicosMasInfoPage() {
+export default function AcademicosMasInfoPage() {
   const t = useTranslations('academicosMasInfo')
 
   return (
