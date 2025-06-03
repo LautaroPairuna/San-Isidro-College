@@ -8,7 +8,6 @@ import { useMedios } from '@/lib/hooks'
 import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
 import { useTranslations } from 'next-intl'
-import type { ReactNode } from 'react'
 import type { NextPage } from 'next'
 
 // IDs de ejemplo (seguirán igual que antes)
