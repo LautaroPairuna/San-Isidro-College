@@ -57,9 +57,9 @@ function makeTimestamp() {
  */
 export async function GET(
   _req: NextRequest,
-  context: { params: { tableName: string; id: string } }
+  { params }: any
 ) {
-  const { tableName, id } = context.params
+  const { tableName, id } = params
   const model             = models[tableName]
 
   if (!model) {
