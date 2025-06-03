@@ -1,153 +1,182 @@
-"use client";
+// app/deportes/components/Carousel.tsx
+'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react';
-import Image from 'next/image';
+import { useEffect, useRef, useState, useCallback } from 'react'
+import Image from 'next/image'
+import { useMedios } from '@/lib/hooks'
 
 type Slide = {
-  src: string;
-  alt: string;
-};
+  src: string
+  alt: string
+}
 
-const rawSlides: Slide[][] = [
-  [
-    {
-      src: '/images/google-education-logo.webp',
-      alt: 'Google for Education',
-    },
-    {
-      src: '/images/science-bits-logo.webp',
-      alt: 'Science Bits',
-    },
-    {
-      src: '/images/epea-logo.webp',
-      alt: 'EPEA',
-    },
-  ],
-  [
-    {
-      src: '/images/logo-iqnet.svg',
-      alt: 'IQNET',
-    },
-    {
-      src: '/images/logo-iram.svg',
-      alt: 'IRAM',
-    },
-    {
-      src: '/images/logo-university-of-cambridge.svg',
-      alt: 'University of Cambridge',
-    },
-  ],
-];
+interface MedioMinimal {
+  id: number
+  urlArchivo: string
+  textoAlternativo?: string
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+  posicion: number
+  grupoMediosId: number
+}
 
-const Carousel = () => {
-  // Duplicamos los slides para lograr el efecto de loop infinito.
-  const slides = [...rawSlides, ...rawSlides];
-  const totalRaw = rawSlides.length; // cantidad de slides "reales"
+// Reemplaza este ID por el que corresponda en tu admin para “Alianzas”
+const ALIANZAS_GROUP_ID = 7
 
-  const [index, setIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
+export default function Carousel() {
+  // 1) Traemos todos los medios del grupo “Alianzas”
+  const { data: mediosRaw = [], isLoading, error } = useMedios(ALIANZAS_GROUP_ID)
 
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  // 2) Estado local para slides agrupados
+  const [rawSlides, setRawSlides] = useState<Slide[][]>([])
 
-  // Ajustamos la función para aceptar número o función actualizadora
+  // 3) Construimos rawSlides cuando cambien los datos
+  useEffect(() => {
+    if (!mediosRaw || mediosRaw.length === 0) {
+      setRawSlides([])
+      return
+    }
+
+    // Filtramos tipos "ICONO" y "IMAGEN"
+    const items = (mediosRaw as MedioMinimal[])
+      .filter((m) => m.tipo === 'ICONO' || m.tipo === 'IMAGEN')
+      .sort((a, b) => a.posicion - b.posicion)
+      .map((m) => ({
+        src: `/images/medios/${m.urlArchivo}`,
+        alt: m.textoAlternativo ?? '',
+      }))
+
+    // Agrupamos en subarrays de 3 elementos cada uno
+    const chunks: Slide[][] = []
+    for (let i = 0; i < items.length; i += 3) {
+      chunks.push(items.slice(i, i + 3))
+    }
+
+    setRawSlides(chunks)
+  }, [mediosRaw])
+
+  // 4) Duplicamos para loop infinito
+  const slides = [...rawSlides, ...rawSlides]
+  const totalRaw = rawSlides.length
+
+  // 5) Estados de control
+  const [index, setIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [transitionEnabled, setTransitionEnabled] = useState(true)
+  const [isPaused, setIsPaused] = useState(false)
+
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  // 6) Función para ir a slide (acepta número o función)
   const goToSlide = useCallback(
-    (newIndex: number | ((prevIndex: number) => number)) => {
-      if (isAnimating) return; // Evita iniciar nueva transición si la actual no finalizó
-      setIsAnimating(true);
-      setIndex((prevIndex) =>
-        typeof newIndex === 'function' ? newIndex(prevIndex) : newIndex
-      );
+    (newIndex: number | ((prev: number) => number)) => {
+      if (isAnimating) return
+      setIsAnimating(true)
+      setIndex((prev) =>
+        typeof newIndex === 'function' ? newIndex(prev) : newIndex
+      )
     },
     [isAnimating]
-  );
+  )
 
-  // Autoavance cada 5 segundos usando la función actualizadora
+  // 7) Autoavance cada 5 segundos
   useEffect(() => {
     if (!isPaused) {
       intervalRef.current = setInterval(() => {
-        goToSlide((prevIndex) => prevIndex + 1);
-      }, 5000);
+        goToSlide((prev) => prev + 1)
+      }, 5000)
     }
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isPaused, goToSlide]);
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [isPaused, goToSlide])
 
-  // Actualiza la transformación del contenedor para mover el slider
+  // 8) Actualizamos transform/transition al cambiar índice
   useEffect(() => {
     if (carouselRef.current) {
       carouselRef.current.style.transition = transitionEnabled
         ? 'transform 500ms ease-in-out'
-        : 'none';
-      carouselRef.current.style.transform = `translateX(-${index * 100}%)`;
+        : 'none'
+      carouselRef.current.style.transform = `translateX(-${index * 100}%)`
     }
-  }, [index, transitionEnabled]);
+  }, [index, transitionEnabled])
 
-  // Al finalizar la transición, verificamos si se debe reiniciar el índice
+  // 9) Al terminar la transición, corregimos índice para loop infinito
   const handleTransitionEnd = () => {
     if (index >= totalRaw) {
-      setTransitionEnabled(false);
-      setIndex(index - totalRaw);
+      setTransitionEnabled(false)
+      setIndex(index - totalRaw)
     } else if (index < 0) {
-      setTransitionEnabled(false);
-      setIndex(index + totalRaw);
+      setTransitionEnabled(false)
+      setIndex(index + totalRaw)
     } else {
-      setTransitionEnabled(true);
+      setTransitionEnabled(true)
     }
-    // Se permite ejecutar otra transición una vez finalizada la actual.
-    setIsAnimating(false);
-  };
+    setIsAnimating(false)
+  }
 
-  // Reactivamos la transición si fue desactivada temporalmente.
+  // 10) Reactiva transición si estuvo desactivada
   useEffect(() => {
     if (!transitionEnabled) {
-      const timer = setTimeout(() => {
-        setTransitionEnabled(true);
-      }, 50);
-      return () => clearTimeout(timer);
+      const t = setTimeout(() => setTransitionEnabled(true), 50)
+      return () => clearTimeout(t)
     }
-  }, [transitionEnabled]);
+  }, [transitionEnabled])
 
-  // Eventos para pausar/resumir el autoavance al pasar el mouse o tocar.
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
+  // 11) Pausar/Resumir al hover o touch
+  const handleMouseEnter = () => setIsPaused(true)
+  const handleMouseLeave = () => setIsPaused(false)
 
-  // Navegación por teclado
+  // 12) Navegación por teclado
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') goToSlide(index - 1);
-      else if (e.key === 'ArrowRight') goToSlide(index + 1);
+      if (e.key === 'ArrowLeft') goToSlide(index - 1)
+      else if (e.key === 'ArrowRight') goToSlide(index + 1)
     },
     [index, goToSlide]
-  );
+  )
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [handleKeyDown])
 
-  // Soporte para swipe en dispositivos táctiles
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
+  // 13) Swipe en pantallas táctiles
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
+    touchStartX.current = e.touches[0].clientX
+  }
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
+    touchEndX.current = e.touches[0].clientX
+  }
   const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
+    const diff = touchStartX.current - touchEndX.current
     if (Math.abs(diff) > 50) {
-      if (diff > 0) goToSlide(index + 1);
-      else goToSlide(index - 1);
+      if (diff > 0) goToSlide(index + 1)
+      else goToSlide(index - 1)
     }
-  };
+  }
+
+  // 14) Renderizado condicional tras declarar todos los hooks
+  if (isLoading) {
+    return (
+      <div className="flex h-48 items-center justify-center text-gray-600">
+        Cargando alianzas…
+      </div>
+    )
+  }
+  if (error) {
+    return (
+      <div className="p-4 text-red-600">
+        Error al cargar alianzas: {error.message}
+      </div>
+    )
+  }
+  if (rawSlides.length === 0) {
+    return null
+  }
 
   return (
     <section id="alianzas">
@@ -164,9 +193,12 @@ const Carousel = () => {
           onTransitionEnd={handleTransitionEnd}
           className="flex transition-transform duration-500 ease-in-out"
         >
-          {slides.map((slide, idx) => (
-            <div key={idx} className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16">
-              {slide.map((item, i) => (
+          {slides.map((slideGroup, idx) => (
+            <div
+              key={idx}
+              className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16"
+            >
+              {slideGroup.map((item, i) => (
                 <div key={i} className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
                   <Image
                     src={item.src}
@@ -186,7 +218,13 @@ const Carousel = () => {
           aria-label="Anterior"
           className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-full w-full"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
@@ -196,7 +234,13 @@ const Carousel = () => {
           aria-label="Siguiente"
           className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-full w-full"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -206,14 +250,14 @@ const Carousel = () => {
             <button
               key={idx}
               onClick={() => goToSlide(idx)}
-              className={`w-3 h-3 rounded-full ${(index % totalRaw) === idx ? 'bg-[#71af8d]' : 'bg-gray-400'}`}
+              className={`w-3 h-3 rounded-full ${
+                index % totalRaw === idx ? 'bg-[#71af8d]' : 'bg-gray-400'
+              }`}
               aria-label={`Ir al slide ${idx + 1}`}
             />
           ))}
         </div>
       </div>
     </section>
-  );
-};
-
-export default Carousel;
+  )
+}

@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource colegio_san_isidro {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// Enum para el tipo de medio: imagen, video o ícono
+enum TipoMedio {
+  IMAGEN
+  VIDEO
+  ICONO
+}
+
+/// Enum para el comportamiento del grupo: carrusel, galería o único
+enum TipoGrupoMedios {
+  CARRUSEL  // Varios medios en loop
+  GALERIA   // Varias imágenes o videos sin loop infinito
+  UNICO     // Solo un medio estático
+}
+
+enum SeccionTipo {
+  MEDIA_UNICA   // una imagen o video suelto
+  GALERIA       // grupo de medios = carrusel / grid
+  TEXTO_RICO    // bloque WYSIWYG / markdown
+  HERO          // componente hero con varios medios
+  CUSTOM        // para casos especiales (React remoto)
+}
+
+model GrupoMedios {
+  id             Int             @id @default(autoincrement())
+  nombre         String          @unique                   // Nombre legible para el usuario
+  tipoGrupo      TipoGrupoMedios @default(CARRUSEL)         // Cómo se muestran los medios
+  medios         Medio[]         // Relación 1:N con Medio
+  secciones      Seccion[]       // Relación 1:N con Seccion
+  creadoEn       DateTime        @default(now())
+  actualizadoEn  DateTime        @updatedAt
+}
+
+model Medio {
+  id               Int           @id @default(autoincrement())
+  urlArchivo       String        // Ruta pública: "/uploads/media/video.mp4" o "/images/media/logo.webp"
+  urlMiniatura     String?       // Solo para imágenes: "/images/media/thumbs/logo.webp"
+  textoAlternativo String?       // Texto alternativo descriptivo
+  tipo             TipoMedio     @default(IMAGEN)          // Define si es imagen, video o ícono
+  posicion         Int           @default(0)                // Orden dentro del grupo
+  grupoMediosId    Int
+  grupoMedios      GrupoMedios   @relation(fields: [grupoMediosId], references: [id], onDelete: Cascade)
+  secciones        Seccion[]     // Relación 1:N con Seccion
+  creadoEn         DateTime      @default(now())
+  actualizadoEn    DateTime      @updatedAt
+
+  @@index([grupoMediosId, posicion])
+}
+
+model Seccion {
+  id            Int          @id @default(autoincrement())
+  slug          String       @unique       // ej. 'home-hero', 'home-bienvenida'
+  pagina        String                     // ej. 'home', 'vida-estudiantil'
+  orden         Int                        // orden vertical de aparición
+  tipo          SeccionTipo
+
+  titulo        String?      // opcional para encabezados
+  subtitulo     String?      // opcional para subtítulos
+  propsJson     Json?        // props extra para el front (colores, CTA, markdown, etc.)
+
+  grupoId       Int?                   
+  grupo         GrupoMedios? @relation(fields: [grupoId], references: [id], onDelete: Cascade)
+
+  medioId       Int?                   
+  medio         Medio?       @relation(fields: [medioId], references: [id], onDelete: Cascade)
+
+  creadoEn      DateTime     @default(now())
+  actualizadoEn DateTime     @updatedAt
+
+  @@index([pagina, orden])
+}

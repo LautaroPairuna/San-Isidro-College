@@ -1,6 +1,9 @@
-import './globals.css';
-import { ReactNode } from 'react';
-import Header from '@/components/Header'; // Ajusta la ruta de import si fuera distinta
+// src/app/layout.tsx
+
+import './globals.css'
+import { ReactNode } from 'react'
+import HeaderWrapper from '@/components/HeaderWrapper'
+import ReactQueryProvider from '@/components/ReactQueryProvider';
 
 export const metadata = {
   title: 'San Isidro College - Home',
@@ -18,11 +21,11 @@ export const metadata = {
     title: 'San Isidro College - Home',
     description:
       'San Isidro College es un colegio Bilingüe con un proyecto educativo sólido e innovador en Salta, Argentina.',
-    url: 'https://tusitio.com', // Cambia por tu dominio
+    url: 'https://tusitio.com',
     siteName: 'San Isidro College',
     images: [
       {
-        url: 'https://tusitio.com/images/cover.jpg', // Cambia por tu portada
+        url: 'https://tusitio.com/images/cover.jpg',
         width: 1200,
         height: 630,
       },
@@ -35,9 +38,9 @@ export const metadata = {
     title: 'San Isidro College - Home',
     description:
       'San Isidro College es un colegio Bilingüe con un proyecto educativo sólido e innovador en Salta, Argentina.',
-    images: ['https://tusitio.com/images/cover.jpg'], // Cambia por tu portada
+    images: ['https://tusitio.com/images/cover.jpg'],
   },
-};
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -50,10 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="keywords" content={metadata.keywords.join(', ')} />
         <meta name="author" content="San Isidro College" />
         <meta name="robots" content="index, follow" />
-        {/* <meta name="googlebot" content="index, follow" />
-        <meta name="google" content="notranslate" /> */}
         <link rel="icon" href="/favicon.ico" />
-        {/* <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> */}
         <style>{`
           html,
           body {
@@ -66,9 +66,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         `}</style>
       </head>
       <body>
-        <Header />
-        {children}
+        {/* En lugar de <Header />, usamos este wrapper */}
+        <HeaderWrapper />
+        <ReactQueryProvider>
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
-  );
+  )
 }
