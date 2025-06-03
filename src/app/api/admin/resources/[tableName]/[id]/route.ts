@@ -89,9 +89,9 @@ export async function GET(
  */
 export async function PUT(
   req: NextRequest,
-  context: { params: { tableName: string; id: string } },
+  { params }: any
 ) {
-  const { tableName, id } = context.params
+  const { tableName, id } = params
   const model = models[tableName]
 
   if (!model) {
@@ -217,9 +217,9 @@ export async function PUT(
  */
 export async function DELETE(
   _req: NextRequest,
-  context: { params: { tableName: string; id: string } }
+  { params }: any
 ) {
-  const { tableName, id } = context.params
+  const { tableName, id } = params
   const model             = models[tableName]
 
   if (!model) {
