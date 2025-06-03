@@ -37,6 +37,8 @@ model GrupoMedios {
   secciones      Seccion[]       // Relación 1:N con Seccion
   creadoEn       DateTime        @default(now())
   actualizadoEn  DateTime        @updatedAt
+
+  @@map("grupo_medios")
 }
 
 model Medio {
@@ -53,6 +55,8 @@ model Medio {
   actualizadoEn    DateTime      @updatedAt
 
   @@index([grupoMediosId, posicion])
+
+  @@map("medio")
 }
 
 model Seccion {
