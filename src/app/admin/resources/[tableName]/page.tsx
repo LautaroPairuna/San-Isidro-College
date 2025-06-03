@@ -11,6 +11,8 @@ export default function ResourceDetailPage({
   // desempaquetamos la Promise con React.use()
   const { tableName } = use(params)
 
-  // ahora sólo pasamos un string limpio
-  return <ResourceDetailClient tableName={tableName} />
+  // Convertimos el string genérico a uno de los literales aceptados
+  const tn = tableName as 'GrupoMedios' | 'Medio'
+
+  return <ResourceDetailClient tableName={tn} />
 }
