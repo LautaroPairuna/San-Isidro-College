@@ -1,80 +1,74 @@
-// app/admin/layout.tsx
-'use client'
+// src/app/(admin)/admin/ClientAdminProviders.tsx
+'use client';
 
-import { SessionProvider, useSession, signOut } from 'next-auth/react'
-import { useRouter, usePathname }                from 'next/navigation'
-import { useState, useMemo, type ReactNode }      from 'react'
-import Link                                      from 'next/link'
-import type { IconType }                         from 'react-icons'
+import { ReactNode, useMemo, useState } from 'react';
+import { SessionProvider, useSession, signOut } from 'next-auth/react';
+import { useRouter, usePathname }                from 'next/navigation';
+import { QueryClient, QueryClientProvider }       from '@tanstack/react-query';
+import Link                                      from 'next/link';
+import Image                                     from 'next/image';
+import type { IconType }                         from 'react-icons';
 import {
   HiPhotograph,
   HiCollection,
   HiMenu,
   HiX,
   HiLogout,
-} from 'react-icons/hi'
-import { QueryClient, QueryClientProvider }       from '@tanstack/react-query'
-import Image from 'next/image'
+} from 'react-icons/hi';
 
-const RESOURCES = [
-  'GrupoMedios',
-  'Medio',
-] as const
+const RESOURCES = ['GrupoMedios', 'Medio'] as const;
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
-  return (
-    <SessionProvider>
-      <AdminLayoutContent>{children}</AdminLayoutContent>
-    </SessionProvider>
-  )
+interface ClientAdminProvidersProps {
+  children: ReactNode;
 }
 
-function AdminLayoutContent({ children }: { children: ReactNode }) {
-  const router      = useRouter()
-  const rawPath     = usePathname() ?? ''
-  const inAuthRoute = rawPath.startsWith('/admin/auth')
+export default function ClientAdminProviders({ children }: ClientAdminProvidersProps) {
+  return (
+    <SessionProvider>
+      <InnerAdminProviders>{children}</InnerAdminProviders>
+    </SessionProvider>
+  );
+}
+
+function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
+  const router      = useRouter();
+  const rawPath     = usePathname() ?? '';
+  const inAuthRoute = rawPath.startsWith('/admin/auth');
 
   const { data: session, status } = useSession({
     required: !inAuthRoute,
     onUnauthenticated() {
-      if (!inAuthRoute) router.replace('/admin/auth')
+      if (!inAuthRoute) router.replace('/admin/auth');
     },
-  })
+  });
 
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const isRoot = rawPath === '/admin'
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const isRoot = rawPath === '/admin';
+  const queryClient = useMemo(() => new QueryClient(), []);
 
-  // React Query: creamos un solo QueryClient y lo pasamos al provider
-  const queryClient = useMemo(() => new QueryClient(), [])
-
-  // Si estamos en /admin/auth/**, renderizamos sin sidebar ni header
+  // Rutas de auth sin sidebar ni header
   if (inAuthRoute) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
-    )
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
   }
-
-  // Si NextAuth aún está verificando sesión, mostramos spinner
+  // Spinner de carga de sesión
   if (status === 'loading') {
     return (
       <div className="flex items-center justify-center h-screen bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-indigo-600" />
         <span className="ml-4 text-gray-700">Verificando sesión…</span>
       </div>
-    )
+    );
   }
 
-  // Sesión ok: obtenemos datos de usuario
-  const avatarUrl   = session?.user?.image ?? '/avatar-placeholder.png'
-  const displayName = session?.user?.name  ?? 'Usuario'
+  // Datos de usuario
+  const avatarUrl   = session?.user?.image ?? '/avatar-placeholder.png';
+  const displayName = session?.user?.name  ?? 'Usuario';
 
   const iconFor = (name: string): IconType => {
-    if (/Medio|Photograph/.test(name)) return HiPhotograph
-    if (/GrupoMedios|Collection/.test(name)) return HiCollection
-    return HiPhotograph
-  }
+    if (/Medio|Photograph/.test(name))      return HiPhotograph;
+    if (/GrupoMedios|Collection/.test(name)) return HiCollection;
+    return HiPhotograph;
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -87,11 +81,7 @@ function AdminLayoutContent({ children }: { children: ReactNode }) {
           <span className="text-lg font-semibold">Admin Panel</span>
           <div className="flex items-center space-x-3">
             <Image src={avatarUrl} alt="Avatar" width={32} height={32} className="h-8 w-8 rounded-full object-cover"/>
-            <button
-              onClick={() => signOut({ callbackUrl: '/admin/auth' })}
-              aria-label="Cerrar sesión"
-              className="p-1 hover:bg-indigo-500 rounded"
-            >
+            <button onClick={() => signOut({ callbackUrl: '/admin/auth' })} className="p-1 hover:bg-indigo-500 rounded">
               <HiLogout className="h-6 w-6 text-white"/>
             </button>
           </div>
@@ -104,20 +94,21 @@ function AdminLayoutContent({ children }: { children: ReactNode }) {
             ${isRoot ? 'w-full' : 'w-64'} transition-transform duration-200
             bg-gradient-to-b from-indigo-800 to-indigo-900 text-white shadow-lg
             md:static md:translate-x-0
+            ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
           `}
         >
           <div className="h-full flex flex-col">
             <div className="hidden md:flex items-center px-6 py-6 border-b border-indigo-700">
               <HiCollection className="h-8 w-8 text-white"/>
-              <span className="ml-3 text-2xl font-bold text-white">Admin</span>
+              <span className="ml-3 text-2xl font-bold">Admin</span>
             </div>
 
             <nav className="flex-1 overflow-y-auto px-2 py-6 space-y-2">
-              {RESOURCES.map(r => {
-                const path   = `/admin/resources/${r}`
-                const active = rawPath === path
-                const label  = r === 'GrupoMedios' ? 'Grupos de Medios' : 'Medios'
-                const Icon   = iconFor(r)
+              {RESOURCES.map((r) => {
+                const path   = `/admin/resources/${r}`;
+                const active = rawPath === path;
+                const label  = r === 'GrupoMedios' ? 'Grupos de Medios' : 'Medios';
+                const Icon   = iconFor(r);
 
                 return (
                   <Link
@@ -134,7 +125,7 @@ function AdminLayoutContent({ children }: { children: ReactNode }) {
                     <Icon className="h-5 w-5 flex-shrink-0"/>
                     <span className="ml-3">{label}</span>
                   </Link>
-                )
+                );
               })}
             </nav>
 
@@ -161,10 +152,9 @@ function AdminLayoutContent({ children }: { children: ReactNode }) {
               <Image src={avatarUrl} alt="Avatar" width={32} height={32} className="h-8 w-8 rounded-full object-cover"/>
             </div>
           </header>
-
           <div className="flex-1 p-6 md:p-8 bg-gray-50">{children}</div>
         </main>
       </div>
     </QueryClientProvider>
-  )
+  );
 }

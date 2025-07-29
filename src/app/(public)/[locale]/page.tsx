@@ -97,8 +97,8 @@ const HomePage: NextPage = () => {
             width={250}
             height={250}
             className="absolute top-[55%] left-[80%] -translate-x-1/2 z-40
-                       max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
-                       max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+                      max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
+                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
           <Link
             href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
@@ -116,19 +116,19 @@ const HomePage: NextPage = () => {
         </div>
 
         {/* --- Columna Derecha: carrusel de heroMedia --- */}
-        <div className="col-span-7 relative w-full h-screen max-sm:col-span-12">
+        <div className="col-span-7 relative w-full h-full max-sm:col-span-12">
           {heroMedia.length > 0 ? (
             <MediaCarousel
               medias={heroMedia.map((m) => `/images/medios/${m.urlArchivo}`)}
               altText={t('hero.alt')}
-              className="w-full h-full object-contain"
+              className="w-full h-full"
             />
           ) : (
             <Image
               src="/images/fondo-home.webp"
               alt={t('hero.alt')}
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           )}
@@ -159,7 +159,7 @@ const HomePage: NextPage = () => {
           priority
           sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
           className="absolute top-0 left-4/12 -translate-x-1/2 h-full pointer-events-none
-                     max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
+                    max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
         />
       </section>
 

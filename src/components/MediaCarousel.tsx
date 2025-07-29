@@ -1,4 +1,5 @@
-"use client";
+// components/MediaCarousel.tsx
+'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
@@ -18,11 +19,9 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Referencias para swipe
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
 
-  // Cambiar slide con wrap-around
   const showSlide = useCallback(
     (next: number) => {
       if (totalSlides <= 1) return;
@@ -34,7 +33,6 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   const nextSlide = useCallback(() => showSlide(index + 1), [index, showSlide]);
   const prevSlide = useCallback(() => showSlide(index - 1), [index, showSlide]);
 
-  // Auto-avance
   useEffect(() => {
     if (totalSlides <= 1 || isPaused) return;
     const intervalo = setInterval(() => {
@@ -43,11 +41,9 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
     return () => clearInterval(intervalo);
   }, [totalSlides, isPaused]);
 
-  // Pausar al hover
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
 
-  // Listener flechas (←/→) en el contenedor enfocable
   const carouselContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = carouselContainerRef.current;
@@ -62,7 +58,6 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
     };
   }, [prevSlide, nextSlide]);
 
-  // Swipe táctil
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -72,15 +67,14 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   const handleTouchEnd = () => {
     const diff = touchStartX.current - touchEndX.current;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
+      diff > 0 ? nextSlide() : prevSlide();
     }
   };
 
   return (
     <div
       ref={carouselContainerRef}
-      className={`relative w-full overflow-hidden ${className}`}
+      className={`relative w-full h-full overflow-hidden ${className}`}
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -88,13 +82,13 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Contenedor de slides en fila (sin h-full) */}
+      {/* Slides */}
       <div
-        className="flex transition-transform duration-500 ease-in-out"
+        className="flex h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {medias.map((src, idx) => (
-          <div key={idx} className="min-w-full relative">
+          <div key={idx} className="min-w-full h-full relative">
             {src.toLowerCase().endsWith(".mp4") ? (
               <video
                 src={src}
@@ -102,15 +96,14 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                 loop
                 muted
                 playsInline
-                className="w-full object-cover"
+                className="w-full h-full object-cover"
               />
             ) : (
               <Image
                 src={src}
                 alt={altText}
-                width={800}
-                height={600}
-                className="w-full h-auto object-cover"
+                fill
+                className="object-cover"
                 sizes="100vw"
               />
             )}
@@ -118,22 +111,12 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         ))}
       </div>
 
-      {/* Flechas e indicadores */}
+      {/* Controles */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4 bg-black/50 px-4 py-2 rounded-full">
         <button onClick={prevSlide} aria-label="Anterior">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="white"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
+          {/* Flecha izquierda */}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="h-6 w-6">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         <div className="flex gap-2">
@@ -149,19 +132,9 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
           ))}
         </div>
         <button onClick={nextSlide} aria-label="Siguiente">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="white"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
+          {/* Flecha derecha */}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="h-6 w-6">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
