@@ -30,7 +30,6 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
     },
     [totalSlides]
   );
-
   const nextSlide = useCallback(() => showSlide(index + 1), [index, showSlide]);
   const prevSlide = useCallback(() => showSlide(index - 1), [index, showSlide]);
 
@@ -83,7 +82,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   return (
     <div
       ref={carouselContainerRef}
-      className={`relative w-full h-full overflow-hidden ${className}`}
+      className={`relative w-full overflow-hidden h-auto sm:h-full ${className}`}
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -97,7 +96,10 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {medias.map((src, idx) => (
-          <div key={idx} className="min-w-full h-full relative">
+          <div
+            key={idx}
+            className="min-w-full relative aspect-[1/1] sm:aspect-auto sm:h-full"
+          >
             {src.toLowerCase().endsWith('.mp4') ? (
               <video
                 src={src}

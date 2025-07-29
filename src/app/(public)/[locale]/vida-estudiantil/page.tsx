@@ -225,7 +225,7 @@ export default function DeportesPage() {
         <div className="relative z-10 grid grid-cols-12 gap-8">
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
-            <div className="absolute top-55 left-41 w-[550px] z-20">
+            <div className="absolute top-32 left-41 w-[490px] z-20">
               <Image
                 src="/images/logo-club-rugby-hockey.svg"
                 alt={t('rugbyHockey.logoAlt')}
@@ -285,7 +285,7 @@ export default function DeportesPage() {
               />
             )}
 
-            <div className="absolute -top-35 left-0 w-full px-4 z-20 -translate-y-1/2">
+            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
               <Image
                 src="/images/logo-club-rugby-hockey.svg"
                 alt={t('rugbyHockey.logoAlt')}
@@ -315,7 +315,7 @@ export default function DeportesPage() {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5 right-36 w-[550px]"
+            className="absolute top-5 -right-24 w-[550px]"
           />
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-8">
@@ -338,7 +338,7 @@ export default function DeportesPage() {
               )}
             </div>
             <div className="absolute col-span-4 top-65 left-[37%] z-20">
-              <div className="absolute -top-[120px] left-[115px] w-[650px]">
+              <div className="absolute -top-[180px] left-[115px] w-[475px]">
                 <Image
                   src="/images/logo-dojo.svg"
                   alt={t('dojo.logoAlt')}
@@ -369,7 +369,7 @@ export default function DeportesPage() {
             className="absolute top-5 right-35 w-[550px]"
           />
           {dojoMedia.length > 0 ? (
-            <div className="w-full h-[290px]">
+            <div className="w-full h-[350px]">
               <MediaCarousel
                 medias={mapUrls(dojoMedia)}
                 altText={t('dojo.carouselAlt')}
@@ -385,7 +385,7 @@ export default function DeportesPage() {
               className="w-full h-auto rounded-md shadow-md"
             />
           )}
-          <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
+          <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
             <Image
               src="/images/logo-dojo.svg"
               alt={t('dojo.logoAlt')}
@@ -412,6 +412,13 @@ export default function DeportesPage() {
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute top-5 left-24 w-[550px]"
+          />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">
@@ -429,13 +436,6 @@ export default function DeportesPage() {
                 </Link>
               </div>
             </div>
-            <Image
-              src="/images/formas/forma-home-5.svg"
-              alt=""
-              width={550}
-              height={300}
-              className="absolute -top-5 -left-36 w-[550px]"
-            />
           </div>
           <div className="col-span-8">
             {vidaMedia.length > 0 ? (
@@ -465,10 +465,10 @@ export default function DeportesPage() {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5 right-35 w-[550px]"
+            className="absolute -top-15 right-35 w-[550px]"
           />
           {vidaMedia.length > 0 ? (
-            <div className="w-full h-[290px]">
+            <div className="w-full h-[350px]">
               <MediaCarousel
                 medias={mapUrls(vidaMedia)}
                 altText={t('vida.carouselAlt')}
@@ -517,7 +517,7 @@ export default function DeportesPage() {
             alt=""
             width={550}
             height={300}
-            className="absolute top-25 right-25 w-[550px] z-10"
+            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px] z-10"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -540,7 +540,7 @@ export default function DeportesPage() {
               )}
             </div>
             <div className="absolute col-span-4 z-20 top-[65%] xl:left-[22%] left-[23%]">
-              <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 left-110 w-[550px]">
+              <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <Image
                   src="/images/logo-SIC-play.svg"
                   alt={t('play.logoAlt')}
@@ -548,11 +548,8 @@ export default function DeportesPage() {
                   height={128}
                   className="mx-auto mb-10 w-32"
                 />
-                <p className="mt-4 text-gray-700 leading-relaxed">
-                  {t('play.description')}
-                </p>
-                <p className="mt-4 text-gray-700 leading-relaxed">
-                  {t('play.invitation')}
+                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: "pre-line" }}>
+                  <strong>San Isidro Play</strong> {t('play.description')}
                 </p>
               </div>
             </div>
@@ -569,7 +566,7 @@ export default function DeportesPage() {
             className="absolute top-5 right-35 w-[550px]"
           />
           {playMedia.length > 0 ? (
-            <div className="w-full h-[290px]">
+            <div className="w-full h-[350px]">
               <MediaCarousel
                 medias={mapUrls(playMedia)}
                 altText={t('play.carouselAlt')}
@@ -585,8 +582,8 @@ export default function DeportesPage() {
               className="w-full h-auto rounded-md shadow-md"
             />
           )}
-          <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-8 text-center">
+          <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
+            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <Image
                 src="/images/logo-SIC-play.svg"
                 alt={t('play.logoAlt')}
@@ -595,7 +592,7 @@ export default function DeportesPage() {
                 className="mx-auto mb-10 w-32"
               />
               <p className="mt-4 text-gray-700 leading-relaxed">
-                {t('play.descriptionMobile')}
+                <strong>San Isidro Play</strong> {t('play.descriptionMobile')}
               </p>
             </div>
           </div>

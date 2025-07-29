@@ -202,15 +202,15 @@
     "dojo": {
       "logoAlt": "Logo SIC Dojo",
       "title": "SAN ISIDRO COLLEGE DOJO",
-      "description": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo.",
-      "descriptionMobile": "Desarrollamos disciplina, respeto y fortaleza a través del judo, promoviendo valores esenciales en un ambiente de camaradería y esfuerzo.",
+      "description": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!",
+      "descriptionMobile": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!",
       "carouselAlt": "Carrusel SIC Dojo",
       "fallbackAlt": "Fondo SIC Dojo"
     },
     "vida": {
       "title": "VIDA ESTUDIANTIL",
-      "description": "San Isidro College fomenta un ambiente positivo donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés y ser resilientes.",
-      "descriptionMobile": "Fomentamos un ambiente positivo y dinámico donde los estudiantes se desarrollan plenamente, guiados por valores fundamentales.",
+      "description": "San Isidro College fomenta un ambiente positivo y dinámico donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés, ser resilientes y estar listos para los exámenes, con el apoyo del departamento de Servicios Estudiantiles y tutorías.",
+      "descriptionMobile": "San Isidro College fomenta un ambiente positivo y dinámico donde los estudiantes pueden desarrollarse plenamente, guiados por valores fundamentales. Preparamos a nuestros alumnos para el siglo XXI enseñándoles a manejar el estrés, ser resilientes y estar listos para los exámenes, con el apoyo del departamento de Servicios Estudiantiles y tutorías.",
       "readMore": "Leer más",
       "carouselAlt": "Carrusel Vida Estudiantil",
       "fallbackAlt": "Fondo Vida Estudiantil"
@@ -219,9 +219,8 @@
       "logoAlt": "Logo San Isidro Play",
       "carouselAlt": "Carrusel San Isidro Play",
       "fallbackAlt": "Fondo San Isidro Play",
-      "description": "<strong>San Isidro Play</strong> es la obra de teatro anual en inglés protagonizada por nuestros talentosos alumnos. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes.",
-      "invitation": "¡Te esperamos para vivir esta mágica experiencia familiar!",
-      "descriptionMobile": "San Isidro Play es la obra de teatro anual en inglés protagonizada por nuestros talentosos alumnos. Combina actuación, canto y baile, resaltando la creatividad y habilidades artísticas de nuestra comunidad educativa."
+      "description": "es la obra de teatro anual en inglés protagonizada por los talentosos alumnos del San Isidro College. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes. \n\n Una tradición esperada cada año, San Isidro Play celebra el talento y esfuerzo de nuestra comunidad educativa, ofreciendo un espectáculo inolvidable para toda la familia. ¡Te esperamos para vivir esta mágica experiencia!",
+      "descriptionMobile": "es la obra de teatro anual en inglés protagonizada por los talentosos alumnos del San Isidro College. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes. \n\n Una tradición esperada cada año, San Isidro Play celebra el talento y esfuerzo de nuestra comunidad educativa, ofreciendo un espectáculo inolvidable para toda la familia. ¡Te esperamos para vivir esta mágica experiencia!"
     }
   },
   "vidaEstudiantilMasInfo": {

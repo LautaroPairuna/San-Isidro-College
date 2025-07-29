@@ -202,15 +202,15 @@
     "dojo": {
       "logoAlt": "SIC Dojo logo",
       "title": "SAN ISIDRO COLLEGE DOJO",
-      "description": "The San Isidro Dojo is the space where our students develop discipline, respect, and strength through judo. As part of our comprehensive education, we foster physical and emotional growth in an environment of camaraderie and effort.",
+      "description": "The San Isidro Dojo is the place where our students develop discipline, respect, and strength through judo. As part of our comprehensive education, we promote essential values and encourage physical and emotional growth in an atmosphere of camaraderie and dedication. A place to learn, grow, and excel every day!",
       "descriptionMobile": "We develop discipline, respect, and strength through judo, promoting essential values in an environment of camaraderie and effort.",
       "carouselAlt": "SIC Dojo carousel",
       "fallbackAlt": "SIC Dojo background"
     },
     "vida": {
       "title": "STUDENT LIFE",
-      "description": "San Isidro College fosters a positive environment where students can fully develop, guided by core values. We prepare our students for the 21st century by teaching them to manage stress and be resilient.",
-      "descriptionMobile": "We foster a positive, dynamic environment where students fully develop, guided by core values.",
+      "description": "San Isidro College fosters a positive and dynamic environment where students can fully develop, guided by core values. We prepare our students for the 21st century by teaching them how to manage stress, be resilient, and be test-ready, with the support of the Student Services Department and tutoring.",
+      "descriptionMobile": "San Isidro College fosters a positive and dynamic environment where students can fully develop, guided by core values. We prepare our students for the 21st century by teaching them how to manage stress, be resilient, and be test-ready, with the support of the Student Services Department and tutoring.",
       "readMore": "Read more",
       "carouselAlt": "Student Life carousel",
       "fallbackAlt": "Student Life background"
@@ -219,9 +219,8 @@
       "logoAlt": "San Isidro Play logo",
       "carouselAlt": "San Isidro Play carousel",
       "fallbackAlt": "San Isidro Play background",
-      "description": "<strong>San Isidro Play</strong> is the annual English-language theatrical production starring our talented students. This event combines acting, singing, and dancing, showcasing not only English proficiency but also our students’ creativity and artistic skills.",
-      "invitation": "Join us for this magical family experience!",
-      "descriptionMobile": "San Isidro Play is the annual English-language theatrical production starring our talented students. It combines acting, singing, and dancing, highlighting creativity and artistic skills within our educational community."
+      "description": "is the annual English-language play starring the talented students of San Isidro College. This event combines acting, singing, and dancing, highlighting not only the mastery of the English language, but also the creativity and artistic abilities of our students. \n\n A highly anticipated annual tradition, San Isidro Play celebrates the talent and effort of our educational community, offering an unforgettable show for the whole family. We look forward to seeing you all for this magical experience!",
+      "descriptionMobile": "is the annual English-language play starring the talented students of San Isidro College. This event combines acting, singing, and dancing, highlighting not only the mastery of the English language, but also the creativity and artistic abilities of our students. \n\n A highly anticipated annual tradition, San Isidro Play celebrates the talent and effort of our educational community, offering an unforgettable show for the whole family. We look forward to seeing you all for this magical experience!"
     }
   },
   "vidaEstudiantilMasInfo": {
