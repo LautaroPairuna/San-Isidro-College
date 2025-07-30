@@ -323,23 +323,21 @@ const HomePage: NextPage = () => {
                 alt="Imagen infograma móvil"
                 width={800}
                 height={600}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
                 className="w-full h-auto rounded-md shadow-md"
               />
             </div>
           </div>
+          <div className="absolute -top-5 2xl:-right-20 -right-0 xl:w-[650px] lg:w-[550px] md:w-[475px] w-[300px] z-0 md:z-10">
+            <Image
+              src="/images/formas/forma-home-3.svg"
+              alt=""
+              width={650}
+              height={100}
+              className="w-full h-full"
+            />
+          </div>
         </div>
       </section>
-
-      {/* =========== SECCIÓN 4: Galería de Logos (si aplica) =========== */}
-      <section className="my-10" id="galeria-logos">
-        {/*
-          // Si tuvieras logos:
-          // const { data: logos = [] } = useMedios(LOGOS_GROUP_ID)
-          // <MediaCarousel medias={logos.map(m => `/images/medios/${m.urlArchivo}`)} …/>
-        */}
-      </section>
-
       {/* Carrusel global y Contacto */}
       <Carousel />
       <Contact />

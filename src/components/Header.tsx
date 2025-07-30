@@ -179,7 +179,7 @@ const Header: React.FC = () => {
                       locale === "es" ? "bg-[#1e804b]" : "bg-gray-400/60"
                     }`}
                   >
-                    ESP
+                    ES
                   </button>
                 </Link>
                 <Link href={getAlternateRoute("en")}>
@@ -188,7 +188,7 @@ const Header: React.FC = () => {
                       locale === "en" ? "bg-[#294161]" : "bg-gray-400/60"
                     }`}
                   >
-                    ING
+                    EN
                   </button>
                 </Link>
               </div>

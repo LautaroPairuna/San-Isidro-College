@@ -262,7 +262,7 @@ export default function VidaEstudiantilPage() {
             {/* Mobile */}
             <div className="block lg:hidden w-full px-4 mt-32">
               <div className="relative z-10">
-                <h2 className="text-5xl font-bold text-left mb-5 text-shadow-bold-movil space-y-4">
+                <h2 className="xs:text-5xl text-4xl font-bold text-left mb-5 text-shadow-bold-movil space-y-4">
                   {t('kinder.title')}
                 </h2>
                 <div className="bg-white shadow-xl rounded-3xl p-6 space-y-4">
@@ -279,7 +279,7 @@ export default function VidaEstudiantilPage() {
                   </Link>
                 </div>
               </div>
-              <div className="absolute -top-5 -left-30 w-[550px] z-0">
+              <div className="absolute top-44 -left-30 w-[550px] z-0">
                 <Image
                   src="/images/formas/forma-home-6.svg"
                   alt=""
@@ -320,7 +320,7 @@ export default function VidaEstudiantilPage() {
             alt=""
             width={750}
             height={500}
-            className="absolute 2xl:top-30 2xl:right-45 top-5 -right-10 w-[650px] h-auto z-10 pointer-events-none"
+            className="absolute 2xl:top-32 2xl:right-44 xl:right-32 lg:top-24 top-5 -right-10 w-[650px] h-auto z-10 pointer-events-none"
           />
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">

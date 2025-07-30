@@ -294,7 +294,7 @@ export default function DeportesPage() {
                 className="mx-auto mb-5 w-32"
               />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-xl font-bold">
                   {t('rugbyHockey.title')}
                 </h2>
                 <p className="mt-4 text-gray-700">
@@ -366,7 +366,7 @@ export default function DeportesPage() {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5 right-35 w-[550px]"
+            className="absolute -top-72 -right-0 w-[550px]"
           />
           {dojoMedia.length > 0 ? (
             <div className="w-full h-[350px]">
@@ -385,7 +385,7 @@ export default function DeportesPage() {
               className="w-full h-auto rounded-md shadow-md"
             />
           )}
-          <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
+          <div className="absolute -top-8 left-0 w-full px-4 z-20 -translate-y-1/2">
             <Image
               src="/images/logo-dojo.svg"
               alt={t('dojo.logoAlt')}
@@ -393,8 +393,8 @@ export default function DeportesPage() {
               height={128}
               className="mx-auto mb-5 w-24"
             />
-            <div className="bg-white shadow-xl rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-bold">
+            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
+              <h2 className="text-xl font-bold">
                 {t('dojo.title')}
               </h2>
               <p className="mt-4 text-gray-700">
@@ -485,8 +485,8 @@ export default function DeportesPage() {
             />
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-bold">
+            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
+              <h2 className="text-xl font-bold">
                 {t('vida.title')}
               </h2>
               <p className="mt-4 text-gray-700 leading-relaxed">
