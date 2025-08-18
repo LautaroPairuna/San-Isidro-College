@@ -9,22 +9,18 @@ import { lookup as mimeLookup } from 'mime-types';
 import { PrismaClient } from '@prisma/client';
 
 import {
-  IMAGE_PUBLIC_DIR,     // p.ej. /app/public/images
-  MEDIA_UPLOAD_DIR,     // p.ej. /app/public/uploads/media
-  tableForFolder,       // { medios: 'Medio', grupos: 'GrupoMedios' }
-  resolveFolderAlias,   // normaliza 'media' -> 'medios'
+  IMAGE_PUBLIC_DIR,
+  MEDIA_UPLOAD_DIR,
+  tableForFolder,
+  resolveFolderAlias,
 } from '@/lib/adminConstants';
 
-/* ──────────────────────────────────────────────────────────────
-   Prisma singleton (evita múltiples conexiones en dev/hot-reload)
-   ────────────────────────────────────────────────────────────── */
+// ───────── Prisma singleton (no export!) ─────────
 const g = globalThis as unknown as { prisma?: PrismaClient };
-export const prisma = g.prisma ?? new PrismaClient();
+const prisma = g.prisma ?? new PrismaClient();
 if (!g.prisma) g.prisma = prisma;
 
-/* ──────────────────────────────────────────────────────────────
-   Utils
-   ────────────────────────────────────────────────────────────── */
+// ───────── Utils ─────────
 function safeJoin(base: string, ...parts: string[]) {
   const decoded = parts.map((p) => decodeURIComponent(p));
   const full = path.resolve(base, ...decoded);
@@ -46,14 +42,13 @@ function resolveTable(folder: string): 'Medio' | 'GrupoMedios' | undefined {
   return tableForFolder[alias] as 'Medio' | 'GrupoMedios' | undefined;
 }
 
-/* ──────────────────────────────────────────────────────────────
-   GET
-   Soporta:
-     /api/disk-images/images/medios/[...]
-     /api/disk-images/images/medios/thumbs/[...]
-     /api/disk-images/images/media/[...]         (alias aceptado)
-     /api/disk-images/uploads/media/[...]
-   ────────────────────────────────────────────────────────────── */
+/**
+ * Acepta:
+ *   /api/disk-images/images/medios/[...]
+ *   /api/disk-images/images/medios/thumbs/[...]
+ *   /api/disk-images/images/media/[...]         (alias aceptado)
+ *   /api/disk-images/uploads/media/[...]
+ */
 export async function GET(
   req: NextRequest,
   { params }: { params: { filePath: string[] } }
@@ -69,12 +64,11 @@ export async function GET(
     let contentType: string;
 
     if (root === 'images') {
-      // Esperado: images / <folder> / [...rest]
       if (parts.length < 3) {
         return NextResponse.json({ error: 'Carpeta de imágenes no válida' }, { status: 400 });
       }
 
-      const folderReq = parts[1];     // "medios" | "media" (alias)
+      const folderReq = parts[1];     // "medios" | "media"
       const rest = parts.slice(2);    // ["thumbs","file.webp"] | ["file.webp"]
       const fileName = rest[rest.length - 1];
 
@@ -83,7 +77,6 @@ export async function GET(
         return NextResponse.json({ error: 'Carpeta no gestionada' }, { status: 404 });
       }
 
-      // Validación en BD SOLO para archivos de 'Medio'
       if (tableName === 'Medio') {
         const isThumb = rest[0] === 'thumbs';
         const where = isThumb
@@ -95,13 +88,11 @@ export async function GET(
         }
       }
 
-      // Carpeta física (alias 'media' -> 'medios')
       const physicalFolder = resolveFolderAlias(folderReq);
       absPath = safeJoin(IMAGE_PUBLIC_DIR, physicalFolder, ...rest);
       contentType = guessMime(absPath);
 
     } else if (root === 'uploads') {
-      // Esperado: uploads / media / [...rest]
       if (parts[1] !== 'media' || parts.length < 3) {
         return NextResponse.json({ error: 'Subcarpeta de uploads no permitida' }, { status: 404 });
       }
@@ -109,7 +100,6 @@ export async function GET(
       const rest = parts.slice(2); // bajo /uploads/media
       const fileName = rest[rest.length - 1];
 
-      // Validar en BD contra Medio (basename o ruta completa en la data)
       const exists = await prisma.medio.findFirst({
         where: {
           OR: [
@@ -130,7 +120,6 @@ export async function GET(
       return NextResponse.json({ error: 'Raíz no soportada' }, { status: 404 });
     }
 
-    // ── FS
     if (!existsSync(absPath)) {
       return NextResponse.json({ error: 'Fichero no encontrado' }, { status: 404 });
     }
@@ -139,7 +128,6 @@ export async function GET(
       return NextResponse.json({ error: 'No es un archivo' }, { status: 404 });
     }
 
-    // ── ETag/Cache + Range 206
     const etag = `W/"${st.size}-${Number(st.mtimeMs).toString(36)}"`;
     const baseHeaders: Record<string, string> = {
       'Content-Type': contentType,
@@ -149,13 +137,11 @@ export async function GET(
       'Cache-Control': 'public, max-age=31536000, immutable',
     };
 
-    // 304 si coincide ETag
     const inm = req.headers.get('if-none-match');
     if (inm && inm === etag) {
       return new NextResponse(null, { status: 304, headers: baseHeaders });
     }
 
-    // Range (para videos / archivos grandes)
     const range = req.headers.get('range');
     if (range) {
       const m = /^bytes=(\d*)-(\d*)$/.exec(range);
@@ -170,22 +156,20 @@ export async function GET(
           'Content-Range': `bytes ${start}-${end}/${size}`,
           'Content-Length': String(chunk),
         };
-        const stream = createReadStream(absPath);
-        // Nota: algunos FS requieren pasar { start, end } para mejorar performance en rangos.
-        return new Response(stream as unknown as ReadableStream, { status: 206, headers });
+        const stream = createReadStream(absPath, { start, end });
+        // cast a any para el tipo de Node stream
+        return new Response(stream as any, { status: 206, headers });
       }
     }
 
-    // Respuesta completa
     const headers = { ...baseHeaders, 'Content-Length': String(st.size) };
     const stream = createReadStream(absPath);
-    return new Response(stream as unknown as ReadableStream, { status: 200, headers });
+    return new Response(stream as any, { status: 200, headers });
 
   } catch (e) {
     if (e instanceof Error && e.message === 'BAD_PATH') {
       return NextResponse.json({ error: 'Bad path' }, { status: 400 });
     }
-    // eslint-disable-next-line no-console
     console.error('disk-images error:', e);
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
