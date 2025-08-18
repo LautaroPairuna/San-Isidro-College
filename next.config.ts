@@ -1,27 +1,22 @@
-import type { NextConfig } from "next";
-const createNextIntlPlugin = require("next-intl/plugin");
-const withNextIntl = createNextIntlPlugin("./i18n.ts"); // Note this path
+import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port:     '3000',
-        pathname: '/images/**',
-      },
-    ],
-  },
+  // Para rutas del mismo origen no necesitás remotePatterns
+  images: {},
 
   async rewrites() {
     return [
-      {
-        source: '/images/:path*',
-        destination: '/api/disk-images/:path*',
-      },
-    ]
+      // IMÁGENES dinámicas (preferido)
+      { source: '/images/medios/thumbs/:path*', destination: '/api/disk-images/images/medios/thumbs/:path*' },
+      { source: '/images/medios/:path*',        destination: '/api/disk-images/images/medios/:path*' },
+
+      // VIDEOS dinámicos
+      { source: '/uploads/media/:path*',         destination: '/api/disk-images/uploads/media/:path*' },
+    ];
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+export default withNextIntl(nextConfig);
