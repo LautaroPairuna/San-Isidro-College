@@ -7,7 +7,7 @@ import fs                            from 'fs/promises'
 import path                          from 'path'
 import slugify                       from 'slugify'
 import sharp                         from 'sharp'
-import { folderNames }               from '@/lib/adminConstants'
+import { folderNames, type PrismaTable }               from '@/lib/adminConstants'
 
 const prisma = new PrismaClient()
 
@@ -101,7 +101,8 @@ export async function POST(req: NextRequest, { params }: any) {
     /* 2 ▸ Procesar archivo si existe */
     if (file) {
       const baseDir = path.join(process.cwd(), 'public', 'images')
-      const keyDir  = folderNames[tableName] || tableName.toLowerCase()
+      const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
+      const keyDir = folderNames[tbl]
       const dir     = path.join(baseDir, keyDir)
       const thumbs  = path.join(dir, 'thumbs')
       await fs.mkdir(dir, { recursive: true })

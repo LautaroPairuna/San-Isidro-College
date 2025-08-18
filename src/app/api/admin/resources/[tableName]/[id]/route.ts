@@ -7,7 +7,7 @@ import fs                            from 'fs/promises'
 import path                          from 'path'
 import slugify                       from 'slugify'
 import sharp                         from 'sharp'
-import { folderNames }               from '@/lib/adminConstants'
+import { folderNames, type PrismaTable }               from '@/lib/adminConstants'
 
 const prisma = new PrismaClient()
 
@@ -106,7 +106,8 @@ export async function PUT(req: NextRequest, { params }: any) {
   /* 2 ▸ Procesar archivo nuevo si llega */
   if (file) {
     const baseDir = path.join(process.cwd(), 'public', 'images')
-    const keyDir  = folderNames[tableName]
+    const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
+    const keyDir = folderNames[tbl]
     const dir     = path.join(baseDir, keyDir)
     const thumbs  = path.join(dir, 'thumbs')
 
@@ -177,7 +178,8 @@ export async function DELETE(_req: NextRequest, { params }: any) {
 
   if (existing?.[FILE_FIELD]) {
     const baseDir = path.join(process.cwd(), 'public', 'images')
-    const keyDir  = folderNames[tableName]
+    const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
+    const keyDir = folderNames[tbl]
     const dir     = path.join(baseDir, keyDir)
     const thumbs  = path.join(dir, 'thumbs')
     await fs.rm(path.join(dir,    existing[FILE_FIELD]), { force: true }).catch(() => {})
