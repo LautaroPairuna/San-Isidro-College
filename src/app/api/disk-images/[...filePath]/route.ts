@@ -16,12 +16,12 @@ import {
   resolveFolderAlias,
 } from '@/lib/adminConstants';
 
-// ── Prisma singleton (no export!)
+// Prisma singleton (sin exportar)
 const g = globalThis as unknown as { prisma?: PrismaClient };
 const prisma = g.prisma ?? new PrismaClient();
 if (!g.prisma) g.prisma = prisma;
 
-// ── Utils
+// Utils
 function safeJoin(base: string, ...parts: string[]) {
   const decoded = parts.map((p) => decodeURIComponent(p));
   const full = path.resolve(base, ...decoded);
@@ -43,14 +43,12 @@ function resolveTable(folder: string): 'Medio' | 'GrupoMedios' | undefined {
   return tableForFolder[alias] as 'Medio' | 'GrupoMedios' | undefined;
 }
 
-// Convierte un Node Readable a Web ReadableStream tipado (sin any)
+// Node Readable -> Web ReadableStream (sin any)
 function toWebReadable(
   nodeStream: import('node:stream').Readable
 ): ReadableStream<Uint8Array> {
   const { toWeb } = Readable as unknown as {
-    toWeb: (
-      s: import('node:stream').Readable
-    ) => ReadableStream<Uint8Array>;
+    toWeb: (s: import('node:stream').Readable) => ReadableStream<Uint8Array>;
   };
   return toWeb(nodeStream);
 }
@@ -59,15 +57,16 @@ function toWebReadable(
  * Acepta:
  *   /api/disk-images/images/medios/[...]
  *   /api/disk-images/images/medios/thumbs/[...]
- *   /api/disk-images/images/media/[...]         (alias aceptado)
+ *   /api/disk-images/images/media/[...]         (alias aceptado → 'medios')
  *   /api/disk-images/uploads/media/[...]
  */
 export async function GET(
   req: NextRequest,
-  { params }: { params: { filePath: string[] } }
+  context: { params: Promise<{ filePath: string[] }> }
 ) {
   try {
-    const parts = params?.filePath ?? [];
+    const { filePath } = await context.params;
+    const parts = filePath ?? [];
     if (parts.length < 2) {
       return NextResponse.json({ error: 'Ruta inválida' }, { status: 400 });
     }
@@ -101,7 +100,7 @@ export async function GET(
         }
       }
 
-      const physicalFolder = resolveFolderAlias(folderReq);
+      const physicalFolder = resolveFolderAlias(folderReq); // normaliza 'media' -> 'medios'
       absPath = safeJoin(IMAGE_PUBLIC_DIR, physicalFolder, ...rest);
       contentType = guessMime(absPath);
 
