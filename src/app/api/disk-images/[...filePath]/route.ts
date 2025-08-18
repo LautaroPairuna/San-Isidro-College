@@ -7,6 +7,7 @@ import { createReadStream, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { lookup as mimeLookup } from 'mime-types';
 import { PrismaClient } from '@prisma/client';
+import { Readable } from 'node:stream';
 
 import {
   IMAGE_PUBLIC_DIR,
@@ -15,12 +16,12 @@ import {
   resolveFolderAlias,
 } from '@/lib/adminConstants';
 
-// ───────── Prisma singleton (no export!) ─────────
+// ── Prisma singleton (no export!)
 const g = globalThis as unknown as { prisma?: PrismaClient };
 const prisma = g.prisma ?? new PrismaClient();
 if (!g.prisma) g.prisma = prisma;
 
-// ───────── Utils ─────────
+// ── Utils
 function safeJoin(base: string, ...parts: string[]) {
   const decoded = parts.map((p) => decodeURIComponent(p));
   const full = path.resolve(base, ...decoded);
@@ -40,6 +41,18 @@ function resolveTable(folder: string): 'Medio' | 'GrupoMedios' | undefined {
   if (direct) return direct;
   const alias = resolveFolderAlias(folder);
   return tableForFolder[alias] as 'Medio' | 'GrupoMedios' | undefined;
+}
+
+// Convierte un Node Readable a Web ReadableStream tipado (sin any)
+function toWebReadable(
+  nodeStream: import('node:stream').Readable
+): ReadableStream<Uint8Array> {
+  const { toWeb } = Readable as unknown as {
+    toWeb: (
+      s: import('node:stream').Readable
+    ) => ReadableStream<Uint8Array>;
+  };
+  return toWeb(nodeStream);
 }
 
 /**
@@ -156,20 +169,20 @@ export async function GET(
           'Content-Range': `bytes ${start}-${end}/${size}`,
           'Content-Length': String(chunk),
         };
-        const stream = createReadStream(absPath, { start, end });
-        // cast a any para el tipo de Node stream
-        return new Response(stream as any, { status: 206, headers });
+        const nodeStream = createReadStream(absPath, { start, end });
+        return new Response(toWebReadable(nodeStream), { status: 206, headers });
       }
     }
 
     const headers = { ...baseHeaders, 'Content-Length': String(st.size) };
-    const stream = createReadStream(absPath);
-    return new Response(stream as any, { status: 200, headers });
+    const nodeStream = createReadStream(absPath);
+    return new Response(toWebReadable(nodeStream), { status: 200, headers });
 
   } catch (e) {
     if (e instanceof Error && e.message === 'BAD_PATH') {
       return NextResponse.json({ error: 'Bad path' }, { status: 400 });
     }
+    // eslint-disable-next-line no-console
     console.error('disk-images error:', e);
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
