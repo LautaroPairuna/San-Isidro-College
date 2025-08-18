@@ -737,7 +737,7 @@ export default function ResourceDetailClient({
 // -------------------------------
 type FotoCellProps = {
   fileName: string
-  tableName: string
+  tableName: 'GrupoMedios' | 'Medio'
   childRelation: Relation | null
 }
 
@@ -746,7 +746,8 @@ const FotoCell = memo(function FotoCell({
   tableName,
   childRelation,
 }: FotoCellProps) {
-  const key = folderNames[childRelation?.childTable ?? tableName]
+  const tableKey: 'Medio' | 'GrupoMedios' = childRelation?.childTable ?? tableName
+  const key = folderNames[tableKey]   // <-- ya no da TS7053
   const thumbSrc = `/images/${key}/thumbs/${fileName}`
   const fullSrc = `/images/${key}/${fileName}`
 
