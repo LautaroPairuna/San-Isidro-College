@@ -3,7 +3,7 @@ import { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
-const ADMIN_EMAIL = "admin@sanisidro.com";
+const ADMIN_EMAIL = "";
 // Contraseña sin hashear: 3steb@n_S4n_!sidr0
 const ADMIN_PASSWORD_HASH =
   "$2b$10$5MFadA1FGZNMaN86ZFjniOuxD2240JuNHk8veGL4cRysiZqvRiDLW";
