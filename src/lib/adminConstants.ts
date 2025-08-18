@@ -1,11 +1,9 @@
 // src/lib/adminConstants.ts
-// Este módulo es SOLO para el servidor (usa node:path y process.cwd()).
-import 'server-only';
-import path from 'node:path';
+import path from 'path';
 
-/* ──────────────────────────────────────────────────────────────
-   BASES DE RUTAS (override por ENV para Docker/EasyPanel)
-   ────────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────
+   BASES DE RUTAS (con override por ENV para Docker/EasyPanel)
+   ───────────────────────────────────────────────────────────────── */
 
 const CWD = process.cwd();
 
@@ -29,10 +27,11 @@ export const MEDIA_UPLOAD_DIR =
 export const MEDIA_PUBLIC_URL =
   process.env.MEDIA_URL_UPLOADS || '/uploads/media';
 
-/* ──────────────────────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────────────
    MAPEOS PRISMA ↔ CARPETAS (para IMÁGENES bajo /public/images)
-   ──────────────────────────────────────────────────────────────
+   ─────────────────────────────────────────────────────────────────
    Nota: en FS usamos plural "medios" y "grupos".
+   Esto coincide con lo que espera el front: /images/medios, /images/grupos
 */
 
 export const folderNames = {
@@ -44,20 +43,26 @@ export const folderNames = {
 
 export type PrismaTable = keyof typeof folderNames;
 
-/** Inverso: dado el nombre de carpeta, devolver la tabla Prisma. */
+/**
+ * Inverso: dado el nombre de carpeta, devolver la tabla Prisma.
+ * Ej.: { "medios": "Medio", "grupos": "GrupoMedios" }
+ */
 export const tableForFolder: Record<string, PrismaTable> = Object.fromEntries(
   Object.entries(folderNames).map(([tbl, folder]) => [folder, tbl as PrismaTable])
 ) as Record<string, PrismaTable>;
 
-/** Alias para tolerar singular "media" → carpeta física "medios". */
+/**
+ * Alias comunes para tolerar singular "media" → carpeta física "medios".
+ * Útil si alguna data antigua quedó guardada con /images/media/...
+ */
 export function resolveFolderAlias(folder: string): string {
   if (folder === 'media') return 'medios';
   return folder;
 }
 
-/* ──────────────────────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────────────
    ENDPOINTS de la API de administración (en español)
-   ────────────────────────────────────────────────────────────── */
+   ───────────────────────────────────────────────────────────────── */
 
 export const API_GRUPO_MEDIOS = '/api/admin/resources/GrupoMedios';
 export const API_GRUPO_MEDIOS_ID = (id: number | string) =>
@@ -67,12 +72,12 @@ export const API_MEDIOS = '/api/admin/resources/Medio';
 export const API_MEDIO_ID = (id: number | string) =>
   `/api/admin/resources/Medio/${id}`;
 
-/* ──────────────────────────────────────────────────────────────
-   HELPERS de PATHS ABSOLUTOS y URL PÚBLICA (server-only)
-   ────────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────
+   HELPERS de PATHS ABSOLUTOS y URL PÚBLICA
+   ───────────────────────────────────────────────────────────────── */
 
 /**
- * Ruta absoluta a una imagen:
+ * Ruta absoluta a una imagen dentro de:
  *   IMAGE_PUBLIC_DIR/<folder>/<...segments>
  *
  * `folder` puede ser:
@@ -91,7 +96,10 @@ export function getImageAbsolutePath(
   return path.join(IMAGE_PUBLIC_DIR, folderName, ...segments);
 }
 
-/** URL pública de una imagen: IMAGE_PUBLIC_URL/<folder>/<...segments> */
+/**
+ * URL pública de una imagen:
+ *   IMAGE_PUBLIC_URL/<folder>/<...segments>
+ */
 export function toPublicImageUrl(
   folder: PrismaTable | string,
   ...segments: string[]
@@ -105,13 +113,35 @@ export function toPublicImageUrl(
   return [base, folderName, ...segments].join('/').replace(/\/{2,}/g, '/');
 }
 
-/** Ruta absoluta a un archivo de VIDEO: MEDIA_UPLOAD_DIR/<...segments> */
+/**
+ * Ruta absoluta a un archivo de VIDEO dentro de MEDIA_UPLOAD_DIR:
+ *   MEDIA_UPLOAD_DIR/<...segments>
+ */
 export function getUploadAbsolutePath(...segments: string[]): string {
   return path.join(MEDIA_UPLOAD_DIR, ...segments);
 }
 
-/** URL pública de un VIDEO: MEDIA_PUBLIC_URL/<...segments> */
+/**
+ * URL pública de un VIDEO:
+ *   MEDIA_PUBLIC_URL/<...segments>
+ */
 export function toPublicMediaUrl(...segments: string[]): string {
   const base = MEDIA_PUBLIC_URL.replace(/\/$/, '');
   return [base, ...segments].join('/').replace(/\/{2,}/g, '/');
 }
+
+/* ─────────────────────────────────────────────────────────────────
+   EJEMPLOS (comentados)
+   ─────────────────────────────────────────────────────────────────
+   getImageAbsolutePath('Medio', ['thumbs', 'logo.webp'])
+     → /app/public/images/medios/thumbs/logo.webp
+
+   toPublicImageUrl('Medio', 'logo.webp')
+     → /images/medios/logo.webp
+
+   getUploadAbsolutePath('video-123.mp4')
+     → /app/public/uploads/media/video-123.mp4
+
+   toPublicMediaUrl('video-123.mp4')
+     → /uploads/media/video-123.mp4
+*/
