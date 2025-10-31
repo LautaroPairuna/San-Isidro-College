@@ -8,7 +8,7 @@ const ADMIN_EMAIL = "admin@sanisidro.com";
 const ADMIN_PASSWORD_HASH =
   "$2b$10$5MFadA1FGZNMaN86ZFjniOuxD2240JuNHk8veGL4cRysiZqvRiDLW";
 
-// El diablo tio
+// El diablo tioooo
 
 export const authOptions: AuthOptions = {
   session: { strategy: "jwt" },
