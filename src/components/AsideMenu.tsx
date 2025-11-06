@@ -7,8 +7,7 @@ interface FixedAsideProps {
 }
 
 const AsideMenu: React.FC<FixedAsideProps> = ({
-  children,
-  scrollThreshold = 2000,
+  children
 }) => {
   const [openMobile, setOpenMobile] = useState(false);
 
