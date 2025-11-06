@@ -26,7 +26,7 @@ const AsideMenu: React.FC<FixedAsideProps> = ({
   const asideDesktop = `
     hidden lg:block
     fixed 2xl:right-20 lg:right-0 right-10 top-60 w-56 text-gray-800 z-30 transition-all duration-300
-    ${scrolled ? 'bg-gray-200 shadow-md p-5 rounded-lg' : ''}
+    bg-gray-200 shadow-md p-5 rounded-lg
   `;
 
   // Menú móvil (< lg) estilo off-canvas,

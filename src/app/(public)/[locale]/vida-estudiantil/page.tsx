@@ -2,7 +2,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
 import { useMedios } from '@/lib/hooks'

@@ -196,55 +196,6 @@ const Header: React.FC = () => {
 
             {/* Menú principal */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {/* Inicio */}
-              <div>
-                <h3 className="text-lg font-bold mb-2">
-                  {locale === "es" ? "Inicio" : "Home"}
-                </h3>
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href={`/${locale}#bienvenida`}
-                      id="bienvenidos-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Bienvenidos" : "Welcome"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}#infograma`}
-                      id="infograma-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Infograma" : "Infogram"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}#alianzas`}
-                      id="alianzas-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Alianzas y Estrategias" : "Alliances & Strategies"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}#contacto`}
-                      id="contacto-ubicacion-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Contacto / Ubicación" : "Contact / Location"}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
               {/* El Colegio */}
               <div>
                 <h3 className="text-lg font-bold mb-2">
@@ -301,16 +252,6 @@ const Header: React.FC = () => {
                       {locale === "es" ? "Educación Personalizada" : "Personalized Education"}
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/colegio#nuestro-escudo`}
-                      id="nuestro-escudo-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Nuestro Escudo" : "Our Coat of Arms"}
-                    </Link>
-                  </li>
                 </ul>
               </div>
 
@@ -352,8 +293,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/academicos#educacion-bilingue`}
-                      id="educacion-bilingue-link"
+                      href={`/${locale}/academicos`}
                       onClick={handleNavClick}
                       className="block hover:underline"
                     >
@@ -362,26 +302,6 @@ const Header: React.FC = () => {
                   </li>
                 </ul>
               </div>
-
-              {/* Admisiones */}
-              <div>
-                <h3 className="text-lg font-bold mb-2">
-                  {locale === "es" ? "Admisiones" : "Admissions"}
-                </h3>
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-                      target="_blank"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Ver Admisiones" : "View Admissions"}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
               {/* Vida Estudiantil */}
               <div>
                 <h3 className="text-lg font-bold mb-2">
@@ -423,35 +343,7 @@ const Header: React.FC = () => {
                 <h3 className="text-lg font-bold mb-2">
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h3>
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href={`/${locale}/contacto#ubicacion`}
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Ubicación" : "Location"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/contacto#redes-sociales`}
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Redes Sociales" : "Social Media"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/contacto#email`}
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Email" : "Email"}
-                    </Link>
-                  </li>
-                </ul>
+                
               </div>
             </div>
           </div>
