@@ -181,7 +181,6 @@ export async function GET(
     if (e instanceof Error && e.message === 'BAD_PATH') {
       return NextResponse.json({ error: 'Bad path' }, { status: 400 });
     }
-    // eslint-disable-next-line no-console
     console.error('disk-images error:', e);
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }

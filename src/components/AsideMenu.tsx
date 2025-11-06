@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 interface FixedAsideProps {
   children: React.ReactNode;
@@ -10,17 +10,7 @@ const AsideMenu: React.FC<FixedAsideProps> = ({
   children,
   scrollThreshold = 2000,
 }) => {
-  const [scrolled, setScrolled] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > scrollThreshold);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrollThreshold]);
 
   // Menú fijo para escritorio (se muestra a partir de lg)
   const asideDesktop = `
