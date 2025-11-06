@@ -52,7 +52,8 @@ function makeTimestamp() {
 
 /* ─────────────── GET: uno por ID ─────────────── */
 export async function GET(_req: NextRequest, { params }: any) {
-  const { tableName, id } = params
+  // Next.js 15: params es asincrónico y debe ser awaited
+  const { tableName, id } = await params
   const model = models[tableName]
 
   if (!model) {
@@ -71,7 +72,8 @@ export async function GET(_req: NextRequest, { params }: any) {
 
 /* ─────────────── PUT: actualizar ─────────────── */
 export async function PUT(req: NextRequest, { params }: any) {
-  const { tableName, id } = params
+  // Next.js 15: params es asincrónico y debe ser awaited
+  const { tableName, id } = await params
   const model = models[tableName]
 
   if (!model) {
@@ -166,7 +168,8 @@ export async function PUT(req: NextRequest, { params }: any) {
 
 /* ─────────────── DELETE: eliminar ─────────────── */
 export async function DELETE(_req: NextRequest, { params }: any) {
-  const { tableName, id } = params
+  // Next.js 15: params es asincrónico y debe ser awaited
+  const { tableName, id } = await params
   const model = models[tableName]
 
   if (!model) {

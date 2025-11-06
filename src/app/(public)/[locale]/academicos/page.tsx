@@ -123,7 +123,7 @@ export default function VidaEstudiantilPage() {
   return (
     <div id="container">
       {/* ───────────────────── HERO VERDE ───────────────────── */}
-      <section className="relative w-full h-[640px] lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
+      <section className="relative w-full lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
         {/* Columna izquierda */}
         <div className="relative col-span-1 md:col-span-4 bg-[#71af8d] flex items-end justify-end">
           <Image

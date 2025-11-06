@@ -55,7 +55,8 @@ function makeTimestamp() {
 
 /* ─────────────── GET: listar todos ─────────────── */
 export async function GET(_req: NextRequest, { params }: any) {
-  const { tableName } = params
+  // Next.js 15: params es asincrónico y debe ser awaited
+  const { tableName } = await params
   const model = models[tableName]
 
   if (!model) {
@@ -73,7 +74,8 @@ export async function GET(_req: NextRequest, { params }: any) {
 
 /* ─────────────── POST: crear registro ─────────────── */
 export async function POST(req: NextRequest, { params }: any) {
-  const { tableName } = params
+  // Next.js 15: params es asincrónico y debe ser awaited
+  const { tableName } = await params
   const model = models[tableName]
 
   if (!model) {

@@ -88,7 +88,7 @@ const HomePage: NextPage = () => {
   return (
     <div id="container">
       {/* ==================== SECCIÓN 1: HERO (CARRUSEL) ==================== */}
-      <section className="relative w-full h-[640px] lg:h-screen grid grid-cols-12 overflow-hidden">
+      <section className="relative w-full lg:h-screen grid grid-cols-12 overflow-hidden">
         {/* --- Columna Izquierda: texto estático sobre fondo verde --- */}
         <div className="col-span-5 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative max-sm:col-span-12 max-sm:items-center max-sm:px-6 max-sm:py-24">
           <Image

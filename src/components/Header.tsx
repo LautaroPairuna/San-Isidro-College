@@ -195,7 +195,7 @@ const Header: React.FC = () => {
             </div>
 
             {/* Menú principal */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
               {/* El Colegio */}
               <div>
                 <h3 className="text-lg font-bold mb-2">
@@ -332,7 +332,7 @@ const Header: React.FC = () => {
                       onClick={handleNavClick}
                       className="block hover:underline"
                     >
-                      {locale === "es" ? "Play & STEAM" : "Play & STEAM"}
+                      {locale === "es" ? "San Isidro Play" : "San Isidro Play"}
                     </Link>
                   </li>
                 </ul>
@@ -340,10 +340,16 @@ const Header: React.FC = () => {
 
               {/* Contacto */}
               <div>
-                <h3 className="text-lg font-bold mb-2">
+                <h3 className="text-lg font-bold mb-4">
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h3>
-                
+                <Link
+                  href={`/${locale}/contacto`}
+                  onClick={handleNavClick}
+                  className="px-3 py-2 bg-[#1e804b] text-white rounded-full"
+                >
+                  {locale === "es" ? "CONTACTO" : "CONTACT US"}
+                </Link>
               </div>
             </div>
           </div>

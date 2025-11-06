@@ -24,16 +24,18 @@ export const metadata = {
 };
 
 type Props = {
-  params: { locale: 'en' | 'es' };
+  // Next.js 15: params es asincrónico y debe ser awaited
+  params: Promise<{ locale: 'en' | 'es' }>;
   children: ReactNode;
 };
 
 export default async function PublicLayout({ children, params }: Props) {
   // ⚠️ getMessages espera un objeto { locale: string }
-  const messages = await getMessages({ locale: params.locale });
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
 
   return (
-    <ClientAppProviders locale={params.locale} messages={messages}>
+    <ClientAppProviders locale={locale} messages={messages}>
       {children}
     </ClientAppProviders>
   );
