@@ -59,7 +59,7 @@ export default function AcademicosMasInfoPage() {
               {t('kindergarten.bold')}
             </p>
 
-            <h4 className="text-xl md:text-2xl font-bold mb-4 text-gray-800">
+            <h4 className="text-xl md:text-xl font-bold mb-4 text-gray-800">
               {t('kindergarten.subtituloJuego')}
             </h4>
             <p>{t('kindergarten.juego.p1')}</p>
