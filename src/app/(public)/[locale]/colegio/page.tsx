@@ -50,7 +50,7 @@ const ColegioPage: NextPage = () => {
           {/* MISIÓN */}
           <h3
             id="mision"
-            className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800"
+            className="text-2xl md:text-3xl font-bold uppercase my-4 text-gray-800"
           >
             {t("misionTitle")}
           </h3>
