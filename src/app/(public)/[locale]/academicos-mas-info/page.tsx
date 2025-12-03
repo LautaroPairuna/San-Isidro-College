@@ -38,7 +38,7 @@ export default function AcademicosMasInfoPage() {
 
           {/* Inglés, Indispensable */}
           <div className="space-y-4 mt-10">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">
               {t('inglesTitulo')}
             </h3>
             <p>{t('ingles.p1')}</p>
@@ -49,7 +49,7 @@ export default function AcademicosMasInfoPage() {
 
           {/* Kindergarten */}
           <div className="space-y-4 mt-10 relative" id="kindergarten">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">
               {t('kindergarten.titulo')}
             </h3>
             <p>{t('kindergarten.p1')}</p>
@@ -59,7 +59,7 @@ export default function AcademicosMasInfoPage() {
               {t('kindergarten.bold')}
             </p>
 
-            <h4 className="text-xl md:text-2xl font-bold uppercase mb-4 text-gray-800">
+            <h4 className="text-xl md:text-2xl font-bold mb-4 text-gray-800">
               {t('kindergarten.subtituloJuego')}
             </h4>
             <p>{t('kindergarten.juego.p1')}</p>
@@ -91,7 +91,7 @@ export default function AcademicosMasInfoPage() {
 
           {/* Primary */}
           <div id="primary" className="space-y-4 relative mt-10">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">
               {t('primary.titulo')}
             </h3>
             <p className="font-bold leading-relaxed text-gray-800 mb-4 text-xl">
@@ -124,7 +124,7 @@ export default function AcademicosMasInfoPage() {
 
           {/* Secondary */}
           <div id="secondary" className="space-y-4 mt-10">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase my-6 text-gray-800">
+            <h3 className="text-2xl md:text-3xl font-bold my-6 text-gray-800">
               {t('secondary.titulo')}
             </h3>
             <h4 className="font-bold text-xl">{t('secondary.subtitulo')}</h4>
