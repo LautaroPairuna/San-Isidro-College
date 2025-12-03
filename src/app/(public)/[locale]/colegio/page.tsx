@@ -39,7 +39,7 @@ const ColegioPage: NextPage = () => {
           </div>
 
           {/* INSTALACIONES */}
-          <h3 className="text-2xl md:text-3xl font-bold uppercase mt-10 mb-4 text-gray-800">
+          <h3 className="text-2xl md:text-3xl font-bold uppercase mt-10 my-4 text-gray-800">
             {t("instalacionesTitle")}
           </h3>
           <VideoEmbed
@@ -61,11 +61,11 @@ const ColegioPage: NextPage = () => {
           {/* VISIÓN */}
           <h3
             id="vision"
-            className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800"
+            className="text-2xl md:text-3xl font-bold uppercase my-4 text-gray-800"
           >
             {t("visionTitle")}
           </h3>
-          <p className="leading-relaxed text-gray-800 mb-4">
+          <p className="leading-relaxed text-gray-800 my-4">
             {t("visionP1")}
           </p>
           <p className="leading-relaxed text-gray-800">
