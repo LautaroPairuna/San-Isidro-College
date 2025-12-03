@@ -344,7 +344,7 @@ const Header: React.FC = () => {
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h3>
                 <Link
-                  href={`/${locale}/contacto`}
+                  href={`/${locale}/#contacto`}
                   onClick={handleNavClick}
                   className="px-3 py-2 bg-[#1e804b] text-white rounded-full"
                 >

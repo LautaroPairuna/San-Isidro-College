@@ -123,7 +123,7 @@ export default function VidaEstudiantilPage() {
   return (
     <div id="container">
       {/* ───────────────────── HERO VERDE ───────────────────── */}
-      <section className="relative w-full lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
+      <section className="relative w-full h-[640px] lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
         {/* Columna izquierda */}
         <div className="relative col-span-1 md:col-span-4 bg-[#71af8d] flex items-end justify-end">
           <Image
@@ -213,7 +213,7 @@ export default function VidaEstudiantilPage() {
       {/* ─────────────────── KINDERGARTEN ─────────────────── */}
       <section
         id="kindergarten"
-        className="relative w-full h-auto py-10 bg-white overflow-hidden"
+        className="relative w-full h-auto py-20 bg-white overflow-hidden"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
           {/* Texto y decoraciones (idéntico pero traducido) */}
