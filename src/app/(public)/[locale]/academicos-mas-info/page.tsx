@@ -117,7 +117,7 @@ export default function AcademicosMasInfoPage() {
                 alt={t('primary.imagenAltContenido')}
                 width={1300}
                 height={400}
-                className="mx-auto -mt-10 lg:max-w-none w-[650px] md:w-[1300px] h-auto"
+                className="mx-auto -mt-10 lg:max-w-none w-[650px] md:w-[800px] xl:w-[1000px] 2xl:w-[1200px] h-auto"
               />
             </div>
           </div>
