@@ -104,7 +104,7 @@ const Header: React.FC = () => {
                 {/* Botones de cambio de idioma */}
                 <Link href={getAlternateRoute("es")}>
                   <button
-                    className={`px-3 py-3 rounded-full text-white ${
+                    className={`px-3 py-3 rounded-full cursor-pointer text-white ${
                       locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/60"
                     }`}
                   >
@@ -113,7 +113,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link href={getAlternateRoute("en")}>
                   <button
-                    className={`px-3 py-3 rounded-full text-white ${
+                    className={`px-3 py-3 rounded-full cursor-pointer text-white ${
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/60"
                     }`}
                   >
@@ -121,9 +121,10 @@ const Header: React.FC = () => {
                   </button>
                 </Link>
               </div>
+
               <button
                 id="menuToggle"
-                className="bg-[#c19516] px-8 py-3 rounded-full text-white"
+                className="bg-[#c19516] px-8 py-3 rounded-full text-white cursor-pointer"
                 onClick={() => setMenuOpen(true)}
               >
                 ☰ MENÚ
@@ -153,7 +154,7 @@ const Header: React.FC = () => {
           <div className="menu-panel bg-[#c19516] text-white w-full h-full p-6 md:rounded-b-lg md:shadow-lg md:h-auto overflow-y-auto md:overflow-y-visible">
             <button
               id="closeMenu"
-              className="absolute top-4 right-6 text-3xl"
+              className="absolute top-4 right-6 text-3xl cursor-pointer"
               onClick={() => setMenuOpen(false)}
               aria-label="Cerrar menú"
             >
@@ -172,10 +173,11 @@ const Header: React.FC = () => {
                   className="h-14 w-auto md:h-20"
                 />
               </Link>
+
               <div className="flex space-x-2 mt-4 md:mt-0">
                 <Link href={getAlternateRoute("es")}>
                   <button
-                    className={`px-3 py-1 rounded-full text-white ${
+                    className={`px-3 py-1 rounded-full cursor-pointer text-white ${
                       locale === "es" ? "bg-[#1e804b]" : "bg-gray-400/60"
                     }`}
                   >
@@ -184,7 +186,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link href={getAlternateRoute("en")}>
                   <button
-                    className={`px-3 py-1 rounded-full text-white ${
+                    className={`px-3 py-1 rounded-full cursor-pointer text-white ${
                       locale === "en" ? "bg-[#294161]" : "bg-gray-400/60"
                     }`}
                   >
@@ -195,21 +197,21 @@ const Header: React.FC = () => {
             </div>
 
             {/* Menú principal */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               {/* El Colegio */}
-              <div>
-                <h3 className="text-lg font-bold mb-2">
+              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+                <h2 className="text-4xl mb-2">
                   {locale === "es" ? "El Colegio" : "The School"}
-                </h3>
+                </h2>
                 <ul className="space-y-1">
                   <li>
                     <Link
                       href={`/${locale}/colegio#proyecto`}
                       id="proyecto-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
-                      {locale === "es" ? "Proyecto" : "Project"}
+                      {locale === "es" ? "Proyecto Educativo Bilingüe" : "Project in Bilingual Education"}
                     </Link>
                   </li>
                   <li>
@@ -217,29 +219,9 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#mision`}
                       id="mision-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
-                      {locale === "es" ? "Misión" : "Mission"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/colegio#vision`}
-                      id="vision-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Visión" : "Vision"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/colegio#valores`}
-                      id="valores-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Valores" : "Values"}
+                      {locale === "es" ? "Misión, Vision y Valores" : "Mission, Vision and Values"}
                     </Link>
                   </li>
                   <li>
@@ -247,7 +229,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#educacion-personalizada`}
                       id="educacion-personalizada-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Educación Personalizada" : "Personalized Education"}
                     </Link>
@@ -256,63 +238,43 @@ const Header: React.FC = () => {
               </div>
 
               {/* Académicos */}
-              <div>
-                <h3 className="text-lg font-bold mb-2">
+              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+                <h2 className="text-4xl mb-2">
                   {locale === "es" ? "Académicos" : "Academics"}
-                </h3>
+                </h2>
                 <ul className="space-y-1">
+                  <li>
+                    <Link
+                      href={`/${locale}/academicos`}
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "Proyecto Bilingüe" : "Bilingual Project"}
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       href={`/${locale}/academicos#kindergarten`}
                       id="kindergarten-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[140px]"
                     >
-                      {locale === "es" ? "Kindergarten" : "Kindergarten"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/academicos#primary`}
-                      id="primary-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Primaria" : "Primary"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/academicos#secondary`}
-                      id="secondary-link"
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Secundaria" : "Secondary"}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/academicos`}
-                      onClick={handleNavClick}
-                      className="block hover:underline"
-                    >
-                      {locale === "es" ? "Educación Bilingüe" : "Bilingual Education"}
+                      {locale === "es" ? "Kindergarten Primary Secondary" : "Kindergarten Primary Secondary"}
                     </Link>
                   </li>
                 </ul>
               </div>
               {/* Vida Estudiantil */}
-              <div>
-                <h3 className="text-lg font-bold mb-2">
+              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+                <h2 className="text-4xl mb-2">
                   {locale === "es" ? "Vida Estudiantil" : "Student Life"}
-                </h3>
+                </h2>
                 <ul className="space-y-1">
                   <li>
                     <Link
                       href={`/${locale}/vida-estudiantil#deportes`}
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Deportes" : "Sports"}
                     </Link>
@@ -321,7 +283,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/vida-estudiantil#bienestar-estudiantil`}
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Bienestar Estudiantil" : "Student Welfare"}
                     </Link>
@@ -330,7 +292,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/vida-estudiantil#play-habilidades-steam`}
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "San Isidro Play" : "San Isidro Play"}
                     </Link>
@@ -339,16 +301,23 @@ const Header: React.FC = () => {
               </div>
 
               {/* Contacto */}
-              <div>
-                <h3 className="text-lg font-bold mb-4">
+              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+                <h2 className="text-4xl mb-4">
                   {locale === "es" ? "Contacto" : "Contact"}
-                </h3>
+                </h2>
                 <Link
                   href={`/${locale}/#contacto`}
                   onClick={handleNavClick}
-                  className="px-3 py-2 bg-[#1e804b] text-white rounded-full"
+                  className="block hover:underline my-3 max-w-[180px]"
                 >
-                  {locale === "es" ? "CONTACTO" : "CONTACT US"}
+                  {locale === "es" ? "Trabaja con nosotros" : "Work with us"}
+                </Link>
+                <Link
+                  href={`/${locale}/#contacto`}
+                  onClick={handleNavClick}
+                  className="block hover:underline my-3 max-w-[180px]"
+                >
+                  {locale === "es" ? "Tel. y Ubicacion" : "Phone and Location"}
                 </Link>
               </div>
             </div>
