@@ -93,31 +93,31 @@ const Header: React.FC = () => {
                   alt="Logo de San Isidro"
                   width={180}
                   height={90}
-                  className="h-14 w-auto md:h-20 transition-all duration-500 ease-in-out"
+                  className="h-20 w-auto md:h-20 transition-all duration-500 ease-in-out"
                 />
               </Link>
             </div>
 
             {/* Idiomas y menú */}
             <div className="flex items-center space-x-2 sm:me-10 me-3">
-              <div className="hidden md:flex space-x-2 me-5">
-                {/* Botones de cambio de idioma */}
-                <Link href={getAlternateRoute("es")}>
+              <div className="hidden md:flex items-center gap-3 me-5">
+                {/* Botones de cambio de idioma: estilo circular ESP/ING */}
+                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                   <button
-                    className={`px-3 py-3 rounded-full cursor-pointer text-white ${
-                      locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/60"
+                    className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                      locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                     }`}
                   >
-                    ES
+                    ESP
                   </button>
                 </Link>
-                <Link href={getAlternateRoute("en")}>
+                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
                   <button
-                    className={`px-3 py-3 rounded-full cursor-pointer text-white ${
-                      locale === "en" ? "bg-[#294161]" : "bg-[#294161]/60"
+                    className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                      locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                     }`}
                   >
-                    EN
+                    ING
                   </button>
                 </Link>
               </div>
@@ -151,18 +151,48 @@ const Header: React.FC = () => {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="menu-panel bg-[#c19516] text-white w-full h-full p-6 md:rounded-b-lg md:shadow-lg md:h-auto overflow-y-auto md:overflow-y-visible">
+          <div className="menu-panel bg-[#c19516] text-white w-full h-auto p-6 md:rounded-b-lg md:shadow-lg overflow-y-auto md:overflow-y-visible">
+            {/* Desktop: idioma + cerrar arriba a la derecha */}
+            <div className="absolute top-4 right-6 hidden md:flex items-center gap-3">
+              <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
+                <button
+                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                    locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
+                  }`}
+                >
+                  ESP
+                </button>
+              </Link>
+              <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
+                <button
+                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                    locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
+                  }`}
+                >
+                  ING
+                </button>
+              </Link>
+              <button
+                id="closeMenu"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Cerrar menú"
+              >
+                X
+              </button>
+            </div>
+            {/* Mobile: botón cerrar arriba derecha */}
             <button
               id="closeMenu"
-              className="absolute top-4 right-6 text-3xl cursor-pointer"
+              className="absolute top-4 right-6 md:hidden w-10 h-10 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
               onClick={() => setMenuOpen(false)}
               aria-label="Cerrar menú"
             >
-              &times;
+              X
             </button>
 
-            {/* Logo + idiomas en menú */}
-            <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+            {/* Logo en menú */}
+            <div className="flex flex-col md:flex-row justify-start items-center mb-6">
               <Link href={getAlternateRoute(locale)} onClick={handleNavClick} className="flex items-center">
                 <Image
                   id="menuLogo"
@@ -173,33 +203,33 @@ const Header: React.FC = () => {
                   className="h-14 w-auto md:h-20"
                 />
               </Link>
-
-              <div className="flex space-x-2 mt-4 md:mt-0">
-                <Link href={getAlternateRoute("es")}>
+              {/* Mobile: idiomas debajo del logo */}
+              <div className="flex gap-2 mt-4 md:hidden">
+                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                   <button
-                    className={`px-3 py-1 rounded-full cursor-pointer text-white ${
-                      locale === "es" ? "bg-[#1e804b]" : "bg-gray-400/60"
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                      locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                     }`}
                   >
-                    ES
+                    ESP
                   </button>
                 </Link>
-                <Link href={getAlternateRoute("en")}>
+                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
                   <button
-                    className={`px-3 py-1 rounded-full cursor-pointer text-white ${
-                      locale === "en" ? "bg-[#294161]" : "bg-gray-400/60"
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                      locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                     }`}
                   >
-                    EN
+                    ING
                   </button>
                 </Link>
               </div>
             </div>
 
             {/* Menú principal */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10 xl:gap-12">
               {/* El Colegio */}
-              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-2">
                   {locale === "es" ? "El Colegio" : "The School"}
                 </h2>
@@ -238,7 +268,7 @@ const Header: React.FC = () => {
               </div>
 
               {/* Académicos */}
-              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-2">
                   {locale === "es" ? "Académicos" : "Academics"}
                 </h2>
@@ -265,7 +295,7 @@ const Header: React.FC = () => {
                 </ul>
               </div>
               {/* Vida Estudiantil */}
-              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+              <div className="xl:border-l-2 lg:border-l-0 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-2">
                   {locale === "es" ? "Vida Estudiantil" : "Student Life"}
                 </h2>
@@ -301,7 +331,7 @@ const Header: React.FC = () => {
               </div>
 
               {/* Contacto */}
-              <div className="md:border-l md:border-white/50 md:pl-8 first:md:border-l-0">
+              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-4">
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h2>
