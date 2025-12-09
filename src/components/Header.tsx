@@ -200,7 +200,7 @@ const Header: React.FC = () => {
                   alt="Logo de San Isidro"
                   width={180}
                   height={90}
-                  className="h-14 w-auto md:h-20"
+                  className="h-20 w-auto"
                 />
               </Link>
               {/* Mobile: idiomas debajo del logo */}
