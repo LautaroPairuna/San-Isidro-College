@@ -151,7 +151,7 @@ const Header: React.FC = () => {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="menu-panel bg-[#c19516] text-white w-full h-auto p-6 md:rounded-b-lg md:shadow-lg overflow-y-auto md:overflow-y-visible">
+          <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto p-6 md:rounded-b-lg md:shadow-lg overflow-y-auto md:overflow-y-visible">
             {/* Desktop: idioma + cerrar arriba a la derecha */}
             <div className="absolute top-4 right-6 hidden md:flex items-center gap-3">
               <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
