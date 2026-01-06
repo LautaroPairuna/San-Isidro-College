@@ -141,14 +141,7 @@ export default function VidaEstudiantilPage() {
               height={250}
               className="transform z-40 max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center text-center gap-3 px-2 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden z-10"
-            >
-              <Image src="/images/ico-admisiones.svg" alt={t('admissions.alt')} width={24} height={24} />
-              <span className="leading-none">{t('admissions.label')}</span>
-            </Link>
+
           </div>
         </div>
 
@@ -186,16 +179,7 @@ export default function VidaEstudiantilPage() {
             </div>
           </div>
 
-          <button className="hidden md:flex absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40">
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className="flex items-center gap-3"
-            >
-              <Image src="/images/ico-admisiones.svg" alt={t('admissions.alt')} width={32} height={32} />
-              {t('admissions.label')}
-            </Link>
-          </button>
+
         </div>
 
         <div className="absolute top-0 left-[32%] -translate-x-1/2 h-full pointer-events-none">

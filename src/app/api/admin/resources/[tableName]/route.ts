@@ -89,9 +89,11 @@ export async function POST(req: NextRequest, { params }: any) {
   if (ct.includes('multipart/form-data')) {
     /* 1 ▸ Parsear multipart */
     const form = await req.formData()
+    const files: Record<string, Blob> = {}
+
     for (const [k, v] of form.entries()) {
-      if (k === FILE_FIELD && isFileLike(v)) {
-        file = v as Blob
+      if (isFileLike(v)) {
+        files[k] = v as Blob
       } else if (typeof v === 'string') {
         data[k] = /^\d+$/.test(v) ? Number(v) : v
       }
@@ -100,20 +102,21 @@ export async function POST(req: NextRequest, { params }: any) {
     delete data.nombreArchivo
     normalizeBooleans(data)
 
-    /* 2 ▸ Procesar archivo si existe */
-    if (file) {
-      const baseDir = path.join(process.cwd(), 'public', 'images')
-      const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
-      const keyDir = folderNames[tbl]
-      const dir     = path.join(baseDir, keyDir)
-      const thumbs  = path.join(dir, 'thumbs')
-      await fs.mkdir(dir, { recursive: true })
-      await fs.mkdir(thumbs, { recursive: true })
+    const baseDir = path.join(process.cwd(), 'public', 'images')
+    const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
+    const keyDir = folderNames[tbl]
+    const dir     = path.join(baseDir, keyDir)
+    const thumbs  = path.join(dir, 'thumbs')
+    await fs.mkdir(dir, { recursive: true })
+    await fs.mkdir(thumbs, { recursive: true })
 
-      const hint = nombreArchivoCustom || data.nombre || data.textoAlternativo || tableName
-      const slug = slugify(String(hint), { lower: true, strict: true })
-      const timestamp = makeTimestamp()
+    const timestamp = makeTimestamp()
+    const hint = nombreArchivoCustom || data.nombre || data.textoAlternativo || tableName
+    const slug = slugify(String(hint), { lower: true, strict: true })
 
+    /* 2 ▸ Procesar archivo principal (urlArchivo) */
+    if (files['urlArchivo']) {
+      file = files['urlArchivo']
       const originalName = (file as any).name as string
       const ext = path.extname(originalName).toLowerCase()
       const videoExts = ['.mp4', '.mov', '.avi', '.mkv', '.webm']
@@ -141,8 +144,9 @@ export async function POST(req: NextRequest, { params }: any) {
         const out = `${slug}-${timestamp}.svg`
         const buf = Buffer.from(await (file as Blob).arrayBuffer())
         await fs.writeFile(path.join(dir, out), buf)
-        data[FILE_FIELD] = out
-        data.urlMiniatura = null
+        data.urlArchivo = out
+        // Si no se envió miniatura explícita, anularla
+        if (!files['urlMiniatura']) data.urlMiniatura = null
         data.tipo = 'ICONO'
       }
       /* 2.b ▸ Video */
@@ -150,8 +154,9 @@ export async function POST(req: NextRequest, { params }: any) {
         const out = `${slug}-${timestamp}${ext}`
         const buf = Buffer.from(await (file as Blob).arrayBuffer())
         await fs.writeFile(path.join(dir, out), buf)
-        data[FILE_FIELD] = out
+        data.urlArchivo = out
         data.tipo = 'VIDEO'
+        // Nota: urlMiniatura se procesará abajo si existe
       }
       /* 2.c ▸ Imagen */
       else {
@@ -159,11 +164,28 @@ export async function POST(req: NextRequest, { params }: any) {
         const buf = Buffer.from(await (file as Blob).arrayBuffer())
         await sharp(buf).webp().toFile(path.join(dir, out))
         await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out))
-        data[FILE_FIELD]   = out
-        data.urlMiniatura  = out
+        data.urlArchivo   = out
+        // Si es imagen, la misma imagen sirve de miniatura por defecto
+        if (!files['urlMiniatura']) data.urlMiniatura = out
         data.tipo          = 'IMAGEN'
       }
     }
+
+    /* 3 ▸ Procesar miniatura explícita (urlMiniatura) */
+    if (files['urlMiniatura']) {
+      const thumbFile = files['urlMiniatura']
+      // Siempre guardar como webp
+      const outThumb = `${slug}-thumb-${timestamp}.webp`
+      const bufThumb = Buffer.from(await (thumbFile as Blob).arrayBuffer())
+      
+      // Guardar original en carpeta principal
+      await sharp(bufThumb).webp().toFile(path.join(dir, outThumb))
+      // Guardar resize en thumbs (para que FotoCell lo encuentre rápido)
+      await sharp(bufThumb).resize(200).webp().toFile(path.join(thumbs, outThumb))
+      
+      data.urlMiniatura = outThumb
+    }
+
   } else {
     /* JSON simple */
     data = await req.json()

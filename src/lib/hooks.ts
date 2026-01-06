@@ -25,7 +25,8 @@ export interface GrupoMedios {
 export interface Medio {
   id: number
   urlArchivo: string
-  textoAlternativo?: string
+  urlMiniatura?: string | null
+  textoAlternativo?: string | null
   tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
   posicion: number
   grupoMediosId: number

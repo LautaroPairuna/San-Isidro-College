@@ -5,8 +5,10 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import SmoothLink from "@/components/SmoothLink"
 import AsideMenu from "@/components/AsideMenu"
-import VideoEmbed from "@/components/VideoEmbed"
+import RenderMedia from "@/components/RenderMedia"
 import { useTranslations } from "next-intl"
+import { useMedioById } from "@/lib/hooks"
+import { MEDIA_IDS } from "@/lib/constants"
 import type { NextPage } from "next"
 
 // Carga dinámica para reducir el bundle inicial
@@ -15,6 +17,9 @@ const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: fals
 
 const ColegioPage: NextPage = () => {
   const t = useTranslations("colegio")
+  const instalacionesMedioId = MEDIA_IDS.COLEGIO.INSTALACIONES_VIDEO
+  const instalacionesFallback = MEDIA_IDS.COLEGIO.INSTALACIONES_FALLBACK
+  const { data: instalacionesMedio } = useMedioById(instalacionesMedioId)
 
   return (
     <>
@@ -42,10 +47,13 @@ const ColegioPage: NextPage = () => {
           <h3 className="text-4xl md:text-5xl font-bold mt-32 my-4 text-gray-800 text-shadow-bold-movil">
             {t("instalacionesTitle")}
           </h3>
-          <VideoEmbed
-            videoId={t("video.id")}
-            placeholderSrc={t("video.placeholderSrc")}
-          />
+          <div className="mt-6 w-full aspect-video overflow-hidden rounded-lg shadow-lg bg-black/5">
+            <RenderMedia
+              medio={instalacionesMedio ?? null}
+              fallback={instalacionesFallback}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           {/* MISIÓN */}
           <h3

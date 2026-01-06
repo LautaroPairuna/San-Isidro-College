@@ -2,6 +2,7 @@
 import { ReactNode } from 'react';
 import { getMessages } from 'next-intl/server';
 import ClientAppProviders from './ClientAppProviders';
+import FloatingAdmissionsButton from '@/components/FloatingAdmissionsButton';
 
 export const metadata = {
   title: 'San Isidro College – Home',
@@ -37,6 +38,7 @@ export default async function PublicLayout({ children, params }: Props) {
   return (
     <ClientAppProviders locale={locale} messages={messages}>
       {children}
+      <FloatingAdmissionsButton />
     </ClientAppProviders>
   );
 }

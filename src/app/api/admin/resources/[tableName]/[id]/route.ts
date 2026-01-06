@@ -85,13 +85,13 @@ export async function PUT(req: NextRequest, { params }: any) {
 
   const ct = req.headers.get('content-type') || ''
   let data: Record<string, any> = {}
-  let file: Blob | null = null
+  const files: Record<string, Blob> = {}
 
   if (ct.includes('multipart/form-data')) {
     const form = await req.formData()
     for (const [k, v] of form.entries()) {
-      if (k === FILE_FIELD && isFileLike(v)) {
-        file = v as Blob
+      if (isFileLike(v)) {
+        files[k] = v as Blob
       } else if (typeof v === 'string') {
         data[k] = /^\d+$/.test(v) ? Number(v) : v
       }
@@ -105,26 +105,29 @@ export async function PUT(req: NextRequest, { params }: any) {
     normalizeBooleans(data)
   }
 
-  /* 2 ▸ Procesar archivo nuevo si llega */
-  if (file) {
-    const baseDir = path.join(process.cwd(), 'public', 'images')
-    const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
-    const keyDir = folderNames[tbl]
-    const dir     = path.join(baseDir, keyDir)
-    const thumbs  = path.join(dir, 'thumbs')
+  /* Directorios comunes */
+  const baseDir = path.join(process.cwd(), 'public', 'images')
+  const tbl: PrismaTable = tableName === 'GrupoMedios' ? 'GrupoMedios' : 'Medio'
+  const keyDir = folderNames[tbl]
+  const dir     = path.join(baseDir, keyDir)
+  const thumbs  = path.join(dir, 'thumbs')
 
-    /* limpiar anteriores */
-    if (existing?.[FILE_FIELD]) {
-      await fs.rm(path.join(dir,    existing[FILE_FIELD]), { force: true }).catch(() => {})
-      await fs.rm(path.join(thumbs, existing[FILE_FIELD]), { force: true }).catch(() => {})
+  await fs.mkdir(dir, { recursive: true })
+  await fs.mkdir(thumbs, { recursive: true })
+
+  const hint = data.nombreArchivo || data.textoAlternativo || tableName
+  const slug = slugify(String(hint), { lower: true, strict: true })
+  const timestamp = makeTimestamp()
+
+  /* 2 ▸ Procesar archivo principal (urlArchivo) */
+  if (files['urlArchivo']) {
+    const file = files['urlArchivo']
+    
+    /* limpiar archivo principal anterior */
+    if (existing?.urlArchivo) {
+      await fs.rm(path.join(dir,    existing.urlArchivo), { force: true }).catch(() => {})
+      await fs.rm(path.join(thumbs, existing.urlArchivo), { force: true }).catch(() => {})
     }
-
-    await fs.mkdir(dir, { recursive: true })
-    await fs.mkdir(thumbs, { recursive: true })
-
-    const hint = data.nombreArchivo || data.textoAlternativo || tableName
-    const slug = slugify(String(hint), { lower: true, strict: true })
-    const timestamp = makeTimestamp()
 
     const originalName = (file as any).name as string
     const ext = path.extname(originalName).toLowerCase()
@@ -136,7 +139,7 @@ export async function PUT(req: NextRequest, { params }: any) {
       const buf = Buffer.from(await (file as Blob).arrayBuffer())
       await fs.writeFile(path.join(dir, out), buf)
       data.urlArchivo   = out
-      data.urlMiniatura = null
+      if (!files['urlMiniatura']) data.urlMiniatura = null
       data.tipo         = 'ICONO'
     } else if (videoExts.includes(ext)) {
       const out = `${slug}-${timestamp}${ext}`
@@ -150,9 +153,28 @@ export async function PUT(req: NextRequest, { params }: any) {
       await sharp(buf).webp().toFile(path.join(dir, out))
       await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out))
       data.urlArchivo   = out
-      data.urlMiniatura = out
+      if (!files['urlMiniatura']) data.urlMiniatura = out
       data.tipo         = 'IMAGEN'
     }
+  }
+
+  /* 3 ▸ Procesar miniatura explícita (urlMiniatura) */
+  if (files['urlMiniatura']) {
+    const thumbFile = files['urlMiniatura']
+    
+    /* limpiar miniatura anterior */
+    if (existing?.urlMiniatura) {
+      await fs.rm(path.join(dir,    existing.urlMiniatura), { force: true }).catch(() => {})
+      await fs.rm(path.join(thumbs, existing.urlMiniatura), { force: true }).catch(() => {})
+    }
+
+    const outThumb = `${slug}-thumb-${timestamp}.webp`
+    const bufThumb = Buffer.from(await (thumbFile as Blob).arrayBuffer())
+    
+    await sharp(bufThumb).webp().toFile(path.join(dir, outThumb))
+    await sharp(bufThumb).resize(200).webp().toFile(path.join(thumbs, outThumb))
+    
+    data.urlMiniatura = outThumb
   }
 
   delete data.nombreArchivo

@@ -1,8 +1,11 @@
 // src/lib/schemas.ts
 import { z } from 'zod';
 
-const MAX_IMG_SIZE   = 10  * 1024 * 1024;   // 10 MiB
-const MAX_VIDEO_SIZE = 200 * 1024 * 1024;   // 200 MiB
+export const MAX_IMG_SIZE_MB = 10;
+export const MAX_VIDEO_SIZE_MB = 200;
+
+export const MAX_IMG_SIZE   = MAX_IMG_SIZE_MB  * 1024 * 1024;
+export const MAX_VIDEO_SIZE = MAX_VIDEO_SIZE_MB * 1024 * 1024;
 
 /* ---------- GrupoMedios SIN CAMBIOS ---------- */
 export const GrupoMediosSchema = z.object({

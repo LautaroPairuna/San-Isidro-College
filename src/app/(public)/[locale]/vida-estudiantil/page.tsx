@@ -187,16 +187,7 @@ export default function DeportesPage() {
           </div>
 
           {/* Botón admisiones (desktop) */}
-          <div className="hidden lg:block">
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className="absolute bottom-6 right-6 flex items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg z-40"
-            >
-              <Image src="/images/ico-admisiones.svg" alt={t('admissions.alt')} width={32} height={32} />
-              {t('admissions.label')}
-            </Link>
-          </div>
+
         </div>
 
         {/* Forma decorativa escritorio */}

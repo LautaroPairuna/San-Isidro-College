@@ -100,19 +100,7 @@ const HomePage: NextPage = () => {
                       max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
                       max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
-          <Link
-            href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-            target="_blank"
-            className="max-sm:absolute max-sm:bottom-4 max-sm:right-4 flex items-center gap-3 px-2 py-1 bg-[#1e804b] text-white rounded-full shadow-lg transition sm:hidden z-10"
-          >
-            <Image
-              src="/images/ico-admisiones.svg"
-              alt={t('hero.admisionButton')}
-              width={24}
-              height={24}
-            />
-            <span className="leading-none">{t('hero.admisionButton')}</span>
-          </Link>
+
         </div>
 
         {/* --- Columna Derecha: carrusel de heroMedia --- */}
@@ -133,21 +121,7 @@ const HomePage: NextPage = () => {
             />
           )}
 
-          <button className="absolute bottom-6 right-6 items-center gap-3 px-6 py-3 bg-[#1e804b] text-white rounded-full shadow-lg transition z-40 hidden sm:flex">
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className="flex items-center gap-2"
-            >
-              <Image
-                src="/images/ico-admisiones.svg"
-                alt={t('hero.admisionButton')}
-                width={32}
-                height={32}
-              />
-              {t('hero.admisionButton')}
-            </Link>
-          </button>
+
         </div>
 
         {/* --- SVG decorativo encima del carrusel --- */}

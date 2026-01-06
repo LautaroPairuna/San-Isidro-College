@@ -1151,13 +1151,14 @@ const FormModal = memo(function FormModal({
           </div>
 
           {/* urlArchivo (file + preview) */}
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             <label className="mb-1 text-gray-700 font-medium">Archivo</label>
             <Controller
               control={controlMedio}
               name="urlArchivo"
               render={({ field }) => (
                 <FileDropZone
+                  className="flex-1"
                   onFileSelected={field.onChange}
                   currentSrc={
                     isEditing ? `/images/medios/${(initialData as MedioType).urlArchivo}` : undefined
@@ -1172,18 +1173,20 @@ const FormModal = memo(function FormModal({
           </div>
 
           {/* urlMiniatura (file + preview) */}
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             <label className="mb-1 text-gray-700 font-medium">Miniatura</label>
             <Controller
               control={controlMedio}
               name="urlMiniatura"
               render={({ field }) => (
                 <FileDropZone
+                  className="flex-1"
                   onFileSelected={field.onChange}
                   currentSrc={
                     isEditing ? `/images/medios/${(initialData as MedioType).urlMiniatura}` : undefined
                   }
-                  currentTipo={isEditing ? (initialData as MedioType).tipo : undefined}
+                  currentTipo="IMAGEN"
+                  allowedTypes={['IMAGEN']}
                 />
               )}
             />
