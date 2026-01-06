@@ -24,7 +24,7 @@ const ColegioPage: NextPage = () => {
           {/* TITULO PRINCIPAL */}
           <h2
             id="proyecto"
-            className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-6"
+            className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-shadow-bold-movil"
           >
             {t("proyectoTitle")}
           </h2>
@@ -39,7 +39,7 @@ const ColegioPage: NextPage = () => {
           </div>
 
           {/* INSTALACIONES */}
-          <h3 className="text-2xl md:text-3xl font-bold uppercase mt-10 my-4 text-gray-800">
+          <h3 className="text-4xl md:text-5xl font-bold mt-32 my-4 text-gray-800 text-shadow-bold-movil">
             {t("instalacionesTitle")}
           </h3>
           <VideoEmbed
@@ -50,7 +50,7 @@ const ColegioPage: NextPage = () => {
           {/* MISIÓN */}
           <h3
             id="mision"
-            className="text-2xl md:text-3xl font-bold uppercase my-4 text-gray-800"
+            className="text-4xl md:text-5xl font-bold my-4 mt-32 text-gray-800 text-shadow-bold-movil"
           >
             {t("misionTitle")}
           </h3>
@@ -61,7 +61,7 @@ const ColegioPage: NextPage = () => {
           {/* VISIÓN */}
           <h3
             id="vision"
-            className="text-2xl md:text-3xl font-bold uppercase my-4 text-gray-800"
+            className="text-4xl md:text-5xl font-bold my-4 mt-32 text-gray-800 text-shadow-bold-movil"
           >
             {t("visionTitle")}
           </h3>
@@ -75,7 +75,7 @@ const ColegioPage: NextPage = () => {
           {/* VALORES */}
           <h3
             id="valores"
-            className="text-2xl md:text-3xl font-bold uppercase my-6 text-gray-800"
+            className="text-4xl md:text-5xl font-bold my-6 mt-32 text-gray-800 text-shadow-bold-movil"
           >
             {t("valoresTitle")}
           </h3>
@@ -92,7 +92,7 @@ const ColegioPage: NextPage = () => {
           {/* EDUCACIÓN PERSONALIZADA */}
           <h3
             id="educacion-personalizada"
-            className="text-2xl md:text-3xl font-bold uppercase mb-2 text-gray-800"
+            className="text-4xl md:text-5xl font-bold mb-2 mt-32 text-gray-800 text-shadow-bold-movil"
           >
             {t("educacionPersonalizadaTitle")}
           </h3>

@@ -108,7 +108,7 @@ export default function DeportesPage() {
   return (
     <div id="container">
       {/* ═════════════ SECCIÓN 1 — HERO ═════════════ */}
-      <section className="relative w-full h-auto grid grid-cols-12 overflow-hidden">
+      <section className="relative w-full h-auto grid grid-cols-12 overflow-hidden" id="deportes">
         {/* --- COLUMNA VERDE ------------------------------------------------ */}
         <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
           {/* Forma decorativa móvil */}
@@ -211,7 +211,6 @@ export default function DeportesPage() {
 
       {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
       <section
-        id="deportes"
         className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden"
       >
         <Image
@@ -429,7 +428,7 @@ export default function DeportesPage() {
               </p>
               <div className="text-center mt-5">
                 <Link
-                  href="/deportes-mas-info"
+                  href="/vida-estudiantil-mas-info/#bienestar"
                   className="text-[#1e804b] font-semibold hover:underline"
                 >
                   {t('vida.readMore')}
@@ -494,7 +493,7 @@ export default function DeportesPage() {
               </p>
               <div className="mt-5">
                 <Link
-                  href="/deportes-mas-info"
+                  href="/vida-estudiantil-mas-info/#bienestar"
                   className="text-[#1e804b] font-semibold hover:underline"
                 >
                   {t('vida.readMore')}

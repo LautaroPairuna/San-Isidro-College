@@ -287,9 +287,29 @@ const Header: React.FC = () => {
                       href={`/${locale}/academicos#kindergarten`}
                       id="kindergarten-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[140px]"
+                      className="block hover:underline my-3"
                     >
-                      {locale === "es" ? "Kindergarten Primary Secondary" : "Kindergarten Primary Secondary"}
+                      {locale === "es" ? "Kindergarten" : "Kindergarten"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/academicos#primary`}
+                      id="primary-link"
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3"
+                    >
+                      {locale === "es" ? "Primary" : "Primary"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/academicos#secondary`}
+                      id="secondary-link"
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3"
+                    >
+                      {locale === "es" ? "Secondary" : "Secondary"}
                     </Link>
                   </li>
                 </ul>
@@ -336,9 +356,11 @@ const Header: React.FC = () => {
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h2>
                 <Link
-                  href={`/${locale}/#contacto`}
+                  href="mailto:cv@colegiosanisidrosalta.edu.ar"
                   onClick={handleNavClick}
                   className="block hover:underline my-3 max-w-[180px]"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {locale === "es" ? "Trabaja con nosotros" : "Work with us"}
                 </Link>

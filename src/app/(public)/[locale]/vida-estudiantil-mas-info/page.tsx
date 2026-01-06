@@ -18,22 +18,24 @@ export default function DeportesMasInfoPage() {
         {/* CONTENEDOR CENTRAL CON FONDO BLANCO */}
         <div className="relative max-w-[1000px] mx-auto bg-white min-h-screen px-8 pb-8 pt-60">
           {/* CONTENIDO PRINCIPAL */}
-          <h2
-            id="proyecto"
-            className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-6"
-          >
-            {t('proyectoTitle')}
-          </h2>
-          {/* TEXTO INTRODUCTORIO */}
-          <div className="space-y-4 leading-relaxed text-gray-800">
-            <p>{t('intro.p1')}</p>
-            <p>{t('intro.p2')}</p>
-            <p>{t('intro.p3')}</p>
+          <div>
+            <h2
+              id="proyecto"
+              className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-shadow-bold-movil"
+            >
+              {t('proyectoTitle')}
+            </h2>
+            {/* Deportes */}
+            <div className="space-y-6 leading-relaxed text-gray-800" id="deportes">
+              <p>{t('intro.p1')}</p>
+              <p>{t('intro.p2')}</p>
+              <p>{t('intro.p3')}</p>
+            </div>
           </div>
 
           {/* Bienestar estudiantil */}
-          <div className="space-y-4">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mt-10 mb-4 text-gray-800">
+          <div className="space-y-4 pt-20" id="bienestar">
+            <h3 className="text-4xl md:text-5xl font-bold mt-10 mb-4 text-gray-800 text-shadow-bold-movil">
               {t('bienestar.title')}
             </h3>
             <p>{t('bienestar.p1')}</p>
@@ -52,10 +54,10 @@ export default function DeportesMasInfoPage() {
             </h3>
             <ul className="space-y-5">
               <li className="font-bold">
-                <SmoothLink href="#proyecto">{t('aside.deportes')}</SmoothLink>
+                <SmoothLink href="#deportes">{t('aside.deportes')}</SmoothLink>
               </li>
               <li className="font-bold">
-                <SmoothLink href="#proyecto">{t('aside.vidaEstudiantil')}</SmoothLink>
+                <SmoothLink href="#bienestar">{t('aside.vidaEstudiantil')}</SmoothLink>
               </li>
               <li className="font-bold">
                 <SmoothLink href="#proyecto">{t('aside.play')}</SmoothLink>

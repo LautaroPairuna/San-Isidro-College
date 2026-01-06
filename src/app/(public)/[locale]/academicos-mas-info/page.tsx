@@ -21,7 +21,7 @@ export default function AcademicosMasInfoPage() {
           {/* CONTENIDO PRINCIPAL */}
           <h2
             id="proyecto"
-            className="text-3xl md:text-4xl font-bold uppercase leading-tight mb-6"
+            className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-shadow-bold-movil"
           >
             {t('proyectoTitulo')}
           </h2>
@@ -38,7 +38,7 @@ export default function AcademicosMasInfoPage() {
 
           {/* Inglés, Indispensable */}
           <div className="space-y-4 mt-10">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
               {t('inglesTitulo')}
             </h3>
             <p>{t('ingles.p1')}</p>
@@ -48,8 +48,8 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Kindergarten */}
-          <div className="space-y-4 mt-10 relative" id="kindergarten">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
+          <div className="space-y-4 mt-32 relative" id="kindergarten">
+            <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
               {t('kindergarten.titulo')}
             </h3>
             <p>{t('kindergarten.p1')}</p>
@@ -90,8 +90,8 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Primary */}
-          <div id="primary" className="space-y-4 relative mt-10">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase mb-4 text-gray-800">
+          <div id="primary" className="space-y-4 relative mt-32">
+            <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
               {t('primary.titulo')}
             </h3>
             <p className="font-bold leading-relaxed text-gray-800 mb-4 text-xl">
@@ -123,8 +123,8 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Secondary */}
-          <div id="secondary" className="space-y-4 mt-10">
-            <h3 className="text-2xl md:text-3xl font-bold uppercase my-6 text-gray-800">
+          <div id="secondary" className="space-y-4 mt-32">
+            <h3 className="text-4xl md:text-5xl font-bold my-6 text-gray-800 text-shadow-bold-movil">
               {t('secondary.titulo')}
             </h3>
             <h4 className="font-bold text-xl">{t('secondary.subtitulo')}</h4>

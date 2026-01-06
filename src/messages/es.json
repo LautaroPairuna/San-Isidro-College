@@ -15,7 +15,7 @@
     }
   },
   "colegio": {
-    "proyectoTitle": "UN PROYECTO EDUCATIVO SÓLIDO E INNOVADOR PARA LA FORMACIÓN INTEGRAL BILINGÜE",
+    "proyectoTitle": "Un proyecto educativo sólido e innovador para la formación integral bilingüe",
     "introduccion": {
       "p1": "Con el fin de aportar a Salta un Proyecto Educativo sólido e innovador, en 2016 San Isidro College abrió sus puertas a la comunidad, a través del Diseño de un Proyecto Educativo exigente y ambicioso, de Formación Integral Bilingüe y de Orientación Católica, integrando contenidos nacionales exigidos, con programas internacionales de altos estándares académicos.",
       "p2": "San Isidro College se propone lograr los objetivos educativos en dos idiomas. Por este motivo es que el inglés se enseña en forma intensiva a través de múltiples actividades y contenidos. Garantizamos una incorporación natural de la segunda lengua.",
@@ -23,17 +23,17 @@
       "p4": "Debido a las características de la zona, el establecimiento aspira a transformarse en un núcleo de actividades escolares, recreativas, culturales y deportivas, para cumplir, así, con una función significativa y relevante, en el medio dentro del cual se halla inserto.",
       "p5": "San Isidro College fue pensado y desarrollado con los más calificados y experimentados profesionales, con el fin de ser el Proyectos Educativo más sólido de nuestro medio. Acompañados por Asesores de Salta, Bs. As. y el extranjero, quienes brindan su gran experiencia en los distintos niveles y en el área de Inglés, con Convenios para la validación de los Exámenes Internacionales y la oportunidad de intercambios estudiantiles con importantes Colegios del extranjero."
     },
-    "instalacionesTitle": "INSTALACIONES",
+    "instalacionesTitle": "Instalaciones",
     "video": {
       "id": "VIDEO_ID", 
       "placeholderSrc": "/ruta/a/tu/imagen-placeholder.jpg"
     },
-    "misionTitle": "MISIÓN",
+    "misionTitle": "Misión",
     "misionText": "San Isidro College es un Colegio Humanizador que ubica a la persona en primer lugar. Su misión es formar ciudadanos globales, promoviendo una educación integral que nutra el crecimiento personal, intelectual y emocional de nuestros estudiantes. Nos comprometemos a proporcionar un ambiente de aprendizaje y autonomía en el que se fomente la curiosidad, la creatividad y el pensamiento crítico. Nuestro objetivo es acompañar a nuestros estudiantes para que sean agentes de cambio en la sociedad, brindando herramientas que les permitan desarrollar habilidades, fomentando el bilingüismo y proporcionando un marco de principios basado en el ejemplo y en valores cristianos.",
-    "visionTitle": "VISIÓN",
+    "visionTitle": "Visión",
     "visionP1": "Nuestra visión es formar líderes resilientes y creativos, capaces de aprovechar las oportunidades y contribuir al progreso de la sociedad en un entorno en constante cambio.",
     "visionP2": "San Isidro College se posiciona como referente en educación en nuestra comunidad, estableciendo un estándar de excelencia y adaptándose de manera flexible a la constante transformación del mundo moderno. Creamos un entorno educativo dinámico y en constante evolución, que prepara a nuestros estudiantes para enfrentar los desafíos del siglo XXI. Nos comprometemos a proporcionar una educación de calidad, impulsada por la innovación, la tecnología y el desarrollo de habilidades relevantes.",
-    "valoresTitle": "VALORES",
+    "valoresTitle": "Valores",
     "valoresAlt": "Diagrama de valores",
     "educacionPersonalizadaTitle": "EDUCACIÓN PERSONALIZADA",
     "educacionPersonalizadaItalic": "Nos proponemos generar en los alumnos el placer de concurrir al colegio",
@@ -240,7 +240,7 @@
     "aside": {
       "title": "ACADÉMICO",
       "deportes": "Deportes",
-      "vidaEstudiantil": "Vida Estudiantil",
+      "vidaEstudiantil": "Bienestar Estudiantil",
       "play": "San Isidro Play"
     }
   }
