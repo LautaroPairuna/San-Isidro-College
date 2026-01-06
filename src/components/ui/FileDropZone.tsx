@@ -134,13 +134,13 @@ export default function FileDropZone({
             <div className="absolute inset-0 w-full h-full bg-gray-100 flex items-center justify-center">
               {isVideoPreview ? (
                 <video
-                  src={preview}
-                  className="w-full h-full object-contain"
-                  muted
-                  loop
-                  playsInline
-                  controls={false}
-                />
+                src={preview}
+                className="w-full h-full object-contain"
+                muted
+                loop
+                playsInline
+                controls
+              />
               ) : (
                 <div className="relative w-full h-full">
                   <Image

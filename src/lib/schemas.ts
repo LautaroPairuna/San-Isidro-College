@@ -19,8 +19,10 @@ export const MedioSchema = z.object({
   nombreArchivo: z.string().trim().min(1, 'Debe tener al menos 1 carácter').max(50, 'Máximo 50 caracteres').optional(),
 
   /** Archivo principal (imagen o video) */
-  urlArchivo: z.instanceof(File, { message: 'Selecciona un archivo (imagen o video)' })
-    .superRefine((file: File, ctx) => {
+  urlArchivo: z.instanceof(File).optional()
+    .superRefine((file: File | undefined, ctx) => {
+      if (!file) return;
+
       const isImage = file.type.startsWith('image/');
       const isVideo = file.type.startsWith('video/');
 

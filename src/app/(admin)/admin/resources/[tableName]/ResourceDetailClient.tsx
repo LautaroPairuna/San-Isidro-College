@@ -911,6 +911,7 @@ const FormModal = memo(function FormModal({
     handleSubmit: handleSubmitMedio,
     control: controlMedio,
     formState: { errors: errorsMedio },
+    setError: setErrorMedio,
   } = useForm<MedioForm>({
     resolver: zodResolver(MedioSchema),
     defaultValues:
@@ -1000,7 +1001,16 @@ const FormModal = memo(function FormModal({
   }
 
   // Submit Medio
-  const onSubmitMedio: SubmitHandler<MedioForm> = (data) => {
+  const onSubmitMedio: SubmitHandler<MedioForm> = async (data) => {
+    // 0️⃣ Validación manual: Archivo requerido en creación
+    if (isNewMode && !data.urlArchivo) {
+      setErrorMedio('urlArchivo', {
+        type: 'manual',
+        message: 'Selecciona un archivo (imagen o video)',
+      })
+      return
+    }
+
     // 1️⃣ Validación “UNICO”
     const grupoSel = gruposFK.find((g) => g.id === data.grupoMediosId)
     if (grupoSel?.tipoGrupo === 'UNICO') {
@@ -1020,28 +1030,19 @@ const FormModal = memo(function FormModal({
     // 2️⃣ Construir FormData y disparar la mutación
     const formData = buildMedioFormData(data)
 
-    if (isEditing && 'resource' in initialData && initialData.resource === 'Medio') {
-      updateMedioHook.mutate(formData, {
-        onSuccess: () => {
-          toast.success('Medio actualizado')
-          onClose()
-          qc.invalidateQueries({ queryKey: ['Medio'] })
-        },
-        onError: () => {
-          toast.error('Error al actualizar medio')
-        },
-      })
-    } else {
-      createMedioHook.mutate(formData, {
-        onSuccess: () => {
-          toast.success('Medio creado')
-          onClose()
-          qc.invalidateQueries({ queryKey: ['Medio'] })
-        },
-        onError: () => {
-          toast.error('Error al crear medio')
-        },
-      })
+    try {
+      if (isEditing && 'resource' in initialData && initialData.resource === 'Medio') {
+        await updateMedioHook.mutateAsync(formData)
+        toast.success('Medio actualizado')
+      } else {
+        await createMedioHook.mutateAsync(formData)
+        toast.success('Medio creado')
+      }
+      qc.invalidateQueries({ queryKey: ['Medio'] })
+      onClose()
+    } catch (error) {
+      console.error(error)
+      toast.error(isEditing ? 'Error al actualizar medio' : 'Error al crear medio')
     }
   }
 
