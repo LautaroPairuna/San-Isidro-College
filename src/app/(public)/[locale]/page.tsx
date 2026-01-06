@@ -2,7 +2,6 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import Image from 'next/image'
 import { useMedios } from '@/lib/hooks'
 import RenderMedia from '@/components/RenderMedia'

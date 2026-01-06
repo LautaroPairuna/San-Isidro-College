@@ -20,7 +20,7 @@ const models: Record<string, any> = {
 }
 
 const BOOLEAN_FIELDS: readonly string[] = []
-const FILE_FIELD = 'urlArchivo'
+
 
 function isFileLike(v: unknown): v is Blob {
   return (
