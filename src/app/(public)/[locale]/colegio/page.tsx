@@ -35,7 +35,7 @@ const ColegioPage: NextPage = () => {
           </h2>
 
           {/* TEXTO INTRODUCTORIO */}
-          <div className="space-y-4 leading-relaxed text-gray-800">
+          <div className="space-y-4 leading-relaxed text-gray-800 text-justify">
             <p>{t("introduccion.p1")}</p>
             <p>{t("introduccion.p2")}</p>
             <p>{t("introduccion.p3")}</p>
@@ -62,7 +62,7 @@ const ColegioPage: NextPage = () => {
           >
             {t("misionTitle")}
           </h3>
-          <p className="mb-8 leading-relaxed text-gray-800">
+          <p className="mb-8 leading-relaxed text-gray-800 text-justify">
             {t("misionText")}
           </p>
 
@@ -73,7 +73,7 @@ const ColegioPage: NextPage = () => {
           >
             {t("visionTitle")}
           </h3>
-          <p className="leading-relaxed text-gray-800 my-4">
+          <p className="leading-relaxed text-gray-800 my-4 text-justify">
             {t("visionP1")}
           </p>
           <p className="leading-relaxed text-gray-800">
@@ -104,25 +104,25 @@ const ColegioPage: NextPage = () => {
           >
             {t("educacionPersonalizadaTitle")}
           </h3>
-          <p className="text-gray-700 italic mb-6">
+          <p className="text-gray-700 italic mb-6 text-justify">
             {t("educacionPersonalizadaItalic")}
           </p>
-          <p className="leading-relaxed text-gray-800 mt-4">
+          <p className="leading-relaxed text-gray-800 mt-4 text-justify">
             {t("educacionPersonalizada.p1")}
           </p>
-          <p className="leading-relaxed text-gray-800 mt-4">
+          <p className="leading-relaxed text-gray-800 mt-4 text-justify">
             {t("educacionPersonalizada.p2")}
           </p>
-          <p className="leading-relaxed text-gray-800 mt-4">
+          <p className="leading-relaxed text-gray-800 mt-4 text-justify">
             {t("educacionPersonalizada.p3")}
           </p>
-          <p className="leading-relaxed text-gray-800 mt-4">
+          <p className="leading-relaxed text-gray-800 mt-4 text-justify">
             {t("educacionPersonalizada.p4")}
           </p>
 
           {/* ÚLTIMO PÁRRAFO (FONDO DORADO) */}
           <div className="bg-[#c9a241] text-black px-4 py-3 mt-8">
-            <p className="leading-relaxed">{t("ultimoParrafo")}</p>
+            <p className="leading-relaxed text-justify">{t("ultimoParrafo")}</p>
           </div>
         </div>
 
