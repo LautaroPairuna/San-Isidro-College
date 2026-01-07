@@ -76,7 +76,7 @@ const ColegioPage: NextPage = () => {
           <p className="leading-relaxed text-gray-800 my-4 text-justify">
             {t("visionP1")}
           </p>
-          <p className="leading-relaxed text-gray-800">
+          <p className="leading-relaxed text-gray-800 text-justify">
             {t("visionP2")}
           </p>
 
