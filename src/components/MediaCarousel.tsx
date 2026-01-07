@@ -82,7 +82,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   return (
     <div
       ref={carouselContainerRef}
-      className={`relative w-full overflow-hidden h-auto sm:h-full ${className}`}
+      className={`relative w-full overflow-hidden h-full ${className}`}
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -98,7 +98,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         {medias.map((src, idx) => (
           <div
             key={idx}
-            className="min-w-full relative aspect-[1/1] sm:aspect-auto sm:h-full"
+            className="min-w-full relative aspect-auto h-full"
           >
             {src.toLowerCase().endsWith('.mp4') ? (
               <video
