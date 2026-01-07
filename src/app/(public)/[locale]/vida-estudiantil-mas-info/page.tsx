@@ -26,7 +26,7 @@ export default function DeportesMasInfoPage() {
               {t('proyectoTitle')}
             </h2>
             {/* Deportes */}
-            <div className="space-y-6 leading-relaxed text-gray-800" id="deportes">
+            <div className="space-y-6 leading-relaxed text-gray-800 text-justify" id="deportes">
               <p>{t('intro.p1')}</p>
               <p>{t('intro.p2')}</p>
               <p>{t('intro.p3')}</p>
@@ -34,7 +34,7 @@ export default function DeportesMasInfoPage() {
           </div>
 
           {/* Bienestar estudiantil */}
-          <div className="space-y-4 pt-20" id="bienestar">
+          <div className="space-y-4 pt-20 text-justify" id="bienestar">
             <h3 className="text-4xl md:text-5xl font-bold mt-10 mb-4 text-gray-800 text-shadow-bold-movil">
               {t('bienestar.title')}
             </h3>
