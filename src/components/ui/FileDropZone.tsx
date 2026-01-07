@@ -35,7 +35,7 @@ export default function FileDropZone({
       /* Validar tamaño y MIME */
       const isVideo = f.type.startsWith('video/')
       const isImage = f.type.startsWith('image/')
-      const maxBytes = (isVideo ? MAX_VIDEO_SIZE_MB : MAX_IMG_SIZE_MB) * 1024 * 1024
+      const maxBytes = (isVideo ? MAX_VIDEO_SIZE_MB * 1024 * 1024 * 1024 : MAX_IMG_SIZE_MB * 1024 * 1024)
 
       /* 1. Validar tipo permitido en general */
       if (!isVideo && !isImage) {
