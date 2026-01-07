@@ -98,8 +98,8 @@ export default function AcademicosMasInfoPage() {
               {t('primary.subtitulo')}
             </p>
             <p>{t('primary.p1')}</p>
-            <p>{t('primary.p2')}</p>
-            <p id="primary">{t('primary.p3')}</p>
+            <p id="primary">{t('primary.p2')}</p>
+            <p>{t('primary.p3')}</p>
             <p>{t('primary.p4')}</p>
 
             <div className="mb-16">
