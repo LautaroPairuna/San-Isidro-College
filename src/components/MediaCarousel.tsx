@@ -95,31 +95,59 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         className="flex h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {medias.map((src, idx) => (
-          <div
-            key={idx}
-            className="min-w-full relative aspect-[1/1] sm:aspect-auto sm:h-full"
-          >
-            {src.toLowerCase().endsWith('.mp4') ? (
-              <video
-                src={src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <Image
-                src={src}
-                alt={altText}
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
-            )}
-          </div>
-        ))}
+        {medias.map((src, idx) => {
+          const isVideo = src.toLowerCase().endsWith('.mp4')
+          return (
+            <div
+              key={idx}
+              className="min-w-full relative h-full overflow-hidden bg-gray-900"
+            >
+              {/* Capa Fondo: Blur para eliminar barras negras */}
+              <div className="absolute inset-0 z-0 opacity-50">
+                {isVideo ? (
+                  <video
+                    src={src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
+                  />
+                ) : (
+                  <Image
+                    src={src}
+                    alt={altText}
+                    fill
+                    className="object-cover blur-xl scale-110 pointer-events-none"
+                    sizes="50vw"
+                  />
+                )}
+              </div>
+
+              {/* Capa Frente: Contenido completo sin cortes */}
+              <div className="relative z-10 w-full h-full shadow-xl">
+                {isVideo ? (
+                  <video
+                    src={src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <Image
+                    src={src}
+                    alt={altText}
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                  />
+                )}
+              </div>
+            </div>
+          )
+        })}
       </div>
 
       {/* Controles */}

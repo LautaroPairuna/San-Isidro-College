@@ -59,7 +59,7 @@ export default function AcademicosMasInfoPage() {
               {t('kindergarten.bold')}
             </p>
 
-            <h4 className="text-xl md:text-xl font-bold mb-4 text-gray-800">
+            <h4 className="text-xl md:text-xl font-bold mb-4 text-gray-800 pt-16">
               {t('kindergarten.subtituloJuego')}
             </h4>
             <p>{t('kindergarten.juego.p1')}</p>
@@ -69,7 +69,7 @@ export default function AcademicosMasInfoPage() {
 
             {/* Imágenes para Kindergarten */}
             <div className="relative">
-              <div className="hidden lg:block md:absolute -top-0 -left-85 w-[250px] z-20">
+              <div className="hidden lg:block md:absolute xl:-top-180 lg:-top-220 xl:-left-85 lg:-left-75 w-[250px] z-20">
                 <Image
                   src="/images/cuadro-kindergarten.svg"
                   alt={t('kindergarten.imagenAltDecoracion')}

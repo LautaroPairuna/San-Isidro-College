@@ -31,7 +31,7 @@
     "visionP2": "San Isidro College se posiciona como referente en educación en nuestra comunidad, estableciendo un estándar de excelencia y adaptándose de manera flexible a la constante transformación del mundo moderno. Creamos un entorno educativo dinámico y en constante evolución, que prepara a nuestros estudiantes para enfrentar los desafíos del siglo XXI. Nos comprometemos a proporcionar una educación de calidad, impulsada por la innovación, la tecnología y el desarrollo de habilidades relevantes.",
     "valoresTitle": "Valores",
     "valoresAlt": "Diagrama de valores",
-    "educacionPersonalizadaTitle": "EDUCACIÓN PERSONALIZADA",
+    "educacionPersonalizadaTitle": "Educación Personalizada",
     "educacionPersonalizadaItalic": "Nos proponemos generar en los alumnos el placer de concurrir al colegio",
     "educacionPersonalizada": {
       "p1": "De manera sistemática y diseñada trabajamos aprendizajes con valores, convirtiendo esta premisa en un eje transversal que sustente todo vínculo humano.",
@@ -200,6 +200,14 @@
       "title": "SAN ISIDRO COLLEGE DOJO",
       "description": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!",
       "descriptionMobile": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!",
+      "carouselAlt": "Carrusel SIC Dojo",
+      "fallbackAlt": "Fondo SIC Dojo"
+    },
+    "gym": {
+      "logoAlt": "Logo Gimnasio",
+      "title": "SAN ISIDRO BALANCE",
+      "description": "San Isidro Balance es un espacio integral de entrenamiento y bienestar, pensado para acompañar a los alumnos del colegio y abierto también a padres y docentes que buscan desarrollar su máximo potencial físico. \n\n Aquí combinamos entrenamiento de calidad, preparación física específica, trabajo de destrezas y acompañamiento en nutrición, integrando todo lo que ofrece un gimnasio moderno dentro de una propuesta profesional y cuidada. Cada actividad está diseñada para potenciar el rendimiento, prevenir lesiones y promover hábitos saludables. \n\n San Isidro Balance es movimiento, equilibrio y evolución.",
+      "descriptionMobile": "San Isidro Balance es un espacio integral de entrenamiento y bienestar, pensado para acompañar a los alumnos del colegio y abierto también a padres y docentes que buscan desarrollar su máximo potencial físico.",
       "carouselAlt": "Carrusel SIC Dojo",
       "fallbackAlt": "Fondo SIC Dojo"
     },

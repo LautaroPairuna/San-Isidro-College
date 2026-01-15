@@ -66,20 +66,34 @@ const RenderMedia = memo(function RenderMedia({
   // Construir la URL pública del archivo: asumimos que los medios se sirven desde /images/medios/
   const src = `/images/medios/${medio.urlArchivo}`
 
-  // Si el tipo es VIDEO, renderizamos un <video>
+  // Si el tipo es VIDEO, renderizamos un <video> con efecto blur
   if (medio.tipo === 'VIDEO') {
     return (
-      <video
-        src={src}
-        className={className}
-        controls
-        muted
-        loop
-        playsInline
-      >
-        {/* Texto accesible para navegadores que no soportan <video> */}
-        Tu navegador no soporta la reproducción de video.
-      </video>
+      <div className={`relative w-full h-full overflow-hidden ${className}`}>
+        {/* Capa Fondo: Blur para eliminar barras negras */}
+        <div className="absolute inset-0 z-0 opacity-50">
+          <video
+            src={src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
+          />
+        </div>
+
+        {/* Capa Frente: Video original */}
+        <video
+          src={src}
+          className="relative z-10 w-full h-full object-contain"
+          controls
+          muted
+          loop
+          playsInline
+        >
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
     )
   }
 

@@ -1,8 +1,8 @@
 // src/lib/schemas.ts
 import { z } from 'zod';
 
-export const MAX_IMG_SIZE_MB = 10;
-export const MAX_VIDEO_SIZE_MB = 200;
+export const MAX_IMG_SIZE_MB = 50;
+export const MAX_VIDEO_SIZE_MB = 2048;
 
 export const MAX_IMG_SIZE   = MAX_IMG_SIZE_MB  * 1024 * 1024;
 export const MAX_VIDEO_SIZE = MAX_VIDEO_SIZE_MB * 1024 * 1024;
@@ -32,11 +32,12 @@ export const MedioSchema = z.object({
       }
 
       if (isImage && file.size > MAX_IMG_SIZE) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'La imagen no puede superar 10 MB' });
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `La imagen no puede superar ${MAX_IMG_SIZE_MB} MB` });
       }
 
       if (isVideo && file.size > MAX_VIDEO_SIZE) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'El video no puede superar 200 MB' });
+        const sizeMsg = MAX_VIDEO_SIZE_MB >= 1024 ? `${MAX_VIDEO_SIZE_MB / 1024} GB` : `${MAX_VIDEO_SIZE_MB} MB`;
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `El video no puede superar ${sizeMsg}` });
       }
     }),
 
@@ -48,7 +49,7 @@ export const MedioSchema = z.object({
       if (!file.type.startsWith('image/')) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'La miniatura debe ser una imagen' });
       } else if (file.size > MAX_IMG_SIZE) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'La miniatura no puede superar 10 MB' });
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `La miniatura no puede superar ${MAX_IMG_SIZE_MB} MB` });
       }
     }),
 

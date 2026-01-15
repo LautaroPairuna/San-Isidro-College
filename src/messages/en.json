@@ -203,6 +203,14 @@
       "carouselAlt": "SIC Dojo carousel",
       "fallbackAlt": "SIC Dojo background"
     },
+    "gym": {
+      "logoAlt": "Gym logo",
+      "title": "SAN ISIDRO BALANCE",
+      "description": "San Isidro Balance is a comprehensive training and wellness space designed to support the school’s students and also open to parents and teachers who want to reach their full physical potential. \n\n Here we combine high-quality training, specific physical conditioning, skill work, and nutritional support, integrating everything a modern gym offers within a professional and well-cared-for program. Each activity is designed to enhance performance, prevent injuries, and promote healthy habits. \n\n San Isidro Balance is movement, balance, and evolution.",
+      "descriptionMobile": "San Isidro Balance is a comprehensive training and wellness space designed to support the school’s students and also open to parents and teachers who want to reach their full physical potential.",
+      "carouselAlt": "San Isidro Balance carousel",
+      "fallbackAlt": "San Isidro Balance background"
+    },
     "vida": {
       "title": "STUDENT LIFE",
       "description": "San Isidro College fosters a positive and dynamic environment where students can fully develop, guided by core values. We prepare our students for the 21st century by teaching them how to manage stress, be resilient, and be test-ready, with the support of the Student Services Department and tutoring.",

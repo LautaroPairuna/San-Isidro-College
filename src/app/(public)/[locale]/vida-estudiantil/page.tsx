@@ -20,6 +20,7 @@ const RUGBY_HOCKEY_GROUP_ID     = 9   // carrusel Club de Rugby y Hockey
 const DOJO_GROUP_ID             = 10  // carrusel SIC Dojo
 const VIDA_ESTUDIANTIL_GROUP_ID = 11  // carrusel Vida Estudiantil
 const PLAY_GROUP_ID             = 12  // carrusel San Isidro Play
+const GYM_GROUP_ID             = 13  // carrusel Gimnasio
 
 /*  Tipado mínimo para que TypeScript esté contento  */
 type MedioMinimal = {
@@ -51,6 +52,11 @@ export default function DeportesPage() {
     error: eDojo,
   } = useMedios(DOJO_GROUP_ID)
   const {
+    data: gymMediaRaw          = [],
+    isLoading: lGym,
+    error: eGym,
+  } = useMedios(GYM_GROUP_ID)
+  const {
     data: vidaMediaRaw          = [],
     isLoading: lVida,
     error: eVida,
@@ -61,7 +67,7 @@ export default function DeportesPage() {
     error: ePlay,
   } = useMedios(PLAY_GROUP_ID)
 
-  const isLoading = lHero || lRH || lDojo || lVida || lPlay
+  const isLoading = lHero || lRH || lDojo || lVida || lPlay || lGym
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center text-xl text-gray-600">
@@ -74,6 +80,7 @@ export default function DeportesPage() {
     eHero  && t('errors.hero', { msg: eHero.message }),
     eRH    && t('errors.rugbyHockey', { msg: eRH.message }),
     eDojo  && t('errors.dojo', { msg: eDojo.message }),
+    eGym  && t('errors.gym', { msg: eGym.message }),
     eVida  && t('errors.vidaEstudiantil', { msg: eVida.message }),
     ePlay  && t('errors.play', { msg: ePlay.message }),
   ].filter(Boolean)
@@ -96,6 +103,7 @@ export default function DeportesPage() {
   const heroMedia        = filterImgOrVideo(heroMediaRaw)
   const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
   const dojoMedia        = filterImgOrVideo(dojoMediaRaw)
+  const gymMedia        = filterImgOrVideo(gymMediaRaw)
   const vidaMedia        = filterImgOrVideo(vidaMediaRaw)
   const playMedia        = filterImgOrVideo(playMediaRaw)
 
@@ -117,7 +125,7 @@ export default function DeportesPage() {
           </div>
 
           {/* Slogan + botón (móvil) */}
-          <div className="lg:hidden relative flex justify-between items-end h-full pt-32 pb-12 z-20 md:w-[80%] w-full">
+          <div className="lg:hidden relative flex justify-between items-end h-full pt-40 pb-12 z-20 md:w-[80%] w-full">
             <Image
               src="/images/eslogan.svg"
               alt={t('hero.alt')}
@@ -125,14 +133,6 @@ export default function DeportesPage() {
               height={250}
               className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
             />
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform"
-              target="_blank"
-              className="inline-flex items-center gap-3 px-4 py-2 bg-[#1e804b] text-white rounded-full shadow-lg transition"
-            >
-              <Image src="/images/ico-admisiones.svg" alt={t('admissions.alt')} width={24} height={24} />
-              {t('admissions.label')}
-            </Link>
           </div>
 
           {/* Slogan (desktop) */}
@@ -185,9 +185,6 @@ export default function DeportesPage() {
               </Link>
             </div>
           </div>
-
-          {/* Botón admisiones (desktop) */}
-
         </div>
 
         {/* Forma decorativa escritorio */}
@@ -390,6 +387,102 @@ export default function DeportesPage() {
               <p className="mt-4 text-gray-700">
                 {t('dojo.descriptionMobile')}
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════ SECCIÓN 4 — SAN ISIDRO BALANCE ═════════════ */}
+      <section
+        className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden"
+      >
+        <Image
+          src="/images/formas/forma-home-2.svg"
+          alt=""
+          width={550}
+          height={300}
+          className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+        />
+
+        <div className="relative z-10 grid grid-cols-12 gap-8">
+          {/* Texto (desktop) */}
+          <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
+            <div className="absolute top-5 left-15 w-[650px] z-20">
+              <Image
+                src="/images/logo-gym.svg"
+                alt={t('gym.logoAlt')}
+                width={256}
+                height={256}
+                className="mx-auto mb-5"
+              />
+              <div className="bg-white shadow-xl rounded-xl p-8">
+                <h2 className="text-2xl font-bold text-center">
+                  {t('gym.title')}
+                </h2>
+                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: "pre-line" }}>
+                  {t('gym.description')}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Carrusel (desktop) */}
+          <div className="hidden sm:block col-span-8">
+            {gymMedia.length > 0 ? (
+              <div className="w-full h-[645px]">
+                <MediaCarousel
+                  medias={mapUrls(gymMedia)}
+                  altText={t('gym.carouselAlt')}
+                  className="w-full h-full rounded-xl shadow-lg"
+                />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-SIC-hockey.webp"
+                alt={t('gym.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            )}
+          </div>
+
+          {/* Móvil */}
+          <div className="sm:hidden col-span-12 relative pt-16">
+            {gymMedia.length > 0 ? (
+              <div className="w-full h-[300px]">
+                <MediaCarousel
+                  medias={mapUrls(gymMedia)}
+                  altText={t('gym.carouselAlt')}
+                  className="w-full h-full rounded-md shadow-lg"
+                />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-SIC-hockey.webp"
+                alt={t('gym.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-md shadow-lg"
+              />
+            )}
+
+            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
+              <Image
+                src="/images/logo-gym.svg"
+                alt={t('gym.logoAlt')}
+                width={256}
+                height={256}
+                className="mx-auto mb-5"
+              />
+              <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
+                <h2 className="text-xl font-bold">
+                  {t('gym.title')}
+                </h2>
+                <p className="mt-4 text-gray-700" style={{ whiteSpace: "pre-line" }}>
+                  {t('gym.descriptionMobile')}
+                </p>
+              </div>
             </div>
           </div>
         </div>

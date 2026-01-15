@@ -55,11 +55,9 @@ export default function FileDropZone({
 
       /* 3. Validar tamaño */
       if (f.size > maxBytes) {
-        setError(
-          `El ${isVideo ? 'video' : 'archivo'} no puede superar ${
-            isVideo ? MAX_VIDEO_SIZE_MB : MAX_IMG_SIZE_MB
-          } MB.`
-        )
+        const limitMB = isVideo ? MAX_VIDEO_SIZE_MB : MAX_IMG_SIZE_MB
+        const limitStr = limitMB >= 1024 ? `${limitMB / 1024} GB` : `${limitMB} MB`
+        setError(`El ${isVideo ? 'video' : 'archivo'} no puede superar ${limitStr}.`)
         return
       }
 
@@ -218,13 +216,13 @@ export default function FileDropZone({
               {allowedTypes.includes('IMAGEN') && (
                 <div className="flex flex-col items-center gap-1">
                   <HiPhotograph className="w-4 h-4 text-gray-400" />
-                  <span>Imágenes máx. {MAX_IMG_SIZE_MB} MB</span>
+                  <span>Imágenes máx. {MAX_IMG_SIZE_MB >= 1024 ? `${MAX_IMG_SIZE_MB / 1024} GB` : `${MAX_IMG_SIZE_MB} MB`}</span>
                 </div>
               )}
               {allowedTypes.includes('VIDEO') && (
                 <div className="flex flex-col items-center gap-1">
                   <HiFilm className="w-4 h-4 text-gray-400" />
-                  <span>Videos máx. {MAX_VIDEO_SIZE_MB} MB</span>
+                  <span>Videos máx. {MAX_VIDEO_SIZE_MB >= 1024 ? `${MAX_VIDEO_SIZE_MB / 1024} GB` : `${MAX_VIDEO_SIZE_MB} MB`}</span>
                 </div>
               )}
             </div>
