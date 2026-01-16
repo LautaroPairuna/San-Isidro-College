@@ -82,7 +82,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   return (
     <div
       ref={carouselContainerRef}
-      className={`relative w-full overflow-hidden h-auto sm:h-full ${className}`}
+      className={`relative w-full overflow-hidden h-full ${className}`}
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -95,6 +95,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         className="flex h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
+<<<<<<< HEAD
         {medias.map((src, idx) => {
           const isVideo = src.toLowerCase().endsWith('.mp4')
           return (
@@ -148,6 +149,33 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
             </div>
           )
         })}
+=======
+        {medias.map((src, idx) => (
+          <div
+            key={idx}
+            className="min-w-full relative aspect-auto h-full"
+          >
+            {src.toLowerCase().endsWith('.mp4') ? (
+              <video
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Image
+                src={src}
+                alt={altText}
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
+            )}
+          </div>
+        ))}
+>>>>>>> 012c3608f9c8d062b7cc455b9e38d0f6e22323c7
       </div>
 
       {/* Controles */}

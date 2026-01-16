@@ -2,10 +2,14 @@
 import { z } from 'zod';
 
 export const MAX_IMG_SIZE_MB = 50;
+<<<<<<< HEAD
 export const MAX_VIDEO_SIZE_MB = 2048;
+=======
+export const MAX_VIDEO_SIZE_MB = 2;
+>>>>>>> 012c3608f9c8d062b7cc455b9e38d0f6e22323c7
 
 export const MAX_IMG_SIZE   = MAX_IMG_SIZE_MB  * 1024 * 1024;
-export const MAX_VIDEO_SIZE = MAX_VIDEO_SIZE_MB * 1024 * 1024;
+export const MAX_VIDEO_SIZE = MAX_VIDEO_SIZE_MB * 1024 * 1024 * 1024;
 
 /* ---------- GrupoMedios SIN CAMBIOS ---------- */
 export const GrupoMediosSchema = z.object({

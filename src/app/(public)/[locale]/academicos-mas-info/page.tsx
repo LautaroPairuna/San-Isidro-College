@@ -26,7 +26,7 @@ export default function AcademicosMasInfoPage() {
             {t('proyectoTitulo')}
           </h2>
 
-          <div className="space-y-4 leading-relaxed text-gray-800">
+          <div className="space-y-4 leading-relaxed text-gray-800 text-justify">
             <p>{t('introduccion.p1')}</p>
             <p>{t('introduccion.p2')}</p>
             <p>{t('introduccion.p3')}</p>
@@ -37,7 +37,7 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Inglés, Indispensable */}
-          <div className="space-y-4 mt-10">
+          <div className="space-y-4 mt-10 text-justify">
             <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
               {t('inglesTitulo')}
             </h3>
@@ -48,13 +48,13 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Kindergarten */}
-          <div className="space-y-4 mt-32 relative" id="kindergarten">
+          <div className="space-y-4 mt-32 relative text-justify">
             <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
               {t('kindergarten.titulo')}
             </h3>
             <p>{t('kindergarten.p1')}</p>
             <p>{t('kindergarten.p2')}</p>
-            <p>{t('kindergarten.p3')}</p>
+            <p id="kindergarten">{t('kindergarten.p3')}</p>
             <p className="font-bold leading-relaxed text-gray-800">
               {t('kindergarten.bold')}
             </p>
@@ -90,15 +90,15 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Primary */}
-          <div id="primary" className="space-y-4 relative mt-32">
-            <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
+          <div className="space-y-4 relative mt-32 text-justify">
+            <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil" >
               {t('primary.titulo')}
             </h3>
             <p className="font-bold leading-relaxed text-gray-800 mb-4 text-xl">
               {t('primary.subtitulo')}
             </p>
             <p>{t('primary.p1')}</p>
-            <p>{t('primary.p2')}</p>
+            <p id="primary">{t('primary.p2')}</p>
             <p>{t('primary.p3')}</p>
             <p>{t('primary.p4')}</p>
 
@@ -123,7 +123,7 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           {/* Secondary */}
-          <div id="secondary" className="space-y-4 mt-32">
+          <div className="space-y-4 mt-32 text-justify" id="secondary">
             <h3 className="text-4xl md:text-5xl font-bold my-6 text-gray-800 text-shadow-bold-movil">
               {t('secondary.titulo')}
             </h3>
