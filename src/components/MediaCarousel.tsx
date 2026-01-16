@@ -102,47 +102,44 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
               key={idx}
               className="min-w-full relative h-full overflow-hidden bg-gray-900"
             >
-              <div className="absolute inset-0 z-0 opacity-50">
-                {isVideo ? (
-                  <video
-                    src={src}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
-                  />
-                ) : (
+              {isVideo ? (
+                <>
+                  {/* Fondo blur solo para video */}
+                  <div className="absolute inset-0 z-0 opacity-50">
+                    <video
+                      src={src}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
+                    />
+                  </div>
+                  {/* Video principal contained */}
+                  <div className="relative z-10 w-full h-full shadow-xl">
+                    <video
+                      src={src}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </>
+              ) : (
+                /* Imagen normal (cover) sin blur de fondo */
+                <div className="relative z-10 w-full h-full">
                   <Image
                     src={src}
                     alt={altText}
                     fill
-                    className="object-cover blur-xl scale-110 pointer-events-none"
-                    sizes="50vw"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                    priority={idx === 0}
                   />
-                )}
-              </div>
-
-              <div className="relative z-10 w-full h-full shadow-xl">
-                {isVideo ? (
-                  <video
-                    src={src}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <Image
-                    src={src}
-                    alt={altText}
-                    fill
-                    className="object-contain"
-                    sizes="100vw"
-                  />
-                )}
-              </div>
+                </div>
+              )}
             </div>
           );
         })}
