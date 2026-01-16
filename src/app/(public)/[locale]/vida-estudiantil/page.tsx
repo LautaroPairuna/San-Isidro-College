@@ -409,7 +409,7 @@ export default function DeportesPage() {
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
             <div className="absolute top-5 left-15 w-[650px] z-20">
               <Image
-                src="/images/logo-gym.svg"
+                src="/images/logo-gym-2.svg"
                 alt={t('gym.logoAlt')}
                 width={256}
                 height={256}
@@ -469,7 +469,7 @@ export default function DeportesPage() {
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
               <Image
-                src="/images/logo-gym.svg"
+                src="/images/logo-gym-2.svg"
                 alt={t('gym.logoAlt')}
                 width={256}
                 height={256}
