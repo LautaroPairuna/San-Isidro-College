@@ -222,11 +222,7 @@ export default function FileDropZone({
               {allowedTypes.includes('VIDEO') && (
                 <div className="flex flex-col items-center gap-1">
                   <HiFilm className="w-4 h-4 text-gray-400" />
-<<<<<<< HEAD
                   <span>Videos máx. {MAX_VIDEO_SIZE_MB >= 1024 ? `${MAX_VIDEO_SIZE_MB / 1024} GB` : `${MAX_VIDEO_SIZE_MB} MB`}</span>
-=======
-                  <span>Videos máx. {MAX_VIDEO_SIZE_MB} GB</span>
->>>>>>> 012c3608f9c8d062b7cc455b9e38d0f6e22323c7
                 </div>
               )}
             </div>
