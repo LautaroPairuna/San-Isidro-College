@@ -10,7 +10,7 @@ export const MAX_VIDEO_SIZE = MAX_VIDEO_SIZE_MB * 1024 * 1024;
 /* ---------- GrupoMedios SIN CAMBIOS ---------- */
 export const GrupoMediosSchema = z.object({
   nombre: z.string().trim().min(1, 'El nombre es obligatorio').max(100, 'Máximo 100 caracteres'),
-  tipoGrupo: z.enum(['CARRUSEL', 'GALERIA', 'UNICO'], { errorMap: () => ({ message: 'Selecciona un tipo de grupo' }) }),
+  tipoGrupo: z.enum(['CARRUSEL', 'GALERIA', 'UNICO'], { message: 'Selecciona un tipo de grupo' }),
 });
 export type GrupoMediosForm = z.infer<typeof GrupoMediosSchema>;
 
@@ -55,13 +55,13 @@ export const MedioSchema = z.object({
 
   textoAlternativo: z.string().trim().max(200, 'Máximo 200 caracteres').optional(),
 
-  tipo: z.enum(['IMAGEN', 'VIDEO', 'ICONO'], { errorMap: () => ({ message: 'Selecciona un tipo de medio' }) }),
+  tipo: z.enum(['IMAGEN', 'VIDEO', 'ICONO'], { message: 'Selecciona un tipo de medio' }),
 
-  posicion: z.number({ invalid_type_error: 'Debe ser un número' })
+  posicion: z.number({ message: 'Debe ser un número' })
             .int('Debe ser un entero')
             .min(0, 'No puede ser negativa'),
 
-  grupoMediosId: z.number({ invalid_type_error: 'Selecciona un grupo' })
+  grupoMediosId: z.number({ message: 'Selecciona un grupo' })
                   .int()
                   .positive('Debe ser mayor que cero'),
 });

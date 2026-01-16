@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 const nextConfig: NextConfig = {
   // Para rutas del mismo origen no necesitás remotePatterns
   images: {},
+  serverExternalPackages: ['prisma', '@prisma/client'],
 
   async rewrites() {
     return [
