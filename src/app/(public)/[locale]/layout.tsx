@@ -25,8 +25,8 @@ export const metadata = {
 };
 
 type Props = {
-  // Next.js 15: params es asincrónico y debe ser awaited
-  params: Promise<{ locale: 'en' | 'es' }>;
+  // Next.js 15+: params es asincrónico
+  params: Promise<{ locale: string }>;
   children: ReactNode;
 };
 
