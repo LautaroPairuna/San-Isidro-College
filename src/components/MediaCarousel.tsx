@@ -116,7 +116,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                     />
                   </div>
                   {/* Video principal contained */}
-                  <div className="relative z-10 w-full h-full shadow-xl">
+                  <div className="absolute inset-0 z-10 w-full h-full shadow-xl">
                     <video
                       src={src}
                       autoPlay

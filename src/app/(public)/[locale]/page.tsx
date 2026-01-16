@@ -103,7 +103,7 @@ const HomePage: NextPage = () => {
         </div>
 
         {/* --- Columna Derecha: carrusel de heroMedia --- */}
-        <div className="col-span-7 relative w-full h-full max-sm:col-span-12 max-sm:h-[60vh]">
+        <div className="col-span-7 relative w-full h-full max-sm:col-span-12 max-sm:h-[60vh] overflow-hidden">
           {heroMedia.length > 0 ? (
             <MediaCarousel
               medias={heroMedia.map((m) => `/images/medios/${m.urlArchivo}`)}
