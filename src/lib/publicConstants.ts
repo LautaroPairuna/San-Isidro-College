@@ -2,18 +2,18 @@
 
 /**
  * URL base pública para IMÁGENES.
- * Puede venir de ENV (NEXT_PUBLIC_...) o por defecto '/images'.
- * IMPORTANTE: No importar 'path' ni 'fs' aquí para que sea seguro en Cliente.
+ * Usamos el endpoint '/api/disk-images/images' por defecto para garantizar
+ * que se lean los archivos recién subidos (bypass de caché estática de Next.js).
  */
 export const IMAGE_PUBLIC_URL =
-  process.env.NEXT_PUBLIC_MEDIA_URL_IMAGES || '/images';
+  process.env.NEXT_PUBLIC_MEDIA_URL_IMAGES || '/api/disk-images/images';
 
 /**
  * URL base pública para VIDEOS.
- * Puede venir de ENV (NEXT_PUBLIC_...) o por defecto '/uploads/media'.
+ * Usamos el endpoint '/api/disk-images/uploads/media' por defecto.
  */
 export const MEDIA_PUBLIC_URL =
-  process.env.NEXT_PUBLIC_MEDIA_URL_UPLOADS || '/uploads/media';
+  process.env.NEXT_PUBLIC_MEDIA_URL_UPLOADS || '/api/disk-images/uploads/media';
 
 /* ─────────────────────────────────────────────────────────────────
    MAPEOS PRISMA ↔ CARPETAS (Safe for Client)

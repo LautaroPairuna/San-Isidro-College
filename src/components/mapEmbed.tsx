@@ -37,15 +37,9 @@ export default function MapEmbed() {
           title="Ubicación del colegio"
         />
       ) : (
-        <Image
-          src="/ruta/a/tu/imagen-estatica-del-mapa.jpg"
-          alt="Mapa del colegio (vista previa)"
-          fill
-          style={{ objectFit: "cover" }}
-          placeholder="blur"
-          blurDataURL="/placeholder.png"
-          className="rounded-lg shadow-lg"
-        />
+        <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg shadow-lg flex items-center justify-center">
+          <span className="text-gray-400">Cargando mapa...</span>
+        </div>
       )}
     </div>
   );

@@ -67,18 +67,23 @@ const RenderMedia = memo(function RenderMedia({
 }: Props) {
   // Si no hay objeto `medio`, o no tiene urlArchivo válida, usamos fallback como imagen
   if (!medio?.urlArchivo) {
+    const isFallbackDynamic = fallback.startsWith('/api/disk-images')
     return (
       <Image
         src={fallback}
         alt="Media Fallback"
         {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
         className={className}
+        unoptimized={isFallbackDynamic}
       />
     )
   }
 
   // Construir la URL pública del archivo: usamos el helper cliente-safe
   const src = toPublicImageUrl('medios', medio.urlArchivo)
+  // Si usamos el proxy de disco (/api/disk-images), desactivamos la optimización de Next
+  // porque el archivo ya es WebP optimizado y Next no puede leerlo del sistema de archivos estático.
+  const isDynamic = src.startsWith('/api/disk-images')
 
   // Si el tipo es VIDEO
   if (medio.tipo === 'VIDEO') {
@@ -135,6 +140,7 @@ const RenderMedia = memo(function RenderMedia({
       alt={medio.textoAlternativo ?? 'Media Image'}
       {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
       className={className}
+      unoptimized={isDynamic}
     />
   )
 })
