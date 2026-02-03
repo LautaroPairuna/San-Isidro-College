@@ -85,6 +85,8 @@ export async function GET(
       }
 
       // Validación en BD: sólo aplica a Medio (tu lógica original)
+      // DESACTIVADA TEMPORALMENTE PARA DEBUGGEAR 404 EN PRODUCCION
+      /*
       if (tableName === "Medio") {
         const isThumb = rest[0] === "thumbs";
         const where = isThumb
@@ -93,9 +95,11 @@ export async function GET(
 
         const exists = await prisma.medio.findFirst({ where, select: { id: true } });
         if (!exists) {
+          console.error('DB check failed for:', fileName);
           return NextResponse.json({ error: "Archivo no registrado en BD" }, { status: 404 });
         }
       }
+      */
 
       const physicalFolder = resolveFolderAlias(folderReq); // normaliza 'media' -> 'medios'
       absPath = safeJoin(IMAGE_PUBLIC_DIR, physicalFolder, ...rest);
@@ -125,6 +129,7 @@ export async function GET(
     }
 
     if (!existsSync(absPath)) {
+      console.error('File missing at:', absPath);
       return NextResponse.json({ error: "Fichero no encontrado" }, { status: 404 });
     }
     const st = statSync(absPath);
