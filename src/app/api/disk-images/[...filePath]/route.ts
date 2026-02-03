@@ -13,8 +13,8 @@ import {
   IMAGE_PUBLIC_DIR,
   MEDIA_UPLOAD_DIR,
   tableForFolder,
-  resolveFolderAlias,
 } from "@/lib/adminConstants";
+import { resolveFolderAlias } from "@/lib/publicConstants";
 
 import { prisma } from "@/lib/prisma";
 

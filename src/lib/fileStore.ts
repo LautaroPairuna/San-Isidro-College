@@ -4,8 +4,9 @@ import fs from 'fs/promises'
 import path from 'path'
 import sharp from 'sharp'
 import slugify from 'slugify'
+import { IMAGE_PUBLIC_DIR } from '@/lib/adminConstants'
 
-const PUBLIC_IMAGES = path.join(process.cwd(), 'public', 'images')
+const PUBLIC_IMAGES = IMAGE_PUBLIC_DIR
 
 /**
  * Asegura que existan las carpetas:

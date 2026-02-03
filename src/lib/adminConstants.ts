@@ -1,5 +1,16 @@
 // src/lib/adminConstants.ts
 import path from 'path';
+import { 
+  folderNames, 
+  type PrismaTable, 
+  toPublicImageUrl as clientToPublicImageUrl,
+  toPublicMediaUrl as clientToPublicMediaUrl,
+  IMAGE_PUBLIC_URL as CLIENT_IMAGE_URL,
+  MEDIA_PUBLIC_URL as CLIENT_MEDIA_URL,
+  resolveFolderAlias
+} from './publicConstants';
+
+export { folderNames, type PrismaTable, resolveFolderAlias } from './publicConstants';
 
 /* ─────────────────────────────────────────────────────────────────
    BASES DE RUTAS (con override por ENV para Docker/EasyPanel)
@@ -12,8 +23,9 @@ export const IMAGE_PUBLIC_DIR =
   process.env.MEDIA_DIR_IMAGES || path.join(CWD, 'public', 'images');
 
 /** Prefijo público para IMÁGENES. Ej.: /images */
+// Usamos la del cliente si está disponible, o la de servidor, o fallback
 export const IMAGE_PUBLIC_URL =
-  process.env.MEDIA_URL_IMAGES || '/images';
+  process.env.MEDIA_URL_IMAGES || CLIENT_IMAGE_URL;
 
 /** Carpeta pública raíz de UPLOADS (binarios sin procesar). */
 export const UPLOADS_DIR =
@@ -25,40 +37,15 @@ export const MEDIA_UPLOAD_DIR =
 
 /** Prefijo público de VIDEOS subidos. Ej.: /uploads/media */
 export const MEDIA_PUBLIC_URL =
-  process.env.MEDIA_URL_UPLOADS || '/uploads/media';
+  process.env.MEDIA_URL_UPLOADS || CLIENT_MEDIA_URL;
 
-/* ─────────────────────────────────────────────────────────────────
-   MAPEOS PRISMA ↔ CARPETAS (para IMÁGENES bajo /public/images)
-   ─────────────────────────────────────────────────────────────────
-   Nota: en FS usamos plural "medios" y "grupos".
-   Esto coincide con lo que espera el front: /images/medios, /images/grupos
-*/
 
-export const folderNames = {
-  /** Archivos (imágenes/íconos/videos) pertenecientes a la tabla Prisma `Medio` */
-  Medio: 'medios',
-  /** `GrupoMedios` no persiste archivos, pero lo dejamos por consistencia */
-  GrupoMedios: 'grupos',
-} as const;
-
-export type PrismaTable = keyof typeof folderNames;
-
-/**
- * Inverso: dado el nombre de carpeta, devolver la tabla Prisma.
- * Ej.: { "medios": "Medio", "grupos": "GrupoMedios" }
- */
+// Re-exportamos helpers de carpetas inversas (tableForFolder)
+// Como adminConstants es server-side (tiene 'path'), podemos definirlo aquí si se usa,
+// pero tableForFolder depende de folderNames que ya importamos.
 export const tableForFolder: Record<string, PrismaTable> = Object.fromEntries(
   Object.entries(folderNames).map(([tbl, folder]) => [folder, tbl as PrismaTable])
 ) as Record<string, PrismaTable>;
-
-/**
- * Alias comunes para tolerar singular "media" → carpeta física "medios".
- * Útil si alguna data antigua quedó guardada con /images/media/...
- */
-export function resolveFolderAlias(folder: string): string {
-  if (folder === 'media') return 'medios';
-  return folder;
-}
 
 /* ─────────────────────────────────────────────────────────────────
    ENDPOINTS de la API de administración (en español)
@@ -79,10 +66,6 @@ export const API_MEDIO_ID = (id: number | string) =>
 /**
  * Ruta absoluta a una imagen dentro de:
  *   IMAGE_PUBLIC_DIR/<folder>/<...segments>
- *
- * `folder` puede ser:
- *  - una clave Prisma ('Medio' | 'GrupoMedios'), o
- *  - el nombre de carpeta final ('medios' | 'grupos' | 'media' alias)
  */
 export function getImageAbsolutePath(
   folder: PrismaTable | string,
@@ -97,51 +80,29 @@ export function getImageAbsolutePath(
 }
 
 /**
- * URL pública de una imagen:
- *   IMAGE_PUBLIC_URL/<folder>/<...segments>
+ * URL pública de una imagen (Server-side wrapper).
+ * Mantiene compatibilidad con firma (...segments).
  */
 export function toPublicImageUrl(
   folder: PrismaTable | string,
   ...segments: string[]
 ): string {
-  const folderName =
-    (folder as PrismaTable) in folderNames
-      ? folderNames[folder as PrismaTable]
-      : resolveFolderAlias(String(folder));
-
-  const base = IMAGE_PUBLIC_URL.replace(/\/$/, '');
-  return [base, folderName, ...segments].join('/').replace(/\/{2,}/g, '/');
+  // Reutilizamos lógica de cliente pero adaptada a segments
+  const filename = segments.join('/');
+  return clientToPublicImageUrl(folder, filename);
 }
 
 /**
- * Ruta absoluta a un archivo de VIDEO dentro de MEDIA_UPLOAD_DIR:
- *   MEDIA_UPLOAD_DIR/<...segments>
+ * Ruta absoluta a un archivo de VIDEO dentro de MEDIA_UPLOAD_DIR
  */
 export function getUploadAbsolutePath(...segments: string[]): string {
   return path.join(MEDIA_UPLOAD_DIR, ...segments);
 }
 
 /**
- * URL pública de un VIDEO:
- *   MEDIA_PUBLIC_URL/<...segments>
+ * URL pública de un VIDEO (Server-side wrapper).
  */
 export function toPublicMediaUrl(...segments: string[]): string {
-  const base = MEDIA_PUBLIC_URL.replace(/\/$/, '');
-  return [base, ...segments].join('/').replace(/\/{2,}/g, '/');
+  const filename = segments.join('/');
+  return clientToPublicMediaUrl(filename);
 }
-
-/* ─────────────────────────────────────────────────────────────────
-   EJEMPLOS (comentados)
-   ─────────────────────────────────────────────────────────────────
-   getImageAbsolutePath('Medio', ['thumbs', 'logo.webp'])
-     → /app/public/images/medios/thumbs/logo.webp
-
-   toPublicImageUrl('Medio', 'logo.webp')
-     → /images/medios/logo.webp
-
-   getUploadAbsolutePath('video-123.mp4')
-     → /app/public/uploads/media/video-123.mp4
-
-   toPublicMediaUrl('video-123.mp4')
-     → /uploads/media/video-123.mp4
-*/

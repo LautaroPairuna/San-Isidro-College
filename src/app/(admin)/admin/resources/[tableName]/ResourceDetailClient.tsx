@@ -21,7 +21,7 @@ import { FaPlus, FaTrash, FaPencilAlt, FaEye } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import FileDropZone from '@/components/ui/FileDropZone'
-import { folderNames } from '@/lib/adminConstants'
+import { folderNames, toPublicImageUrl } from '@/lib/publicConstants'
 import {
   useCreateGrupoMedios,
   useUpdateGrupoMedios,
@@ -1162,7 +1162,7 @@ const FormModal = memo(function FormModal({
                   className="flex-1"
                   onFileSelected={field.onChange}
                   currentSrc={
-                    isEditing ? `/images/medios/${(initialData as MedioType).urlArchivo}` : undefined
+                    isEditing ? toPublicImageUrl('medios', (initialData as MedioType).urlArchivo) : undefined
                   }
                   currentTipo={isEditing ? (initialData as MedioType).tipo : undefined}
                 />
@@ -1184,7 +1184,7 @@ const FormModal = memo(function FormModal({
                   className="flex-1"
                   onFileSelected={field.onChange}
                   currentSrc={
-                    isEditing ? `/images/medios/${(initialData as MedioType).urlMiniatura}` : undefined
+                    isEditing ? toPublicImageUrl('medios', (initialData as MedioType).urlMiniatura || '') : undefined
                   }
                   currentTipo="IMAGEN"
                   allowedTypes={['IMAGEN']}

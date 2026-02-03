@@ -1,6 +1,7 @@
 // src/components/RenderMedia.tsx
 import React, { memo } from 'react'
 import Image from 'next/image'
+import { toPublicImageUrl } from '@/lib/publicConstants'
 
 /**
  * Tipo mínimo que RenderMedia necesita para funcionar.
@@ -76,8 +77,8 @@ const RenderMedia = memo(function RenderMedia({
     )
   }
 
-  // Construir la URL pública del archivo: asumimos que los medios se sirven desde /images/medios/
-  const src = `/images/medios/${medio.urlArchivo}`
+  // Construir la URL pública del archivo: usamos el helper cliente-safe
+  const src = toPublicImageUrl('medios', medio.urlArchivo)
 
   // Si el tipo es VIDEO
   if (medio.tipo === 'VIDEO') {

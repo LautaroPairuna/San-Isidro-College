@@ -8,7 +8,7 @@ import fs from "fs/promises";
 import path from "path";
 import slugify from "slugify";
 import sharp from "sharp";
-import { folderNames, type PrismaTable } from "@/lib/adminConstants";
+import { folderNames, type PrismaTable, IMAGE_PUBLIC_DIR } from "@/lib/adminConstants";
 import { prisma } from "@/lib/prisma";
 
 const FILE_FIELD = "urlArchivo";
@@ -130,7 +130,7 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
   }
 
   /* Directorios comunes */
-  const baseDir = path.join(process.cwd(), "public", "images");
+  const baseDir = IMAGE_PUBLIC_DIR;
   const tbl: PrismaTable = tableName === "GrupoMedios" ? "GrupoMedios" : "Medio";
   const keyDir = folderNames[tbl];
   const dir = path.join(baseDir, keyDir);

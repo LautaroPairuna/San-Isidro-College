@@ -10,6 +10,7 @@ import React, {
 } from 'react';
 import Image from 'next/image';
 import { useMedios } from '@/lib/hooks';
+import { toPublicImageUrl } from '@/lib/publicConstants';
 
 type Slide = { src: string; alt: string };
 
@@ -46,7 +47,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
       .filter((m) => m.tipo === 'ICONO' || m.tipo === 'IMAGEN')
       .sort((a, b) => a.posicion - b.posicion)
       .map((m) => ({
-        src: `/images/medios/${m.urlArchivo}`,
+        src: toPublicImageUrl('medios', m.urlArchivo),
         alt: m.textoAlternativo ?? '',
       }));
 
