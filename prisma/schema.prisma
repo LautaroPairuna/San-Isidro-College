@@ -80,4 +80,6 @@ model Seccion {
   actualizadoEn DateTime     @updatedAt
 
   @@index([pagina, orden])
+
+  @@map("seccion")
 }
