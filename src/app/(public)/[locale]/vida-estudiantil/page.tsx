@@ -5,29 +5,34 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
-import { useMedios } from '@/lib/hooks'
+import { usePageContent } from '@/lib/hooks'
 import MediaCarousel from '@/components/MediaCarousel'
 
 const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
 const SectionCarrusel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
 
 /* --------------------------------------------------------------------
- *  GRUPOS DE MEDIOS  (reemplaza los IDs por los que hayas creado
- *  en tu panel de administración).
+ *  SLUGS DE SECCIONES (Coinciden con DB)
  * ------------------------------------------------------------------*/
-const HERO_GROUP_ID             = 8   // carrusel “Deportes” (hero)
-const RUGBY_HOCKEY_GROUP_ID     = 9   // carrusel Club de Rugby y Hockey
-const DOJO_GROUP_ID             = 10  // carrusel SIC Dojo
-const VIDA_ESTUDIANTIL_GROUP_ID = 11  // carrusel Vida Estudiantil
-const PLAY_GROUP_ID             = 12  // carrusel San Isidro Play
-const GYM_GROUP_ID             = 13  // carrusel Gimnasio
+const SECTION_SLUGS = {
+  HERO: 'vida-estudiantil-hero',
+  RUGBY: 'vida-estudiantil-rugby',
+  DOJO: 'vida-estudiantil-dojo',
+  GYM: 'vida-estudiantil-gym',
+  BIENESTAR: 'vida-estudiantil-bienestar',
+  PLAY: 'vida-estudiantil-play',
+} as const
 
-/*  Tipado mínimo para que TypeScript esté contento  */
-type MedioMinimal = {
+/**
+ * Tipo mínimo consistente para carruseles (imagen/video/icono).
+ * (No depende de creadoEn/actualizadoEn para evitar fricción de tipado en páginas)
+ */
+type MedioItem = {
   id: number
   urlArchivo: string
-  textoAlternativo?: string
-  tipo: 'IMAGEN' | 'VIDEO'
+  urlMiniatura?: string | null
+  textoAlternativo?: string | null
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
   posicion: number
   grupoMediosId: number
 }
@@ -35,39 +40,21 @@ type MedioMinimal = {
 export default function DeportesPage() {
   const t = useTranslations('vidaEstudiantilHome')
 
-  /* ------------------------------ CARGA DE MEDIOS ------------------------------ */
-  const {
-    data: heroMediaRaw          = [],
-    isLoading: lHero,
-    error: eHero,
-  } = useMedios(HERO_GROUP_ID)
-  const {
-    data: rugbyHockeyMediaRaw   = [],
-    isLoading: lRH,
-    error: eRH,
-  } = useMedios(RUGBY_HOCKEY_GROUP_ID)
-  const {
-    data: dojoMediaRaw          = [],
-    isLoading: lDojo,
-    error: eDojo,
-  } = useMedios(DOJO_GROUP_ID)
-  const {
-    data: gymMediaRaw          = [],
-    isLoading: lGym,
-    error: eGym,
-  } = useMedios(GYM_GROUP_ID)
-  const {
-    data: vidaMediaRaw          = [],
-    isLoading: lVida,
-    error: eVida,
-  } = useMedios(VIDA_ESTUDIANTIL_GROUP_ID)
-  const {
-    data: playMediaRaw          = [],
-    isLoading: lPlay,
-    error: ePlay,
-  } = useMedios(PLAY_GROUP_ID)
+  /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
+  const { data: pageSections = [], isLoading, error } = usePageContent('vida-estudiantil')
 
-  const isLoading = lHero || lRH || lDojo || lVida || lPlay || lGym
+  const getMedias = (slug: string): MedioItem[] => {
+    const section = pageSections.find((s: any) => s.slug === slug)
+    return (section?.grupo?.medios ?? []) as MedioItem[]
+  }
+
+  const heroMediaRaw = getMedias(SECTION_SLUGS.HERO)
+  const rugbyHockeyMediaRaw = getMedias(SECTION_SLUGS.RUGBY)
+  const dojoMediaRaw = getMedias(SECTION_SLUGS.DOJO)
+  const gymMediaRaw = getMedias(SECTION_SLUGS.GYM)
+  const vidaMediaRaw = getMedias(SECTION_SLUGS.BIENESTAR)
+  const playMediaRaw = getMedias(SECTION_SLUGS.PLAY)
+
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center text-xl text-gray-600">
@@ -76,42 +63,27 @@ export default function DeportesPage() {
     )
   }
 
-  const errores = [
-    eHero  && t('errors.hero', { msg: eHero.message }),
-    eRH    && t('errors.rugbyHockey', { msg: eRH.message }),
-    eDojo  && t('errors.dojo', { msg: eDojo.message }),
-    eGym  && t('errors.gym', { msg: eGym.message }),
-    eVida  && t('errors.vidaEstudiantil', { msg: eVida.message }),
-    ePlay  && t('errors.play', { msg: ePlay.message }),
-  ].filter(Boolean)
-
-  if (errores.length > 0) {
+  if (error) {
     return (
       <div className="p-6 space-y-2 text-red-600">
         <h2 className="font-bold">{t('errors.title')}</h2>
-        {errores.map((msg, idx) => (
-          <p key={idx}>• {msg}</p>
-        ))}
+        <p>• {(error as Error).message}</p>
       </div>
     )
   }
 
-  /* ------------------------------ FILTRADO SOLO IMAGEN/VIDEO ------------------------------ */
-  const filterImgOrVideo = (arr: typeof heroMediaRaw) =>
-    (arr as MedioMinimal[]).filter(m => m.tipo === 'IMAGEN' || m.tipo === 'VIDEO')
-
-  const heroMedia        = filterImgOrVideo(heroMediaRaw)
-  const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
-  const dojoMedia        = filterImgOrVideo(dojoMediaRaw)
-  const gymMedia        = filterImgOrVideo(gymMediaRaw)
-  const vidaMedia        = filterImgOrVideo(vidaMediaRaw)
-  const playMedia        = filterImgOrVideo(playMediaRaw)
-
-  /* ------------------------------ HELPERS ------------------------------ */
-  const mapUrls = (arr: MedioMinimal[]) =>
+  /* ------------------------------ FILTRADO SOLO IMAGEN/VIDEO Y ORDENAMIENTO ------------------------------ */
+  const filterImgOrVideo = (arr: MedioItem[]) =>
     arr
+      .filter((m) => m.tipo === 'IMAGEN' || m.tipo === 'VIDEO')
       .sort((a, b) => a.posicion - b.posicion)
-      .map((m) => `/images/medios/${m.urlArchivo}`)
+
+  const heroMedia = filterImgOrVideo(heroMediaRaw)
+  const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
+  const dojoMedia = filterImgOrVideo(dojoMediaRaw)
+  const gymMedia = filterImgOrVideo(gymMediaRaw)
+  const vidaMedia = filterImgOrVideo(vidaMediaRaw)
+  const playMedia = filterImgOrVideo(playMediaRaw)
 
   return (
     <div id="container">
@@ -150,18 +122,9 @@ export default function DeportesPage() {
         {/* --- COLUMNA CARRUSEL ------------------------------------------- */}
         <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px]">
           {heroMedia.length > 0 ? (
-            <MediaCarousel
-              medias={mapUrls(heroMedia)}
-              altText={t('hero.carouselAlt')}
-              className="w-full h-full"
-            />
+            <MediaCarousel items={heroMedia} altText={t('hero.carouselAlt')} className="w-full h-full" />
           ) : (
-            <Image
-              src="/images/Image-deportes.webp"
-              alt={t('hero.fallbackAlt')}
-              fill
-              className="object-cover"
-            />
+            <Image src="/images/Image-deportes.webp" alt={t('hero.fallbackAlt')} fill className="object-cover" />
           )}
 
           {/* Recuadro blanco centrado */}
@@ -170,17 +133,10 @@ export default function DeportesPage() {
                         absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                         z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]"
           >
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">
-              {t('hero.title')}
-            </h1>
-            <p className="text-gray-700 mb-4 text-sm md:text-base">
-              {t('hero.description')}
-            </p>
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">{t('hero.title')}</h1>
+            <p className="text-gray-700 mb-4 text-sm md:text-base">{t('hero.description')}</p>
             <div className="text-center mt-5">
-              <Link
-                href="/vida-estudiantil-mas-info"
-                className="text-[#1e804b] font-semibold hover:underline"
-              >
+              <Link href="/vida-estudiantil-mas-info" className="text-[#1e804b] font-semibold hover:underline">
                 {t('hero.readMore')}
               </Link>
             </div>
@@ -198,9 +154,7 @@ export default function DeportesPage() {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
-      <section
-        className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden"
-      >
+      <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
         <Image
           src="/images/formas/forma-home-2.svg"
           alt=""
@@ -221,12 +175,8 @@ export default function DeportesPage() {
                 className="mx-auto mb-5"
               />
               <div className="bg-white shadow-xl rounded-xl p-8">
-                <h2 className="text-2xl font-bold text-center">
-                  {t('rugbyHockey.title')}
-                </h2>
-                <p className="mt-4 text-gray-700 leading-relaxed">
-                  {t('rugbyHockey.description')}
-                </p>
+                <h2 className="text-2xl font-bold text-center">{t('rugbyHockey.title')}</h2>
+                <p className="mt-4 text-gray-700 leading-relaxed">{t('rugbyHockey.description')}</p>
               </div>
             </div>
           </div>
@@ -236,7 +186,7 @@ export default function DeportesPage() {
             {rugbyHockeyMedia.length > 0 ? (
               <div className="w-full h-[645px]">
                 <MediaCarousel
-                  medias={mapUrls(rugbyHockeyMedia)}
+                  items={rugbyHockeyMedia}
                   altText={t('rugbyHockey.carouselAlt')}
                   className="w-full h-full rounded-xl shadow-lg"
                 />
@@ -257,7 +207,7 @@ export default function DeportesPage() {
             {rugbyHockeyMedia.length > 0 ? (
               <div className="w-full h-[300px]">
                 <MediaCarousel
-                  medias={mapUrls(rugbyHockeyMedia)}
+                  items={rugbyHockeyMedia}
                   altText={t('rugbyHockey.carouselAlt')}
                   className="w-full h-full rounded-md shadow-lg"
                 />
@@ -281,12 +231,8 @@ export default function DeportesPage() {
                 className="mx-auto mb-5 w-32"
               />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <h2 className="text-xl font-bold">
-                  {t('rugbyHockey.title')}
-                </h2>
-                <p className="mt-4 text-gray-700">
-                  {t('rugbyHockey.description')}
-                </p>
+                <h2 className="text-xl font-bold">{t('rugbyHockey.title')}</h2>
+                <p className="mt-4 text-gray-700">{t('rugbyHockey.description')}</p>
               </div>
             </div>
           </div>
@@ -308,11 +254,7 @@ export default function DeportesPage() {
             <div className="col-span-8">
               {dojoMedia.length > 0 ? (
                 <div className="w-full h-[645px]">
-                  <MediaCarousel
-                    medias={mapUrls(dojoMedia)}
-                    altText={t('dojo.carouselAlt')}
-                    className="w-full h-full rounded-md shadow-md"
-                  />
+                  <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
                 </div>
               ) : (
                 <Image
@@ -334,12 +276,8 @@ export default function DeportesPage() {
                   className="mx-auto mb-5 w-32"
                 />
                 <div className="bg-white shadow-xl rounded-xl p-8">
-                  <h2 className="text-2xl font-bold text-center">
-                    {t('dojo.title')}
-                  </h2>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
-                    {t('dojo.description')}
-                  </p>
+                  <h2 className="text-2xl font-bold text-center">{t('dojo.title')}</h2>
+                  <p className="mt-4 text-gray-700 leading-relaxed">{t('dojo.description')}</p>
                 </div>
               </div>
             </div>
@@ -357,11 +295,7 @@ export default function DeportesPage() {
           />
           {dojoMedia.length > 0 ? (
             <div className="w-full h-[350px]">
-              <MediaCarousel
-                medias={mapUrls(dojoMedia)}
-                altText={t('dojo.carouselAlt')}
-                className="w-full h-full rounded-md shadow-md"
-              />
+              <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
             </div>
           ) : (
             <Image
@@ -381,21 +315,15 @@ export default function DeportesPage() {
               className="mx-auto mb-5 w-24"
             />
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">
-                {t('dojo.title')}
-              </h2>
-              <p className="mt-4 text-gray-700">
-                {t('dojo.descriptionMobile')}
-              </p>
+              <h2 className="text-xl font-bold">{t('dojo.title')}</h2>
+              <p className="mt-4 text-gray-700">{t('dojo.descriptionMobile')}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 4 — SAN ISIDRO BALANCE ═════════════ */}
-      <section
-        className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden"
-      >
+      <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
         <Image
           src="/images/formas/forma-home-2.svg"
           alt=""
@@ -416,10 +344,8 @@ export default function DeportesPage() {
                 className="mx-auto mb-5"
               />
               <div className="bg-white shadow-xl rounded-xl p-8">
-                <h2 className="text-2xl font-bold text-center">
-                  {t('gym.title')}
-                </h2>
-                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: "pre-line" }}>
+                <h2 className="text-2xl font-bold text-center">{t('gym.title')}</h2>
+                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.description')}
                 </p>
               </div>
@@ -430,11 +356,7 @@ export default function DeportesPage() {
           <div className="hidden sm:block col-span-8">
             {gymMedia.length > 0 ? (
               <div className="w-full h-[645px]">
-                <MediaCarousel
-                  medias={mapUrls(gymMedia)}
-                  altText={t('gym.carouselAlt')}
-                  className="w-full h-full rounded-xl shadow-lg"
-                />
+                <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
               </div>
             ) : (
               <Image
@@ -451,11 +373,7 @@ export default function DeportesPage() {
           <div className="sm:hidden col-span-12 relative pt-16">
             {gymMedia.length > 0 ? (
               <div className="w-full h-[300px]">
-                <MediaCarousel
-                  medias={mapUrls(gymMedia)}
-                  altText={t('gym.carouselAlt')}
-                  className="w-full h-full rounded-md shadow-lg"
-                />
+                <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-md shadow-lg" />
               </div>
             ) : (
               <Image
@@ -468,18 +386,10 @@ export default function DeportesPage() {
             )}
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
-              <Image
-                src="/images/logo-gym-2.svg"
-                alt={t('gym.logoAlt')}
-                width={256}
-                height={256}
-                className="mx-auto mb-5"
-              />
+              <Image src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={256} height={256} className="mx-auto mb-5" />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <h2 className="text-xl font-bold">
-                  {t('gym.title')}
-                </h2>
-                <p className="mt-4 text-gray-700" style={{ whiteSpace: "pre-line" }}>
+                <h2 className="text-xl font-bold">{t('gym.title')}</h2>
+                <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.descriptionMobile')}
                 </p>
               </div>
@@ -504,17 +414,10 @@ export default function DeportesPage() {
           />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
-              <h2 className="text-2xl font-bold text-center">
-                {t('vida.title')}
-              </h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                {t('vida.description')}
-              </p>
+              <h2 className="text-2xl font-bold text-center">{t('vida.title')}</h2>
+              <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.description')}</p>
               <div className="text-center mt-5">
-                <Link
-                  href="/vida-estudiantil-mas-info/#bienestar"
-                  className="text-[#1e804b] font-semibold hover:underline"
-                >
+                <Link href="/vida-estudiantil-mas-info/#bienestar" className="text-[#1e804b] font-semibold hover:underline">
                   {t('vida.readMore')}
                 </Link>
               </div>
@@ -523,11 +426,7 @@ export default function DeportesPage() {
           <div className="col-span-8">
             {vidaMedia.length > 0 ? (
               <div className="w-full h-[645px]">
-                <MediaCarousel
-                  medias={mapUrls(vidaMedia)}
-                  altText={t('vida.carouselAlt')}
-                  className="w-full h-full rounded-xl shadow-lg"
-                />
+                <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
               </div>
             ) : (
               <Image
@@ -552,11 +451,7 @@ export default function DeportesPage() {
           />
           {vidaMedia.length > 0 ? (
             <div className="w-full h-[350px]">
-              <MediaCarousel
-                medias={mapUrls(vidaMedia)}
-                altText={t('vida.carouselAlt')}
-                className="w-full h-full rounded-xl shadow-lg"
-              />
+              <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
             <Image
@@ -569,17 +464,10 @@ export default function DeportesPage() {
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">
-                {t('vida.title')}
-              </h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                {t('vida.descriptionMobile')}
-              </p>
+              <h2 className="text-xl font-bold">{t('vida.title')}</h2>
+              <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.descriptionMobile')}</p>
               <div className="mt-5">
-                <Link
-                  href="/vida-estudiantil-mas-info/#bienestar"
-                  className="text-[#1e804b] font-semibold hover:underline"
-                >
+                <Link href="/vida-estudiantil-mas-info/#bienestar" className="text-[#1e804b] font-semibold hover:underline">
                   {t('vida.readMore')}
                 </Link>
               </div>
@@ -589,10 +477,7 @@ export default function DeportesPage() {
       </section>
 
       {/* ═════════════ SECCIÓN 5 — SAN ISIDRO PLAY ═════════════ */}
-      <section
-        id="play-habilidades-steam"
-        className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-white overflow-hidden"
-      >
+      <section id="play-habilidades-steam" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-white overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <Image
@@ -606,11 +491,7 @@ export default function DeportesPage() {
             <div className="col-span-8 flex items-center justify-center">
               {playMedia.length > 0 ? (
                 <div className="w-full h-[645px]">
-                  <MediaCarousel
-                    medias={mapUrls(playMedia)}
-                    altText={t('play.carouselAlt')}
-                    className="w-full h-full rounded-md shadow-md"
-                  />
+                  <MediaCarousel items={playMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
                 </div>
               ) : (
                 <Image
@@ -631,7 +512,7 @@ export default function DeportesPage() {
                   height={128}
                   className="mx-auto mb-10 w-32"
                 />
-                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: "pre-line" }}>
+                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   <strong>San Isidro Play</strong> {t('play.description')}
                 </p>
               </div>
@@ -650,11 +531,7 @@ export default function DeportesPage() {
           />
           {playMedia.length > 0 ? (
             <div className="w-full h-[350px]">
-              <MediaCarousel
-                medias={mapUrls(playMedia)}
-                altText={t('play.carouselAlt')}
-                className="w-full h-full rounded-md shadow-md"
-              />
+              <MediaCarousel items={playMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
             </div>
           ) : (
             <Image

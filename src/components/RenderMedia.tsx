@@ -3,62 +3,75 @@ import React, { memo } from 'react'
 import Image from 'next/image'
 
 /**
- * Tipo que describe un medio (imagen o video) desde la API.
+ * Tipo mínimo que RenderMedia necesita para funcionar.
+ * (No debería exigir creadoEn/actualizadoEn porque no renderiza con eso)
  */
-export interface MedioType {
+export type MedioKind = 'IMAGEN' | 'VIDEO' | 'ICONO'
+
+export interface MedioBase {
   id: number
   urlArchivo: string
   urlMiniatura?: string | null
   textoAlternativo?: string | null
-  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+  tipo: MedioKind
   posicion: number
   grupoMediosId: number
+}
+
+/**
+ * Tipo completo (DB/API “full”).
+ * Si en otros lados lo necesitás, seguís teniéndolo.
+ */
+export interface MedioType extends MedioBase {
   creadoEn: string
   actualizadoEn: string
 }
 
 /**
  * Props para el componente RenderMedia:
- * - medio: objeto MedioType proveniente de la API.
+ * - medio: objeto mínimo requerido para renderizar.
  * - fallback: ruta a imagen que se mostrará si no hay `medio` o si falla la carga.
  * - className: clases CSS opcionales para estilizar el elemento <img> o <video>.
  */
 interface Props {
-  medio?: MedioType | null
+  medio?: MedioBase | null
   fallback: string
   className?: string
+  width?: number
+  height?: number
+  fill?: boolean
+  videoMode?: 'cover' | 'contain-blur'
+  videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>
 }
 
 /**
  * RenderMedia
  *
- * Componente genérico que, dado un objeto MedioType, detecta si debe
- * renderizar una etiqueta <video> (cuando tipo === 'VIDEO') o una imagen
+ * Componente genérico que, dado un objeto MedioBase, detecta si debe
+ * renderizar un <video> (cuando tipo === 'VIDEO') o una imagen
  * (cuando tipo === 'IMAGEN' o 'ICONO'). Si `medio` viene nulo o indefinido,
  * se usa la ruta `fallback`.
  *
- * Buenas prácticas aplicadas:
- * - Siempre validar que `medio.urlArchivo` exista antes de usarlo.
- * - Next.js <Image> para optimización en imágenes.
- * - Etiqueta <video> con props básicos para autoplay en loop sin sonido.
- * - Componente memoizado para evitar renderizados innecesarios.
- * - Comentarios claros explicando propósitos y lógica.
+ * Soporta modo "fill" vs modo dimensiones fijas.
  */
 const RenderMedia = memo(function RenderMedia({
   medio,
   fallback,
   className,
+  width = 800,
+  height = 600,
+  fill = false,
+  videoMode,
+  videoProps = {},
 }: Props) {
   // Si no hay objeto `medio`, o no tiene urlArchivo válida, usamos fallback como imagen
-  if (!medio || !medio.urlArchivo) {
+  if (!medio?.urlArchivo) {
     return (
       <Image
         src={fallback}
         alt="Media Fallback"
-        width={800}
-        height={600}
+        {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
         className={className}
-        unoptimized={false}
       />
     )
   }
@@ -66,11 +79,27 @@ const RenderMedia = memo(function RenderMedia({
   // Construir la URL pública del archivo: asumimos que los medios se sirven desde /images/medios/
   const src = `/images/medios/${medio.urlArchivo}`
 
-  // Si el tipo es VIDEO, renderizamos un <video> con efecto blur
+  // Si el tipo es VIDEO
   if (medio.tipo === 'VIDEO') {
+    const mode = videoMode || (fill ? 'cover' : 'contain-blur')
+
+    if (mode === 'cover') {
+      return (
+        <video
+          src={src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          {...videoProps}
+          className={`w-full h-full object-cover ${className || ''}`}
+        />
+      )
+    }
+
     return (
-      <div className={`relative w-full h-full overflow-hidden ${className}`}>
-        {/* Capa Fondo: Blur para eliminar barras negras */}
+      <div className={`relative w-full h-full overflow-hidden ${className || ''}`}>
+        {/* Fondo blur */}
         <div className="absolute inset-0 z-0 opacity-50">
           <video
             src={src}
@@ -82,14 +111,15 @@ const RenderMedia = memo(function RenderMedia({
           />
         </div>
 
-        {/* Capa Frente: Video original */}
+        {/* Frente */}
         <video
           src={src}
           className="relative z-10 w-full h-full object-contain"
           controls
-          muted
-          loop
+          muted={false}
+          loop={false}
           playsInline
+          {...videoProps}
         >
           Tu navegador no soporta la reproducción de video.
         </video>
@@ -97,17 +127,13 @@ const RenderMedia = memo(function RenderMedia({
     )
   }
 
-  // Para IMAGEN o ICONO, usamos Next.js Image
-  // Si existe urlMiniatura, podríamos usarla en lugar de urlArchivo,
-  // pero aquí asumimos que urlArchivo ya es WebP optimizado.
+  // Para IMAGEN o ICONO
   return (
     <Image
       src={src}
       alt={medio.textoAlternativo ?? 'Media Image'}
-      width={800}
-      height={600}
+      {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
       className={className}
-      unoptimized={false}
     />
   )
 })

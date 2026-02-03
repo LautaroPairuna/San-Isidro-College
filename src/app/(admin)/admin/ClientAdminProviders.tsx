@@ -6,7 +6,6 @@ import { SessionProvider, useSession, signOut } from 'next-auth/react';
 import { useRouter, usePathname }                from 'next/navigation';
 import { QueryClient, QueryClientProvider }       from '@tanstack/react-query';
 import Link                                      from 'next/link';
-import Image                                     from 'next/image';
 import type { IconType }                         from 'react-icons';
 import {
   HiPhotograph,
@@ -14,6 +13,7 @@ import {
   HiMenu,
   HiX,
   HiLogout,
+  HiHome,
 } from 'react-icons/hi';
 
 const RESOURCES = ['GrupoMedios', 'Medio'] as const;
@@ -35,7 +35,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
   const rawPath     = usePathname() ?? '';
   const inAuthRoute = rawPath.startsWith('/admin/auth');
 
-  const { data: session, status } = useSession({
+  const { data: session, status } = useSession({ 
     required: !inAuthRoute,
     onUnauthenticated() {
       if (!inAuthRoute) router.replace('/admin/auth');
@@ -61,14 +61,20 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
   }
 
   // Datos de usuario
-  const avatarUrl   = session?.user?.image ?? '/avatar-placeholder.png';
-  const displayName = session?.user?.name  ?? 'Usuario';
+  // Hardcoded por requerimiento del usuario
+  const displayName = 'Esteban Siladji';
 
   const iconFor = (name: string): IconType => {
     if (/Medio|Photograph/.test(name))      return HiPhotograph;
     if (/GrupoMedios|Collection/.test(name)) return HiCollection;
     return HiPhotograph;
   };
+
+  const DefaultAvatar = ({ className }: { className?: string }) => (
+    <div className={`rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold border-2 border-indigo-300 ${className}`}>
+      ES
+    </div>
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -80,7 +86,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
           </button>
           <span className="text-lg font-semibold">Admin Panel</span>
           <div className="flex items-center space-x-3">
-            <Image src={avatarUrl} alt="Avatar" width={32} height={32} className="h-8 w-8 rounded-full object-cover"/>
+            <DefaultAvatar className="h-8 w-8 text-xs" />
             <button onClick={() => signOut({ callbackUrl: '/admin/auth' })} className="p-1 hover:bg-indigo-500 rounded">
               <HiLogout className="h-6 w-6 text-white"/>
             </button>
@@ -91,68 +97,84 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
         <aside
           className={`
             fixed inset-y-0 left-0 z-20 transform
-            ${isRoot ? 'w-full' : 'w-64'} transition-transform duration-200
+            ${isRoot ? 'w-full md:w-64' : 'w-64'} transition-transform duration-200
             bg-gradient-to-b from-indigo-800 to-indigo-900 text-white shadow-lg
             md:static md:translate-x-0
             ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
           `}
         >
           <div className="h-full flex flex-col">
-            <div className="hidden md:flex items-center px-6 py-6 border-b border-indigo-700">
-              <HiCollection className="h-8 w-8 text-white"/>
-              <span className="ml-3 text-2xl font-bold">Admin</span>
+            {/* Header Sidebar */}
+            <div className="flex items-center justify-center h-20 shadow-md bg-indigo-900">
+              <h1 className="text-2xl font-bold tracking-wider uppercase">Panel</h1>
             </div>
 
-            <nav className="flex-1 overflow-y-auto px-2 py-6 space-y-2">
-              {RESOURCES.map((r) => {
-                const path   = `/admin/resources/${r}`;
-                const active = rawPath === path;
-                const label  = r === 'GrupoMedios' ? 'Grupos de Medios' : 'Medios';
-                const Icon   = iconFor(r);
+            {/* Nav Links */}
+            <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+              <Link
+                href="/admin"
+                className={`flex items-center px-4 py-3 rounded-md transition-colors ${
+                  rawPath === '/admin'
+                    ? 'bg-indigo-700 text-white shadow'
+                    : 'text-indigo-100 hover:bg-indigo-700 hover:text-white'
+                }`}
+              >
+                <HiHome className="mr-3 h-5 w-5" />
+                <span className="font-medium">Dashboard</span>
+              </Link>
 
+              <div className="pt-4 pb-2">
+                <p className="px-4 text-xs font-semibold text-indigo-300 uppercase tracking-wider">
+                  Recursos
+                </p>
+              </div>
+
+              {RESOURCES.map((resName) => {
+                const Icon = iconFor(resName);
+                const isActive = rawPath.includes(`/admin/resources/${resName}`);
                 return (
                   <Link
-                    key={r}
-                    href={path}
-                    onClick={() => setMobileOpen(false)}
-                    className={`
-                      flex items-center px-4 py-3 rounded-lg transition
-                      ${active
-                        ? 'bg-indigo-700 text-white font-semibold'
-                        : 'text-indigo-200 hover:bg-indigo-700 hover:text-white'}
-                    `}
+                    key={resName}
+                    href={`/admin/resources/${resName}`}
+                    className={`flex items-center px-4 py-3 rounded-md transition-colors ${
+                      isActive
+                        ? 'bg-indigo-700 text-white shadow'
+                        : 'text-indigo-100 hover:bg-indigo-700 hover:text-white'
+                    }`}
                   >
-                    <Icon className="h-5 w-5 flex-shrink-0"/>
-                    <span className="ml-3">{label}</span>
+                    <Icon className="mr-3 h-5 w-5" />
+                    <span className="font-medium">{resName}</span>
                   </Link>
                 );
               })}
             </nav>
 
-            <div className="border-t border-indigo-700 p-4">
+            {/* Footer Sidebar (User info desktop) */}
+            <div className="hidden md:flex flex-col p-4 bg-indigo-900 border-t border-indigo-800">
+              <div className="flex items-center space-x-3 mb-3">
+                <DefaultAvatar className="h-10 w-10 text-sm" />
+                <div className="overflow-hidden">
+                  <p className="text-sm font-medium text-white truncate">{displayName}</p>
+                  <p className="text-xs text-indigo-300 truncate">Administrador</p>
+                </div>
+              </div>
               <button
                 onClick={() => signOut({ callbackUrl: '/admin/auth' })}
-                className="w-full flex items-center px-4 py-3 bg-indigo-700 hover:bg-indigo-600 rounded-lg transition"
+                className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-700 rounded hover:bg-indigo-600 transition-colors"
               >
-                <HiLogout className="h-5 w-5 text-white"/>
-                <span className="ml-3 text-white font-medium">Cerrar sesión</span>
+                <HiLogout className="mr-2 h-4 w-4" />
+                Cerrar Sesión
               </button>
             </div>
           </div>
         </aside>
 
-        {/* Contenido principal */}
-        <main className={`${isRoot ? 'hidden' : 'flex-1 flex flex-col overflow-auto'}`}>
-          <header className="hidden md:flex items-center justify-between bg-white border-b px-8 py-4 shadow-sm">
-            <h1 className="text-xl font-semibold">
-              {rawPath.split('/').pop() === 'GrupoMedios' ? 'Grupos de Medios' : 'Medios'}
-            </h1>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-600">¡Hola, {displayName}!</span>
-              <Image src={avatarUrl} alt="Avatar" width={32} height={32} className="h-8 w-8 rounded-full object-cover"/>
-            </div>
-          </header>
-          <div className="flex-1 p-6 md:p-8 bg-gray-50">{children}</div>
+        {/* Contenido Principal */}
+        <main className="flex-1 overflow-y-auto relative flex flex-col">
+          {/* Header Mobile (oculto en desktop) se maneja arriba, aquí solo el contenido */}
+          <div className="flex-1 p-4 md:p-8">
+            {children}
+          </div>
         </main>
       </div>
     </QueryClientProvider>

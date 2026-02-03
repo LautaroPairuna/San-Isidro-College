@@ -22,11 +22,21 @@ interface MedioMinimal {
   grupoMediosId: number;
 }
 
+interface SectionCarruselProps {
+  medios?: MedioMinimal[];
+}
+
 const ALIANZAS_GROUP_ID = 7;
 
-export default function SectionCarrusel() {
-  // 1) Traemos todos los medios del grupo “Alianzas”
-  const { data: mediosRaw = [], isLoading, error } = useMedios(ALIANZAS_GROUP_ID);
+export default function SectionCarrusel({ medios }: SectionCarruselProps) {
+  // 1) Traemos todos los medios del grupo “Alianzas” solo si no se pasan por props
+  const { data: fetchedMedios = [], isLoading: isLoadingFetch, error: errorFetch } = useMedios(ALIANZAS_GROUP_ID, {
+    enabled: !medios
+  });
+
+  const mediosRaw = medios ?? fetchedMedios;
+  const isLoading = medios ? false : isLoadingFetch;
+  const error = medios ? null : errorFetch;
 
   // 2) Agrupamos en rawSlides con useMemo para evitar loops de estado
   const rawSlides = useMemo<Slide[][]>(() => {

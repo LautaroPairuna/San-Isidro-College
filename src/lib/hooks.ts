@@ -122,10 +122,11 @@ export function useDeleteGrupoMedios(): UseMutationResult<unknown, Error, number
 /* ==================================================================
  *  4) HOOKS PARA MEDIO
  * =================================================================*/
-export function useMedios(grupoMediosId?: number) {
+export function useMedios(grupoMediosId?: number, options?: { enabled?: boolean }) {
   return useQuery<Medio[], Error>({
     queryKey: ['Medio'],
     queryFn : () => fetchAll<Medio>('Medio'),
+    enabled : options?.enabled !== false,
     select  : data =>
       typeof grupoMediosId === 'number'
         ? data.filter(m => m.grupoMediosId === grupoMediosId)
@@ -186,6 +187,43 @@ export function useDeleteMedio(): UseMutationResult<unknown, Error, number> {
     onSuccess: () => qc.invalidateQueries({ queryKey: ['Medio'] }),
   })
 }
+
+/* ==================================================================
+ *  5) HOOKS PARA CONTENIDO DINÁMICO DE PÁGINAS (PUBLIC)
+ * =================================================================*/
+
+// Interfaz aproximada de lo que devuelve el endpoint /api/public/page-content
+export interface PageSection {
+  id: number;
+  slug: string;
+  pagina: string;
+  orden: number;
+  tipo: string;
+  titulo?: string | null;
+  subtitulo?: string | null;
+  propsJson?: any;
+  grupo?: {
+    id: number;
+    nombre: string;
+    tipoGrupo: string;
+    medios: Medio[];
+  } | null;
+  medio?: Medio | null;
+}
+
+export function usePageContent(pageSlug: string) {
+  return useQuery<PageSection[], Error>({
+    queryKey: ['PageContent', pageSlug],
+    queryFn: async () => {
+      const res = await fetch(`/api/public/page-content?slug=${pageSlug}`);
+      if (!res.ok) throw new Error('Error al obtener contenido de la página');
+      return res.json();
+    },
+    // Opcional: staleTime para evitar refetch constante
+    staleTime: 1000 * 60 * 5, // 5 minutos
+  });
+}
+
 
 /* ==================================================================
  *  5) Hook utilitario: cargar varios recursos por IDs

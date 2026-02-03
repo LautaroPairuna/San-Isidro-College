@@ -3,17 +3,30 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { useMedios } from '@/lib/hooks'
+import { usePageContent } from '@/lib/hooks'
 import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
 import { useTranslations } from 'next-intl'
 import type { NextPage } from 'next'
 
-// IDs de ejemplo (seguirán igual que antes)
-const HERO_GROUP_ID = 4
-const BIENVENIDA_GROUP_ID = 5
-const INFOGRAFIA_GROUP_ID = 6
-const SEC3_GROUP_ID = 7
+// SLUGS de secciones (coinciden con DB)
+const SECTION_SLUGS = {
+  HERO: 'home-hero',
+  BIENVENIDA: 'home-bienvenida',
+  INFOGRAFIA: 'home-infografia',
+  SEC3_BACKGROUND: 'home-sec3-background',
+  ALIANZAS: 'home-alianzas',
+};
+
+// Tipado auxiliar
+type MedioMinimal = {
+  id: number
+  urlArchivo: string
+  textoAlternativo?: string
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+  posicion: number
+  grupoMediosId: number
+}
 
 const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
 const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
@@ -22,36 +35,28 @@ const HomePage: NextPage = () => {
   // Hook de traducción: namespace 'home'
   const t = useTranslations('home')
 
+  /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
+  const { data: pageSections = [], isLoading: isAnyLoading, error } = usePageContent('home');
+
+  const getMedias = (slug: string) => {
+    const section = pageSections.find(s => s.slug === slug);
+    return (section?.grupo?.medios || []) as unknown as MedioMinimal[];
+  }
+
   // 1) Hero (carrousel)
-  const {
-    data: heroMedia = [],
-    isLoading: loadingHero,
-    error: errorHero,
-  } = useMedios(HERO_GROUP_ID)
+  const heroMedia = getMedias(SECTION_SLUGS.HERO);
 
   // 2) Bienvenida (único)
-  const {
-    data: bienvenidaArr = [],
-    isLoading: loadingBienvenida,
-    error: errorBienvenida,
-  } = useMedios(BIENVENIDA_GROUP_ID)
+  const bienvenidaArr = getMedias(SECTION_SLUGS.BIENVENIDA);
 
   // 3) Infografía íconos
-  const {
-    data: infografiaIcons = [],
-    isLoading: loadingInfografia,
-    error: errorInfografia,
-  } = useMedios(INFOGRAFIA_GROUP_ID)
+  const infografiaIcons = getMedias(SECTION_SLUGS.INFOGRAFIA);
 
   // 4) Sección 3 fondo único
-  const {
-    data: sec3Arr = [],
-    isLoading: loadingSec3,
-    error: errorSec3,
-  } = useMedios(SEC3_GROUP_ID)
+  const sec3Arr = getMedias(SECTION_SLUGS.SEC3_BACKGROUND);
 
-  const isAnyLoading =
-    loadingHero || loadingBienvenida || loadingInfografia || loadingSec3
+  // 5) Alianzas
+  const alianzasMedia = getMedias(SECTION_SLUGS.ALIANZAS);
 
   if (isAnyLoading) {
     return (
@@ -61,28 +66,19 @@ const HomePage: NextPage = () => {
     )
   }
 
-  // Extraemos objetos únicos de welcome y sección 3
-  const bienvenidaMedio = bienvenidaArr.length > 0 ? bienvenidaArr[0] : undefined
-  const sec3Medio = sec3Arr.length > 0 ? sec3Arr[0] : undefined
-
   // Agregamos chequeo de errores
-  const errores = [
-    errorHero && `Hero: ${errorHero.message}`,
-    errorBienvenida && `Bienvenida: ${errorBienvenida.message}`,
-    errorInfografia && `Infografía Icons: ${errorInfografia.message}`,
-    errorSec3 && `Sección 3 Fondo: ${errorSec3.message}`,
-  ].filter(Boolean)
-
-  if (errores.length > 0) {
+  if (error) {
     return (
       <div className="p-6 space-y-2 text-red-600">
         <h2 className="font-bold">Error al cargar algún contenido:</h2>
-        {errores.map((msg, idx) => (
-          <p key={idx}>• {msg}</p>
-        ))}
+        <p>• {error.message}</p>
       </div>
     )
   }
+
+  // Extraemos objetos únicos de welcome y sección 3
+  const bienvenidaMedio = bienvenidaArr.length > 0 ? bienvenidaArr[0] : undefined
+  const sec3Medio = sec3Arr.length > 0 ? sec3Arr[0] : undefined
 
   return (
     <div id="container">
@@ -106,7 +102,7 @@ const HomePage: NextPage = () => {
         <div className="col-span-7 relative w-full h-full max-sm:col-span-12 max-sm:h-[60vh] overflow-hidden">
           {heroMedia.length > 0 ? (
             <MediaCarousel
-              medias={heroMedia.map((m) => `/images/medios/${m.urlArchivo}`)}
+              items={heroMedia}
               altText={t('hero.alt')}
               className="w-full h-full"
             />
@@ -161,34 +157,13 @@ const HomePage: NextPage = () => {
 
           {/* Columna Derecha */}
           <div className="col-span-8 max-sm:col-span-12 z-10">
-            {bienvenidaMedio ? (
-              bienvenidaMedio.tipo === 'VIDEO' ? (
-                <video
-                  src={`/images/medios/${bienvenidaMedio.urlArchivo}`}
-                  className="w-full h-auto rounded-xl shadow-lg"
-                  controls
-                  muted
-                  loop
-                  playsInline
-                />
-              ) : (
-                <Image
-                  src={`/images/medios/${bienvenidaMedio.urlArchivo}`}
-                  alt={bienvenidaMedio.textoAlternativo ?? t('bienvenida.fallbackAlt')}
-                  width={800}
-                  height={600}
-                  className="w-full h-auto rounded-xl shadow-lg"
-                />
-              )
-            ) : (
-              <Image
-                src="/images/fondo-bienvenida.webp"
-                alt={t('bienvenida.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
-            )}
+            <RenderMedia
+              medio={bienvenidaMedio}
+              fallback="/images/fondo-bienvenida.webp"
+              width={800}
+              height={600}
+              className="w-full h-auto rounded-xl shadow-lg"
+            />
           </div>
         </div>
       </section>
@@ -196,31 +171,12 @@ const HomePage: NextPage = () => {
       {/* =========== SECCIÓN 3: FONDO UNICO + MARQUEE ÍCONOS =========== */}
       <section className="relative w-full bg-[#71af8d] py-10" id="infograma">
         {/* --- Fondo único via sec3Medio --- */}
-        {sec3Medio ? (
-          sec3Medio.tipo === 'VIDEO' ? (
-            <video
-              src={`/images/medios/${sec3Medio.urlArchivo}`}
-              className="absolute inset-0 w-full h-full object-cover -z-10"
-              muted
-              loop
-              playsInline
-            />
-          ) : (
-            <Image
-              src={`/images/medios/${sec3Medio.urlArchivo}`}
-              alt={sec3Medio.textoAlternativo ?? t('section3.fallbackAlt')}
-              fill
-              className="object-cover -z-10"
-            />
-          )
-        ) : (
-          <Image
-            src="/images/fondo-iconos.webp"
-            alt={t('section3.fallbackAlt')}
-            fill
-            className="object-cover -z-10"
-          />
-        )}
+        <RenderMedia
+          medio={sec3Medio}
+          fallback="/images/fondo-iconos.webp"
+          fill
+          className="object-cover -z-10 pointer-events-none"
+        />
 
         <div className="relative max-w-screen-xl mx-auto px-4">
           {/* --- Desktop Infografía con marquee --- */}
@@ -275,6 +231,8 @@ const HomePage: NextPage = () => {
                     <RenderMedia
                       medio={m}
                       fallback="/images/icons/ico-alumnos.svg"
+                      width={100}
+                      height={100}
                       className="w-[100px] h-[100px] transition-transform duration-300 hover:scale-110"
                     />
                   </div>
@@ -284,6 +242,8 @@ const HomePage: NextPage = () => {
                     <RenderMedia
                       medio={m}
                       fallback="/images/icons/ico-alumnos.svg"
+                      width={100}
+                      height={100}
                       className="w-[100px] h-[100px] transition-transform duration-300 hover:scale-110"
                     />
                   </div>
@@ -312,7 +272,7 @@ const HomePage: NextPage = () => {
         </div>
       </section>
       {/* Carrusel global y Contacto */}
-      <Carousel />
+      <Carousel medios={alianzasMedia} />
       <Contact />
     </div>
   )

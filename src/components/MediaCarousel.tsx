@@ -2,20 +2,30 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import Image from 'next/image';
+import RenderMedia, { MedioType } from '@/components/RenderMedia';
+
+// Interfaz compatible con lo que llega de la API/Prisma
+interface MedioMinimal {
+  id: number;
+  urlArchivo: string;
+  textoAlternativo?: string | null;
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO';
+  posicion?: number;
+  grupoMediosId?: number;
+}
 
 interface MediaCarouselProps {
-  medias?: string[];
+  items: (MedioType | MedioMinimal)[];
   altText?: string;
   className?: string;
 }
 
 const MediaCarousel: React.FC<MediaCarouselProps> = ({
-  medias = [],
+  items = [],
   altText = '',
   className = '',
 }) => {
-  const totalSlides = medias.length;
+  const totalSlides = items.length;
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -95,54 +105,26 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         className="flex h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {medias.map((src, idx) => {
-          const isVideo = src.toLowerCase().endsWith('.mp4');
-          return (
-            <div
-              key={idx}
-              className="min-w-full relative h-full overflow-hidden bg-gray-900"
-            >
-              {isVideo ? (
-                <>
-                  {/* Fondo blur solo para video */}
-                  <div className="absolute inset-0 z-0 opacity-50">
-                    <video
-                      src={src}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
-                    />
-                  </div>
-                  {/* Video principal contained */}
-                  <div className="absolute inset-0 z-10 w-full h-full shadow-xl">
-                    <video
-                      src={src}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </>
-              ) : (
-                /* Imagen normal (cover) sin blur de fondo */
-                <div className="relative z-10 w-full h-full">
-                  <Image
-                    src={src}
-                    alt={altText}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 60vw"
-                    priority={idx === 0}
-                  />
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {items.map((item, idx) => (
+          <div
+            key={idx}
+            className="min-w-full relative h-full overflow-hidden bg-gray-900"
+          >
+            <RenderMedia
+              medio={item as MedioType} // Cast seguro por compatibilidad de tipos
+              fallback="/images/placeholder.webp" // Fallback genérico si falla
+              fill={true} // Imagen llena el slide
+              videoMode="contain-blur" // Video mantiene ratio con fondo blur
+              videoProps={{
+                autoPlay: true,
+                muted: true,
+                loop: true,
+                controls: false,
+              }}
+              className="object-cover"
+            />
+          </div>
+        ))}
       </div>
 
       {/* Controles */}
@@ -164,7 +146,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
           </svg>
         </button>
         <div className="flex gap-2">
-          {medias.map((_, idx) => (
+          {items.map((_, idx) => (
             <button
               key={idx}
               onClick={() => showSlide(idx)}

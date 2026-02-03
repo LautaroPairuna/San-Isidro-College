@@ -1,104 +1,55 @@
-// /app/[locale]/vida-estudiantil/page.tsx
 'use client'
 
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
-import SectionCarrusel from '@/components/sectionCarrusel'
-import Contact from '@/components/sectionContact'
-import { useResourcesByIds } from '@/lib/hooks'
+import { usePageContent } from '@/lib/hooks'
+import RenderMedia from '@/components/RenderMedia'
+import type { NextPage } from 'next'
 
-/* ╭────────────── Tipos y constantes ──────────────╮ */
-type MedioType = {
-  id: number
-  urlArchivo: string
-  urlMiniatura?: string
-  textoAlternativo?: string
-  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+// Carga dinámica de componentes pesados
+const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
+const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+
+// Slugs de secciones (coinciden con DB)
+const SECTION_SLUGS = {
+  KINDER: 'academicos-kinder',
+  PRIMARY: 'academicos-primary',
+  SECONDARY: 'academicos-secondary',
+  ALIANZAS: 'academicos-alianzas'
 }
-
-const IDS = {
-  KINDER: 1,
-  PRIMARY: 2,
-  SECOND: 3,
-} as const
 
 const FALLBACKS = {
   KINDER: '/images/image-kindergarten.webp',
   PRIMARY: '/images/fondo-iconos.webp',
   SECOND: '/images/image-kindergarten.webp',
 }
-/* ╰───────────────────────────────────────────────╯ */
 
-/* Renderiza imagen o video según `tipo` */
-function RenderMedia({
-  medio,
-  fallback,
-  width,
-  height,
-  className = '',
-}: {
-  medio?: MedioType
-  fallback: string
-  width: number
-  height: number
-  className?: string
-}) {
-  if (!medio) {
-    return (
-      <Image
-        src={fallback}
-        alt="fallback"
-        width={width}
-        height={height}
-        className={className}
-      />
-    )
-  }
-
-  const src = `/images/medios/${medio.urlArchivo}`
-
-  if (medio.tipo === 'VIDEO') {
-    return (
-      <video
-        src={src}
-        width={width}
-        height={height}
-        className={`${className} object-cover rounded-md shadow-md`}
-        poster={
-          medio.urlMiniatura
-            ? `/images/medios/${medio.urlMiniatura}`
-            : undefined
-        }
-        muted
-        playsInline
-        controls
-      />
-    )
-  }
-
-  return (
-    <Image
-      src={src}
-      alt={medio.textoAlternativo ?? 'Imagen'}
-      width={width}
-      height={height}
-      className={className}
-    />
-  )
+// Tipado auxiliar
+type MedioMinimal = {
+  id: number
+  urlArchivo: string
+  textoAlternativo?: string
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+  posicion: number
+  grupoMediosId: number
+  // Campos extra de RenderMedia/MedioType
+  urlMiniatura?: string | null
+  creadoEn?: string
+  actualizadoEn?: string
 }
 
-export default function VidaEstudiantilPage() {
+const AcademicosPage: NextPage = () => {
   const t = useTranslations('academicosHome')
 
-  const { dataById, errorById, isLoading } = useResourcesByIds<MedioType>(
-    'Medio',
-    Object.values(IDS)
-  )
+  const { data: pageSections = [], isLoading, error } = usePageContent('academicos');
 
-  const kinderImg = dataById[IDS.KINDER]
-  const primaryImg = dataById[IDS.PRIMARY]
-  const secondImg = dataById[IDS.SECOND]
+  const kinderImg = pageSections.find(s => s.slug === SECTION_SLUGS.KINDER)?.medio;
+  const primaryImg = pageSections.find(s => s.slug === SECTION_SLUGS.PRIMARY)?.medio;
+  const secondImg = pageSections.find(s => s.slug === SECTION_SLUGS.SECONDARY)?.medio;
+
+  const alianzasMedia = (pageSections.find(s => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
 
   if (isLoading) {
     return (
@@ -108,14 +59,11 @@ export default function VidaEstudiantilPage() {
     )
   }
 
-  const errs = Object.values(errorById).filter(Boolean) as Error[]
-  if (errs.length) {
+  if (error) {
     return (
       <div className="p-6 space-y-2 text-red-600">
         <h2 className="font-bold">{t('errorTitle')}</h2>
-        {errs.map((e, i) => (
-          <p key={i}>• {e.message}</p>
-        ))}
+        <p>• {error.message}</p>
       </div>
     )
   }
@@ -518,8 +466,10 @@ export default function VidaEstudiantilPage() {
           </section>
 
           {/* ─────────────────── Extras ─────────────────── */}
-          <SectionCarrusel />
+          <Carousel medios={alianzasMedia} />
           <Contact />
         </div>
   )
 }
+
+export default AcademicosPage

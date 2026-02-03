@@ -7,19 +7,45 @@ import SmoothLink from "@/components/SmoothLink"
 import AsideMenu from "@/components/AsideMenu"
 import RenderMedia from "@/components/RenderMedia"
 import { useTranslations } from "next-intl"
-import { useMedioById } from "@/lib/hooks"
-import { MEDIA_IDS } from "@/lib/constants"
+import { usePageContent } from "@/lib/hooks"
 import type { NextPage } from "next"
 
 // Carga dinámica para reducir el bundle inicial
 const Carousel = dynamic(() => import("@/components/sectionCarrusel"), { ssr: false })
 const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: false })
 
+/* --------------------------------------------------------------------
+ *  SLUGS DE SECCIONES
+ * ------------------------------------------------------------------*/
+const SECTION_SLUGS = {
+  INSTALACIONES: 'colegio-instalaciones',
+  ALIANZAS: 'colegio-alianzas'
+};
+
+/* Tipado auxiliar (copiado de otros archivos, idealmente centralizar) */
+type MedioMinimal = {
+  id: number
+  urlArchivo: string
+  textoAlternativo?: string
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+  posicion: number
+  grupoMediosId: number
+}
+
 const ColegioPage: NextPage = () => {
   const t = useTranslations("colegio")
-  const instalacionesMedioId = MEDIA_IDS.COLEGIO.INSTALACIONES_VIDEO
-  const instalacionesFallback = MEDIA_IDS.COLEGIO.INSTALACIONES_FALLBACK
-  const { data: instalacionesMedio } = useMedioById(instalacionesMedioId)
+
+  // Carga dinámica
+  const { data: pageSections = [] } = usePageContent('colegio');
+
+  // Instalaciones
+  const instalacionesSection = pageSections.find(s => s.slug === SECTION_SLUGS.INSTALACIONES);
+  const instalacionesMedio = instalacionesSection?.medio;
+  // Fallback si no hay medio en DB (opcional, pero mantenemos lógica de renderMedia)
+  const instalacionesFallback = '/images/fondo-home.webp'; // Hardcoded fallback path as per original const
+
+  // Alianzas
+  const alianzasMedia = (pageSections.find(s => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
 
   return (
     <>
@@ -178,7 +204,7 @@ const ColegioPage: NextPage = () => {
         </div>
       </section>
 
-      <Carousel />
+      <Carousel medios={alianzasMedia} />
       <Contact />
     </>
   )

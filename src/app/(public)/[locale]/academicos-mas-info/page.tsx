@@ -17,7 +17,7 @@ export default function AcademicosMasInfoPage() {
     <>
       <section className="relative w-full min-h-screen bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-80 overflow-hidden">
         {/* CONTENEDOR CENTRAL CON FONDO BLANCO */}
-        <div className="relative max-w-[1000px] mx-auto bg-white min-h-screen px-8 pb-8 pt-60">
+        <div className="relative max-w-250 mx-auto bg-white min-h-screen px-8 pb-8 pt-60">
           {/* CONTENIDO PRINCIPAL */}
           <h2
             id="proyecto"
@@ -69,7 +69,7 @@ export default function AcademicosMasInfoPage() {
 
             {/* Imágenes para Kindergarten */}
             <div className="relative">
-              <div className="hidden lg:block md:absolute xl:-top-180 lg:-top-220 xl:-left-85 lg:-left-75 w-[250px] z-20">
+              <div className="hidden lg:block md:absolute xl:-top-180 lg:-top-220 xl:-left-85 lg:-left-75 w-62.5 z-20">
                 <Image
                   src="/images/cuadro-kindergarten.svg"
                   alt={t('kindergarten.imagenAltDecoracion')}

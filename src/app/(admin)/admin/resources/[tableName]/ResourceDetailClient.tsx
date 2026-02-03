@@ -370,7 +370,7 @@ export default function ResourceDetailClient({
   // UI
   // -----------------------------
   return (
-    <div className="container mx-auto p-6 bg-gray-50 min-h-screen space-y-6">
+    <div className="w-full p-6 bg-gray-50 min-h-screen space-y-6">
       <header>
         <h1 className="text-2xl font-bold text-gray-800">
           Gestión de {tableName === 'GrupoMedios' ? 'Grupos de Medios' : 'Medios'}
