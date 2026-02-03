@@ -1,4 +1,3 @@
-// src/lib/hooks.ts
 import {
   useQuery,
   useMutation,
@@ -10,16 +9,16 @@ import {
 
 /* ------------------------------------------------------------------
  *  1) DEFINIR TIPOS EXPLÍCITOS
- *
- *  Aquí asumimos el shape básico de tus entidades. Ajusta estos
- *  campos según lo que realmente tenga tu modelo GrupoMedios y Medio.
  * ---------------------------------------------------------------- */
 export interface GrupoMedios {
   id: number
   nombre: string
   descripcion?: string
+  tipoGrupo: 'CARRUSEL' | 'GALERIA' | 'UNICO'
   creadoEn: string
   actualizadoEn: string
+  // Relación inversa (opcional en listados, presente en detalles/page-content)
+  medios?: Medio[]
 }
 
 export interface Medio {
@@ -32,15 +31,105 @@ export interface Medio {
   grupoMediosId: number
   creadoEn: string
   actualizadoEn: string
+  nombreArchivo?: string
+}
+
+export interface Seccion {
+  id: number
+  slug: string
+  pagina: string
+  orden: number
+  tipo: 'MEDIA_UNICA' | 'GALERIA' | 'TEXTO_RICO' | 'HERO' | 'CUSTOM'
+  titulo?: string | null
+  subtitulo?: string | null
+  descripcion?: string | null
+  urlBoton?: string | null
+  textoBoton?: string | null
+  grupoId?: number | null
+  medioId?: number | null
+  propsJson?: any
+  creadoEn: string
+  actualizadoEn: string
+  // Relaciones (presentes en /api/public/page-content)
+  grupo?: GrupoMedios | null
+  medio?: Medio | null
+}
+
+export interface PaginatedResponse<T> {
+  data: T[]
+  meta: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
 }
 
 /* ------------------------------------------------------------------
  *  2) FUNCIONES GENÉRICAS DE FETCH
  * ---------------------------------------------------------------- */
 async function fetchAll<T>(table: string): Promise<T[]> {
-  const res = await fetch(`/api/admin/resources/${table}`)
+  // Por defecto pedimos un límite alto para mantener comportamiento "fetch all"
+  // en los clientes que esperan un array completo.
+  // El backend ahora devuelve { data: T[], meta: ... }
+  const res = await fetch(`/api/admin/resources/${table}?limit=10000`)
   if (!res.ok) throw new Error(`Error al obtener datos de ${table}`)
+  
+  const json = await res.json()
+  // Si el backend devuelve estructura paginada, extraemos data.
+  // Si devolviera array directo (legacy), lo devolvemos tal cual.
+  if (json && typeof json === 'object' && 'data' in json && Array.isArray(json.data)) {
+    return json.data
+  }
+  return json as T[]
+}
+
+export async function fetchPaginated<T>(
+  table: string,
+  page: number,
+  limit: number,
+  search?: string,
+  filters?: Record<string, any>,
+  sortBy?: string,
+  order: 'asc' | 'desc' = 'desc'
+): Promise<PaginatedResponse<T>> {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+    order,
+    _t: Date.now().toString(),
+  })
+  if (sortBy) params.set('sortBy', sortBy)
+  if (search) params.set('search', search)
+  if (filters) {
+    Object.entries(filters).forEach(([key, val]) => {
+      if (val !== undefined && val !== null) {
+        params.set(key, String(val))
+      }
+    })
+  }
+
+  const res = await fetch(`/api/admin/resources/${table}?${params.toString()}`)
+  if (!res.ok) throw new Error(`Error al obtener datos paginados de ${table}`)
   return res.json()
+}
+
+export function usePaginatedResource<T>(
+  table: string,
+  page: number,
+  limit: number,
+  search: string,
+  filters?: Record<string, any>,
+  sortBy?: string,
+  order: 'asc' | 'desc' = 'desc',
+  options?: { enabled?: boolean }
+) {
+  return useQuery<PaginatedResponse<T>, Error>({
+    queryKey: [table, 'paginated', { page, limit, search, ...filters, sortBy, order }],
+    queryFn: () => fetchPaginated<T>(table, page, limit, search, filters, sortBy, order),
+    enabled: options?.enabled !== false,
+    // placeholderData: keepPreviousData // Se debe importar de @tanstack/react-query si es v5
+  })
 }
 
 async function fetchOne<T>(table: string, id: number | string): Promise<T> {
@@ -191,21 +280,6 @@ export function useDeleteMedio(): UseMutationResult<unknown, Error, number> {
 /* ==================================================================
  *  5) HOOKS PARA SECCION
  * =================================================================*/
-export interface Seccion {
-  id: number
-  slug: string
-  pagina: string
-  orden: number
-  tipo: 'MEDIA_UNICA' | 'GALERIA' | 'TEXTO_RICO' | 'HERO' | 'CUSTOM'
-  titulo?: string | null
-  subtitulo?: string | null
-  propsJson?: unknown
-  grupoId?: number | null
-  medioId?: number | null
-  creadoEn: string
-  actualizadoEn: string
-}
-
 export function useSecciones() {
   return useQuery<Seccion[], Error>({
     queryKey: ['Seccion'],
@@ -213,11 +287,15 @@ export function useSecciones() {
   })
 }
 
-export function useCreateSeccion(): UseMutationResult<
-  Seccion,
-  Error,
-  Partial<Seccion>
-> {
+export function useSeccionById(id: number | string) {
+  return useQuery<Seccion, Error>({
+    queryKey: ['Seccion', id],
+    queryFn : () => fetchOne<Seccion>('Seccion', id),
+    enabled : Boolean(id),
+  })
+}
+
+export function useCreateSeccion(): UseMutationResult<Seccion, Error, Partial<Seccion>> {
   const qc = useQueryClient()
   return useMutation<Seccion, Error, Partial<Seccion>>({
     mutationFn: data =>
@@ -266,71 +344,15 @@ export function useDeleteSeccion(): UseMutationResult<unknown, Error, number> {
 }
 
 /* ==================================================================
- *  6) HOOKS PARA CONTENIDO DINÁMICO DE PÁGINAS (PUBLIC)
+ *  6) HOOKS PÚBLICOS
  * =================================================================*/
-
-// Interfaz aproximada de lo que devuelve el endpoint /api/public/page-content
-export interface PageSection {
-  id: number;
-  slug: string;
-  pagina: string;
-  orden: number;
-  tipo: string;
-  titulo?: string | null;
-  subtitulo?: string | null;
-  propsJson?: any;
-  grupo?: {
-    id: number;
-    nombre: string;
-    tipoGrupo: string;
-    medios: Medio[];
-  } | null;
-  medio?: Medio | null;
-}
-
-export function usePageContent(pageSlug: string) {
-  return useQuery<PageSection[], Error>({
-    queryKey: ['PageContent', pageSlug],
-    queryFn: async () => {
-      const res = await fetch(`/api/public/page-content?slug=${pageSlug}`);
-      if (!res.ok) throw new Error('Error al obtener contenido de la página');
-      return res.json();
-    },
-    // Opcional: staleTime para evitar refetch constante
-    staleTime: 1000 * 60 * 5, // 5 minutos
-  });
-}
-
-
-/* ==================================================================
- *  5) Hook utilitario: cargar varios recursos por IDs
- * =================================================================*/
-export function useResourcesByIds<T>(
-  resource: string,
-  ids: number[]
-): {
-  dataById  : Record<number, T | undefined>
-  isLoading : boolean
-  errorById : Record<number, Error | null>
-} {
-  const queries = useQueries({
-    queries: ids.map(id => ({
-      queryKey : [resource, id],
-      queryFn  : () => fetchOne<T>(resource, id),
-      enabled  : id != null,
-    })),
-  }) as UseQueryResult<T, Error>[]
-
-  const dataById: Record<number, T | undefined> = {}
-  const errorById: Record<number, Error | null> = {}
-  let isLoading = false
-
-  queries.forEach((q, idx) => {
-    const id = ids[idx]
-    dataById[id]  = q.data
-    errorById[id] = q.error ?? null
-    if (q.isLoading) isLoading = true
+export function usePageContent(slug: string) {
+  return useQuery<Seccion[], Error>({
+    queryKey: ['page-content', slug],
+    queryFn: () => fetch(`/api/public/page-content?slug=${slug}`).then(res => {
+        if (!res.ok) throw new Error('Error fetching page content')
+        return res.json()
+    }),
+    enabled: !!slug
   })
-
-  return { dataById, isLoading, errorById }
 }

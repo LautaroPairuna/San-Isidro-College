@@ -16,7 +16,7 @@ import debounce from 'lodash.debounce'
 import { format, parseISO } from 'date-fns'
 import clsx from 'clsx'
 import { toast } from 'react-hot-toast'
-import { HiCheckCircle, HiXCircle, HiCalendar, HiPhotograph } from 'react-icons/hi'
+import { HiCheckCircle, HiXCircle, HiCalendar, HiPhotograph, HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { FaPlus, FaTrash, FaPencilAlt, FaEye } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -29,11 +29,16 @@ import {
   useCreateMedio,
   useUpdateMedio,
   useDeleteMedio,
-  useSecciones,
   useCreateSeccion,
   useUpdateSeccion,
   useDeleteSeccion,
+  useGrupoMediosById,
+  useGrupoMedios, // Para FKs
+  useMedios,      // Para FKs
+  usePaginatedResource,
   Seccion,
+  GrupoMedios,
+  Medio,
 } from '@/lib/hooks'
 import {
   GrupoMediosForm,
@@ -47,28 +52,9 @@ import {
 // -------------------------------
 // Tipos para filas
 // -------------------------------
-interface GrupoMediosType {
-  id: number
-  nombre: string
-  tipoGrupo: 'CARRUSEL' | 'GALERIA' | 'UNICO'
-  creadoEn: string
-  actualizadoEn: string
-}
-
-interface MedioType {
-  id: number
-  urlArchivo: string
-  urlMiniatura?: string
-  textoAlternativo?: string
-  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
-  posicion: number
-  grupoMediosId: number
-  creadoEn: string
-  actualizadoEn: string
-  nombreArchivo?: string
-}
-
-// Reutilizamos la interfaz Seccion de hooks.ts
+// Usamos los tipos definidos en hooks.ts
+type GrupoMediosType = GrupoMedios
+type MedioType = Medio
 type SeccionType = Seccion
 
 // -------------------------------
@@ -160,6 +146,8 @@ export default function ResourceDetailClient({
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
+  const [sortBy, setSortBy] = useState<string | undefined>(undefined)
+  const [order, setOrder] = useState<'asc' | 'desc'>('desc')
   const [childRelation, setChildRelation] = useState<Relation | null>(null)
   const [detailRow, setDetailRow] = useState<GrupoMediosType | MedioType | SeccionType | null>(
     null
@@ -186,75 +174,41 @@ export default function ResourceDetailClient({
   }, [searchInput, debouncedSetSearch])
 
   // -----------------------------
-  // Datos con React Query
+  // Datos Paginados (Server-Side)
   // -----------------------------
-  const {
-    data: grupos = [],
-    isLoading: loadingGrupos,
-    error: errorGrupos,
-  } = useQuery<GrupoMediosType[], Error>({
-    queryKey: ['GrupoMedios'],
-    queryFn: () =>
-      fetch('/api/admin/resources/GrupoMedios').then((res) => {
-        if (!res.ok) throw new Error('Error cargando GrupoMedios')
-        return res.json()
-      }),
-  })
+  const currentTable = childRelation ? childRelation.childTable : tableName
 
-  const {
-    data: medios = [],
-    isLoading: loadingMedios,
-    error: errorMedios,
-  } = useQuery<MedioType[], Error>({
-    queryKey: ['Medio'],
-    queryFn: () =>
-      fetch('/api/admin/resources/Medio').then((res) => {
-        if (!res.ok) throw new Error('Error cargando Medio')
-        return res.json()
-      }),
-  })
-
-  const {
-    data: secciones = [],
-    isLoading: loadingSecciones,
-    error: errorSecciones,
-  } = useSecciones()
-
-  // -----------------------------
-  // Filtrar si tenemos childRelation
-  // -----------------------------
-  const baseRows = useMemo<(GrupoMediosType | MedioType | SeccionType)[]>(() => {
+  const filters = useMemo(() => {
     if (childRelation) {
-      return (medios as MedioType[]).filter(
-        (m) => m.grupoMediosId === childRelation.parentId
-      )
+      return { [childRelation.foreignKey]: childRelation.parentId }
     }
-    if (tableName === 'GrupoMedios') return grupos
-    if (tableName === 'Medio') return medios
-    if (tableName === 'Seccion') return secciones
-    return []
-  }, [childRelation, grupos, medios, secciones, tableName])
+    return undefined
+  }, [childRelation])
 
-  // -----------------------------
-  // Filtrado por búsqueda
-  // -----------------------------
-  const filteredRows = useMemo<(GrupoMediosType | MedioType | SeccionType)[]>(() => {
-    if (!search) return baseRows
-    return baseRows.filter((row) =>
-      Object.values(row).some((val) =>
-        String(val).toLowerCase().includes(search)
-      )
-    )
-  }, [baseRows, search])
-
-  // -----------------------------
-  // Paginación
-  // -----------------------------
-  const totalPages = Math.max(1, Math.ceil(filteredRows.length / pageSize))
-  const pageData = useMemo<(GrupoMediosType | MedioType | SeccionType)[]>(() =>
-    filteredRows.slice((page - 1) * pageSize, page * pageSize),
-    [filteredRows, page, pageSize]
+  const {
+    data: paginatedData,
+    isLoading: loadingData,
+    isFetching, // Agregamos isFetching para feedback visual en actualizaciones
+    error: errorData,
+    refetch,
+  } = usePaginatedResource<GrupoMediosType | MedioType | SeccionType>(
+    currentTable,
+    page,
+    pageSize,
+    search,
+    filters
   )
+
+  const pageData = paginatedData?.data || []
+  const totalPages = paginatedData?.meta.totalPages || 1
+
+  // -----------------------------
+  // Datos Auxiliares
+  // -----------------------------
+  
+  // Padre para header drill-down
+  const { data: parentRowData } = useGrupoMediosById(childRelation?.parentId || 0)
+  const parentRow = parentRowData as GrupoMediosType | undefined
 
   // -----------------------------
   // Mutations (React Query)
@@ -266,6 +220,16 @@ export default function ResourceDetailClient({
   // -----------------------------
   // Acciones CRUD
   // -----------------------------
+  const handleSort = useCallback((column: string) => {
+    console.log('Ordenando por:', column); // Log para depuración
+    if (sortBy === column) {
+      setOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
+    } else {
+      setSortBy(column)
+      setOrder('asc')
+    }
+  }, [sortBy])
+
   const handleDelete = useCallback(
     (id: number) => {
       if (tableName === 'GrupoMedios') {
@@ -280,7 +244,6 @@ export default function ResourceDetailClient({
     },
     [tableName, deleteGrupo, deleteMedio, deleteSeccion]
   )
-
 
   const handleViewChild = (row: GrupoMediosType) => {
     if (tableName === 'GrupoMedios') {
@@ -391,10 +354,6 @@ export default function ResourceDetailClient({
   // -----------------------------
   // Estados auxiliares (detalle, edición)
   // -----------------------------
-  const parentRow = useMemo<GrupoMediosType | undefined>(() => {
-    if (!childRelation) return undefined
-    return grupos.find((g) => g.id === childRelation.parentId)
-  }, [childRelation, grupos])
 
   const displayName =
     parentRow?.nombre || `${childRelation?.childTable} #${childRelation?.parentId}`
@@ -402,21 +361,15 @@ export default function ResourceDetailClient({
   // -----------------------------
   // Manejo de errores/carga
   // -----------------------------
-  if (
-    (tableName === 'GrupoMedios' && loadingGrupos) ||
-    (tableName === 'Medio' && loadingMedios)
-  ) {
-    return <div className="p-4 text-gray-600">Cargando …</div>
+  if (loadingData) {
+    return <div className="p-4 text-gray-600">Cargando datos …</div>
   }
-  if (
-    (tableName === 'GrupoMedios' && errorGrupos) ||
-    (tableName === 'Medio' && errorMedios)
-  ) {
+  if (errorData) {
     return <div className="p-4 text-red-500">Error al cargar datos</div>
   }
 
   const parentIsUnico = parentRow?.tipoGrupo === 'UNICO'
-  const parentMedioCount = childRelation ? baseRows.length : 0
+  const parentMedioCount = paginatedData?.meta.total || 0
   const forbidNewMedio = parentIsUnico && parentMedioCount >= 1
 
   // -----------------------------
@@ -515,11 +468,16 @@ export default function ResourceDetailClient({
         </div>
 
         {/* Tabla */}
-        <div className="overflow-x-auto">
+        <div className={clsx("overflow-x-auto relative", isFetching && "opacity-50 pointer-events-none")}>
+          {isFetching && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+               <div className="bg-white p-2 rounded shadow text-indigo-600 font-semibold">Cargando...</div>
+            </div>
+          )}
           {pageData.length === 0 ? (
             <div className="p-6 text-center text-gray-500">Sin resultados</div>
           ) : (
-            <table className="min-w-full divide-y divide-indigo-100">
+            <table key={`${sortBy}-${order}-${page}`} className="min-w-full divide-y divide-indigo-100">
               <thead className="sticky top-0 bg-indigo-600">
                 <tr>
                   <th className="px-4 py-3">
@@ -539,9 +497,21 @@ export default function ResourceDetailClient({
                   {visibleCols.map((col) => (
                     <th
                       key={col}
-                      className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                      onClick={() => handleSort(col)}
+                      className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-indigo-700 transition select-none"
                     >
-                      {col.replace(/([A-Z])/g, ' $1')}
+                      <div className="flex items-center space-x-1">
+                        <span>{col.replace(/([A-Z])/g, ' $1')}</span>
+                        {sortBy === col && (
+                          <span>
+                            {order === 'asc' ? (
+                              <HiChevronUp className="h-4 w-4" />
+                            ) : (
+                              <HiChevronDown className="h-4 w-4" />
+                            )}
+                          </span>
+                        )}
+                      </div>
                     </th>
                   ))}
                 </tr>
@@ -770,7 +740,7 @@ export default function ResourceDetailClient({
           tableName={tableName}
           initialData={editRow}
           parentId={childRelation?.parentId ?? null}
-          allMedios={medios}
+          currentCount={paginatedData?.meta.total || 0}
           onClose={() => setEditRow(null)}
         />
       )}
@@ -927,7 +897,7 @@ type FormModalProps = {
   tableName: 'GrupoMedios' | 'Medio' | 'Seccion'
   initialData: EditRow
   parentId: number | null
-  allMedios: MedioType[]
+  currentCount?: number
   onClose: () => void
 }
 
@@ -935,7 +905,7 @@ const FormModal = memo(function FormModal({
   tableName,
   initialData,
   parentId,
-  allMedios,
+  currentCount = 0,
   onClose,
 }: FormModalProps) {
   const isNewMode = 'isNew' in initialData && initialData.isNew === true
@@ -1044,24 +1014,10 @@ const FormModal = memo(function FormModal({
   )
 
   // Datos de FK (grupos para el select en medio y seccion)
-  const { data: gruposFK = [] } = useQuery<GrupoMediosType[], Error>({
-    queryKey: ['GrupoMedios'],
-    queryFn: () =>
-      fetch('/api/admin/resources/GrupoMedios').then((res) => {
-        if (!res.ok) throw new Error('Error cargando GrupoMedios')
-        return res.json()
-      }),
-  })
+  const { data: gruposFK = [] } = useGrupoMedios()
 
   // Datos de FK (medios para el select en seccion)
-  const { data: mediosFK = [] } = useQuery<MedioType[], Error>({
-    queryKey: ['Medio'],
-    queryFn: () =>
-      fetch('/api/admin/resources/Medio').then((res) => {
-        if (!res.ok) throw new Error('Error cargando Medio')
-        return res.json()
-      }),
-  })
+  const { data: mediosFK = [] } = useMedios()
 
   // Submit GrupoMedios
   const onSubmitGrupo: SubmitHandler<GrupoMediosForm> = (data) => {
@@ -1119,16 +1075,13 @@ const FormModal = memo(function FormModal({
     // 1️⃣ Validación “UNICO”
     const grupoSel = gruposFK.find((g) => g.id === data.grupoMediosId)
     if (grupoSel?.tipoGrupo === 'UNICO') {
-      const mediosDeGrupo = allMedios.filter((m) => m.grupoMediosId === grupoSel.id)
-      const yaTiene = mediosDeGrupo.length
-
-      if (isNewMode && yaTiene >= 1) {
-        toast.error('Este grupo es de tipo UNICO y ya contiene un medio')
-        return
-      }
-      if (!isNewMode && yaTiene > 1) {
-        toast.error('El grupo UNICO no puede tener más de un medio')
-        return
+      // Si estamos insertando en el mismo padre del que venimos, usamos currentCount
+      // De lo contrario, confiamos en la validación del servidor
+      if (parentId === data.grupoMediosId) {
+        if (isNewMode && currentCount >= 1) {
+          toast.error('Este grupo es de tipo UNICO y ya contiene un medio')
+          return
+        }
       }
     }
 
