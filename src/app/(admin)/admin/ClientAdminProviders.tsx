@@ -14,9 +14,10 @@ import {
   HiX,
   HiLogout,
   HiHome,
+  HiTemplate,
 } from 'react-icons/hi';
 
-const RESOURCES = ['GrupoMedios', 'Medio'] as const;
+const RESOURCES = ['GrupoMedios', 'Medio', 'Seccion'] as const;
 
 interface ClientAdminProvidersProps {
   children: ReactNode;
@@ -65,6 +66,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
   const displayName = 'Esteban Siladji';
 
   const iconFor = (name: string): IconType => {
+    if (name === 'Seccion') return HiTemplate;
     if (/Medio|Photograph/.test(name))      return HiPhotograph;
     if (/GrupoMedios|Collection/.test(name)) return HiCollection;
     return HiPhotograph;

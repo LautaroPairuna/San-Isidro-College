@@ -83,23 +83,23 @@ const HomePage: NextPage = () => {
   return (
     <div id="container">
       {/* ==================== SECCIÓN 1: HERO (CARRUSEL) ==================== */}
-      <section className="relative w-full lg:h-screen grid grid-cols-12 overflow-hidden">
+      <section className="relative w-full lg:h-screen grid grid-cols-12 max-lg:flex max-lg:flex-col overflow-hidden">
         {/* --- Columna Izquierda: texto estático sobre fondo verde --- */}
-        <div className="col-span-5 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative max-sm:col-span-12 max-sm:items-center max-sm:px-6 max-sm:py-24">
+        <div className="col-span-5 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative max-sm:items-center max-sm:px-6 max-sm:py-24 max-lg:w-full max-lg:h-[300px]">
           <Image
             src="/images/eslogan.svg"
             alt={t('hero.alt')}
             width={250}
             height={250}
             className="absolute top-[55%] left-[80%] -translate-x-1/2 z-40
-                      max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-60 max-lg:left-80 max-sm:translate-x-0
+                      max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-[50%] max-lg:left-[80%] max-sm:translate-x-0
                       max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
           />
 
         </div>
 
         {/* --- Columna Derecha: carrusel de heroMedia --- */}
-        <div className="col-span-7 relative w-full h-full max-sm:col-span-12 max-sm:h-[60vh] overflow-hidden">
+        <div className="col-span-7 relative w-full h-full max-sm:h-[60vh] max-lg:h-[500px] overflow-hidden">
           {heroMedia.length > 0 ? (
             <MediaCarousel
               items={heroMedia}

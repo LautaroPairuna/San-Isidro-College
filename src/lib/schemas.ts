@@ -66,3 +66,18 @@ export const MedioSchema = z.object({
                   .positive('Debe ser mayor que cero'),
 });
 export type MedioForm = z.infer<typeof MedioSchema>;
+
+/* ---------- Seccion (Nuevo) ---------- */
+export const SeccionSchema = z.object({
+  slug: z.string().trim().min(3, 'Mínimo 3 caracteres').max(100, 'Máximo 100 caracteres')
+    .regex(/^[a-z0-9-]+$/, 'Solo minúsculas, números y guiones'),
+  pagina: z.string().trim().min(1, 'Requerido'),
+  orden: z.coerce.number().int().min(0),
+  tipo: z.enum(['MEDIA_UNICA', 'GALERIA', 'TEXTO_RICO', 'HERO', 'CUSTOM']),
+  titulo: z.string().optional(),
+  subtitulo: z.string().optional(),
+  grupoId: z.coerce.number().int().positive().optional().nullable(),
+  medioId: z.coerce.number().int().positive().optional().nullable(),
+  // propsJson se podría manejar como string y parsear, o ignorar por ahora en el form básico
+});
+export type SeccionForm = z.infer<typeof SeccionSchema>;

@@ -10,7 +10,7 @@ import React, {
   memo,
 } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import { useForm, Controller, SubmitHandler, Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import debounce from 'lodash.debounce'
 import { format, parseISO } from 'date-fns'
@@ -29,8 +29,20 @@ import {
   useCreateMedio,
   useUpdateMedio,
   useDeleteMedio,
+  useSecciones,
+  useCreateSeccion,
+  useUpdateSeccion,
+  useDeleteSeccion,
+  Seccion,
 } from '@/lib/hooks'
-import { GrupoMediosForm, GrupoMediosSchema, MedioForm, MedioSchema } from '@/lib/schemas'
+import {
+  GrupoMediosForm,
+  GrupoMediosSchema,
+  MedioForm,
+  MedioSchema,
+  SeccionForm,
+  SeccionSchema,
+} from '@/lib/schemas'
 
 // -------------------------------
 // Tipos para filas
@@ -53,7 +65,11 @@ interface MedioType {
   grupoMediosId: number
   creadoEn: string
   actualizadoEn: string
+  nombreArchivo?: string
 }
+
+// Reutilizamos la interfaz Seccion de hooks.ts
+type SeccionType = Seccion
 
 // -------------------------------
 // Opciones para enums
@@ -70,12 +86,21 @@ const OPCIONES_TIPO_MEDIO = [
   { value: 'ICONO', label: 'ICONO' },
 ] as const
 
+const OPCIONES_TIPO_SECCION = [
+  { value: 'MEDIA_UNICA', label: 'MEDIA ÚNICA' },
+  { value: 'GALERIA', label: 'GALERÍA' },
+  { value: 'TEXTO_RICO', label: 'TEXTO RICO' },
+  { value: 'HERO', label: 'HERO' },
+  { value: 'CUSTOM', label: 'CUSTOM' },
+] as const
+
 // -------------------------------
 // Columnas ocultas y por defecto
 // -------------------------------
 const HIDDEN_COLUMNS: Record<string, string[]> = {
   GrupoMedios: [],
   Medio: ['grupoMediosId'],
+  Seccion: ['propsJson', 'grupoId', 'medioId'],
 }
 
 const DEFAULT_COLUMNS: Record<string, string[]> = {
@@ -87,6 +112,16 @@ const DEFAULT_COLUMNS: Record<string, string[]> = {
     'textoAlternativo',
     'tipo',
     'posicion',
+    'creadoEn',
+    'actualizadoEn',
+  ],
+  Seccion: [
+    'id',
+    'slug',
+    'pagina',
+    'orden',
+    'tipo',
+    'titulo',
     'creadoEn',
     'actualizadoEn',
   ],
@@ -105,9 +140,10 @@ type Relation = {
 // Tipo para editRow
 // -------------------------------
 type EditRow =
-  | { isNew: true; parentId: number | null; resource: 'GrupoMedios' | 'Medio' }
+  | { isNew: true; parentId: number | null; resource: 'GrupoMedios' | 'Medio' | 'Seccion' }
   | (GrupoMediosType & { resource: 'GrupoMedios' })
   | (MedioType & { resource: 'Medio' })
+  | (SeccionType & { resource: 'Seccion' })
 
 // -------------------------------
 // Componente principal
@@ -115,7 +151,7 @@ type EditRow =
 export default function ResourceDetailClient({
   tableName,
 }: {
-  tableName: 'GrupoMedios' | 'Medio'
+  tableName: 'GrupoMedios' | 'Medio' | 'Seccion'
 }) {
   // -----------------------------
   // Estado y hooks generales
@@ -125,9 +161,13 @@ export default function ResourceDetailClient({
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [childRelation, setChildRelation] = useState<Relation | null>(null)
-  const [detailRow, setDetailRow] = useState<GrupoMediosType | MedioType | null>(null)
+  const [detailRow, setDetailRow] = useState<GrupoMediosType | MedioType | SeccionType | null>(
+    null
+  )
   const [editRow, setEditRow] = useState<EditRow | null>(null)
-  const [confirmItems, setConfirmItems] = useState<(GrupoMediosType | MedioType)[] | null>(null)
+  const [confirmItems, setConfirmItems] = useState<
+    (GrupoMediosType | MedioType | SeccionType)[] | null
+  >(null)
   const [selected, setSelected] = useState<number[]>([])
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({})
 
@@ -174,22 +214,31 @@ export default function ResourceDetailClient({
       }),
   })
 
+  const {
+    data: secciones = [],
+    isLoading: loadingSecciones,
+    error: errorSecciones,
+  } = useSecciones()
+
   // -----------------------------
   // Filtrar si tenemos childRelation
   // -----------------------------
-  const baseRows = useMemo<(GrupoMediosType | MedioType)[]>(() => {
+  const baseRows = useMemo<(GrupoMediosType | MedioType | SeccionType)[]>(() => {
     if (childRelation) {
       return (medios as MedioType[]).filter(
         (m) => m.grupoMediosId === childRelation.parentId
       )
     }
-    return tableName === 'GrupoMedios' ? grupos : medios
-  }, [childRelation, grupos, medios, tableName])
+    if (tableName === 'GrupoMedios') return grupos
+    if (tableName === 'Medio') return medios
+    if (tableName === 'Seccion') return secciones
+    return []
+  }, [childRelation, grupos, medios, secciones, tableName])
 
   // -----------------------------
   // Filtrado por búsqueda
   // -----------------------------
-  const filteredRows = useMemo<(GrupoMediosType | MedioType)[]>(() => {
+  const filteredRows = useMemo<(GrupoMediosType | MedioType | SeccionType)[]>(() => {
     if (!search) return baseRows
     return baseRows.filter((row) =>
       Object.values(row).some((val) =>
@@ -202,7 +251,7 @@ export default function ResourceDetailClient({
   // Paginación
   // -----------------------------
   const totalPages = Math.max(1, Math.ceil(filteredRows.length / pageSize))
-  const pageData = useMemo<(GrupoMediosType | MedioType)[]>(() =>
+  const pageData = useMemo<(GrupoMediosType | MedioType | SeccionType)[]>(() =>
     filteredRows.slice((page - 1) * pageSize, page * pageSize),
     [filteredRows, page, pageSize]
   )
@@ -212,6 +261,7 @@ export default function ResourceDetailClient({
   // -----------------------------
   const deleteGrupo = useDeleteGrupoMedios()
   const deleteMedio = useDeleteMedio()
+  const deleteSeccion = useDeleteSeccion()
 
   // -----------------------------
   // Acciones CRUD
@@ -220,14 +270,17 @@ export default function ResourceDetailClient({
     (id: number) => {
       if (tableName === 'GrupoMedios') {
         deleteGrupo.mutate(id)
-      } else {
+      } else if (tableName === 'Medio') {
         deleteMedio.mutate(id)
+      } else if (tableName === 'Seccion') {
+        deleteSeccion.mutate(id)
       }
       setConfirmItems(null)
       setSelected([])
     },
-    [tableName, deleteGrupo, deleteMedio]
+    [tableName, deleteGrupo, deleteMedio, deleteSeccion]
   )
+
 
   const handleViewChild = (row: GrupoMediosType) => {
     if (tableName === 'GrupoMedios') {
@@ -528,6 +581,8 @@ export default function ResourceDetailClient({
                         onClick={() => {
                           if (tableName === 'GrupoMedios') {
                             setEditRow({ ...(row as GrupoMediosType), resource: 'GrupoMedios' })
+                          } else if (tableName === 'Seccion') {
+                            setEditRow({ ...(row as SeccionType), resource: 'Seccion' })
                           } else {
                             setEditRow({ ...(row as MedioType), resource: 'Medio' })
                           }
@@ -737,7 +792,7 @@ export default function ResourceDetailClient({
 // -------------------------------
 type FotoCellProps = {
   fileName: string
-  tableName: 'GrupoMedios' | 'Medio'
+  tableName: 'GrupoMedios' | 'Medio' | 'Seccion'
   childRelation: Relation | null
 }
 
@@ -746,8 +801,10 @@ const FotoCell = memo(function FotoCell({
   tableName,
   childRelation,
 }: FotoCellProps) {
-  const tableKey: 'Medio' | 'GrupoMedios' = childRelation?.childTable ?? tableName
-  const key = folderNames[tableKey]   // <-- ya no da TS7053
+  const tableKey = childRelation?.childTable ?? tableName
+  if (tableKey === 'Seccion') return null
+
+  const key = folderNames[tableKey as 'Medio' | 'GrupoMedios']
   const thumbSrc = `/images/${key}/thumbs/${fileName}`
   const fullSrc = `/images/${key}/${fileName}`
 
@@ -831,7 +888,7 @@ const Modal = memo(function Modal({ title, onClose, children }: ModalProps) {
 // ConfirmModal para eliminar
 // -------------------------------
 type ConfirmModalProps = {
-  items: (GrupoMediosType | MedioType)[]
+  items: (GrupoMediosType | MedioType | SeccionType)[]
   onConfirm: () => void
   onCancel: () => void
 }
@@ -849,7 +906,7 @@ const ConfirmModal = memo(function ConfirmModal({
       <ul className="list-disc list-inside max-h-40 overflow-y-auto border rounded p-4 bg-gray-50 mb-6">
         {items.map((it, idx) => (
           <li key={idx} className="text-gray-600">
-            {(it as GrupoMediosType).nombre || (it as MedioType).id}
+            {'nombre' in it ? it.nombre : 'slug' in it ? it.slug : it.id}
           </li>
         ))}
       </ul>
@@ -867,7 +924,7 @@ const ConfirmModal = memo(function ConfirmModal({
 // FormModal: creación y edición
 // -------------------------------
 type FormModalProps = {
-  tableName: 'GrupoMedios' | 'Medio'
+  tableName: 'GrupoMedios' | 'Medio' | 'Seccion'
   initialData: EditRow
   parentId: number | null
   allMedios: MedioType[]
@@ -934,6 +991,38 @@ const FormModal = memo(function FormModal({
           },
   })
 
+  // Hook para Seccion
+  const {
+    register: registerSeccion,
+    handleSubmit: handleSubmitSeccion,
+    control: controlSeccion,
+    formState: { errors: errorsSeccion },
+  } = useForm<SeccionForm>({
+    resolver: zodResolver(SeccionSchema) as Resolver<SeccionForm>,
+    defaultValues:
+      isEditing && 'resource' in initialData && initialData.resource === 'Seccion'
+        ? {
+            slug: (initialData as SeccionType).slug,
+            pagina: (initialData as SeccionType).pagina,
+            orden: (initialData as SeccionType).orden,
+            tipo: (initialData as SeccionType).tipo,
+            titulo: (initialData as SeccionType).titulo ?? '',
+            subtitulo: (initialData as SeccionType).subtitulo ?? '',
+            grupoId: (initialData as SeccionType).grupoId,
+            medioId: (initialData as SeccionType).medioId,
+          }
+        : {
+            slug: '',
+            pagina: 'home',
+            orden: 0,
+            tipo: 'MEDIA_UNICA',
+            titulo: '',
+            subtitulo: '',
+            grupoId: null,
+            medioId: null,
+          },
+  })
+
   // Hooks de mutación
   const createGrupoHook = useCreateGrupoMedios()
   const updateGrupoHook = useUpdateGrupoMedios(
@@ -947,13 +1036,29 @@ const FormModal = memo(function FormModal({
       ? (initialData as MedioType).id
       : 0
   )
+  const createSeccionHook = useCreateSeccion()
+  const updateSeccionHook = useUpdateSeccion(
+    isEditing && 'resource' in initialData && initialData.resource === 'Seccion'
+      ? (initialData as SeccionType).id
+      : 0
+  )
 
-  // Datos de FK (grupos para el select en medio)
+  // Datos de FK (grupos para el select en medio y seccion)
   const { data: gruposFK = [] } = useQuery<GrupoMediosType[], Error>({
     queryKey: ['GrupoMedios'],
     queryFn: () =>
       fetch('/api/admin/resources/GrupoMedios').then((res) => {
         if (!res.ok) throw new Error('Error cargando GrupoMedios')
+        return res.json()
+      }),
+  })
+
+  // Datos de FK (medios para el select en seccion)
+  const { data: mediosFK = [] } = useQuery<MedioType[], Error>({
+    queryKey: ['Medio'],
+    queryFn: () =>
+      fetch('/api/admin/resources/Medio').then((res) => {
+        if (!res.ok) throw new Error('Error cargando Medio')
         return res.json()
       }),
   })
@@ -1046,10 +1151,37 @@ const FormModal = memo(function FormModal({
     }
   }
 
+  // Submit Seccion
+  const onSubmitSeccion: SubmitHandler<SeccionForm> = (data) => {
+    if (isEditing && 'resource' in initialData && initialData.resource === 'Seccion') {
+      updateSeccionHook.mutate(data, {
+        onSuccess: () => {
+          toast.success('Sección actualizada')
+          onClose()
+          qc.invalidateQueries({ queryKey: ['Seccion'] })
+        },
+        onError: () => {
+          toast.error('Error al actualizar sección')
+        },
+      })
+    } else {
+      createSeccionHook.mutate(data, {
+        onSuccess: () => {
+          toast.success('Sección creada')
+          onClose()
+          qc.invalidateQueries({ queryKey: ['Seccion'] })
+        },
+        onError: () => {
+          toast.error('Error al crear sección')
+        },
+      })
+    }
+  }
+
   return (
     <Modal
       title={`${isNewMode ? 'Crear' : 'Editar'} ${
-        tableName === 'GrupoMedios' ? 'Grupo de Medios' : 'Medio'
+        tableName === 'GrupoMedios' ? 'Grupo de Medios' : tableName === 'Medio' ? 'Medio' : 'Sección'
       }`}
       onClose={onClose}
     >
@@ -1094,7 +1226,7 @@ const FormModal = memo(function FormModal({
             <ButtonBase type="submit">{isNewMode ? 'Guardar' : 'Actualizar'}</ButtonBase>
           </div>
         </form>
-      ) : (
+      ) : tableName === 'Medio' ? (
         <form
           onSubmit={handleSubmitMedio(onSubmitMedio)}
           className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -1248,6 +1380,127 @@ const FormModal = memo(function FormModal({
             {errorsMedio.posicion && (
               <p className="text-red-600 text-sm">{errorsMedio.posicion.message}</p>
             )}
+          </div>
+
+          {/* Botón Guardar */}
+          <div className="md:col-span-2 flex justify-end">
+            <ButtonBase type="submit">{isNewMode ? 'Guardar' : 'Actualizar'}</ButtonBase>
+          </div>
+        </form>
+      ) : (
+        /* --------------------------
+         * FORM SECCION
+         * -------------------------- */
+        <form
+          onSubmit={handleSubmitSeccion(onSubmitSeccion)}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          {/* Slug */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Slug (ID único)</label>
+            <InputBase {...registerSeccion('slug')} placeholder="ej: home-hero-principal" />
+            {errorsSeccion.slug && (
+              <p className="text-red-600 text-sm">{errorsSeccion.slug.message}</p>
+            )}
+          </div>
+
+          {/* Pagina */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Página</label>
+            <InputBase {...registerSeccion('pagina')} placeholder="ej: home, academicos, contacto" />
+            {errorsSeccion.pagina && (
+              <p className="text-red-600 text-sm">{errorsSeccion.pagina.message}</p>
+            )}
+          </div>
+
+          {/* Orden */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Orden</label>
+            <InputBase
+              type="number"
+              min={0}
+              {...registerSeccion('orden')}
+            />
+            {errorsSeccion.orden && (
+              <p className="text-red-600 text-sm">{errorsSeccion.orden.message}</p>
+            )}
+          </div>
+
+          {/* Tipo Seccion */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Tipo</label>
+            <Controller
+              control={controlSeccion}
+              name="tipo"
+              render={({ field }) => (
+                <SelectBase {...field}>
+                  {OPCIONES_TIPO_SECCION.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </SelectBase>
+              )}
+            />
+            {errorsSeccion.tipo && (
+              <p className="text-red-600 text-sm">{errorsSeccion.tipo.message}</p>
+            )}
+          </div>
+
+          {/* Titulo */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Título (Opcional)</label>
+            <InputBase {...registerSeccion('titulo')} placeholder="Título de la sección" />
+          </div>
+
+          {/* Subtitulo */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Subtítulo (Opcional)</label>
+            <InputBase {...registerSeccion('subtitulo')} placeholder="Subtítulo de la sección" />
+          </div>
+
+          {/* Grupo ID */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Grupo de Medios (Opcional)</label>
+            <Controller
+              control={controlSeccion}
+              name="grupoId"
+              render={({ field }) => (
+                <SelectBase
+                  value={field.value ?? ''}
+                  onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : null)}
+                >
+                  <option value="">— Ninguno —</option>
+                  {gruposFK.map((g) => (
+                    <option key={g.id} value={g.id}>
+                      {g.nombre} ({g.tipoGrupo})
+                    </option>
+                  ))}
+                </SelectBase>
+              )}
+            />
+          </div>
+
+          {/* Medio ID */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Medio Único (Opcional)</label>
+            <Controller
+              control={controlSeccion}
+              name="medioId"
+              render={({ field }) => (
+                <SelectBase
+                  value={field.value ?? ''}
+                  onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : null)}
+                >
+                  <option value="">— Ninguno —</option>
+                  {mediosFK.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nombreArchivo || m.urlArchivo}
+                    </option>
+                  ))}
+                </SelectBase>
+              )}
+            />
           </div>
 
           {/* Botón Guardar */}

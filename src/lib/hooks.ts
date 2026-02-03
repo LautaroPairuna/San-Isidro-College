@@ -189,7 +189,84 @@ export function useDeleteMedio(): UseMutationResult<unknown, Error, number> {
 }
 
 /* ==================================================================
- *  5) HOOKS PARA CONTENIDO DINÁMICO DE PÁGINAS (PUBLIC)
+ *  5) HOOKS PARA SECCION
+ * =================================================================*/
+export interface Seccion {
+  id: number
+  slug: string
+  pagina: string
+  orden: number
+  tipo: 'MEDIA_UNICA' | 'GALERIA' | 'TEXTO_RICO' | 'HERO' | 'CUSTOM'
+  titulo?: string | null
+  subtitulo?: string | null
+  propsJson?: unknown
+  grupoId?: number | null
+  medioId?: number | null
+  creadoEn: string
+  actualizadoEn: string
+}
+
+export function useSecciones() {
+  return useQuery<Seccion[], Error>({
+    queryKey: ['Seccion'],
+    queryFn : () => fetchAll<Seccion>('Seccion'),
+  })
+}
+
+export function useCreateSeccion(): UseMutationResult<
+  Seccion,
+  Error,
+  Partial<Seccion>
+> {
+  const qc = useQueryClient()
+  return useMutation<Seccion, Error, Partial<Seccion>>({
+    mutationFn: data =>
+      fetch('/api/admin/resources/Seccion', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify(data),
+      }).then(async res => {
+        if (!res.ok) throw new Error('Error al crear Seccion')
+        return res.json() as Promise<Seccion>
+      }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['Seccion'] }),
+  })
+}
+
+export function useUpdateSeccion(
+  id: number
+): UseMutationResult<Seccion, Error, Partial<Seccion>> {
+  const qc = useQueryClient()
+  return useMutation<Seccion, Error, Partial<Seccion>>({
+    mutationFn: data =>
+      fetch(`/api/admin/resources/Seccion/${id}`, {
+        method : 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify(data),
+      }).then(async res => {
+        if (!res.ok) throw new Error('Error al actualizar Seccion')
+        return res.json() as Promise<Seccion>
+      }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['Seccion'] }),
+  })
+}
+
+export function useDeleteSeccion(): UseMutationResult<unknown, Error, number> {
+  const qc = useQueryClient()
+  return useMutation<unknown, Error, number>({
+    mutationFn: id =>
+      fetch(`/api/admin/resources/Seccion/${id}`, { method: 'DELETE' }).then(
+        async res => {
+          if (!res.ok) throw new Error('Error al eliminar Seccion')
+          return res.json() as Promise<unknown>
+        }
+      ),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['Seccion'] }),
+  })
+}
+
+/* ==================================================================
+ *  6) HOOKS PARA CONTENIDO DINÁMICO DE PÁGINAS (PUBLIC)
  * =================================================================*/
 
 // Interfaz aproximada de lo que devuelve el endpoint /api/public/page-content
