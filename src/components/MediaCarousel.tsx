@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { motion, PanInfo } from 'framer-motion';
 import RenderMedia, { MedioType } from '@/components/RenderMedia';
 
 // Interfaz compatible con lo que llega de la API/Prisma
@@ -29,17 +30,17 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-
+  // Navegación segura
   const showSlide = useCallback(
     (next: number) => {
       if (totalSlides <= 1) return;
+      // Loop cíclico
       const newIndex = (next + totalSlides) % totalSlides;
       setIndex(newIndex);
     },
     [totalSlides]
   );
+
   const nextSlide = useCallback(() => showSlide(index + 1), [index, showSlide]);
   const prevSlide = useCallback(() => showSlide(index - 1), [index, showSlide]);
 
@@ -47,10 +48,10 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   useEffect(() => {
     if (totalSlides <= 1 || isPaused) return;
     const intervalId = setInterval(() => {
-      setIndex((prev) => (prev + 1) % totalSlides);
+      nextSlide();
     }, 5000);
     return () => clearInterval(intervalId);
-  }, [totalSlides, isPaused]);
+  }, [totalSlides, isPaused, nextSlide]);
 
   // Pause on hover
   const handleMouseEnter = () => setIsPaused(true);
@@ -71,54 +72,16 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
     };
   }, [prevSlide, nextSlide]);
 
-  // Touch swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
+  // Drag logic (Framer Motion)
+  const onDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const threshold = 50;
+    const { offset, velocity } = info;
+
+    if (offset.x < -threshold || velocity.x < -500) {
+      nextSlide();
+    } else if (offset.x > threshold || velocity.x > 500) {
+      prevSlide();
     }
-  };
-
-  // Mouse swipe
-  const mouseStartX = useRef(0);
-  const mouseEndX = useRef(0);
-  const isMouseDragging = useRef(false);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isMouseDragging.current = true;
-    mouseStartX.current = e.clientX;
-    mouseEndX.current = e.clientX;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isMouseDragging.current) return;
-    mouseEndX.current = e.clientX;
-  };
-
-  const handleMouseUp = () => {
-    if (!isMouseDragging.current) return;
-    isMouseDragging.current = false;
-    const diff = mouseStartX.current - mouseEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
-    }
-  };
-
-  const handleMouseLeaveWrapper = () => {
-    handleMouseLeave(); // Lógica original de pausa
-    handleMouseUp();    // Terminar drag si sale
   };
 
   return (
@@ -127,89 +90,105 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
       className={`relative w-full overflow-hidden h-full cursor-grab active:cursor-grabbing ${className}`}
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeaveWrapper}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Slides */}
-      <div
-        className="flex h-full transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${index * 100}%)` }}
+      {/* Slides Container */}
+      <motion.div
+        className="flex h-full"
+        animate={{ x: `-${index * 100}%` }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={onDragEnd}
+        // Evita propagar click si hubo drag significativo (opcional, pero buena UX)
+        onClickCapture={(e) => {
+          // Si quisiéramos bloquear clicks en links internos durante el drag
+        }}
       >
         {items.map((item, idx) => (
           <div
             key={idx}
-            className="min-w-full relative h-full overflow-hidden bg-gray-900"
+            className="min-w-full relative h-full overflow-hidden bg-gray-900 select-none"
+            onDragStart={(e) => e.preventDefault()} // Evita ghost image nativa
           >
             <RenderMedia
-              medio={item as MedioType} // Cast seguro por compatibilidad de tipos
-              fallback="/images/placeholder.webp" // Fallback genérico si falla
-              fill={true} // Imagen llena el slide
-              priority={idx === 0} // Priorizar carga de la primera imagen
-              videoMode="contain-blur" // Video mantiene ratio con fondo blur
+              medio={item as MedioType}
+              fallback="/images/placeholder.webp"
+              fill={true}
+              priority={idx === 0}
+              videoMode="contain-blur"
               videoProps={{
                 autoPlay: true,
                 muted: true,
                 loop: true,
                 controls: false,
+                playsInline: true,
+                className: "pointer-events-none" // Importante para no interferir con el drag
               }}
-              className="object-cover"
+              className="object-cover pointer-events-none" // Importante para imágenes
             />
           </div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Controles */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4 bg-black/50 px-4 py-2 rounded-full">
-        <button onClick={prevSlide} aria-label="Anterior">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="white"
-            className="h-6 w-6"
+      {totalSlides > 1 && (
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4 bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm">
+          <button 
+            onClick={(e) => { e.stopPropagation(); prevSlide(); }} 
+            aria-label="Anterior"
+            className="hover:scale-110 transition-transform"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <div className="flex gap-2">
-          {items.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => showSlide(idx)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                idx === index ? 'bg-white scale-110' : 'bg-gray-300'
-              }`}
-              aria-label={`Ir al slide ${idx + 1}`}
-            />
-          ))}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="white"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <div className="flex gap-2">
+            {items.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={(e) => { e.stopPropagation(); showSlide(idx); }}
+                className={`w-2.5 h-2.5 rounded-full transition-all ${
+                  idx === index ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'
+                }`}
+                aria-label={`Ir al slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+          <button 
+            onClick={(e) => { e.stopPropagation(); nextSlide(); }} 
+            aria-label="Siguiente"
+            className="hover:scale-110 transition-transform"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="white"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
         </div>
-        <button onClick={nextSlide} aria-label="Siguiente">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="white"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-      </div>
+      )}
     </div>
   );
 };
