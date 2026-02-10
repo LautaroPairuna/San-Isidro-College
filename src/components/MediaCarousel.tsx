@@ -51,6 +51,32 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
 
   if (items.length === 0) return null;
 
+  // Si hay un solo elemento, renderizarlo estáticamente
+  if (items.length === 1) {
+    const item = items[0];
+    return (
+      <div className={cn('w-full h-full relative overflow-hidden bg-gray-900', className)}>
+        <RenderMedia
+          medio={item as MedioType}
+          fallback="/images/placeholder.webp"
+          fill={true}
+          priority={true}
+          videoMode="contain-blur"
+          videoProps={{
+            autoPlay: true,
+            muted: true,
+            loop: true,
+            controls: false,
+            playsInline: true,
+            className: 'pointer-events-none object-contain w-full h-full relative z-10',
+          }}
+          className="w-full h-full pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+      </div>
+    );
+  }
+
   return (
     <Carousel
       setApi={setApi}
@@ -76,16 +102,16 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                 fallback="/images/placeholder.webp"
                 fill={true}
                 priority={idx === 0}
-                videoMode="contain-blur"
+                videoMode="contain-blur" // Forzar modo contain-blur
                 videoProps={{
                   autoPlay: true,
                   muted: true,
                   loop: true,
                   controls: false,
                   playsInline: true,
-                  className: 'pointer-events-none object-cover w-full h-full',
+                  className: 'pointer-events-none object-contain w-full h-full relative z-10', // object-contain para respetar aspect ratio
                 }}
-                className="object-cover w-full h-full pointer-events-none"
+                className="w-full h-full pointer-events-none"
               />
               {/* Overlay gradiente sutil para mejorar visibilidad de controles si es necesario */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
