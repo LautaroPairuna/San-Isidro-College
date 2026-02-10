@@ -1,10 +1,10 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource colegio_san_isidro {
   provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 /// Enum para el tipo de medio: imagen, video o ícono
