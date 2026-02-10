@@ -1,9 +1,17 @@
-// src/components/MediaCarousel.tsx
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, PanInfo } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import RenderMedia, { MedioType } from '@/components/RenderMedia';
+import { cn } from '@/lib/utils';
 
 // Interfaz compatible con lo que llega de la API/Prisma
 interface MedioMinimal {
@@ -26,170 +34,99 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   altText = '',
   className = '',
 }) => {
-  const totalSlides = items.length;
-  const [index, setIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
-  // Navegación segura
-  const showSlide = useCallback(
-    (next: number) => {
-      if (totalSlides <= 1) return;
-      // Loop cíclico
-      const newIndex = (next + totalSlides) % totalSlides;
-      setIndex(newIndex);
-    },
-    [totalSlides]
-  );
-
-  const nextSlide = useCallback(() => showSlide(index + 1), [index, showSlide]);
-  const prevSlide = useCallback(() => showSlide(index - 1), [index, showSlide]);
-
-  // Auto-advance
   useEffect(() => {
-    if (totalSlides <= 1 || isPaused) return;
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, [totalSlides, isPaused, nextSlide]);
+    if (!api) return;
 
-  // Pause on hover
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
 
-  // Keyboard nav
-  const carouselContainerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = carouselContainerRef.current;
-    if (!el) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
-    };
-    el.addEventListener('keydown', onKeyDown);
-    return () => {
-      el.removeEventListener('keydown', onKeyDown);
-    };
-  }, [prevSlide, nextSlide]);
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
-  // Drag logic (Framer Motion)
-  const onDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const threshold = 50;
-    const { offset, velocity } = info;
-
-    if (offset.x < -threshold || velocity.x < -500) {
-      nextSlide();
-    } else if (offset.x > threshold || velocity.x > 500) {
-      prevSlide();
-    }
-  };
+  if (items.length === 0) return null;
 
   return (
-    <div
-      ref={carouselContainerRef}
-      className={`relative w-full overflow-hidden h-full cursor-grab active:cursor-grabbing ${className}`}
-      tabIndex={0}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <Carousel
+      setApi={setApi}
+      plugins={[
+        Autoplay({
+          delay: 5000,
+          stopOnInteraction: false,
+          stopOnMouseEnter: true,
+        }),
+      ]}
+      opts={{
+        loop: true,
+        align: 'start',
+      }}
+      className={cn('w-full h-full relative group', className)}
     >
-      {/* Slides Container */}
-      <motion.div
-        className="flex h-full"
-        animate={{ x: `-${index * 100}%` }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.2}
-        onDragEnd={onDragEnd}
-        // Evita propagar click si hubo drag significativo (opcional, pero buena UX)
-        onClickCapture={(e) => {
-          // Si quisiéramos bloquear clicks en links internos durante el drag
-        }}
-      >
+      <CarouselContent className="h-full -ml-0">
         {items.map((item, idx) => (
-          <div
-            key={idx}
-            className="min-w-full relative h-full overflow-hidden bg-gray-900 select-none"
-            onDragStart={(e) => e.preventDefault()} // Evita ghost image nativa
-          >
-            <RenderMedia
-              medio={item as MedioType}
-              fallback="/images/placeholder.webp"
-              fill={true}
-              priority={idx === 0}
-              videoMode="contain-blur"
-              videoProps={{
-                autoPlay: true,
-                muted: true,
-                loop: true,
-                controls: false,
-                playsInline: true,
-                className: "pointer-events-none" // Importante para no interferir con el drag
-              }}
-              className="object-cover pointer-events-none" // Importante para imágenes
-            />
-          </div>
+          <CarouselItem key={idx} className="h-full pl-0 relative">
+            <div className="w-full h-full relative overflow-hidden bg-gray-900">
+              <RenderMedia
+                medio={item as MedioType}
+                fallback="/images/placeholder.webp"
+                fill={true}
+                priority={idx === 0}
+                videoMode="contain-blur"
+                videoProps={{
+                  autoPlay: true,
+                  muted: true,
+                  loop: true,
+                  controls: false,
+                  playsInline: true,
+                  className: 'pointer-events-none object-cover w-full h-full',
+                }}
+                className="object-cover w-full h-full pointer-events-none"
+              />
+              {/* Overlay gradiente sutil para mejorar visibilidad de controles si es necesario */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+            </div>
+          </CarouselItem>
         ))}
-      </motion.div>
+      </CarouselContent>
 
-      {/* Controles */}
-      {totalSlides > 1 && (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4 bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm">
-          <button 
-            onClick={(e) => { e.stopPropagation(); prevSlide(); }} 
-            aria-label="Anterior"
-            className="hover:scale-110 transition-transform"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="white"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <div className="flex gap-2">
-            {items.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={(e) => { e.stopPropagation(); showSlide(idx); }}
-                className={`w-2.5 h-2.5 rounded-full transition-all ${
-                  idx === index ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'
-                }`}
-                aria-label={`Ir al slide ${idx + 1}`}
-              />
-            ))}
-          </div>
-          <button 
-            onClick={(e) => { e.stopPropagation(); nextSlide(); }} 
-            aria-label="Siguiente"
-            className="hover:scale-110 transition-transform"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="white"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+      {/* Controles de Navegación (Dots) */}
+      {count > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 p-2 bg-black/20 backdrop-blur-sm rounded-full">
+          {Array.from({ length: count }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className={cn(
+                'h-2.5 rounded-full transition-all duration-300',
+                current === index
+                  ? 'bg-white w-8'
+                  : 'bg-white/50 w-2.5 hover:bg-white/80'
+              )}
+              aria-label={`Ir al slide ${index + 1}`}
+            />
+          ))}
         </div>
       )}
-    </div>
+
+      {/* Flechas de Navegación (Visibles en hover) */}
+      {count > 1 && (
+        <>
+          <CarouselPrevious
+            className="left-4 bg-black/20 border-white/20 text-white hover:bg-black/40 hover:text-white hover:border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex h-10 w-10"
+            variant="outline"
+          />
+          <CarouselNext
+            className="right-4 bg-black/20 border-white/20 text-white hover:bg-black/40 hover:text-white hover:border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex h-10 w-10"
+            variant="outline"
+          />
+        </>
+      )}
+    </Carousel>
   );
 };
 
