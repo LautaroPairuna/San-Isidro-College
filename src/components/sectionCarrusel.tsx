@@ -163,7 +163,39 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
     }
   };
 
-  // 13) Estados de carga y vacíos
+  // 13) Mouse Swipe
+  const mouseStartX = useRef(0);
+  const mouseEndX = useRef(0);
+  const isMouseDragging = useRef(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isMouseDragging.current = true;
+    mouseStartX.current = e.clientX;
+    mouseEndX.current = e.clientX;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDragging.current) return;
+    mouseEndX.current = e.clientX;
+  };
+
+  const handleMouseUp = () => {
+    if (!isMouseDragging.current) return;
+    isMouseDragging.current = false;
+    const diff = mouseStartX.current - mouseEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goToSlide((i) => i + 1);
+      else goToSlide((i) => i - 1);
+    }
+  };
+
+  const handleMouseLeaveWrapper = () => {
+    handleMouseLeave();
+    handleMouseUp();
+  };
+
+  // 14) Estados de carga y vacíos
   if (isLoading) {
     return (
       <div className="flex h-48 items-center justify-center text-gray-600">
@@ -186,11 +218,14 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
     <section id="alianzas">
       <div
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMouseLeaveWrapper}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative w-full mx-auto overflow-hidden py-10 border-t-4 border-b-4 border-[#71af8d]"
+        className="relative w-full mx-auto overflow-hidden py-10 border-t-4 border-b-4 border-[#71af8d] cursor-grab active:cursor-grabbing"
       >
         <div
           ref={carouselRef}

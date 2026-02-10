@@ -89,13 +89,48 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
     }
   };
 
+  // Mouse swipe
+  const mouseStartX = useRef(0);
+  const mouseEndX = useRef(0);
+  const isMouseDragging = useRef(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isMouseDragging.current = true;
+    mouseStartX.current = e.clientX;
+    mouseEndX.current = e.clientX;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDragging.current) return;
+    mouseEndX.current = e.clientX;
+  };
+
+  const handleMouseUp = () => {
+    if (!isMouseDragging.current) return;
+    isMouseDragging.current = false;
+    const diff = mouseStartX.current - mouseEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  };
+
+  const handleMouseLeaveWrapper = () => {
+    handleMouseLeave(); // Lógica original de pausa
+    handleMouseUp();    // Terminar drag si sale
+  };
+
   return (
     <div
       ref={carouselContainerRef}
-      className={`relative w-full overflow-hidden h-full ${className}`}
+      className={`relative w-full overflow-hidden h-full cursor-grab active:cursor-grabbing ${className}`}
       tabIndex={0}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={handleMouseLeaveWrapper}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
