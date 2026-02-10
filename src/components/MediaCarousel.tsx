@@ -120,24 +120,24 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         ))}
       </CarouselContent>
 
-      {/* Controles Unificados (Dots + Flechas) */}
+      {/* Controles Unificados (Dots + Flechas) - Estilo Pill Dark */}
       {count > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 bg-black/30 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
           <CarouselPrevious
-            className="static translate-y-0 h-8 w-8 bg-transparent border-none text-white/70 hover:text-white hover:bg-white/10"
+            className="static translate-y-0 h-6 w-6 bg-transparent border-none text-white hover:text-white/80 hover:bg-transparent"
             variant="ghost"
           />
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-1.5 items-center mx-1">
             {Array.from({ length: count }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
                 className={cn(
-                  'h-2 rounded-full transition-all duration-300',
+                  'rounded-full transition-all duration-300',
                   current === index
-                    ? 'bg-white w-6'
-                    : 'bg-white/40 w-2 hover:bg-white/60'
+                    ? 'bg-white w-5 h-1.5'
+                    : 'bg-white/50 w-1.5 h-1.5 hover:bg-white/80'
                 )}
                 aria-label={`Ir al slide ${index + 1}`}
               />
@@ -145,7 +145,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
           </div>
 
           <CarouselNext
-            className="static translate-y-0 h-8 w-8 bg-transparent border-none text-white/70 hover:text-white hover:bg-white/10"
+            className="static translate-y-0 h-6 w-6 bg-transparent border-none text-white hover:text-white/80 hover:bg-transparent"
             variant="ghost"
           />
         </div>
