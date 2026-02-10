@@ -113,15 +113,15 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         </div>
       )}
 
-      {/* Flechas de Navegación (Visibles en hover) */}
+      {/* Flechas de Navegación (Visibles siempre) */}
       {count > 1 && (
         <>
           <CarouselPrevious
-            className="left-4 bg-black/20 border-white/20 text-white hover:bg-black/40 hover:text-white hover:border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex h-10 w-10"
+            className="left-4 bg-black/30 border-white/30 text-white hover:bg-black/60 hover:text-white hover:border-white/80 transition-all duration-300 hidden md:flex h-12 w-12 z-50 backdrop-blur-sm"
             variant="outline"
           />
           <CarouselNext
-            className="right-4 bg-black/20 border-white/20 text-white hover:bg-black/40 hover:text-white hover:border-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex h-10 w-10"
+            className="right-4 bg-black/30 border-white/30 text-white hover:bg-black/60 hover:text-white hover:border-white/80 transition-all duration-300 hidden md:flex h-12 w-12 z-50 backdrop-blur-sm"
             variant="outline"
           />
         </>
