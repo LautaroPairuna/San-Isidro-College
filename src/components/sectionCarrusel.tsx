@@ -1,23 +1,24 @@
 // src/app/components/ui/sectionCarrusel.tsx
 'use client';
 
-import React, {
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
-import Image from 'next/image';
+import { useMemo, useState, useEffect } from 'react';
+import RenderMedia from '@/components/RenderMedia';
 import { useMedios } from '@/lib/hooks';
-import { toPublicImageUrl } from '@/lib/publicConstants';
-
-type Slide = { src: string; alt: string };
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { cn } from '@/lib/utils';
 
 interface MedioMinimal {
   id: number;
   urlArchivo: string;
-  textoAlternativo?: string;
+  textoAlternativo?: string | null;
   tipo: 'IMAGEN' | 'VIDEO' | 'ICONO';
   posicion: number;
   grupoMediosId: number;
@@ -30,6 +31,10 @@ interface SectionCarruselProps {
 const ALIANZAS_GROUP_ID = 7;
 
 export default function SectionCarrusel({ medios }: SectionCarruselProps) {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
   // 1) Traemos todos los medios del grupo “Alianzas” solo si no se pasan por props
   const { data: fetchedMedios = [], isLoading: isLoadingFetch, error: errorFetch } = useMedios(ALIANZAS_GROUP_ID, {
     enabled: !medios
@@ -39,163 +44,32 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
   const isLoading = medios ? false : isLoadingFetch;
   const error = medios ? null : errorFetch;
 
-  // 2) Agrupamos en rawSlides con useMemo para evitar loops de estado
-  const rawSlides = useMemo<Slide[][]>(() => {
+  // 2) Agrupamos en chunks de 3 para mantener el diseño original
+  const slides = useMemo<MedioMinimal[][]>(() => {
     if (!mediosRaw || mediosRaw.length === 0) return [];
 
     const items = (mediosRaw as MedioMinimal[])
       .filter((m) => m.tipo === 'ICONO' || m.tipo === 'IMAGEN')
-      .sort((a, b) => a.posicion - b.posicion)
-      .map((m) => ({
-        src: toPublicImageUrl('medios', m.urlArchivo),
-        alt: m.textoAlternativo ?? '',
-      }));
+      .sort((a, b) => a.posicion - b.posicion);
 
-    const chunks: Slide[][] = [];
+    const chunks: MedioMinimal[][] = [];
     for (let i = 0; i < items.length; i += 3) {
       chunks.push(items.slice(i, i + 3));
     }
     return chunks;
   }, [mediosRaw]);
 
-  // 3) Duplicamos para loop infinito
-  const slides = useMemo(() => [...rawSlides, ...rawSlides], [rawSlides]);
-  const totalRaw = rawSlides.length;
-
-  // 4) Estados de control
-  const [index, setIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // 5) Función para ir a slide
-  const goToSlide = useCallback(
-    (newIndex: number | ((prev: number) => number)) => {
-      if (isAnimating || totalRaw === 0) return;
-      setIsAnimating(true);
-      setIndex((prev) =>
-        typeof newIndex === 'function' ? newIndex(prev) : newIndex
-      );
-    },
-    [isAnimating, totalRaw]
-  );
-
-  // 6) Autoavance cada 5 segundos
   useEffect(() => {
-    if (isPaused || totalRaw === 0) return;
-    intervalRef.current = setInterval(() => {
-      setIndex((prev) => prev + 1);
-    }, 5000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isPaused, totalRaw]);
+    if (!api) return;
 
-  // 7) Actualizamos transform/transition
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    el.style.transition = transitionEnabled
-      ? 'transform 500ms ease-in-out'
-      : 'none';
-    el.style.transform = `translateX(-${index * 100}%)`;
-  }, [index, transitionEnabled]);
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
 
-  // 8) Corregimos índice al terminar transición
-  const handleTransitionEnd = () => {
-    if (totalRaw === 0) return;
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
-    if (index >= totalRaw) {
-      setTransitionEnabled(false);
-      setIndex(index - totalRaw);
-    } else if (index < 0) {
-      setTransitionEnabled(false);
-      setIndex(index + totalRaw);
-    } else {
-      setTransitionEnabled(true);
-    }
-    setIsAnimating(false);
-  };
-
-  // 9) Reactiva transición
-  useEffect(() => {
-    if (!transitionEnabled) {
-      const t = setTimeout(() => setTransitionEnabled(true), 50);
-      return () => clearTimeout(t);
-    }
-  }, [transitionEnabled]);
-
-  // 10) Pausar/Resumir al hover
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
-
-  // 11) Navegación por teclado
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') goToSlide((i) => i - 1);
-      else if (e.key === 'ArrowRight') goToSlide((i) => i + 1);
-    },
-    [goToSlide]
-  );
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
-
-  // 12) Swipe táctil
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) goToSlide((i) => i + 1);
-      else goToSlide((i) => i - 1);
-    }
-  };
-
-  // 13) Mouse Swipe
-  const mouseStartX = useRef(0);
-  const mouseEndX = useRef(0);
-  const isMouseDragging = useRef(false);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isMouseDragging.current = true;
-    mouseStartX.current = e.clientX;
-    mouseEndX.current = e.clientX;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isMouseDragging.current) return;
-    mouseEndX.current = e.clientX;
-  };
-
-  const handleMouseUp = () => {
-    if (!isMouseDragging.current) return;
-    isMouseDragging.current = false;
-    const diff = mouseStartX.current - mouseEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) goToSlide((i) => i + 1);
-      else goToSlide((i) => i - 1);
-    }
-  };
-
-  const handleMouseLeaveWrapper = () => {
-    handleMouseLeave();
-    handleMouseUp();
-  };
-
-  // 14) Estados de carga y vacíos
   if (isLoading) {
     return (
       <div className="flex h-48 items-center justify-center text-gray-600">
@@ -203,6 +77,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
       </div>
     );
   }
+
   if (error) {
     return (
       <div className="p-4 text-red-600">
@@ -210,96 +85,82 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
       </div>
     );
   }
-  if (totalRaw === 0) {
+
+  if (slides.length === 0) {
     return null;
   }
 
   return (
     <section id="alianzas">
-      <div
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeaveWrapper}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        className="relative w-full mx-auto overflow-hidden py-10 border-t-4 border-b-4 border-[#71af8d] cursor-grab active:cursor-grabbing"
-      >
-        <div
-          ref={carouselRef}
-          onTransitionEnd={handleTransitionEnd}
-          className="flex transition-transform duration-500 ease-in-out"
+      <div className="relative w-full mx-auto py-10 border-t-4 border-b-4 border-[#71af8d]">
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: 'start',
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 5000,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          className="w-full"
         >
-          {slides.map((slideGroup, idx) => (
-            <div
-              key={idx}
-              className="min-w-full flex justify-center items-center gap-8 sm:gap-12 md:gap-16"
-            >
-              {slideGroup.map((item, i) => (
-                <div
-                  key={i}
-                  className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
-                >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    priority={idx === 0}
-                    style={{ objectFit: 'contain' }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+          <CarouselContent>
+            {slides.map((slideGroup, idx) => (
+              <CarouselItem key={idx} className="min-w-full">
+                <div className="flex justify-center items-center gap-8 sm:gap-12 md:gap-16 h-full p-4">
+                  {slideGroup.map((item, i) => (
+                    <div
+                      key={item.id}
+                      className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
+                    >
+                      <RenderMedia
+                        medio={item}
+                        fallback="/images/placeholder.webp"
+                        fill
+                        priority={idx === 0}
+                        className="object-contain"
+                        unoptimized={true}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-        <button
-          onClick={() => goToSlide((i) => i - 1)}
-          aria-label="Anterior"
-          className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-full w-full"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <button
-          onClick={() => goToSlide((i) => i + 1)}
-          aria-label="Siguiente"
-          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md z-20 w-6 h-6 sm:w-8 sm:h-8"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-full w-full"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-          {rawSlides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => goToSlide(idx)}
-              className={`w-3 h-3 rounded-full ${
-                index % totalRaw === idx ? 'bg-[#71af8d]' : 'bg-gray-400'
-              }`}
-              aria-label={`Ir al slide ${idx + 1}`}
+          {/* Controles de Navegación Personalizados (Estilo Original) */}
+          <div className="hidden md:block">
+            <CarouselPrevious
+              variant="ghost"
+              className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 bg-gray-200 hover:bg-gray-300 rounded-full shadow-md text-gray-700 border-none"
             />
-          ))}
-        </div>
+            <CarouselNext
+              variant="ghost"
+              className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 bg-gray-200 hover:bg-gray-300 rounded-full shadow-md text-gray-700 border-none"
+            />
+          </div>
+
+          {/* Indicadores (Dots) Verdes */}
+          <div className="flex justify-center gap-2 mt-6">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={cn(
+                  'h-2.5 rounded-full transition-all duration-300',
+                  current === index
+                    ? 'bg-[#71af8d] w-8' // Activo: Verde y alargado
+                    : 'bg-[#71af8d]/30 w-2.5 hover:bg-[#71af8d]/60' // Inactivo: Verde transparente
+                )}
+                aria-label={`Ir al slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </Carousel>
       </div>
     </section>
   );
