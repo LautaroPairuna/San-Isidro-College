@@ -94,37 +94,35 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         ))}
       </CarouselContent>
 
-      {/* Controles de Navegación (Dots) */}
+      {/* Controles Unificados (Dots + Flechas) */}
       {count > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 p-2 bg-black/20 backdrop-blur-sm rounded-full">
-          {Array.from({ length: count }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => api?.scrollTo(index)}
-              className={cn(
-                'h-2.5 rounded-full transition-all duration-300',
-                current === index
-                  ? 'bg-white w-8'
-                  : 'bg-white/50 w-2.5 hover:bg-white/80'
-              )}
-              aria-label={`Ir al slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Flechas de Navegación (Visibles siempre) */}
-      {count > 1 && (
-        <>
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 bg-black/30 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
           <CarouselPrevious
-            className="left-4 bg-black/30 border-white/30 text-white hover:bg-black/60 hover:text-white hover:border-white/80 transition-all duration-300 hidden md:flex h-12 w-12 z-50 backdrop-blur-sm"
-            variant="outline"
+            className="static translate-y-0 h-8 w-8 bg-transparent border-none text-white/70 hover:text-white hover:bg-white/10"
+            variant="ghost"
           />
+
+          <div className="flex gap-2 items-center">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={cn(
+                  'h-2 rounded-full transition-all duration-300',
+                  current === index
+                    ? 'bg-white w-6'
+                    : 'bg-white/40 w-2 hover:bg-white/60'
+                )}
+                aria-label={`Ir al slide ${index + 1}`}
+              />
+            ))}
+          </div>
+
           <CarouselNext
-            className="right-4 bg-black/30 border-white/30 text-white hover:bg-black/60 hover:text-white hover:border-white/80 transition-all duration-300 hidden md:flex h-12 w-12 z-50 backdrop-blur-sm"
-            variant="outline"
+            className="static translate-y-0 h-8 w-8 bg-transparent border-none text-white/70 hover:text-white hover:bg-white/10"
+            variant="ghost"
           />
-        </>
+        </div>
       )}
     </Carousel>
   );
