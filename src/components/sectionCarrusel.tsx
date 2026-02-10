@@ -211,6 +211,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
                     src={item.src}
                     alt={item.alt}
                     fill
+                    priority={idx === 0}
                     style={{ objectFit: 'contain' }}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />

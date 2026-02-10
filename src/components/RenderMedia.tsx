@@ -43,6 +43,7 @@ interface Props {
   fill?: boolean
   videoMode?: 'cover' | 'contain-blur'
   videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>
+  priority?: boolean
 }
 
 /**
@@ -64,6 +65,7 @@ const RenderMedia = memo(function RenderMedia({
   fill = false,
   videoMode,
   videoProps = {},
+  priority = false,
 }: Props) {
   // Si no hay objeto `medio`, o no tiene urlArchivo válida, usamos fallback como imagen
   if (!medio?.urlArchivo) {
@@ -75,6 +77,7 @@ const RenderMedia = memo(function RenderMedia({
         {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
         className={className}
         unoptimized={isFallbackDynamic}
+        priority={priority}
       />
     )
   }
@@ -141,6 +144,7 @@ const RenderMedia = memo(function RenderMedia({
       {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
       className={className}
       unoptimized={isDynamic}
+      priority={priority}
     />
   )
 })

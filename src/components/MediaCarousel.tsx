@@ -114,6 +114,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
               medio={item as MedioType} // Cast seguro por compatibilidad de tipos
               fallback="/images/placeholder.webp" // Fallback genérico si falla
               fill={true} // Imagen llena el slide
+              priority={idx === 0} // Priorizar carga de la primera imagen
               videoMode="contain-blur" // Video mantiene ratio con fondo blur
               videoProps={{
                 autoPlay: true,
