@@ -1,57 +1,14 @@
 @import "tailwindcss";
 
-@font-face {
-    font-family: 'AcuminVariableConcept';
-    src: url('/fonts/Acumin-Variable-Concept.woff2') format('woff2');
-    font-weight: 100 900; /* Permite todo el rango de pesos */
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Gotham';
-    src: url('/fonts/GothamBold.woff2') format('woff2');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Gotham';
-    src: url('/fonts/GothamBoldItalic.woff2') format('woff2');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Gotham';
-    src: url('/fonts/GothamBook.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Gotham';
-    src: url('/fonts/GothamBookItalic.woff2') format('woff2');
-    font-weight: 400;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Gotham';
-    src: url('/fonts/GothamLight.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Harlows';
-    src: url('/fonts/HARLOWSI.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+@theme {
+  --font-gotham: var(--font-gotham), sans-serif;
+  --font-acumin: var(--font-acumin), sans-serif;
+  --font-harlows: var(--font-harlows), sans-serif;
 }
 
 /* Aplicar por defecto */
 body {
-    font-family: 'Gotham', sans-serif;
+    font-family: var(--font-gotham);
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);

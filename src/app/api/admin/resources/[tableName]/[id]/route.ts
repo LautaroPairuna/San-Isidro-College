@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { adminGuard } from "@/lib/auth-guard";
-import { resourceService } from "@/services/resource.service";
+import { resourceService, isValidTableName } from "@/services/resource.service";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -27,6 +27,10 @@ type ParamsPromise<T> = { params: Promise<T> };
 export async function GET(_req: NextRequest, ctx: ParamsPromise<{ tableName: string; id: string }>) {
   const { tableName, id } = await ctx.params;
 
+  if (!isValidTableName(tableName)) {
+    return NextResponse.json({ error: "Modelo inválido" }, { status: 400 });
+  }
+
   try {
     await adminGuard();
     const item = await resourceService.getOne(tableName, id);
@@ -46,6 +50,10 @@ export async function GET(_req: NextRequest, ctx: ParamsPromise<{ tableName: str
 /* ─────────────── PUT ─────────────── */
 export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: string; id: string }>) {
   const { tableName, id } = await ctx.params;
+
+  if (!isValidTableName(tableName)) {
+    return NextResponse.json({ error: "Modelo inválido" }, { status: 400 });
+  }
 
   try {
     await adminGuard();
@@ -90,6 +98,10 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
 /* ─────────────── DELETE ─────────────── */
 export async function DELETE(_req: NextRequest, ctx: ParamsPromise<{ tableName: string; id: string }>) {
   const { tableName, id } = await ctx.params;
+
+  if (!isValidTableName(tableName)) {
+    return NextResponse.json({ error: "Modelo inválido" }, { status: 400 });
+  }
 
   try {
     await adminGuard();

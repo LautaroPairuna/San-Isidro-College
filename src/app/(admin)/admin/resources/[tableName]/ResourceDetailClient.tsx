@@ -196,7 +196,9 @@ export default function ResourceDetailClient({
     page,
     pageSize,
     search,
-    filters
+    filters,
+    sortBy,
+    order
   )
 
   const pageData = paginatedData?.data || []

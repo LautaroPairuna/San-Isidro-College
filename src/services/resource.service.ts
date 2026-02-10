@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { fileService } from "./file.service";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { GrupoMedios, Medio, Seccion, Prisma } from "@prisma/client";
 
 export type PaginatedResult<T> = {
   data: T[];
@@ -13,135 +12,149 @@ export type PaginatedResult<T> = {
   };
 };
 
-type ResourceTable = "GrupoMedios" | "Medio" | "Seccion";
+type AllowedModels = GrupoMedios | Medio | Seccion;
+type TableName = "GrupoMedios" | "Medio" | "Seccion";
+
+const SEARCH_CONFIG: Record<TableName, string[]> = {
+  GrupoMedios: ["nombre"],
+  Medio: ["textoAlternativo", "urlArchivo"],
+  Seccion: ["titulo", "slug"],
+};
+
+const DEFAULT_ORDER: Record<TableName, { field: string; direction: "asc" | "desc" }> = {
+  GrupoMedios: { field: "actualizadoEn", direction: "desc" },
+  Medio: { field: "posicion", direction: "asc" },
+  Seccion: { field: "orden", direction: "asc" },
+};
+
+const SORT_ALLOWLIST: Record<TableName, string[]> = {
+  GrupoMedios: ["id", "nombre", "tipoGrupo", "creadoEn", "actualizadoEn"],
+  Medio: ["id", "urlArchivo", "urlMiniatura", "textoAlternativo", "tipo", "posicion", "creadoEn", "actualizadoEn"],
+  Seccion: ["id", "slug", "pagina", "orden", "tipo", "titulo", "creadoEn", "actualizadoEn"],
+};
+
+export function isValidTableName(name: string): name is TableName {
+  return ["GrupoMedios", "Medio", "Seccion"].includes(name);
+}
 
 export const resourceService = {
-  async listAll(
-    tableName: string,
+  async listAll<T extends AllowedModels>(
+    tableName: TableName,
     page = 1,
     limit = 1000,
     search?: string,
-    filters?: Record<string, any>,
+    filters?: Record<string, unknown>,
     sortBy?: string,
-    order: 'asc' | 'desc' = 'desc'
-  ): Promise<PaginatedResult<any> | null> {
+    order: "asc" | "desc" = "desc"
+  ): Promise<PaginatedResult<T> | null> {
     const skip = (page - 1) * limit;
-    
-    // Base where con filtros exactos (ej. grupoMediosId)
-    const whereConditions: any[] = [];
+
+    // 1. Construir WHERE
+    const whereConditions: Prisma.JsonObject[] = [];
+
+    // Filtros exactos
     if (filters && Object.keys(filters).length > 0) {
-      whereConditions.push(filters);
+      whereConditions.push(filters as Prisma.JsonObject);
     }
 
-    // Filtro de búsqueda textual
+    // Búsqueda dinámica
     if (search) {
-        if (tableName === "GrupoMedios") {
-            whereConditions.push({ nombre: { contains: search } });
-        } else if (tableName === "Medio") {
-            whereConditions.push({ 
-                OR: [
-                    { textoAlternativo: { contains: search } },
-                    { urlArchivo: { contains: search } }
-                ]
-            });
-        } else if (tableName === "Seccion") {
-            whereConditions.push({ 
-                OR: [
-                    { titulo: { contains: search } },
-                    { slug: { contains: search } }
-                ]
-            });
-        }
+      const searchFields = SEARCH_CONFIG[tableName] || [];
+      if (searchFields.length > 0) {
+        whereConditions.push({
+          OR: searchFields.map((field) => ({
+            [field]: { contains: search },
+          })),
+        });
+      }
     }
 
     const where = whereConditions.length > 0 ? { AND: whereConditions } : {};
+
+    // 2. Construir ORDER BY
+    const orderBy: Record<string, "asc" | "desc"> = {};
+    // const forbiddenFields = ["grupo", "medios", "medio", "propsJson"]; // Reemplazado por allowlist
+
+    const validSortFields = SORT_ALLOWLIST[tableName] || [];
     
-    // Configuración de ordenamiento dinámico
-    const orderBy: any = {};
-    if (sortBy && sortBy.trim().length > 0) {
-        // Evitar ordenar por campos de relación complejos que romperían Prisma
-        // Solo permitimos ordenar por campos escalares o conocidos
-        const forbiddenFields = ['grupo', 'medios', 'medio', 'propsJson'];
-        if (!forbiddenFields.includes(sortBy)) {
-             orderBy[sortBy] = order;
-        }
-    }
-    
-    // Si orderBy sigue vacío (porque no hubo sortBy o era inválido), aplicamos defaults
-    if (Object.keys(orderBy).length === 0) {
-        switch (tableName) {
-            case "GrupoMedios":
-                orderBy.actualizadoEn = 'desc';
-                break;
-            case "Medio":
-                orderBy.posicion = 'asc';
-                break;
-            case "Seccion":
-                orderBy.orden = 'asc';
-                break;
-        }
+    if (sortBy && sortBy.trim().length > 0 && validSortFields.includes(sortBy)) {
+      orderBy[sortBy] = order;
+    } else {
+      const defaultSort = DEFAULT_ORDER[tableName];
+      if (defaultSort) {
+        orderBy[defaultSort.field] = defaultSort.direction;
+      }
     }
 
     console.log(`[ResourceService] Listing ${tableName} with orderBy:`, JSON.stringify(orderBy));
 
     try {
-        let total = 0;
-        let data: any[] = [];
+      // Prisma Client no permite "tableName" dinámico tipado fácilmente sin mapeo manual o delegados inseguros.
+      // Usamos un switch exhaustivo para mantener tipado fuerte.
+      let total = 0;
+      let data: T[] = [];
 
-        switch (tableName) {
+      // Usamos 'any' en la desestructuración intermedia para evitar conflictos de PrismaPromise vs Promise
+      // pero mantenemos la seguridad de tipos en el switch
+      let rawData: unknown[];
+
+      switch (tableName) {
         case "GrupoMedios":
-            [total, data] = await prisma.$transaction([
-                prisma.grupoMedios.count({ where }),
-                prisma.grupoMedios.findMany({
-                    where,
-                    take: limit,
-                    skip: skip,
-                    orderBy
-                })
-            ]);
-            break;
+          [total, rawData] = await prisma.$transaction([
+            prisma.grupoMedios.count({ where }),
+            prisma.grupoMedios.findMany({
+              where,
+              take: limit,
+              skip,
+              orderBy,
+            }),
+          ]);
+          data = rawData as T[];
+          break;
         case "Medio":
-            [total, data] = await prisma.$transaction([
-                prisma.medio.count({ where }),
-                prisma.medio.findMany({
-                    where,
-                    take: limit,
-                    skip: skip,
-                    orderBy
-                })
-            ]);
-            break;
+          [total, rawData] = await prisma.$transaction([
+            prisma.medio.count({ where }),
+            prisma.medio.findMany({
+              where,
+              take: limit,
+              skip,
+              orderBy,
+            }),
+          ]);
+          data = rawData as T[];
+          break;
         case "Seccion":
-            [total, data] = await prisma.$transaction([
-                prisma.seccion.count({ where }),
-                prisma.seccion.findMany({
-                    where,
-                    take: limit,
-                    skip: skip,
-                    orderBy
-                })
-            ]);
-            break;
+          [total, rawData] = await prisma.$transaction([
+            prisma.seccion.count({ where }),
+            prisma.seccion.findMany({
+              where,
+              take: limit,
+              skip,
+              orderBy,
+            }),
+          ]);
+          data = rawData as T[];
+          break;
         default:
-            return null;
-        }
+          return null;
+      }
 
-        return {
-            data,
-            meta: {
-                total,
-                page,
-                limit,
-                totalPages: Math.ceil(total / limit)
-            }
-        };
+      return {
+        data,
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
+      };
     } catch (error) {
-        console.error("Error in listAll:", error);
-        throw new Error("Error fetching data");
+      console.error("Error in listAll:", error);
+      throw new Error("Error fetching data");
     }
   },
 
-  async getOne(tableName: string, id: string | number) {
+  async getOne(tableName: TableName, id: string | number): Promise<AllowedModels | null> {
     const key = Number(id);
     if (Number.isNaN(key)) return null;
 
@@ -157,40 +170,46 @@ export const resourceService = {
     }
   },
 
-  async create(tableName: string, data: any, files?: { main?: Blob; thumb?: Blob }) {
-    // Validación lógica de negocio específica
+  async create(
+    tableName: TableName,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any,
+    files?: { main?: Blob; thumb?: Blob }
+  ): Promise<AllowedModels | null> {
+    // Validación lógica de negocio
     if (tableName === "Medio" && data.grupoMediosId) {
-        const grupoPadre = await prisma.grupoMedios.findUnique({
-            where: { id: Number(data.grupoMediosId) },
-            select: { tipoGrupo: true },
-        });
+      const grupoPadre = await prisma.grupoMedios.findUnique({
+        where: { id: Number(data.grupoMediosId) },
+        select: { tipoGrupo: true },
+      });
 
-        if (grupoPadre?.tipoGrupo === "UNICO") {
-            const existing = await prisma.medio.count({
-                where: { grupoMediosId: Number(data.grupoMediosId) },
-            });
-            if (existing >= 1) {
-                throw new Error("Este grupo es “UNICO” y ya contiene un medio.");
-            }
+      if (grupoPadre?.tipoGrupo === "UNICO") {
+        const existing = await prisma.medio.count({
+          where: { grupoMediosId: Number(data.grupoMediosId) },
+        });
+        if (existing >= 1) {
+          throw new Error("Este grupo es “UNICO” y ya contiene un medio.");
         }
+      }
     }
 
     // Manejo de archivos
     if (files?.main) {
-        const hint = data.nombreArchivo || data.nombre || data.textoAlternativo || tableName;
-        const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb);
-        
-        data.urlArchivo = saved.filename;
-        data.tipo = saved.tipo;
-        if (saved.urlMiniatura) {
-            data.urlMiniatura = saved.urlMiniatura;
-        } else if (data.urlMiniatura === undefined) {
-             data.urlMiniatura = null;
-        }
+      const hint = data.nombreArchivo || data.nombre || data.textoAlternativo || tableName;
+      const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb);
+
+      data.urlArchivo = saved.filename;
+      data.tipo = saved.tipo;
+      if (saved.urlMiniatura) {
+        data.urlMiniatura = saved.urlMiniatura;
+      } else if (data.urlMiniatura === undefined) {
+        data.urlMiniatura = null;
+      }
     }
 
     delete data.nombreArchivo;
 
+    // Casting explícito a tipos de creación de Prisma
     switch (tableName) {
       case "GrupoMedios":
         return prisma.grupoMedios.create({ data });
@@ -203,7 +222,13 @@ export const resourceService = {
     }
   },
 
-  async update(tableName: string, id: string | number, data: any, files?: { main?: Blob; thumb?: Blob }) {
+  async update(
+    tableName: TableName,
+    id: string | number,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any,
+    files?: { main?: Blob; thumb?: Blob }
+  ): Promise<AllowedModels | null> {
     const key = Number(id);
     if (Number.isNaN(key)) return null;
 
@@ -211,29 +236,26 @@ export const resourceService = {
     if (!existing) return null;
 
     if (files?.main) {
-        if ((existing as any).urlArchivo) {
-            await fileService.deleteFile((existing as any).urlArchivo, tableName);
-        }
+      // Cast seguro sabiendo que 'urlArchivo' existe en Medio/Grupo (si aplica)
+      // Como AllowedModels es unión, verificamos propiedad
+      if ("urlArchivo" in existing && existing.urlArchivo) {
+        await fileService.deleteFile(existing.urlArchivo, tableName);
+      }
 
-        const hint = data.nombreArchivo || data.textoAlternativo || tableName;
-        const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb);
-        
-        data.urlArchivo = saved.filename;
-        data.tipo = saved.tipo;
-        if (saved.urlMiniatura) {
-            data.urlMiniatura = saved.urlMiniatura;
-        } else {
-            data.urlMiniatura = null;
-        }
-    } 
-    else if (files?.thumb) {
-         const oldThumb = (existing as any).urlMiniatura;
-         if (oldThumb) {
-             await fileService.deleteFile(oldThumb, tableName);
-         }
-         // Nota: aquí falta lógica para guardar solo thumb si no hay main, 
-         // pero se asume que el usuario envía main o usa lógica existente.
-         // Por brevedad mantenemos lógica anterior.
+      const hint = data.nombreArchivo || data.textoAlternativo || tableName;
+      const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb);
+
+      data.urlArchivo = saved.filename;
+      data.tipo = saved.tipo;
+      if (saved.urlMiniatura) {
+        data.urlMiniatura = saved.urlMiniatura;
+      } else {
+        data.urlMiniatura = null;
+      }
+    } else if (files?.thumb) {
+      if ("urlMiniatura" in existing && existing.urlMiniatura) {
+        await fileService.deleteFile(existing.urlMiniatura, tableName);
+      }
     }
 
     delete data.nombreArchivo;
@@ -250,18 +272,23 @@ export const resourceService = {
     }
   },
 
-  async delete(tableName: string, id: string | number) {
+  async delete(tableName: TableName, id: string | number): Promise<AllowedModels | null> {
     const key = Number(id);
     if (Number.isNaN(key)) return null;
 
     const existing = await this.getOne(tableName, key);
     if (!existing) return null;
 
-    if ((existing as any).urlArchivo) {
-        await fileService.deleteFile((existing as any).urlArchivo, tableName);
+    if ("urlArchivo" in existing && existing.urlArchivo) {
+      await fileService.deleteFile(existing.urlArchivo, tableName);
     }
-    if ((existing as any).urlMiniatura && (existing as any).urlMiniatura !== (existing as any).urlArchivo) {
-         await fileService.deleteFile((existing as any).urlMiniatura, tableName);
+    if (
+      "urlMiniatura" in existing &&
+      existing.urlMiniatura &&
+      "urlArchivo" in existing &&
+      existing.urlMiniatura !== existing.urlArchivo
+    ) {
+      await fileService.deleteFile(existing.urlMiniatura, tableName);
     }
 
     switch (tableName) {
@@ -274,5 +301,5 @@ export const resourceService = {
       default:
         return null;
     }
-  }
+  },
 };

@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { adminGuard } from "@/lib/auth-guard";
-import { resourceService } from "@/services/resource.service";
+import { resourceService, isValidTableName } from "@/services/resource.service";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -26,6 +26,11 @@ type ParamsPromise<T> = { params: Promise<T> };
 /* ─────────────── GET: listar todos ─────────────── */
 export async function GET(req: NextRequest, ctx: ParamsPromise<{ tableName: string }>) {
   const { tableName } = await ctx.params;
+
+  if (!isValidTableName(tableName)) {
+    return NextResponse.json({ error: "Modelo inválido" }, { status: 400 });
+  }
+
   const searchParams = req.nextUrl.searchParams;
   
   // Parsear query params
@@ -75,6 +80,10 @@ export async function GET(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
 /* ─────────────── POST: crear registro ─────────────── */
 export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: string }>) {
   const { tableName } = await ctx.params;
+
+  if (!isValidTableName(tableName)) {
+    return NextResponse.json({ error: "Modelo inválido" }, { status: 400 });
+  }
 
   try {
     await adminGuard();
