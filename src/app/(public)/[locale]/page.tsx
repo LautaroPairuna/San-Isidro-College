@@ -254,9 +254,10 @@ const HomePage: NextPage = () => {
               <Image
                 src="/images/fondo-iconos.webp"
                 alt="Imagen infograma móvil"
-                width={800}
-                height={600}
+                width={665}
+                height={546}
                 className="w-full h-auto rounded-md shadow-md"
+                sizes="(max-width: 768px) 100vw, 665px"
               />
             </div>
           </div>
@@ -267,6 +268,7 @@ const HomePage: NextPage = () => {
               width={650}
               height={100}
               className="w-full h-full"
+              loading="lazy"
             />
           </div>
         </div>

@@ -122,6 +122,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
                         fallback="/images/placeholder.webp"
                         fill
                         priority={idx === 0}
+                        sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 160px"
                         className="object-contain"
                         unoptimized={true}
                       />

@@ -45,6 +45,8 @@ interface Props {
   videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>
   priority?: boolean
   unoptimized?: boolean
+  sizes?: string
+  fetchPriority?: 'high' | 'low' | 'auto'
 }
 
 /**
@@ -68,6 +70,8 @@ const RenderMedia = memo(function RenderMedia({
   videoProps = {},
   priority = false,
   unoptimized,
+  sizes,
+  fetchPriority,
 }: Props) {
   // Si no hay objeto `medio`, o no tiene urlArchivo válida, usamos fallback como imagen
   if (!medio?.urlArchivo) {
@@ -76,10 +80,11 @@ const RenderMedia = memo(function RenderMedia({
       <Image
         src={fallback}
         alt="Media Fallback"
-        {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
+        {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
         className={className}
         unoptimized={unoptimized ?? isFallbackDynamic}
         priority={priority}
+        {...(fetchPriority ? { fetchPriority } : {})}
       />
     )
   }
@@ -142,11 +147,13 @@ const RenderMedia = memo(function RenderMedia({
   return (
     <Image
       src={src}
-      alt={medio.textoAlternativo || 'Media'}
-      {...(fill ? { fill: true, sizes: '100vw' } : { width, height })}
+      alt={medio.textoAlternativo || 'Medio'}
+      {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
       className={className}
+      // Desactivar optimización si es imagen local servida por API
       unoptimized={unoptimized ?? isDynamic}
       priority={priority}
+      {...(fetchPriority ? { fetchPriority } : {})}
     />
   )
 })
