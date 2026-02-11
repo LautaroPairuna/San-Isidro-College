@@ -122,13 +122,13 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
 
       {/* Controles Unificados (Dots + Flechas) - Estilo Pill Dark */}
       {count > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 shadow-lg">
           <CarouselPrevious
             className="static translate-y-0 h-6 w-6 bg-transparent border-none text-white hover:text-white/80 hover:bg-transparent"
             variant="ghost"
           />
 
-          <div className="flex gap-1.5 items-center mx-1">
+          <div className="flex gap-2 items-center mx-1">
             {Array.from({ length: count }).map((_, index) => (
               <button
                 key={index}
@@ -136,8 +136,8 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                 className={cn(
                   'rounded-full transition-all duration-300',
                   current === index
-                    ? 'bg-white w-5 h-1.5'
-                    : 'bg-white/50 w-1.5 h-1.5 hover:bg-white/80'
+                    ? 'bg-white w-8 h-2.5'
+                    : 'bg-white/50 w-2.5 h-2.5 hover:bg-white/80'
                 )}
                 aria-label={`Ir al slide ${index + 1}`}
               />
