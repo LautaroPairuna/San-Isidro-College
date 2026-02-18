@@ -12,9 +12,46 @@ import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
 import ffprobeInstaller from "@ffprobe-installer/ffprobe";
 import { folderNames, type PrismaTable, IMAGE_PUBLIC_DIR } from "@/lib/adminConstants";
 
+import os from "os";
+
 // Configurar rutas de binarios
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 ffmpeg.setFfprobePath(ffprobeInstaller.path);
+
+// Store progress in a temporary directory
+const PROGRESS_DIR = path.join(os.tmpdir(), "upload-progress");
+// Ensure directory exists
+fs.mkdir(PROGRESS_DIR, { recursive: true }).catch(() => {});
+
+type ProgressStage = 'uploading' | 'compressing' | 'generating_thumbnail' | 'done' | 'error';
+
+export type UploadProgress = {
+  percent: number;
+  stage: ProgressStage;
+  updatedAt: number;
+  error?: string;
+};
+
+async function updateProgress(id: string, percent: number, stage: ProgressStage = 'uploading', error?: string) {
+  if (!id) return;
+  const filePath = path.join(PROGRESS_DIR, `${id}.json`);
+  try {
+    const data: UploadProgress = { percent, stage, updatedAt: Date.now(), error };
+    await fs.writeFile(filePath, JSON.stringify(data));
+  } catch (e) {
+    console.error("Error writing progress:", e);
+  }
+}
+
+export async function getProgress(id: string): Promise<UploadProgress> {
+  const filePath = path.join(PROGRESS_DIR, `${id}.json`);
+  try {
+    const content = await fs.readFile(filePath, "utf-8");
+    return JSON.parse(content) as UploadProgress;
+  } catch {
+    return { percent: 0, stage: 'uploading', updatedAt: Date.now() };
+  }
+}
 
 function makeTimestamp() {
   const d = new Date();
@@ -32,35 +69,45 @@ function makeTimestamp() {
 
 async function generateVideoThumbnail(videoPath: string): Promise<Buffer | null> {
   return new Promise((resolve) => {
+    const tempName = `thumb-${Date.now()}-${Math.random().toString(36).substring(7)}.png`;
+    console.log(`[FFmpeg] Iniciando generación de miniatura para: ${videoPath}`);
+    
     let buf: Buffer | null = null;
-    const stream = ffmpeg(videoPath)
+    
+    ffmpeg(videoPath)
+      .on('start', (cmd) => {
+        console.log(`[FFmpeg] Comando generado: ${cmd}`);
+      })
       .screenshots({
-        timestamps: ['00:00:01'],
-        filename: 'thumb.png',
+        timestamps: ['20%'], // 20% del video para evitar intros negras
+        filename: tempName,
         folder: path.dirname(videoPath),
         size: '?x?', // Mantener aspecto original
       })
       .on('end', async () => {
+        console.log(`[FFmpeg] Miniatura generada exitosamente: ${tempName}`);
         // Leer el archivo generado
-        const thumbPath = path.join(path.dirname(videoPath), 'thumb.png');
+        const thumbPath = path.join(path.dirname(videoPath), tempName);
         try {
             buf = await fs.readFile(thumbPath);
             await fs.unlink(thumbPath); // Borrar temporal
             resolve(buf);
         } catch (e) {
-            console.error("Error leyendo thumb temporal:", e);
+            console.error("[FFmpeg] Error leyendo thumb temporal:", e);
             resolve(null);
         }
       })
       .on('error', (err) => {
-        console.error("FFmpeg fluent error:", err);
+        console.error("[FFmpeg] Error fatal:", err);
         resolve(null);
       });
   });
 }
 
-function compressVideo(inputPath: string, outputPath: string): Promise<boolean> {
+function compressVideo(inputPath: string, outputPath: string, progressId?: string): Promise<boolean> {
   return new Promise((resolve) => {
+    if (progressId) updateProgress(progressId, 0, 'compressing');
+    
     ffmpeg(inputPath)
       .outputOptions([
         '-c:v libx264', // Codec de video H.264
@@ -70,10 +117,19 @@ function compressVideo(inputPath: string, outputPath: string): Promise<boolean> 
         '-b:a 128k',    // Bitrate de audio
         '-movflags +faststart' // Optimización para streaming web
       ])
+      .on('progress', (progress) => {
+        if (progressId && progress.percent) {
+          updateProgress(progressId, Math.round(progress.percent), 'compressing');
+        }
+      })
       .save(outputPath)
-      .on('end', () => resolve(true))
+      .on('end', () => {
+        if (progressId) updateProgress(progressId, 100, 'compressing');
+        resolve(true);
+      })
       .on('error', (err) => {
         console.error("Error comprimiendo video:", err);
+        if (progressId) updateProgress(progressId, 0, 'error', err.message);
         resolve(false);
       });
   });
@@ -88,10 +144,6 @@ export type SavedFile = {
 export const fileService = {
   async ensureDirectories(tableName: string) {
     const baseDir = IMAGE_PUBLIC_DIR;
-    // Si no es GrupoMedios ni Medio, asumimos que no tiene carpeta propia o usa un fallback.
-    // En el código original solo manejaba GrupoMedios y Medio para carpetas.
-    // Si agregamos Seccion con archivos, deberíamos mapearlo.
-    // Por ahora mantengo la lógica original:
     const tbl: PrismaTable = tableName === "GrupoMedios" ? "GrupoMedios" : "Medio";
     const keyDir = folderNames[tbl];
     const dir = path.join(baseDir, keyDir);
@@ -103,15 +155,56 @@ export const fileService = {
     return { dir, thumbs };
   },
 
+  async cleanTempFiles(tableName: string) {
+    const { dir } = await this.ensureDirectories(tableName);
+    try {
+      // Limpiar carpeta de imágenes/videos
+      const files = await fs.readdir(dir);
+      const now = Date.now();
+      const ONE_HOUR = 60 * 60 * 1000;
+
+      for (const file of files) {
+        if (file.includes('-temp.') || file === 'thumb.png') {
+          const filePath = path.join(dir, file);
+          const stats = await fs.stat(filePath);
+          if (now - stats.mtimeMs > ONE_HOUR) {
+            await fs.unlink(filePath).catch(() => {});
+          }
+        }
+      }
+
+      // Limpiar carpeta de progreso (archivos json viejos)
+      try {
+        const progressFiles = await fs.readdir(PROGRESS_DIR);
+        for (const pFile of progressFiles) {
+          if (pFile.endsWith('.json')) {
+            const pPath = path.join(PROGRESS_DIR, pFile);
+            const stats = await fs.stat(pPath);
+            // Borrar progresos con más de 1 hora
+            if (now - stats.mtimeMs > ONE_HOUR) {
+              await fs.unlink(pPath).catch(() => {});
+            }
+          }
+        }
+      } catch (e) {
+        // Ignorar si falla la limpieza de progreso
+      }
+
+    } catch (error) {
+      console.error("Error limpiando archivos temporales:", error);
+    }
+  },
+
   async saveFile(
     file: Blob,
     tableName: string,
-    hint: string,
-    thumbFile?: Blob
+    hintName?: string,
+    thumbFile?: Blob,
+    uploadId?: string
   ): Promise<SavedFile> {
     const { dir, thumbs } = await this.ensureDirectories(tableName);
     const timestamp = makeTimestamp();
-    const slug = slugify(String(hint), { lower: true, strict: true });
+    const slug = slugify(hintName || "archivo", { lower: true, strict: true });
 
     // Casting seguro
     const originalName = (file as any).name as string;
@@ -134,24 +227,40 @@ export const fileService = {
       const out = `${slug}-${timestamp}${ext}`;
       const tempOut = `${slug}-${timestamp}-temp${ext}`;
       
-      // Escritura eficiente con Streams (chunks) a archivo temporal
       const tempPath = path.join(dir, tempOut);
       const finalPath = path.join(dir, out);
+
+      // Report initial progress
+      if (uploadId) updateProgress(uploadId, 0, 'uploading');
 
       const webStream = file.stream();
       // @ts-ignore
       const nodeStream = Readable.fromWeb(webStream);
+      
+      // Track upload progress
+      let loaded = 0;
+      const total = file.size;
+      
+      nodeStream.on('data', (chunk) => {
+        loaded += chunk.length;
+        if (uploadId && total > 0) {
+          const percent = Math.round((loaded / total) * 100);
+          // Throttle updates slightly to avoid disk spam
+          if (percent % 5 === 0 || percent === 100) {
+            updateProgress(uploadId, percent, 'uploading');
+          }
+        }
+      });
+
       await pipeline(nodeStream, createWriteStream(tempPath));
 
       // Comprimir video
-      const compressed = await compressVideo(tempPath, finalPath);
+      const compressed = await compressVideo(tempPath, finalPath, uploadId);
       
       if (compressed) {
-        // Si se comprimió bien, borrar el temporal
         await fs.unlink(tempPath).catch(() => {});
         savedFilename = out;
       } else {
-        // Si falló, renombramos el temporal al final (fallback)
         await fs.rename(tempPath, finalPath);
         savedFilename = out;
       }
@@ -160,20 +269,33 @@ export const fileService = {
 
       // Intentar generar miniatura automática de video
       try {
+        if (uploadId) updateProgress(uploadId, 0, 'generating_thumbnail');
+        console.log(`[FileService] Intentando generar miniatura para video: ${finalPath}`);
+        
+        // Verificar que el archivo existe y tiene tamaño > 0
+        const stat = await fs.stat(finalPath);
+        if (stat.size === 0) {
+             throw new Error("El archivo de video tiene tamaño 0");
+        }
+
         const thumbBuf = await generateVideoThumbnail(finalPath);
         if (thumbBuf) {
-          const outThumb = `${slug}-thumb-${timestamp}.webp`;
+          console.log(`[FileService] Miniatura generada, procesando con Sharp...`);
+          const thumbName = `thumb-${path.parse(out).name}.webp`;
+          await sharp(thumbBuf)
+            .resize(300) // Un poco más grande para video
+            .webp({ quality: 80 })
+            .toFile(path.join(thumbs, thumbName));
           
-          // Guardar en dir principal (para acceso directo)
-          await sharp(thumbBuf).webp().toFile(path.join(dir, outThumb));
-          
-          // Guardar en thumbs (resized)
-          await sharp(thumbBuf).resize(200).webp().toFile(path.join(thumbs, outThumb));
-          
-          urlMiniatura = outThumb;
+          urlMiniatura = thumbName;
+          console.log(`[FileService] Miniatura guardada como: ${thumbName}`);
+        } else {
+          console.warn(`[FileService] No se pudo generar miniatura para: ${finalPath}`);
         }
-      } catch (err) {
-        console.error("Error generando miniatura de video:", err);
+      } catch (error) {
+        console.error("[FileService] Error en proceso de miniatura:", error);
+      } finally {
+        if (uploadId) updateProgress(uploadId, 100, 'done');
       }
     } else {
       // Imagen por defecto
@@ -201,7 +323,7 @@ export const fileService = {
       } else {
         // Si NO hay thumb explícito, generar miniatura automática de la principal
         await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out));
-        urlMiniatura = out; // Mismo nombre, el frontend debe saber buscar en thumbs/ si quiere la pequeña
+        urlMiniatura = out; 
       }
     }
 
@@ -224,28 +346,4 @@ export const fileService = {
     await fs.rm(path.join(dir, filename), { force: true }).catch(() => {});
     await fs.rm(path.join(thumbs, filename), { force: true }).catch(() => {});
   },
-
-  async cleanTempFiles(tableName: string) {
-    const { dir } = await this.ensureDirectories(tableName);
-    try {
-      const files = await fs.readdir(dir);
-      const now = Date.now();
-      const ONE_HOUR = 60 * 60 * 1000;
-
-      for (const file of files) {
-        // Eliminar archivos temporales (-temp) y thumbnails temporales (thumb.png)
-        if (file.includes('-temp.') || file === 'thumb.png') {
-          const filePath = path.join(dir, file);
-          const stats = await fs.stat(filePath);
-          
-          // Borrar si tiene más de 1 hora de antigüedad
-          if (now - stats.mtimeMs > ONE_HOUR) {
-            await fs.unlink(filePath).catch(() => {});
-          }
-        }
-      }
-    } catch (error) {
-      console.error("Error limpiando archivos temporales:", error);
-    }
-  }
 };

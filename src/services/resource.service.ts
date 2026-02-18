@@ -196,7 +196,9 @@ export const resourceService = {
     // Manejo de archivos
     if (files?.main) {
       const hint = data.nombreArchivo || data.nombre || data.textoAlternativo || tableName;
-      const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb);
+      // Extract uploadId if present in data
+      const uploadId = data.uploadId;
+      const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb, uploadId);
 
       data.urlArchivo = saved.filename;
       data.tipo = saved.tipo;
@@ -248,10 +250,11 @@ export const resourceService = {
       }
 
       // 3. Guardar nuevo archivo
-      const hint = data.nombreArchivo || data.textoAlternativo || tableName;
-      const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb);
+            const hint = data.nombreArchivo || data.textoAlternativo || tableName;
+            const uploadId = data.uploadId;
+            const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb, uploadId);
 
-      data.urlArchivo = saved.filename;
+            data.urlArchivo = saved.filename;
       data.tipo = saved.tipo;
       
       // Actualizar miniatura

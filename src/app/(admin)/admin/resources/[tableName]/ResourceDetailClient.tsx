@@ -10,7 +10,7 @@ import React, {
   ReactNode,
   memo,
 } from 'react'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { useForm, Controller, SubmitHandler, Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import debounce from 'lodash.debounce'
@@ -1024,10 +1024,14 @@ const FormModal = memo(function FormModal({
 
   // Estado para progreso de subida y fases
   type UploadPhase = 'IDLE' | 'UPLOADING' | 'PROCESSING' | 'COMPLETED'
+  type ServerProgress = { percent: number; stage: string; error?: string }
+  
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploadPhase, setUploadPhase] = useState<UploadPhase>('IDLE')
+  const [serverProgress, setServerProgress] = useState<ServerProgress | null>(null)
   const [processingTime, setProcessingTime] = useState(0)
   const processingInterval = useRef<NodeJS.Timeout | null>(null)
+  const uploadIdRef = useRef<string | null>(null)
 
   // Limpiar intervalo al desmontar
   useEffect(() => {
@@ -1048,6 +1052,31 @@ const FormModal = memo(function FormModal({
         clearInterval(processingInterval.current)
         processingInterval.current = null
       }
+    }
+  }, [uploadPhase])
+
+  // Polling para progreso del servidor
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (uploadPhase === 'PROCESSING' && uploadIdRef.current) {
+      // Iniciar polling inmediato
+      const fetchProgress = async () => {
+        try {
+          const res = await fetch(`/api/upload-progress?id=${uploadIdRef.current}`)
+          if (res.ok) {
+            const data: ServerProgress = await res.json()
+            setServerProgress(data)
+          }
+        } catch (error) {
+          console.error('Error fetching progress:', error)
+        }
+      }
+      
+      fetchProgress() // Primera llamada inmediata
+      interval = setInterval(fetchProgress, 1000)
+    }
+    return () => {
+      if (interval) clearInterval(interval)
     }
   }, [uploadPhase])
 
@@ -1125,7 +1154,14 @@ const FormModal = memo(function FormModal({
 
     // 2️⃣ Construir FormData y disparar la mutación
     const formData = buildMedioFormData(data)
+    
+    // Generar Upload ID único para tracking
+    const uploadId = crypto.randomUUID();
+    uploadIdRef.current = uploadId;
+    formData.append('uploadId', uploadId);
+
     setUploadProgress(0)
+    setServerProgress(null)
     setUploadPhase('UPLOADING')
 
     try {
@@ -1376,13 +1412,13 @@ const FormModal = memo(function FormModal({
             {/* FASE 1: SUBIENDO */}
             {uploadPhase === 'UPLOADING' && (
               <div className="w-full bg-gray-50 p-3 rounded-lg border border-gray-100 animate-in fade-in zoom-in duration-300">
-                <div className="flex justify-between text-xs text-gray-500 mb-1">
-                  <span>Subiendo archivo...</span>
-                  <span>{uploadProgress}%</span>
+                <div className="flex justify-between text-xs text-gray-600 mb-1">
+                  <span className="font-medium">Subiendo archivo...</span>
+                  <span className="font-bold">{uploadProgress}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                   <div 
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+                    className="bg-indigo-600 h-2 rounded-full transition-all duration-300" 
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
@@ -1391,21 +1427,33 @@ const FormModal = memo(function FormModal({
 
             {/* FASE 2: PROCESANDO (COMPRESIÓN/ENSAMBLAJE) */}
             {uploadPhase === 'PROCESSING' && (
-              <div className="w-full bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-center gap-4 animate-in fade-in zoom-in duration-500">
-                {/* Loader Circular Minimalista */}
-                <div className="relative w-10 h-10 flex items-center justify-center">
-                  <div className="absolute w-full h-full border-4 border-blue-200 rounded-full opacity-50"></div>
-                  <div className="absolute w-full h-full border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
+              <div className="w-full bg-indigo-50 p-3 rounded-lg border border-indigo-100 animate-in fade-in zoom-in duration-500">
+                <div className="flex justify-between text-xs text-indigo-700 mb-1">
+                  <span className="font-medium">
+                    {serverProgress?.stage === 'compressing' ? 'Comprimiendo video...' : 
+                     serverProgress?.stage === 'generating_thumbnail' ? 'Generando miniatura...' :
+                     serverProgress?.stage === 'uploading' ? 'Ensamblando video...' :
+                     'Procesando video...'}
+                  </span>
+                  <span className="font-bold">{serverProgress?.percent || 0}%</span>
                 </div>
                 
-                <div className="flex-1">
-                  <h4 className="text-sm font-semibold text-blue-800">Procesando video</h4>
-                  <p className="text-xs text-blue-600 mt-0.5">Ensamblando chunks y comprimiendo...</p>
+                <div className="w-full bg-indigo-200 rounded-full h-2 overflow-hidden">
+                  <div 
+                    className="bg-indigo-600 h-2 rounded-full transition-all duration-300 ease-out" 
+                    style={{ width: `${serverProgress?.percent || 0}%` }}
+                  ></div>
                 </div>
 
-                <div className="text-right">
-                  <div className="text-xl font-mono text-blue-900 font-bold">{formatTime(processingTime)}</div>
-                  <span className="text-[10px] uppercase tracking-wider text-blue-500 font-medium">Tiempo</span>
+                <div className="flex justify-between mt-1">
+                  <span className="text-[10px] text-indigo-400">
+                     {serverProgress?.stage === 'compressing' ? 'Optimizando para web' : 
+                      serverProgress?.stage === 'generating_thumbnail' ? 'Creando preview' :
+                      'Guardando en servidor'}
+                  </span>
+                  <span className="text-[10px] text-indigo-500 font-mono">
+                    {formatTime(processingTime)}
+                  </span>
                 </div>
               </div>
             )}
