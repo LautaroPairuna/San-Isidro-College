@@ -58,6 +58,10 @@ type GrupoMediosType = GrupoMedios
 type MedioType = Medio
 type SeccionType = Seccion
 
+// Tipos para Subida (Globales)
+type UploadPhase = 'IDLE' | 'UPLOADING' | 'PROCESSING' | 'COMPLETED'
+type ServerProgress = { percent: number; stage: string; error?: string }
+
 // -------------------------------
 // Opciones para enums
 // -------------------------------
@@ -360,6 +364,92 @@ export default function ResourceDetailClient({
 
   const displayName =
     parentRow?.nombre || `${childRelation?.childTable} #${childRelation?.parentId}`
+
+  // Estado para progreso de subida y fases (Elevado desde FormModal)
+  
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [uploadPhase, setUploadPhase] = useState<UploadPhase>('IDLE')
+  const [serverProgress, setServerProgress] = useState<ServerProgress | null>(null)
+  const [processingTime, setProcessingTime] = useState(0)
+  const processingInterval = useRef<NodeJS.Timeout | null>(null)
+  const uploadIdRef = useRef<string | null>(null)
+  const [isFormMinimized, setIsFormMinimized] = useState(false)
+
+  // Limpiar intervalo al desmontar
+  useEffect(() => {
+    return () => {
+      if (processingInterval.current) clearInterval(processingInterval.current)
+    }
+  }, [])
+
+  // Iniciar cronómetro cuando entra en fase PROCESSING
+  useEffect(() => {
+    if (uploadPhase === 'PROCESSING') {
+      setProcessingTime(0)
+      processingInterval.current = setInterval(() => {
+        setProcessingTime((prev) => prev + 1)
+      }, 1000)
+    } else {
+      if (processingInterval.current) {
+        clearInterval(processingInterval.current)
+        processingInterval.current = null
+      }
+    }
+  }, [uploadPhase])
+
+  // Polling para progreso del servidor
+  useEffect(() => {
+    let interval: NodeJS.Timeout
+    if (uploadPhase === 'PROCESSING' && uploadIdRef.current) {
+      // Iniciar polling inmediato
+      const fetchProgress = async () => {
+        try {
+          const res = await fetch(`/api/upload-progress?id=${uploadIdRef.current}`)
+          if (res.ok) {
+            const data: ServerProgress = await res.json()
+            setServerProgress(data)
+          }
+        } catch (error) {
+          console.error('Error fetching progress:', error)
+        }
+      }
+      
+      fetchProgress() // Primera llamada inmediata
+      interval = setInterval(fetchProgress, 1000)
+    }
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [uploadPhase])
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60).toString().padStart(2, '0')
+    const secs = (seconds % 60).toString().padStart(2, '0')
+    return `${mins}:${secs}`
+  }
+
+  // Manejo de cierre del modal (con minimización si está subiendo)
+  const handleCloseForm = useCallback(() => {
+    if (uploadPhase === 'UPLOADING' || uploadPhase === 'PROCESSING') {
+      setIsFormMinimized(true)
+      toast('Subida minimizada en segundo plano', {
+        icon: '⬇️',
+        duration: 3000,
+      })
+    } else {
+      setEditRow(null)
+      setIsFormMinimized(false)
+      // Resetear estados de subida por seguridad
+      setUploadPhase('IDLE')
+      setUploadProgress(0)
+      setServerProgress(null)
+    }
+  }, [uploadPhase])
+
+  // Restaurar formulario minimizado
+  const handleRestoreForm = useCallback(() => {
+    setIsFormMinimized(false)
+  }, [])
 
   // -----------------------------
   // Manejo de errores/carga
@@ -737,15 +827,77 @@ export default function ResourceDetailClient({
         </Modal>
       )}
 
-      {/* Modal Crear/Editar */}
+      {/* Modal Crear/Editar (Oculto si está minimizado para mantener estado) */}
       {editRow && (
-        <FormModal
-          tableName={tableName}
-          initialData={editRow}
-          parentId={childRelation?.parentId ?? null}
-          currentCount={paginatedData?.meta.total || 0}
-          onClose={() => setEditRow(null)}
-        />
+        <div className={isFormMinimized ? 'hidden' : ''}>
+          <FormModal
+            tableName={tableName}
+            initialData={editRow}
+            parentId={childRelation?.parentId ?? null}
+            currentCount={paginatedData?.meta.total || 0}
+            onClose={handleCloseForm}
+            // Props de subida
+            uploadProgress={uploadProgress}
+            setUploadProgress={setUploadProgress}
+            uploadPhase={uploadPhase}
+            setUploadPhase={setUploadPhase}
+            serverProgress={serverProgress}
+            setServerProgress={setServerProgress}
+            processingTime={processingTime}
+            uploadIdRef={uploadIdRef}
+            formatTime={formatTime}
+          />
+        </div>
+      )}
+
+      {/* Toast Flotante de Progreso */}
+      {isFormMinimized && (uploadPhase === 'UPLOADING' || uploadPhase === 'PROCESSING') && (
+        <div 
+          onClick={handleRestoreForm}
+          className="fixed bottom-6 right-6 z-60 w-80 bg-white rounded-lg shadow-2xl border border-indigo-100 p-4 cursor-pointer hover:bg-gray-50 transition-all animate-in slide-in-from-bottom-4"
+        >
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <h4 className="font-semibold text-gray-800 text-sm">Subida en segundo plano</h4>
+              <p className="text-xs text-gray-500">Click para restaurar formulario</p>
+            </div>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation()
+                // Confirmar cancelación? Por ahora solo restaura
+                handleRestoreForm()
+              }}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <FaEye className="w-4 h-4" />
+            </button>
+          </div>
+          
+          {uploadPhase === 'UPLOADING' ? (
+             <div className="space-y-1">
+               <div className="flex justify-between text-xs text-gray-600">
+                 <span>Subiendo...</span>
+                 <span>{uploadProgress}%</span>
+               </div>
+               <div className="w-full bg-gray-200 rounded-full h-1.5">
+                 <div className="bg-indigo-600 h-1.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
+               </div>
+             </div>
+          ) : (
+             <div className="space-y-1">
+               <div className="flex justify-between text-xs text-indigo-600">
+                 <span>{serverProgress?.stage === 'compressing' ? 'Comprimiendo...' : 'Procesando...'}</span>
+                 <span>{serverProgress?.percent || 0}%</span>
+               </div>
+               <div className="w-full bg-indigo-200 rounded-full h-1.5">
+                 <div className="bg-indigo-600 h-1.5 rounded-full animate-pulse" style={{ width: `${serverProgress?.percent || 0}%` }}></div>
+               </div>
+               <div className="text-[10px] text-right text-gray-400 font-mono">
+                 {formatTime(processingTime)}
+               </div>
+             </div>
+          )}
+        </div>
       )}
 
       {/* Modal Confirmación Eliminación */}
@@ -902,6 +1054,16 @@ type FormModalProps = {
   parentId: number | null
   currentCount?: number
   onClose: () => void
+  // Props de subida
+  uploadProgress?: number
+  setUploadProgress?: (val: number) => void
+  uploadPhase?: UploadPhase
+  setUploadPhase?: (val: UploadPhase) => void
+  serverProgress?: ServerProgress | null
+  setServerProgress?: (val: ServerProgress | null) => void
+  processingTime?: number
+  uploadIdRef?: React.MutableRefObject<string | null>
+  formatTime?: (seconds: number) => string
 }
 
 const FormModal = memo(function FormModal({
@@ -910,6 +1072,16 @@ const FormModal = memo(function FormModal({
   parentId,
   currentCount = 0,
   onClose,
+  // Default values por si no se pasan (retrocompatibilidad)
+  uploadProgress = 0,
+  setUploadProgress = () => {},
+  uploadPhase = 'IDLE',
+  setUploadPhase = () => {},
+  serverProgress = null,
+  setServerProgress = () => {},
+  processingTime = 0,
+  uploadIdRef = { current: null },
+  formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`,
 }: FormModalProps) {
   const isNewMode = 'isNew' in initialData && initialData.isNew === true
   const isEditing = !isNewMode
@@ -1022,69 +1194,7 @@ const FormModal = memo(function FormModal({
   // Datos de FK (medios para el select en seccion)
   const { data: mediosFK = [] } = useMedios()
 
-  // Estado para progreso de subida y fases
-  type UploadPhase = 'IDLE' | 'UPLOADING' | 'PROCESSING' | 'COMPLETED'
-  type ServerProgress = { percent: number; stage: string; error?: string }
-  
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [uploadPhase, setUploadPhase] = useState<UploadPhase>('IDLE')
-  const [serverProgress, setServerProgress] = useState<ServerProgress | null>(null)
-  const [processingTime, setProcessingTime] = useState(0)
-  const processingInterval = useRef<NodeJS.Timeout | null>(null)
-  const uploadIdRef = useRef<string | null>(null)
-
-  // Limpiar intervalo al desmontar
-  useEffect(() => {
-    return () => {
-      if (processingInterval.current) clearInterval(processingInterval.current)
-    }
-  }, [])
-
-  // Iniciar cronómetro cuando entra en fase PROCESSING
-  useEffect(() => {
-    if (uploadPhase === 'PROCESSING') {
-      setProcessingTime(0)
-      processingInterval.current = setInterval(() => {
-        setProcessingTime((prev) => prev + 1)
-      }, 1000)
-    } else {
-      if (processingInterval.current) {
-        clearInterval(processingInterval.current)
-        processingInterval.current = null
-      }
-    }
-  }, [uploadPhase])
-
-  // Polling para progreso del servidor
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-    if (uploadPhase === 'PROCESSING' && uploadIdRef.current) {
-      // Iniciar polling inmediato
-      const fetchProgress = async () => {
-        try {
-          const res = await fetch(`/api/upload-progress?id=${uploadIdRef.current}`)
-          if (res.ok) {
-            const data: ServerProgress = await res.json()
-            setServerProgress(data)
-          }
-        } catch (error) {
-          console.error('Error fetching progress:', error)
-        }
-      }
-      
-      fetchProgress() // Primera llamada inmediata
-      interval = setInterval(fetchProgress, 1000)
-    }
-    return () => {
-      if (interval) clearInterval(interval)
-    }
-  }, [uploadPhase])
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60).toString().padStart(2, '0')
-    const secs = (seconds % 60).toString().padStart(2, '0')
-    return `${mins}:${secs}`
-  }
+  // (Estado de subida eliminado de aquí, ahora viene por props)
 
   // Submit GrupoMedios
   const onSubmitGrupo: SubmitHandler<GrupoMediosForm> = (data) => {

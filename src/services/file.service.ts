@@ -111,8 +111,9 @@ function compressVideo(inputPath: string, outputPath: string, progressId?: strin
     ffmpeg(inputPath)
       .outputOptions([
         '-c:v libx264', // Codec de video H.264
-        '-crf 23',      // Calidad visual constante (18-28 es el rango usual)
-        '-preset fast', // Balance velocidad/compresión
+        '-crf 28',      // Calidad visual constante (28 es más ligero y rápido que 23)
+        '-preset ultrafast', // Prioridad velocidad extrema
+        '-vf scale=\'min(1920,iw)\':-2', // Redimensionar a 1080p máx para ahorrar CPU en videos 4K
         '-c:a aac',     // Codec de audio AAC
         '-b:a 128k',    // Bitrate de audio
         '-movflags +faststart' // Optimización para streaming web
