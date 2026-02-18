@@ -1153,18 +1153,27 @@ const FormModal = memo(function FormModal({
     }
 
     // 2️⃣ Construir FormData y disparar la mutación
-    const formData = buildMedioFormData(data)
-    
-    // Generar Upload ID único para tracking
-    const uploadId = crypto.randomUUID();
-    uploadIdRef.current = uploadId;
-    formData.append('uploadId', uploadId);
-
+    setUploadPhase('UPLOADING')
     setUploadProgress(0)
     setServerProgress(null)
-    setUploadPhase('UPLOADING')
 
     try {
+      const formData = buildMedioFormData(data)
+      
+      // Generar Upload ID único para tracking (con fallback)
+      let uploadId = '';
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        uploadId = crypto.randomUUID();
+      } else {
+        uploadId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+      
+      uploadIdRef.current = uploadId;
+      formData.append('uploadId', uploadId);
+
       const onUploadProgress = (progressEvent: any) => {
         const total = progressEvent.total || 1
         const current = progressEvent.loaded
@@ -1193,6 +1202,11 @@ const FormModal = memo(function FormModal({
       setUploadPhase('IDLE')
       setUploadProgress(0)
     }
+  }
+
+  const onErrorMedio = (errors: any) => {
+    console.error("Errores de validación Medio:", errors);
+    toast.error("Por favor revisa los campos del formulario");
   }
 
   // Submit Seccion
@@ -1272,7 +1286,7 @@ const FormModal = memo(function FormModal({
         </form>
       ) : tableName === 'Medio' ? (
         <form
-          onSubmit={handleSubmitMedio(onSubmitMedio)}
+          onSubmit={handleSubmitMedio(onSubmitMedio, onErrorMedio)}
           className="grid grid-cols-1 md:grid-cols-2 gap-4"
         >
           {/* GrupoMediosId */}
