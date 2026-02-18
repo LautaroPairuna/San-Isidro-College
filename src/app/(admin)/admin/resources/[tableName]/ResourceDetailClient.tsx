@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useRef,
   ReactNode,
   memo,
 } from 'react'
@@ -1021,8 +1022,40 @@ const FormModal = memo(function FormModal({
   // Datos de FK (medios para el select en seccion)
   const { data: mediosFK = [] } = useMedios()
 
-  // Estado para progreso de subida
+  // Estado para progreso de subida y fases
+  type UploadPhase = 'IDLE' | 'UPLOADING' | 'PROCESSING' | 'COMPLETED'
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [uploadPhase, setUploadPhase] = useState<UploadPhase>('IDLE')
+  const [processingTime, setProcessingTime] = useState(0)
+  const processingInterval = useRef<NodeJS.Timeout | null>(null)
+
+  // Limpiar intervalo al desmontar
+  useEffect(() => {
+    return () => {
+      if (processingInterval.current) clearInterval(processingInterval.current)
+    }
+  }, [])
+
+  // Iniciar cronómetro cuando entra en fase PROCESSING
+  useEffect(() => {
+    if (uploadPhase === 'PROCESSING') {
+      setProcessingTime(0)
+      processingInterval.current = setInterval(() => {
+        setProcessingTime((prev) => prev + 1)
+      }, 1000)
+    } else {
+      if (processingInterval.current) {
+        clearInterval(processingInterval.current)
+        processingInterval.current = null
+      }
+    }
+  }, [uploadPhase])
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60).toString().padStart(2, '0')
+    const secs = (seconds % 60).toString().padStart(2, '0')
+    return `${mins}:${secs}`
+  }
 
   // Submit GrupoMedios
   const onSubmitGrupo: SubmitHandler<GrupoMediosForm> = (data) => {
@@ -1093,12 +1126,18 @@ const FormModal = memo(function FormModal({
     // 2️⃣ Construir FormData y disparar la mutación
     const formData = buildMedioFormData(data)
     setUploadProgress(0)
+    setUploadPhase('UPLOADING')
 
     try {
       const onUploadProgress = (progressEvent: any) => {
         const total = progressEvent.total || 1
         const current = progressEvent.loaded
-        setUploadProgress(Math.round((current / total) * 100))
+        const percent = Math.round((current / total) * 100)
+        setUploadProgress(percent)
+        
+        if (percent >= 100) {
+          setUploadPhase('PROCESSING')
+        }
       }
 
       if (isEditing && 'resource' in initialData && initialData.resource === 'Medio') {
@@ -1110,10 +1149,12 @@ const FormModal = memo(function FormModal({
       }
       qc.invalidateQueries({ queryKey: ['Medio'] })
       onClose()
+      setUploadPhase('COMPLETED')
       setUploadProgress(0)
     } catch (error) {
       console.error(error)
       toast.error(isEditing ? 'Error al actualizar medio' : 'Error al crear medio')
+      setUploadPhase('IDLE')
       setUploadProgress(0)
     }
   }
@@ -1329,21 +1370,52 @@ const FormModal = memo(function FormModal({
             )}
           </div>
 
-          {/* Botón Guardar */}
+          {/* Botón Guardar con UI de Progreso Avanzada */}
           <div className="md:col-span-2 flex flex-col items-end gap-2">
-            {(createMedioHook.isPending || updateMedioHook.isPending) && uploadProgress > 0 && (
-              <div className="w-full">
-                <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+            
+            {/* FASE 1: SUBIENDO */}
+            {uploadPhase === 'UPLOADING' && (
+              <div className="w-full bg-gray-50 p-3 rounded-lg border border-gray-100 animate-in fade-in zoom-in duration-300">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>Subiendo archivo...</span>
+                  <span>{uploadProgress}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                   <div 
-                    className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
-                <p className="text-xs text-gray-500 mt-1 text-center">Subiendo: {uploadProgress}%</p>
               </div>
             )}
-            <ButtonBase type="submit" disabled={createMedioHook.isPending || updateMedioHook.isPending}>
-              {createMedioHook.isPending || updateMedioHook.isPending ? 'Procesando...' : (isNewMode ? 'Guardar' : 'Actualizar')}
+
+            {/* FASE 2: PROCESANDO (COMPRESIÓN/ENSAMBLAJE) */}
+            {uploadPhase === 'PROCESSING' && (
+              <div className="w-full bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-center gap-4 animate-in fade-in zoom-in duration-500">
+                {/* Loader Circular Minimalista */}
+                <div className="relative w-10 h-10 flex items-center justify-center">
+                  <div className="absolute w-full h-full border-4 border-blue-200 rounded-full opacity-50"></div>
+                  <div className="absolute w-full h-full border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
+                </div>
+                
+                <div className="flex-1">
+                  <h4 className="text-sm font-semibold text-blue-800">Procesando video</h4>
+                  <p className="text-xs text-blue-600 mt-0.5">Ensamblando chunks y comprimiendo...</p>
+                </div>
+
+                <div className="text-right">
+                  <div className="text-xl font-mono text-blue-900 font-bold">{formatTime(processingTime)}</div>
+                  <span className="text-[10px] uppercase tracking-wider text-blue-500 font-medium">Tiempo</span>
+                </div>
+              </div>
+            )}
+
+            <ButtonBase 
+              type="submit" 
+              disabled={uploadPhase === 'UPLOADING' || uploadPhase === 'PROCESSING'}
+              className={`transition-all ${uploadPhase !== 'IDLE' ? 'opacity-0 h-0 p-0 overflow-hidden' : ''}`}
+            >
+              {isNewMode ? 'Guardar' : 'Actualizar'}
             </ButtonBase>
           </div>
         </form>
