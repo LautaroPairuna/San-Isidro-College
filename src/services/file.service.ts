@@ -59,6 +59,26 @@ async function generateVideoThumbnail(videoPath: string): Promise<Buffer | null>
   });
 }
 
+function compressVideo(inputPath: string, outputPath: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    ffmpeg(inputPath)
+      .outputOptions([
+        '-c:v libx264', // Codec de video H.264
+        '-crf 23',      // Calidad visual constante (18-28 es el rango usual)
+        '-preset fast', // Balance velocidad/compresión
+        '-c:a aac',     // Codec de audio AAC
+        '-b:a 128k',    // Bitrate de audio
+        '-movflags +faststart' // Optimización para streaming web
+      ])
+      .save(outputPath)
+      .on('end', () => resolve(true))
+      .on('error', (err) => {
+        console.error("Error comprimiendo video:", err);
+        resolve(false);
+      });
+  });
+}
+
 export type SavedFile = {
   filename: string;
   tipo: "IMAGEN" | "VIDEO" | "ICONO";
@@ -112,20 +132,35 @@ export const fileService = {
       tipo = "ICONO";
     } else if (videoExts.includes(ext)) {
       const out = `${slug}-${timestamp}${ext}`;
+      const tempOut = `${slug}-${timestamp}-temp${ext}`;
       
-      // Escritura eficiente con Streams (chunks)
-      const videoPath = path.join(dir, out);
+      // Escritura eficiente con Streams (chunks) a archivo temporal
+      const tempPath = path.join(dir, tempOut);
+      const finalPath = path.join(dir, out);
+
       const webStream = file.stream();
       // @ts-ignore
       const nodeStream = Readable.fromWeb(webStream);
-      await pipeline(nodeStream, createWriteStream(videoPath));
+      await pipeline(nodeStream, createWriteStream(tempPath));
 
-      savedFilename = out;
+      // Comprimir video
+      const compressed = await compressVideo(tempPath, finalPath);
+      
+      if (compressed) {
+        // Si se comprimió bien, borrar el temporal
+        await fs.unlink(tempPath).catch(() => {});
+        savedFilename = out;
+      } else {
+        // Si falló, renombramos el temporal al final (fallback)
+        await fs.rename(tempPath, finalPath);
+        savedFilename = out;
+      }
+
       tipo = "VIDEO";
 
       // Intentar generar miniatura automática de video
       try {
-        const thumbBuf = await generateVideoThumbnail(videoPath);
+        const thumbBuf = await generateVideoThumbnail(finalPath);
         if (thumbBuf) {
           const outThumb = `${slug}-thumb-${timestamp}.webp`;
           
@@ -189,4 +224,28 @@ export const fileService = {
     await fs.rm(path.join(dir, filename), { force: true }).catch(() => {});
     await fs.rm(path.join(thumbs, filename), { force: true }).catch(() => {});
   },
+
+  async cleanTempFiles(tableName: string) {
+    const { dir } = await this.ensureDirectories(tableName);
+    try {
+      const files = await fs.readdir(dir);
+      const now = Date.now();
+      const ONE_HOUR = 60 * 60 * 1000;
+
+      for (const file of files) {
+        // Eliminar archivos temporales (-temp) y thumbnails temporales (thumb.png)
+        if (file.includes('-temp.') || file === 'thumb.png') {
+          const filePath = path.join(dir, file);
+          const stats = await fs.stat(filePath);
+          
+          // Borrar si tiene más de 1 hora de antigüedad
+          if (now - stats.mtimeMs > ONE_HOUR) {
+            await fs.unlink(filePath).catch(() => {});
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error limpiando archivos temporales:", error);
+    }
+  }
 };
