@@ -6,6 +6,7 @@ import {
   UseMutationResult,
   UseQueryResult,
 } from '@tanstack/react-query'
+import axios from 'axios'
 
 /* ------------------------------------------------------------------
  *  1) DEFINIR TIPOS EXPLÍCITOS
@@ -231,34 +232,33 @@ export function useMedioById(id: number | string) {
   })
 }
 
-export function useCreateMedio(): UseMutationResult<Medio, Error, FormData> {
+export interface UploadPayload {
+  formData: FormData
+  onUploadProgress?: (progressEvent: any) => void
+}
+
+export function useCreateMedio(): UseMutationResult<Medio, Error, UploadPayload> {
   const qc = useQueryClient()
-  return useMutation<Medio, Error, FormData>({
-    mutationFn: formData =>
-      fetch('/api/admin/resources/Medio', {
-        method: 'POST',
-        body  : formData,
-      }).then(async res => {
-        if (!res.ok) throw new Error('Error al crear Medio')
-        return res.json() as Promise<Medio>
-      }),
+  return useMutation<Medio, Error, UploadPayload>({
+    mutationFn: ({ formData, onUploadProgress }) =>
+      axios.post('/api/admin/resources/Medio', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress,
+      }).then(res => res.data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['Medio'] }),
   })
 }
 
 export function useUpdateMedio(
   id: number
-): UseMutationResult<Medio, Error, FormData> {
+): UseMutationResult<Medio, Error, UploadPayload> {
   const qc = useQueryClient()
-  return useMutation<Medio, Error, FormData>({
-    mutationFn: formData =>
-      fetch(`/api/admin/resources/Medio/${id}`, {
-        method: 'PUT',
-        body  : formData,
-      }).then(async res => {
-        if (!res.ok) throw new Error('Error al actualizar Medio')
-        return res.json() as Promise<Medio>
-      }),
+  return useMutation<Medio, Error, UploadPayload>({
+    mutationFn: ({ formData, onUploadProgress }) =>
+      axios.put(`/api/admin/resources/Medio/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress,
+      }).then(res => res.data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['Medio'] }),
   })
 }

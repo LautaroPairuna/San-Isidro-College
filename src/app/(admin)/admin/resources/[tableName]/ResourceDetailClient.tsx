@@ -1021,6 +1021,9 @@ const FormModal = memo(function FormModal({
   // Datos de FK (medios para el select en seccion)
   const { data: mediosFK = [] } = useMedios()
 
+  // Estado para progreso de subida
+  const [uploadProgress, setUploadProgress] = useState(0)
+
   // Submit GrupoMedios
   const onSubmitGrupo: SubmitHandler<GrupoMediosForm> = (data) => {
     if (isEditing && 'resource' in initialData && initialData.resource === 'GrupoMedios') {
@@ -1089,20 +1092,29 @@ const FormModal = memo(function FormModal({
 
     // 2️⃣ Construir FormData y disparar la mutación
     const formData = buildMedioFormData(data)
+    setUploadProgress(0)
 
     try {
+      const onUploadProgress = (progressEvent: any) => {
+        const total = progressEvent.total || 1
+        const current = progressEvent.loaded
+        setUploadProgress(Math.round((current / total) * 100))
+      }
+
       if (isEditing && 'resource' in initialData && initialData.resource === 'Medio') {
-        await updateMedioHook.mutateAsync(formData)
+        await updateMedioHook.mutateAsync({ formData, onUploadProgress })
         toast.success('Medio actualizado')
       } else {
-        await createMedioHook.mutateAsync(formData)
+        await createMedioHook.mutateAsync({ formData, onUploadProgress })
         toast.success('Medio creado')
       }
       qc.invalidateQueries({ queryKey: ['Medio'] })
       onClose()
+      setUploadProgress(0)
     } catch (error) {
       console.error(error)
       toast.error(isEditing ? 'Error al actualizar medio' : 'Error al crear medio')
+      setUploadProgress(0)
     }
   }
 
@@ -1258,29 +1270,9 @@ const FormModal = memo(function FormModal({
             {errorsMedio.urlArchivo && (
               <p className="text-red-600 text-sm">{errorsMedio.urlArchivo.message}</p>
             )}
-          </div>
-
-          {/* urlMiniatura (file + preview) */}
-          <div className="flex flex-col h-full">
-            <label className="mb-1 text-gray-700 font-medium">Miniatura</label>
-            <Controller
-              control={controlMedio}
-              name="urlMiniatura"
-              render={({ field }) => (
-                <FileDropZone
-                  className="flex-1"
-                  onFileSelected={field.onChange}
-                  currentSrc={
-                    isEditing ? toPublicImageUrl('medios', (initialData as MedioType).urlMiniatura || '') : undefined
-                  }
-                  currentTipo="IMAGEN"
-                  allowedTypes={['IMAGEN']}
-                />
-              )}
-            />
-            {errorsMedio.urlMiniatura && (
-              <p className="text-red-600 text-sm">{errorsMedio.urlMiniatura.message}</p>
-            )}
+            <p className="text-xs text-gray-500 mt-1">
+              La miniatura se generará automáticamente a partir de este archivo (si es imagen).
+            </p>
           </div>
 
           {/* textoAlternativo */}
@@ -1338,8 +1330,21 @@ const FormModal = memo(function FormModal({
           </div>
 
           {/* Botón Guardar */}
-          <div className="md:col-span-2 flex justify-end">
-            <ButtonBase type="submit">{isNewMode ? 'Guardar' : 'Actualizar'}</ButtonBase>
+          <div className="md:col-span-2 flex flex-col items-end gap-2">
+            {(createMedioHook.isPending || updateMedioHook.isPending) && uploadProgress > 0 && (
+              <div className="w-full">
+                <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                  <div 
+                    className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-xs text-gray-500 mt-1 text-center">Subiendo: {uploadProgress}%</p>
+              </div>
+            )}
+            <ButtonBase type="submit" disabled={createMedioHook.isPending || updateMedioHook.isPending}>
+              {createMedioHook.isPending || updateMedioHook.isPending ? 'Procesando...' : (isNewMode ? 'Guardar' : 'Actualizar')}
+            </ButtonBase>
           </div>
         </form>
       ) : (

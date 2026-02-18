@@ -1,8 +1,20 @@
 import fs from "fs/promises";
+import { createWriteStream } from "fs";
+import { pipeline } from "stream/promises";
+import { Readable } from "stream";
 import path from "path";
 import slugify from "slugify";
 import sharp from "sharp";
+import ffmpeg from "fluent-ffmpeg";
+// @ts-ignore
+import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
+// @ts-ignore
+import ffprobeInstaller from "@ffprobe-installer/ffprobe";
 import { folderNames, type PrismaTable, IMAGE_PUBLIC_DIR } from "@/lib/adminConstants";
+
+// Configurar rutas de binarios
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
+ffmpeg.setFfprobePath(ffprobeInstaller.path);
 
 function makeTimestamp() {
   const d = new Date();
@@ -16,6 +28,35 @@ function makeTimestamp() {
     pad(d.getMinutes()) +
     pad(d.getSeconds())
   );
+}
+
+async function generateVideoThumbnail(videoPath: string): Promise<Buffer | null> {
+  return new Promise((resolve) => {
+    let buf: Buffer | null = null;
+    const stream = ffmpeg(videoPath)
+      .screenshots({
+        timestamps: ['00:00:01'],
+        filename: 'thumb.png',
+        folder: path.dirname(videoPath),
+        size: '?x?', // Mantener aspecto original
+      })
+      .on('end', async () => {
+        // Leer el archivo generado
+        const thumbPath = path.join(path.dirname(videoPath), 'thumb.png');
+        try {
+            buf = await fs.readFile(thumbPath);
+            await fs.unlink(thumbPath); // Borrar temporal
+            resolve(buf);
+        } catch (e) {
+            console.error("Error leyendo thumb temporal:", e);
+            resolve(null);
+        }
+      })
+      .on('error', (err) => {
+        console.error("FFmpeg fluent error:", err);
+        resolve(null);
+      });
+  });
 }
 
 export type SavedFile = {
@@ -71,10 +112,34 @@ export const fileService = {
       tipo = "ICONO";
     } else if (videoExts.includes(ext)) {
       const out = `${slug}-${timestamp}${ext}`;
-      const buf = Buffer.from(await file.arrayBuffer());
-      await fs.writeFile(path.join(dir, out), buf);
+      
+      // Escritura eficiente con Streams (chunks)
+      const videoPath = path.join(dir, out);
+      const webStream = file.stream();
+      // @ts-ignore
+      const nodeStream = Readable.fromWeb(webStream);
+      await pipeline(nodeStream, createWriteStream(videoPath));
+
       savedFilename = out;
       tipo = "VIDEO";
+
+      // Intentar generar miniatura automática de video
+      try {
+        const thumbBuf = await generateVideoThumbnail(videoPath);
+        if (thumbBuf) {
+          const outThumb = `${slug}-thumb-${timestamp}.webp`;
+          
+          // Guardar en dir principal (para acceso directo)
+          await sharp(thumbBuf).webp().toFile(path.join(dir, outThumb));
+          
+          // Guardar en thumbs (resized)
+          await sharp(thumbBuf).resize(200).webp().toFile(path.join(thumbs, outThumb));
+          
+          urlMiniatura = outThumb;
+        }
+      } catch (err) {
+        console.error("Error generando miniatura de video:", err);
+      }
     } else {
       // Imagen por defecto
       const out = `${slug}-${timestamp}.webp`;
@@ -83,21 +148,26 @@ export const fileService = {
       // Guardar principal
       await sharp(buf).webp().toFile(path.join(dir, out));
       
-      // Guardar miniatura auto-generada
-      await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out));
-      
       savedFilename = out;
-      urlMiniatura = out; // Por defecto la misma imagen es su thumb (reducido)
       tipo = "IMAGEN";
-    }
 
-    // Si se subió miniatura explícita, procesarla
-    if (thumbFile) {
-      const outThumb = `${slug}-thumb-${timestamp}.webp`;
-      const bufThumb = Buffer.from(await thumbFile.arrayBuffer());
-      await sharp(bufThumb).webp().toFile(path.join(dir, outThumb));
-      await sharp(bufThumb).resize(200).webp().toFile(path.join(thumbs, outThumb));
-      urlMiniatura = outThumb;
+      // Si se subió miniatura explícita, usarla
+      if (thumbFile) {
+        const outThumb = `${slug}-thumb-${timestamp}.webp`;
+        const bufThumb = Buffer.from(await thumbFile.arrayBuffer());
+        
+        // Guardar thumb explícito en carpeta principal (para acceso directo)
+        await sharp(bufThumb).webp().toFile(path.join(dir, outThumb));
+        
+        // También generamos versión pequeña en thumbs/ para consistencia
+        await sharp(bufThumb).resize(200).webp().toFile(path.join(thumbs, outThumb));
+        
+        urlMiniatura = outThumb;
+      } else {
+        // Si NO hay thumb explícito, generar miniatura automática de la principal
+        await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out));
+        urlMiniatura = out; // Mismo nombre, el frontend debe saber buscar en thumbs/ si quiere la pequeña
+      }
     }
 
     // Si es SVG y no hay miniatura explícita, null
