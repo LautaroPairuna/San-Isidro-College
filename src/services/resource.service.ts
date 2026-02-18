@@ -282,6 +282,22 @@ export const resourceService = {
 
     // Limpiar campos virtuales
     delete data.nombreArchivo;
+    delete data.uploadId;
+
+    // Fix específico para Prisma: Si viene grupoMediosId en update, usar connect o eliminar si es redundante
+    if (tableName === "Medio" && "grupoMediosId" in data) {
+      const gId = Number(data.grupoMediosId);
+      if (!Number.isNaN(gId)) {
+        // Opción segura: transformar a connect si se quiere permitir mover,
+        // o simplemente borrarlo si asumimos que no se mueve por aquí.
+        // Dado el error "Unknown argument grupoMediosId", Prisma prefiere la relación.
+        // Sin embargo, si el ID es el mismo, mejor no tocarlo.
+        if (existing.grupoMediosId !== gId) {
+          data.grupoMedios = { connect: { id: gId } };
+        }
+      }
+      delete data.grupoMediosId;
+    }
 
     // Ejecutar limpieza de temporales de fondo (sin await para no bloquear respuesta)
     fileService.cleanTempFiles(tableName).catch(err => console.error("Error background cleanup:", err));
