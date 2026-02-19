@@ -453,6 +453,24 @@ export default function ResourceDetailClient({
     setIsFormMinimized(false)
   }, [])
 
+  // Limpiar estados al abrir formulario nuevo
+  const handleOpenNew = () => {
+    if (forbidNewMedio) return
+    setUploadPhase('IDLE')
+    setUploadProgress(0)
+    setServerProgress(null)
+    setDetailRow(null)
+    setEditRow(
+      childRelation
+        ? {
+            isNew: true,
+            parentId: childRelation.parentId,
+            resource: 'Medio',
+          }
+        : { isNew: true, parentId: null, resource: 'GrupoMedios' }
+    )
+  }
+
   // -----------------------------
   // Manejo de errores/carga
   // -----------------------------
@@ -514,19 +532,7 @@ export default function ResourceDetailClient({
         <div className="flex flex-wrap items-center justify-between mb-4 space-y-2">
           <div className="flex space-x-2">
             <button
-              onClick={() => {
-                if (forbidNewMedio) return
-                setDetailRow(null)
-                setEditRow(
-                  childRelation
-                    ? {
-                        isNew: true,
-                        parentId: childRelation.parentId,
-                        resource: 'Medio',
-                      }
-                    : { isNew: true, parentId: null, resource: 'GrupoMedios' }
-                )
-              }}
+              onClick={handleOpenNew}
               disabled={forbidNewMedio}
               className={clsx(
                 'flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition',
@@ -655,6 +661,9 @@ export default function ResourceDetailClient({
                       <button
                         title="Editar"
                         onClick={() => {
+                          setUploadPhase('IDLE')
+                          setUploadProgress(0)
+                          setServerProgress(null)
                           if (tableName === 'GrupoMedios') {
                             setEditRow({ ...(row as GrupoMediosType), resource: 'GrupoMedios' })
                           } else if (tableName === 'Seccion') {
@@ -1188,6 +1197,7 @@ const FormModal = memo(function FormModal({
     control: controlMedio,
     formState: { errors: errorsMedio },
     setError: setErrorMedio,
+    watch: watchMedioForm,
   } = useForm<MedioForm>({
     resolver: zodResolver(MedioSchema),
     defaultValues:
@@ -1425,6 +1435,9 @@ const FormModal = memo(function FormModal({
     }
   }
 
+  const tipo = watchMedioForm('tipo')
+  const isVideo = tipo === 'VIDEO'
+
   return (
     <Modal
       title={`${isNewMode ? 'Crear' : 'Editar'} ${
@@ -1633,10 +1646,15 @@ const FormModal = memo(function FormModal({
               <div className="w-full bg-indigo-50 p-3 rounded-lg border border-indigo-100 animate-in fade-in zoom-in duration-500">
                 <div className="flex justify-between text-xs text-indigo-700 mb-1">
                   <span className="font-medium">
-                    {serverProgress?.stage === 'compressing' ? 'Comprimiendo video...' : 
-                     serverProgress?.stage === 'generating_thumbnail' ? 'Generando miniatura...' :
-                     serverProgress?.stage === 'uploading' ? 'Ensamblando video...' :
-                     'Procesando video...'}
+                    {isVideo ? (
+                        serverProgress?.stage === 'compressing' ? 'Comprimiendo video...' : 
+                        serverProgress?.stage === 'generating_thumbnail' ? 'Generando miniatura...' :
+                        serverProgress?.stage === 'uploading' ? 'Ensamblando video...' :
+                        'Procesando video...'
+                    ) : (
+                        serverProgress?.stage === 'generating_thumbnail' ? 'Generando miniatura...' :
+                        'Procesando imagen...'
+                    )}
                   </span>
                   <span className="font-bold">{serverProgress?.percent || 0}%</span>
                 </div>
