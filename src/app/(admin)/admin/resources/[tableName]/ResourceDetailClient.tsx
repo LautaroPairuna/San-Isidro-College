@@ -894,6 +894,7 @@ export default function ResourceDetailClient({
             processingTime={processingTime}
             uploadIdRef={uploadIdRef}
             formatTime={formatTime}
+            gruposFK={gruposFK}
           />
         </div>
       )}
@@ -1173,6 +1174,7 @@ type FormModalProps = {
   processingTime?: number
   uploadIdRef?: React.MutableRefObject<string | null>
   formatTime?: (seconds: number) => string
+  gruposFK?: GrupoMediosType[]
 }
 
 const FormModal = memo(function FormModal({
@@ -1191,6 +1193,7 @@ const FormModal = memo(function FormModal({
   processingTime = 0,
   uploadIdRef = { current: null },
   formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`,
+  gruposFK = [],
 }: FormModalProps) {
   const isNewMode = 'isNew' in initialData && initialData.isNew === true
   const isEditing = !isNewMode
@@ -1394,6 +1397,28 @@ const FormModal = memo(function FormModal({
       uploadIdRef.current = uploadId;
       formData.append('uploadId', uploadId);
 
+      // Iniciar polling de progreso en segundo plano
+      let polling = true;
+      const pollProgress = async () => {
+        while (polling) {
+          try {
+            const res = await fetch(`/api/upload-progress?id=${uploadId}`);
+            if (res.ok) {
+              const progress = await res.json();
+              setServerProgress(progress);
+              if (progress.stage === 'done' || progress.stage === 'error') {
+                 // Si terminó, podemos detener el polling (aunque el request principal debería retornar pronto)
+              }
+            }
+          } catch (e) {
+            console.error("Polling error", e);
+          }
+          if (polling) await new Promise(r => setTimeout(r, 1000));
+        }
+      };
+      // No await, lanzamos en paralelo
+      pollProgress();
+
       const onUploadProgress = (progressEvent: any) => {
         const total = progressEvent.total || 1
         const current = progressEvent.loaded
@@ -1412,6 +1437,8 @@ const FormModal = memo(function FormModal({
         await createMedioHook.mutateAsync({ formData, onUploadProgress })
         toast.success('Medio creado')
       }
+      
+      polling = false; // Detener polling
       qc.invalidateQueries({ queryKey: ['Medio'] })
       
       // Re-invalidar tras unos segundos para asegurar que se muestren las miniaturas generadas asíncronamente
@@ -1578,7 +1605,17 @@ const FormModal = memo(function FormModal({
               render={({ field }) => (
                 <FileDropZone
                   className="flex-1"
-                  onFileSelected={field.onChange}
+                  onFileSelected={(file) => {
+                    field.onChange(file)
+                    // Auto-detectar tipo de archivo
+                    if (file && file.type) {
+                      if (file.type.startsWith('video/')) {
+                        setValueMedio('tipo', 'VIDEO')
+                      } else if (file.type.startsWith('image/')) {
+                        setValueMedio('tipo', 'IMAGEN')
+                      }
+                    }
+                  }}
                   currentSrc={
                     isEditing ? toPublicImageUrl('medios', (initialData as MedioType).urlArchivo) : undefined
                   }
@@ -1861,7 +1898,7 @@ const ButtonBase = memo(function ButtonBase({
     <button
       {...props}
       className={clsx(
-        'px-6 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-indigo-500',
+        'px-6 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed',
         {
           'bg-indigo-600 hover:bg-indigo-700 text-white': variant === 'default',
           'bg-red-500 hover:bg-red-600 text-white': variant === 'danger',
