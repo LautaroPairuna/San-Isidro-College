@@ -224,6 +224,9 @@ export default function ResourceDetailClient({
   const { data: parentRowData } = useGrupoMediosById(childRelation?.parentId || 0)
   const parentRow = parentRowData as GrupoMediosType | undefined
 
+  // Datos de FK para el filtro (se mueven arriba para que sean accesibles)
+  const { data: gruposFK = [] } = useGrupoMedios()
+
   // -----------------------------
   // Mutations (React Query)
   // -----------------------------
@@ -1295,8 +1298,8 @@ const FormModal = memo(function FormModal({
       : 0
   )
 
-  // Datos de FK (grupos para el select en medio y seccion)
-  const { data: gruposFK = [] } = useGrupoMedios()
+  // Datos de FK (grupos para el select en medio y seccion) - Ya definido arriba
+  // const { data: gruposFK = [] } = useGrupoMedios()
 
   // Datos de FK (medios para el select en seccion)
   const { data: mediosFK = [] } = useMedios()

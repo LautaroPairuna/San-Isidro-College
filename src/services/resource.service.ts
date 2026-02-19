@@ -193,11 +193,13 @@ export const resourceService = {
       }
     }
 
+    // Extract uploadId if present in data
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const uploadId = data.uploadId;
+
     // Manejo de archivos
     if (files?.main) {
       const hint = data.nombreArchivo || data.nombre || data.textoAlternativo || tableName;
-      // Extract uploadId if present in data
-      const uploadId = data.uploadId;
       const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb, uploadId);
 
       data.urlArchivo = saved.filename;
@@ -210,6 +212,7 @@ export const resourceService = {
     }
 
     delete data.nombreArchivo;
+    delete data.uploadId; // <--- Eliminar uploadId antes de crear en Prisma
 
     // Casting explícito a tipos de creación de Prisma
     switch (tableName) {
