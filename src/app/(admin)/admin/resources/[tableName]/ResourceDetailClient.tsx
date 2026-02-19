@@ -166,6 +166,8 @@ export default function ResourceDetailClient({
   const [selected, setSelected] = useState<number[]>([])
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({})
 
+  const [selectedGroupFilter, setSelectedGroupFilter] = useState<number | ''>('')
+
   // Debounce para búsqueda
   const debouncedSetSearch = useMemo(
     () =>
@@ -189,8 +191,11 @@ export default function ResourceDetailClient({
     if (childRelation) {
       return { [childRelation.foreignKey]: childRelation.parentId }
     }
+    if (tableName === 'Medio' && selectedGroupFilter !== '') {
+      return { grupoMediosId: selectedGroupFilter }
+    }
     return undefined
-  }, [childRelation])
+  }, [childRelation, selectedGroupFilter, tableName])
 
   const {
     data: paginatedData,
@@ -558,6 +563,24 @@ export default function ResourceDetailClient({
           </div>
 
           <div className="flex space-x-2">
+            {tableName === 'Medio' && !childRelation && (
+              <select
+                value={selectedGroupFilter}
+                onChange={(e) => {
+                  const val = e.target.value
+                  setSelectedGroupFilter(val ? Number(val) : '')
+                  setPage(1)
+                }}
+                className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 max-w-xs"
+              >
+                <option value="">Todos los grupos</option>
+                {gruposFK.map((g) => (
+                  <option key={g.id} value={g.id}>
+                    {g.nombre}
+                  </option>
+                ))}
+              </select>
+            )}
             <input
               type="text"
               value={searchInput}
