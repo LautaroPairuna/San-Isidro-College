@@ -50,6 +50,8 @@ import {
   SeccionSchema,
 } from '@/lib/schemas'
 
+
+
 // -------------------------------
 // Tipos para filas
 // -------------------------------
@@ -455,10 +457,21 @@ export default function ResourceDetailClient({
   // Manejo de errores/carga
   // -----------------------------
   if (loadingData) {
-    return <div className="p-4 text-gray-600">Cargando datos …</div>
+    return <TableSkeleton />
   }
   if (errorData) {
-    return <div className="p-4 text-red-500">Error al cargar datos</div>
+    return (
+      <div className="w-full p-6 bg-gray-50 min-h-screen flex items-center justify-center">
+        <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md">
+           <div className="text-red-500 text-5xl mb-4">⚠️</div>
+           <h3 className="text-lg font-bold text-gray-800 mb-2">Error al cargar datos</h3>
+           <p className="text-gray-600 mb-4">{errorData.message || 'Ocurrió un error inesperado'}</p>
+           <button onClick={() => refetch()} className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+             Reintentar
+           </button>
+        </div>
+      </div>
+    )
   }
 
   const parentIsUnico = parentRow?.tipoGrupo === 'UNICO'
@@ -938,16 +951,36 @@ const FotoCell = memo(function FotoCell({
 
   const [src, setSrc] = useState(isVideo ? fullSrc : thumbSrc)
   const [errored, setErrored] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  // Reset loading si cambia el fileName
+  useEffect(() => {
+    setLoading(true)
+    setSrc(isVideo ? fullSrc : thumbSrc)
+    setErrored(false)
+  }, [fileName, isVideo, fullSrc, thumbSrc])
 
   const handleError = () => {
+    setLoading(false)
     if (!isVideo && src === thumbSrc) setSrc(fullSrc)
     else setErrored(true)
+  }
+
+  const handleLoad = () => {
+    setLoading(false)
   }
 
   if (errored) return <span className="text-xs text-gray-600 truncate">{fileName}</span>
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 relative group">
+      {/* Spinner superpuesto */}
+      {loading && !isVideo && (
+         <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded z-10 w-16 h-16">
+           <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+         </div>
+      )}
+      
       {isVideo ? (
         <video
           src={src}
@@ -956,7 +989,9 @@ const FotoCell = memo(function FotoCell({
           muted
           loop
           playsInline
-          className="rounded shadow object-cover"
+          className="rounded shadow object-cover bg-gray-100"
+          onLoadedData={handleLoad}
+          onError={handleError}
         />
       ) : (
         <Image
@@ -964,11 +999,12 @@ const FotoCell = memo(function FotoCell({
           alt={fileName}
           width={64}
           height={64}
+          onLoad={handleLoad}
           onError={handleError}
-          className="rounded shadow object-cover"
+          className={`rounded shadow object-cover transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
         />
       )}
-      <span className="text-xs text-gray-600 truncate" style={{ maxWidth: 100 }}>
+      <span className="text-xs text-gray-600 truncate group-hover:whitespace-normal group-hover:absolute group-hover:bg-white group-hover:z-20 group-hover:p-1 group-hover:shadow group-hover:rounded group-hover:left-16 transition-all" style={{ maxWidth: 100 }}>
         {fileName}
       </span>
     </div>
@@ -1042,6 +1078,44 @@ const ConfirmModal = memo(function ConfirmModal({
         </ButtonBase>
       </div>
     </Modal>
+  )
+})
+
+// -------------------------------
+// Skeleton de Carga
+// -------------------------------
+const TableSkeleton = memo(function TableSkeleton() {
+  return (
+    <div className="w-full p-6 bg-gray-50 min-h-screen space-y-6 animate-pulse">
+      {/* Header */}
+      <div className="space-y-2">
+        <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+      </div>
+
+      {/* Toolbar */}
+      <div className="bg-white shadow rounded-lg p-4 space-y-4">
+        <div className="flex justify-between">
+          <div className="h-10 w-32 bg-gray-200 rounded"></div>
+          <div className="h-10 w-64 bg-gray-200 rounded"></div>
+        </div>
+        
+        {/* Tabla */}
+        <div className="border rounded overflow-hidden">
+          <div className="bg-gray-100 h-10 w-full border-b"></div>
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="flex border-b last:border-0">
+              <div className="w-12 p-4"><div className="h-4 w-4 bg-gray-200 rounded"></div></div>
+              <div className="flex-1 p-4 space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              </div>
+              <div className="w-32 p-4"><div className="h-8 bg-gray-200 rounded"></div></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 })
 
@@ -1303,6 +1377,11 @@ const FormModal = memo(function FormModal({
         toast.success('Medio creado')
       }
       qc.invalidateQueries({ queryKey: ['Medio'] })
+      
+      // Re-invalidar tras unos segundos para asegurar que se muestren las miniaturas generadas asíncronamente
+      setTimeout(() => qc.invalidateQueries({ queryKey: ['Medio'] }), 2000)
+      setTimeout(() => qc.invalidateQueries({ queryKey: ['Medio'] }), 5000)
+
       onClose()
       setUploadPhase('COMPLETED')
       setUploadProgress(0)
@@ -1584,10 +1663,12 @@ const FormModal = memo(function FormModal({
 
             <ButtonBase 
               type="submit" 
-              disabled={uploadPhase === 'UPLOADING' || uploadPhase === 'PROCESSING'}
-              className={`transition-all ${uploadPhase !== 'IDLE' ? 'opacity-0 h-0 p-0 overflow-hidden' : ''}`}
+              disabled={uploadPhase !== 'IDLE'}
+              className="transition-all w-full md:w-auto"
             >
-              {isNewMode ? 'Guardar' : 'Actualizar'}
+              {uploadPhase === 'UPLOADING' ? `Subiendo ${uploadProgress}%` : 
+               uploadPhase === 'PROCESSING' ? 'Procesando...' : 
+               isNewMode ? 'Guardar' : 'Actualizar'}
             </ButtonBase>
           </div>
         </form>
