@@ -1227,6 +1227,7 @@ const FormModal = memo(function FormModal({
     formState: { errors: errorsMedio },
     setError: setErrorMedio,
     watch: watchMedioForm,
+    setValue: setValueMedio,
   } = useForm<MedioForm>({
     resolver: zodResolver(MedioSchema),
     defaultValues:
