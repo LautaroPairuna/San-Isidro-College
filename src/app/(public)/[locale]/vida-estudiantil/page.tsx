@@ -326,13 +326,6 @@ export default function DeportesPage() {
       <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
-          <Image
-            src="/images/formas/forma-home-2.svg"
-            alt=""
-            width={500}
-            height={300}
-            className="absolute -top-5 -left-0 w-[500px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
-          />
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
             <div className="absolute top-5 left-15 w-[650px] z-20">
@@ -344,6 +337,13 @@ export default function DeportesPage() {
                 className="mx-auto mb-5"
               />
               <div className="bg-white shadow-xl rounded-xl p-8">
+                <Image
+                  src="/images/formas/forma-home-2.svg"
+                  alt=""
+                  width={500}
+                  height={300}
+                  className="absolute -top-5 -left-0 w-[500px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+                />
                 <h2 className="text-2xl font-bold text-center">{t('gym.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.description')}
