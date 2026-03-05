@@ -324,15 +324,15 @@ export default function DeportesPage() {
 
       {/* ═════════════ SECCIÓN 4 — SAN ISIDRO BALANCE ═════════════ */}
       <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
-        <Image
-          src="/images/formas/forma-home-2.svg"
-          alt=""
-          width={550}
-          height={300}
-          className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
-        />
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
+          <Image
+            src="/images/formas/forma-home-2.svg"
+            alt=""
+            width={500}
+            height={300}
+            className="absolute -top-5 -left-0 w-[500px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+          />
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
             <div className="absolute top-5 left-15 w-[650px] z-20">
