@@ -340,8 +340,8 @@ export default function DeportesPage() {
                 <Image
                   src="/images/logo-gym-2.svg"
                   alt={t('gym.logoAlt')}
-                  width={256}
-                  height={256}
+                  width={128}
+                  height={128}
                   className="mx-auto mb-5"
                 />
                 <h2 className="text-2xl font-bold text-center">{t('gym.title')}</h2>
@@ -386,8 +386,8 @@ export default function DeportesPage() {
             )}
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
-              <Image src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={256} height={256} className="mx-auto mb-5" />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
+                <Image src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
                 <h2 className="text-xl font-bold">{t('gym.title')}</h2>
                 <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.descriptionMobile')}
