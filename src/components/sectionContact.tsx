@@ -11,7 +11,7 @@ const ContactSection = () => {
             <div className="text-gray-800 leading-relaxed">
               <p>
                 Avenida Finca Yerba Buena 1500<br />
-                San Lorenzo Chico 4401<br />
+                San Lorenzo Chico<br />
                 A4401 San Lorenzo, Salta
               </p>
               <p className="mt-2">
