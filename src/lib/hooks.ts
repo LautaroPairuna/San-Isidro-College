@@ -2,11 +2,8 @@ import {
   useQuery,
   useMutation,
   useQueryClient,
-  useQueries,
   UseMutationResult,
-  UseQueryResult,
 } from '@tanstack/react-query'
-import axios from 'axios'
 
 /* ------------------------------------------------------------------
  *  1) DEFINIR TIPOS EXPLÍCITOS
@@ -234,17 +231,52 @@ export function useMedioById(id: number | string) {
 
 export interface UploadPayload {
   formData: FormData
-  onUploadProgress?: (progressEvent: any) => void
+  onUploadProgress?: (progressEvent: { loaded: number; total: number }) => void
+}
+
+async function uploadFormData<T>(
+  url: string,
+  method: 'POST' | 'PUT',
+  formData: FormData,
+  onUploadProgress?: (progressEvent: { loaded: number; total: number }) => void
+): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open(method, url)
+    xhr.responseType = 'json'
+
+    if (onUploadProgress) {
+      xhr.upload.onprogress = event => {
+        onUploadProgress({
+          loaded: event.loaded,
+          total: event.total || 1,
+        })
+      }
+    }
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.response as T)
+        return
+      }
+      reject(new Error(`Error HTTP ${xhr.status}`))
+    }
+
+    xhr.onerror = () => reject(new Error('Error de red al subir archivo'))
+    xhr.send(formData)
+  })
 }
 
 export function useCreateMedio(): UseMutationResult<Medio, Error, UploadPayload> {
   const qc = useQueryClient()
   return useMutation<Medio, Error, UploadPayload>({
     mutationFn: ({ formData, onUploadProgress }) =>
-      axios.post('/api/admin/resources/Medio', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        onUploadProgress,
-      }).then(res => res.data),
+      uploadFormData<Medio>(
+        '/api/admin/resources/Medio',
+        'POST',
+        formData,
+        onUploadProgress
+      ),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['Medio'] }),
   })
 }
@@ -255,10 +287,12 @@ export function useUpdateMedio(
   const qc = useQueryClient()
   return useMutation<Medio, Error, UploadPayload>({
     mutationFn: ({ formData, onUploadProgress }) =>
-      axios.put(`/api/admin/resources/Medio/${id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        onUploadProgress,
-      }).then(res => res.data),
+      uploadFormData<Medio>(
+        `/api/admin/resources/Medio/${id}`,
+        'PUT',
+        formData,
+        onUploadProgress
+      ),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['Medio'] }),
   })
 }
