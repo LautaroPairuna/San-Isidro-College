@@ -10,13 +10,24 @@ import { lookup as mimeLookup } from "mime-types";
 import { Readable } from "node:stream";
 
 import {
-  IMAGE_PUBLIC_DIR,
-  MEDIA_UPLOAD_DIR,
-  tableForFolder,
-} from "@/lib/adminConstants";
-import { resolveFolderAlias } from "@/lib/publicConstants";
+  folderNames,
+  resolveFolderAlias,
+} from "@/lib/publicConstants";
 
 import { prisma } from "@/lib/prisma";
+
+const IMAGE_PUBLIC_DIR =
+  process.env.MEDIA_DIR_IMAGES || path.resolve("public", "images");
+
+const UPLOADS_DIR =
+  process.env.UPLOADS_DIR || path.resolve("public", "uploads");
+
+const MEDIA_UPLOAD_DIR =
+  process.env.MEDIA_DIR_UPLOADS || path.join(UPLOADS_DIR, "media");
+
+const tableForFolder: Record<string, "Medio" | "GrupoMedios"> = Object.fromEntries(
+  Object.entries(folderNames).map(([tbl, folder]) => [folder, tbl as "Medio" | "GrupoMedios"])
+) as Record<string, "Medio" | "GrupoMedios">;
 
 // Utils
 function safeJoin(base: string, ...parts: string[]) {
@@ -77,7 +88,6 @@ export async function GET(
 
       const folderReq = parts[1]; // "medios" | "media"
       const rest = parts.slice(2); // ["thumbs","file.webp"] | ["file.webp"]
-      const fileName = rest[rest.length - 1];
 
       const tableName = resolveTable(folderReq);
       if (!tableName) {

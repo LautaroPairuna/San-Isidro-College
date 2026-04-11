@@ -45,7 +45,7 @@ export interface Seccion {
   textoBoton?: string | null
   grupoId?: number | null
   medioId?: number | null
-  propsJson?: any
+  propsJson?: unknown
   creadoEn: string
   actualizadoEn: string
   // Relaciones (presentes en /api/public/page-content)
@@ -62,6 +62,8 @@ export interface PaginatedResponse<T> {
     totalPages: number
   }
 }
+
+type ResourceFilters = Record<string, string | number | boolean | null | undefined>
 
 /* ------------------------------------------------------------------
  *  2) FUNCIONES GENÉRICAS DE FETCH
@@ -87,7 +89,7 @@ export async function fetchPaginated<T>(
   page: number,
   limit: number,
   search?: string,
-  filters?: Record<string, any>,
+  filters?: ResourceFilters,
   sortBy?: string,
   order: 'asc' | 'desc' = 'desc'
 ): Promise<PaginatedResponse<T>> {
@@ -117,7 +119,7 @@ export function usePaginatedResource<T>(
   page: number,
   limit: number,
   search: string,
-  filters?: Record<string, any>,
+  filters?: ResourceFilters,
   sortBy?: string,
   order: 'asc' | 'desc' = 'desc',
   options?: { enabled?: boolean }

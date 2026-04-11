@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import clsx from 'clsx'
 import { HiCloudUpload, HiTrash, HiPhotograph, HiFilm } from 'react-icons/hi'
@@ -23,8 +23,14 @@ export default function FileDropZone({
   className,
 }: Props) {
   const [file, setFile] = useState<File | null>(null)
-  const [preview, setPreview] = useState<string | null>(currentSrc ?? null)
+  const [cleared, setCleared] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const preview = useMemo(() => {
+    if (file) return URL.createObjectURL(file)
+    if (cleared) return null
+    return currentSrc ?? null
+  }, [file, cleared, currentSrc])
 
   /* ───────── Manejo drag&drop ───────── */
   const onDrop = useCallback(
@@ -77,6 +83,7 @@ export default function FileDropZone({
 
       setError(null)
       setFile(f)
+      setCleared(false)
       onFileSelected(f)
     },
     [currentTipo, onFileSelected, allowedTypes]
@@ -92,19 +99,17 @@ export default function FileDropZone({
     },
   })
 
-  /* ---- generar / liberar preview ---- */
+  /* ---- liberar preview temporal ---- */
   useEffect(() => {
-    if (!file) return
-    const url = URL.createObjectURL(file)
-    setPreview(url)
-    return () => URL.revokeObjectURL(url)
-  }, [file])
+    if (!file || !preview) return
+    return () => URL.revokeObjectURL(preview)
+  }, [file, preview])
 
   /* ---- borrar archivo ---- */
   const clear = (e?: React.MouseEvent) => {
     e?.stopPropagation()
     setFile(null)
-    setPreview(null)
+    setCleared(true)
     onFileSelected(null)
     setError(null)
   }

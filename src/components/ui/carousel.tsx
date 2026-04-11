@@ -202,7 +202,7 @@ interface CarouselControlProps extends React.ButtonHTMLAttributes<HTMLButtonElem
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   CarouselControlProps
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
@@ -230,7 +230,7 @@ CarouselPrevious.displayName = "CarouselPrevious"
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   CarouselControlProps
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (

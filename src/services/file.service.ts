@@ -6,13 +6,13 @@ import path from "path";
 import slugify from "slugify";
 import sharp from "sharp";
 import ffmpeg from "fluent-ffmpeg";
-// @ts-ignore
 import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
-// @ts-ignore
 import ffprobeInstaller from "@ffprobe-installer/ffprobe";
-import { folderNames, type PrismaTable, IMAGE_PUBLIC_DIR } from "@/lib/adminConstants";
+import { folderNames, type PrismaTable } from "@/lib/publicConstants";
 
 import os from "os";
+
+const IMAGE_PUBLIC_DIR = process.env.MEDIA_DIR_IMAGES || path.resolve("public", "images");
 
 // Configurar rutas de binarios
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
@@ -24,6 +24,7 @@ const PROGRESS_DIR = path.join(os.tmpdir(), "upload-progress");
 fs.mkdir(PROGRESS_DIR, { recursive: true }).catch(() => {});
 
 type ProgressStage = 'uploading' | 'compressing' | 'generating_thumbnail' | 'done' | 'error';
+type FileNamedBlob = Blob & { name?: string };
 
 export type UploadProgress = {
   percent: number;
@@ -31,6 +32,13 @@ export type UploadProgress = {
   updatedAt: number;
   error?: string;
 };
+
+function toNodeReadable(webStream: ReadableStream<Uint8Array>) {
+  const { fromWeb } = Readable as unknown as {
+    fromWeb: (stream: ReadableStream<Uint8Array>) => NodeJS.ReadableStream;
+  };
+  return fromWeb(webStream);
+}
 
 async function updateProgress(id: string, percent: number, stage: ProgressStage = 'uploading', error?: string) {
   if (!id) return;
@@ -187,7 +195,7 @@ export const fileService = {
             }
           }
         }
-      } catch (e) {
+      } catch {
         // Ignorar si falla la limpieza de progreso
       }
 
@@ -208,7 +216,7 @@ export const fileService = {
     const slug = slugify(hintName || "archivo", { lower: true, strict: true });
 
     // Casting seguro
-    const originalName = (file as any).name as string;
+    const originalName = (file as FileNamedBlob).name ?? "archivo";
     const ext = path.extname(originalName).toLowerCase();
     
     const videoExts = [".mp4", ".mov", ".avi", ".mkv", ".webm"];
@@ -235,8 +243,7 @@ export const fileService = {
       if (uploadId) updateProgress(uploadId, 0, 'uploading');
 
       const webStream = file.stream();
-      // @ts-ignore
-      const nodeStream = Readable.fromWeb(webStream);
+      const nodeStream = toNodeReadable(webStream);
       
       // Track upload progress
       let loaded = 0;

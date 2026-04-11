@@ -4,9 +4,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import sharp from 'sharp'
 import slugify from 'slugify'
-import { IMAGE_PUBLIC_DIR } from '@/lib/adminConstants'
-
-const PUBLIC_IMAGES = IMAGE_PUBLIC_DIR
+const PUBLIC_IMAGES = process.env.MEDIA_DIR_IMAGES || path.resolve('public', 'images')
 
 /**
  * Asegura que existan las carpetas:

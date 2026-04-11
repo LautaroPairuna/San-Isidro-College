@@ -16,11 +16,9 @@ export { folderNames, type PrismaTable, resolveFolderAlias } from './publicConst
    BASES DE RUTAS (con override por ENV para Docker/EasyPanel)
    ───────────────────────────────────────────────────────────────── */
 
-const CWD = process.cwd();
-
 /** Carpeta pública raíz de IMÁGENES procesadas (WebP y thumbs). */
 export const IMAGE_PUBLIC_DIR =
-  process.env.MEDIA_DIR_IMAGES || path.join(CWD, 'public', 'images');
+  process.env.MEDIA_DIR_IMAGES || path.resolve('public', 'images');
 
 /** Prefijo público para IMÁGENES. Ej.: /images */
 // Usamos la del cliente si está disponible, o la de servidor, o fallback
@@ -29,7 +27,7 @@ export const IMAGE_PUBLIC_URL =
 
 /** Carpeta pública raíz de UPLOADS (binarios sin procesar). */
 export const UPLOADS_DIR =
-  process.env.UPLOADS_DIR || path.join(CWD, 'public', 'uploads');
+  process.env.UPLOADS_DIR || path.resolve('public', 'uploads');
 
 /** Carpeta física de VIDEOS subidos (dentro de UPLOADS). */
 export const MEDIA_UPLOAD_DIR =

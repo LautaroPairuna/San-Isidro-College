@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { fileService } from "./file.service";
-import { GrupoMedios, Medio, Seccion, Prisma } from "@prisma/client";
+import { GrupoMedios, Medio, Seccion, Prisma } from "@/generated/prisma/client";
 
 export type PaginatedResult<T> = {
   data: T[];
@@ -14,6 +14,16 @@ export type PaginatedResult<T> = {
 
 type AllowedModels = GrupoMedios | Medio | Seccion;
 type TableName = "GrupoMedios" | "Medio" | "Seccion";
+type ResourcePayload = Record<string, unknown>;
+type ExistingMediaFields = {
+  urlArchivo?: string | null;
+  urlMiniatura?: string | null;
+  grupoMediosId?: number | null;
+};
+
+function toOptionalString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim().length > 0 ? value : undefined;
+}
 
 const SEARCH_CONFIG: Record<TableName, string[]> = {
   GrupoMedios: ["nombre"],
@@ -172,8 +182,7 @@ export const resourceService = {
 
   async create(
     tableName: TableName,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any,
+    data: ResourcePayload,
     files?: { main?: Blob; thumb?: Blob }
   ): Promise<AllowedModels | null> {
     // Validación lógica de negocio
@@ -194,12 +203,15 @@ export const resourceService = {
     }
 
     // Extract uploadId if present in data
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const uploadId = data.uploadId;
+    const uploadId = toOptionalString(data.uploadId);
 
     // Manejo de archivos
     if (files?.main) {
-      const hint = data.nombreArchivo || data.nombre || data.textoAlternativo || tableName;
+      const hint =
+        toOptionalString(data.nombreArchivo) ??
+        toOptionalString(data.nombre) ??
+        toOptionalString(data.textoAlternativo) ??
+        tableName;
       const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb, uploadId);
 
       data.urlArchivo = saved.filename;
@@ -217,11 +229,11 @@ export const resourceService = {
     // Casting explícito a tipos de creación de Prisma
     switch (tableName) {
       case "GrupoMedios":
-        return prisma.grupoMedios.create({ data });
+        return prisma.grupoMedios.create({ data: data as Prisma.GrupoMediosUncheckedCreateInput });
       case "Medio":
-        return prisma.medio.create({ data });
+        return prisma.medio.create({ data: data as Prisma.MedioUncheckedCreateInput });
       case "Seccion":
-        return prisma.seccion.create({ data });
+        return prisma.seccion.create({ data: data as Prisma.SeccionUncheckedCreateInput });
       default:
         return null;
     }
@@ -230,14 +242,13 @@ export const resourceService = {
   async update(
     tableName: TableName,
     id: string | number,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any,
+    data: ResourcePayload,
     files?: { main?: Blob; thumb?: Blob }
   ): Promise<AllowedModels | null> {
     const key = Number(id);
     if (Number.isNaN(key)) return null;
 
-    const existing = await this.getOne(tableName, key) as any; // Cast para acceder a propiedades comunes
+    const existing = await this.getOne(tableName, key) as (AllowedModels & ExistingMediaFields) | null;
     if (!existing) return null;
 
     // Si se sube un nuevo archivo principal
@@ -253,11 +264,14 @@ export const resourceService = {
       }
 
       // 3. Guardar nuevo archivo
-            const hint = data.nombreArchivo || data.textoAlternativo || tableName;
-            const uploadId = data.uploadId;
-            const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb, uploadId);
+      const hint =
+        toOptionalString(data.nombreArchivo) ??
+        toOptionalString(data.textoAlternativo) ??
+        tableName;
+      const uploadId = toOptionalString(data.uploadId);
+      const saved = await fileService.saveFile(files.main, tableName, hint, files.thumb, uploadId);
 
-            data.urlArchivo = saved.filename;
+      data.urlArchivo = saved.filename;
       data.tipo = saved.tipo;
       
       // Actualizar miniatura
@@ -307,14 +321,11 @@ export const resourceService = {
 
     switch (tableName) {
       case "GrupoMedios":
-        // @ts-ignore
-        return prisma.grupoMedios.update({ where: { id: key }, data });
+        return prisma.grupoMedios.update({ where: { id: key }, data: data as Prisma.GrupoMediosUncheckedUpdateInput });
       case "Medio":
-        // @ts-ignore
-        return prisma.medio.update({ where: { id: key }, data });
+        return prisma.medio.update({ where: { id: key }, data: data as Prisma.MedioUpdateInput });
       case "Seccion":
-        // @ts-ignore
-        return prisma.seccion.update({ where: { id: key }, data });
+        return prisma.seccion.update({ where: { id: key }, data: data as Prisma.SeccionUncheckedUpdateInput });
       default:
         return null;
     }
