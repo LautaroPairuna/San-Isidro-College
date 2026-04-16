@@ -1191,6 +1191,12 @@ type FormModalProps = {
   gruposFK?: GrupoMediosType[]
 }
 
+function guessNombreArchivoFromStoredFilename(fileName: string): string {
+  const withoutExt = fileName.replace(/\.[^.]+$/, '')
+  // Quita sufijo típico de timestamp del uploader: -YYYYMMDD-HHmmss
+  return withoutExt.replace(/-\d{8}-\d{6}$/, '')
+}
+
 const FormModal = memo(function FormModal({
   tableName,
   initialData,
@@ -1248,6 +1254,7 @@ const FormModal = memo(function FormModal({
     defaultValues:
       isEditing && 'resource' in initialData && initialData.resource === 'Medio'
         ? {
+            nombreArchivo: guessNombreArchivoFromStoredFilename((initialData as MedioType).urlArchivo),
             urlArchivo: undefined,
             urlMiniatura: undefined,
             textoAlternativo: (initialData as MedioType).textoAlternativo ?? '',
