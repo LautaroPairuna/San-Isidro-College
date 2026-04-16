@@ -76,8 +76,7 @@ const HomePage: NextPage = () => {
     )
   }
 
-  // Extraemos objetos únicos de welcome y sección 3
-  const bienvenidaMedio = bienvenidaArr.length > 0 ? bienvenidaArr[0] : undefined
+  // Extraemos objeto único para sección 3
   const sec3Medio = sec3Arr.length > 0 ? sec3Arr[0] : undefined
 
   return (
@@ -157,13 +156,21 @@ const HomePage: NextPage = () => {
 
           {/* Columna Derecha */}
           <div className="col-span-8 max-sm:col-span-12 z-10">
-            <RenderMedia
-              medio={bienvenidaMedio}
-              fallback="/images/fondo-bienvenida.webp"
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-xl shadow-lg"
-            />
+            {bienvenidaArr.length > 0 ? (
+              <MediaCarousel
+                items={bienvenidaArr}
+                altText={t('bienvenida.title')}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            ) : (
+              <Image
+                src="/images/fondo-bienvenida.webp"
+                alt={t('bienvenida.title')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            )}
           </div>
         </div>
       </section>
