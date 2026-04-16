@@ -16,7 +16,10 @@ export type GrupoMediosForm = z.infer<typeof GrupoMediosSchema>;
 
 /* ---------- Medio CON VALIDACIÓN CORREGIDA ---------- */
 export const MedioSchema = z.object({
-  nombreArchivo: z.string().trim().min(1, 'Debe tener al menos 1 carácter').max(50, 'Máximo 50 caracteres').optional(),
+  nombreArchivo: z.preprocess(
+    (value) => (typeof value === 'string' && value.trim() === '' ? undefined : value),
+    z.string().trim().min(1, 'Debe tener al menos 1 carácter').max(50, 'Máximo 50 caracteres').optional()
+  ),
 
   /** Archivo principal (imagen o video) */
   urlArchivo: z.instanceof(File).optional()
