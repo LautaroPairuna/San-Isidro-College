@@ -132,7 +132,7 @@ const HomePage: NextPage = () => {
       </section>
 
       {/* =============== SECCIÓN 2: BIENVENIDA (MÉTODO UNICO) =============== */}
-      <section className="relative w-full h-auto py-10 bg-white" id="bienvenida">
+      <section className="relative w-full py-10 bg-white" id="bienvenida">
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center max-sm:col-span-12">
@@ -155,21 +155,22 @@ const HomePage: NextPage = () => {
           </div>
 
           {/* Columna Derecha */}
-          <div className="col-span-8 max-sm:col-span-12 z-10">
+          <div className="col-span-8 max-sm:col-span-12 z-10 relative h-[300px] sm:h-[420px] lg:h-[560px]">
             {bienvenidaArr.length > 0 ? (
               <MediaCarousel
                 items={bienvenidaArr}
                 altText={t('bienvenida.title')}
-                className="w-full h-auto rounded-xl shadow-lg"
+                className="w-full h-full rounded-xl shadow-lg"
               />
             ) : (
-              <Image
-                src="/images/fondo-bienvenida.webp"
-                alt={t('bienvenida.title')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+              <div className="relative w-full h-full rounded-xl shadow-lg overflow-hidden">
+                <Image
+                  src="/images/fondo-bienvenida.webp"
+                  alt={t('bienvenida.title')}
+                  fill
+                  className="object-cover"
+                />
+              </div>
             )}
           </div>
         </div>
