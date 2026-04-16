@@ -93,12 +93,13 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
         loop: true,
         align: 'start',
       }}
-      className={cn('w-full h-full relative group', className)}
+      className={cn('w-full h-full relative group overflow-hidden', className)}
+      aria-label={altText || 'Carrusel multimedia'}
     >
       <CarouselContent className="h-full -ml-0">
         {items.map((item, idx) => (
           <CarouselItem key={idx} className="h-full pl-0 relative">
-            <div className="w-full h-full relative overflow-hidden bg-gray-900">
+            <div className="w-full h-full relative overflow-hidden rounded-[inherit] bg-gray-900">
               <RenderMedia
                 medio={item as MedioType}
                 fallback="/images/placeholder.webp"

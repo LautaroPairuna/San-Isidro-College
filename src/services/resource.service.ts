@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { fileService } from "./file.service";
 import { GrupoMedios, Medio, Seccion, Prisma } from "@/generated/prisma/client";
 
 export type PaginatedResult<T> = {
@@ -23,6 +22,11 @@ type ExistingMediaFields = {
 
 function toOptionalString(value: unknown): string | undefined {
   return typeof value === "string" && value.trim().length > 0 ? value : undefined;
+}
+
+async function getFileService() {
+  const fileServiceModule = await import("./file.service");
+  return fileServiceModule.fileService;
 }
 
 const SEARCH_CONFIG: Record<TableName, string[]> = {
@@ -207,6 +211,7 @@ export const resourceService = {
 
     // Manejo de archivos
     if (files?.main) {
+      const fileService = await getFileService();
       const hint =
         toOptionalString(data.nombreArchivo) ??
         toOptionalString(data.nombre) ??
@@ -253,6 +258,7 @@ export const resourceService = {
 
     // Si se sube un nuevo archivo principal
     if (files?.main) {
+      const fileService = await getFileService();
       // 1. Borrar archivo principal anterior
       if (existing.urlArchivo) {
         await fileService.deleteFile(existing.urlArchivo, tableName);
@@ -283,6 +289,7 @@ export const resourceService = {
     } 
     // Si NO se sube archivo principal pero SÍ una miniatura explícita (caso raro ahora, pero posible)
     else if (files?.thumb) {
+      const fileService = await getFileService();
       if (existing.urlMiniatura && existing.urlMiniatura !== existing.urlArchivo) {
         await fileService.deleteFile(existing.urlMiniatura, tableName);
       }
@@ -317,7 +324,10 @@ export const resourceService = {
     }
 
     // Ejecutar limpieza de temporales de fondo (sin await para no bloquear respuesta)
-    fileService.cleanTempFiles(tableName).catch(err => console.error("Error background cleanup:", err));
+    {
+      const fileService = await getFileService();
+      fileService.cleanTempFiles(tableName).catch(err => console.error("Error background cleanup:", err));
+    }
 
     switch (tableName) {
       case "GrupoMedios":
@@ -337,6 +347,7 @@ export const resourceService = {
 
     const existing = await this.getOne(tableName, key);
     if (!existing) return null;
+    const fileService = await getFileService();
 
     if ("urlArchivo" in existing && existing.urlArchivo) {
       await fileService.deleteFile(existing.urlArchivo, tableName);

@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { adminGuard } from "@/lib/auth-guard";
 import { resourceService, isValidTableName } from "@/services/resource.service";
+import { refreshPageContentCacheAll } from "@/lib/pageContentCache";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -119,6 +120,11 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
     if (created === null) {
       return NextResponse.json({ error: `Recurso “${tableName}” no existe` }, { status: 404 });
     }
+
+    if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
+      await refreshPageContentCacheAll();
+    }
+
     return NextResponse.json(created, { status: 201 });
 
   } catch (e: any) {

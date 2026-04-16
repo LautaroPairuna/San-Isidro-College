@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 
 export default function MapEmbed() {
   const ref = useRef<HTMLDivElement>(null);

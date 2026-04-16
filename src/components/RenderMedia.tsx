@@ -1,5 +1,5 @@
 // src/components/RenderMedia.tsx
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import Image from 'next/image'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 
@@ -47,6 +47,164 @@ interface Props {
   unoptimized?: boolean
   sizes?: string
   fetchPriority?: 'high' | 'low' | 'auto'
+  loading?: 'eager' | 'lazy'
+}
+
+interface ImageWithFallbackProps {
+  src: string
+  fallback: string
+  alt: string
+  className?: string
+  width: number
+  height: number
+  fill: boolean
+  sizes?: string
+  priority: boolean
+  loading: 'eager' | 'lazy'
+  unoptimized?: boolean
+  fetchPriority?: 'high' | 'low' | 'auto'
+}
+
+function ImageWithFallback({
+  src,
+  fallback,
+  alt,
+  className,
+  width,
+  height,
+  fill,
+  sizes,
+  priority,
+  loading,
+  unoptimized,
+  fetchPriority,
+}: ImageWithFallbackProps) {
+  const [failed, setFailed] = useState(false)
+  const activeSrc = failed ? fallback : src
+  const isDynamic = activeSrc.startsWith('/api/disk-images')
+
+  return (
+    <Image
+      src={activeSrc}
+      alt={alt}
+      {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
+      className={className}
+      unoptimized={unoptimized ?? isDynamic}
+      priority={priority}
+      loading={loading}
+      onError={() => {
+        if (!failed && src !== fallback) setFailed(true)
+      }}
+      {...(fetchPriority ? { fetchPriority } : {})}
+    />
+  )
+}
+
+interface VideoWithFallbackProps {
+  src: string
+  fallback: string
+  alt: string
+  className?: string
+  width: number
+  height: number
+  fill: boolean
+  sizes?: string
+  priority: boolean
+  loading: 'eager' | 'lazy'
+  unoptimized?: boolean
+  fetchPriority?: 'high' | 'low' | 'auto'
+  mode: 'cover' | 'contain-blur'
+  videoProps: React.VideoHTMLAttributes<HTMLVideoElement>
+}
+
+function VideoWithFallback({
+  src,
+  fallback,
+  alt,
+  className,
+  width,
+  height,
+  fill,
+  sizes,
+  priority,
+  loading,
+  unoptimized,
+  fetchPriority,
+  mode,
+  videoProps,
+}: VideoWithFallbackProps) {
+  const [failed, setFailed] = useState(false)
+
+  if (failed) {
+    return (
+      <ImageWithFallback
+        src={fallback}
+        fallback={fallback}
+        alt={alt}
+        className={className}
+        width={width}
+        height={height}
+        fill={fill}
+        sizes={sizes}
+        priority={priority}
+        loading={loading}
+        unoptimized={unoptimized}
+        fetchPriority={fetchPriority}
+      />
+    )
+  }
+
+  if (mode === 'cover') {
+    return (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        {...videoProps}
+        onError={(event) => {
+          setFailed(true)
+          videoProps.onError?.(event)
+        }}
+        className={`w-full h-full object-cover ${className || ''}`}
+      />
+    )
+  }
+
+  return (
+    <div className={`relative w-full h-full overflow-hidden ${className || ''}`}>
+      <div className="absolute inset-0 z-0 opacity-50">
+        <video
+          src={src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          onError={() => {
+            setFailed(true)
+          }}
+          className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
+        />
+      </div>
+
+      <video
+        src={src}
+        className="relative z-10 w-full h-full object-contain"
+        controls
+        muted={false}
+        loop={false}
+        playsInline
+        {...videoProps}
+        onError={(event) => {
+          setFailed(true)
+          videoProps.onError?.(event)
+        }}
+      >
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
+  )
 }
 
 /**
@@ -72,88 +230,73 @@ const RenderMedia = memo(function RenderMedia({
   unoptimized,
   sizes,
   fetchPriority,
+  loading,
 }: Props) {
+  const effectiveLoading = loading ?? (priority ? 'eager' : 'lazy')
+
   // Si no hay objeto `medio`, o no tiene urlArchivo válida, usamos fallback como imagen
   if (!medio?.urlArchivo) {
-    const isFallbackDynamic = fallback.startsWith('/api/disk-images')
     return (
-      <Image
+      <ImageWithFallback
         src={fallback}
+        fallback={fallback}
         alt="Media Fallback"
-        {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
         className={className}
-        unoptimized={unoptimized ?? isFallbackDynamic}
+        width={width}
+        height={height}
+        fill={fill}
+        sizes={sizes}
         priority={priority}
-        {...(fetchPriority ? { fetchPriority } : {})}
+        loading={effectiveLoading}
+        unoptimized={unoptimized}
+        fetchPriority={fetchPriority}
       />
     )
   }
 
   // Construir la URL pública del archivo: usamos el helper cliente-safe
   const src = toPublicImageUrl('medios', medio.urlArchivo)
-  // Si usamos el proxy de disco (/api/disk-images), desactivamos la optimización de Next
-  // porque el archivo ya es WebP optimizado y Next no puede leerlo del sistema de archivos estático.
-  const isDynamic = src.startsWith('/api/disk-images')
 
   // Si el tipo es VIDEO
   if (medio.tipo === 'VIDEO') {
     const mode = videoMode || (fill ? 'cover' : 'contain-blur')
-
-    if (mode === 'cover') {
-      return (
-        <video
-          src={src}
-          autoPlay
-          loop
-          muted
-          playsInline
-          {...videoProps}
-          className={`w-full h-full object-cover ${className || ''}`}
-        />
-      )
-    }
-
     return (
-      <div className={`relative w-full h-full overflow-hidden ${className || ''}`}>
-        {/* Fondo blur */}
-        <div className="absolute inset-0 z-0 opacity-50">
-          <video
-            src={src}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover blur-xl scale-110 pointer-events-none"
-          />
-        </div>
-
-        {/* Frente */}
-        <video
-          src={src}
-          className="relative z-10 w-full h-full object-contain"
-          controls
-          muted={false}
-          loop={false}
-          playsInline
-          {...videoProps}
-        >
-          Tu navegador no soporta la reproducción de video.
-        </video>
-      </div>
+      <VideoWithFallback
+        key={`video:${src}`}
+        src={src}
+        fallback={fallback}
+        alt={medio.textoAlternativo || 'Media Fallback'}
+        className={className}
+        width={width}
+        height={height}
+        fill={fill}
+        sizes={sizes}
+        priority={priority}
+        loading={effectiveLoading}
+        unoptimized={unoptimized}
+        fetchPriority={fetchPriority}
+        mode={mode}
+        videoProps={videoProps}
+      />
     )
   }
 
   // Si el tipo es IMAGEN o ICONO
   return (
-    <Image
+    <ImageWithFallback
+      key={`image:${src}`}
       src={src}
+      fallback={fallback}
       alt={medio.textoAlternativo || 'Medio'}
-      {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
       className={className}
-      // Desactivar optimización si es imagen local servida por API
-      unoptimized={unoptimized ?? isDynamic}
+      width={width}
+      height={height}
+      fill={fill}
+      sizes={sizes}
       priority={priority}
-      {...(fetchPriority ? { fetchPriority } : {})}
+      loading={effectiveLoading}
+      unoptimized={unoptimized}
+      fetchPriority={fetchPriority}
     />
   )
 })

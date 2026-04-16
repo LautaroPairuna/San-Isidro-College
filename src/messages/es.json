@@ -111,6 +111,90 @@
       "diplomaDualTexto": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
       "diplomaDualLogoAlt": "Logo Academia International Studies"
     },
+    "cards": {
+      "persona": {
+        "title": "El Centro de Nuestro Proyecto: La Persona",
+        "backText": "Nuestra premisa es clara: lo primero es la persona. Priorizamos el bienestar del alumno y el desarrollo de una comunidad inclusiva, donde cada estudiante se sienta valorado. Buscamos el desarrollo integral, formando jóvenes con apertura mental y una profunda sensibilidad hacia la sustentabilidad y el impacto social."
+      },
+      "ciudadanos": {
+        "title": "Ciudadanos Globales con Excelencia Académica",
+        "backText": "A través de un sólido bilingüismo, preparamos a nuestros estudiantes para actuar en un mundo interconectado. Nuestra excelencia académica potencia el trabajo en equipo como competencia esencial del siglo XXI, la curiosidad por descubrir el mundo y el pensamiento crítico, y la creatividad para construir un proyecto de vida ético."
+      },
+      "innovacion": {
+        "title": "Innovación y Tecnología de Vanguardia",
+        "backText": "Nuestra premisa es clara: lo primero es la persona. Innovación real: los alumnos construyen sus propios prototipos desde cero (sin kits comerciales), integrando ingeniería y electrónica. Inteligencia artificial: proyectos avanzados para liderar en entornos digitales. Infraestructura: aulas con pantallas interactivas touch y un laboratorio de alta complejidad totalmente equipado."
+      },
+      "deportes": {
+        "title": "Deportes",
+        "backText": "Deportes y vida sana: disciplina y trabajo en equipo a través de Rugby, Hockey y Jiu-Jitsu. Con gimnasio propio y participación en torneos, promovemos valores como el respeto, el esfuerzo, la solidaridad y la diversión, desarrollando habilidades motrices. Durante el año, los alumnos participan en encuentros, giras y competencias con otros clubes, fortaleciendo la amistad, la disciplina y el sentido de pertenencia."
+      },
+      "artes": {
+        "title": "Artes",
+        "backText": "El poder transformador del arte es un pilar fundamental para la sensibilidad y la autoexpresión. A través de distintos lenguajes, los estudiantes desarrollan nuevas formas de comunicación, fortaleciendo su inteligencia emocional, creatividad y capacidad de abstracción. El arte se convierte en un espacio de libertad que impulsa la innovación y la confianza personal."
+      },
+      "sustentabilidad": {
+        "title": "Sustentabilidad",
+        "backText": "La sustentabilidad no es solo un concepto, sino una forma de habitar el mundo. Formamos jóvenes con una profunda conciencia ambiental y social, capaces de liderar proyectos que generen un impacto positivo en su entorno. A través de una mirada ética y responsable, integramos el respeto por la naturaleza y la equidad social, preparando ciudadanos globales comprometidos con el cuidado de nuestra casa común y el bienestar de las futuras generaciones."
+      },
+      "bienestar": {
+        "title": "Bienestar",
+        "backText": "Para aprender, primero hay que estar bien. Por eso, el bienestar integral de nuestros estudiantes es el eje de nuestro compromiso educativo: lo primero es la persona. Sostenemos una comunidad inclusiva donde cada joven se sienta escuchado, valorado y seguro."
+      }
+    },
+    "weAreCommunity": {
+      "academicProposal": {
+        "title": "Propuesta Académica: Excelencia y Doble Titulación Internacional",
+        "p1": "Durante los cinco años de Secundaria, ofrecemos una educación integral bilingüe de doble jornada, fusionando el diseño curricular oficial argentino con estándares de competitividad global a través de programas internacionales.",
+        "orientationsTitle": "Nuestra propuesta se diversifica en dos Orientaciones:",
+        "natural": {
+          "label": "Ciencias Naturales:",
+          "text": "fomentamos la investigación científica y el compromiso ambiental, utilizando nuestro laboratorio de alta complejidad para transformar la teoría en experimentación real."
+        },
+        "informatics": {
+          "label": "Informática:",
+          "text": "centrada en la creación tecnológica, donde los alumnos pasan de ser usuarios a desarrolladores de soluciones digitales, IA y prototipos originales."
+        }
+      },
+      "internationalProjection": {
+        "title": "Proyección Internacional: Cambridge e High School Diploma",
+        "intro": "Entendemos que el mundo actual no tiene fronteras. Por ello, potenciamos el perfil de nuestros egresados con certificaciones de validez global.",
+        "igcse": {
+          "label": "Programa IGCSE (University of Cambridge):",
+          "text": "nuestros alumnos se preparan bajo este prestigioso estándar internacional que garantiza una formación académica de élite y una mentalidad global."
+        },
+        "dual": {
+          "label": "Diploma Dual® de Academica:",
+          "text": "a partir de 2do año ofrecemos la posibilidad de cursar este programa de convalidación internacional. Mediante una plataforma online con profesores nativos, los estudiantes obtienen simultáneamente el Bachillerato local y el American High School Diploma."
+        },
+        "closing": "Esta experiencia de inmersión lingüística y tecnológica los posiciona con una ventaja competitiva única para ingresar a las mejores universidades del mundo."
+      },
+      "identity": {
+        "title": "Nuestra identidad: El Proyecto de Vida",
+        "p1": "En San Isidro College, entendemos que el Nivel Secundario es la etapa donde el potencial se transforma en identidad. Nuestro objetivo es que cada estudiante egrese con un Proyecto de Vida sólido, consciente y autónomo.",
+        "p2": "Acompañamos a cada joven en el descubrimiento de su propósito con una propuesta que equilibra vanguardia tecnológica y calidez humana."
+      },
+      "eoe": {
+        "title": "Un Acompañamiento Profesional: Equipo de Orientación Escolar (EOE)",
+        "intro": "En San Isidro College, el bienestar es una práctica diaria sostenida por nuestro Equipo de Orientación Escolar. Contamos con profesionales especializados en Psicología y Psicopedagogía dedicados a acompañar las trayectorias de nuestros estudiantes.",
+        "emotional": {
+          "label": "Sostén Emocional:",
+          "text": "espacio de escucha y contención ante los desafíos propios de la adolescencia."
+        },
+        "learning": {
+          "label": "Optimización del Aprendizaje:",
+          "text": "intervención psicopedagógica para potenciar habilidades cognitivas y procesos de estudio."
+        },
+        "coexistence": {
+          "label": "Vinculación y Convivencia:",
+          "text": "acompañamiento en la dinámica grupal para sostener un clima escolar sano, inclusivo y respetuoso."
+        },
+        "closing": "Este equipo trabaja de manera integrada con equipos externos, docentes y familias para garantizar el respaldo profesional necesario en el camino del Proyecto de Vida de cada joven."
+      },
+      "club": {
+        "title": "Club y Fundación",
+        "p1": "También abrimos un espacio institucional para integrar el trabajo del Club y la Fundación, fortaleciendo la formación integral, la participación comunitaria y el vínculo con acciones de impacto social."
+      }
+    },
     "aside": {
       "titulo": "ACADÉMICO",
       "proyecto": "Proyecto Bilingüe",

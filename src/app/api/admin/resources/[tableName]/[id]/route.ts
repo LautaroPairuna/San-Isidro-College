@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { adminGuard } from "@/lib/auth-guard";
 import { resourceService, isValidTableName } from "@/services/resource.service";
+import { refreshPageContentCacheAll } from "@/lib/pageContentCache";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -85,6 +86,11 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
     if (updated === null) {
       return NextResponse.json({ error: `Recurso “${tableName}” no existe` }, { status: 404 });
     }
+
+    if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
+      await refreshPageContentCacheAll();
+    }
+
     return NextResponse.json(updated);
   } catch (e: any) {
     if (e.message === "Unauthorized") {
@@ -109,6 +115,11 @@ export async function DELETE(_req: NextRequest, ctx: ParamsPromise<{ tableName: 
     if (deleted === null) {
       return NextResponse.json({ error: `Recurso “${tableName}” no existe` }, { status: 404 });
     }
+
+    if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
+      await refreshPageContentCacheAll();
+    }
+
     return NextResponse.json({ success: true });
   } catch (e: any) {
     if (e.message === "Unauthorized") {

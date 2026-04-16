@@ -1,16 +1,21 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import type { SeccionTipo } from '@/generated/prisma/client';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
     const results = [];
-
-    // Definir las secciones de Académicos requeridas por la nueva página
-    // Los IDs (medioId: 1, 2, 3 y grupoId: 7) son valores por defecto históricos.
-    // Si los recursos no existen, la UI mostrará fallbacks hasta que se asignen en el Admin.
-    const sections = [
+    const sections: Array<{
+      slug: string
+      pagina: string
+      orden: number
+      tipo: SeccionTipo
+      medioId?: number
+      grupoId?: number
+      titulo: string
+    }> = [
       {
         slug: 'academicos-kinder',
         pagina: 'academicos',
@@ -56,7 +61,7 @@ export async function GET() {
           data: {
             pagina: s.pagina,
             orden: s.orden,
-            tipo: s.tipo as any, // Cast a enum de Prisma
+            tipo: s.tipo,
             titulo: s.titulo,
             // Solo establecemos el default si no hay nada asignado actualmente
             grupoId: existing.grupoId ?? s.grupoId,
@@ -71,7 +76,7 @@ export async function GET() {
             slug: s.slug,
             pagina: s.pagina,
             orden: s.orden,
-            tipo: s.tipo as any,
+            tipo: s.tipo,
             titulo: s.titulo,
             grupoId: s.grupoId,
             medioId: s.medioId,

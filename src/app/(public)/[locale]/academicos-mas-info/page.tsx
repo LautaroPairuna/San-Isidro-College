@@ -3,74 +3,124 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import SmoothLink from '@/components/SmoothLink'
 import AsideMenu from '@/components/AsideMenu'
 import { useTranslations } from 'next-intl'
+import { usePageContent } from '@/lib/hooks'
+import { toPublicImageUrl } from '@/lib/publicConstants'
 
 const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
 const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+const CARD_MEDIA_SECTION_SLUG = 'academicos-mas-info-cards'
 
 const FLIP_CARDS = [
   {
-    title: 'El Centro de Nuestro Proyecto: La Persona',
+    key: 'persona',
     icon: '/images/icons/ico-centro-proyecto.svg',
     image: '/images/image-kindergarten.webp',
     color: '#c29618',
-    backText:
-      'Nuestra premisa es clara: lo primero es la persona. Priorizamos el bienestar del alumno y el desarrollo de una comunidad inclusiva, donde cada estudiante se sienta valorado. Buscamos el desarrollo integral, formando jóvenes con apertura mental y una profunda sensibilidad hacia la sustentabilidad y el impacto social.',
   },
   {
-    title: 'Ciudadanos Globales con Excelencia Académica',
+    key: 'ciudadanos',
     icon: '/images/icons/ico-ciudadanos-globales.svg',
     image: '/images/medios/foto-estudiantil-20250603-005440.webp',
     color: '#2d8f57',
-    backText:
-      'A través de un sólido bilingüismo, preparamos a nuestros estudiantes para actuar en un mundo interconectado. Nuestra excelencia académica potencia el trabajo en equipo como competencia esencial del siglo XXI, la curiosidad por descubrir el mundo y el pensamiento crítico, y la creatividad para construir un proyecto de vida ético.',
   },
   {
-    title: 'Innovación y Tecnología de Vanguardia',
+    key: 'innovacion',
     icon: '/images/icons/ico-innovacion-tecnologia.svg',
     image: '/images/medios/foto-dojo-2-20250603-005253.webp',
     color: '#294161',
-    backText:
-      'Nuestra premisa es clara: lo primero es la persona. Innovación real: los alumnos construyen sus propios prototipos desde cero (sin kits comerciales), integrando ingeniería y electrónica. Inteligencia artificial: proyectos avanzados para liderar en entornos digitales. Infraestructura: aulas con pantallas interactivas touch y un laboratorio de alta complejidad totalmente equipado.',
   },
   {
-    title: 'Deportes',
+    key: 'deportes',
     icon: '/images/icons/ico-deportes.svg',
     image: '/images/medios/foto-hockey-20250603-005057.webp',
     color: '#75ad76',
-    backText:
-      'Deportes y vida sana: disciplina y trabajo en equipo a través de Rugby, Hockey y Jiu-Jitsu. Con gimnasio propio y participación en torneos, promovemos valores como el respeto, el esfuerzo, la solidaridad y la diversión, desarrollando habilidades motrices. Durante el año, los alumnos participan en encuentros, giras y competencias con otros clubes, fortaleciendo la amistad, la disciplina y el sentido de pertenencia.',
   },
   {
-    title: 'Artes',
+    key: 'artes',
     icon: '/images/icons/ico-artes.svg',
     image: '/images/medios/foto-isidro-play-20250603-005601.webp',
     color: '#3ba9cf',
-    backText:
-      'El poder transformador del arte es un pilar fundamental para la sensibilidad y la autoexpresión. A través de distintos lenguajes, los estudiantes desarrollan nuevas formas de comunicación, fortaleciendo su inteligencia emocional, creatividad y capacidad de abstracción. El arte se convierte en un espacio de libertad que impulsa la innovación y la confianza personal.',
   },
   {
-    title: 'Sustentabilidad',
+    key: 'sustentabilidad',
     icon: '/images/icons/ico-sustentabilidad.svg',
     image: '/images/medios/foto-balance-1-20260217-194502.webp',
     color: '#beb465',
-    backText:
-      'La sustentabilidad no es solo un concepto, sino una forma de habitar el mundo. Formamos jóvenes con una profunda conciencia ambiental y social, capaces de liderar proyectos que generen un impacto positivo en su entorno. A través de una mirada ética y responsable, integramos el respeto por la naturaleza y la equidad social, preparando ciudadanos globales comprometidos con el cuidado de nuestra casa común y el bienestar de las futuras generaciones.',
   },
   {
-    title: 'Bienestar',
+    key: 'bienestar',
     icon: '/images/icons/ico-bienestar.svg',
     image: '/images/medios/foto-balance-2-20260217-194547.webp',
     color: '#c19516',
-    backText:
-      'Para aprender, primero hay que estar bien. Por eso, el bienestar integral de nuestros estudiantes es el eje de nuestro compromiso educativo: lo primero es la persona. Sostenemos una comunidad inclusiva donde cada joven se sienta escuchado, valorado y seguro.',
   },
 ]
 
+type CardI18nKey = (typeof FLIP_CARDS)[number]['key']
+
+function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallbackSrc: string; alt: string }) {
+  const [currentSrc, setCurrentSrc] = useState(src)
+
+  useEffect(() => {
+    setCurrentSrc(src)
+  }, [src])
+
+  return (
+    <Image
+      src={currentSrc}
+      alt={alt}
+      width={46}
+      height={46}
+      className="mx-auto object-contain"
+      onError={() => {
+        if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
+      }}
+    />
+  )
+}
+
+function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbackSrc: string; alt: string }) {
+  const [currentSrc, setCurrentSrc] = useState(src)
+
+  useEffect(() => {
+    setCurrentSrc(src)
+  }, [src])
+
+  return (
+    <Image
+      src={currentSrc}
+      alt={alt}
+      fill
+      sizes="(max-width: 640px) 280px, (max-width: 1280px) 45vw, 280px"
+      className="object-cover"
+      onError={() => {
+        if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
+      }}
+    />
+  )
+}
+
 export default function AcademicosMasInfoPage() {
   const t = useTranslations('academicosMasInfo')
+  const { data: pageSections = [] } = usePageContent('academicos-mas-info')
+
+  const cardsSection = pageSections.find(section => section.slug === CARD_MEDIA_SECTION_SLUG)
+  const medias = [...(cardsSection?.grupo?.medios ?? [])].sort((a, b) => a.posicion - b.posicion)
+  const iconMedias = medias.filter(media => media.tipo === 'ICONO')
+  const imageMedias = medias.filter(media => media.tipo === 'IMAGEN')
+
+  const cardsWithMedia = FLIP_CARDS.map((card, index) => ({
+    ...card,
+    title: t(`cards.${card.key as CardI18nKey}.title`),
+    backText: t(`cards.${card.key as CardI18nKey}.backText`),
+    fallbackIcon: card.icon,
+    fallbackImage: card.image,
+    icon: iconMedias[index] ? toPublicImageUrl('medios', iconMedias[index].urlArchivo) : card.icon,
+    image: imageMedias[index] ? toPublicImageUrl('medios', imageMedias[index].urlArchivo) : card.image,
+  }))
 
   return (
     <>
@@ -214,67 +264,46 @@ export default function AcademicosMasInfoPage() {
               We are Community
             </h3>
             <h4 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Propuesta Académica: Excelencia y Doble Titulación Internacional
+              {t('weAreCommunity.academicProposal.title')}
             </h4>
+            <p>{t('weAreCommunity.academicProposal.p1')}</p>
+            <p>{t('weAreCommunity.academicProposal.orientationsTitle')}</p>
             <p>
-              Durante los cinco años de Secundaria, ofrecemos una educación integral bilingüe de doble jornada,
-              fusionando el diseño curricular oficial argentino con estándares de competitividad global a través de
-              programas internacionales.
-            </p>
-            <p>Nuestra propuesta se diversifica en dos Orientaciones:</p>
-            <p>
-              <span className="font-bold">Ciencias Naturales:</span> fomentamos la investigación científica y el
-              compromiso ambiental, utilizando nuestro laboratorio de alta complejidad para transformar la teoría en
-              experimentación real.
+              <span className="font-bold">{t('weAreCommunity.academicProposal.natural.label')}</span>{' '}
+              {t('weAreCommunity.academicProposal.natural.text')}
             </p>
             <p>
-              <span className="font-bold">Informática:</span> centrada en la creación tecnológica, donde los alumnos
-              pasan de ser usuarios a desarrolladores de soluciones digitales, IA y prototipos originales.
+              <span className="font-bold">{t('weAreCommunity.academicProposal.informatics.label')}</span>{' '}
+              {t('weAreCommunity.academicProposal.informatics.text')}
             </p>
           </div>
 
           <div className="space-y-5 mt-16 text-justify">
             <h4 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Proyección Internacional: Cambridge e High School Diploma
+              {t('weAreCommunity.internationalProjection.title')}
             </h4>
-            <p>
-              Entendemos que el mundo actual no tiene fronteras. Por ello, potenciamos el perfil de nuestros
-              egresados con certificaciones de validez global.
-            </p>
+            <p>{t('weAreCommunity.internationalProjection.intro')}</p>
             <ol className="list-decimal pl-6 space-y-3">
               <li>
-                <span className="font-bold">Programa IGCSE (University of Cambridge):</span> nuestros alumnos se
-                preparan bajo este prestigioso estándar internacional que garantiza una formación académica de élite
-                y una mentalidad global.
+                <span className="font-bold">{t('weAreCommunity.internationalProjection.igcse.label')}</span>{' '}
+                {t('weAreCommunity.internationalProjection.igcse.text')}
               </li>
               <li>
-                <span className="font-bold">Diploma Dual® de Academica:</span> a partir de 2do año ofrecemos la
-                posibilidad de cursar este programa de convalidación internacional. Mediante una plataforma online
-                con profesores nativos, los estudiantes obtienen simultáneamente el Bachillerato local y el American
-                High School Diploma.
+                <span className="font-bold">{t('weAreCommunity.internationalProjection.dual.label')}</span>{' '}
+                {t('weAreCommunity.internationalProjection.dual.text')}
               </li>
             </ol>
-            <p>
-              Esta experiencia de inmersión lingüística y tecnológica los posiciona con una ventaja competitiva única
-              para ingresar a las mejores universidades del mundo.
-            </p>
+            <p>{t('weAreCommunity.internationalProjection.closing')}</p>
           </div>
 
           <div className="space-y-5 mt-16 text-justify">
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">Nuestra identidad: El Proyecto de Vida</h4>
-            <p>
-              En San Isidro College, entendemos que el Nivel Secundario es la etapa donde el potencial se transforma
-              en identidad. Nuestro objetivo es que cada estudiante egrese con un Proyecto de Vida sólido, consciente
-              y autónomo.
-            </p>
-            <p>
-              Acompañamos a cada joven en el descubrimiento de su propósito con una propuesta que equilibra vanguardia
-              tecnológica y calidez humana.
-            </p>
+            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">{t('weAreCommunity.identity.title')}</h4>
+            <p>{t('weAreCommunity.identity.p1')}</p>
+            <p>{t('weAreCommunity.identity.p2')}</p>
           </div>
 
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center">
-            {FLIP_CARDS.map((card) => (
+            {cardsWithMedia.map((card) => (
               <article
                 key={card.title}
                 className="group w-full max-w-[280px] [perspective:1200px]"
@@ -286,17 +315,19 @@ export default function AcademicosMasInfoPage() {
                     style={{ backgroundColor: card.color }}
                   >
                     <div className="h-[40%] px-5 text-center text-white flex flex-col items-center justify-center">
-                      <Image
+                      <CardIconWithFallback
                         src={card.icon}
+                        fallbackSrc={card.fallbackIcon}
                         alt={card.title}
-                        width={46}
-                        height={46}
-                        className="mx-auto h-[46px] w-[46px] object-contain"
                       />
                       <h5 className="mt-3 text-lg font-bold leading-tight">{card.title}</h5>
                     </div>
                     <div className="absolute inset-x-0 bottom-0 h-[60%]">
-                      <Image src={card.image} alt={card.title} fill className="object-cover" />
+                      <CardCoverWithFallback
+                        src={card.image}
+                        fallbackSrc={card.fallbackImage}
+                        alt={card.title}
+                      />
                     </div>
                   </div>
 
@@ -315,39 +346,29 @@ export default function AcademicosMasInfoPage() {
 
           <div className="space-y-5 mt-16 text-justify">
             <h4 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Un Acompañamiento Profesional: Equipo de Orientación Escolar (EOE)
+              {t('weAreCommunity.eoe.title')}
             </h4>
-            <p>
-              En San Isidro College, el bienestar es una práctica diaria sostenida por nuestro Equipo de Orientación
-              Escolar. Contamos con profesionales especializados en Psicología y Psicopedagogía dedicados a acompañar
-              las trayectorias de nuestros estudiantes.
-            </p>
+            <p>{t('weAreCommunity.eoe.intro')}</p>
             <ul className="list-disc pl-6 space-y-3">
               <li>
-                <span className="font-bold">Sostén Emocional:</span> espacio de escucha y contención ante los desafíos
-                propios de la adolescencia.
+                <span className="font-bold">{t('weAreCommunity.eoe.emotional.label')}</span>{' '}
+                {t('weAreCommunity.eoe.emotional.text')}
               </li>
               <li>
-                <span className="font-bold">Optimización del Aprendizaje:</span> intervención psicopedagógica para
-                potenciar habilidades cognitivas y procesos de estudio.
+                <span className="font-bold">{t('weAreCommunity.eoe.learning.label')}</span>{' '}
+                {t('weAreCommunity.eoe.learning.text')}
               </li>
               <li>
-                <span className="font-bold">Vinculación y Convivencia:</span> acompañamiento en la dinámica grupal para
-                sostener un clima escolar sano, inclusivo y respetuoso.
+                <span className="font-bold">{t('weAreCommunity.eoe.coexistence.label')}</span>{' '}
+                {t('weAreCommunity.eoe.coexistence.text')}
               </li>
             </ul>
-            <p>
-              Este equipo trabaja de manera integrada con equipos externos, docentes y familias para garantizar el
-              respaldo profesional necesario en el camino del Proyecto de Vida de cada joven.
-            </p>
+            <p>{t('weAreCommunity.eoe.closing')}</p>
           </div>
 
           <div className="space-y-5 mt-16 text-justify">
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">Club y Fundación</h4>
-            <p>
-              También abrimos un espacio institucional para integrar el trabajo del Club y la Fundación, fortaleciendo
-              la formación integral, la participación comunitaria y el vínculo con acciones de impacto social.
-            </p>
+            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">{t('weAreCommunity.club.title')}</h4>
+            <p>{t('weAreCommunity.club.p1')}</p>
           </div>
         </div>
 

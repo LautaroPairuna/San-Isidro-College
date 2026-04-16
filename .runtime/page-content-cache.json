@@ -1,0 +1,1316 @@
+{
+  "academicos": [
+    {
+      "id": 8,
+      "slug": "academicos-kinder",
+      "pagina": "academicos",
+      "orden": 10,
+      "tipo": "MEDIA_UNICA",
+      "titulo": "Kindergarten",
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": null,
+      "medioId": 18,
+      "creadoEn": "2026-04-05T18:07:06.108Z",
+      "actualizadoEn": "2026-04-16T12:09:51.035Z",
+      "grupo": null,
+      "medio": {
+        "id": 18,
+        "urlArchivo": "banner-kindergarten-20250602-210920.webp",
+        "urlMiniatura": null,
+        "textoAlternativo": "Banner Kindergarten",
+        "tipo": "IMAGEN",
+        "posicion": 10,
+        "grupoMediosId": 7,
+        "creadoEn": "2026-04-11T19:15:59.231Z",
+        "actualizadoEn": "2026-04-16T12:09:50.796Z"
+      }
+    },
+    {
+      "id": 9,
+      "slug": "academicos-primary",
+      "pagina": "academicos",
+      "orden": 20,
+      "tipo": "MEDIA_UNICA",
+      "titulo": "Primary",
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": null,
+      "medioId": 19,
+      "creadoEn": "2026-04-05T18:07:06.110Z",
+      "actualizadoEn": "2026-04-16T12:09:51.041Z",
+      "grupo": null,
+      "medio": {
+        "id": 19,
+        "urlArchivo": "banner-primary-20250602-202252.webp",
+        "urlMiniatura": null,
+        "textoAlternativo": "Banner Primary",
+        "tipo": "IMAGEN",
+        "posicion": 10,
+        "grupoMediosId": 8,
+        "creadoEn": "2026-04-11T19:15:59.235Z",
+        "actualizadoEn": "2026-04-16T12:09:50.804Z"
+      }
+    },
+    {
+      "id": 10,
+      "slug": "academicos-secondary",
+      "pagina": "academicos",
+      "orden": 30,
+      "tipo": "MEDIA_UNICA",
+      "titulo": "Secondary",
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": null,
+      "medioId": 20,
+      "creadoEn": "2026-04-05T18:07:06.111Z",
+      "actualizadoEn": "2026-04-16T12:09:51.048Z",
+      "grupo": null,
+      "medio": {
+        "id": 20,
+        "urlArchivo": "banner-secondary-20250602-202322.webp",
+        "urlMiniatura": null,
+        "textoAlternativo": "Banner Secondary",
+        "tipo": "IMAGEN",
+        "posicion": 10,
+        "grupoMediosId": 9,
+        "creadoEn": "2026-04-11T19:15:59.240Z",
+        "actualizadoEn": "2026-04-16T12:09:50.812Z"
+      }
+    },
+    {
+      "id": 11,
+      "slug": "academicos-alianzas",
+      "pagina": "academicos",
+      "orden": 40,
+      "tipo": "GALERIA",
+      "titulo": "Nuestras Alianzas",
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 5,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.113Z",
+      "actualizadoEn": "2026-04-16T12:09:51.057Z",
+      "grupo": {
+        "id": 5,
+        "nombre": "Alianzas",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.209Z",
+        "actualizadoEn": "2026-04-11T19:15:59.209Z",
+        "medios": [
+          {
+            "id": 11,
+            "urlArchivo": "logo-iram.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IRAM",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.212Z",
+            "actualizadoEn": "2026-04-16T12:09:50.754Z"
+          },
+          {
+            "id": 58,
+            "urlArchivo": "logo-iqnet.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IQNet",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.997Z",
+            "actualizadoEn": "2026-04-16T12:09:50.758Z"
+          },
+          {
+            "id": 12,
+            "urlArchivo": "logo-university-of-cambridge.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Cambridge",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.214Z",
+            "actualizadoEn": "2026-04-16T12:09:50.762Z"
+          },
+          {
+            "id": 59,
+            "urlArchivo": "science-bits-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Science Bits",
+            "tipo": "IMAGEN",
+            "posicion": 40,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.999Z",
+            "actualizadoEn": "2026-04-16T12:09:50.766Z"
+          },
+          {
+            "id": 13,
+            "urlArchivo": "google-education-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Google Education",
+            "tipo": "IMAGEN",
+            "posicion": 50,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.215Z",
+            "actualizadoEn": "2026-04-16T12:09:50.771Z"
+          },
+          {
+            "id": 60,
+            "urlArchivo": "epea-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "EPEA",
+            "tipo": "IMAGEN",
+            "posicion": 60,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:07.002Z",
+            "actualizadoEn": "2026-04-16T12:09:50.775Z"
+          }
+        ]
+      },
+      "medio": null
+    }
+  ],
+  "academicos-mas-info": [
+    {
+      "id": 18,
+      "slug": "academicos-mas-info-alianzas",
+      "pagina": "academicos-mas-info",
+      "orden": 10,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 5,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.124Z",
+      "actualizadoEn": "2026-04-16T12:09:51.098Z",
+      "grupo": {
+        "id": 5,
+        "nombre": "Alianzas",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.209Z",
+        "actualizadoEn": "2026-04-11T19:15:59.209Z",
+        "medios": [
+          {
+            "id": 11,
+            "urlArchivo": "logo-iram.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IRAM",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.212Z",
+            "actualizadoEn": "2026-04-16T12:09:50.754Z"
+          },
+          {
+            "id": 58,
+            "urlArchivo": "logo-iqnet.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IQNet",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.997Z",
+            "actualizadoEn": "2026-04-16T12:09:50.758Z"
+          },
+          {
+            "id": 12,
+            "urlArchivo": "logo-university-of-cambridge.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Cambridge",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.214Z",
+            "actualizadoEn": "2026-04-16T12:09:50.762Z"
+          },
+          {
+            "id": 59,
+            "urlArchivo": "science-bits-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Science Bits",
+            "tipo": "IMAGEN",
+            "posicion": 40,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.999Z",
+            "actualizadoEn": "2026-04-16T12:09:50.766Z"
+          },
+          {
+            "id": 13,
+            "urlArchivo": "google-education-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Google Education",
+            "tipo": "IMAGEN",
+            "posicion": 50,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.215Z",
+            "actualizadoEn": "2026-04-16T12:09:50.771Z"
+          },
+          {
+            "id": 60,
+            "urlArchivo": "epea-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "EPEA",
+            "tipo": "IMAGEN",
+            "posicion": 60,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:07.002Z",
+            "actualizadoEn": "2026-04-16T12:09:50.775Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 20,
+      "slug": "academicos-mas-info-cards",
+      "pagina": "academicos-mas-info",
+      "orden": 20,
+      "tipo": "GALERIA",
+      "titulo": "Cards Proyecto de Vida",
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 16,
+      "medioId": null,
+      "creadoEn": "2026-04-11T10:40:47.815Z",
+      "actualizadoEn": "2026-04-16T12:09:51.104Z",
+      "grupo": {
+        "id": 16,
+        "nombre": "Academicos Mas Info - Cards Proyecto de Vida",
+        "tipoGrupo": "GALERIA",
+        "creadoEn": "2026-04-11T19:15:59.294Z",
+        "actualizadoEn": "2026-04-11T19:15:59.294Z",
+        "medios": [
+          {
+            "id": 39,
+            "urlArchivo": "ico-centro-proyecto.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card persona",
+            "tipo": "ICONO",
+            "posicion": 10,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.296Z",
+            "actualizadoEn": "2026-04-16T12:09:50.912Z"
+          },
+          {
+            "id": 40,
+            "urlArchivo": "ico-ciudadanos-globales.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card ciudadanos globales",
+            "tipo": "ICONO",
+            "posicion": 20,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.298Z",
+            "actualizadoEn": "2026-04-16T12:09:50.916Z"
+          },
+          {
+            "id": 41,
+            "urlArchivo": "ico-innovacion-tecnologia.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card innovación y tecnología",
+            "tipo": "ICONO",
+            "posicion": 30,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.300Z",
+            "actualizadoEn": "2026-04-16T12:09:50.921Z"
+          },
+          {
+            "id": 42,
+            "urlArchivo": "ico-deportes.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card deportes",
+            "tipo": "ICONO",
+            "posicion": 40,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.301Z",
+            "actualizadoEn": "2026-04-16T12:09:50.924Z"
+          },
+          {
+            "id": 43,
+            "urlArchivo": "ico-artes.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card artes",
+            "tipo": "ICONO",
+            "posicion": 50,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.303Z",
+            "actualizadoEn": "2026-04-16T12:09:50.929Z"
+          },
+          {
+            "id": 44,
+            "urlArchivo": "ico-sustentabilidad.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card sustentabilidad",
+            "tipo": "ICONO",
+            "posicion": 60,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.304Z",
+            "actualizadoEn": "2026-04-16T12:09:50.932Z"
+          },
+          {
+            "id": 45,
+            "urlArchivo": "ico-bienestar.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Icono card bienestar",
+            "tipo": "ICONO",
+            "posicion": 70,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-11T19:15:59.307Z",
+            "actualizadoEn": "2026-04-16T12:09:50.936Z"
+          },
+          {
+            "id": 64,
+            "urlArchivo": "centro-proyecto.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card persona",
+            "tipo": "IMAGEN",
+            "posicion": 110,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.945Z",
+            "actualizadoEn": "2026-04-16T12:09:50.945Z"
+          },
+          {
+            "id": 65,
+            "urlArchivo": "ciudadanos-globales.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card ciudadanos globales",
+            "tipo": "IMAGEN",
+            "posicion": 120,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.950Z",
+            "actualizadoEn": "2026-04-16T12:09:50.950Z"
+          },
+          {
+            "id": 66,
+            "urlArchivo": "innovacion-tecnologia.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card innovación y tecnología",
+            "tipo": "IMAGEN",
+            "posicion": 130,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.953Z",
+            "actualizadoEn": "2026-04-16T12:09:50.953Z"
+          },
+          {
+            "id": 67,
+            "urlArchivo": "deportes.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card deportes",
+            "tipo": "IMAGEN",
+            "posicion": 140,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.956Z",
+            "actualizadoEn": "2026-04-16T12:09:50.956Z"
+          },
+          {
+            "id": 68,
+            "urlArchivo": "artes.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card artes",
+            "tipo": "IMAGEN",
+            "posicion": 150,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.959Z",
+            "actualizadoEn": "2026-04-16T12:09:50.959Z"
+          },
+          {
+            "id": 69,
+            "urlArchivo": "sustentabilidad.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card sustentabilidad",
+            "tipo": "IMAGEN",
+            "posicion": 160,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.962Z",
+            "actualizadoEn": "2026-04-16T12:09:50.962Z"
+          },
+          {
+            "id": 70,
+            "urlArchivo": "bienestar.png",
+            "urlMiniatura": null,
+            "textoAlternativo": "Card bienestar",
+            "tipo": "IMAGEN",
+            "posicion": 170,
+            "grupoMediosId": 16,
+            "creadoEn": "2026-04-16T12:09:50.965Z",
+            "actualizadoEn": "2026-04-16T12:09:50.965Z"
+          }
+        ]
+      },
+      "medio": null
+    }
+  ],
+  "colegio": [
+    {
+      "id": 6,
+      "slug": "colegio-instalaciones",
+      "pagina": "colegio",
+      "orden": 10,
+      "tipo": "MEDIA_UNICA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": null,
+      "medioId": 17,
+      "creadoEn": "2026-04-05T18:07:06.105Z",
+      "actualizadoEn": "2026-04-16T12:09:51.022Z",
+      "grupo": null,
+      "medio": {
+        "id": 17,
+        "urlArchivo": "video-de-instalaciones-20260104-184512.mp4",
+        "urlMiniatura": null,
+        "textoAlternativo": "Video de instalaciones",
+        "tipo": "VIDEO",
+        "posicion": 10,
+        "grupoMediosId": 6,
+        "creadoEn": "2026-04-11T19:15:59.226Z",
+        "actualizadoEn": "2026-04-16T12:09:50.787Z"
+      }
+    },
+    {
+      "id": 7,
+      "slug": "colegio-alianzas",
+      "pagina": "colegio",
+      "orden": 20,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 5,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.107Z",
+      "actualizadoEn": "2026-04-16T12:09:51.028Z",
+      "grupo": {
+        "id": 5,
+        "nombre": "Alianzas",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.209Z",
+        "actualizadoEn": "2026-04-11T19:15:59.209Z",
+        "medios": [
+          {
+            "id": 11,
+            "urlArchivo": "logo-iram.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IRAM",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.212Z",
+            "actualizadoEn": "2026-04-16T12:09:50.754Z"
+          },
+          {
+            "id": 58,
+            "urlArchivo": "logo-iqnet.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IQNet",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.997Z",
+            "actualizadoEn": "2026-04-16T12:09:50.758Z"
+          },
+          {
+            "id": 12,
+            "urlArchivo": "logo-university-of-cambridge.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Cambridge",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.214Z",
+            "actualizadoEn": "2026-04-16T12:09:50.762Z"
+          },
+          {
+            "id": 59,
+            "urlArchivo": "science-bits-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Science Bits",
+            "tipo": "IMAGEN",
+            "posicion": 40,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.999Z",
+            "actualizadoEn": "2026-04-16T12:09:50.766Z"
+          },
+          {
+            "id": 13,
+            "urlArchivo": "google-education-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Google Education",
+            "tipo": "IMAGEN",
+            "posicion": 50,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.215Z",
+            "actualizadoEn": "2026-04-16T12:09:50.771Z"
+          },
+          {
+            "id": 60,
+            "urlArchivo": "epea-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "EPEA",
+            "tipo": "IMAGEN",
+            "posicion": 60,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:07.002Z",
+            "actualizadoEn": "2026-04-16T12:09:50.775Z"
+          }
+        ]
+      },
+      "medio": null
+    }
+  ],
+  "home": [
+    {
+      "id": 1,
+      "slug": "home-hero",
+      "pagina": "home",
+      "orden": 10,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 1,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.088Z",
+      "actualizadoEn": "2026-04-16T12:09:50.980Z",
+      "grupo": {
+        "id": 1,
+        "nombre": "Home - Hero",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.142Z",
+        "actualizadoEn": "2026-04-11T19:15:59.142Z",
+        "medios": [
+          {
+            "id": 1,
+            "urlArchivo": "fondo-home.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Hero home 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 1,
+            "creadoEn": "2026-04-11T19:15:59.163Z",
+            "actualizadoEn": "2026-04-16T12:09:50.656Z"
+          },
+          {
+            "id": 46,
+            "urlArchivo": "fondo-home.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Hero home 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 1,
+            "creadoEn": "2026-04-11T21:37:06.927Z",
+            "actualizadoEn": "2026-04-16T12:09:50.672Z"
+          },
+          {
+            "id": 2,
+            "urlArchivo": "fondo-home.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Hero home 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 1,
+            "creadoEn": "2026-04-11T19:15:59.168Z",
+            "actualizadoEn": "2026-04-16T12:09:50.679Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 2,
+      "slug": "home-bienvenida",
+      "pagina": "home",
+      "orden": 20,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 2,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.097Z",
+      "actualizadoEn": "2026-04-16T12:09:50.989Z",
+      "grupo": {
+        "id": 2,
+        "nombre": "Home - Bienvenida",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.176Z",
+        "actualizadoEn": "2026-04-11T21:37:06.954Z",
+        "medios": [
+          {
+            "id": 4,
+            "urlArchivo": "fondo-bienvenida.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Bienvenida 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 2,
+            "creadoEn": "2026-04-11T19:15:59.183Z",
+            "actualizadoEn": "2026-04-16T12:09:50.691Z"
+          },
+          {
+            "id": 49,
+            "urlArchivo": "fondo-bienvenida.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Bienvenida 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 2,
+            "creadoEn": "2026-04-11T21:37:06.962Z",
+            "actualizadoEn": "2026-04-16T12:09:50.698Z"
+          },
+          {
+            "id": 50,
+            "urlArchivo": "fondo-bienvenida.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Bienvenida 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 2,
+            "creadoEn": "2026-04-11T21:37:06.965Z",
+            "actualizadoEn": "2026-04-16T12:09:50.704Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 3,
+      "slug": "home-infografia",
+      "pagina": "home",
+      "orden": 30,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 3,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.099Z",
+      "actualizadoEn": "2026-04-16T12:09:50.997Z",
+      "grupo": {
+        "id": 3,
+        "nombre": "Home - Infografia",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.187Z",
+        "actualizadoEn": "2026-04-11T19:15:59.187Z",
+        "medios": [
+          {
+            "id": 5,
+            "urlArchivo": "ico-alumnos-extranjeros.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Ícono alumnos extranjeros",
+            "tipo": "ICONO",
+            "posicion": 10,
+            "grupoMediosId": 3,
+            "creadoEn": "2026-04-11T19:15:59.191Z",
+            "actualizadoEn": "2026-04-16T12:09:50.714Z"
+          },
+          {
+            "id": 52,
+            "urlArchivo": "ico-alumnos.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Ícono alumnos",
+            "tipo": "ICONO",
+            "posicion": 20,
+            "grupoMediosId": 3,
+            "creadoEn": "2026-04-11T21:37:06.974Z",
+            "actualizadoEn": "2026-04-16T12:09:50.719Z"
+          },
+          {
+            "id": 6,
+            "urlArchivo": "ico-certificados-internacionales.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Ícono certificados internacionales",
+            "tipo": "ICONO",
+            "posicion": 30,
+            "grupoMediosId": 3,
+            "creadoEn": "2026-04-11T19:15:59.192Z",
+            "actualizadoEn": "2026-04-16T12:09:50.723Z"
+          },
+          {
+            "id": 53,
+            "urlArchivo": "ico-hectarias.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Ícono hectáreas",
+            "tipo": "ICONO",
+            "posicion": 40,
+            "grupoMediosId": 3,
+            "creadoEn": "2026-04-11T21:37:06.977Z",
+            "actualizadoEn": "2026-04-16T12:09:50.729Z"
+          },
+          {
+            "id": 7,
+            "urlArchivo": "ico-m3-construidos.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Ícono m2 construidos",
+            "tipo": "ICONO",
+            "posicion": 50,
+            "grupoMediosId": 3,
+            "creadoEn": "2026-04-11T19:15:59.194Z",
+            "actualizadoEn": "2026-04-16T12:09:50.734Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 4,
+      "slug": "home-sec3-background",
+      "pagina": "home",
+      "orden": 40,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 4,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.101Z",
+      "actualizadoEn": "2026-04-16T12:09:51.006Z",
+      "grupo": {
+        "id": 4,
+        "nombre": "Home - Seccion 3 Background",
+        "tipoGrupo": "UNICO",
+        "creadoEn": "2026-04-11T19:15:59.203Z",
+        "actualizadoEn": "2026-04-11T19:15:59.203Z",
+        "medios": [
+          {
+            "id": 10,
+            "urlArchivo": "fondo-iconos.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Background sección 3",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 4,
+            "creadoEn": "2026-04-11T19:15:59.206Z",
+            "actualizadoEn": "2026-04-16T12:09:50.746Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 5,
+      "slug": "home-alianzas",
+      "pagina": "home",
+      "orden": 50,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 5,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.103Z",
+      "actualizadoEn": "2026-04-16T12:09:51.014Z",
+      "grupo": {
+        "id": 5,
+        "nombre": "Alianzas",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.209Z",
+        "actualizadoEn": "2026-04-11T19:15:59.209Z",
+        "medios": [
+          {
+            "id": 11,
+            "urlArchivo": "logo-iram.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IRAM",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.212Z",
+            "actualizadoEn": "2026-04-16T12:09:50.754Z"
+          },
+          {
+            "id": 58,
+            "urlArchivo": "logo-iqnet.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IQNet",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.997Z",
+            "actualizadoEn": "2026-04-16T12:09:50.758Z"
+          },
+          {
+            "id": 12,
+            "urlArchivo": "logo-university-of-cambridge.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Cambridge",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.214Z",
+            "actualizadoEn": "2026-04-16T12:09:50.762Z"
+          },
+          {
+            "id": 59,
+            "urlArchivo": "science-bits-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Science Bits",
+            "tipo": "IMAGEN",
+            "posicion": 40,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.999Z",
+            "actualizadoEn": "2026-04-16T12:09:50.766Z"
+          },
+          {
+            "id": 13,
+            "urlArchivo": "google-education-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Google Education",
+            "tipo": "IMAGEN",
+            "posicion": 50,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.215Z",
+            "actualizadoEn": "2026-04-16T12:09:50.771Z"
+          },
+          {
+            "id": 60,
+            "urlArchivo": "epea-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "EPEA",
+            "tipo": "IMAGEN",
+            "posicion": 60,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:07.002Z",
+            "actualizadoEn": "2026-04-16T12:09:50.775Z"
+          }
+        ]
+      },
+      "medio": null
+    }
+  ],
+  "vida-estudiantil": [
+    {
+      "id": 12,
+      "slug": "vida-estudiantil-hero",
+      "pagina": "vida-estudiantil",
+      "orden": 10,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 10,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.114Z",
+      "actualizadoEn": "2026-04-16T12:09:51.065Z",
+      "grupo": {
+        "id": 10,
+        "nombre": "Vida Estudiantil - Hero",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.243Z",
+        "actualizadoEn": "2026-04-11T19:15:59.243Z",
+        "medios": [
+          {
+            "id": 21,
+            "urlArchivo": "banner-deportes-20250603-004842.webp",
+            "urlMiniatura": "thumbs/banner-deportes-20250603-004842.webp",
+            "textoAlternativo": "Vida estudiantil hero 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 10,
+            "creadoEn": "2026-04-11T19:15:59.246Z",
+            "actualizadoEn": "2026-04-16T12:09:50.821Z"
+          },
+          {
+            "id": 22,
+            "urlArchivo": "banner-deportes-2-20250603-004919.webp",
+            "urlMiniatura": "thumbs/banner-deportes-2-20250603-004919.webp",
+            "textoAlternativo": "Vida estudiantil hero 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 10,
+            "creadoEn": "2026-04-11T19:15:59.248Z",
+            "actualizadoEn": "2026-04-16T12:09:50.825Z"
+          },
+          {
+            "id": 23,
+            "urlArchivo": "banner-deportes-3-20250603-005009.webp",
+            "urlMiniatura": "thumbs/banner-deportes-3-20250603-005009.webp",
+            "textoAlternativo": "Vida estudiantil hero 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 10,
+            "creadoEn": "2026-04-11T19:15:59.250Z",
+            "actualizadoEn": "2026-04-16T12:09:50.829Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 13,
+      "slug": "vida-estudiantil-rugby",
+      "pagina": "vida-estudiantil",
+      "orden": 20,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 11,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.116Z",
+      "actualizadoEn": "2026-04-16T12:09:51.071Z",
+      "grupo": {
+        "id": 11,
+        "nombre": "Vida Estudiantil - Rugby Hockey",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.252Z",
+        "actualizadoEn": "2026-04-11T19:15:59.252Z",
+        "medios": [
+          {
+            "id": 24,
+            "urlArchivo": "foto-hockey-20250603-005057.webp",
+            "urlMiniatura": "thumbs/foto-hockey-20250603-005057.webp",
+            "textoAlternativo": "Rugby y hockey 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 11,
+            "creadoEn": "2026-04-11T19:15:59.256Z",
+            "actualizadoEn": "2026-04-16T12:09:50.839Z"
+          },
+          {
+            "id": 25,
+            "urlArchivo": "foto-hockey-2-20250603-005124.webp",
+            "urlMiniatura": "thumbs/foto-hockey-2-20250603-005124.webp",
+            "textoAlternativo": "Rugby y hockey 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 11,
+            "creadoEn": "2026-04-11T19:15:59.258Z",
+            "actualizadoEn": "2026-04-16T12:09:50.842Z"
+          },
+          {
+            "id": 26,
+            "urlArchivo": "foto-hockey-3-20250603-005153.webp",
+            "urlMiniatura": "thumbs/foto-hockey-3-20250603-005153.webp",
+            "textoAlternativo": "Rugby y hockey 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 11,
+            "creadoEn": "2026-04-11T19:15:59.260Z",
+            "actualizadoEn": "2026-04-16T12:09:50.846Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 14,
+      "slug": "vida-estudiantil-dojo",
+      "pagina": "vida-estudiantil",
+      "orden": 30,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 12,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.118Z",
+      "actualizadoEn": "2026-04-16T12:09:51.077Z",
+      "grupo": {
+        "id": 12,
+        "nombre": "Vida Estudiantil - Dojo",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.262Z",
+        "actualizadoEn": "2026-04-11T19:15:59.262Z",
+        "medios": [
+          {
+            "id": 27,
+            "urlArchivo": "foto-dojo-20250603-005232.webp",
+            "urlMiniatura": "thumbs/foto-dojo-20250603-005232.webp",
+            "textoAlternativo": "Dojo 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 12,
+            "creadoEn": "2026-04-11T19:15:59.264Z",
+            "actualizadoEn": "2026-04-16T12:09:50.854Z"
+          },
+          {
+            "id": 28,
+            "urlArchivo": "foto-dojo-2-20250603-005253.webp",
+            "urlMiniatura": "thumbs/foto-dojo-2-20250603-005253.webp",
+            "textoAlternativo": "Dojo 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 12,
+            "creadoEn": "2026-04-11T19:15:59.266Z",
+            "actualizadoEn": "2026-04-16T12:09:50.857Z"
+          },
+          {
+            "id": 29,
+            "urlArchivo": "foto-dojo-3-20250603-005319.webp",
+            "urlMiniatura": "thumbs/foto-dojo-3-20250603-005319.webp",
+            "textoAlternativo": "Dojo 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 12,
+            "creadoEn": "2026-04-11T19:15:59.268Z",
+            "actualizadoEn": "2026-04-16T12:09:50.861Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 15,
+      "slug": "vida-estudiantil-gym",
+      "pagina": "vida-estudiantil",
+      "orden": 40,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 13,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.120Z",
+      "actualizadoEn": "2026-04-16T12:09:51.082Z",
+      "grupo": {
+        "id": 13,
+        "nombre": "Vida Estudiantil - Gym",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.270Z",
+        "actualizadoEn": "2026-04-11T19:15:59.270Z",
+        "medios": [
+          {
+            "id": 30,
+            "urlArchivo": "foto-balance-1-20260217-194502.webp",
+            "urlMiniatura": "thumbs/foto-balance-1-thumb-20260217-194502.webp",
+            "textoAlternativo": "Gym 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 13,
+            "creadoEn": "2026-04-11T19:15:59.272Z",
+            "actualizadoEn": "2026-04-16T12:09:50.867Z"
+          },
+          {
+            "id": 31,
+            "urlArchivo": "foto-balance-2-20260217-194547.webp",
+            "urlMiniatura": "thumbs/foto-balance-2-thumb-20260217-194547.webp",
+            "textoAlternativo": "Gym 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 13,
+            "creadoEn": "2026-04-11T19:15:59.274Z",
+            "actualizadoEn": "2026-04-16T12:09:50.870Z"
+          },
+          {
+            "id": 32,
+            "urlArchivo": "foto-balance-3-20260217-194614.webp",
+            "urlMiniatura": "thumbs/foto-balance-3-thumb-20260217-194614.webp",
+            "textoAlternativo": "Gym 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 13,
+            "creadoEn": "2026-04-11T19:15:59.275Z",
+            "actualizadoEn": "2026-04-16T12:09:50.875Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 16,
+      "slug": "vida-estudiantil-bienestar",
+      "pagina": "vida-estudiantil",
+      "orden": 50,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 14,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.121Z",
+      "actualizadoEn": "2026-04-16T12:09:51.087Z",
+      "grupo": {
+        "id": 14,
+        "nombre": "Vida Estudiantil - Bienestar",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.278Z",
+        "actualizadoEn": "2026-04-11T19:15:59.278Z",
+        "medios": [
+          {
+            "id": 33,
+            "urlArchivo": "foto-estudiantil-20250603-005440.webp",
+            "urlMiniatura": "thumbs/foto-estudiantil-20250603-005440.webp",
+            "textoAlternativo": "Bienestar 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 14,
+            "creadoEn": "2026-04-11T19:15:59.280Z",
+            "actualizadoEn": "2026-04-16T12:09:50.882Z"
+          },
+          {
+            "id": 34,
+            "urlArchivo": "foto-estudiantil-2-20250603-005502.webp",
+            "urlMiniatura": "thumbs/foto-estudiantil-2-20250603-005502.webp",
+            "textoAlternativo": "Bienestar 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 14,
+            "creadoEn": "2026-04-11T19:15:59.282Z",
+            "actualizadoEn": "2026-04-16T12:09:50.886Z"
+          },
+          {
+            "id": 35,
+            "urlArchivo": "foto-estudiantil-3-20250603-005527.webp",
+            "urlMiniatura": "thumbs/foto-estudiantil-3-20250603-005527.webp",
+            "textoAlternativo": "Bienestar 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 14,
+            "creadoEn": "2026-04-11T19:15:59.283Z",
+            "actualizadoEn": "2026-04-16T12:09:50.890Z"
+          }
+        ]
+      },
+      "medio": null
+    },
+    {
+      "id": 17,
+      "slug": "vida-estudiantil-play",
+      "pagina": "vida-estudiantil",
+      "orden": 60,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 15,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.123Z",
+      "actualizadoEn": "2026-04-16T12:09:51.092Z",
+      "grupo": {
+        "id": 15,
+        "nombre": "Vida Estudiantil - Play",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.285Z",
+        "actualizadoEn": "2026-04-11T19:15:59.285Z",
+        "medios": [
+          {
+            "id": 36,
+            "urlArchivo": "foto-isidro-play-20250603-005601.webp",
+            "urlMiniatura": "thumbs/foto-isidro-play-20250603-005601.webp",
+            "textoAlternativo": "SIC Play 1",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 15,
+            "creadoEn": "2026-04-11T19:15:59.288Z",
+            "actualizadoEn": "2026-04-16T12:09:50.897Z"
+          },
+          {
+            "id": 37,
+            "urlArchivo": "foto-isidro-play-2-20250603-005640.webp",
+            "urlMiniatura": "thumbs/foto-isidro-play-2-20250603-005640.webp",
+            "textoAlternativo": "SIC Play 2",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 15,
+            "creadoEn": "2026-04-11T19:15:59.289Z",
+            "actualizadoEn": "2026-04-16T12:09:50.901Z"
+          },
+          {
+            "id": 38,
+            "urlArchivo": "foto-isidro-play-3-20250603-005706.webp",
+            "urlMiniatura": "thumbs/foto-isidro-play-3-20250603-005706.webp",
+            "textoAlternativo": "SIC Play 3",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 15,
+            "creadoEn": "2026-04-11T19:15:59.291Z",
+            "actualizadoEn": "2026-04-16T12:09:50.906Z"
+          }
+        ]
+      },
+      "medio": null
+    }
+  ],
+  "vida-estudiantil-mas-info": [
+    {
+      "id": 19,
+      "slug": "vida-estudiantil-mas-info-alianzas",
+      "pagina": "vida-estudiantil-mas-info",
+      "orden": 10,
+      "tipo": "GALERIA",
+      "titulo": null,
+      "subtitulo": null,
+      "propsJson": null,
+      "grupoId": 5,
+      "medioId": null,
+      "creadoEn": "2026-04-05T18:07:06.125Z",
+      "actualizadoEn": "2026-04-16T12:09:51.109Z",
+      "grupo": {
+        "id": 5,
+        "nombre": "Alianzas",
+        "tipoGrupo": "CARRUSEL",
+        "creadoEn": "2026-04-11T19:15:59.209Z",
+        "actualizadoEn": "2026-04-11T19:15:59.209Z",
+        "medios": [
+          {
+            "id": 11,
+            "urlArchivo": "logo-iram.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IRAM",
+            "tipo": "IMAGEN",
+            "posicion": 10,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.212Z",
+            "actualizadoEn": "2026-04-16T12:09:50.754Z"
+          },
+          {
+            "id": 58,
+            "urlArchivo": "logo-iqnet.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "IQNet",
+            "tipo": "IMAGEN",
+            "posicion": 20,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.997Z",
+            "actualizadoEn": "2026-04-16T12:09:50.758Z"
+          },
+          {
+            "id": 12,
+            "urlArchivo": "logo-university-of-cambridge.svg",
+            "urlMiniatura": null,
+            "textoAlternativo": "Cambridge",
+            "tipo": "IMAGEN",
+            "posicion": 30,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.214Z",
+            "actualizadoEn": "2026-04-16T12:09:50.762Z"
+          },
+          {
+            "id": 59,
+            "urlArchivo": "science-bits-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Science Bits",
+            "tipo": "IMAGEN",
+            "posicion": 40,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:06.999Z",
+            "actualizadoEn": "2026-04-16T12:09:50.766Z"
+          },
+          {
+            "id": 13,
+            "urlArchivo": "google-education-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "Google Education",
+            "tipo": "IMAGEN",
+            "posicion": 50,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T19:15:59.215Z",
+            "actualizadoEn": "2026-04-16T12:09:50.771Z"
+          },
+          {
+            "id": 60,
+            "urlArchivo": "epea-logo.webp",
+            "urlMiniatura": null,
+            "textoAlternativo": "EPEA",
+            "tipo": "IMAGEN",
+            "posicion": 60,
+            "grupoMediosId": 5,
+            "creadoEn": "2026-04-11T21:37:07.002Z",
+            "actualizadoEn": "2026-04-16T12:09:50.775Z"
+          }
+        ]
+      },
+      "medio": null
+    }
+  ]
+}

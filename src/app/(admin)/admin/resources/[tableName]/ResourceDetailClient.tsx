@@ -11,7 +11,7 @@ import React, {
   memo,
 } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { useForm, Controller, SubmitHandler, Resolver } from 'react-hook-form'
+import { useForm, Controller, SubmitHandler, SubmitErrorHandler, Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import debounce from 'lodash.debounce'
 import { format, parseISO } from 'date-fns'
@@ -63,6 +63,7 @@ type SeccionType = Seccion
 // Tipos para Subida (Globales)
 type UploadPhase = 'IDLE' | 'UPLOADING' | 'PROCESSING' | 'COMPLETED'
 type ServerProgress = { percent: number; stage: string; error?: string }
+type UploadProgressEvent = { loaded: number; total: number }
 
 // -------------------------------
 // Opciones para enums
@@ -213,7 +214,10 @@ export default function ResourceDetailClient({
     order
   )
 
-  const pageData = paginatedData?.data || []
+  const pageData = useMemo(
+    () => paginatedData?.data ?? [],
+    [paginatedData]
+  )
   const totalPages = paginatedData?.meta.totalPages || 1
 
   // -----------------------------
@@ -395,7 +399,6 @@ export default function ResourceDetailClient({
   // Iniciar cronómetro cuando entra en fase PROCESSING
   useEffect(() => {
     if (uploadPhase === 'PROCESSING') {
-      setProcessingTime(0)
       processingInterval.current = setInterval(() => {
         setProcessingTime((prev) => prev + 1)
       }, 1000)
@@ -892,6 +895,7 @@ export default function ResourceDetailClient({
             serverProgress={serverProgress}
             setServerProgress={setServerProgress}
             processingTime={processingTime}
+            setProcessingTime={setProcessingTime}
             uploadIdRef={uploadIdRef}
             formatTime={formatTime}
             gruposFK={gruposFK}
@@ -970,31 +974,22 @@ type FotoCellProps = {
   childRelation: Relation | null
 }
 
-const FotoCell = memo(function FotoCell({
+type FotoCellPreviewProps = {
+  fileName: string
+  thumbSrc: string
+  fullSrc: string
+  isVideo: boolean
+}
+
+const FotoCellPreview = memo(function FotoCellPreview({
   fileName,
-  tableName,
-  childRelation,
-}: FotoCellProps) {
-  const tableKey = childRelation?.childTable ?? tableName
-  if (tableKey === 'Seccion') return null
-
-  const key = folderNames[tableKey as 'Medio' | 'GrupoMedios']
-  const thumbSrc = `/images/${key}/thumbs/${fileName}`
-  const fullSrc = `/images/${key}/${fileName}`
-
-  const ext = fileName.split('.').pop()?.toLowerCase() ?? ''
-  const isVideo = ['mp4', 'webm', 'mov', 'avi', 'mkv'].includes(ext)
-
+  thumbSrc,
+  fullSrc,
+  isVideo,
+}: FotoCellPreviewProps) {
   const [src, setSrc] = useState(isVideo ? fullSrc : thumbSrc)
   const [errored, setErrored] = useState(false)
   const [loading, setLoading] = useState(true)
-
-  // Reset loading si cambia el fileName
-  useEffect(() => {
-    setLoading(true)
-    setSrc(isVideo ? fullSrc : thumbSrc)
-    setErrored(false)
-  }, [fileName, isVideo, fullSrc, thumbSrc])
 
   const handleError = () => {
     setLoading(false)
@@ -1010,7 +1005,6 @@ const FotoCell = memo(function FotoCell({
 
   return (
     <div className="flex items-center space-x-2 relative group">
-      {/* Spinner superpuesto */}
       {loading && !isVideo && (
          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded z-10 w-16 h-16">
            <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
@@ -1045,6 +1039,25 @@ const FotoCell = memo(function FotoCell({
       </span>
     </div>
   )
+})
+
+const FotoCell = memo(function FotoCell({
+  fileName,
+  tableName,
+  childRelation,
+}: FotoCellProps) {
+  const tableKey = childRelation?.childTable ?? tableName
+  const isSeccion = tableKey === 'Seccion'
+
+  const key = folderNames[tableKey as 'Medio' | 'GrupoMedios']
+  const thumbSrc = `/images/${key}/thumbs/${fileName}`
+  const fullSrc = `/images/${key}/${fileName}`
+
+  const ext = fileName.split('.').pop()?.toLowerCase() ?? ''
+  const isVideo = ['mp4', 'webm', 'mov', 'avi', 'mkv'].includes(ext)
+
+  if (isSeccion) return null
+  return <FotoCellPreview key={`${fileName}-${isVideo ? 'video' : 'image'}`} fileName={fileName} thumbSrc={thumbSrc} fullSrc={fullSrc} isVideo={isVideo} />
 })
 
 // -------------------------------
@@ -1172,6 +1185,7 @@ type FormModalProps = {
   serverProgress?: ServerProgress | null
   setServerProgress?: (val: ServerProgress | null) => void
   processingTime?: number
+  setProcessingTime?: (val: number) => void
   uploadIdRef?: React.MutableRefObject<string | null>
   formatTime?: (seconds: number) => string
   gruposFK?: GrupoMediosType[]
@@ -1191,6 +1205,7 @@ const FormModal = memo(function FormModal({
   serverProgress = null,
   setServerProgress = () => {},
   processingTime = 0,
+  setProcessingTime = () => {},
   uploadIdRef = { current: null },
   formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`,
   gruposFK = [],
@@ -1420,13 +1435,16 @@ const FormModal = memo(function FormModal({
       // No await, lanzamos en paralelo
       pollProgress();
 
-      const onUploadProgress = (progressEvent: any) => {
+      let movedToProcessing = false
+      const onUploadProgress = (progressEvent: UploadProgressEvent) => {
         const total = progressEvent.total || 1
         const current = progressEvent.loaded
         const percent = Math.round((current / total) * 100)
         setUploadProgress(percent)
         
-        if (percent >= 100) {
+        if (percent >= 100 && !movedToProcessing) {
+          movedToProcessing = true
+          setProcessingTime(0)
           setUploadPhase('PROCESSING')
         }
       }
@@ -1457,7 +1475,7 @@ const FormModal = memo(function FormModal({
     }
   }
 
-  const onErrorMedio = (errors: any) => {
+  const onErrorMedio: SubmitErrorHandler<MedioForm> = (errors) => {
     console.error("Errores de validación Medio:", errors);
     toast.error("Por favor revisa los campos del formulario");
   }

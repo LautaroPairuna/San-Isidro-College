@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "node:fs/promises";
-import os from "node:os";
 import path from "node:path";
 
 type UploadProgress = {
@@ -11,7 +10,9 @@ type UploadProgress = {
 };
 
 async function getProgress(id: string): Promise<UploadProgress> {
-  const progressDir = path.join(os.tmpdir(), "upload-progress");
+  const progressDir =
+    process.env.UPLOAD_PROGRESS_DIR ||
+    path.join(/*turbopackIgnore: true*/ process.cwd(), ".runtime", "upload-progress");
   const filePath = path.join(progressDir, `${id}.json`);
   try {
     const content = await fs.readFile(filePath, "utf-8");

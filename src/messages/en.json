@@ -111,6 +111,90 @@
       "diplomaDualTexto": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",
       "diplomaDualLogoAlt": "Academia International Studies Logo"
     },
+    "cards": {
+      "persona": {
+        "title": "The Center of Our Project: The Person",
+        "backText": "Our premise is clear: the person comes first. We prioritize student well-being and the development of an inclusive community where each learner feels valued. We seek integral growth, shaping young people with open minds and deep sensitivity to sustainability and social impact."
+      },
+      "ciudadanos": {
+        "title": "Global Citizens with Academic Excellence",
+        "backText": "Through strong bilingual education, we prepare our students to thrive in an interconnected world. Our academic excellence strengthens teamwork as an essential 21st-century skill, curiosity to discover the world, critical thinking, and creativity to build an ethical life project."
+      },
+      "innovacion": {
+        "title": "Innovation and Cutting-Edge Technology",
+        "backText": "Our premise is clear: the person comes first. Real innovation: students build their own prototypes from scratch (without commercial kits), integrating engineering and electronics. Artificial intelligence: advanced projects to lead in digital environments. Infrastructure: classrooms with interactive touch screens and a fully equipped high-complexity lab."
+      },
+      "deportes": {
+        "title": "Sports",
+        "backText": "Sports and healthy living: discipline and teamwork through Rugby, Hockey, and Jiu-Jitsu. With our own gym and tournament participation, we promote values such as respect, effort, solidarity, and enjoyment, while developing motor skills. Throughout the year, students join matches, tours, and competitions with other clubs, strengthening friendship, discipline, and belonging."
+      },
+      "artes": {
+        "title": "Arts",
+        "backText": "The transformative power of art is a fundamental pillar for sensitivity and self-expression. Through different artistic languages, students develop new forms of communication, strengthening emotional intelligence, creativity, and abstract thinking. Art becomes a space of freedom that drives innovation and personal confidence."
+      },
+      "sustentabilidad": {
+        "title": "Sustainability",
+        "backText": "Sustainability is not just a concept, but a way of inhabiting the world. We educate young people with deep environmental and social awareness, capable of leading projects that create a positive impact in their surroundings. Through an ethical and responsible perspective, we integrate respect for nature and social equity, preparing global citizens committed to caring for our common home and future generations."
+      },
+      "bienestar": {
+        "title": "Well-Being",
+        "backText": "To learn, students must first feel well. That is why the integral well-being of our students is at the core of our educational commitment: the person comes first. We sustain an inclusive community where every young person feels heard, valued, and safe."
+      }
+    },
+    "weAreCommunity": {
+      "academicProposal": {
+        "title": "Academic Proposal: Excellence and International Dual Diploma",
+        "p1": "During the five years of Secondary School, we provide a full-day bilingual comprehensive education, combining the official Argentine curriculum with global competitiveness standards through international programs.",
+        "orientationsTitle": "Our proposal is diversified into two tracks:",
+        "natural": {
+          "label": "Natural Sciences:",
+          "text": "we foster scientific research and environmental commitment, using our high-complexity laboratory to transform theory into real experimentation."
+        },
+        "informatics": {
+          "label": "Informatics:",
+          "text": "focused on technological creation, where students move from being users to developers of digital solutions, AI, and original prototypes."
+        }
+      },
+      "internationalProjection": {
+        "title": "International Projection: Cambridge and High School Diploma",
+        "intro": "We understand that today's world has no borders. Therefore, we strengthen our graduates' profiles with globally valid certifications.",
+        "igcse": {
+          "label": "IGCSE Program (University of Cambridge):",
+          "text": "our students are prepared under this prestigious international standard that ensures elite academic preparation and a global mindset."
+        },
+        "dual": {
+          "label": "Academica Dual Diploma®:",
+          "text": "starting in 2nd year, we offer the possibility to pursue this international validation program. Through an online platform with native teachers, students simultaneously obtain the local high school diploma and the American High School Diploma."
+        },
+        "closing": "This linguistic and technological immersion experience positions them with a unique competitive advantage to enter the best universities in the world."
+      },
+      "identity": {
+        "title": "Our Identity: The Life Project",
+        "p1": "At San Isidro College, we understand that Secondary School is the stage where potential transforms into identity. Our goal is for each student to graduate with a solid, conscious, and autonomous Life Project.",
+        "p2": "We support each young person in discovering their purpose through a proposal that balances technological innovation and human warmth."
+      },
+      "eoe": {
+        "title": "Professional Support: School Guidance Team (EOE)",
+        "intro": "At San Isidro College, well-being is a daily practice sustained by our School Guidance Team. We have professionals specialized in Psychology and Psychopedagogy dedicated to supporting our students' trajectories.",
+        "emotional": {
+          "label": "Emotional Support:",
+          "text": "a space for listening and containment in the face of the challenges of adolescence."
+        },
+        "learning": {
+          "label": "Learning Optimization:",
+          "text": "psychopedagogical intervention to strengthen cognitive skills and study processes."
+        },
+        "coexistence": {
+          "label": "Relationships and Coexistence:",
+          "text": "support in group dynamics to sustain a healthy, inclusive, and respectful school climate."
+        },
+        "closing": "This team works in an integrated way with external teams, teachers, and families to guarantee the professional support needed throughout each young person's Life Project."
+      },
+      "club": {
+        "title": "Club and Foundation",
+        "p1": "We also open an institutional space to integrate the work of the Club and the Foundation, strengthening comprehensive development, community participation, and links with social-impact actions."
+      }
+    },
     "aside": {
       "titulo": "ACADEMIC",
       "proyecto": "Bilingual Project",

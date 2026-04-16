@@ -3,7 +3,7 @@
 
 import { useMemo, useState, useEffect } from 'react';
 import RenderMedia from '@/components/RenderMedia';
-import { useMedios } from '@/lib/hooks';
+import { useGrupoMedios, useMedios } from '@/lib/hooks';
 import {
   Carousel,
   CarouselContent,
@@ -28,21 +28,27 @@ interface SectionCarruselProps {
   medios?: MedioMinimal[];
 }
 
-const ALIANZAS_GROUP_ID = 7;
+const ALIANZAS_GROUP_NAME = 'Alianzas';
 
 export default function SectionCarrusel({ medios }: SectionCarruselProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
+  const { data: grupos = [], isLoading: isLoadingGroups, error: errorGroups } = useGrupoMedios();
+  const alianzasGroupId = useMemo(
+    () => grupos.find((group) => group.nombre === ALIANZAS_GROUP_NAME)?.id,
+    [grupos]
+  );
+
   // 1) Traemos todos los medios del grupo “Alianzas” solo si no se pasan por props
-  const { data: fetchedMedios = [], isLoading: isLoadingFetch, error: errorFetch } = useMedios(ALIANZAS_GROUP_ID, {
-    enabled: !medios
+  const { data: fetchedMedios = [], isLoading: isLoadingFetch, error: errorFetch } = useMedios(alianzasGroupId, {
+    enabled: !medios && typeof alianzasGroupId === 'number'
   });
 
   const mediosRaw = medios ?? fetchedMedios;
-  const isLoading = medios ? false : isLoadingFetch;
-  const error = medios ? null : errorFetch;
+  const isLoading = medios ? false : (isLoadingGroups || isLoadingFetch);
+  const error = medios ? null : (errorGroups ?? errorFetch);
 
   // 2) Agrupamos en chunks de 3 para mantener el diseño original
   const slides = useMemo<MedioMinimal[][]>(() => {
@@ -112,7 +118,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
             {slides.map((slideGroup, idx) => (
               <CarouselItem key={idx} className="min-w-full">
                 <div className="flex justify-center items-center gap-8 sm:gap-12 md:gap-16 h-full p-4">
-                  {slideGroup.map((item, i) => (
+                  {slideGroup.map((item) => (
                     <div
                       key={item.id}
                       className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"

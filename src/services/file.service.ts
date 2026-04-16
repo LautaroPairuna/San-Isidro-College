@@ -10,8 +10,6 @@ import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
 import ffprobeInstaller from "@ffprobe-installer/ffprobe";
 import { folderNames, type PrismaTable } from "@/lib/publicConstants";
 
-import os from "os";
-
 const IMAGE_PUBLIC_DIR = process.env.MEDIA_DIR_IMAGES || path.resolve("public", "images");
 
 // Configurar rutas de binarios
@@ -19,7 +17,9 @@ ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 ffmpeg.setFfprobePath(ffprobeInstaller.path);
 
 // Store progress in a temporary directory
-const PROGRESS_DIR = path.join(os.tmpdir(), "upload-progress");
+const PROGRESS_DIR =
+  process.env.UPLOAD_PROGRESS_DIR ||
+  path.join(/*turbopackIgnore: true*/ process.cwd(), ".runtime", "upload-progress");
 // Ensure directory exists
 fs.mkdir(PROGRESS_DIR, { recursive: true }).catch(() => {});
 

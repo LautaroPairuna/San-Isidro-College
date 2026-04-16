@@ -1,7 +1,7 @@
 // /components/Header.tsx
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useLocale } from "next-intl"
@@ -9,20 +9,12 @@ import { usePathname } from "next/navigation"
 import type { MouseEvent } from "react"
 
 const Header: React.FC = () => {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   // next-intl: devuelve el locale actual ('es' o 'en')
   const locale = useLocale() as "es" | "en"
   // Obtiene la ruta completa incluyendo el prefijo de idioma, p.ej. "/es/colegio", "/en/contacto"
   const pathname = usePathname() || "/"
-
-  // Detectar scroll para cambiar estilos
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   // Calcula la ruta con el otro idioma, reemplazando el primer segmento
   const getAlternateRoute = (targetLocale: "es" | "en") => {
@@ -41,8 +33,7 @@ const Header: React.FC = () => {
   // Seleccionar logo según estado
   const getLogoSrc = () => {
     if (menuOpen) return "/images/logo-san-isidro-3.svg"
-    if (scrolled) return "/images/logo-san-isidro-2.svg"
-    return "/images/logo-san-isidro.svg"
+    return "/images/logo-san-isidro-2.svg"
   }
 
   // Cerrar menú al hacer click en enlace
@@ -56,34 +47,18 @@ const Header: React.FC = () => {
       {/* HEADER fijo */}
       <header
         id="header"
-        className="fixed top-0 left-0 right-0 z-60 min-h-[120px] transition-all duration-500 ease-in-out"
+        className="fixed top-0 left-0 right-0 z-60 min-h-[120px]"
       >
-        {/* Fondo SVG */}
-        <div
-          className={`
-            absolute inset-0 bg-[url('/images/fondo-header.svg')]
-            bg-no-repeat bg-left md:bg-center bg-cover
-            transition-opacity duration-500 ease-in-out
-            z-0 ${scrolled ? "opacity-0" : "opacity-100"}
-          `}
-        />
-
         <nav
           className={`
-            relative z-10 h-full w-full transition-all duration-500 ease-in-out
-            ${scrolled ? "py-0 px-0" : "px-6 py-6 md:py-12"}
+            relative z-10 h-full w-full px-0 py-0
           `}
         >
           <div className="flex items-center justify-between w-full">
             {/* Logo */}
             <div
               className={`
-                logo-container transition-all duration-500 ease-in-out
-                ${
-                  scrolled
-                    ? "bg-white sm:py-8 py-4 sm:px-12 px-6 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0"
-                    : "px-3 py-2 sm:ms-10 ms-2"
-                }
+                logo-container bg-white sm:py-8 py-4 sm:px-12 px-6 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0
               `}
             >
               <Link href={`/${locale}#home`} onClick={() => setMenuOpen(false)}>
@@ -93,6 +68,9 @@ const Header: React.FC = () => {
                   alt="Logo de San Isidro"
                   width={180}
                   height={90}
+                  priority
+                  loading="eager"
+                  fetchPriority="high"
                   className="h-20 w-auto md:h-20 transition-all duration-500 ease-in-out"
                 />
               </Link>

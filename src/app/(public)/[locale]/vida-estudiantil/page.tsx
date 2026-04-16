@@ -44,7 +44,7 @@ export default function DeportesPage() {
   const { data: pageSections = [], isLoading, error } = usePageContent('vida-estudiantil')
 
   const getMedias = (slug: string): MedioItem[] => {
-    const section = pageSections.find((s: any) => s.slug === slug)
+    const section = pageSections.find((s) => s.slug === slug)
     return (section?.grupo?.medios ?? []) as MedioItem[]
   }
 
@@ -335,7 +335,7 @@ export default function DeportesPage() {
           />
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
-            <div className="absolute top-5 left-15 w-[650px] z-20">
+            <div className="absolute top-20 -left-15 w-[650px] z-20">
               <div className="bg-white shadow-xl rounded-xl p-8">
                 <Image
                   src="/images/logo-gym-2.svg"
@@ -410,10 +410,10 @@ export default function DeportesPage() {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5 left-24 w-[550px]"
+            className="absolute top-5 left-25 w-[550px]"
           />
           <div className="col-span-4 relative flex flex-col justify-center">
-            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-65 left-45 w-[550px] z-20">
+            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{t('vida.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.description')}</p>
               <div className="text-center mt-5">
@@ -503,7 +503,7 @@ export default function DeportesPage() {
                 />
               )}
             </div>
-            <div className="absolute col-span-4 z-20 top-[65%] xl:left-[22%] left-[23%]">
+            <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <Image
                   src="/images/logo-SIC-play.svg"
