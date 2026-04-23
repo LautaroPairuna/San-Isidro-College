@@ -57,13 +57,13 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
   }, [src])
 
   return (
-    <div className="absolute inset-0 overflow-hidden rounded-3xl">
+    <div className="absolute inset-0">
       <Image
         src={currentSrc}
         alt={alt}
         fill
         sizes="(max-width: 640px) 280px, (max-width: 1280px) 45vw, 280px"
-        className="object-cover"
+        className="object-cover rounded-b-3xl"
         onError={() => {
           if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
         }}
@@ -74,16 +74,23 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
 
 function FlipCard({ card }: { card: FlipCardItem }) {
   const [isFlipped, setIsFlipped] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const showBack = isFlipped || isHovered
 
   return (
     <article 
-      className="group w-full [perspective:1200px] cursor-pointer" 
+      className="w-full cursor-pointer" 
       aria-label={card.title}
       onClick={() => setIsFlipped(!isFlipped)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`relative h-[390px] w-full transition-transform duration-700 [transform-style:preserve-3d] md:group-hover:[transform:rotateY(180deg)] md:group-focus-within:[transform:rotateY(180deg)] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
+      <div
+        className="relative h-[390px] w-full transition-transform duration-700 [transform-style:preserve-3d]"
+        style={{ transform: showBack ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
+      >
         <div
-          className="absolute inset-0 overflow-hidden rounded-2xl border border-white/40 shadow-lg [backface-visibility:hidden]"
+          className="absolute inset-0 overflow-hidden rounded-3xl shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
           style={{ backgroundColor: card.color }}
         >
           <div className="h-[40%] px-2 text-center text-white flex flex-col items-center justify-center">
@@ -96,8 +103,8 @@ function FlipCard({ card }: { card: FlipCardItem }) {
         </div>
 
         <div
-          className="absolute inset-0 rounded-2xl border border-white/40 p-6 text-white shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)]"
-          style={{ backgroundColor: card.color }}
+          className="absolute inset-0 rounded-3xl p-6 text-white shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
+          style={{ backgroundColor: card.color, transform: 'rotateY(180deg)' }}
         >
           <div className="h-full flex items-center justify-center text-center text-xs leading-snug font-semibold">
             {card.backText}
