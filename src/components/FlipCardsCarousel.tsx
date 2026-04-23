@@ -69,9 +69,15 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
 }
 
 function FlipCard({ card }: { card: FlipCardItem }) {
+  const [isFlipped, setIsFlipped] = useState(false)
+
   return (
-    <article className="group w-full [perspective:1200px]" aria-label={card.title}>
-      <div className="relative h-[390px] w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
+    <article 
+      className="group w-full [perspective:1200px] cursor-pointer" 
+      aria-label={card.title}
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <div className={`relative h-[390px] w-full transition-transform duration-700 [transform-style:preserve-3d] md:group-hover:[transform:rotateY(180deg)] md:group-focus-within:[transform:rotateY(180deg)] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
         <div
           className="absolute inset-0 overflow-hidden rounded-2xl border border-white/40 shadow-lg [backface-visibility:hidden]"
           style={{ backgroundColor: card.color }}
@@ -177,7 +183,7 @@ export default function FlipCardsCarousel({
           <>
             <button
               type="button"
-              className="absolute top-1/2 -translate-y-1/2 left-3 lg:left-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
+              className="absolute top-1/2 -translate-y-1/2 -left-4 sm:-left-6 lg:left-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
               disabled={slideIndex === 0}
               onClick={() => {
                 let activeP = pages.findIndex(p => p >= slideIndex)
@@ -192,7 +198,7 @@ export default function FlipCardsCarousel({
 
             <button
               type="button"
-              className="absolute top-1/2 -translate-y-1/2 right-3 lg:right-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
+              className="absolute top-1/2 -translate-y-1/2 -right-4 sm:-right-6 lg:right-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
               disabled={slideIndex === slideCount - 1}
               onClick={() => {
                 let activeP = pages.findIndex(p => p > slideIndex)
