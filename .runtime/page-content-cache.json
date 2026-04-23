@@ -282,80 +282,80 @@
         "medios": [
           {
             "id": 41,
-            "urlArchivo": "ico-centro-proyecto.svg",
+            "urlArchivo": "ico-centro-proyecto-20260423-114151.svg",
             "urlMiniatura": null,
-            "textoAlternativo": "Icono card persona",
+            "textoAlternativo": "Icono card centro proyecto",
             "tipo": "ICONO",
             "posicion": 10,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.251Z",
-            "actualizadoEn": "2026-04-16T13:32:47.251Z"
+            "actualizadoEn": "2026-04-23T14:41:51.363Z"
           },
           {
             "id": 42,
-            "urlArchivo": "ico-ciudadanos-globales.svg",
+            "urlArchivo": "ico-ciudadanos-globales-20260423-114134.svg",
             "urlMiniatura": null,
             "textoAlternativo": "Icono card ciudadanos globales",
             "tipo": "ICONO",
             "posicion": 20,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.253Z",
-            "actualizadoEn": "2026-04-16T13:32:47.253Z"
+            "actualizadoEn": "2026-04-23T14:41:34.078Z"
           },
           {
             "id": 43,
-            "urlArchivo": "ico-innovacion-tecnologia.svg",
+            "urlArchivo": "ico-innovacion-tecnologia-20260423-114143.svg",
             "urlMiniatura": null,
             "textoAlternativo": "Icono card innovación y tecnología",
             "tipo": "ICONO",
             "posicion": 30,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.255Z",
-            "actualizadoEn": "2026-04-16T13:32:47.255Z"
+            "actualizadoEn": "2026-04-23T14:41:43.088Z"
           },
           {
             "id": 44,
-            "urlArchivo": "ico-deportes.svg",
+            "urlArchivo": "ico-deportes-20260423-114201.svg",
             "urlMiniatura": null,
             "textoAlternativo": "Icono card deportes",
             "tipo": "ICONO",
             "posicion": 40,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.256Z",
-            "actualizadoEn": "2026-04-16T13:32:47.256Z"
+            "actualizadoEn": "2026-04-23T14:42:01.975Z"
           },
           {
             "id": 45,
-            "urlArchivo": "ico-artes.svg",
+            "urlArchivo": "ico-artes-20260423-114805.svg",
             "urlMiniatura": null,
             "textoAlternativo": "Icono card artes",
             "tipo": "ICONO",
             "posicion": 50,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.258Z",
-            "actualizadoEn": "2026-04-16T13:32:47.258Z"
+            "actualizadoEn": "2026-04-23T14:48:05.394Z"
           },
           {
             "id": 46,
-            "urlArchivo": "ico-sustentabilidad.svg",
+            "urlArchivo": "ico-sustentabilidad-20260423-114111.svg",
             "urlMiniatura": null,
             "textoAlternativo": "Icono card sustentabilidad",
             "tipo": "ICONO",
             "posicion": 60,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.259Z",
-            "actualizadoEn": "2026-04-16T13:32:47.259Z"
+            "actualizadoEn": "2026-04-23T14:41:11.443Z"
           },
           {
             "id": 47,
-            "urlArchivo": "ico-bienestar.svg",
+            "urlArchivo": "ico-bienestar-20260423-114119.svg",
             "urlMiniatura": null,
             "textoAlternativo": "Icono card bienestar",
             "tipo": "ICONO",
             "posicion": 70,
             "grupoMediosId": 16,
             "creadoEn": "2026-04-16T13:32:47.261Z",
-            "actualizadoEn": "2026-04-16T13:32:47.261Z"
+            "actualizadoEn": "2026-04-23T14:41:19.593Z"
           },
           {
             "id": 48,

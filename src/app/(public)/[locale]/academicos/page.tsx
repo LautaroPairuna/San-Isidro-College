@@ -430,14 +430,6 @@ const AcademicosPage: NextPage = () => {
                   </Link>
                 </div>
 
-                <Image
-                  src="/images/cuadro-primary.svg"
-                  alt={t('secondary.decorAlt')}
-                  width={450}
-                  height={450}
-                  className="w-[450px] mx-auto h-auto mb-6"
-                />
-
                 <RenderMedia
                   medio={secondImg}
                   fallback={FALLBACKS.SECOND}

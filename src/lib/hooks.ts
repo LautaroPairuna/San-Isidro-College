@@ -389,6 +389,8 @@ export function usePageContent(slug: string) {
         if (!res.ok) throw new Error('Error fetching page content')
         return res.json()
     }),
-    enabled: !!slug
+    enabled: !!slug,
+    refetchInterval: 5000, // Actualiza automáticamente cada 5 segundos
+    refetchOnWindowFocus: true, // Actualiza cuando el usuario vuelve a la pestaña
   })
 }

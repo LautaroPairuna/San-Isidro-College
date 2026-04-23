@@ -34,16 +34,18 @@ function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallback
   }, [src])
 
   return (
-    <Image
-      src={currentSrc}
-      alt={alt}
-      width={46}
-      height={46}
-      className="mx-auto object-contain"
-      onError={() => {
-        if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-      }}
-    />
+    <div className="h-20 w-20 flex items-center justify-center shrink-0">
+      <Image
+        src={currentSrc}
+        alt={alt}
+        width={64}
+        height={64}
+        className="w-full h-full object-contain"
+        onError={() => {
+          if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
+        }}
+      />
+    </div>
   )
 }
 
@@ -82,9 +84,9 @@ function FlipCard({ card }: { card: FlipCardItem }) {
           className="absolute inset-0 overflow-hidden rounded-2xl border border-white/40 shadow-lg [backface-visibility:hidden]"
           style={{ backgroundColor: card.color }}
         >
-          <div className="h-[40%] px-5 text-center text-white flex flex-col items-center justify-center">
+          <div className="h-[40%] px-2 text-center text-white flex flex-col items-center justify-center">
             <CardIconWithFallback src={card.icon} fallbackSrc={card.fallbackIcon} alt={card.title} />
-            <h5 className="mt-3 text-lg font-bold leading-tight">{card.title}</h5>
+            <h5 className="mt-3 text-sm font-bold leading-tight">{card.title}</h5>
           </div>
           <div className="absolute inset-x-0 bottom-0 h-[60%]">
             <CardCoverWithFallback src={card.image} fallbackSrc={card.fallbackImage} alt={card.title} />
@@ -95,7 +97,7 @@ function FlipCard({ card }: { card: FlipCardItem }) {
           className="absolute inset-0 rounded-2xl border border-white/40 p-6 text-white shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)]"
           style={{ backgroundColor: card.color }}
         >
-          <div className="h-full flex items-center justify-center text-center text-xs md:text-sm leading-snug font-semibold">
+          <div className="h-full flex items-center justify-center text-center text-xs leading-snug font-semibold">
             {card.backText}
           </div>
         </div>
