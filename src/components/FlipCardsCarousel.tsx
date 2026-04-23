@@ -57,16 +57,18 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
   }, [src])
 
   return (
-    <Image
-      src={currentSrc}
-      alt={alt}
-      fill
-      sizes="(max-width: 640px) 280px, (max-width: 1280px) 45vw, 280px"
-      className="object-cover"
-      onError={() => {
-        if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-      }}
-    />
+    <div className="absolute inset-0 overflow-hidden rounded-3xl">
+      <Image
+        src={currentSrc}
+        alt={alt}
+        fill
+        sizes="(max-width: 640px) 280px, (max-width: 1280px) 45vw, 280px"
+        className="object-cover"
+        onError={() => {
+          if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
+        }}
+      />
+    </div>
   )
 }
 
