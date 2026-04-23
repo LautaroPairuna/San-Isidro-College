@@ -3,12 +3,12 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import SmoothLink from '@/components/SmoothLink'
 import AsideMenu from '@/components/AsideMenu'
 import { useTranslations } from 'next-intl'
 import { usePageContent } from '@/lib/hooks'
 import { toPublicImageUrl } from '@/lib/publicConstants'
+import FlipCardsCarousel from '@/components/FlipCardsCarousel'
 
 const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
 const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
@@ -61,48 +61,6 @@ const FLIP_CARDS = [
 
 type CardI18nKey = (typeof FLIP_CARDS)[number]['key']
 
-function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallbackSrc: string; alt: string }) {
-  const [currentSrc, setCurrentSrc] = useState(src)
-
-  useEffect(() => {
-    setCurrentSrc(src)
-  }, [src])
-
-  return (
-    <Image
-      src={currentSrc}
-      alt={alt}
-      width={46}
-      height={46}
-      className="mx-auto object-contain"
-      onError={() => {
-        if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-      }}
-    />
-  )
-}
-
-function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbackSrc: string; alt: string }) {
-  const [currentSrc, setCurrentSrc] = useState(src)
-
-  useEffect(() => {
-    setCurrentSrc(src)
-  }, [src])
-
-  return (
-    <Image
-      src={currentSrc}
-      alt={alt}
-      fill
-      sizes="(max-width: 640px) 280px, (max-width: 1280px) 45vw, 280px"
-      className="object-cover"
-      onError={() => {
-        if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-      }}
-    />
-  )
-}
-
 export default function AcademicosMasInfoPage() {
   const t = useTranslations('academicosMasInfo')
   const { data: pageSections = [] } = usePageContent('academicos-mas-info')
@@ -126,7 +84,7 @@ export default function AcademicosMasInfoPage() {
     <>
       <section className="relative w-full min-h-screen bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-80 overflow-hidden">
         {/* CONTENEDOR CENTRAL CON FONDO BLANCO */}
-        <div className="relative max-w-250 mx-auto bg-white min-h-screen px-8 pb-8 pt-24">
+        <div className="relative max-w-300 mx-auto bg-white min-h-screen px-8 pb-8 pt-24">
           {/* CONTENIDO PRINCIPAL */}
           <h2
             id="proyecto"
@@ -259,11 +217,11 @@ export default function AcademicosMasInfoPage() {
             </div>
           </div>
 
-          <div className="space-y-5 mt-32 text-justify">
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-800 text-shadow-bold-movil">
+          <div className="space-y-5 mt-16 text-justify">
+            <h3 className="text-2xl font-semibold uppercase leading-tight text-gray-800 text-left">
               We are Community
             </h3>
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">
+            <h4 className="text-xl font-bold leading-tight text-gray-800 text-left">
               {t('weAreCommunity.academicProposal.title')}
             </h4>
             <p>{t('weAreCommunity.academicProposal.p1')}</p>
@@ -279,7 +237,7 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           <div className="space-y-5 mt-16 text-justify">
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">
+            <h4 className="text-xl font-bold leading-tight text-gray-800 text-left">
               {t('weAreCommunity.internationalProjection.title')}
             </h4>
             <p>{t('weAreCommunity.internationalProjection.intro')}</p>
@@ -297,57 +255,20 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           <div className="space-y-5 mt-16 text-justify">
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">{t('weAreCommunity.identity.title')}</h4>
+            <h4 className="text-xl font-bold leading-tight text-gray-800 text-left">{t('weAreCommunity.identity.title')}</h4>
             <p>{t('weAreCommunity.identity.p1')}</p>
             <p>{t('weAreCommunity.identity.p2')}</p>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center">
-            {cardsWithMedia.map((card) => (
-              <article
-                key={card.title}
-                className="group w-full max-w-[280px] [perspective:1200px]"
-                aria-label={card.title}
-              >
-                <div className="relative h-[390px] w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
-                  <div
-                    className="absolute inset-0 overflow-hidden rounded-2xl border border-white/40 shadow-lg [backface-visibility:hidden]"
-                    style={{ backgroundColor: card.color }}
-                  >
-                    <div className="h-[40%] px-5 text-center text-white flex flex-col items-center justify-center">
-                      <CardIconWithFallback
-                        src={card.icon}
-                        fallbackSrc={card.fallbackIcon}
-                        alt={card.title}
-                      />
-                      <h5 className="mt-3 text-lg font-bold leading-tight">{card.title}</h5>
-                    </div>
-                    <div className="absolute inset-x-0 bottom-0 h-[60%]">
-                      <CardCoverWithFallback
-                        src={card.image}
-                        fallbackSrc={card.fallbackImage}
-                        alt={card.title}
-                      />
-                    </div>
-                  </div>
-
-                  <div
-                    className="absolute inset-0 rounded-2xl border border-white/40 p-6 text-white shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)]"
-                    style={{ backgroundColor: card.color }}
-                  >
-                    <div className="h-full flex items-center justify-center text-center text-xs md:text-sm leading-snug font-semibold">
-                      {card.backText}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          <FlipCardsCarousel
+            items={cardsWithMedia}
+            ariaLabel={t('weAreCommunity.academicProposal.title')}
+          />
 
           <div className="space-y-5 mt-16 text-justify">
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">
+            <h3 className="text-xl font-bold leading-tight text-gray-800 text-left">
               {t('weAreCommunity.eoe.title')}
-            </h4>
+            </h3>
             <p>{t('weAreCommunity.eoe.intro')}</p>
             <ul className="list-disc pl-6 space-y-3">
               <li>
@@ -367,7 +288,7 @@ export default function AcademicosMasInfoPage() {
           </div>
 
           <div className="space-y-5 mt-16 text-justify">
-            <h4 className="text-2xl md:text-3xl font-bold text-gray-800">{t('weAreCommunity.club.title')}</h4>
+            <h3 className="text-xl font-bold leading-tight text-gray-800 text-left">{t('weAreCommunity.club.title')}</h3>
             <p>{t('weAreCommunity.club.p1')}</p>
           </div>
         </div>

@@ -58,7 +58,7 @@ const Header: React.FC = () => {
             {/* Logo */}
             <div
               className={`
-                logo-container bg-white sm:py-8 py-4 sm:px-12 px-6 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0
+                logo-container bg-white py-3 sm:py-6 md:py-8 px-4 sm:px-8 md:px-12 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0
               `}
             >
               <Link href={`/${locale}#home`} onClick={() => setMenuOpen(false)}>
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
                   priority
                   loading="eager"
                   fetchPriority="high"
-                  className="h-20 w-auto md:h-20 transition-all duration-500 ease-in-out"
+                  className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-500 ease-in-out"
                 />
               </Link>
             </div>
