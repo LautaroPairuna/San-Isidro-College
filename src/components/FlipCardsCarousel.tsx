@@ -34,7 +34,7 @@ function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallback
   }, [src])
 
   return (
-    <div className="h-20 w-20 flex items-center justify-center shrink-0">
+    <div className="h-16 w-16 flex items-center justify-center shrink-0">
       <Image
         src={currentSrc}
         alt={alt}
