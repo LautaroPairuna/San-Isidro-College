@@ -183,7 +183,7 @@ export default function FlipCardsCarousel({
           <>
             <button
               type="button"
-              className="absolute top-1/2 -translate-y-1/2 -left-6 lg:left-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
+              className="absolute top-1/2 -translate-y-1/2 -left-7 lg:left-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
               disabled={slideIndex === 0}
               onClick={() => {
                 let activeP = pages.findIndex(p => p >= slideIndex)
@@ -198,7 +198,7 @@ export default function FlipCardsCarousel({
 
             <button
               type="button"
-              className="absolute top-1/2 -translate-y-1/2 -right-6 lg:right-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
+              className="absolute top-1/2 -translate-y-1/2 -right-7 lg:right-0 h-9 w-9 lg:h-10 lg:w-10 rounded-full flex items-center justify-center bg-white/80 hover:bg-white border border-gray-200 shadow-md transition-colors disabled:opacity-50 z-10"
               disabled={slideIndex === slideCount - 1}
               onClick={() => {
                 let activeP = pages.findIndex(p => p > slideIndex)
