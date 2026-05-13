@@ -81,7 +81,8 @@ function ImageWithFallback({
 }: ImageWithFallbackProps) {
   const [failed, setFailed] = useState(false)
   const activeSrc = failed ? fallback : src
-  const isDynamic = activeSrc.startsWith('/api/disk-images')
+  const basePath = activeSrc.split('?')[0] ?? activeSrc
+  const isSvg = basePath.toLowerCase().endsWith('.svg')
 
   return (
     <Image
@@ -89,7 +90,7 @@ function ImageWithFallback({
       alt={alt}
       {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
       className={className}
-      unoptimized={unoptimized ?? isDynamic}
+      unoptimized={unoptimized ?? isSvg}
       priority={priority}
       loading={loading}
       onError={() => {

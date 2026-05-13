@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { HiCollection, HiPhotograph, HiTemplate } from 'react-icons/hi';
-import { useQuery } from '@tanstack/react-query';
 
 // Dashboard simple que muestra resumen de recursos
 export default function AdminDashboard() {

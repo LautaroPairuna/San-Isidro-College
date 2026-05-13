@@ -23,6 +23,14 @@ interface ClientAdminProvidersProps {
   children: ReactNode;
 }
 
+const DefaultAvatar = ({ className }: { className?: string }) => (
+  <div
+    className={`rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold border-2 border-indigo-300 ${className ?? ''}`}
+  >
+    ES
+  </div>
+);
+
 export default function ClientAdminProviders({ children }: ClientAdminProvidersProps) {
   return (
     <SessionProvider>
@@ -36,7 +44,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
   const rawPath     = usePathname() ?? '';
   const inAuthRoute = rawPath.startsWith('/admin/auth');
 
-  const { data: session, status } = useSession({ 
+  const { status } = useSession({ 
     required: !inAuthRoute,
     onUnauthenticated() {
       if (!inAuthRoute) router.replace('/admin/auth');
@@ -71,12 +79,6 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
     if (/GrupoMedios|Collection/.test(name)) return HiCollection;
     return HiPhotograph;
   };
-
-  const DefaultAvatar = ({ className }: { className?: string }) => (
-    <div className={`rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold border-2 border-indigo-300 ${className}`}>
-      ES
-    </div>
-  );
 
   return (
     <QueryClientProvider client={queryClient}>
