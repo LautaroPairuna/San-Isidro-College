@@ -3,7 +3,6 @@
 
 import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
-import ReactQueryProvider from '@/components/ReactQueryProvider';
 import HeaderWrapper from '@/components/HeaderWrapper';
 
 // Define bien el tipo de props
@@ -21,7 +20,7 @@ export default function ClientAppProviders({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <HeaderWrapper />
-      <ReactQueryProvider>{children}</ReactQueryProvider>
+      {children}
     </NextIntlClientProvider>
   );
 }

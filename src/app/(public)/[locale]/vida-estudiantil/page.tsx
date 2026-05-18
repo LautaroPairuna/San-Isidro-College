@@ -1,15 +1,11 @@
 // /app/[locale]/deportes/page.tsx
-'use client'
-
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import dynamic from 'next/dynamic'
-import { useTranslations } from 'next-intl'
-import { usePageContent } from '@/lib/hooks'
 import MediaCarousel from '@/components/MediaCarousel'
-
-const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
-const SectionCarrusel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
+import Contact from '@/components/sectionContact'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import { getTranslations } from 'next-intl/server'
+import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
  *  SLUGS DE SECCIONES (Coinciden con DB)
@@ -37,14 +33,22 @@ type MedioItem = {
   grupoMediosId: number
 }
 
-export default function DeportesPage() {
-  const t = useTranslations('vidaEstudiantilHome')
+export const dynamic = 'force-dynamic'
+
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function DeportesPage({ params }: PageProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
-  const { data: pageSections = [], isLoading, error } = usePageContent('vida-estudiantil')
+  const pageSections = await getPageContentForSlug('vida-estudiantil')
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   const getMedias = (slug: string): MedioItem[] => {
-    const section = pageSections.find((s) => s.slug === slug)
+    const section = pageSections.find((s: PageContentSection) => s.slug === slug)
     return (section?.grupo?.medios ?? []) as MedioItem[]
   }
 
@@ -54,23 +58,6 @@ export default function DeportesPage() {
   const gymMediaRaw = getMedias(SECTION_SLUGS.GYM)
   const vidaMediaRaw = getMedias(SECTION_SLUGS.BIENESTAR)
   const playMediaRaw = getMedias(SECTION_SLUGS.PLAY)
-
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center text-xl text-gray-600">
-        {t('loading')}
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="p-6 space-y-2 text-red-600">
-        <h2 className="font-bold">{t('errors.title')}</h2>
-        <p>• {(error as Error).message}</p>
-      </div>
-    )
-  }
 
   /* ------------------------------ FILTRADO SOLO IMAGEN/VIDEO Y ORDENAMIENTO ------------------------------ */
   const filterImgOrVideo = (arr: MedioItem[]) =>
@@ -560,7 +547,7 @@ export default function DeportesPage() {
       </section>
 
       {/* Carrusel genérico + contacto */}
-      <SectionCarrusel />
+      <SectionCarrusel medios={alianzasMedia} />
       <Contact />
     </div>
   )

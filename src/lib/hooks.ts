@@ -382,7 +382,11 @@ export function useDeleteSeccion(): UseMutationResult<unknown, Error, number> {
 /* ==================================================================
  *  6) HOOKS PÚBLICOS
  * =================================================================*/
-export function usePageContent(slug: string) {
+type UsePageContentOptions = {
+  live?: boolean
+}
+
+export function usePageContent(slug: string, options?: UsePageContentOptions) {
   return useQuery<Seccion[], Error>({
     queryKey: ['page-content', slug],
     queryFn: () => fetch(`/api/public/page-content?slug=${slug}`).then(res => {
@@ -390,7 +394,9 @@ export function usePageContent(slug: string) {
         return res.json()
     }),
     enabled: !!slug,
-    refetchInterval: 5000, // Actualiza automáticamente cada 5 segundos
-    refetchOnWindowFocus: true, // Actualiza cuando el usuario vuelve a la pestaña
+    staleTime: 1000 * 60 * 10,
+    gcTime: 1000 * 60 * 30,
+    refetchInterval: options?.live ? 5000 : false,
+    refetchOnWindowFocus: options?.live ?? false,
   })
 }

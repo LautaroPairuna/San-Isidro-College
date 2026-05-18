@@ -1,18 +1,12 @@
 // /app/[locale]/colegio/page.tsx
-'use client'
-
-import dynamic from "next/dynamic"
 import Image from "next/image"
 import SmoothLink from "@/components/SmoothLink"
 import AsideMenu from "@/components/AsideMenu"
 import RenderMedia from "@/components/RenderMedia"
-import { useTranslations } from "next-intl"
-import { usePageContent } from "@/lib/hooks"
-import type { NextPage } from "next"
-
-// Carga dinámica para reducir el bundle inicial
-const Carousel = dynamic(() => import("@/components/sectionCarrusel"), { ssr: false })
-const Contact = dynamic(() => import("@/components/sectionContact"), { ssr: false })
+import SectionCarrusel from "@/components/sectionCarrusel"
+import Contact from "@/components/sectionContact"
+import { getTranslations } from "next-intl/server"
+import { getPageContentForSlug, type PageContentSection } from "@/lib/pageContentCache"
 
 /* --------------------------------------------------------------------
  *  SLUGS DE SECCIONES
@@ -32,20 +26,27 @@ type MedioMinimal = {
   grupoMediosId: number
 }
 
-const ColegioPage: NextPage = () => {
-  const t = useTranslations("colegio")
+export const dynamic = "force-dynamic"
+
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
+const ColegioPage = async ({ params }: PageProps) => {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "colegio" })
 
   // Carga dinámica
-  const { data: pageSections = [] } = usePageContent('colegio');
+  const pageSections = await getPageContentForSlug("colegio");
 
   // Instalaciones
-  const instalacionesSection = pageSections.find(s => s.slug === SECTION_SLUGS.INSTALACIONES);
+  const instalacionesSection = pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.INSTALACIONES);
   const instalacionesMedio = instalacionesSection?.medio;
   // Fallback si no hay medio en DB (opcional, pero mantenemos lógica de renderMedia)
   const instalacionesFallback = '/images/fondo-home.webp'; // Hardcoded fallback path as per original const
 
   // Alianzas
-  const alianzasMedia = (pageSections.find(s => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
+  const alianzasMedia = (pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
 
   return (
     <>
@@ -204,7 +205,7 @@ const ColegioPage: NextPage = () => {
         </div>
       </section>
 
-      <Carousel medios={alianzasMedia} />
+      <SectionCarrusel medios={alianzasMedia} />
       <Contact />
     </>
   )

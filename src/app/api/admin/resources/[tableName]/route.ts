@@ -5,7 +5,10 @@ export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { adminGuard } from "@/lib/auth-guard";
 import { resourceService, isValidTableName } from "@/services/resource.service";
-import { refreshPageContentCacheAll } from "@/lib/pageContentCache";
+import {
+  invalidatePageContentMemoryCache,
+  refreshPageContentCacheAll,
+} from "@/lib/pageContentCache";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -122,6 +125,7 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
     }
 
     if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
+      invalidatePageContentMemoryCache();
       await refreshPageContentCacheAll();
     }
 

@@ -1,17 +1,13 @@
 // /app/[locale]/vida-estudiantil-mas-info/page.tsx
-'use client'
-
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import SmoothLink from '@/components/SmoothLink'
 import AsideMenu from '@/components/AsideMenu'
-import { useTranslations } from 'next-intl'
-import { usePageContent } from '@/lib/hooks'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import FlipCardsCarousel from '@/components/FlipCardsCarousel'
-
-const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
-const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
+import { getTranslations } from 'next-intl/server'
+import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 const CARD_MEDIA_SECTION_SLUG = 'academicos-mas-info-cards'
 
 const FLIP_CARDS = [
@@ -61,11 +57,19 @@ const FLIP_CARDS = [
 
 type CardI18nKey = (typeof FLIP_CARDS)[number]['key']
 
-export default function AcademicosMasInfoPage() {
-  const t = useTranslations('academicosMasInfo')
-  const { data: pageSections = [] } = usePageContent('academicos-mas-info')
+export const dynamic = 'force-dynamic'
 
-  const cardsSection = pageSections.find(section => section.slug === CARD_MEDIA_SECTION_SLUG)
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function AcademicosMasInfoPage({ params }: PageProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'academicosMasInfo' })
+  const pageSections = await getPageContentForSlug('academicos-mas-info')
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
+
+  const cardsSection = pageSections.find((section: PageContentSection) => section.slug === CARD_MEDIA_SECTION_SLUG)
   const medias = [...(cardsSection?.grupo?.medios ?? [])].sort((a, b) => a.posicion - b.posicion)
   const iconMedias = medias.filter(media => media.tipo === 'ICONO')
   const imageMedias = medias.filter(media => media.tipo === 'IMAGEN')
@@ -317,7 +321,7 @@ export default function AcademicosMasInfoPage() {
       </section>
 
       {/* Carrusel (sin medias, ya que son opcionales) */}
-      <Carousel />
+      <SectionCarrusel medios={alianzasMedia} />
 
       {/* Contacto */}
       <Contact />

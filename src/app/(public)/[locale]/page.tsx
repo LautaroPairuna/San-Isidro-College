@@ -1,13 +1,11 @@
 // /app/[locale]/page.tsx
-'use client'
-
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { usePageContent } from '@/lib/hooks'
 import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
-import { useTranslations } from 'next-intl'
-import type { NextPage } from 'next'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
+import { getTranslations } from 'next-intl/server'
+import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 // SLUGS de secciones (coinciden con DB)
 const SECTION_SLUGS = {
@@ -28,18 +26,21 @@ type MedioMinimal = {
   grupoMediosId: number
 }
 
-const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
-const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
+export const dynamic = 'force-dynamic'
 
-const HomePage: NextPage = () => {
-  // Hook de traducción: namespace 'home'
-  const t = useTranslations('home')
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
+const HomePage = async ({ params }: PageProps) => {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'home' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
-  const { data: pageSections = [], isLoading: isAnyLoading, error } = usePageContent('home');
+  const pageSections = await getPageContentForSlug('home')
 
   const getMedias = (slug: string) => {
-    const section = pageSections.find(s => s.slug === slug);
+    const section = pageSections.find((s: PageContentSection) => s.slug === slug);
     return (section?.grupo?.medios || []) as unknown as MedioMinimal[];
   }
 
@@ -57,24 +58,6 @@ const HomePage: NextPage = () => {
 
   // 5) Alianzas
   const alianzasMedia = getMedias(SECTION_SLUGS.ALIANZAS);
-
-  if (isAnyLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center text-xl text-gray-600">
-        {t('hero.loading')}
-      </div>
-    )
-  }
-
-  // Agregamos chequeo de errores
-  if (error) {
-    return (
-      <div className="p-6 space-y-2 text-red-600">
-        <h2 className="font-bold">Error al cargar algún contenido:</h2>
-        <p>• {error.message}</p>
-      </div>
-    )
-  }
 
   // Extraemos objeto único para sección 3
   const sec3Medio = sec3Arr.length > 0 ? sec3Arr[0] : undefined
@@ -282,7 +265,7 @@ const HomePage: NextPage = () => {
         </div>
       </section>
       {/* Carrusel global y Contacto */}
-      <Carousel medios={alianzasMedia} />
+      <SectionCarrusel medios={alianzasMedia} />
       <Contact />
     </div>
   )

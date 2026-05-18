@@ -1,16 +1,10 @@
-'use client'
-
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 import { Link } from '@/i18n/navigation'
-import { useTranslations } from 'next-intl'
-import { usePageContent } from '@/lib/hooks'
 import RenderMedia from '@/components/RenderMedia'
-import type { NextPage } from 'next'
-
-// Carga dinámica de componentes pesados
-const Carousel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
-const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
+import { getTranslations } from 'next-intl/server'
+import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 // Slugs de secciones (coinciden con DB)
 const SECTION_SLUGS = {
@@ -40,33 +34,23 @@ type MedioMinimal = {
   actualizadoEn?: string
 }
 
-const AcademicosPage: NextPage = () => {
-  const t = useTranslations('academicosHome')
+export const dynamic = 'force-dynamic'
 
-  const { data: pageSections = [], isLoading, error } = usePageContent('academicos');
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
 
-  const kinderImg = pageSections.find(s => s.slug === SECTION_SLUGS.KINDER)?.medio;
-  const primaryImg = pageSections.find(s => s.slug === SECTION_SLUGS.PRIMARY)?.medio;
-  const secondImg = pageSections.find(s => s.slug === SECTION_SLUGS.SECONDARY)?.medio;
+const AcademicosPage = async ({ params }: PageProps) => {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'academicosHome' })
 
-  const alianzasMedia = (pageSections.find(s => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
+  const pageSections = await getPageContentForSlug('academicos')
 
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center text-xl text-gray-600">
-        {t('loading')}
-      </div>
-    )
-  }
+  const kinderImg = pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.KINDER)?.medio;
+  const primaryImg = pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.PRIMARY)?.medio;
+  const secondImg = pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.SECONDARY)?.medio;
 
-  if (error) {
-    return (
-      <div className="p-6 space-y-2 text-red-600">
-        <h2 className="font-bold">{t('errorTitle')}</h2>
-        <p>• {error.message}</p>
-      </div>
-    )
-  }
+  const alianzasMedia = (pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
 
   return (
     <div id="container">
@@ -458,7 +442,7 @@ const AcademicosPage: NextPage = () => {
           </section>
 
           {/* ─────────────────── Extras ─────────────────── */}
-          <Carousel medios={alianzasMedia} />
+          <SectionCarrusel medios={alianzasMedia} />
           <Contact />
         </div>
   )

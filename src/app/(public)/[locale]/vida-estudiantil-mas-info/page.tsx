@@ -1,16 +1,21 @@
 // /app/[locale]/deportes-mas-info/page.tsx
-'use client'
-
-import dynamic from 'next/dynamic'
-import { useTranslations } from 'next-intl'
 import SmoothLink from '@/components/SmoothLink'
 import AsideMenu from '@/components/AsideMenu'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
+import { getTranslations } from 'next-intl/server'
+import { getMediaGroupByName } from '@/lib/pageContentCache'
 
-const SectionCarrusel = dynamic(() => import('@/components/sectionCarrusel'), { ssr: false })
-const Contact = dynamic(() => import('@/components/sectionContact'), { ssr: false })
+export const dynamic = 'force-dynamic'
 
-export default function DeportesMasInfoPage() {
-  const t = useTranslations('vidaEstudiantilMasInfo')
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function DeportesMasInfoPage({ params }: PageProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'vidaEstudiantilMasInfo' })
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   return (
     <>
@@ -67,7 +72,7 @@ export default function DeportesMasInfoPage() {
         </div>
       </section>
 
-      <SectionCarrusel />
+      <SectionCarrusel medios={alianzasMedia} />
       <Contact />
     </>
   )

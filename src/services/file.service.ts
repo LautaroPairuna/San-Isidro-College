@@ -4,17 +4,9 @@ import { pipeline } from "stream/promises";
 import { Readable } from "stream";
 import path from "path";
 import slugify from "slugify";
-import sharp from "sharp";
-import ffmpeg from "fluent-ffmpeg";
-import ffmpegInstaller from "@ffmpeg-installer/ffmpeg";
-import ffprobeInstaller from "@ffprobe-installer/ffprobe";
 import { folderNames, type PrismaTable } from "@/lib/publicConstants";
 
 const IMAGE_PUBLIC_DIR = process.env.MEDIA_DIR_IMAGES || path.resolve("public", "images");
-
-// Configurar rutas de binarios
-ffmpeg.setFfmpegPath(ffmpegInstaller.path);
-ffmpeg.setFfprobePath(ffprobeInstaller.path);
 
 // Store progress in a temporary directory
 const PROGRESS_DIR =
@@ -25,6 +17,35 @@ fs.mkdir(PROGRESS_DIR, { recursive: true }).catch(() => {});
 
 type ProgressStage = 'uploading' | 'compressing' | 'generating_thumbnail' | 'done' | 'error';
 type FileNamedBlob = Blob & { name?: string };
+
+let sharpModulePromise: Promise<typeof import('sharp')> | null = null;
+let ffmpegModulePromise: Promise<typeof import('fluent-ffmpeg')> | null = null;
+
+async function getSharp() {
+  sharpModulePromise ??= import('sharp');
+  const mod = await sharpModulePromise;
+  return mod.default;
+}
+
+async function getFfmpeg() {
+  if (!ffmpegModulePromise) {
+    ffmpegModulePromise = (async () => {
+      const [ffmpegModule, ffmpegInstaller, ffprobeInstaller] = await Promise.all([
+        import('fluent-ffmpeg'),
+        import('@ffmpeg-installer/ffmpeg'),
+        import('@ffprobe-installer/ffprobe'),
+      ]);
+
+      ffmpegModule.default.setFfmpegPath(ffmpegInstaller.default.path);
+      ffmpegModule.default.setFfprobePath(ffprobeInstaller.default.path);
+
+      return ffmpegModule;
+    })();
+  }
+
+  const mod = await ffmpegModulePromise;
+  return mod.default;
+}
 
 export type UploadProgress = {
   percent: number;
@@ -81,38 +102,46 @@ async function generateVideoThumbnail(videoPath: string): Promise<Buffer | null>
     console.log(`[FFmpeg] Iniciando generación de miniatura para: ${videoPath}`);
     
     let buf: Buffer | null = null;
-    
-    ffmpeg(videoPath)
-      .on('start', (cmd) => {
-        console.log(`[FFmpeg] Comando generado: ${cmd}`);
-      })
-      .screenshots({
-        timestamps: ['20%'], // 20% del video para evitar intros negras
-        filename: tempName,
-        folder: path.dirname(videoPath),
-        size: '?x?', // Mantener aspecto original
-      })
-      .on('end', async () => {
-        console.log(`[FFmpeg] Miniatura generada exitosamente: ${tempName}`);
-        // Leer el archivo generado
-        const thumbPath = path.join(path.dirname(videoPath), tempName);
-        try {
-            buf = await fs.readFile(thumbPath);
-            await fs.unlink(thumbPath); // Borrar temporal
-            resolve(buf);
-        } catch (e) {
-            console.error("[FFmpeg] Error leyendo thumb temporal:", e);
+
+    void getFfmpeg()
+      .then((ffmpeg) => {
+        ffmpeg(videoPath)
+          .on('start', (cmd) => {
+            console.log(`[FFmpeg] Comando generado: ${cmd}`);
+          })
+          .screenshots({
+            timestamps: ['20%'], // 20% del video para evitar intros negras
+            filename: tempName,
+            folder: path.dirname(videoPath),
+            size: '?x?', // Mantener aspecto original
+          })
+          .on('end', async () => {
+            console.log(`[FFmpeg] Miniatura generada exitosamente: ${tempName}`);
+            const thumbPath = path.join(path.dirname(videoPath), tempName);
+            try {
+              buf = await fs.readFile(thumbPath);
+              await fs.unlink(thumbPath);
+              resolve(buf);
+            } catch (e) {
+              console.error("[FFmpeg] Error leyendo thumb temporal:", e);
+              resolve(null);
+            }
+          })
+          .on('error', (err) => {
+            console.error("[FFmpeg] Error fatal:", err);
             resolve(null);
-        }
+          });
       })
-      .on('error', (err) => {
-        console.error("[FFmpeg] Error fatal:", err);
+      .catch((err) => {
+        console.error("[FFmpeg] Error cargando módulo:", err);
         resolve(null);
       });
   });
 }
 
-function compressVideo(inputPath: string, outputPath: string, progressId?: string): Promise<boolean> {
+async function compressVideo(inputPath: string, outputPath: string, progressId?: string): Promise<boolean> {
+  const ffmpeg = await getFfmpeg();
+
   return new Promise((resolve) => {
     if (progressId) updateProgress(progressId, 0, 'compressing');
     
@@ -290,6 +319,7 @@ export const fileService = {
         if (thumbBuf) {
           console.log(`[FileService] Miniatura generada, procesando con Sharp...`);
           const thumbName = `thumb-${path.parse(out).name}.webp`;
+          const sharp = await getSharp();
           await sharp(thumbBuf)
             .resize(300) // Un poco más grande para video
             .webp({ quality: 80 })
@@ -309,6 +339,7 @@ export const fileService = {
       // Imagen por defecto
       const out = `${slug}-${timestamp}.webp`;
       const buf = Buffer.from(await file.arrayBuffer());
+      const sharp = await getSharp();
       
       // Guardar principal
       await sharp(buf).webp().toFile(path.join(dir, out));
