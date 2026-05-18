@@ -1,3 +1,5 @@
+'use client'
+
 // src/components/RenderMedia.tsx
 import React, { memo, useState } from 'react'
 import Image from 'next/image'

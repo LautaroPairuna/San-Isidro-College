@@ -1,9 +1,9 @@
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import { PrismaClient } from "@/generated/prisma/client";
+import { Prisma, PrismaClient } from "@/generated/prisma/client";
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 const adapter = new PrismaMariaDb(process.env.DATABASE_URL ?? "");
-const prismaLogs =
+const prismaLogs: Prisma.LogLevel[] =
   process.env.PRISMA_LOG_QUERIES === "true"
     ? ["query", "error", "warn"]
     : ["error", "warn"];

@@ -18,13 +18,11 @@ fs.mkdir(PROGRESS_DIR, { recursive: true }).catch(() => {});
 type ProgressStage = 'uploading' | 'compressing' | 'generating_thumbnail' | 'done' | 'error';
 type FileNamedBlob = Blob & { name?: string };
 
-let sharpModulePromise: Promise<typeof import('sharp')> | null = null;
 let ffmpegModulePromise: Promise<typeof import('fluent-ffmpeg')> | null = null;
 
 async function getSharp() {
-  sharpModulePromise ??= import('sharp');
-  const mod = await sharpModulePromise;
-  return mod.default;
+  const sharpModule = await import('sharp');
+  return ('default' in sharpModule ? sharpModule.default : sharpModule) as typeof import('sharp');
 }
 
 async function getFfmpeg() {
@@ -36,15 +34,18 @@ async function getFfmpeg() {
         import('@ffprobe-installer/ffprobe'),
       ]);
 
-      ffmpegModule.default.setFfmpegPath(ffmpegInstaller.default.path);
-      ffmpegModule.default.setFfprobePath(ffprobeInstaller.default.path);
+      const ffmpeg = ('default' in ffmpegModule ? ffmpegModule.default : ffmpegModule) as typeof import('fluent-ffmpeg');
+      const ffmpegInstallerModule = 'default' in ffmpegInstaller ? ffmpegInstaller.default : ffmpegInstaller;
+      const ffprobeInstallerModule = 'default' in ffprobeInstaller ? ffprobeInstaller.default : ffprobeInstaller;
 
-      return ffmpegModule;
+      ffmpeg.setFfmpegPath(ffmpegInstallerModule.path);
+      ffmpeg.setFfprobePath(ffprobeInstallerModule.path);
+
+      return ffmpeg;
     })();
   }
 
-  const mod = await ffmpegModulePromise;
-  return mod.default;
+  return ffmpegModulePromise;
 }
 
 export type UploadProgress = {
