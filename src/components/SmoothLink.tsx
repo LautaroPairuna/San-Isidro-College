@@ -1,11 +1,15 @@
+'use client';
+
 import React from 'react';
 
 interface SmoothLinkProps {
   href: string;
   children: React.ReactNode;
+  className?: string;
+  'aria-label'?: string;
 }
 
-const SmoothLink: React.FC<SmoothLinkProps> = ({ href, children }) => {
+const SmoothLink: React.FC<SmoothLinkProps> = ({ href, children, className, 'aria-label': ariaLabel }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const targetId = href.substring(1); // Quita el "#" del href
@@ -26,7 +30,7 @@ const SmoothLink: React.FC<SmoothLinkProps> = ({ href, children }) => {
   };
 
   return (
-    <a href={href} onClick={handleClick} className="scroll-link">
+    <a href={href} onClick={handleClick} className={className ?? 'scroll-link'} aria-label={ariaLabel}>
       {children}
     </a>
   );
