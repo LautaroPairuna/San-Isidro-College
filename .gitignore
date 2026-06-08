@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# runtime state (caché de respaldo, progreso de uploads, etc.)
+# Se regenera en ejecución desde la DB; nunca debe viajar en el repo
+# porque sobrescribiría el estado vivo con datos obsoletos en cada deploy.
+/.runtime/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
