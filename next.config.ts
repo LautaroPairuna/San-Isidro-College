@@ -4,6 +4,10 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
+  // Salida standalone: genera un server mínimo en .next/standalone/server.js
+  // que sólo incluye las dependencias realmente usadas (menos RAM y menos
+  // archivos en el contenedor que `next start`, que carga todo el CLI de Next).
+  output: 'standalone',
   // Optimizaciones de imágenes
   images: {
     // Solo WebP: los originales ya se guardan optimizados en WebP (file.service),
@@ -16,12 +20,22 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   serverExternalPackages: [
-    'prisma', 
-    '@prisma/client', 
-    'fluent-ffmpeg', 
-    '@ffmpeg-installer/ffmpeg', 
+    'prisma',
+    '@prisma/client',
+    'fluent-ffmpeg',
+    '@ffmpeg-installer/ffmpeg',
     '@ffprobe-installer/ffprobe'
   ],
+
+  // En standalone, los binarios de ffmpeg/ffprobe se referencian por ruta
+  // (no por require), así que el file-tracer no los detecta solo. Los incluimos
+  // explícitamente para las rutas del admin que procesan video.
+  outputFileTracingIncludes: {
+    '/api/admin/resources/**': [
+      './node_modules/@ffmpeg-installer/**',
+      './node_modules/@ffprobe-installer/**',
+    ],
+  },
 
   async rewrites() {
     return [
