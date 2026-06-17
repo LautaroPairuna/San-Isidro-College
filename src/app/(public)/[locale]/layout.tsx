@@ -1,34 +1,28 @@
 // app/(public)/[locale]/layout.tsx
 import { ReactNode } from 'react';
-import { getMessages } from 'next-intl/server';
+import type { Metadata } from 'next';
+import { getMessages, getTranslations } from 'next-intl/server';
 import ClientAppProviders from './ClientAppProviders';
 import FloatingAdmissionsButton from '@/components/FloatingAdmissionsButton';
-
-export const metadata = {
-  title: 'San Isidro College – Home',
-  description:
-    'San Isidro College es un colegio bilingüe con un proyecto educativo sólido e innovador en Salta, Argentina.',
-  openGraph: {
-    title: 'San Isidro College – Home',
-    description:
-      'San Isidro College es un colegio bilingüe con un proyecto educativo sólido e innovador en Salta, Argentina.',
-    locale: 'es_ES',
-    type: 'website',
-    url: 'https://tusitio.com',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'San Isidro College – Home',
-    description:
-      'San Isidro College es un colegio bilingüe con un proyecto educativo sólido e innovador en Salta, Argentina.',
-  },
-};
+import SeoJsonLd from '@/components/SeoJsonLd';
+import { buildPageMetadata } from '@/lib/seo';
 
 type Props = {
   // Next.js 15+: params es asincrónico
   params: Promise<{ locale: string }>;
   children: ReactNode;
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo.home' });
+  return buildPageMetadata({
+    locale,
+    path: '',
+    title: t('title'),
+    description: t('description'),
+  });
+}
 
 export default async function PublicLayout({ children, params }: Props) {
   // ⚠️ getMessages espera un objeto { locale: string }
@@ -37,6 +31,7 @@ export default async function PublicLayout({ children, params }: Props) {
 
   return (
     <ClientAppProviders locale={locale} messages={messages}>
+      <SeoJsonLd locale={locale} />
       {children}
       <FloatingAdmissionsButton />
     </ClientAppProviders>

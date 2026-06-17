@@ -1,4 +1,30 @@
 {
+  "seo": {
+    "home": {
+      "title": "San Isidro College | Colegio bilingüe en Salta, Argentina",
+      "description": "Colegio bilingüe de orientación católica en San Lorenzo, Salta. Proyecto educativo sólido e innovador, con programas internacionales y formación integral. Conocé San Isidro College."
+    },
+    "colegio": {
+      "title": "El Colegio | San Isidro College — Salta",
+      "description": "Conocé el proyecto educativo de San Isidro College: formación integral bilingüe y de orientación católica en San Lorenzo, Salta, Argentina."
+    },
+    "academicos": {
+      "title": "Académicos | San Isidro College — Salta",
+      "description": "Propuesta académica de San Isidro College: niveles, programas internacionales y formación bilingüe en San Lorenzo, Salta, Argentina."
+    },
+    "academicosMasInfo": {
+      "title": "Más sobre lo Académico | San Isidro College",
+      "description": "Información ampliada de la propuesta académica bilingüe de San Isidro College en San Lorenzo, Salta, Argentina."
+    },
+    "vidaEstudiantil": {
+      "title": "Vida Estudiantil | San Isidro College — Salta",
+      "description": "Deportes, arte y actividades de la vida estudiantil en San Isidro College, San Lorenzo, Salta, Argentina."
+    },
+    "vidaEstudiantilMasInfo": {
+      "title": "Más sobre Vida Estudiantil | San Isidro College",
+      "description": "Descubrí más sobre la vida estudiantil y las actividades extracurriculares de San Isidro College en Salta, Argentina."
+    }
+  },
   "home": {
     "hero": {
       "alt": "Carrusel Principal",
