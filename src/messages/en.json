@@ -1,4 +1,30 @@
 {
+  "seo": {
+    "home": {
+      "title": "San Isidro College | Bilingual School in Salta, Argentina",
+      "description": "Catholic bilingual school in San Lorenzo, Salta. A solid, innovative educational project with international programs and integral education. Discover San Isidro College."
+    },
+    "colegio": {
+      "title": "The School | San Isidro College — Salta",
+      "description": "Discover San Isidro College's educational project: integral bilingual, Catholic-oriented education in San Lorenzo, Salta, Argentina."
+    },
+    "academicos": {
+      "title": "Academics | San Isidro College — Salta",
+      "description": "San Isidro College's academic program: levels, international programs and bilingual education in San Lorenzo, Salta, Argentina."
+    },
+    "academicosMasInfo": {
+      "title": "More about Academics | San Isidro College",
+      "description": "Extended information about San Isidro College's bilingual academic program in San Lorenzo, Salta, Argentina."
+    },
+    "vidaEstudiantil": {
+      "title": "Student Life | San Isidro College — Salta",
+      "description": "Sports, arts and student life activities at San Isidro College, San Lorenzo, Salta, Argentina."
+    },
+    "vidaEstudiantilMasInfo": {
+      "title": "More about Student Life | San Isidro College",
+      "description": "Discover more about student life and extracurricular activities at San Isidro College in Salta, Argentina."
+    }
+  },
   "home": {
     "hero": {
       "alt": "Hero Carousel",

@@ -26,10 +26,8 @@ const ContactSection = () => {
             <hr className="my-6 border-gray-300" />
             <div className="flex items-center justify-center gap-6">
               {[
-                { href: 'https://instagram.com', src: '/images/ico-instagram.svg', alt: 'Instagram' },
-                { href: 'https://facebook.com',  src: '/images/ico-facebook.svg',  alt: 'Facebook' },
-                { href: 'https://youtube.com',   src: '/images/ico-youtube.svg',   alt: 'YouTube' },
-                { href: 'https://linkedin.com',  src: '/images/ico-linkedin.svg',  alt: 'LinkedIn' },
+                { href: 'https://www.instagram.com/sanisidrocollegesalta/', src: '/images/ico-instagram.svg', alt: 'Instagram San Isidro College' },
+                { href: 'https://www.facebook.com/sanisidrocollege/',        src: '/images/ico-facebook.svg',  alt: 'Facebook San Isidro College' },
               ].map(({ href, src, alt }) => (
                 <a
                   key={alt}

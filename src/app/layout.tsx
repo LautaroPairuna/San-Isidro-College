@@ -2,6 +2,8 @@
 import '@/app/globals.css';
 import { Toaster } from 'react-hot-toast';
 import localFont from 'next/font/local';
+import { getLocale } from 'next-intl/server';
+import { getBaseUrl, siteConfig } from '@/lib/siteConfig';
 
 // Configuración de fuentes locales (Gotham)
 const gotham = localFont({
@@ -52,12 +54,21 @@ const harlows = localFont({
 });
 
 export const metadata = {
-  title: 'Colegio San Isidro',
+  metadataBase: new URL(getBaseUrl()),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // El locale se resuelve desde la URL (vía next-intl). En rutas sin prefijo
+  // (p. ej. /admin) cae al locale por defecto.
+  const locale = await getLocale();
+
   return (
-    <html lang="es" className={`${gotham.variable} ${acumin.variable} ${harlows.variable}`}>
+    <html lang={locale} className={`${gotham.variable} ${acumin.variable} ${harlows.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />

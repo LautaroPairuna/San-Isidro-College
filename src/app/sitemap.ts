@@ -1,13 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { routing } from '@/i18n/routing'
-
-function getBaseUrl(): string {
-  const raw =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.SITE_URL ||
-    'http://localhost:3000'
-  return raw.replace(/\/+$/, '')
-}
+import { getBaseUrl } from '@/lib/siteConfig'
 
 const PUBLIC_PATHS = [
   '',
@@ -33,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
 
     const canonical = languages[routing.defaultLocale] ?? languages[routing.locales[0]]!
+    // x-default mejora el targeting internacional (Google elige el idioma por usuario).
+    languages['x-default'] = canonical
 
     urls.push({
       url: canonical,

@@ -1,15 +1,15 @@
-// app/colegio/layout.tsx
+// app/(public)/[locale]/colegio/layout.tsx
 import { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Colegio - San Isidro College',
-  description: 'Página Colegio',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo.colegio' });
+  return buildPageMetadata({ locale, path: 'colegio', title: t('title'), description: t('description') });
+}
 
 export default function ColegioLayout({ children }: { children: ReactNode }) {
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
