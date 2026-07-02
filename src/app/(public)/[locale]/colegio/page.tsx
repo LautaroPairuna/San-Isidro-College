@@ -71,7 +71,10 @@ const ColegioPage = async ({ params }: PageProps) => {
           </div>
 
           {/* INSTALACIONES */}
-          <h3 className="text-4xl md:text-5xl font-bold mt-32 my-4 text-gray-800 text-shadow-bold-movil">
+          <h3
+            id="instalaciones"
+            className="text-4xl md:text-5xl font-bold mt-32 my-4 text-gray-800 text-shadow-bold-movil"
+          >
             {t("instalacionesTitle")}
           </h3>
           <div className="mt-6 w-full aspect-video overflow-hidden rounded-lg shadow-lg bg-black/5">

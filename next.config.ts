@@ -41,9 +41,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // ---- Institucional ----
-      { source: '/institucional.html',          destination: '/es/colegio',                         permanent: true },
+      { source: '/institucional.html',          destination: '/es/colegio#proyecto',                permanent: true },
       { source: '/mision-vision-valores.html',  destination: '/es/colegio#mision',                  permanent: true },
-      { source: '/asesoria-pedagogica.html',    destination: '/es/colegio',                         permanent: true },
+      { source: '/asesoria-pedagogica.html',    destination: '/es/colegio#educacion-personalizada', permanent: true },
       { source: '/horarios.html',               destination: '/es/colegio',                         permanent: true },
       { source: '/escudo.html',                 destination: '/es/colegio#valores',                 permanent: true },
 
@@ -54,20 +54,20 @@ const nextConfig: NextConfig = {
 
       // ---- Actividades ----
       { source: '/actividades---deportes.html', destination: '/es/vida-estudiantil#deportes',       permanent: true },
-      { source: '/arte.html',                   destination: '/es/vida-estudiantil',                permanent: true },
+      { source: '/arte.html',                   destination: '/es/vida-estudiantil#play-habilidades-steam', permanent: true },
       { source: '/tic.html',                    destination: '/es/vida-estudiantil#play-habilidades-steam', permanent: true },
-      { source: '/huerta.html',                 destination: '/es/vida-estudiantil',                permanent: true },
+      { source: '/huerta.html',                 destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
       { source: '/formacion-religiosa.html',    destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
-      { source: '/instalaciones.html',          destination: '/es/colegio',                         permanent: true },
+      { source: '/instalaciones.html',          destination: '/es/colegio#instalaciones',           permanent: true },
       { source: '/ubicacion.html',              destination: '/es/#contacto',                       permanent: true },
 
       // ---- Galería de fotos ----
       { source: '/deporte.html',                destination: '/es/vida-estudiantil#deportes',       permanent: true },
-      { source: '/family-day.html',             destination: '/es/vida-estudiantil',                permanent: true },
-      { source: '/arte-galeria.html',           destination: '/es/vida-estudiantil',                permanent: true },
-      { source: '/huerta-galeria.html',         destination: '/es/vida-estudiantil',                permanent: true },
+      { source: '/family-day.html',             destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
+      { source: '/arte-galeria.html',           destination: '/es/vida-estudiantil#play-habilidades-steam', permanent: true },
+      { source: '/huerta-galeria.html',         destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
       { source: '/formacion-religiosa-galeria.html', destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
-      { source: '/instalaciones-galeria.html',  destination: '/es/colegio',                         permanent: true },
+      { source: '/instalaciones-galeria.html',  destination: '/es/colegio#instalaciones',           permanent: true },
       { source: '/admisiones.html',             destination: '/es',                                 permanent: true },
 
       // ---- Trabaja con nosotros ----

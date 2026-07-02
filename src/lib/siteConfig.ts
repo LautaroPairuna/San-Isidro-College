@@ -2,11 +2,18 @@
 // Se usa para SEO (metadata, hreflang, JSON-LD, geo meta tags) y como única
 // fuente de verdad para la URL base.
 
+// Dominio de producción (post-migración de DNS). Se usa como fallback cuando el
+// hosting no define NEXT_PUBLIC_SITE_URL / SITE_URL, para evitar que canonical,
+// hreflang, sitemap y Open Graph queden apuntando a localhost en producción.
+export const PRODUCTION_SITE_URL = 'https://www.sanisidrocollege.com.ar';
+
 export function getBaseUrl(): string {
   const raw =
     process.env.NEXT_PUBLIC_SITE_URL ||
     process.env.SITE_URL ||
-    'http://localhost:3000';
+    (process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : PRODUCTION_SITE_URL);
   return raw.replace(/\/+$/, '');
 }
 
