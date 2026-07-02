@@ -35,7 +35,9 @@ export const siteConfig = {
     'San Isidro College es un colegio bilingüe de orientación católica con un proyecto educativo sólido e innovador en San Lorenzo, Salta, Argentina.',
   email: 'info@colegiosanisidrosalta.edu.ar',
   // Imagen por defecto para compartir en redes (Open Graph / Twitter).
-  defaultOgImage: '/images/fondo-home.webp',
+  // PNG 1200x630 con el logo institucional: WhatsApp/Facebook no renderizan SVG
+  // ni WebP de forma confiable en previews, por eso usamos un raster con la marca.
+  defaultOgImage: '/images/og-san-isidro.png',
   address: {
     streetAddress: 'Avenida Finca Yerba Buena 1500',
     addressLocality: 'San Lorenzo',
