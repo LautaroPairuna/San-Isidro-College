@@ -1,14 +1,16 @@
 import type { MetadataRoute } from 'next'
-import { routing } from '@/i18n/routing'
+import { routing, type AppPathname } from '@/i18n/routing'
+import { getPathname } from '@/i18n/navigation'
 import { getBaseUrl } from '@/lib/siteConfig'
 
-const PUBLIC_PATHS = [
-  '',
-  'colegio',
-  'academicos',
-  'academicos-mas-info',
-  'vida-estudiantil',
-  'vida-estudiantil-mas-info',
+// Pathnames internos públicos (claves del mapa de rutas localizadas).
+const PUBLIC_HREFS: AppPathname[] = [
+  '/',
+  '/colegio',
+  '/academicos',
+  '/academicos-mas-info',
+  '/vida-estudiantil',
+  '/vida-estudiantil-mas-info',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -17,12 +19,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const urls: MetadataRoute.Sitemap = []
 
-  for (const path of PUBLIC_PATHS) {
+  for (const href of PUBLIC_HREFS) {
     const languages: Record<string, string> = {}
     for (const locale of routing.locales) {
-      const localePrefix = `/${locale}`
-      const suffix = path ? `/${path}` : ''
-      languages[locale] = `${baseUrl}${localePrefix}${suffix}`
+      // getPathname resuelve el slug localizado (p. ej. /en/school) con prefijo.
+      languages[locale] = `${baseUrl}${getPathname({ locale, href })}`
     }
 
     const canonical = languages[routing.defaultLocale] ?? languages[routing.locales[0]]!
@@ -33,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: canonical,
       lastModified,
       changeFrequency: 'weekly',
-      priority: path === '' ? 1 : 0.8,
+      priority: href === '/' ? 1 : 0.8,
       alternates: { languages },
     })
   }

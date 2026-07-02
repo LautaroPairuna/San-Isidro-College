@@ -7,7 +7,7 @@ import { buildPageMetadata } from '@/lib/seo';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'seo.academicos' });
-  return buildPageMetadata({ locale, path: 'academicos', title: t('title'), description: t('description') });
+  return buildPageMetadata({ locale, href: '/academicos', title: t('title'), description: t('description') });
 }
 
 export default function AcademicosLayout({ children }: { children: ReactNode }) {

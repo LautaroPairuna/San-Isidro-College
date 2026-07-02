@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
-import { routing } from '@/i18n/routing';
+import { routing, type AppPathname } from '@/i18n/routing';
+import { getPathname } from '@/i18n/navigation';
 import { getBaseUrl, siteConfig, GEO, OG_LOCALES } from '@/lib/siteConfig';
+
+type AppLocale = (typeof routing.locales)[number];
 
 type BuildMetadataArgs = {
   locale: string;
-  /** Ruta sin el prefijo de locale, p. ej. '' (home) o 'colegio'. */
-  path?: string;
+  /** Pathname interno de la ruta, p. ej. '/' (home) o '/colegio'. */
+  href?: AppPathname;
   title: string;
   description: string;
   /** Imagen para compartir (ruta absoluta o relativa al dominio). */
@@ -25,22 +28,26 @@ function toAbsolute(baseUrl: string, src: string): string {
  */
 export function buildPageMetadata({
   locale,
-  path = '',
+  href = '/',
   title,
   description,
   image,
 }: BuildMetadataArgs): Metadata {
   const baseUrl = getBaseUrl();
-  const suffix = path ? `/${path}` : '';
+
+  // Cada idioma tiene su propio slug (localized pathnames), por eso resolvemos
+  // la ruta por locale en lugar de reutilizar el mismo sufijo. getPathname ya
+  // incluye el prefijo de locale (p. ej. '/en/school').
+  const localizedPath = (loc: AppLocale) => getPathname({ locale: loc, href });
 
   const languages: Record<string, string> = {};
   for (const loc of routing.locales) {
-    languages[loc] = `${baseUrl}/${loc}${suffix}`;
+    languages[loc] = `${baseUrl}${localizedPath(loc)}`;
   }
   // x-default apunta al locale por defecto (mejor práctica para SEO internacional).
-  languages['x-default'] = `${baseUrl}/${routing.defaultLocale}${suffix}`;
+  languages['x-default'] = `${baseUrl}${localizedPath(routing.defaultLocale)}`;
 
-  const canonical = `${baseUrl}/${locale}${suffix}`;
+  const canonical = `${baseUrl}${localizedPath(locale as AppLocale)}`;
   const ogImage = toAbsolute(baseUrl, image ?? siteConfig.defaultOgImage);
   const ogLocale = OG_LOCALES[locale] ?? OG_LOCALES[routing.defaultLocale];
   const alternateLocales = routing.locales

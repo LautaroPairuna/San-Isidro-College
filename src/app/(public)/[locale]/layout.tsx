@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'seo.home' });
   return buildPageMetadata({
     locale,
-    path: '',
+    href: '/',
     title: t('title'),
     description: t('description'),
   });

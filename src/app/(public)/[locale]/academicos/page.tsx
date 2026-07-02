@@ -150,7 +150,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   <p className="text-gray-700 leading-relaxed">
                     {t('kinder.p3')}
                   </p>
-                  <Link href="/academicos-mas-info#kindergarten">
+                  <Link href={{ pathname: "/academicos-mas-info", hash: "kindergarten" }}>
                     <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                       {t('kinder.readMore')}
                     </span>
@@ -188,7 +188,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   <p className="text-gray-700 leading-relaxed">
                     {t('kinder.mobileBrief')}
                   </p>
-                  <Link href="/academicos-mas-info#kindergarten">
+                  <Link href={{ pathname: "/academicos-mas-info", hash: "kindergarten" }}>
                     <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                       {t('kinder.readMore')}
                     </span>
@@ -257,7 +257,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 <p className="text-gray-700 leading-relaxed">
                   {t('primary.p1')}
                 </p>
-                <Link href="/academicos-mas-info#primary">
+                <Link href={{ pathname: "/academicos-mas-info", hash: "primary" }}>
                   <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                     {t('primary.readMore')}
                   </span>
@@ -296,7 +296,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               <p className="leading-relaxed text-gray-800">
                 {t('primary.p1')}
               </p>
-              <Link href="/academicos-mas-info#primary">
+              <Link href={{ pathname: "/academicos-mas-info", hash: "primary" }}>
                 <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                   {t('primary.readMore')}
                 </span>
@@ -340,7 +340,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   <p className="leading-relaxed text-gray-800">
                     {t('secondary.p1')}
                   </p>
-                  <Link href="/academicos-mas-info#secondary">
+                  <Link href={{ pathname: "/academicos-mas-info", hash: "secondary" }}>
                     <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                       {t('secondary.readMore')}
                     </span>
@@ -407,7 +407,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   <p className="leading-relaxed text-gray-800">
                     {t('secondary.p1')}
                   </p>
-                  <Link href="/academicos-mas-info#secondary">
+                  <Link href={{ pathname: "/academicos-mas-info", hash: "secondary" }}>
                     <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
                       {t('secondary.readMore')}
                     </span>

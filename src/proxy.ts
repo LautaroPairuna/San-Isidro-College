@@ -1,13 +1,11 @@
-// src/middleware.ts
+// src/proxy.ts (middleware de Next.js 16)
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
-export default createMiddleware({
-  locales:       routing.locales,
-  defaultLocale: routing.defaultLocale,
-  // Siempre anteponemos el prefijo (incluso para el defaultLocale)
-  localePrefix:  'always'
-});
+// Pasamos el objeto `routing` completo para que el middleware aplique también
+// los `pathnames` localizados (p. ej. /en/school -> interno /en/colegio) además
+// del prefijo de locale.
+export default createMiddleware(routing);
 
 export const config = {
   matcher: [

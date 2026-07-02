@@ -404,7 +404,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-2xl font-bold text-center">{t('vida.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.description')}</p>
               <div className="text-center mt-5">
-                <Link href="/vida-estudiantil-mas-info/#bienestar" className="text-[#1e804b] font-semibold hover:underline">
+                <Link href={{ pathname: "/vida-estudiantil-mas-info", hash: "bienestar" }} className="text-[#1e804b] font-semibold hover:underline">
                   {t('vida.readMore')}
                 </Link>
               </div>
@@ -454,7 +454,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-xl font-bold">{t('vida.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.descriptionMobile')}</p>
               <div className="mt-5">
-                <Link href="/vida-estudiantil-mas-info/#bienestar" className="text-[#1e804b] font-semibold hover:underline">
+                <Link href={{ pathname: "/vida-estudiantil-mas-info", hash: "bienestar" }} className="text-[#1e804b] font-semibold hover:underline">
                   {t('vida.readMore')}
                 </Link>
               </div>
