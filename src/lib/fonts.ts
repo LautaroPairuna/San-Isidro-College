@@ -1,0 +1,55 @@
+// src/lib/fonts.ts
+// Fuentes locales compartidas por los root layouts de (public) y (admin).
+// Viven en un módulo aparte porque el árbol de la app tiene dos root layouts
+// (uno por grupo de rutas) y next/font exige definir cada fuente una sola vez.
+import localFont from 'next/font/local';
+
+// Configuración de fuentes locales (Gotham)
+export const gotham = localFont({
+  src: [
+    {
+      path: '../../public/fonts/GothamLight.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/GothamBook.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/GothamBookItalic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/GothamBold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/GothamBoldItalic.woff2',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-gotham', // Variable CSS para Tailwind
+  display: 'swap',
+});
+
+// Configuración de fuente Acumin (Variable)
+export const acumin = localFont({
+  src: '../../public/fonts/Acumin-Variable-Concept.woff2',
+  variable: '--font-acumin',
+  weight: '100 900',
+  display: 'swap',
+});
+
+// Configuración de fuente Harlows
+export const harlows = localFont({
+  src: '../../public/fonts/HARLOWSI.woff2',
+  variable: '--font-harlows',
+  display: 'swap',
+});
+
+export const fontVariables = `${gotham.variable} ${acumin.variable} ${harlows.variable}`;

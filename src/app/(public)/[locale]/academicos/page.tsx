@@ -3,7 +3,7 @@ import { Link } from '@/i18n/navigation'
 import RenderMedia from '@/components/RenderMedia'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 // Slugs de secciones (coinciden con DB)
@@ -34,7 +34,9 @@ type MedioMinimal = {
   actualizadoEn?: string
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -42,6 +44,8 @@ type PageProps = {
 
 const AcademicosPage = async ({ params }: PageProps) => {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'academicosHome' })
 
   const pageSections = await getPageContentForSlug('academicos')

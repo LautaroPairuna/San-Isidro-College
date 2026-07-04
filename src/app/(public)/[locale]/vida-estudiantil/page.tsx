@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation'
 import MediaCarousel from '@/components/MediaCarousel'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
@@ -33,7 +33,9 @@ type MedioItem = {
   grupoMediosId: number
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -41,6 +43,8 @@ type PageProps = {
 
 export default async function DeportesPage({ params }: PageProps) {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */

@@ -4,6 +4,10 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
+  // El caché incremental (ISR) vive sólo en disco: sin LRU en memoria
+  // (por defecto Next reserva hasta 50MB de RAM para esto).
+  cacheMaxMemorySize: 0,
+
   // Optimizaciones de imágenes
   images: {
     // Solo WebP: los originales ya se guardan optimizados en WebP (file.service),
