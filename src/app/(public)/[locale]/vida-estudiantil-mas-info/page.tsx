@@ -3,10 +3,12 @@ import SmoothLink from '@/components/SmoothLink'
 import AsideMenu from '@/components/AsideMenu'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -14,6 +16,8 @@ type PageProps = {
 
 export default async function DeportesMasInfoPage({ params }: PageProps) {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'vidaEstudiantilMasInfo' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
 

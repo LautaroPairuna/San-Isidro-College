@@ -6,7 +6,7 @@ import { toPublicImageUrl } from '@/lib/publicConstants'
 import FlipCardsCarousel from '@/components/FlipCardsCarousel'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 const CARD_MEDIA_SECTION_SLUG = 'academicos-mas-info-cards'
 
@@ -57,7 +57,9 @@ const FLIP_CARDS = [
 
 type CardI18nKey = (typeof FLIP_CARDS)[number]['key']
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -65,6 +67,8 @@ type PageProps = {
 
 export default async function AcademicosMasInfoPage({ params }: PageProps) {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'academicosMasInfo' })
   const pageSections = await getPageContentForSlug('academicos-mas-info')
   const alianzasMedia = await getMediaGroupByName('Alianzas')
