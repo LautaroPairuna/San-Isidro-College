@@ -129,12 +129,12 @@ const Header: React.FC = () => {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto p-6 md:rounded-b-lg md:shadow-lg overflow-y-auto md:overflow-y-visible">
+          <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto px-6 py-5 md:px-10 md:py-4 xl:px-14 xl:py-5 2xl:px-16 overflow-y-auto md:overflow-y-visible">
             {/* Desktop: idioma + cerrar arriba a la derecha */}
-            <div className="absolute top-4 right-6 hidden md:flex items-center gap-3">
+            <div className="absolute top-4 right-6 hidden md:flex items-center gap-3 xl:right-8">
               <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                 <button
-                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                  className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                   }`}
                 >
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
               </Link>
               <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
                 <button
-                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                  className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                   }`}
                 >
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
               </Link>
               <button
                 id="closeMenu"
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
+                className="w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Cerrar menú"
               >
@@ -170,7 +170,7 @@ const Header: React.FC = () => {
             </button>
 
             {/* Logo en menú */}
-            <div className="flex flex-col md:flex-row justify-start items-center mb-6">
+            <div className="mb-8 flex flex-col items-start justify-start md:mb-12">
               <Link href={getAlternateRoute(locale)} onClick={handleNavClick} className="flex items-center">
                 <Image
                   id="menuLogo"
@@ -178,7 +178,7 @@ const Header: React.FC = () => {
                   alt="Logo de San Isidro"
                   width={180}
                   height={90}
-                  className="h-20 w-auto"
+                  className="h-16 md:h-18 xl:h-20 w-auto"
                 />
               </Link>
               {/* Mobile: idiomas debajo del logo */}
@@ -205,19 +205,19 @@ const Header: React.FC = () => {
             </div>
 
             {/* Menú principal */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10 xl:gap-12">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-4 xl:gap-0">
               {/* El Colegio */}
-              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-2">
+              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
+                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
                   {locale === "es" ? "El Colegio" : "The School"}
                 </h2>
-                <ul className="space-y-1">
+                <ul className="space-y-3 text-[1.05rem] leading-snug">
                   <li>
                     <Link
                       href={`/${locale}/colegio#proyecto`}
                       id="proyecto-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "Proyecto Educativo Bilingüe" : "Project in Bilingual Education"}
                     </Link>
@@ -227,7 +227,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#mision`}
                       id="mision-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "Misión, Vision y Valores" : "Mission, Vision and Values"}
                     </Link>
@@ -237,7 +237,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#educacion-personalizada`}
                       id="educacion-personalizada-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "Educación Personalizada" : "Personalized Education"}
                     </Link>
@@ -246,16 +246,16 @@ const Header: React.FC = () => {
               </div>
 
               {/* Académicos */}
-              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-2">
+              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
+                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
                   {locale === "es" ? "Académicos" : "Academics"}
                 </h2>
-                <ul className="space-y-1">
+                <ul className="space-y-3 text-[1.05rem] leading-snug">
                   <li>
                     <Link
                       href={`/${locale}/academicos`}
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "Proyecto Bilingüe" : "Bilingual Project"}
                     </Link>
@@ -265,7 +265,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/academicos#kindergarten`}
                       id="kindergarten-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3"
+                      className="block hover:underline"
                     >
                       {locale === "es" ? "Kindergarten" : "Kindergarten"}
                     </Link>
@@ -275,7 +275,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/academicos#primary`}
                       id="primary-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3"
+                      className="block hover:underline"
                     >
                       {locale === "es" ? "Primary" : "Primary"}
                     </Link>
@@ -285,7 +285,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/academicos#secondary`}
                       id="secondary-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3"
+                      className="block hover:underline"
                     >
                       {locale === "es" ? "Secondary" : "Secondary"}
                     </Link>
@@ -293,16 +293,16 @@ const Header: React.FC = () => {
                 </ul>
               </div>
               {/* Vida Estudiantil */}
-              <div className="xl:border-l-2 lg:border-l-0 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-2">
+              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
+                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
                   {locale === "es" ? "Vida Estudiantil" : "Student Life"}
                 </h2>
-                <ul className="space-y-1">
+                <ul className="space-y-3 text-[1.05rem] leading-snug">
                   <li>
                     <Link
                       href={`/${locale}/vida-estudiantil#deportes`}
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "Deportes" : "Sports"}
                     </Link>
@@ -311,7 +311,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/vida-estudiantil#bienestar-estudiantil`}
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "Bienestar Estudiantil" : "Student Welfare"}
                     </Link>
@@ -320,7 +320,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/vida-estudiantil#play-habilidades-steam`}
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block max-w-[220px] hover:underline"
                     >
                       {locale === "es" ? "San Isidro Play" : "San Isidro Play"}
                     </Link>
@@ -329,14 +329,14 @@ const Header: React.FC = () => {
               </div>
 
               {/* Contacto */}
-              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-4">
+              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
+                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h2>
                 <Link
                   href="mailto:cv@colegiosanisidrosalta.edu.ar"
                   onClick={handleNavClick}
-                  className="block hover:underline my-3 max-w-[180px]"
+                  className="block max-w-[220px] text-[1.05rem] leading-snug hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -345,7 +345,7 @@ const Header: React.FC = () => {
                 <Link
                   href={`/${locale}/#contacto`}
                   onClick={handleNavClick}
-                  className="block hover:underline my-3 max-w-[180px]"
+                  className="mt-3 block max-w-[220px] text-[1.05rem] leading-snug hover:underline"
                 >
                   {locale === "es" ? "Tel. y Ubicacion" : "Phone and Location"}
                 </Link>
