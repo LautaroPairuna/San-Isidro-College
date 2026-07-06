@@ -2,10 +2,9 @@
 'use client'
 
 import { useState } from "react"
-import Link from "next/link"
 import Image from "next/image"
 import { useLocale } from "next-intl"
-import { usePathname } from "next/navigation"
+import { Link, usePathname } from "@/i18n/navigation"
 import type { MouseEvent } from "react"
 
 const Header: React.FC = () => {
@@ -13,22 +12,10 @@ const Header: React.FC = () => {
 
   // next-intl: devuelve el locale actual ('es' o 'en')
   const locale = useLocale() as "es" | "en"
-  // Obtiene la ruta completa incluyendo el prefijo de idioma, p.ej. "/es/colegio", "/en/contacto"
-  const pathname = usePathname() || "/"
-
-  // Calcula la ruta con el otro idioma, reemplazando el primer segmento
-  const getAlternateRoute = (targetLocale: "es" | "en") => {
-    // Separamos la ruta en segmentos: ["", "es", "colegio", "mision", ...]
-    const segments = pathname.split("/")
-    // Si el primer segmento tras la "/" coincide con el locale, lo reemplazamos
-    if (segments[1] === locale) {
-      segments[1] = targetLocale
-    } else {
-      // Si no tiene prefijo (p.ej. pathname === "/"), lo anteponemos
-      segments.splice(1, 0, targetLocale)
-    }
-    return segments.join("/") || `/${targetLocale}`
-  }
+  // Pathname INTERNO (sin prefijo de locale y sin traducir), p.ej. "/colegio".
+  // El componente Link se encarga de traducirlo al slug de cada idioma, por eso
+  // el botón de idioma conserva la página actual y solo cambia el locale.
+  const pathname = usePathname()
 
   // Seleccionar logo según estado
   const getLogoSrc = () => {
@@ -61,7 +48,7 @@ const Header: React.FC = () => {
                 logo-container bg-white py-3 sm:py-6 md:py-8 px-4 sm:px-8 md:px-12 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0
               `}
             >
-              <Link href={`/${locale}#home`} onClick={() => setMenuOpen(false)}>
+              <Link href="/" onClick={() => setMenuOpen(false)}>
                 <Image
                   id="logo"
                   src={getLogoSrc()}
@@ -80,7 +67,7 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-2 sm:me-10 me-3">
               <div className="hidden md:flex items-center gap-3 me-5">
                 {/* Botones de cambio de idioma: estilo circular ESP/ING */}
-                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
+                <Link href={pathname} locale="es" aria-label="Cambiar a Español">
                   <button
                     className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
@@ -89,7 +76,7 @@ const Header: React.FC = () => {
                     ESP
                   </button>
                 </Link>
-                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
+                <Link href={pathname} locale="en" aria-label="Cambiar a Inglés">
                   <button
                     className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
@@ -131,7 +118,7 @@ const Header: React.FC = () => {
         >
           <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto px-6 py-5 md:px-10 md:py-4 xl:px-14 xl:py-5 2xl:px-16 overflow-y-auto md:overflow-y-visible">
             {/* Desktop: idioma + cerrar arriba a la derecha */}
-            <div className="absolute top-4 right-6 hidden md:flex items-center gap-3 xl:right-8">
+            <div className="absolute top-4 right-6 hidden md:flex items-center gap-3">
               <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                 <button
                   className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
@@ -141,7 +128,7 @@ const Header: React.FC = () => {
                   ESP
                 </button>
               </Link>
-              <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
+              <Link href={pathname} locale="en" aria-label="Cambiar a Inglés">
                 <button
                   className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
@@ -170,7 +157,7 @@ const Header: React.FC = () => {
             </button>
 
             {/* Logo en menú */}
-            <div className="mb-8 flex flex-col items-start justify-start md:mb-12">
+            <div className="flex flex-col md:flex-row justify-start items-center mb-6">
               <Link href={getAlternateRoute(locale)} onClick={handleNavClick} className="flex items-center">
                 <Image
                   id="menuLogo"
@@ -183,7 +170,7 @@ const Header: React.FC = () => {
               </Link>
               {/* Mobile: idiomas debajo del logo */}
               <div className="flex gap-2 mt-4 md:hidden">
-                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
+                <Link href={pathname} locale="es" aria-label="Cambiar a Español">
                   <button
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
@@ -192,7 +179,7 @@ const Header: React.FC = () => {
                     ESP
                   </button>
                 </Link>
-                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
+                <Link href={pathname} locale="en" aria-label="Cambiar a Inglés">
                   <button
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
@@ -214,7 +201,7 @@ const Header: React.FC = () => {
                 <ul className="space-y-3 text-[1.05rem] leading-snug">
                   <li>
                     <Link
-                      href={`/${locale}/colegio#proyecto`}
+                      href={{ pathname: "/colegio", hash: "proyecto" }}
                       id="proyecto-link"
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
@@ -224,7 +211,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#mision`}
+                      href={{ pathname: "/colegio", hash: "mision" }}
                       id="mision-link"
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
@@ -234,7 +221,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#educacion-personalizada`}
+                      href={{ pathname: "/colegio", hash: "educacion-personalizada" }}
                       id="educacion-personalizada-link"
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
@@ -253,7 +240,7 @@ const Header: React.FC = () => {
                 <ul className="space-y-3 text-[1.05rem] leading-snug">
                   <li>
                     <Link
-                      href={`/${locale}/academicos`}
+                      href="/academicos"
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
                     >
@@ -262,7 +249,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/academicos#kindergarten`}
+                      href={{ pathname: "/academicos", hash: "kindergarten" }}
                       id="kindergarten-link"
                       onClick={handleNavClick}
                       className="block hover:underline"
@@ -272,7 +259,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/academicos#primary`}
+                      href={{ pathname: "/academicos", hash: "primary" }}
                       id="primary-link"
                       onClick={handleNavClick}
                       className="block hover:underline"
@@ -282,7 +269,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/academicos#secondary`}
+                      href={{ pathname: "/academicos", hash: "secondary" }}
                       id="secondary-link"
                       onClick={handleNavClick}
                       className="block hover:underline"
@@ -300,7 +287,7 @@ const Header: React.FC = () => {
                 <ul className="space-y-3 text-[1.05rem] leading-snug">
                   <li>
                     <Link
-                      href={`/${locale}/vida-estudiantil#deportes`}
+                      href={{ pathname: "/vida-estudiantil", hash: "deportes" }}
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
                     >
@@ -309,7 +296,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/vida-estudiantil#bienestar-estudiantil`}
+                      href={{ pathname: "/vida-estudiantil", hash: "bienestar-estudiantil" }}
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
                     >
@@ -318,7 +305,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/vida-estudiantil#play-habilidades-steam`}
+                      href={{ pathname: "/vida-estudiantil", hash: "play-habilidades-steam" }}
                       onClick={handleNavClick}
                       className="block max-w-[220px] hover:underline"
                     >
@@ -333,7 +320,7 @@ const Header: React.FC = () => {
                 <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
                   {locale === "es" ? "Contacto" : "Contact"}
                 </h2>
-                <Link
+                <a
                   href="mailto:cv@colegiosanisidrosalta.edu.ar"
                   onClick={handleNavClick}
                   className="block max-w-[220px] text-[1.05rem] leading-snug hover:underline"
@@ -341,9 +328,9 @@ const Header: React.FC = () => {
                   rel="noopener noreferrer"
                 >
                   {locale === "es" ? "Trabaja con nosotros" : "Work with us"}
-                </Link>
+                </a>
                 <Link
-                  href={`/${locale}/#contacto`}
+                  href={{ pathname: "/", hash: "contacto" }}
                   onClick={handleNavClick}
                   className="mt-3 block max-w-[220px] text-[1.05rem] leading-snug hover:underline"
                 >

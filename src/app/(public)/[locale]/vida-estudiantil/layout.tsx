@@ -1,15 +1,15 @@
-// app/deportes/layout.tsx
+// app/(public)/[locale]/vida-estudiantil/layout.tsx
 import { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Deportes - San Isidro College',
-  description: 'Página Deportes',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo.vidaEstudiantil' });
+  return buildPageMetadata({ locale, href: '/vida-estudiantil', title: t('title'), description: t('description') });
+}
 
-export default function DeportesLayout({ children }: { children: ReactNode }) {
-  return (
-    <>
-      {children}
-    </>
-  );
+export default function VidaEstudiantilLayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
 }

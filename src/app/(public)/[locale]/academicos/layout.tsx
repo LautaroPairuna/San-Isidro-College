@@ -1,9 +1,15 @@
+// app/(public)/[locale]/academicos/layout.tsx
 import { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { buildPageMetadata } from '@/lib/seo';
 
-export default function AcademicosLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return children;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo.academicos' });
+  return buildPageMetadata({ locale, href: '/academicos', title: t('title'), description: t('description') });
+}
+
+export default function AcademicosLayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
 }

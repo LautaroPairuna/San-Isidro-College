@@ -1,10 +1,11 @@
-// app/layout.tsx
-import '@/app/globals.css';
-import { Toaster } from 'react-hot-toast';
+// src/lib/fonts.ts
+// Fuentes locales compartidas por los root layouts de (public) y (admin).
+// Viven en un módulo aparte porque el árbol de la app tiene dos root layouts
+// (uno por grupo de rutas) y next/font exige definir cada fuente una sola vez.
 import localFont from 'next/font/local';
 
 // Configuración de fuentes locales (Gotham)
-const gotham = localFont({
+export const gotham = localFont({
   src: [
     {
       path: '../../public/fonts/GothamLight.woff2',
@@ -37,7 +38,7 @@ const gotham = localFont({
 });
 
 // Configuración de fuente Acumin (Variable)
-const acumin = localFont({
+export const acumin = localFont({
   src: '../../public/fonts/Acumin-Variable-Concept.woff2',
   variable: '--font-acumin',
   weight: '100 900',
@@ -45,27 +46,10 @@ const acumin = localFont({
 });
 
 // Configuración de fuente Harlows
-const harlows = localFont({
+export const harlows = localFont({
   src: '../../public/fonts/HARLOWSI.woff2',
   variable: '--font-harlows',
   display: 'swap',
 });
 
-export const metadata = {
-  title: 'Colegio San Isidro',
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="es" className={`${gotham.variable} ${acumin.variable} ${harlows.variable}`}>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-      </head>
-      <body className="font-gotham antialiased">
-        {children}
-        <Toaster position="top-right" />
-      </body>
-    </html>
-  );
-}
+export const fontVariables = `${gotham.variable} ${acumin.variable} ${harlows.variable}`;

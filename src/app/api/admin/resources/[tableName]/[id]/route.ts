@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { adminGuard } from "@/lib/auth-guard";
 import { resourceService, isValidTableName } from "@/services/resource.service";
 import {
@@ -93,6 +94,8 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
     if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
       invalidatePageContentMemoryCache();
       await refreshPageContentCacheAll();
+      // Regenera las páginas públicas cacheadas (ISR) con el contenido nuevo.
+      revalidatePath("/", "layout");
     }
 
     return NextResponse.json(updated);
@@ -123,6 +126,8 @@ export async function DELETE(_req: NextRequest, ctx: ParamsPromise<{ tableName: 
     if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
       invalidatePageContentMemoryCache();
       await refreshPageContentCacheAll();
+      // Regenera las páginas públicas cacheadas (ISR) con el contenido nuevo.
+      revalidatePath("/", "layout");
     }
 
     return NextResponse.json({ success: true });
