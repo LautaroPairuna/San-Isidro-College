@@ -1,30 +1,4 @@
 {
-  "seo": {
-    "home": {
-      "title": "San Isidro College | Colegio bilingüe en Salta, Argentina",
-      "description": "Colegio bilingüe de orientación católica en San Lorenzo, Salta. Proyecto educativo sólido e innovador, con programas internacionales y formación integral. Conocé San Isidro College."
-    },
-    "colegio": {
-      "title": "El Colegio | San Isidro College — Salta",
-      "description": "Conocé el proyecto educativo de San Isidro College: formación integral bilingüe y de orientación católica en San Lorenzo, Salta, Argentina."
-    },
-    "academicos": {
-      "title": "Académicos | San Isidro College — Salta",
-      "description": "Propuesta académica de San Isidro College: niveles, programas internacionales y formación bilingüe en San Lorenzo, Salta, Argentina."
-    },
-    "academicosMasInfo": {
-      "title": "Más sobre lo Académico | San Isidro College",
-      "description": "Información ampliada de la propuesta académica bilingüe de San Isidro College en San Lorenzo, Salta, Argentina."
-    },
-    "vidaEstudiantil": {
-      "title": "Vida Estudiantil | San Isidro College — Salta",
-      "description": "Deportes, arte y actividades de la vida estudiantil en San Isidro College, San Lorenzo, Salta, Argentina."
-    },
-    "vidaEstudiantilMasInfo": {
-      "title": "Más sobre Vida Estudiantil | San Isidro College",
-      "description": "Descubrí más sobre la vida estudiantil y las actividades extracurriculares de San Isidro College en Salta, Argentina."
-    }
-  },
   "home": {
     "hero": {
       "alt": "Carrusel Principal",
@@ -148,7 +122,7 @@
       },
       "innovacion": {
         "title": "Innovación y Tecnología de Vanguardia",
-        "backText": "Nuestra premisa es clara: lo primero es la persona. Innovación real: los alumnos construyen sus propios prototipos desde cero (sin kits comerciales), integrando ingeniería y electrónica. Inteligencia artificial: proyectos avanzados para liderar en entornos digitales. Infraestructura: aulas con pantallas interactivas touch y un laboratorio de alta complejidad totalmente equipado."
+        "backText": "Innovación real: los alumnos construyen sus propios prototipos desde cero (sin kits comerciales), integrando ingeniería y electrónica. Inteligencia artificial: proyectos avanzados para liderar en entornos digitales. Infraestructura: aulas con pantallas interactivas touch y un laboratorio de alta complejidad totalmente equipado."
       },
       "deportes": {
         "title": "Deportes",
@@ -276,6 +250,25 @@
       "secondary": "Secondary"
     }
   },
+  "academicosLevelsNav": {
+    "overviewTitle": "Conocé cada nivel",
+    "detailTitle": "Explorá los otros niveles",
+    "cta": "Ver nivel",
+    "levels": {
+      "kindergarden": {
+        "title": "Kindergarten",
+        "description": "Primeros años de inmersión bilingüe, juego, exploración y desarrollo integral desde el nivel inicial."
+      },
+      "primary": {
+        "title": "Primary",
+        "description": "Formación académica bilingüe con literatura, ciencia, creatividad y una transición sólida hacia nuevos desafíos."
+      },
+      "secondary": {
+        "title": "Secondary",
+        "description": "Proyecto de vida, proyección internacional, innovación y preparación para liderar el futuro."
+      }
+    }
+  },
   "vidaEstudiantilHome": {
     "loading": "Cargando sección Deportes…",
     "errors": {
@@ -337,6 +330,35 @@
       "descriptionMobile": "es la obra de teatro anual en inglés protagonizada por los talentosos alumnos del San Isidro College. Este evento combina actuación, canto y baile, destacando no solo el dominio del idioma inglés, sino también la creatividad y habilidades artísticas de nuestros estudiantes. \n\n Una tradición esperada cada año, San Isidro Play celebra el talento y esfuerzo de nuestra comunidad educativa, ofreciendo un espectáculo inolvidable para toda la familia. ¡Te esperamos para vivir esta mágica experiencia!"
     }
   },
+  "experienciaSicHome": {
+    "hero": {
+      "alt": "I am because we are",
+      "carouselAlt": "Carrusel Experiencia San Isidro",
+      "fallbackAlt": "Fondo Experiencia San Isidro",
+      "title": "Experiencia San Isidro",
+      "description": "La experiencia de crecer, aprender y compartir va mucho más allá del aula. En San Isidro College, cada actividad complementa la formación académica y ofrece nuevas oportunidades para desarrollar talentos, fortalecer vínculos y disfrutar de una comunidad que inspira a crecer."
+    },
+    "rugbyHockey": {
+      "title": "Bienestar Y Acompañamiento",
+      "description": "Creemos que cada alumno aprende mejor cuando se siente seguro, escuchado y acompañado. Por eso promovemos un entorno de confianza, respeto y cercanía, donde el bienestar forma parte de la experiencia educativa de todos los días.",
+      "readMore": "Leer mas"
+    },
+    "googleReferenceSchool": {
+      "title": "Google Reference School",
+      "description": "La innovación forma parte de nuestra identidad desde el primer día. Como Google Reference School, integramos la tecnología de manera significativa para potenciar el aprendizaje, la creatividad y la colaboración, preparando a nuestros alumnos para los desafíos del futuro.",
+      "readMore": "Leer mas"
+    },
+    "innovacionRobotica": {
+      "title": "Innovación y Robótica",
+      "description": "Un espacio donde las ideas se convierten en proyectos. Nuestro Laboratorio de Innovación y Robótica invita a los alumnos a explorar, diseñar, construir y experimentar, desarrollando habilidades para resolver los desafíos del presente y del futuro.",
+      "readMore": "Leer mas"
+    },
+    "actividadesExtracurriculares": {
+      "title": "Actividades Extracurriculares",
+      "description": "Cada alumno tiene talentos e intereses únicos. Por eso, nuestras actividades extracurriculares crean espacios donde pueden expresarse, desafiarse y crecer. A través de propuestas como Danza, Jiu-Jitsu y Gimnasio, complementamos la formación académica con experiencias que fortalecen el cuerpo, la mente y la confianza.",
+      "readMore": "Leer mas"
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Deportes",
     "intro": {
@@ -356,6 +378,40 @@
       "deportes": "Deportes",
       "vidaEstudiantil": "Bienestar Estudiantil",
       "play": "San Isidro Play"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "San Isidro College",
+      "description": "San Isidro College en Salta: educación bilingüe, formación integral y una propuesta académica orientada al desarrollo humano."
+    },
+    "colegio": {
+      "title": "El Colegio | San Isidro College",
+      "description": "Conocé el proyecto educativo, la misión, la visión, los valores y la propuesta de formación integral de San Isidro College."
+    },
+    "academicosMasInfo": {
+      "title": "Académicos | San Isidro College",
+      "description": "Descubrí la propuesta bilingüe, el recorrido académico y la formación en inglés de San Isidro College."
+    },
+    "kindergarden": {
+      "title": "Kindergarten | San Isidro College",
+      "description": "Conocé el nivel Kindergarten, la inmersión bilingüe temprana y el valor del juego en San Isidro College."
+    },
+    "primary": {
+      "title": "Primary | San Isidro College",
+      "description": "Explorá la propuesta de Primary, su metodología basada en literatura y la formación bilingüe de San Isidro College."
+    },
+    "secondary": {
+      "title": "Secondary | San Isidro College",
+      "description": "Descubrí Secondary, su proyección internacional, innovación y propuesta académica integral en San Isidro College."
+    },
+    "vidaEstudiantil": {
+      "title": "Deportes | San Isidro College",
+      "description": "Explorá deportes, bienestar, San Isidro Play y las experiencias que complementan la vida escolar en San Isidro College."
+    },
+    "vidaEstudiantilMasInfo": {
+      "title": "Deportes y Bienestar | San Isidro College",
+      "description": "Conocé el enfoque de deportes, bienestar estudiantil y acompañamiento integral de San Isidro College."
     }
   }
 }

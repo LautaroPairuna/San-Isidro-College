@@ -40,10 +40,16 @@ const nextConfig: NextConfig = {
 
   // Redirecciones 301 de la antigua web (.html) a las rutas de la web nueva.
   // Migración de DNS: las viejas páginas estáticas se consolidaron en /es/colegio,
-  // /es/academicos, /es/vida-estudiantil y el home (#contacto). Se preserva el SEO
+  // /es/academicos, /es/deportes y el home (#contacto). Se preserva el SEO
   // apuntando cada URL indexada a la sección equivalente.
   async redirects() {
     return [
+      // ---- Renombre de rutas públicas ----
+      { source: '/es/vida-estudiantil', destination: '/es/deportes', permanent: true },
+      { source: '/en/student-life', destination: '/en/sports', permanent: true },
+      { source: '/es/vida-estudiantil-mas-info', destination: '/es/deportes-mas-info', permanent: true },
+      { source: '/en/student-life-more-info', destination: '/en/sports-more-info', permanent: true },
+
       // ---- Institucional ----
       { source: '/institucional.html',          destination: '/es/colegio#proyecto',                permanent: true },
       { source: '/mision-vision-valores.html',  destination: '/es/colegio#mision',                  permanent: true },
@@ -57,20 +63,20 @@ const nextConfig: NextConfig = {
       { source: '/frances.html',                destination: '/es/academicos',                      permanent: true },
 
       // ---- Actividades ----
-      { source: '/actividades---deportes.html', destination: '/es/vida-estudiantil#deportes',       permanent: true },
-      { source: '/arte.html',                   destination: '/es/vida-estudiantil#play-habilidades-steam', permanent: true },
-      { source: '/tic.html',                    destination: '/es/vida-estudiantil#play-habilidades-steam', permanent: true },
-      { source: '/huerta.html',                 destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
-      { source: '/formacion-religiosa.html',    destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
+      { source: '/actividades---deportes.html', destination: '/es/deportes#deportes',               permanent: true },
+      { source: '/arte.html',                   destination: '/es/deportes#play-habilidades-steam', permanent: true },
+      { source: '/tic.html',                    destination: '/es/deportes#play-habilidades-steam', permanent: true },
+      { source: '/huerta.html',                 destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
+      { source: '/formacion-religiosa.html',    destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
       { source: '/instalaciones.html',          destination: '/es/colegio#instalaciones',           permanent: true },
       { source: '/ubicacion.html',              destination: '/es/#contacto',                       permanent: true },
 
       // ---- Galería de fotos ----
-      { source: '/deporte.html',                destination: '/es/vida-estudiantil#deportes',       permanent: true },
-      { source: '/family-day.html',             destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
-      { source: '/arte-galeria.html',           destination: '/es/vida-estudiantil#play-habilidades-steam', permanent: true },
-      { source: '/huerta-galeria.html',         destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
-      { source: '/formacion-religiosa-galeria.html', destination: '/es/vida-estudiantil#bienestar-estudiantil', permanent: true },
+      { source: '/deporte.html',                destination: '/es/deportes#deportes',               permanent: true },
+      { source: '/family-day.html',             destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
+      { source: '/arte-galeria.html',           destination: '/es/deportes#play-habilidades-steam', permanent: true },
+      { source: '/huerta-galeria.html',         destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
+      { source: '/formacion-religiosa-galeria.html', destination: '/es/deportes#bienestar-estudiantil', permanent: true },
       { source: '/instalaciones-galeria.html',  destination: '/es/colegio#instalaciones',           permanent: true },
       { source: '/admisiones.html',             destination: '/es',                                 permanent: true },
 

@@ -4,7 +4,7 @@ import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 // SLUGS de secciones (coinciden con DB)
@@ -26,9 +26,7 @@ type MedioMinimal = {
   grupoMediosId: number
 }
 
-// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
-// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -36,8 +34,6 @@ type PageProps = {
 
 const HomePage = async ({ params }: PageProps) => {
   const { locale } = await params
-  // Habilita el render estático (ISR) fijando el locale sin leer headers().
-  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'home' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */

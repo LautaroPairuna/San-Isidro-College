@@ -2,9 +2,10 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import Image from "next/image"
 import { useLocale } from "next-intl"
-import { Link, usePathname } from "@/i18n/navigation"
+import { usePathname } from "next/navigation"
 import type { MouseEvent } from "react"
 
 const Header: React.FC = () => {
@@ -12,10 +13,22 @@ const Header: React.FC = () => {
 
   // next-intl: devuelve el locale actual ('es' o 'en')
   const locale = useLocale() as "es" | "en"
-  // Pathname INTERNO (sin prefijo de locale y sin traducir), p.ej. "/colegio".
-  // El componente Link se encarga de traducirlo al slug de cada idioma, por eso
-  // el botón de idioma conserva la página actual y solo cambia el locale.
-  const pathname = usePathname()
+  // Obtiene la ruta completa incluyendo el prefijo de idioma, p.ej. "/es/colegio", "/en/contacto"
+  const pathname = usePathname() || "/"
+
+  // Calcula la ruta con el otro idioma, reemplazando el primer segmento
+  const getAlternateRoute = (targetLocale: "es" | "en") => {
+    // Separamos la ruta en segmentos: ["", "es", "colegio", "mision", ...]
+    const segments = pathname.split("/")
+    // Si el primer segmento tras la "/" coincide con el locale, lo reemplazamos
+    if (segments[1] === locale) {
+      segments[1] = targetLocale
+    } else {
+      // Si no tiene prefijo (p.ej. pathname === "/"), lo anteponemos
+      segments.splice(1, 0, targetLocale)
+    }
+    return segments.join("/") || `/${targetLocale}`
+  }
 
   // Seleccionar logo según estado
   const getLogoSrc = () => {
@@ -48,7 +61,7 @@ const Header: React.FC = () => {
                 logo-container bg-white py-3 sm:py-6 md:py-8 px-4 sm:px-8 md:px-12 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0
               `}
             >
-              <Link href="/" onClick={() => setMenuOpen(false)}>
+              <Link href={`/${locale}#home`} onClick={() => setMenuOpen(false)}>
                 <Image
                   id="logo"
                   src={getLogoSrc()}
@@ -67,7 +80,7 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-2 sm:me-10 me-3">
               <div className="hidden md:flex items-center gap-3 me-5">
                 {/* Botones de cambio de idioma: estilo circular ESP/ING */}
-                <Link href={pathname} locale="es" aria-label="Cambiar a Español">
+                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                   <button
                     className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
@@ -76,7 +89,7 @@ const Header: React.FC = () => {
                     ESP
                   </button>
                 </Link>
-                <Link href={pathname} locale="en" aria-label="Cambiar a Inglés">
+                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
                   <button
                     className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
@@ -116,21 +129,28 @@ const Header: React.FC = () => {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto px-6 py-5 md:px-10 md:py-4 xl:px-14 xl:py-5 2xl:px-16 overflow-y-auto md:overflow-y-visible">
+          <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto p-6 md:rounded-b-lg md:shadow-lg overflow-y-auto md:overflow-y-visible">
             {/* Desktop: idioma + cerrar arriba a la derecha */}
-            <div className="absolute top-4 right-6 hidden md:flex items-center gap-3">
+            <div className="absolute top-4 right-6 hidden md:flex items-center gap-6">
+              <a
+                href="mailto:cv@colegiosanisidrosalta.edu.ar"
+                className="text-base lg:text-lg text-white/90 hover:text-white transition-colors whitespace-nowrap"
+              >
+                <span className="font-semibold">Trabajá con nosotros:</span>{" "}
+                <span className="font-normal">cv@colegiosanisidrosalta.edu.ar</span>
+              </a>
               <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                 <button
-                  className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                   }`}
                 >
                   ESP
                 </button>
               </Link>
-              <Link href={pathname} locale="en" aria-label="Cambiar a Inglés">
+              <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
                 <button
-                  className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                   }`}
                 >
@@ -139,7 +159,7 @@ const Header: React.FC = () => {
               </Link>
               <button
                 id="closeMenu"
-                className="w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Cerrar menú"
               >
@@ -165,12 +185,12 @@ const Header: React.FC = () => {
                   alt="Logo de San Isidro"
                   width={180}
                   height={90}
-                  className="h-16 md:h-18 xl:h-20 w-auto"
+                  className="h-20 w-auto"
                 />
               </Link>
               {/* Mobile: idiomas debajo del logo */}
               <div className="flex gap-2 mt-4 md:hidden">
-                <Link href={pathname} locale="es" aria-label="Cambiar a Español">
+                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
                   <button
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
@@ -179,7 +199,7 @@ const Header: React.FC = () => {
                     ESP
                   </button>
                 </Link>
-                <Link href={pathname} locale="en" aria-label="Cambiar a Inglés">
+                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
                   <button
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
@@ -192,39 +212,41 @@ const Header: React.FC = () => {
             </div>
 
             {/* Menú principal */}
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-4 xl:gap-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10 xl:gap-12">
               {/* El Colegio */}
-              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
-                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
-                  {locale === "es" ? "El Colegio" : "The School"}
+              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
+                <h2 className="text-4xl mb-2">
+                  <Link href={`/${locale}/colegio`} onClick={handleNavClick} className="hover:underline">
+                    {locale === "es" ? "El Colegio" : "The School"}
+                  </Link>
                 </h2>
-                <ul className="space-y-3 text-[1.05rem] leading-snug">
+                <ul className="space-y-1">
                   <li>
                     <Link
-                      href={{ pathname: "/colegio", hash: "proyecto" }}
+                      href={`/${locale}/colegio#proyecto`}
                       id="proyecto-link"
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Proyecto Educativo Bilingüe" : "Project in Bilingual Education"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/colegio", hash: "mision" }}
+                      href={`/${locale}/colegio#mision`}
                       id="mision-link"
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Misión, Vision y Valores" : "Mission, Vision and Values"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/colegio", hash: "educacion-personalizada" }}
+                      href={`/${locale}/colegio#educacion-personalizada`}
                       id="educacion-personalizada-link"
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Educación Personalizada" : "Personalized Education"}
                     </Link>
@@ -233,109 +255,146 @@ const Header: React.FC = () => {
               </div>
 
               {/* Académicos */}
-              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
-                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
-                  {locale === "es" ? "Académicos" : "Academics"}
+              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
+                <h2 className="text-4xl mb-2">
+                  <Link href={`/${locale}/academicos`} onClick={handleNavClick} className="hover:underline">
+                    {locale === "es" ? "Académicos" : "Academics"}
+                  </Link>
                 </h2>
-                <ul className="space-y-3 text-[1.05rem] leading-snug">
+                <ul className="space-y-1">
                   <li>
                     <Link
-                      href="/academicos"
+                      href={`/${locale}/academicos`}
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Proyecto Bilingüe" : "Bilingual Project"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/academicos", hash: "kindergarten" }}
+                      href={`/${locale}/kindergarden`}
                       id="kindergarten-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3"
                     >
                       {locale === "es" ? "Kindergarten" : "Kindergarten"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/academicos", hash: "primary" }}
+                      href={`/${locale}/primary`}
                       id="primary-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3"
                     >
                       {locale === "es" ? "Primary" : "Primary"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/academicos", hash: "secondary" }}
+                      href={`/${locale}/secondary`}
                       id="secondary-link"
                       onClick={handleNavClick}
-                      className="block hover:underline"
+                      className="block hover:underline my-3"
                     >
                       {locale === "es" ? "Secondary" : "Secondary"}
                     </Link>
                   </li>
                 </ul>
               </div>
-              {/* Vida Estudiantil */}
-              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
-                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
-                  {locale === "es" ? "Vida Estudiantil" : "Student Life"}
+              {/* Experiencia SIC */}
+              <div className="xl:border-l-2 lg:border-l-0 md:border-white/70 md:pl-10 first:md:border-l-0">
+                <h2 className="text-4xl mb-2">
+                  <Link href={`/${locale}/experiencia-sic`} onClick={handleNavClick} className="hover:underline">
+                    {locale === "es" ? "Experiencia SIC" : "SIC Experience"}
+                  </Link>
                 </h2>
-                <ul className="space-y-3 text-[1.05rem] leading-snug">
+                <ul className="space-y-1">
                   <li>
                     <Link
-                      href={{ pathname: "/vida-estudiantil", hash: "deportes" }}
+                      href={{ pathname: "/experiencia-sic", hash: "club" }}
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
-                      {locale === "es" ? "Deportes" : "Sports"}
+                      {locale === "es" ? "Bienestar y Acompañamiento" : "Wellbeing and Guidance"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/vida-estudiantil", hash: "bienestar-estudiantil" }}
+                      href={{ pathname: "/experiencia-sic", hash: "play-habilidades-steam" }}
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
-                      {locale === "es" ? "Bienestar Estudiantil" : "Student Welfare"}
+                      {locale === "es" ? "Google Reference School" : "Google Reference School"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/vida-estudiantil", hash: "play-habilidades-steam" }}
+                      href={{ pathname: "/experiencia-sic", hash: "bienestar-estudiantil" }}
                       onClick={handleNavClick}
-                      className="block max-w-[220px] hover:underline"
+                      className="block hover:underline my-3 whitespace-nowrap"
+                    >
+                      {locale === "es" ? "Innovación y Robótica" : "Innovation and Robotics"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={{ pathname: "/experiencia-sic", hash: "play-habilidades-steam" }}
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "San Isidro Play" : "San Isidro Play"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={{ pathname: "/experiencia-sic", hash: "bienestar-estudiantil" }}
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 whitespace-nowrap"
+                    >
+                      {locale === "es" ? "Actividades Extracurriculares" : "Extracurricular Activities"}
                     </Link>
                   </li>
                 </ul>
               </div>
 
-              {/* Contacto */}
-              <div className="xl:min-h-[232px] xl:border-l xl:border-white/70 xl:px-10 first:xl:border-l-0 first:xl:pl-0 last:xl:pr-0">
-                <h2 className="mb-4 text-4xl font-light leading-none xl:text-[3.35rem]">
-                  {locale === "es" ? "Contacto" : "Contact"}
+              {/* Deportes */}
+              <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
+                <h2 className="text-4xl mb-4">
+                  <Link href={`/${locale}/deportes`} onClick={handleNavClick} className="hover:underline">
+                    {locale === "es" ? "Deportes" : "Sports"}
+                  </Link>
                 </h2>
-                <a
-                  href="mailto:cv@colegiosanisidrosalta.edu.ar"
-                  onClick={handleNavClick}
-                  className="block max-w-[220px] text-[1.05rem] leading-snug hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {locale === "es" ? "Trabaja con nosotros" : "Work with us"}
-                </a>
-                <Link
-                  href={{ pathname: "/", hash: "contacto" }}
-                  onClick={handleNavClick}
-                  className="mt-3 block max-w-[220px] text-[1.05rem] leading-snug hover:underline"
-                >
-                  {locale === "es" ? "Tel. y Ubicacion" : "Phone and Location"}
-                </Link>
+                <ul className="space-y-1">
+                  <li>
+                    <Link
+                      href={{ pathname: "/deportes", hash: "club" }}
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "Club" : "Club"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={{ pathname: "/deportes", hash: "dojo" }}
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "Dojo" : "Dojo"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={{ pathname: "/deportes", hash: "san-isidro-balance" }}
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "San Isidro Balance" : "San Isidro Balance"}
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

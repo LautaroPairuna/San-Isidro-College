@@ -1,30 +1,4 @@
 {
-  "seo": {
-    "home": {
-      "title": "San Isidro College | Bilingual School in Salta, Argentina",
-      "description": "Catholic bilingual school in San Lorenzo, Salta. A solid, innovative educational project with international programs and integral education. Discover San Isidro College."
-    },
-    "colegio": {
-      "title": "The School | San Isidro College — Salta",
-      "description": "Discover San Isidro College's educational project: integral bilingual, Catholic-oriented education in San Lorenzo, Salta, Argentina."
-    },
-    "academicos": {
-      "title": "Academics | San Isidro College — Salta",
-      "description": "San Isidro College's academic program: levels, international programs and bilingual education in San Lorenzo, Salta, Argentina."
-    },
-    "academicosMasInfo": {
-      "title": "More about Academics | San Isidro College",
-      "description": "Extended information about San Isidro College's bilingual academic program in San Lorenzo, Salta, Argentina."
-    },
-    "vidaEstudiantil": {
-      "title": "Student Life | San Isidro College — Salta",
-      "description": "Sports, arts and student life activities at San Isidro College, San Lorenzo, Salta, Argentina."
-    },
-    "vidaEstudiantilMasInfo": {
-      "title": "More about Student Life | San Isidro College",
-      "description": "Discover more about student life and extracurricular activities at San Isidro College in Salta, Argentina."
-    }
-  },
   "home": {
     "hero": {
       "alt": "Hero Carousel",
@@ -148,7 +122,7 @@
       },
       "innovacion": {
         "title": "Innovation and Cutting-Edge Technology",
-        "backText": "Our premise is clear: the person comes first. Real innovation: students build their own prototypes from scratch (without commercial kits), integrating engineering and electronics. Artificial intelligence: advanced projects to lead in digital environments. Infrastructure: classrooms with interactive touch screens and a fully equipped high-complexity lab."
+        "backText": "Real innovation: students build their own prototypes from scratch (without commercial kits), integrating engineering and electronics. Artificial intelligence: advanced projects to lead in digital environments. Infrastructure: classrooms with interactive touch screens and a fully equipped high-complexity lab."
       },
       "deportes": {
         "title": "Sports",
@@ -276,6 +250,25 @@
       "secondary": "Secondary"
     }
   },
+  "academicosLevelsNav": {
+    "overviewTitle": "Explore each level",
+    "detailTitle": "Discover the other levels",
+    "cta": "View level",
+    "levels": {
+      "kindergarden": {
+        "title": "Kindergarten",
+        "description": "Early bilingual immersion, play, exploration, and integral development from the first school years."
+      },
+      "primary": {
+        "title": "Primary",
+        "description": "Bilingual academic formation with literature, science, creativity, and a strong transition toward new challenges."
+      },
+      "secondary": {
+        "title": "Secondary",
+        "description": "Life project, international projection, innovation, and preparation to lead the future."
+      }
+    }
+  },
   "vidaEstudiantilHome": {
     "loading": "Loading Sports section…",
     "errors": {
@@ -337,6 +330,35 @@
       "descriptionMobile": "is the annual English-language play starring the talented students of San Isidro College. This event combines acting, singing, and dancing, highlighting not only the mastery of the English language, but also the creativity and artistic abilities of our students. \n\n A highly anticipated annual tradition, San Isidro Play celebrates the talent and effort of our educational community, offering an unforgettable show for the whole family. We look forward to seeing you all for this magical experience!"
     }
   },
+  "experienciaSicHome": {
+    "hero": {
+      "alt": "I am because we are",
+      "carouselAlt": "San Isidro Experience carousel",
+      "fallbackAlt": "San Isidro Experience background",
+      "title": "San Isidro Experience",
+      "description": "The experience of growing, learning, and sharing goes far beyond the classroom. At San Isidro College, each activity complements academic development and creates new opportunities to build talents, strengthen bonds, and enjoy a community that inspires growth."
+    },
+    "rugbyHockey": {
+      "title": "Wellbeing And Guidance",
+      "description": "We believe every student learns better when they feel safe, heard, and supported. That is why we promote an environment of trust, respect, and closeness, where wellbeing is part of the educational experience every day.",
+      "readMore": "Read more"
+    },
+    "googleReferenceSchool": {
+      "title": "Google Reference School",
+      "description": "Innovation has been part of our identity from day one. As a Google Reference School, we integrate technology in meaningful ways to strengthen learning, creativity, and collaboration, preparing our students for the challenges of the future.",
+      "readMore": "Read more"
+    },
+    "innovacionRobotica": {
+      "title": "Innovation and Robotics",
+      "description": "A space where ideas become projects. Our Innovation and Robotics Lab invites students to explore, design, build, and experiment, developing the skills to solve the challenges of the present and the future.",
+      "readMore": "Read more"
+    },
+    "actividadesExtracurriculares": {
+      "title": "Extracurricular Activities",
+      "description": "Each student has unique talents and interests. That is why our extracurricular activities create spaces where they can express themselves, challenge themselves, and grow. Through proposals such as Dance, Jiu-Jitsu, and Gym, we complement academic education with experiences that strengthen the body, mind, and confidence.",
+      "readMore": "Read more"
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Sports",
     "intro": {
@@ -356,6 +378,40 @@
       "deportes": "Sports",
       "vidaEstudiantil": "Student Well-Being",
       "play": "San Isidro Play"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "San Isidro College",
+      "description": "San Isidro College in Salta: bilingual education, holistic formation, and an academic proposal focused on human development."
+    },
+    "colegio": {
+      "title": "The School | San Isidro College",
+      "description": "Discover the educational project, mission, vision, values, and comprehensive formation proposal of San Isidro College."
+    },
+    "academicosMasInfo": {
+      "title": "Academics | San Isidro College",
+      "description": "Explore the bilingual program, academic journey, and English-language formation at San Isidro College."
+    },
+    "kindergarden": {
+      "title": "Kindergarten | San Isidro College",
+      "description": "Discover Kindergarten, early bilingual immersion, and the value of play at San Isidro College."
+    },
+    "primary": {
+      "title": "Primary | San Isidro College",
+      "description": "Explore the Primary proposal, its literature-based methodology, and bilingual formation at San Isidro College."
+    },
+    "secondary": {
+      "title": "Secondary | San Isidro College",
+      "description": "Discover Secondary, its international projection, innovation, and comprehensive academic proposal at San Isidro College."
+    },
+    "vidaEstudiantil": {
+      "title": "Sports | San Isidro College",
+      "description": "Explore sports, wellbeing, San Isidro Play, and the experiences that complement school life at San Isidro College."
+    },
+    "vidaEstudiantilMasInfo": {
+      "title": "Sports and Wellbeing | San Isidro College",
+      "description": "Learn about the sports program, student wellbeing, and integral support approach at San Isidro College."
     }
   }
 }

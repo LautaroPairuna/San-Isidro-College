@@ -1,16 +1,26 @@
 import type { MetadataRoute } from 'next'
-import { routing, type AppPathname } from '@/i18n/routing'
 import { getPathname } from '@/i18n/navigation'
-import { getBaseUrl } from '@/lib/siteConfig'
+import { routing, type AppPathname } from '@/i18n/routing'
 
-// Pathnames internos públicos (claves del mapa de rutas localizadas).
-const PUBLIC_HREFS: AppPathname[] = [
+function getBaseUrl(): string {
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    'http://localhost:3000'
+  return raw.replace(/\/+$/, '')
+}
+
+const PUBLIC_PATHS: AppPathname[] = [
   '/',
   '/colegio',
   '/academicos',
   '/academicos-mas-info',
-  '/vida-estudiantil',
-  '/vida-estudiantil-mas-info',
+  '/kindergarden',
+  '/primary',
+  '/secondary',
+  '/experiencia-sic',
+  '/deportes',
+  '/deportes-mas-info',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -19,22 +29,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const urls: MetadataRoute.Sitemap = []
 
-  for (const href of PUBLIC_HREFS) {
+  for (const path of PUBLIC_PATHS) {
     const languages: Record<string, string> = {}
     for (const locale of routing.locales) {
-      // getPathname resuelve el slug localizado (p. ej. /en/school) con prefijo.
-      languages[locale] = `${baseUrl}${getPathname({ locale, href })}`
+      languages[locale] = `${baseUrl}${getPathname({ locale, href: path })}`
     }
 
     const canonical = languages[routing.defaultLocale] ?? languages[routing.locales[0]]!
-    // x-default mejora el targeting internacional (Google elige el idioma por usuario).
-    languages['x-default'] = canonical
 
     urls.push({
       url: canonical,
       lastModified,
       changeFrequency: 'weekly',
-      priority: href === '/' ? 1 : 0.8,
+      priority: path === '/' ? 1 : 0.8,
       alternates: { languages },
     })
   }

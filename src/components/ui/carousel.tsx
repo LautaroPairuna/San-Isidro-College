@@ -25,8 +25,8 @@ type CarouselContextProps = {
   api: CarouselApi
   scrollPrev: () => void
   scrollNext: () => void
-  canScrollPrev: boolean
-  canScrollNext: boolean
+  canScrollPrev: boolean | null
+  canScrollNext: boolean | null
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -64,8 +64,8 @@ const Carousel = React.forwardRef<
       },
       plugins
     )
-    const [canScrollPrev, setCanScrollPrev] = React.useState(false)
-    const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [canScrollPrev, setCanScrollPrev] = React.useState<boolean | null>(null)
+    const [canScrollNext, setCanScrollNext] = React.useState<boolean | null>(null)
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -216,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollPrev}
+      disabled={canScrollPrev === null ? undefined : !canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
@@ -244,7 +244,7 @@ const CarouselNext = React.forwardRef<
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollNext}
+      disabled={canScrollNext === null ? undefined : !canScrollNext}
       onClick={scrollNext}
       {...props}
     >

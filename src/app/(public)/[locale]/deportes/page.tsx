@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation'
 import MediaCarousel from '@/components/MediaCarousel'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
@@ -33,9 +33,7 @@ type MedioItem = {
   grupoMediosId: number
 }
 
-// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
-// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -43,8 +41,6 @@ type PageProps = {
 
 export default async function DeportesPage({ params }: PageProps) {
   const { locale } = await params
-  // Habilita el render estático (ISR) fijando el locale sin leer headers().
-  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
@@ -127,7 +123,7 @@ export default async function DeportesPage({ params }: PageProps) {
             <h1 className="text-2xl md:text-3xl font-bold mb-2">{t('hero.title')}</h1>
             <p className="text-gray-700 mb-4 text-sm md:text-base">{t('hero.description')}</p>
             <div className="text-center mt-5">
-              <Link href="/vida-estudiantil-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+              <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
                 {t('hero.readMore')}
               </Link>
             </div>
@@ -145,7 +141,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
-      <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="club" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
         <Image
           src="/images/formas/forma-home-2.svg"
           alt=""
@@ -231,7 +227,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 3 — SIC DOJO ═════════════ */}
-      <section className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden">
+      <section id="dojo" className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block max-w-[1200px] mx-auto relative">
           <Image
@@ -314,7 +310,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 4 — SAN ISIDRO BALANCE ═════════════ */}
-      <section className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="san-isidro-balance" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
           <Image
@@ -326,7 +322,7 @@ export default async function DeportesPage({ params }: PageProps) {
           />
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
-            <div className="absolute top-20 -left-15 w-[650px] z-20">
+            <div className="absolute top-20 w-[650px] z-20">
               <div className="bg-white shadow-xl rounded-xl p-8">
                 <Image
                   src="/images/logo-gym-2.svg"
@@ -408,7 +404,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-2xl font-bold text-center">{t('vida.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.description')}</p>
               <div className="text-center mt-5">
-                <Link href={{ pathname: "/vida-estudiantil-mas-info", hash: "bienestar" }} className="text-[#1e804b] font-semibold hover:underline">
+                <Link href={{ pathname: "/deportes-mas-info", hash: "bienestar" }} className="text-[#1e804b] font-semibold hover:underline">
                   {t('vida.readMore')}
                 </Link>
               </div>
@@ -458,7 +454,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-xl font-bold">{t('vida.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{t('vida.descriptionMobile')}</p>
               <div className="mt-5">
-                <Link href={{ pathname: "/vida-estudiantil-mas-info", hash: "bienestar" }} className="text-[#1e804b] font-semibold hover:underline">
+                <Link href={{ pathname: "/deportes-mas-info", hash: "bienestar" }} className="text-[#1e804b] font-semibold hover:underline">
                   {t('vida.readMore')}
                 </Link>
               </div>
@@ -476,7 +472,7 @@ export default async function DeportesPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px] z-10"
+            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px]"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -494,7 +490,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 />
               )}
             </div>
-            <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
+            <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[28%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <Image
                   src="/images/logo-SIC-play.svg"

@@ -17,10 +17,26 @@ export const routing = defineRouting({
       es: "/academicos-mas-info",
       en: "/academics-more-info",
     },
-    "/vida-estudiantil": { es: "/vida-estudiantil", en: "/student-life" },
-    "/vida-estudiantil-mas-info": {
-      es: "/vida-estudiantil-mas-info",
-      en: "/student-life-more-info",
+    "/kindergarden": {
+      es: "/kindergarden",
+      en: "/kindergarden",
+    },
+    "/primary": {
+      es: "/primary",
+      en: "/primary",
+    },
+    "/secondary": {
+      es: "/secondary",
+      en: "/secondary",
+    },
+    "/experiencia-sic": {
+      es: "/experiencia-sic",
+      en: "/sic-experience",
+    },
+    "/deportes": { es: "/deportes", en: "/sports" },
+    "/deportes-mas-info": {
+      es: "/deportes-mas-info",
+      en: "/sports-more-info",
     },
   },
 });
