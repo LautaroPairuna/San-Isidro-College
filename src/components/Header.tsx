@@ -119,7 +119,7 @@ const Header: React.FC = () => {
           <div className="menu-panel bg-[#c19516] text-white w-full h-full md:h-auto px-6 py-5 md:px-10 md:py-4 xl:px-14 xl:py-5 2xl:px-16 overflow-y-auto md:overflow-y-visible">
             {/* Desktop: idioma + cerrar arriba a la derecha */}
             <div className="absolute top-4 right-6 hidden md:flex items-center gap-3">
-              <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
+              <Link href={pathname} locale="es" aria-label="Cambiar a Español">
                 <button
                   className={`w-10 h-10 xl:w-12 xl:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
@@ -158,7 +158,7 @@ const Header: React.FC = () => {
 
             {/* Logo en menú */}
             <div className="flex flex-col md:flex-row justify-start items-center mb-6">
-              <Link href={getAlternateRoute(locale)} onClick={handleNavClick} className="flex items-center">
+              <Link href="/" onClick={handleNavClick} className="flex items-center">
                 <Image
                   id="menuLogo"
                   src={getLogoSrc()}
