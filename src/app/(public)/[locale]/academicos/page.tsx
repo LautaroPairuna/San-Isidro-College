@@ -253,33 +253,39 @@ const AcademicosPage = async ({ params }: PageProps) => {
               />
             </div>
 
-            <div className="absolute 2xl:top-[20%] 2xl:left-[45%] top-[20%] left-[40%] w-[550px] z-20">
-              <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
-                {t('primary.title')}
-              </h2>
-              <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
-                <p className="text-gray-700 leading-relaxed">
-                  {t('primary.p1')}
-                </p>
-                <Link href={{ pathname: "/academicos-mas-info", hash: "primary" }}>
-                  <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
-                    {t('primary.readMore')}
-                  </span>
-                </Link>
+            {/* Tarjeta + cuadro de niveles agrupados en una sola columna.
+                Al estar apilados (flex-col), la separación la fija mt-* en px
+                y NO depende del alto del viewport: por eso no se rompe al
+                cambiar la resolución. El grupo sigue siendo absolute (flota
+                sobre la imagen) y el cuadro conserva z-20. */}
+            <div className="absolute 2xl:top-[20%] 2xl:left-[45%] top-[20%] left-[40%] w-[550px] z-20 flex flex-col items-end">
+              <div className="w-full">
+                <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
+                  {t('primary.title')}
+                </h2>
+                <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
+                  <p className="text-gray-700 leading-relaxed">
+                    {t('primary.p1')}
+                  </p>
+                  <Link href={{ pathname: "/academicos-mas-info", hash: "primary" }}>
+                    <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
+                      {t('primary.readMore')}
+                    </span>
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            {/* Cuadro de niveles: bloque absoluto propio con z-20.
-                top-* controla la separación con la tarjeta: subir el % lo
-                baja (más separación), bajarlo lo sube hacia la tarjeta. */}
-            <div className="absolute top-[64%] left-[50%] z-20 pointer-events-none">
-              <Image
-                src="/images/cuadro-primary.svg"
-                alt={t('primary.decorAlt')}
-                width={450}
-                height={450}
-                className="w-[450px] h-auto"
-              />
+              {/* Cuadro de niveles: debajo de la tarjeta. mt-* = separación
+                  (fija, en px). translate-x-* lo corre a la derecha. */}
+              <div className="mt-8 translate-x-6 z-20 pointer-events-none">
+                <Image
+                  src="/images/cuadro-primary.svg"
+                  alt={t('primary.decorAlt')}
+                  width={450}
+                  height={450}
+                  className="w-[450px] h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
