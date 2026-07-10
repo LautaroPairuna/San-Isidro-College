@@ -267,16 +267,18 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </span>
                 </Link>
               </div>
-            </div>
 
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[60%] left-[50%] pointer-events-none">
-              <Image
-                src="/images/cuadro-primary.svg"
-                alt={t('primary.decorAlt')}
-                width={450}
-                height={450}
-                className="w-[450px] h-auto"
-              />
+              {/* Cuadro de niveles anclado bajo la tarjeta: la separación
+                  la controla mt-* (valor fijo, no depende del alto del viewport) */}
+              <div className="pointer-events-none absolute top-full left-1/2 mt-10">
+                <Image
+                  src="/images/cuadro-primary.svg"
+                  alt={t('primary.decorAlt')}
+                  width={450}
+                  height={450}
+                  className="w-[450px] h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
