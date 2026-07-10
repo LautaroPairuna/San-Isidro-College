@@ -133,7 +133,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
       {/* ─────────────────── KINDERGARTEN ─────────────────── */}
       <section
         id="kindergarten"
-        className="relative w-full h-auto py-20 bg-white overflow-hidden lg:min-h-[880px]"
+        className="relative w-full h-auto py-20 bg-white overflow-hidden"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
           {/* Texto y decoraciones (idéntico pero traducido) */}
@@ -240,7 +240,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
             alt=""
             width={750}
             height={500}
-            className="absolute 2xl:top-32 2xl:right-44 xl:right-32 lg:top-24 top-5 -right-10 w-[650px] h-auto z-10 pointer-events-none"
+            className="absolute 2xl:top-32 xl:top-16 top-5 2xl:right-44 xl:right-0 -right-10 w-[650px] h-auto z-10 pointer-events-none"
           />
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -253,7 +253,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               />
             </div>
 
-            <div className="absolute 2xl:top-[20%] 2xl:left-[45%] top-[20%] left-[40%] w-[550px] z-20">
+            <div className="absolute 2xl:top-[20%] 2xl:left-[45%] xl:top-[15%] xl:left-[42%] top-[20%] left-[40%] w-[550px] z-20">
               <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
                 {t('primary.title')}
               </h2>
@@ -269,13 +269,12 @@ const AcademicosPage = async ({ params }: PageProps) => {
               </div>
             </div>
 
-            <div className="absolute col-span-4 flex items-center justify-center z-20 top-[60%] left-[50%] pointer-events-none">
+            <div className="absolute top-[62%] left-[48%] z-20 pointer-events-none">
               <Image
                 src="/images/cuadro-primary.svg"
                 alt={t('primary.decorAlt')}
                 width={450}
                 height={450}
-                className="w-[450px] h-auto"
               />
             </div>
           </div>
