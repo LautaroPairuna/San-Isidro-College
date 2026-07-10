@@ -133,7 +133,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
       {/* ─────────────────── KINDERGARTEN ─────────────────── */}
       <section
         id="kindergarten"
-        className="relative w-full h-auto py-20 bg-white overflow-hidden"
+        className="relative w-full h-auto py-20 bg-white overflow-hidden lg:min-h-[880px]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
           {/* Texto y decoraciones (idéntico pero traducido) */}
