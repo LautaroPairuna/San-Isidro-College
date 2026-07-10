@@ -41,7 +41,7 @@ const ContactSection = () => {
                     alt={alt}
                     width={20}
                     height={20}
-                    className="object-contain"
+                    className="w-5 h-5 object-contain"
                   />
                 </a>
               ))}
