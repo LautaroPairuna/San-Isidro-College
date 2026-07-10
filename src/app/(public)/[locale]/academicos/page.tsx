@@ -267,18 +267,19 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </span>
                 </Link>
               </div>
+            </div>
 
-              {/* Cuadro de niveles anclado bajo la tarjeta: la separación
-                  la controla mt-* (valor fijo, no depende del alto del viewport) */}
-              <div className="pointer-events-none absolute top-full left-1/2 mt-10">
-                <Image
-                  src="/images/cuadro-primary.svg"
-                  alt={t('primary.decorAlt')}
-                  width={450}
-                  height={450}
-                  className="w-[450px] h-auto"
-                />
-              </div>
+            {/* Cuadro de niveles: bloque absoluto propio, anclado abajo.
+                bottom-* controla la separación (subirlo lo acerca a la tarjeta,
+                bajarlo lo empuja más abajo) sin depender del alto del viewport. */}
+            <div className="absolute bottom-[10%] left-[50%] z-20 pointer-events-none">
+              <Image
+                src="/images/cuadro-primary.svg"
+                alt={t('primary.decorAlt')}
+                width={450}
+                height={450}
+                className="w-[450px] h-auto"
+              />
             </div>
           </div>
         </div>
