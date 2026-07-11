@@ -319,14 +319,14 @@ export default function ResourceDetailClient({
         const fecha = parseISO(val)
         return (
           <div className="flex items-center text-sm text-gray-700">
-            <HiCalendar className="h-4 w-4 text-blue-400 mr-1" />
+            <HiCalendar className="h-4 w-4 text-navy-600 mr-1" />
             {format(fecha, 'dd/MM/yyyy')}
           </div>
         )
       }
       if (col === 'tipo' && val === 'VIDEO') {
         return (
-          <span className="px-2 py-0.5 text-xs bg-purple-100 text-purple-700 rounded">
+          <span className="px-2 py-0.5 text-xs bg-gold-500/15 text-gold-600 rounded">
             VIDEO
           </span>
         )
@@ -495,7 +495,7 @@ export default function ResourceDetailClient({
            <div className="text-red-500 text-5xl mb-4">⚠️</div>
            <h3 className="text-lg font-bold text-gray-800 mb-2">Error al cargar datos</h3>
            <p className="text-gray-600 mb-4">{errorData.message || 'Ocurrió un error inesperado'}</p>
-           <button onClick={() => refetch()} className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+           <button onClick={() => refetch()} className="px-4 py-2 bg-brand-600 text-white rounded hover:bg-brand-700 transition">
              Reintentar
            </button>
         </div>
@@ -528,7 +528,7 @@ export default function ResourceDetailClient({
               setChildRelation(null)
               setSelected([])
             }}
-            className="text-indigo-600 hover:underline focus:outline-none"
+            className="text-brand-600 hover:underline focus:outline-none"
           >
             ← Volver a Grupos de Medios
           </button>
@@ -577,7 +577,7 @@ export default function ResourceDetailClient({
                   setSelectedGroupFilter(val ? Number(val) : '')
                   setPage(1)
                 }}
-                className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 max-w-xs"
+                className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-brand-400 max-w-xs"
               >
                 <option value="">Todos los grupos</option>
                 {gruposFK.map((g) => (
@@ -592,12 +592,12 @@ export default function ResourceDetailClient({
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Buscar..."
-              className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-brand-400"
             />
             <select
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
-              className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-brand-400"
             >
               {[5, 10, 25, 50].map((n) => (
                 <option key={n} value={n}>
@@ -612,14 +612,14 @@ export default function ResourceDetailClient({
         <div className={clsx("overflow-x-auto relative", isFetching && "opacity-50 pointer-events-none")}>
           {isFetching && (
             <div className="absolute inset-0 flex items-center justify-center z-10">
-               <div className="bg-white p-2 rounded shadow text-indigo-600 font-semibold">Cargando...</div>
+               <div className="bg-white p-2 rounded shadow text-brand-600 font-semibold">Cargando...</div>
             </div>
           )}
           {pageData.length === 0 ? (
             <div className="p-6 text-center text-gray-500">Sin resultados</div>
           ) : (
-            <table key={`${sortBy}-${order}-${page}`} className="min-w-full divide-y divide-indigo-100">
-              <thead className="sticky top-0 bg-indigo-600">
+            <table key={`${sortBy}-${order}-${page}`} className="min-w-full divide-y divide-brand-100">
+              <thead className="sticky top-0 bg-brand-600">
                 <tr>
                   <th className="px-4 py-3">
                     <input
@@ -628,7 +628,7 @@ export default function ResourceDetailClient({
                         selected.length === pageData.length && pageData.length > 0
                       }
                       onChange={toggleSelectAll}
-                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      className="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded"
                       aria-label="Seleccionar todos"
                     />
                   </th>
@@ -639,7 +639,7 @@ export default function ResourceDetailClient({
                     <th
                       key={col}
                       onClick={() => handleSort(col)}
-                      className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-indigo-700 transition select-none"
+                      className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-brand-700 transition select-none"
                     >
                       <div className="flex items-center space-x-1">
                         <span>{col.replace(/([A-Z])/g, ' $1')}</span>
@@ -658,18 +658,18 @@ export default function ResourceDetailClient({
                 </tr>
               </thead>
 
-              <tbody className="divide-y divide-indigo-100">
+              <tbody className="divide-y divide-brand-100">
                 {pageData.map((row) => (
                   <tr
                     key={row.id}
-                    className="odd:bg-indigo-50 even:bg-white hover:bg-indigo-100 transition"
+                    className="odd:bg-brand-50 even:bg-white hover:bg-brand-100 transition"
                   >
                     <td className="px-4 py-2">
                       <input
                         type="checkbox"
                         checked={selected.includes(row.id)}
                         onChange={() => toggleSelect(row.id)}
-                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-brand-600 focus:ring-brand-500 border-gray-300 rounded"
                         aria-label={`Seleccionar fila ${row.id}`}
                       />
                     </td>
@@ -682,7 +682,7 @@ export default function ResourceDetailClient({
                           setEditRow(null)
                           setConfirmItems(null)
                         }}
-                        className="p-1 hover:text-indigo-600 transition"
+                        className="p-1 hover:text-brand-600 transition"
                         aria-label={`Ver fila ${row.id}`}
                       >
                         <FaEye className="h-5 w-5" />
@@ -702,7 +702,7 @@ export default function ResourceDetailClient({
                           }
                           setDetailRow(null)
                         }}
-                        className="p-1 hover:text-indigo-600 transition"
+                        className="p-1 hover:text-brand-600 transition"
                         aria-label={`Editar fila ${row.id}`}
                       >
                         <FaPencilAlt className="h-5 w-5" />
@@ -712,7 +712,7 @@ export default function ResourceDetailClient({
                         <button
                           title="Ver Medios"
                           onClick={() => handleViewChild(row as GrupoMediosType)}
-                          className="p-1 hover:text-indigo-600 transition"
+                          className="p-1 hover:text-brand-600 transition"
                           aria-label={`Ver medios de grupo ${row.id}`}
                         >
                           <HiPhotograph className="h-5 w-5" />
@@ -732,7 +732,7 @@ export default function ResourceDetailClient({
                     {visibleCols.map((col) => (
                       <td
                         key={col}
-                        className="px-4 py-2 whitespace-nowrap text-sm text-gray-800 border-b border-indigo-100"
+                        className="px-4 py-2 whitespace-nowrap text-sm text-gray-800 border-b border-brand-100"
                       >
                         {renderCell((row as unknown as Record<string, unknown>)[col], col)}
                       </td>
@@ -746,11 +746,11 @@ export default function ResourceDetailClient({
 
         {/* Paginación */}
         {pageData.length > 0 && (
-          <footer className="flex items-center justify-between px-4 py-3 bg-indigo-50 border-t border-indigo-200">
+          <footer className="flex items-center justify-between px-4 py-3 bg-brand-50 border-t border-brand-200">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-3 py-1 border border-indigo-300 rounded disabled:opacity-50 hover:bg-indigo-100 transition"
+              className="px-3 py-1 border border-brand-300 rounded disabled:opacity-50 hover:bg-brand-100 transition"
               aria-label="Página anterior"
             >
               ‹
@@ -761,7 +761,7 @@ export default function ResourceDetailClient({
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="px-3 py-1 border border-indigo-300 rounded disabled:opacity-50 hover:bg-indigo-100 transition"
+              className="px-3 py-1 border border-brand-300 rounded disabled:opacity-50 hover:bg-brand-100 transition"
               aria-label="Página siguiente"
             >
               ›
@@ -812,13 +812,13 @@ export default function ResourceDetailClient({
                         (val as unknown[]).length > 0 &&
                         typeof (val as unknown[])[0] === 'object' && (
                           <table className="w-full text-sm border-collapse">
-                            <thead className="bg-indigo-100">
+                            <thead className="bg-brand-100">
                               <tr>
                                 {Object.keys((val as unknown[])[0] as Record<string, unknown>).map(
                                   (colKey, i) => (
                                     <th
                                       key={i}
-                                      className="border px-2 py-1 text-left text-indigo-700"
+                                      className="border px-2 py-1 text-left text-brand-700"
                                     >
                                       {colKey.replace(/([A-Z])/g, ' $1')}
                                     </th>
@@ -907,7 +907,7 @@ export default function ResourceDetailClient({
       {isFormMinimized && (uploadPhase === 'UPLOADING' || uploadPhase === 'PROCESSING') && (
         <div 
           onClick={handleRestoreForm}
-          className="fixed bottom-6 right-6 z-60 w-80 bg-white rounded-lg shadow-2xl border border-indigo-100 p-4 cursor-pointer hover:bg-gray-50 transition-all animate-in slide-in-from-bottom-4"
+          className="fixed bottom-6 right-6 z-60 w-80 bg-white rounded-lg shadow-2xl border border-brand-100 p-4 cursor-pointer hover:bg-gray-50 transition-all animate-in slide-in-from-bottom-4"
         >
           <div className="flex justify-between items-start mb-2">
             <div>
@@ -933,17 +933,17 @@ export default function ResourceDetailClient({
                  <span>{uploadProgress}%</span>
                </div>
                <div className="w-full bg-gray-200 rounded-full h-1.5">
-                 <div className="bg-indigo-600 h-1.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
+                 <div className="bg-brand-600 h-1.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
                </div>
              </div>
           ) : (
              <div className="space-y-1">
-               <div className="flex justify-between text-xs text-indigo-600">
+               <div className="flex justify-between text-xs text-brand-600">
                  <span>{serverProgress?.stage === 'compressing' ? 'Comprimiendo...' : 'Procesando...'}</span>
                  <span>{serverProgress?.percent || 0}%</span>
                </div>
-               <div className="w-full bg-indigo-200 rounded-full h-1.5">
-                 <div className="bg-indigo-600 h-1.5 rounded-full animate-pulse" style={{ width: `${serverProgress?.percent || 0}%` }}></div>
+               <div className="w-full bg-brand-200 rounded-full h-1.5">
+                 <div className="bg-brand-600 h-1.5 rounded-full animate-pulse" style={{ width: `${serverProgress?.percent || 0}%` }}></div>
                </div>
                <div className="text-[10px] text-right text-gray-400 font-mono">
                  {formatTime(processingTime)}
@@ -1007,7 +1007,7 @@ const FotoCellPreview = memo(function FotoCellPreview({
     <div className="flex items-center space-x-2 relative group">
       {loading && !isVideo && (
          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded z-10 w-16 h-16">
-           <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+           <div className="w-4 h-4 border-2 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
          </div>
       )}
       
@@ -1083,7 +1083,7 @@ const Modal = memo(function Modal({ title, onClose, children }: ModalProps) {
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+            className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded"
           >
             ✕
           </button>
@@ -1723,7 +1723,7 @@ const FormModal = memo(function FormModal({
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                   <div 
-                    className="bg-indigo-600 h-2 rounded-full transition-all duration-300" 
+                    className="bg-brand-600 h-2 rounded-full transition-all duration-300" 
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
@@ -1732,8 +1732,8 @@ const FormModal = memo(function FormModal({
 
             {/* FASE 2: PROCESANDO (COMPRESIÓN/ENSAMBLAJE) */}
             {uploadPhase === 'PROCESSING' && (
-              <div className="w-full bg-indigo-50 p-3 rounded-lg border border-indigo-100 animate-in fade-in zoom-in duration-500">
-                <div className="flex justify-between text-xs text-indigo-700 mb-1">
+              <div className="w-full bg-brand-50 p-3 rounded-lg border border-brand-100 animate-in fade-in zoom-in duration-500">
+                <div className="flex justify-between text-xs text-brand-700 mb-1">
                   <span className="font-medium">
                     {isVideo ? (
                         serverProgress?.stage === 'compressing' ? 'Comprimiendo video...' : 
@@ -1748,20 +1748,20 @@ const FormModal = memo(function FormModal({
                   <span className="font-bold">{serverProgress?.percent || 0}%</span>
                 </div>
                 
-                <div className="w-full bg-indigo-200 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-brand-200 rounded-full h-2 overflow-hidden">
                   <div 
-                    className="bg-indigo-600 h-2 rounded-full transition-all duration-300 ease-out" 
+                    className="bg-brand-600 h-2 rounded-full transition-all duration-300 ease-out" 
                     style={{ width: `${serverProgress?.percent || 0}%` }}
                   ></div>
                 </div>
 
                 <div className="flex justify-between mt-1">
-                  <span className="text-[10px] text-indigo-400">
+                  <span className="text-[10px] text-brand-400">
                      {serverProgress?.stage === 'compressing' ? 'Optimizando para web' : 
                       serverProgress?.stage === 'generating_thumbnail' ? 'Creando preview' :
                       'Guardando en servidor'}
                   </span>
-                  <span className="text-[10px] text-indigo-500 font-mono">
+                  <span className="text-[10px] text-brand-500 font-mono">
                     {formatTime(processingTime)}
                   </span>
                 </div>
@@ -1924,9 +1924,9 @@ const ButtonBase = memo(function ButtonBase({
     <button
       {...props}
       className={clsx(
-        'px-6 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed',
+        'px-6 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:opacity-50 disabled:cursor-not-allowed',
         {
-          'bg-indigo-600 hover:bg-indigo-700 text-white': variant === 'default',
+          'bg-brand-600 hover:bg-brand-700 text-white': variant === 'default',
           'bg-red-500 hover:bg-red-600 text-white': variant === 'danger',
         },
         className
@@ -1945,7 +1945,7 @@ const InputBase = memo(function InputBase(props: InputBaseProps) {
     <input
       {...props}
       className={clsx(
-        'px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400',
+        'px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-brand-400',
         props.className
       )}
     />
@@ -1960,7 +1960,7 @@ const SelectBase = memo(function SelectBase(props: SelectBaseProps) {
     <select
       {...props}
       className={clsx(
-        'px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400',
+        'px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-brand-400',
         props.className
       )}
     />

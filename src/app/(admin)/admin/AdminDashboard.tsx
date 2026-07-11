@@ -14,28 +14,28 @@ export default function AdminDashboard() {
       description: 'Gestiona colecciones de imágenes y videos para carruseles y galerías.',
       href: '/admin/resources/GrupoMedios',
       icon: HiCollection,
-      color: 'bg-blue-500',
+      color: 'bg-brand-600',
     },
     {
       title: 'Medios Individuales',
       description: 'Sube y administra archivos multimedia (fotos, videos, íconos).',
       href: '/admin/resources/Medio',
       icon: HiPhotograph,
-      color: 'bg-green-500',
+      color: 'bg-gold-500',
     },
     {
       title: 'Secciones de Página',
       description: 'Administra el contenido dinámico de las páginas (textos, galerías, héroes).',
       href: '/admin/resources/Seccion',
       icon: HiTemplate,
-      color: 'bg-purple-500',
+      color: 'bg-navy-700',
     },
   ];
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Bienvenido al Panel</h1>
+      <div className="border-l-4 border-gold-400 pl-4">
+        <h1 className="text-3xl font-bold text-navy-700">Bienvenido al Panel</h1>
         <p className="mt-2 text-gray-600">
           Selecciona un recurso para comenzar a administrar el contenido del sitio.
         </p>
@@ -53,7 +53,7 @@ export default function AdminDashboard() {
                 <card.icon className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800 group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-800 group-hover:text-brand-700 transition-colors">
                   {card.title}
                 </h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
@@ -61,14 +61,14 @@ export default function AdminDashboard() {
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
           </Link>
         ))}
       </div>
 
-      <div className="bg-indigo-50 rounded-lg p-6 border border-indigo-100">
-        <h3 className="text-lg font-semibold text-indigo-900 mb-2">Consejos rápidos</h3>
-        <ul className="list-disc list-inside space-y-2 text-indigo-800">
+      <div className="bg-brand-50 rounded-lg p-6 border border-brand-100">
+        <h3 className="text-lg font-semibold text-brand-900 mb-2">Consejos rápidos</h3>
+        <ul className="list-disc list-inside space-y-2 text-brand-800">
           <li>Usa <strong>Grupo de Medios</strong> para crear sliders o galerías nuevas.</li>
           <li>Asegúrate de usar nombres descriptivos en los archivos para mejorar el SEO.</li>
           <li>Si subes videos, intenta que no superen los 10MB para no afectar la velocidad del sitio.</li>
