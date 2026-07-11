@@ -135,7 +135,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
             </div>
 
             {/* Nav Links */}
-            <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+            <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto bg-gradient-to-b from-navy-700 to-navy-800">
               <Link
                 href="/admin"
                 onClick={() => setMobileOpen(false)}
