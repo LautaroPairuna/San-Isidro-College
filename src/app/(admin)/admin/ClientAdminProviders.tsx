@@ -116,12 +116,29 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
           className={`
             fixed inset-y-0 left-0 z-20 transform
             ${isRoot ? 'w-full md:w-64' : 'w-64'} transition-transform duration-200
-            bg-gradient-to-b from-brand-800 to-brand-900 text-white shadow-xl
+            bg-gradient-to-b from-brand-800 via-brand-900 to-navy-800 text-white shadow-xl
             md:static md:translate-x-0
             ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
           `}
         >
-          <div className="h-full flex flex-col">
+          <div className="relative h-full flex flex-col overflow-hidden">
+            {/* Decoración de marca en la zona media: forma dorada centrada
+                + brillos navy/dorado que aportan el amarillo y los tonos azules */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+              <div className="absolute left-1/2 top-1/2 w-72 -translate-x-1/2 -translate-y-1/2 opacity-[0.18]">
+                <Image
+                  src="/images/formas/forma-home-3.svg"
+                  alt=""
+                  width={750}
+                  height={500}
+                  className="w-full h-auto"
+                />
+              </div>
+              <div className="absolute -bottom-20 -right-16 h-64 w-64 rounded-full bg-navy-600/40 blur-3xl" />
+              <div className="absolute top-1/3 -left-16 h-52 w-52 rounded-full bg-gold-500/15 blur-3xl" />
+            </div>
+
+            <div className="relative z-10 flex h-full flex-col">
             {/* Header Sidebar con logo institucional */}
             <div className="flex items-center justify-center h-24 px-6 border-b border-white/10 bg-brand-900/40">
               <Image
@@ -196,6 +213,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
                 <HiLogout className="mr-2 h-4 w-4" />
                 Cerrar Sesión
               </button>
+            </div>
             </div>
           </div>
         </aside>
