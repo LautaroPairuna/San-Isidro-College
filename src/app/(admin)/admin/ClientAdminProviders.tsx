@@ -135,7 +135,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
             </div>
 
             {/* Nav Links */}
-            <nav className="flex flex-1 flex-col px-4 py-6 space-y-1.5 overflow-y-auto">
+            <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
               <Link
                 href="/admin"
                 onClick={() => setMobileOpen(false)}
@@ -177,16 +177,6 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
                   <HiGlobeAlt className="mr-3 h-5 w-5" />
                   <span className="font-medium">Ver sitio web</span>
                 </Link>
-              </div>
-
-              {/* Zona media: panel navy con acento dorado */}
-              <div className="mt-6 flex-1 min-h-[120px] rounded-xl bg-navy-700 border border-gold-500/30 p-4 flex flex-col justify-center text-center gap-1.5">
-                <span className="text-gold-400 text-xs font-semibold uppercase tracking-widest">
-                  San Isidro College
-                </span>
-                <p className="text-white/70 text-xs leading-relaxed">
-                  Panel de gestión de contenidos del sitio institucional.
-                </p>
               </div>
             </nav>
 
