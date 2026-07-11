@@ -15,9 +15,16 @@ import {
   HiLogout,
   HiHome,
   HiTemplate,
+  HiGlobeAlt,
 } from 'react-icons/hi';
 
-const RESOURCES = ['GrupoMedios', 'Medio', 'Seccion'] as const;
+// Enlaces del sidebar normalizados: cada recurso con su label amigable
+// (consistente con el Dashboard) y el nombre de tabla usado en las rutas.
+const RESOURCES: { name: string; label: string }[] = [
+  { name: 'GrupoMedios', label: 'Grupos de Medios' },
+  { name: 'Medio',       label: 'Medios Individuales' },
+  { name: 'Seccion',     label: 'Secciones de Página' },
+];
 
 interface ClientAdminProvidersProps {
   children: ReactNode;
@@ -133,13 +140,13 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
                 </p>
               </div>
 
-              {RESOURCES.map((resName) => {
-                const Icon = iconFor(resName);
-                const isActive = rawPath.includes(`/admin/resources/${resName}`);
+              {RESOURCES.map(({ name, label }) => {
+                const Icon = iconFor(name);
+                const isActive = rawPath.includes(`/admin/resources/${name}`);
                 return (
                   <Link
-                    key={resName}
-                    href={`/admin/resources/${resName}`}
+                    key={name}
+                    href={`/admin/resources/${name}`}
                     className={`flex items-center px-4 py-3 rounded-md transition-colors ${
                       isActive
                         ? 'bg-indigo-700 text-white shadow'
@@ -147,10 +154,22 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
                     }`}
                   >
                     <Icon className="mr-3 h-5 w-5" />
-                    <span className="font-medium">{resName}</span>
+                    <span className="font-medium">{label}</span>
                   </Link>
                 );
               })}
+
+              {/* Volver al sitio público */}
+              <div className="pt-4 mt-4 border-t border-indigo-700/60">
+                <Link
+                  href="/"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center px-4 py-3 rounded-md text-indigo-100 hover:bg-indigo-700 hover:text-white transition-colors"
+                >
+                  <HiGlobeAlt className="mr-3 h-5 w-5" />
+                  <span className="font-medium">Ver sitio web</span>
+                </Link>
+              </div>
             </nav>
 
             {/* Footer Sidebar (User info desktop) */}
