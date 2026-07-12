@@ -4,18 +4,10 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
-  // El caché incremental (ISR) vive sólo en disco: sin LRU en memoria
-  // (por defecto Next reserva hasta 50MB de RAM para esto).
   cacheMaxMemorySize: 0,
-
-  // Optimizaciones de imágenes
   images: {
-    // Solo WebP: los originales ya se guardan optimizados en WebP (file.service),
-    // así que generar AVIF además duplica el trabajo y es ~3-5x más caro en RAM/CPU.
     formats: ['image/webp'],
-    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 días
-    // Quitamos 2048/3840: la variante 4K es la que más RAM consume al procesar
-    // y no aporta en un sitio institucional. Conservamos el resize responsive.
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
@@ -37,11 +29,7 @@ const nextConfig: NextConfig = {
       { source: '/uploads/media/:path*',         destination: '/api/disk-images/uploads/media/:path*' },
     ];
   },
-
-  // Redirecciones 301 de la antigua web (.html) a las rutas de la web nueva.
-  // Migración de DNS: las viejas páginas estáticas se consolidaron en /es/colegio,
-  // /es/academicos, /es/deportes y el home (#contacto). Se preserva el SEO
-  // apuntando cada URL indexada a la sección equivalente.
+  
   async redirects() {
     return [
       // ---- Renombre de rutas públicas ----
@@ -64,19 +52,19 @@ const nextConfig: NextConfig = {
 
       // ---- Actividades ----
       { source: '/actividades---deportes.html', destination: '/es/deportes#deportes',               permanent: true },
-      { source: '/arte.html',                   destination: '/es/deportes#play-habilidades-steam', permanent: true },
-      { source: '/tic.html',                    destination: '/es/deportes#play-habilidades-steam', permanent: true },
-      { source: '/huerta.html',                 destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
-      { source: '/formacion-religiosa.html',    destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
+      { source: '/arte.html',                   destination: '/es/experiencia-sic#san-isidro-play', permanent: true },
+      { source: '/tic.html',                    destination: '/es/experiencia-sic#innovacion-y-robotica', permanent: true },
+      { source: '/huerta.html',                 destination: '/es/experiencia-sic#actividades-extracurriculares', permanent: true },
+      { source: '/formacion-religiosa.html',    destination: '/es/colegio#valores',                 permanent: true },
       { source: '/instalaciones.html',          destination: '/es/colegio#instalaciones',           permanent: true },
       { source: '/ubicacion.html',              destination: '/es/#contacto',                       permanent: true },
 
       // ---- Galería de fotos ----
       { source: '/deporte.html',                destination: '/es/deportes#deportes',               permanent: true },
-      { source: '/family-day.html',             destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
-      { source: '/arte-galeria.html',           destination: '/es/deportes#play-habilidades-steam', permanent: true },
-      { source: '/huerta-galeria.html',         destination: '/es/deportes#bienestar-estudiantil',  permanent: true },
-      { source: '/formacion-religiosa-galeria.html', destination: '/es/deportes#bienestar-estudiantil', permanent: true },
+      { source: '/family-day.html',             destination: '/es/experiencia-sic#bienestar-y-acompanamiento', permanent: true },
+      { source: '/arte-galeria.html',           destination: '/es/experiencia-sic#san-isidro-play', permanent: true },
+      { source: '/huerta-galeria.html',         destination: '/es/experiencia-sic#actividades-extracurriculares', permanent: true },
+      { source: '/formacion-religiosa-galeria.html', destination: '/es/colegio#valores',           permanent: true },
       { source: '/instalaciones-galeria.html',  destination: '/es/colegio#instalaciones',           permanent: true },
       { source: '/admisiones.html',             destination: '/es',                                 permanent: true },
 

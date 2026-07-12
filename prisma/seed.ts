@@ -163,6 +163,29 @@ const ACADEMICOS_MAS_INFO_GROUPS: SeedGrupo[] = [
   ]),
 ]
 
+const EXPERIENCIA_SIC_OVERVIEW_GROUPS: SeedGrupo[] = [
+  group("g-exp-hero", "Experiencia SIC - Hero", "CARRUSEL", [
+    media("m-exp-hero-1", "banner-deportes-20250603-004842.webp", "IMAGEN", 10, "Experiencia SIC hero 1", "thumbs/banner-deportes-20250603-004842.webp"),
+    media("m-exp-hero-2", "banner-deportes-2-20250603-004919.webp", "IMAGEN", 20, "Experiencia SIC hero 2", "thumbs/banner-deportes-2-20250603-004919.webp"),
+    media("m-exp-hero-3", "banner-deportes-3-20250603-005009.webp", "IMAGEN", 30, "Experiencia SIC hero 3", "thumbs/banner-deportes-3-20250603-005009.webp"),
+  ]),
+  group("g-exp-bienestar-carousel", "Experiencia SIC - Bienestar Carousel", "CARRUSEL", [
+    media("m-exp-bienestar-carousel-1", "foto-hockey-20250603-005057.webp", "IMAGEN", 10, "Experiencia SIC bienestar 1", "thumbs/foto-hockey-20250603-005057.webp"),
+    media("m-exp-bienestar-carousel-2", "foto-hockey-2-20250603-005124.webp", "IMAGEN", 20, "Experiencia SIC bienestar 2", "thumbs/foto-hockey-2-20250603-005124.webp"),
+    media("m-exp-bienestar-carousel-3", "foto-hockey-3-20250603-005153.webp", "IMAGEN", 30, "Experiencia SIC bienestar 3", "thumbs/foto-hockey-3-20250603-005153.webp"),
+  ]),
+  group("g-exp-google-carousel", "Experiencia SIC - Google Carousel", "CARRUSEL", [
+    media("m-exp-google-carousel-1", "foto-isidro-play-20250603-005601.webp", "IMAGEN", 10, "Experiencia SIC google 1", "thumbs/foto-isidro-play-20250603-005601.webp"),
+    media("m-exp-google-carousel-2", "foto-isidro-play-2-20250603-005640.webp", "IMAGEN", 20, "Experiencia SIC google 2", "thumbs/foto-isidro-play-2-20250603-005640.webp"),
+    media("m-exp-google-carousel-3", "foto-isidro-play-3-20250603-005706.webp", "IMAGEN", 30, "Experiencia SIC google 3", "thumbs/foto-isidro-play-3-20250603-005706.webp"),
+  ]),
+  group("g-exp-innovacion-carousel", "Experiencia SIC - Innovacion Carousel", "CARRUSEL", [
+    media("m-exp-innovacion-carousel-1", "foto-estudiantil-20250603-005440.webp", "IMAGEN", 10, "Experiencia SIC innovacion 1", "thumbs/foto-estudiantil-20250603-005440.webp"),
+    media("m-exp-innovacion-carousel-2", "foto-estudiantil-2-20250603-005502.webp", "IMAGEN", 20, "Experiencia SIC innovacion 2", "thumbs/foto-estudiantil-2-20250603-005502.webp"),
+    media("m-exp-innovacion-carousel-3", "foto-estudiantil-3-20250603-005527.webp", "IMAGEN", 30, "Experiencia SIC innovacion 3", "thumbs/foto-estudiantil-3-20250603-005527.webp"),
+  ]),
+] 
+
 const EXPERIENCIA_SIC_DETAIL_GROUPS: SeedGrupo[] = [
   group("g-exp-google-logo", "Experiencia SIC - Google Logo", "UNICO", [
     media("m-exp-google-logo", "google-education-logo.webp", "IMAGEN", 10, "Google for Education logo"),
@@ -216,6 +239,7 @@ const GROUP_DEFAULTS: SeedGrupo[] = [
   ...ACADEMICOS_GROUPS,
   ...VIDA_ESTUDIANTIL_GROUPS,
   ...ACADEMICOS_MAS_INFO_GROUPS,
+  ...EXPERIENCIA_SIC_OVERVIEW_GROUPS,
   ...EXPERIENCIA_SIC_DETAIL_GROUPS,
 ]
 
@@ -256,7 +280,7 @@ const MAS_INFO_SECTIONS: SeedSection[] = [
 
 const EXPERIENCIA_SIC_SECTIONS: SeedSection[] = [
   section("experiencia-sic-hero", "experiencia-sic", 10, "HERO", {
-    grupoKey: "g-vida-hero",
+    grupoKey: "g-exp-hero",
     titulo: "Experiencia San Isidro",
     propsJson: {
       component: "hero",
@@ -275,7 +299,7 @@ const EXPERIENCIA_SIC_SECTIONS: SeedSection[] = [
     },
   }),
   section("experiencia-sic-bienestar-y-acompanamiento", "experiencia-sic", 20, "GALERIA", {
-    grupoKey: "g-vida-rugby",
+    grupoKey: "g-exp-bienestar-carousel",
     titulo: "Bienestar y Acompanamiento",
     propsJson: {
       component: "feature-card",
@@ -298,7 +322,7 @@ const EXPERIENCIA_SIC_SECTIONS: SeedSection[] = [
     },
   }),
   section("experiencia-sic-google-reference-school", "experiencia-sic", 30, "GALERIA", {
-    grupoKey: "g-vida-play",
+    grupoKey: "g-exp-google-carousel",
     titulo: "Google Reference School",
     propsJson: {
       component: "feature-card",
@@ -321,7 +345,7 @@ const EXPERIENCIA_SIC_SECTIONS: SeedSection[] = [
     },
   }),
   section("experiencia-sic-innovacion-y-robotica", "experiencia-sic", 40, "GALERIA", {
-    grupoKey: "g-vida-bienestar",
+    grupoKey: "g-exp-innovacion-carousel",
     titulo: "Innovacion y Robotica",
     propsJson: {
       component: "feature-card",

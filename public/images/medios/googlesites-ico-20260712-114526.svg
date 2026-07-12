@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 41.08 34.23">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4fa0ff;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #9dd2ff;
+      }
+
+      .cls-3 {
+        fill: #579fff;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        mask: url(#mask);
+      }
+
+      .cls-5 {
+        fill: #3186ff;
+      }
+    </style>
+    <mask id="mask" x="0" y="0" width="41.08" height="34.23" maskUnits="userSpaceOnUse">
+      <g id="a">
+        <path class="cls-3" d="M0,9.41c0-2.84,0-4.26.45-5.39.65-1.63,1.94-2.92,3.57-3.57,1.13-.45,2.55-.45,5.39-.45h22.26c2.84,0,4.26,0,5.39.45,1.63.65,2.92,1.94,3.57,3.57.45,1.13.45,2.55.45,5.39v15.42c0,2.84,0,4.26-.45,5.39-.65,1.63-1.94,2.92-3.57,3.57-1.13.45-2.55.45-5.39.45H9.41c-2.84,0-4.26,0-5.39-.45-1.63-.65-2.92-1.94-3.57-3.57-.45-1.13-.45-2.55-.45-5.39v-15.42Z"/>
+      </g>
+    </mask>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g class="cls-6">
+      <g>
+        <path class="cls-1" d="M0,0h41.08v34.23H0V0Z"/>
+        <path class="cls-4" d="M32.52,23.47h.98c1.76,0,3.18,1.42,3.18,3.18h0c0,1.76-1.42,3.18-3.18,3.18h-.98c-1.76,0-3.18-1.42-3.18-3.18h0c0-1.76,1.42-3.18,3.18-3.18Z"/>
+        <path class="cls-2" d="M12.23,10.76H0v17.36c0,3.38,2.74,6.11,6.11,6.11s6.11-2.74,6.11-6.11V10.76Z"/>
+        <path class="cls-5" d="M0,0h41.08v10.76H0V0Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

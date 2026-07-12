@@ -11,12 +11,12 @@ import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } f
  *  SLUGS DE SECCIONES (Coinciden con DB)
  * ------------------------------------------------------------------*/
 const SECTION_SLUGS = {
-  HERO: 'vida-estudiantil-hero',
-  RUGBY: 'vida-estudiantil-rugby',
-  DOJO: 'vida-estudiantil-dojo',
-  GYM: 'vida-estudiantil-gym',
-  BIENESTAR: 'vida-estudiantil-bienestar',
-  PLAY: 'vida-estudiantil-play',
+  HERO: 'experiencia-sic-hero',
+  BIENESTAR: 'experiencia-sic-bienestar-y-acompanamiento',
+  GOOGLE: 'experiencia-sic-google-reference-school',
+  INNOVACION: 'experiencia-sic-innovacion-y-robotica',
+  LEGACY_PLAY: 'vida-estudiantil-play',
+  LEGACY_BIENESTAR: 'vida-estudiantil-bienestar',
 } as const
 
 /**
@@ -39,26 +39,32 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export default async function DeportesPage({ params }: PageProps) {
+export default async function ExperienciaSicPage({ params }: PageProps) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
   const tExperience = await getTranslations({ locale, namespace: 'experienciaSicHome' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
-  const pageSections = await getPageContentForSlug('vida-estudiantil')
+  const experienceSections = await getPageContentForSlug('experiencia-sic')
+  const legacySections = await getPageContentForSlug('vida-estudiantil')
   const alianzasMedia = await getMediaGroupByName('Alianzas')
 
-  const getMedias = (slug: string): MedioItem[] => {
-    const section = pageSections.find((s: PageContentSection) => s.slug === slug)
+  const getExperienceMedias = (slug: string): MedioItem[] => {
+    const section = experienceSections.find((s: PageContentSection) => s.slug === slug)
     return (section?.grupo?.medios ?? []) as MedioItem[]
   }
 
-  const heroMediaRaw = getMedias(SECTION_SLUGS.HERO)
-  const rugbyHockeyMediaRaw = getMedias(SECTION_SLUGS.RUGBY)
-  const dojoMediaRaw = getMedias(SECTION_SLUGS.DOJO)
-  const gymMediaRaw = getMedias(SECTION_SLUGS.GYM)
-  const vidaMediaRaw = getMedias(SECTION_SLUGS.BIENESTAR)
-  const playMediaRaw = getMedias(SECTION_SLUGS.PLAY)
+  const getLegacyMedias = (slug: string): MedioItem[] => {
+    const section = legacySections.find((s: PageContentSection) => s.slug === slug)
+    return (section?.grupo?.medios ?? []) as MedioItem[]
+  }
+
+  const heroMediaRaw = getExperienceMedias(SECTION_SLUGS.HERO)
+  const rugbyHockeyMediaRaw = getExperienceMedias(SECTION_SLUGS.BIENESTAR)
+  const googleMediaRaw = getExperienceMedias(SECTION_SLUGS.GOOGLE)
+  const innovacionMediaRaw = getExperienceMedias(SECTION_SLUGS.INNOVACION)
+  const vidaMediaRaw = getLegacyMedias(SECTION_SLUGS.LEGACY_BIENESTAR)
+  const playMediaRaw = getLegacyMedias(SECTION_SLUGS.LEGACY_PLAY)
 
   /* ------------------------------ FILTRADO SOLO IMAGEN/VIDEO Y ORDENAMIENTO ------------------------------ */
   const filterImgOrVideo = (arr: MedioItem[]) =>
@@ -68,8 +74,8 @@ export default async function DeportesPage({ params }: PageProps) {
 
   const heroMedia = filterImgOrVideo(heroMediaRaw)
   const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
-  const dojoMedia = filterImgOrVideo(dojoMediaRaw)
-  const gymMedia = filterImgOrVideo(gymMediaRaw)
+  const googleMedia = filterImgOrVideo(googleMediaRaw)
+  const innovacionMedia = filterImgOrVideo(innovacionMediaRaw)
   const vidaMedia = filterImgOrVideo(vidaMediaRaw)
   const playMedia = filterImgOrVideo(playMediaRaw)
 
@@ -154,7 +160,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-center">{tExperience('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('rugbyHockey.description')}</p>
                 <div className="mt-5 text-center">
-                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-black font-semibold hover:underline">
+                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-[#1e804b] font-semibold hover:underline">
                     {tExperience('rugbyHockey.readMore')}
                   </Link>
                 </div>
@@ -208,7 +214,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 <h2 className="text-xl font-bold">{tExperience('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700">{tExperience('rugbyHockey.description')}</p>
                 <div className="mt-5">
-                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-black font-semibold hover:underline">
+                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-[#1e804b] font-semibold hover:underline">
                     {tExperience('rugbyHockey.readMore')}
                   </Link>
                 </div>
@@ -227,15 +233,15 @@ export default async function DeportesPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px]"
+            className="absolute -top-16 lg:right-80 md:-right-28 w-[550px]"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               <div className="w-full h-[645px]">
-                <MediaCarousel items={playMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
+                <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
               </div>
             </div>
-            <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
+            <div className="absolute col-span-4 z-20 top-[63%] xl:left-[28%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('googleReferenceSchool.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('googleReferenceSchool.description')}</p>
@@ -258,9 +264,9 @@ export default async function DeportesPage({ params }: PageProps) {
             height={300}
             className="absolute -top-20 right-35 w-[550px]"
           />
-          {playMedia.length > 0 ? (
+          {googleMedia.length > 0 ? (
             <div className="w-full h-[350px]">
-              <MediaCarousel items={playMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
+              <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
             </div>
           ) : (
             <Image
@@ -297,7 +303,7 @@ export default async function DeportesPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5"
+            className="absolute top-5 left-52 w-[550px]"
           />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
@@ -312,7 +318,7 @@ export default async function DeportesPage({ params }: PageProps) {
           </div>
           <div className="col-span-8">
             <div className="w-full h-[645px]">
-              <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
+              <MediaCarousel items={innovacionMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           </div>
         </div>
@@ -326,9 +332,9 @@ export default async function DeportesPage({ params }: PageProps) {
             height={300}
             className="absolute -top-15 right-35 w-[550px]"
           />
-          {vidaMedia.length > 0 ? (
+          {innovacionMedia.length > 0 ? (
             <div className="w-full h-[350px]">
-              <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
+              <MediaCarousel items={innovacionMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
             <Image
@@ -362,7 +368,7 @@ export default async function DeportesPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px] z-10"
+            className="absolute -top-16 lg:right-52 md:-right-28 w-[550px] z-10"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -448,7 +454,7 @@ export default async function DeportesPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5"
+            className="absolute top-5 left-52 w-[550px]"
           />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">

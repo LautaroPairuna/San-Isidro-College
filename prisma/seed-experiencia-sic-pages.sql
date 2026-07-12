@@ -1,7 +1,8 @@
 -- Seed SQL corregido para las paginas nuevas de Experiencia SIC.
 -- Corrige dos cosas:
 -- 1. No inserta secciones de "Alianzas" dentro de cada pagina detalle.
--- 2. Inserta grupos y medios propios para Google e Innovacion.
+-- 2. Inserta grupos y medios propios para Google, Innovacion y los carruseles
+--    del overview de Experiencia SIC.
 --
 -- Requiere que ya existan estos grupos base del seed principal:
 -- - Vida Estudiantil - Hero
@@ -23,11 +24,15 @@ WHERE `slug` IN (
 );
 
 -- ============================================================================
--- GRUPOS PROPIOS DE GOOGLE E INNOVACION
+-- GRUPOS PROPIOS DE EXPERIENCIA SIC
 -- ============================================================================
 
 INSERT INTO `grupomedios` (`nombre`, `tipoGrupo`, `creadoEn`, `actualizadoEn`)
 VALUES
+  ('Experiencia SIC - Hero', 'CARRUSEL', NOW(), NOW()),
+  ('Experiencia SIC - Bienestar Carousel', 'CARRUSEL', NOW(), NOW()),
+  ('Experiencia SIC - Google Carousel', 'CARRUSEL', NOW(), NOW()),
+  ('Experiencia SIC - Innovacion Carousel', 'CARRUSEL', NOW(), NOW()),
   ('Experiencia SIC - Google Logo', 'UNICO', NOW(), NOW()),
   ('Experiencia SIC - Google Students Icons', 'GALERIA', NOW(), NOW()),
   ('Experiencia SIC - Google Teachers Icons', 'GALERIA', NOW(), NOW()),
@@ -42,6 +47,10 @@ DELETE m
 FROM `medio` m
 INNER JOIN `grupomedios` g ON g.`id` = m.`grupoMediosId`
 WHERE g.`nombre` IN (
+  'Experiencia SIC - Hero',
+  'Experiencia SIC - Bienestar Carousel',
+  'Experiencia SIC - Google Carousel',
+  'Experiencia SIC - Innovacion Carousel',
   'Experiencia SIC - Google Logo',
   'Experiencia SIC - Google Students Icons',
   'Experiencia SIC - Google Teachers Icons',
@@ -49,6 +58,46 @@ WHERE g.`nombre` IN (
   'Experiencia SIC - Innovacion Students Icons',
   'Experiencia SIC - Innovacion Tools Icons'
 );
+
+INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
+FROM `grupomedios` g
+JOIN (
+  SELECT 'banner-deportes-20250603-004842.webp' AS urlArchivo, 'thumbs/banner-deportes-20250603-004842.webp' AS urlMiniatura, 'Experiencia SIC hero 1' AS textoAlternativo, 10 AS posicion
+  UNION ALL SELECT 'banner-deportes-2-20250603-004919.webp', 'thumbs/banner-deportes-2-20250603-004919.webp', 'Experiencia SIC hero 2', 20
+  UNION ALL SELECT 'banner-deportes-3-20250603-005009.webp', 'thumbs/banner-deportes-3-20250603-005009.webp', 'Experiencia SIC hero 3', 30
+) x
+WHERE g.`nombre` = 'Experiencia SIC - Hero';
+
+INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
+FROM `grupomedios` g
+JOIN (
+  SELECT 'foto-hockey-20250603-005057.webp' AS urlArchivo, 'thumbs/foto-hockey-20250603-005057.webp' AS urlMiniatura, 'Experiencia SIC bienestar 1' AS textoAlternativo, 10 AS posicion
+  UNION ALL SELECT 'foto-hockey-2-20250603-005124.webp', 'thumbs/foto-hockey-2-20250603-005124.webp', 'Experiencia SIC bienestar 2', 20
+  UNION ALL SELECT 'foto-hockey-3-20250603-005153.webp', 'thumbs/foto-hockey-3-20250603-005153.webp', 'Experiencia SIC bienestar 3', 30
+) x
+WHERE g.`nombre` = 'Experiencia SIC - Bienestar Carousel';
+
+INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
+FROM `grupomedios` g
+JOIN (
+  SELECT 'foto-isidro-play-20250603-005601.webp' AS urlArchivo, 'thumbs/foto-isidro-play-20250603-005601.webp' AS urlMiniatura, 'Experiencia SIC google 1' AS textoAlternativo, 10 AS posicion
+  UNION ALL SELECT 'foto-isidro-play-2-20250603-005640.webp', 'thumbs/foto-isidro-play-2-20250603-005640.webp', 'Experiencia SIC google 2', 20
+  UNION ALL SELECT 'foto-isidro-play-3-20250603-005706.webp', 'thumbs/foto-isidro-play-3-20250603-005706.webp', 'Experiencia SIC google 3', 30
+) x
+WHERE g.`nombre` = 'Experiencia SIC - Google Carousel';
+
+INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
+FROM `grupomedios` g
+JOIN (
+  SELECT 'foto-estudiantil-20250603-005440.webp' AS urlArchivo, 'thumbs/foto-estudiantil-20250603-005440.webp' AS urlMiniatura, 'Experiencia SIC innovacion 1' AS textoAlternativo, 10 AS posicion
+  UNION ALL SELECT 'foto-estudiantil-2-20250603-005502.webp', 'thumbs/foto-estudiantil-2-20250603-005502.webp', 'Experiencia SIC innovacion 2', 20
+  UNION ALL SELECT 'foto-estudiantil-3-20250603-005527.webp', 'thumbs/foto-estudiantil-3-20250603-005527.webp', 'Experiencia SIC innovacion 3', 30
+) x
+WHERE g.`nombre` = 'Experiencia SIC - Innovacion Carousel';
 
 INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
 SELECT 'google-education-logo.webp', NULL, 'Google for Education logo', 'IMAGEN', 10, g.`id`, NOW(), NOW()
@@ -133,7 +182,7 @@ VALUES
   'Experiencia San Isidro',
   NULL,
   '{"component":"hero","locales":{"es":{"title":"Experiencia San Isidro","description":"La experiencia de crecer, aprender y compartir va mucho mas alla del aula. En San Isidro College, cada actividad complementa la formacion academica y ofrece nuevas oportunidades para desarrollar talentos, fortalecer vinculos y disfrutar de una comunidad que inspira a crecer."},"en":{"title":"San Isidro Experience","description":"The experience of growing, learning, and sharing goes far beyond the classroom. At San Isidro College, each activity complements academic development and creates new opportunities to build talents, strengthen bonds, and enjoy a community that inspires growth."}}}',
-  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Vida Estudiantil - Hero' LIMIT 1),
+  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Hero' LIMIT 1),
   NULL,
   NOW(),
   NOW()
@@ -146,7 +195,7 @@ VALUES
   'Bienestar y Acompanamiento',
   NULL,
   '{"component":"feature-card","overviewHash":"bienestar-y-acompanamiento","detailHref":"/experiencia-sic/bienestar-y-acompanamiento","locales":{"es":{"title":"Bienestar y Acompanamiento","description":"Creemos que cada alumno aprende mejor cuando se siente seguro, escuchado y acompanado. Por eso promovemos un entorno de confianza, respeto y cercania, donde el bienestar forma parte de la experiencia educativa de todos los dias.","readMore":"Leer mas"},"en":{"title":"Wellbeing and Guidance","description":"We believe every student learns better when they feel safe, heard, and supported. That is why we promote an environment of trust, respect, and closeness, where wellbeing is part of the educational experience every day.","readMore":"Read more"}}}',
-  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Vida Estudiantil - Rugby Hockey' LIMIT 1),
+  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Bienestar Carousel' LIMIT 1),
   NULL,
   NOW(),
   NOW()
@@ -159,7 +208,7 @@ VALUES
   'Google Reference School',
   NULL,
   '{"component":"feature-card","overviewHash":"google-reference-school","detailHref":"/experiencia-sic/google-reference-school","locales":{"es":{"title":"Google Reference School","description":"La innovacion forma parte de nuestra identidad desde el primer dia. Como Google Reference School, integramos la tecnologia de manera significativa para potenciar el aprendizaje, la creatividad y la colaboracion, preparando a nuestros alumnos para los desafios del futuro.","readMore":"Leer mas"},"en":{"title":"Google Reference School","description":"Innovation has been part of our identity from day one. As a Google Reference School, we integrate technology in meaningful ways to strengthen learning, creativity, and collaboration, preparing our students for the challenges of the future.","readMore":"Read more"}}}',
-  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Vida Estudiantil - Play' LIMIT 1),
+  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Google Carousel' LIMIT 1),
   NULL,
   NOW(),
   NOW()
@@ -172,7 +221,7 @@ VALUES
   'Innovacion y Robotica',
   NULL,
   '{"component":"feature-card","overviewHash":"innovacion-y-robotica","detailHref":"/experiencia-sic/innovacion-y-robotica","locales":{"es":{"title":"Innovacion y Robotica","description":"Un espacio donde las ideas se convierten en proyectos. Nuestro Laboratorio de Innovacion y Robotica invita a los alumnos a explorar, disenar, construir y experimentar, desarrollando habilidades para resolver los desafios del presente y del futuro.","readMore":"Leer mas"},"en":{"title":"Innovation and Robotics","description":"A space where ideas become projects. Our Innovation and Robotics Lab invites students to explore, design, build, and experiment, developing the skills to solve the challenges of the present and the future.","readMore":"Read more"}}}',
-  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Vida Estudiantil - Bienestar' LIMIT 1),
+  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Innovacion Carousel' LIMIT 1),
   NULL,
   NOW(),
   NOW()
