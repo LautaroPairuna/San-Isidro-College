@@ -233,7 +233,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute -top-16 lg:right-80 md:-right-28 w-[550px]"
+            className="absolute -top-16 2xl:right-80 xl:right-20 md:-right-28 w-[550px]"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -241,7 +241,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
               </div>
             </div>
-            <div className="absolute col-span-4 z-20 top-[63%] xl:left-[28%] left-[23%]">
+            <div className="absolute col-span-4 z-20 2xl:top-[63%] xl:top-[66%] 2xl:left-[28%] xl:left-[15%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('googleReferenceSchool.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('googleReferenceSchool.description')}</p>
@@ -303,7 +303,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5 left-52 w-[550px]"
+            className="absolute top-5 2xl:left-52 left-0 w-[550px]"
           />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
@@ -368,7 +368,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute -top-16 lg:right-52 md:-right-28 w-[550px] z-10"
+            className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -387,7 +387,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               )}
             </div>
             <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
-              <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
+              <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 2xl:left-96 xl:left-52 w-[550px]">
                 <Image
                   src="/images/logo-SIC-play.svg"
                   alt={t('play.logoAlt')}
@@ -454,7 +454,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute top-5 left-52 w-[550px]"
+            className="absolute top-5 2xl:left-52 left-0 w-[550px]"
           />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
