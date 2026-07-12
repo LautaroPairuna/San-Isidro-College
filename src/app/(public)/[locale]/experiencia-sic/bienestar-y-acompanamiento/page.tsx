@@ -1,0 +1,141 @@
+import type { FlipCardItem } from '@/components/FlipCardsCarousel'
+import FlipCardsGrid from '@/components/FlipCardsGrid'
+import Contact from '@/components/sectionContact'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import { getTranslations } from 'next-intl/server'
+import { toPublicImageUrl } from '@/lib/publicConstants'
+import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+
+const CARD_MEDIA_SECTION_SLUG = 'academicos-mas-info-cards'
+
+const CARD_FALLBACK_IMAGES = [
+  '/images/image-kindergarten.webp',
+  '/images/medios/foto-estudiantil-20250603-005440.webp',
+  '/images/medios/foto-dojo-2-20250603-005253.webp',
+  '/images/medios/foto-hockey-20250603-005057.webp',
+  '/images/medios/foto-isidro-play-20250603-005601.webp',
+  '/images/medios/foto-balance-1-20260217-194502.webp',
+  '/images/medios/foto-balance-2-20260217-194547.webp',
+  '/images/medios/foto-hockey-20250603-005057.webp',
+] as const
+
+const FIRST_GROUP_CARDS = [
+  { key: 'tutorias', icon: '/images/icons/tutorias-ico.svg', color: '#c19516' },
+  { key: 'educacionEmocional', icon: '/images/icons/educacion-emocional-ico.svg', color: '#2d8f57' },
+  { key: 'trabajoFamilias', icon: '/images/icons/trabajo-familia-ico.svg', color: '#294161' },
+  { key: 'desarrolloIntegral', icon: '/images/icons/desarrollo-integral-ico.svg', color: '#75ad76' },
+] as const
+
+const SECOND_GROUP_CARDS = [
+  { key: 'sostenEmocional', icon: '/images/icons/sosten-emocional-ico.svg', color: '#3ba9cf' },
+  { key: 'acompanamientoPsicopedagogico', icon: '/images/icons/acompanamiento-pedagogico-ico.svg', color: '#beb465' },
+  { key: 'convivenciaEscolar', icon: '/images/icons/convivencia-escolar-ico.svg', color: '#c19516' },
+  { key: 'trabajoInterdisciplinario', icon: '/images/icons/trabajo-interdisciplinario-ico.svg', color: '#294161' },
+] as const
+
+type CardKey =
+  | (typeof FIRST_GROUP_CARDS)[number]['key']
+  | (typeof SECOND_GROUP_CARDS)[number]['key']
+
+type PageProps = {
+  params: Promise<{ locale: string }>
+}
+
+export const dynamic = 'force-dynamic'
+
+function buildCards(
+  cards: ReadonlyArray<{ key: CardKey; icon: string; color: string }>,
+  imageUrls: string[],
+  t: Awaited<ReturnType<typeof getTranslations>>,
+  offset: number
+): FlipCardItem[] {
+  return cards.map((card, index) => {
+    const image = imageUrls[offset + index] ?? CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length]
+
+    return {
+      key: card.key,
+      title: t(`cards.${card.key}.title`),
+      backText: t(`cards.${card.key}.backText`),
+      icon: card.icon,
+      image,
+      fallbackIcon: card.icon,
+      fallbackImage: CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length],
+      color: card.color,
+    }
+  })
+}
+
+export default async function ExperienciaSicBienestarPage({ params }: PageProps) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'experienciaSicBienestarDetail' })
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
+  const academicsSections = await getPageContentForSlug('academicos-mas-info')
+
+  const cardsSection = academicsSections.find(
+    (section: PageContentSection) => section.slug === CARD_MEDIA_SECTION_SLUG
+  )
+  const imageMedias = [...(cardsSection?.grupo?.medios ?? [])]
+    .filter((media) => media.tipo === 'IMAGEN')
+    .sort((a, b) => a.posicion - b.posicion)
+
+  const imageUrls =
+    imageMedias.length > 0
+      ? Array.from({ length: 8 }, (_, index) =>
+          toPublicImageUrl('medios', imageMedias[index % imageMedias.length]!.urlArchivo)
+        )
+      : [...CARD_FALLBACK_IMAGES]
+
+  const firstGroupCards = buildCards(FIRST_GROUP_CARDS, imageUrls, t, 0)
+  const secondGroupCards = buildCards(SECOND_GROUP_CARDS, imageUrls, t, 4)
+
+  return (
+    <>
+      <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
+        <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white px-8 pb-12 pt-28">
+          <div className="space-y-5 text-justify text-gray-800">
+            <h1 className="text-4xl font-bold leading-tight text-shadow-bold-movil md:text-5xl">
+              {t('title')}
+            </h1>
+            <p>{t('intro.p1')}</p>
+            <h2 className="pt-2 text-2xl font-bold leading-tight text-gray-800">
+              {t('philosophy.title')}
+            </h2>
+            <p>{t('philosophy.p1')}</p>
+            <p>{t('philosophy.p2')}</p>
+          </div>
+
+          <FlipCardsGrid items={firstGroupCards} ariaLabel={t('firstGroupAriaLabel')} />
+
+          <div className="mt-10 space-y-5 text-justify text-gray-800">
+            <div>
+              <h2 className="text-2xl font-bold leading-tight text-gray-800">
+                {t('community.title')}
+              </h2>
+              <p className="mt-2">{t('community.p1')}</p>
+              <p>{t('community.p2')}</p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold leading-tight text-gray-800">
+                {t('eoe.title')}
+              </h2>
+              <p className="mt-2">{t('eoe.p1')}</p>
+            </div>
+          </div>
+
+          <FlipCardsGrid items={secondGroupCards} ariaLabel={t('secondGroupAriaLabel')} />
+
+          <div className="mt-10 space-y-4 text-justify text-gray-800">
+            <h2 className="text-2xl font-bold leading-tight text-gray-800">
+              {t('closing.title')}
+            </h2>
+            <p>{t('closing.p1')}</p>
+          </div>
+        </div>
+      </section>
+
+      <SectionCarrusel medios={alianzasMedia} />
+      <Contact />
+    </>
+  )
+}

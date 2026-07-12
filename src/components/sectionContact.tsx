@@ -28,6 +28,8 @@ const ContactSection = () => {
               {[
                 { href: 'https://www.instagram.com/sanisidrocollegesalta/', src: '/images/ico-instagram.svg', alt: 'Instagram San Isidro College' },
                 { href: 'https://www.facebook.com/sanisidrocollege/',        src: '/images/ico-facebook.svg',  alt: 'Facebook San Isidro College' },
+                { href: 'https://www.linkedin.com/sanisidrocollegesalta/', src: '/images/ico-linkedin.svg', alt: 'LinkedIn San Isidro College' },
+                { href: 'https://www.youtube.com/sanisidrocollege/',        src: '/images/ico-youtube.svg',  alt: 'YouTube San Isidro College' },
               ].map(({ href, src, alt }) => (
                 <a
                   key={alt}
@@ -41,7 +43,7 @@ const ContactSection = () => {
                     alt={alt}
                     width={20}
                     height={20}
-                    className="object-contain"
+                    className="w-5 h-5 object-contain"
                   />
                 </a>
               ))}

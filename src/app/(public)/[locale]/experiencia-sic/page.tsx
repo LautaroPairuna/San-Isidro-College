@@ -137,7 +137,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — BIENESTAR ESTUDIANTIL ═════════════ */}
-      <section id="club" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="bienestar-y-acompanamiento" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
         <Image
           src="/images/formas/forma-home-2.svg"
           alt=""
@@ -154,7 +154,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-center">{tExperience('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('rugbyHockey.description')}</p>
                 <div className="mt-5 text-center">
-                  <Link href={{ pathname: "/deportes-mas-info", hash: "bienestar" }} className="text-black font-semibold hover:underline">
+                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-black font-semibold hover:underline">
                     {tExperience('rugbyHockey.readMore')}
                   </Link>
                 </div>
@@ -208,7 +208,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 <h2 className="text-xl font-bold">{tExperience('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700">{tExperience('rugbyHockey.description')}</p>
                 <div className="mt-5">
-                  <Link href={{ pathname: "/deportes-mas-info", hash: "bienestar" }} className="text-black font-semibold hover:underline">
+                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-black font-semibold hover:underline">
                     {tExperience('rugbyHockey.readMore')}
                   </Link>
                 </div>
@@ -219,7 +219,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {	/* ═════════════ SECCIÓN 3 — GOOGLE REFERENCEW SCHOOL  ═════════════ */}
-      <section id="play-habilidades-steam" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
+      <section id="google-reference-school" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <Image
@@ -240,7 +240,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-center">{tExperience('googleReferenceSchool.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('googleReferenceSchool.description')}</p>
                 <div className="mt-5 text-center">
-                  <Link href="/academicos-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                  <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
                     {tExperience('googleReferenceSchool.readMore')}
                   </Link>
                 </div>
@@ -276,7 +276,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-xl font-bold">{tExperience('googleReferenceSchool.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('googleReferenceSchool.description')}</p>
               <div className="mt-5">
-                <Link href="/academicos-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
                   {tExperience('googleReferenceSchool.readMore')}
                 </Link>
               </div>
@@ -287,7 +287,7 @@ export default async function DeportesPage({ params }: PageProps) {
 
       {/* ═════════════ SECCIÓN 4 — INNOVACION Y ROBOTICA ═════════════ */}
       <section
-        id="bienestar-estudiantil"
+        id="innovacion-y-robotica"
         className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-white overflow-hidden"
       >
         {/* Desktop */}
@@ -304,7 +304,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-2xl font-bold text-center">{tExperience('innovacionRobotica.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('innovacionRobotica.description')}</p>
               <div className="text-center mt-5">
-                <Link href="/academicos-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
                   {tExperience('innovacionRobotica.readMore')}
                 </Link>
               </div>
@@ -344,7 +344,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <h2 className="text-xl font-bold">{tExperience('innovacionRobotica.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('innovacionRobotica.description')}</p>
               <div className="mt-5">
-                <Link href="/academicos-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
                   {tExperience('innovacionRobotica.readMore')}
                 </Link>
               </div>
@@ -354,7 +354,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 5 — SAN ISIDRO PLAY ═════════════ */}
-      <section id="play-habilidades-steam" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
+      <section id="san-isidro-play" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <Image
@@ -438,7 +438,7 @@ export default async function DeportesPage({ params }: PageProps) {
 
       {/* ═════════════ SECCIÓN 6 — ACTIVIDADES EXTRACURRICULARES ═════════════ */}
       <section
-        id="bienestar-estudiantil"
+        id="actividades-extracurriculares"
         className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-white overflow-hidden"
       >
         {/* Desktop */}

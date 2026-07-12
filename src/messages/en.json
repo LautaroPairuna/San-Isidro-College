@@ -359,6 +359,173 @@
       "readMore": "Read more"
     }
   },
+  "experienciaSicBienestarDetail": {
+    "title": "Wellbeing and Guidance",
+    "firstGroupAriaLabel": "First group of wellbeing and guidance cards",
+    "secondGroupAriaLabel": "Second group of wellbeing and guidance cards",
+    "intro": {
+      "p1": "At San Isidro College, we understand that educating means accompanying. Our students' wellbeing is a core pillar of our educational proposal, because feeling supported, safe, and heard is essential to learn, grow, and develop their full potential."
+    },
+    "philosophy": {
+      "title": "Our philosophy",
+      "p1": "Educating means much more than transmitting knowledge. It means supporting each student at every stage of their growth, helping them develop confidence, autonomy, empathy, and the tools they need to face life's challenges.",
+      "p2": "At San Isidro College, we want every student to find a place where they can learn, grow, and build healthy relationships within a community that knows and supports them."
+    },
+    "community": {
+      "title": "A community that supports",
+      "p1": "Wellbeing does not depend on one person or one team alone. It is the result of the commitment of the entire educational community.",
+      "p2": "Teachers, tutors, coordinators, and school leaders work closely to know each student, support their journey, and create a school climate based on respect, trust, and a sense of belonging."
+    },
+    "eoe": {
+      "title": "Professional support - School Guidance Team (EOE)",
+      "p1": "In addition to the daily support provided by teachers and tutors, San Isidro College has a School Guidance Team made up of Psychology and Psychopedagogy professionals who support our students' pathways and work in coordination with families, teachers, and, when necessary, external professionals."
+    },
+    "closing": {
+      "title": "Supporting growth",
+      "p1": "At San Isidro College, we understand that each student follows a unique path. That is why we promote a culture of care where wellbeing, closeness, and guidance are part of the educational experience every day. Our commitment is to provide each student with the tools, support, and confidence they need to grow, learn, and develop their full potential."
+    },
+    "cards": {
+      "tutorias": {
+        "title": "Tutoring",
+        "backText": "Each student has a tutor who supports their personal and academic development, encouraging dialogue, close follow-up, and the building of trusting relationships."
+      },
+      "educacionEmocional": {
+        "title": "Emotional education",
+        "backText": "We work on skills such as empathy, resilience, communication, conflict resolution, and emotional management to encourage integral development."
+      },
+      "trabajoFamilias": {
+        "title": "Working with families",
+        "backText": "We believe education is a shared task. We maintain close and ongoing communication with families to support each student's growth."
+      },
+      "desarrolloIntegral": {
+        "title": "Integral development",
+        "backText": "Our goal is to form well-rounded individuals who can learn, live together, make responsible decisions, and face new challenges with confidence."
+      },
+      "sostenEmocional": {
+        "title": "Emotional support",
+        "backText": "Spaces for listening, guidance, and containment to support students through the challenges of each stage of their development."
+      },
+      "acompanamientoPsicopedagogico": {
+        "title": "Psychopedagogical guidance",
+        "backText": "Interventions focused on strengthening learning processes, developing study strategies, and enhancing each student's cognitive abilities."
+      },
+      "convivenciaEscolar": {
+        "title": "School coexistence",
+        "backText": "We promote healthy relationships and support group dynamics to sustain a respectful, inclusive, and positive school climate."
+      },
+      "trabajoInterdisciplinario": {
+        "title": "Interdisciplinary work",
+        "backText": "The EOE works together with teachers, families, and external professionals to provide the most appropriate support according to each student's needs."
+      }
+    }
+  },
+  "experienciaSicGoogleReferenceSchoolDetail": {
+    "logoAlt": "Google for Education Reference School logo",
+    "title": "San Isidro College is a Google Reference School",
+    "intro": {
+      "p1": "It is a recognition that distinguishes educational institutions that integrate Google technology in innovative ways to transform teaching and learning."
+    },
+    "whatIs": {
+      "title": "What does it mean to be a Google Reference School?",
+      "p1": "Being a Google Reference School means being part of an international community of institutions that stand out for using technology as a tool to strengthen learning, creativity, and collaboration.",
+      "p2": "This recognition reflects our commitment to innovative education, where technology supports the development of essential skills for the present and the future."
+    },
+    "students": {
+      "title": "What does it mean for our students?",
+      "items": {
+        "collaborativeLearning": {
+          "title": "Collaborative learning",
+          "description": "Students work as a team using digital tools that encourage communication and the shared construction of knowledge."
+        },
+        "digitalCitizenship": {
+          "title": "Digital citizenship",
+          "description": "They learn to use technology in a responsible, ethical, and safe way."
+        },
+        "creativeThinking": {
+          "title": "Creativity and innovation",
+          "description": "Technology becomes a means to create, investigate, solve problems, and develop new ideas."
+        },
+        "futureReady": {
+          "title": "Future readiness",
+          "description": "They develop digital competencies that will be essential in university, the workplace, and the challenges of the 21st century."
+        }
+      }
+    },
+    "teachers": {
+      "title": "What does it mean for our teachers?",
+      "items": {
+        "enhanceTeaching": {
+          "title": "Enhancing teaching",
+          "description": "Technology supports teachers' work by offering new tools to enrich every learning experience."
+        },
+        "innovateWithConfidence": {
+          "title": "Innovating with confidence",
+          "description": "Our teachers receive ongoing training and support to incorporate new methodologies and make the most of digital tools."
+        },
+        "collaborateToGrow": {
+          "title": "Collaborating to grow",
+          "description": "Shared planning and resource exchange strengthen teamwork and promote a professional learning community."
+        },
+        "inspireStudents": {
+          "title": "Inspiring students",
+          "description": "Innovation begins with prepared teachers who spark curiosity, encourage creativity, and support each student in their development."
+        }
+      }
+    },
+    "technology": {
+      "title": "Technology as part of learning",
+      "p1": "At San Isidro College, technology does not replace the teacher: it strengthens teaching. Since the school opened, innovation and digital tools have been part of our educational proposal. Google Workspace for Education supports the daily experience of students and teachers, promoting dynamic, collaborative, and organized learning from the earliest years."
+    },
+    "closing": {
+      "p1": "At San Isidro College, we believe that innovating does not mean adding more technology, but creating better opportunities to learn. Being a Google Reference School reflects that commitment to an education that prepares our students for the world ahead."
+    }
+  },
+  "experienciaSicInnovacionRoboticaDetail": {
+    "title": "Innovation and Robotics Lab",
+    "intro": {
+      "lead": "A space where ideas become projects.",
+      "p1": "At San Isidro College, we believe the best learning experiences happen when students have the opportunity to experiment.",
+      "p2": "Our Innovation and Robotics Lab is designed to spark curiosity, encourage creativity, and turn ideas into real projects.",
+      "p3": "Through challenges, hands-on experiences, and collaborative work, students develop skills that go beyond technical knowledge and prepare them for a constantly evolving world."
+    },
+    "students": {
+      "title": "What do our students develop?",
+      "items": {
+        "creativeThinking": {
+          "title": "Creative thinking",
+          "description": "They learn to imagine, design, and transform ideas into innovative solutions."
+        },
+        "problemSolving": {
+          "title": "Problem solving",
+          "description": "They analyze challenges, test different alternatives, and find solutions through iteration and continuous improvement."
+        },
+        "teamwork": {
+          "title": "Teamwork",
+          "description": "Each project encourages collaboration, communication, and shared learning."
+        },
+        "computationalThinking": {
+          "title": "Computational thinking",
+          "description": "They develop programming, logic, and sequencing skills to understand how technology works and create with it."
+        }
+      }
+    },
+    "lab": {
+      "title": "A space to experiment",
+      "p1": "Our lab brings together different tools and technologies so students can investigate, build, and learn actively.",
+      "tools": {
+        "robotics": "Robotics",
+        "programming": "Programming",
+        "electronics": "Electronics",
+        "projectDesign": "Project design",
+        "prototyping": "Prototyping",
+        "challengeSolving": "Challenge solving",
+        "printing3d": "3D printing"
+      }
+    },
+    "closing": {
+      "p1": "Our Innovation and Robotics Lab expresses San Isidro College's commitment to innovative education. Together with our technological proposal and our recognition as a Google Reference School, this space encourages students to learn, create, and develop the skills that will allow them to move confidently in the world of tomorrow."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Sports",
     "intro": {
@@ -412,6 +579,18 @@
     "vidaEstudiantilMasInfo": {
       "title": "Sports and Wellbeing | San Isidro College",
       "description": "Learn about the sports program, student wellbeing, and integral support approach at San Isidro College."
+    },
+    "experienciaSicBienestar": {
+      "title": "Wellbeing and Guidance | San Isidro College",
+      "description": "Explore tutoring, emotional education, and the School Guidance Team approach at San Isidro College."
+    },
+    "experienciaSicGoogleReferenceSchool": {
+      "title": "Google Reference School | San Isidro College",
+      "description": "Discover how San Isidro College integrates Google for Education to strengthen learning, creativity, and collaboration."
+    },
+    "experienciaSicInnovacionRobotica": {
+      "title": "Innovation and Robotics | San Isidro College",
+      "description": "Explore the Innovation and Robotics Lab, its projects, tools, and the skills students develop at San Isidro College."
     }
   }
 }

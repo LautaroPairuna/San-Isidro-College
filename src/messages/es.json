@@ -359,6 +359,173 @@
       "readMore": "Leer mas"
     }
   },
+  "experienciaSicBienestarDetail": {
+    "title": "Bienestar y Acompañamiento",
+    "firstGroupAriaLabel": "Primer grupo de tarjetas de bienestar y acompañamiento",
+    "secondGroupAriaLabel": "Segundo grupo de tarjetas de bienestar y acompañamiento",
+    "intro": {
+      "p1": "En San Isidro College entendemos que educar es acompañar. El bienestar de nuestros alumnos es un pilar de nuestra propuesta educativa, porque sabemos que sentirse contenido, seguro y escuchado es fundamental para aprender, crecer y desarrollar todo su potencial."
+    },
+    "philosophy": {
+      "title": "Nuestra filosofía",
+      "p1": "Educar significa mucho más que transmitir conocimientos. Significa acompañar a cada alumno en cada etapa de su crecimiento, ayudándolo a desarrollar confianza, autonomía, empatía y las herramientas necesarias para afrontar los desafíos de la vida.",
+      "p2": "En San Isidro College buscamos que cada estudiante encuentre un lugar donde pueda aprender, crecer y construir vínculos saludables dentro de una comunidad que lo conoce y lo acompaña."
+    },
+    "community": {
+      "title": "Una comunidad que acompaña",
+      "p1": "El bienestar no depende de una sola persona ni de un solo equipo. Es el resultado del compromiso de toda la comunidad educativa.",
+      "p2": "Docentes, tutores, coordinadores y directivos trabajan de manera cercana para conocer a cada alumno, acompañar su trayectoria y generar un clima escolar basado en el respeto, la confianza y el sentido de pertenencia."
+    },
+    "eoe": {
+      "title": "Un acompañamiento profesional - Equipo de Orientación Escolar (EOE)",
+      "p1": "Además del acompañamiento cotidiano que brindan docentes y tutores, San Isidro College cuenta con un Equipo de Orientación Escolar integrado por profesionales de Psicología y Psicopedagogía que acompañan las trayectorias de nuestros estudiantes y trabajan de manera articulada con las familias, los docentes y, cuando es necesario, con profesionales externos."
+    },
+    "closing": {
+      "title": "Acompañar para crecer",
+      "p1": "En San Isidro College entendemos que cada alumno recorre un camino único. Por eso promovemos una cultura del cuidado donde el bienestar, la cercanía y el acompañamiento forman parte de la experiencia educativa de todos los días. Nuestro compromiso es brindar a cada estudiante las herramientas, el apoyo y la confianza necesarios para crecer, aprender y desarrollar todo su potencial."
+    },
+    "cards": {
+      "tutorias": {
+        "title": "Tutorías",
+        "backText": "Cada alumno cuenta con un tutor que acompaña su desarrollo personal y académico, promoviendo el diálogo, el seguimiento cercano y la construcción de vínculos de confianza."
+      },
+      "educacionEmocional": {
+        "title": "Educación emocional",
+        "backText": "Trabajamos habilidades como la empatía, la resiliencia, la comunicación, la resolución de conflictos y el manejo de las emociones para favorecer un desarrollo integral."
+      },
+      "trabajoFamilias": {
+        "title": "Trabajo junto a las familias",
+        "backText": "Creemos que la educación es una tarea compartida. Mantenemos una comunicación cercana y permanente con las familias para acompañar el crecimiento de cada alumno."
+      },
+      "desarrolloIntegral": {
+        "title": "Desarrollo integral",
+        "backText": "Nuestro objetivo es formar personas íntegras, capaces de aprender, convivir, tomar decisiones responsables y afrontar nuevos desafíos con confianza."
+      },
+      "sostenEmocional": {
+        "title": "Sostén emocional",
+        "backText": "Espacios de escucha, orientación y contención para acompañar a los estudiantes en los desafíos propios de cada etapa de su desarrollo."
+      },
+      "acompanamientoPsicopedagogico": {
+        "title": "Acompañamiento psicopedagógico",
+        "backText": "Intervenciones orientadas a fortalecer los procesos de aprendizaje, desarrollar estrategias de estudio y potenciar las habilidades cognitivas de cada alumno."
+      },
+      "convivenciaEscolar": {
+        "title": "Convivencia escolar",
+        "backText": "Promovemos vínculos saludables y acompañamos la dinámica grupal para sostener un clima escolar respetuoso, inclusivo y positivo."
+      },
+      "trabajoInterdisciplinario": {
+        "title": "Trabajo interdisciplinario",
+        "backText": "El EOE trabaja en conjunto con docentes, familias y profesionales externos para brindar el acompañamiento más adecuado según las necesidades de cada estudiante."
+      }
+    }
+  },
+  "experienciaSicGoogleReferenceSchoolDetail": {
+    "logoAlt": "Logo Google for Education Reference School",
+    "title": "San Isidro College es Google Reference School",
+    "intro": {
+      "p1": "Es un reconocimiento que distingue a instituciones educativas que integran la tecnología de Google de manera innovadora para transformar la enseñanza y el aprendizaje."
+    },
+    "whatIs": {
+      "title": "¿Qué es ser Google Reference School?",
+      "p1": "Ser Google Reference School significa formar parte de una comunidad internacional de instituciones que se destacan por utilizar la tecnología como una herramienta para potenciar el aprendizaje, la creatividad y la colaboración.",
+      "p2": "Este reconocimiento refleja nuestro compromiso con una educación innovadora, donde la tecnología acompaña el desarrollo de habilidades fundamentales para el presente y el futuro."
+    },
+    "students": {
+      "title": "¿Qué significa para nuestros alumnos?",
+      "items": {
+        "collaborativeLearning": {
+          "title": "Aprendizaje colaborativo",
+          "description": "Los alumnos trabajan en equipo utilizando herramientas digitales que favorecen la comunicación y la construcción conjunta del conocimiento."
+        },
+        "digitalCitizenship": {
+          "title": "Ciudadanía digital",
+          "description": "Aprenden a utilizar la tecnología de manera responsable, ética y segura."
+        },
+        "creativeThinking": {
+          "title": "Creatividad e innovación",
+          "description": "La tecnología se convierte en un medio para crear, investigar, resolver problemas y desarrollar nuevas ideas."
+        },
+        "futureReady": {
+          "title": "Preparación para el futuro",
+          "description": "Desarrollan competencias digitales que serán fundamentales en la universidad, el mundo laboral y los desafíos del siglo XXI."
+        }
+      }
+    },
+    "teachers": {
+      "title": "¿Qué significa para nuestros docentes?",
+      "items": {
+        "enhanceTeaching": {
+          "title": "Potenciar la enseñanza",
+          "description": "La tecnología acompaña el trabajo docente, ofreciendo nuevas herramientas para enriquecer cada experiencia de aprendizaje."
+        },
+        "innovateWithConfidence": {
+          "title": "Innovar con confianza",
+          "description": "Nuestros docentes reciben formación y acompañamiento continuo para incorporar nuevas metodologías y aprovechar todo el potencial de las herramientas digitales."
+        },
+        "collaborateToGrow": {
+          "title": "Colaborar para crecer",
+          "description": "La planificación compartida y el intercambio de recursos fortalecen el trabajo en equipo y promueven una comunidad profesional de aprendizaje."
+        },
+        "inspireStudents": {
+          "title": "Inspirar a los alumnos",
+          "description": "La innovación comienza con docentes preparados para despertar la curiosidad, fomentar la creatividad y acompañar a cada estudiante en su desarrollo."
+        }
+      }
+    },
+    "technology": {
+      "title": "La tecnología como parte del aprendizaje",
+      "p1": "En San Isidro College la tecnología no reemplaza al docente: potencia la enseñanza. Desde la apertura del colegio, la innovación y las herramientas digitales forman parte de nuestra propuesta educativa. Google Workspace for Education acompaña la experiencia diaria de alumnos y docentes, promoviendo un aprendizaje dinámico, colaborativo y organizado desde los primeros años."
+    },
+    "closing": {
+      "p1": "En San Isidro College creemos que innovar no significa incorporar más tecnología, sino generar mejores oportunidades para aprender. Ser Google Reference School es el reflejo de ese compromiso con una educación que prepara a nuestros alumnos para el mundo que viene."
+    }
+  },
+  "experienciaSicInnovacionRoboticaDetail": {
+    "title": "Laboratorio de Innovación y Robótica",
+    "intro": {
+      "lead": "Un espacio donde las ideas se convierten en proyectos.",
+      "p1": "En San Isidro College creemos que las mejores experiencias de aprendizaje nacen cuando los alumnos tienen la oportunidad de experimentar.",
+      "p2": "Nuestro Laboratorio de Innovación y Robótica es un espacio pensado para despertar la curiosidad, fomentar la creatividad y transformar las ideas en proyectos reales.",
+      "p3": "A través de desafíos, experiencias prácticas y trabajo colaborativo, los estudiantes desarrollan habilidades que trascienden el conocimiento técnico y los preparan para un mundo en constante evolución."
+    },
+    "students": {
+      "title": "¿Qué desarrollan nuestros alumnos?",
+      "items": {
+        "creativeThinking": {
+          "title": "Pensamiento creativo",
+          "description": "Aprenden a imaginar, diseñar y transformar ideas en soluciones innovadoras."
+        },
+        "problemSolving": {
+          "title": "Resolución de problemas",
+          "description": "Analizan desafíos, experimentan diferentes alternativas y encuentran soluciones mediante el ensayo y la mejora continua."
+        },
+        "teamwork": {
+          "title": "Trabajo en equipo",
+          "description": "Cada proyecto fomenta la colaboración, la comunicación y el aprendizaje compartido."
+        },
+        "computationalThinking": {
+          "title": "Pensamiento computacional",
+          "description": "Desarrollan habilidades de programación, lógica y secuenciación para comprender cómo funciona la tecnología y crear con ella."
+        }
+      }
+    },
+    "lab": {
+      "title": "Un espacio para experimentar",
+      "p1": "Nuestro laboratorio integra distintas herramientas y tecnologías para que los alumnos puedan investigar, construir y aprender de manera activa.",
+      "tools": {
+        "robotics": "Robótica",
+        "programming": "Programación",
+        "electronics": "Electrónica",
+        "projectDesign": "Diseño de proyectos",
+        "prototyping": "Prototipado",
+        "challengeSolving": "Resolución de desafíos",
+        "printing3d": "Impresión 3D"
+      }
+    },
+    "closing": {
+      "p1": "Nuestro Laboratorio de Innovación y Robótica es una expresión del compromiso de San Isidro College con una educación innovadora. En conjunto con nuestra propuesta tecnológica y nuestro reconocimiento como Google Reference School, este espacio impulsa a los alumnos a aprender, crear y desarrollar las habilidades que les permitirán desenvolverse con confianza en el mundo del mañana."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Deportes",
     "intro": {
@@ -412,6 +579,18 @@
     "vidaEstudiantilMasInfo": {
       "title": "Deportes y Bienestar | San Isidro College",
       "description": "Conocé el enfoque de deportes, bienestar estudiantil y acompañamiento integral de San Isidro College."
+    },
+    "experienciaSicBienestar": {
+      "title": "Bienestar y Acompañamiento | San Isidro College",
+      "description": "Conocé la propuesta de bienestar y acompañamiento, tutorías, educación emocional y trabajo del EOE en San Isidro College."
+    },
+    "experienciaSicGoogleReferenceSchool": {
+      "title": "Google Reference School | San Isidro College",
+      "description": "Descubrí cómo San Isidro College integra Google for Education para potenciar el aprendizaje, la creatividad y la colaboración."
+    },
+    "experienciaSicInnovacionRobotica": {
+      "title": "Innovación y Robótica | San Isidro College",
+      "description": "Conocé el Laboratorio de Innovación y Robótica, sus proyectos, herramientas y habilidades que desarrollan los alumnos en San Isidro College."
     }
   }
 }

@@ -1,6 +1,6 @@
 import "dotenv/config"
 import { PrismaMariaDb } from "@prisma/adapter-mariadb"
-import { PrismaClient } from "../src/generated/prisma/client"
+import { PrismaClient, Prisma } from "../src/generated/prisma/client"
 
 const adapter = new PrismaMariaDb(process.env.DATABASE_URL ?? "")
 const prisma = new PrismaClient({ adapter })
@@ -31,6 +31,8 @@ type SeedSection = {
   grupoId?: number
   medioId?: number
   titulo?: string
+  subtitulo?: string
+  propsJson?: Prisma.InputJsonValue
 }
 
 const media = (
@@ -54,7 +56,7 @@ const section = (
   pagina: string,
   orden: number,
   tipo: SeedSection["tipo"],
-  opts?: Pick<SeedSection, "grupoKey" | "medioKey" | "titulo">
+  opts?: Pick<SeedSection, "grupoKey" | "medioKey" | "titulo" | "subtitulo" | "propsJson">
 ): SeedSection => ({ slug, pagina, orden, tipo, ...opts })
 
 const HOME_GROUPS: SeedGrupo[] = [
@@ -161,6 +163,52 @@ const ACADEMICOS_MAS_INFO_GROUPS: SeedGrupo[] = [
   ]),
 ]
 
+const EXPERIENCIA_SIC_DETAIL_GROUPS: SeedGrupo[] = [
+  group("g-exp-google-logo", "Experiencia SIC - Google Logo", "UNICO", [
+    media("m-exp-google-logo", "google-education-logo.webp", "IMAGEN", 10, "Google for Education logo"),
+  ]),
+  group("g-exp-google-students-icons", "Experiencia SIC - Google Students Icons", "GALERIA", [
+    media("m-exp-google-student-collaborative", "aprendizaje-colaborativo-ico.svg", "ICONO", 10, "Aprendizaje colaborativo"),
+    media("m-exp-google-student-citizenship", "ciudadania-digital-ico.svg", "ICONO", 20, "Ciudadania digital"),
+    media("m-exp-google-student-creativity", "preparacion-futuro-2-ico.svg", "ICONO", 30, "Creatividad e innovacion"),
+    media("m-exp-google-student-future", "preparacion-futuro-ico.svg", "ICONO", 40, "Preparacion para el futuro"),
+  ]),
+  group("g-exp-google-teachers-icons", "Experiencia SIC - Google Teachers Icons", "GALERIA", [
+    media("m-exp-google-teacher-enhance", "potenciar-ensenanza-ico.svg", "ICONO", 10, "Potenciar la ensenanza"),
+    media("m-exp-google-teacher-innovate", "innovar-confianza-ico.svg", "ICONO", 20, "Innovar con confianza"),
+    media("m-exp-google-teacher-collaborate", "colaborar-crecer-ico.svg", "ICONO", 30, "Colaborar para crecer"),
+    media("m-exp-google-teacher-inspire", "inspirar-alumnos-ico.svg", "ICONO", 40, "Inspirar a los alumnos"),
+  ]),
+  group("g-exp-google-apps", "Experiencia SIC - Google Apps", "GALERIA", [
+    media("m-exp-google-app-drive", "google/drive-ico.svg", "ICONO", 10, "Drive"),
+    media("m-exp-google-app-gemini", "google/gemini-ico.svg", "ICONO", 20, "Gemini"),
+    media("m-exp-google-app-notebooklm", "google/notebook-lm-ico.svg", "ICONO", 30, "NotebookLM"),
+    media("m-exp-google-app-calendar", "google/calendar-ico.svg", "ICONO", 40, "Calendar"),
+    media("m-exp-google-app-sites", "google/sites-ico.svg", "ICONO", 50, "Sites"),
+    media("m-exp-google-app-forms", "google/forms-ico.svg", "ICONO", 60, "Forms"),
+    media("m-exp-google-app-gmail", "google/gmail-ico.svg", "ICONO", 70, "Gmail"),
+    media("m-exp-google-app-classroom", "google/classroom-ico.svg", "ICONO", 80, "Classroom"),
+    media("m-exp-google-app-sheets", "google/sheets-ico.svg", "ICONO", 90, "Sheets"),
+    media("m-exp-google-app-docs", "google/docs-ico.svg", "ICONO", 100, "Docs"),
+    media("m-exp-google-app-slides", "google/slides-ico.svg", "ICONO", 110, "Slides"),
+  ]),
+  group("g-exp-innovacion-students-icons", "Experiencia SIC - Innovacion Students Icons", "GALERIA", [
+    media("m-exp-innovacion-student-creative", "pensamiento-creativo-ico.svg", "ICONO", 10, "Pensamiento creativo"),
+    media("m-exp-innovacion-student-problem", "resolucion-problemas-ico.svg", "ICONO", 20, "Resolucion de problemas"),
+    media("m-exp-innovacion-student-teamwork", "trabajo-equipo-ico.svg", "ICONO", 30, "Trabajo en equipo"),
+    media("m-exp-innovacion-student-computational", "pensamiento-computacional-ico.svg", "ICONO", 40, "Pensamiento computacional"),
+  ]),
+  group("g-exp-innovacion-tools-icons", "Experiencia SIC - Innovacion Tools Icons", "GALERIA", [
+    media("m-exp-innovacion-tool-robotica", "robotica-ico.svg", "ICONO", 10, "Robotica"),
+    media("m-exp-innovacion-tool-programacion", "programacion-ico.svg", "ICONO", 20, "Programacion"),
+    media("m-exp-innovacion-tool-electronica", "electronica-ico.svg", "ICONO", 30, "Electronica"),
+    media("m-exp-innovacion-tool-diseno", "diseno-proyectos-ico.svg", "ICONO", 40, "Diseno de proyectos"),
+    media("m-exp-innovacion-tool-prototipado", "prototipado-ico.svg", "ICONO", 50, "Prototipado"),
+    media("m-exp-innovacion-tool-desafios", "resolucion-desafios-ico.svg", "ICONO", 60, "Resolucion de desafios"),
+    media("m-exp-innovacion-tool-impresion", "impresion-3d-ico.svg", "ICONO", 70, "Impresion 3D"),
+  ]),
+]
+
 const GROUP_DEFAULTS: SeedGrupo[] = [
   ...HOME_GROUPS,
   ...SHARED_GROUPS,
@@ -168,6 +216,7 @@ const GROUP_DEFAULTS: SeedGrupo[] = [
   ...ACADEMICOS_GROUPS,
   ...VIDA_ESTUDIANTIL_GROUPS,
   ...ACADEMICOS_MAS_INFO_GROUPS,
+  ...EXPERIENCIA_SIC_DETAIL_GROUPS,
 ]
 
 const HOME_SECTIONS: SeedSection[] = [
@@ -205,12 +254,551 @@ const MAS_INFO_SECTIONS: SeedSection[] = [
   section("vida-estudiantil-mas-info-alianzas", "vida-estudiantil-mas-info", 10, "GALERIA", { grupoKey: "g-alianzas" }),
 ]
 
+const EXPERIENCIA_SIC_SECTIONS: SeedSection[] = [
+  section("experiencia-sic-hero", "experiencia-sic", 10, "HERO", {
+    grupoKey: "g-vida-hero",
+    titulo: "Experiencia San Isidro",
+    propsJson: {
+      component: "hero",
+      locales: {
+        es: {
+          title: "Experiencia San Isidro",
+          description:
+            "La experiencia de crecer, aprender y compartir va mucho mas alla del aula. En San Isidro College, cada actividad complementa la formacion academica y ofrece nuevas oportunidades para desarrollar talentos, fortalecer vinculos y disfrutar de una comunidad que inspira a crecer.",
+        },
+        en: {
+          title: "San Isidro Experience",
+          description:
+            "The experience of growing, learning, and sharing goes far beyond the classroom. At San Isidro College, each activity complements academic development and creates new opportunities to build talents, strengthen bonds, and enjoy a community that inspires growth.",
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-bienestar-y-acompanamiento", "experiencia-sic", 20, "GALERIA", {
+    grupoKey: "g-vida-rugby",
+    titulo: "Bienestar y Acompanamiento",
+    propsJson: {
+      component: "feature-card",
+      overviewHash: "bienestar-y-acompanamiento",
+      detailHref: "/experiencia-sic/bienestar-y-acompanamiento",
+      locales: {
+        es: {
+          title: "Bienestar y Acompanamiento",
+          description:
+            "Creemos que cada alumno aprende mejor cuando se siente seguro, escuchado y acompanado. Por eso promovemos un entorno de confianza, respeto y cercania, donde el bienestar forma parte de la experiencia educativa de todos los dias.",
+          readMore: "Leer mas",
+        },
+        en: {
+          title: "Wellbeing and Guidance",
+          description:
+            "We believe every student learns better when they feel safe, heard, and supported. That is why we promote an environment of trust, respect, and closeness, where wellbeing is part of the educational experience every day.",
+          readMore: "Read more",
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-google-reference-school", "experiencia-sic", 30, "GALERIA", {
+    grupoKey: "g-vida-play",
+    titulo: "Google Reference School",
+    propsJson: {
+      component: "feature-card",
+      overviewHash: "google-reference-school",
+      detailHref: "/experiencia-sic/google-reference-school",
+      locales: {
+        es: {
+          title: "Google Reference School",
+          description:
+            "La innovacion forma parte de nuestra identidad desde el primer dia. Como Google Reference School, integramos la tecnologia de manera significativa para potenciar el aprendizaje, la creatividad y la colaboracion, preparando a nuestros alumnos para los desafios del futuro.",
+          readMore: "Leer mas",
+        },
+        en: {
+          title: "Google Reference School",
+          description:
+            "Innovation has been part of our identity from day one. As a Google Reference School, we integrate technology in meaningful ways to strengthen learning, creativity, and collaboration, preparing our students for the challenges of the future.",
+          readMore: "Read more",
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-innovacion-y-robotica", "experiencia-sic", 40, "GALERIA", {
+    grupoKey: "g-vida-bienestar",
+    titulo: "Innovacion y Robotica",
+    propsJson: {
+      component: "feature-card",
+      overviewHash: "innovacion-y-robotica",
+      detailHref: "/experiencia-sic/innovacion-y-robotica",
+      locales: {
+        es: {
+          title: "Innovacion y Robotica",
+          description:
+            "Un espacio donde las ideas se convierten en proyectos. Nuestro Laboratorio de Innovacion y Robotica invita a los alumnos a explorar, disenar, construir y experimentar, desarrollando habilidades para resolver los desafios del presente y del futuro.",
+          readMore: "Leer mas",
+        },
+        en: {
+          title: "Innovation and Robotics",
+          description:
+            "A space where ideas become projects. Our Innovation and Robotics Lab invites students to explore, design, build, and experiment, developing the skills to solve the challenges of the present and the future.",
+          readMore: "Read more",
+        },
+      },
+    },
+  }),
+]
+
+const EXPERIENCIA_SIC_BIENESTAR_SECTIONS: SeedSection[] = [
+  section("experiencia-sic-bienestar-intro", "experiencia-sic-bienestar-y-acompanamiento", 10, "TEXTO_RICO", {
+    titulo: "Bienestar y Acompanamiento",
+    subtitulo: "En San Isidro College entendemos que educar es acompanar.",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          intro: {
+            p1: "En San Isidro College entendemos que educar es acompanar. El bienestar de nuestros alumnos es un pilar de nuestra propuesta educativa, porque sabemos que sentirse contenido, seguro y escuchado es fundamental para aprender, crecer y desarrollar todo su potencial.",
+          },
+          philosophy: {
+            title: "Una filosofia centrada en la persona",
+            paragraphs: [
+              "Creemos en una educacion que forme integralmente, contemplando tanto el desarrollo academico como el crecimiento emocional y social de cada estudiante.",
+              "Por eso trabajamos para que cada alumno encuentre en el colegio un espacio de pertenencia, confianza y cuidado, donde pueda expresarse, vincularse con otros y construir una imagen positiva de si mismo.",
+            ],
+          },
+        },
+        en: {
+          intro: {
+            p1: "At San Isidro College, we understand that educating means accompanying. Our students wellbeing is a core pillar of our educational proposal, because feeling supported, safe, and heard is essential to learn, grow, and develop their full potential.",
+          },
+          philosophy: {
+            title: "A philosophy centered on the person",
+            paragraphs: [
+              "We believe in an education that forms the whole person, considering both academic development and the emotional and social growth of each student.",
+              "That is why we work so that every student finds at school a space of belonging, trust, and care, where they can express themselves, connect with others, and build a positive image of themselves.",
+            ],
+          },
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-bienestar-cards-1", "experiencia-sic-bienestar-y-acompanamiento", 20, "GALERIA", {
+    grupoKey: "g-academicos-cards",
+    titulo: "Tarjetas Bienestar - Grupo 1",
+    propsJson: {
+      component: "flip-cards",
+      sourceGroup: "Academicos Mas Info - Cards Proyecto de Vida",
+      cardKeys: ["tutorias", "educacionEmocional", "trabajoFamilias", "desarrolloIntegral"],
+    },
+  }),
+  section("experiencia-sic-bienestar-community", "experiencia-sic-bienestar-y-acompanamiento", 30, "TEXTO_RICO", {
+    titulo: "Una comunidad que acompana",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          title: "Una comunidad que acompana",
+          paragraphs: [
+            "El bienestar se construye todos los dias a traves del vinculo entre alumnos, docentes, tutores y familias. Por eso fomentamos una comunicacion cercana y un trabajo conjunto que permita sostener a cada estudiante en su recorrido escolar.",
+            "Las tutorias, la educacion emocional y las acciones preventivas forman parte de una cultura institucional orientada al cuidado, el respeto y la convivencia.",
+          ],
+        },
+        en: {
+          title: "A community that supports",
+          paragraphs: [
+            "Wellbeing is built every day through the bond among students, teachers, tutors, and families. That is why we encourage close communication and joint work that supports each student throughout their school journey.",
+            "Tutoring, emotional education, and preventive actions are part of an institutional culture oriented toward care, respect, and coexistence.",
+          ],
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-bienestar-eoe", "experiencia-sic-bienestar-y-acompanamiento", 40, "TEXTO_RICO", {
+    titulo: "Un acompanamiento profesional - Equipo de Orientacion Escolar (EOE)",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          title: "Un acompanamiento profesional - Equipo de Orientacion Escolar (EOE)",
+          paragraphs: [
+            "Ademas del acompanamiento cotidiano que brindan docentes y tutores, San Isidro College cuenta con un Equipo de Orientacion Escolar integrado por profesionales de Psicologia y Psicopedagogia que acompanan las trayectorias de nuestros estudiantes y trabajan de manera articulada con las familias, los docentes y, cuando es necesario, con profesionales externos.",
+          ],
+        },
+        en: {
+          title: "Professional support - School Guidance Team (EOE)",
+          paragraphs: [
+            "In addition to the daily support provided by teachers and tutors, San Isidro College has a School Guidance Team made up of Psychology and Psychopedagogy professionals who support our students pathways and work in coordination with families, teachers, and, when necessary, external professionals.",
+          ],
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-bienestar-cards-2", "experiencia-sic-bienestar-y-acompanamiento", 50, "GALERIA", {
+    grupoKey: "g-academicos-cards",
+    titulo: "Tarjetas Bienestar - Grupo 2",
+    propsJson: {
+      component: "flip-cards",
+      sourceGroup: "Academicos Mas Info - Cards Proyecto de Vida",
+      cardKeys: ["sostenEmocional", "acompanamientoPsicopedagogico", "convivenciaEscolar", "trabajoInterdisciplinario"],
+    },
+  }),
+  section("experiencia-sic-bienestar-closing", "experiencia-sic-bienestar-y-acompanamiento", 60, "TEXTO_RICO", {
+    titulo: "Acompanar para crecer",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          title: "Acompanar para crecer",
+          paragraphs: [
+            "En San Isidro College entendemos que cada alumno recorre un camino unico. Por eso promovemos una cultura del cuidado donde el bienestar, la cercania y el acompanamiento forman parte de la experiencia educativa de todos los dias. Nuestro compromiso es brindar a cada estudiante las herramientas, el apoyo y la confianza necesarios para crecer, aprender y desarrollar todo su potencial.",
+          ],
+        },
+        en: {
+          title: "Supporting growth",
+          paragraphs: [
+            "At San Isidro College, we understand that each student follows a unique path. That is why we promote a culture of care where wellbeing, closeness, and guidance are part of the educational experience every day. Our commitment is to provide each student with the tools, support, and confidence they need to grow, learn, and develop their full potential.",
+          ],
+        },
+      },
+    },
+  }),
+]
+
+const EXPERIENCIA_SIC_GOOGLE_SECTIONS: SeedSection[] = [
+  section("experiencia-sic-google-intro", "experiencia-sic-google-reference-school", 10, "TEXTO_RICO", {
+    grupoKey: "g-exp-google-logo",
+    titulo: "San Isidro College es Google Reference School",
+    subtitulo: "Es un reconocimiento que distingue a instituciones educativas que integran la tecnologia de Google de manera innovadora para transformar la ensenanza y el aprendizaje.",
+    propsJson: {
+      component: "rich-text",
+      sourceGroup: "Experiencia SIC - Google Logo",
+      logoKey: "m-exp-google-logo",
+      locales: {
+        es: {
+          intro: {
+            p1: "Es un reconocimiento que distingue a instituciones educativas que integran la tecnologia de Google de manera innovadora para transformar la ensenanza y el aprendizaje.",
+          },
+          whatIs: {
+            title: "Que es ser Google Reference School?",
+            paragraphs: [
+              "Ser Google Reference School significa formar parte de una comunidad internacional de instituciones que se destacan por utilizar la tecnologia como una herramienta para potenciar el aprendizaje, la creatividad y la colaboracion.",
+              "Este reconocimiento refleja nuestro compromiso con una educacion innovadora, donde la tecnologia acompana el desarrollo de habilidades fundamentales para el presente y el futuro.",
+            ],
+          },
+        },
+        en: {
+          intro: {
+            p1: "It is a recognition that distinguishes educational institutions that integrate Google technology in innovative ways to transform teaching and learning.",
+          },
+          whatIs: {
+            title: "What does it mean to be a Google Reference School?",
+            paragraphs: [
+              "Being a Google Reference School means being part of an international community of institutions that stand out for using technology as a tool to strengthen learning, creativity, and collaboration.",
+              "This recognition reflects our commitment to innovative education, where technology supports the development of essential skills for the present and the future.",
+            ],
+          },
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-google-students", "experiencia-sic-google-reference-school", 20, "TEXTO_RICO", {
+    grupoKey: "g-exp-google-students-icons",
+    titulo: "Que significa para nuestros alumnos?",
+    propsJson: {
+      component: "icon-grid",
+      sourceGroup: "Experiencia SIC - Google Students Icons",
+      itemKeys: ["collaborativeLearning", "digitalCitizenship", "creativeThinking", "futureReady"],
+      locales: {
+        es: {
+          title: "Que significa para nuestros alumnos?",
+          items: {
+            collaborativeLearning: {
+              title: "Aprendizaje colaborativo",
+              description: "Los alumnos trabajan en equipo utilizando herramientas digitales que favorecen la comunicacion y la construccion conjunta del conocimiento.",
+            },
+            digitalCitizenship: {
+              title: "Ciudadania digital",
+              description: "Aprenden a utilizar la tecnologia de manera responsable, etica y segura.",
+            },
+            creativeThinking: {
+              title: "Creatividad e innovacion",
+              description: "La tecnologia se convierte en un medio para crear, investigar, resolver problemas y desarrollar nuevas ideas.",
+            },
+            futureReady: {
+              title: "Preparacion para el futuro",
+              description: "Desarrollan competencias digitales que seran fundamentales en la universidad, el mundo laboral y los desafios del siglo XXI.",
+            },
+          },
+        },
+        en: {
+          title: "What does it mean for our students?",
+          items: {
+            collaborativeLearning: {
+              title: "Collaborative learning",
+              description: "Students work as a team using digital tools that encourage communication and the shared construction of knowledge.",
+            },
+            digitalCitizenship: {
+              title: "Digital citizenship",
+              description: "They learn to use technology in a responsible, ethical, and safe way.",
+            },
+            creativeThinking: {
+              title: "Creativity and innovation",
+              description: "Technology becomes a means to create, investigate, solve problems, and develop new ideas.",
+            },
+            futureReady: {
+              title: "Future readiness",
+              description: "They develop digital competencies that will be essential in university, the workplace, and the challenges of the 21st century.",
+            },
+          },
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-google-teachers", "experiencia-sic-google-reference-school", 30, "TEXTO_RICO", {
+    grupoKey: "g-exp-google-teachers-icons",
+    titulo: "Que significa para nuestros docentes?",
+    propsJson: {
+      component: "icon-grid",
+      sourceGroup: "Experiencia SIC - Google Teachers Icons",
+      itemKeys: ["enhanceTeaching", "innovateWithConfidence", "collaborateToGrow", "inspireStudents"],
+      locales: {
+        es: {
+          title: "Que significa para nuestros docentes?",
+          items: {
+            enhanceTeaching: {
+              title: "Potenciar la ensenanza",
+              description: "La tecnologia acompana el trabajo docente, ofreciendo nuevas herramientas para enriquecer cada experiencia de aprendizaje.",
+            },
+            innovateWithConfidence: {
+              title: "Innovar con confianza",
+              description: "Nuestros docentes reciben formacion y acompanamiento continuo para incorporar nuevas metodologias y aprovechar todo el potencial de las herramientas digitales.",
+            },
+            collaborateToGrow: {
+              title: "Colaborar para crecer",
+              description: "La planificacion compartida y el intercambio de recursos fortalecen el trabajo en equipo y promueven una comunidad profesional de aprendizaje.",
+            },
+            inspireStudents: {
+              title: "Inspirar a los alumnos",
+              description: "La innovacion comienza con docentes preparados para despertar la curiosidad, fomentar la creatividad y acompanar a cada estudiante en su desarrollo.",
+            },
+          },
+        },
+        en: {
+          title: "What does it mean for our teachers?",
+          items: {
+            enhanceTeaching: {
+              title: "Enhancing teaching",
+              description: "Technology supports teachers work by offering new tools to enrich every learning experience.",
+            },
+            innovateWithConfidence: {
+              title: "Innovating with confidence",
+              description: "Our teachers receive ongoing training and support to incorporate new methodologies and make the most of digital tools.",
+            },
+            collaborateToGrow: {
+              title: "Collaborating to grow",
+              description: "Shared planning and resource exchange strengthen teamwork and promote a professional learning community.",
+            },
+            inspireStudents: {
+              title: "Inspiring students",
+              description: "Innovation begins with prepared teachers who spark curiosity, encourage creativity, and support each student in their development.",
+            },
+          },
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-google-technology", "experiencia-sic-google-reference-school", 40, "TEXTO_RICO", {
+    titulo: "La tecnologia como parte del aprendizaje",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          title: "La tecnologia como parte del aprendizaje",
+          paragraphs: [
+            "En San Isidro College la tecnologia no reemplaza al docente: potencia la ensenanza. Desde la apertura del colegio, la innovacion y las herramientas digitales forman parte de nuestra propuesta educativa. Google Workspace for Education acompana la experiencia diaria de alumnos y docentes, promoviendo un aprendizaje dinamico, colaborativo y organizado desde los primeros anos.",
+          ],
+        },
+        en: {
+          title: "Technology as part of learning",
+          paragraphs: [
+            "At San Isidro College, technology does not replace the teacher: it strengthens teaching. Since the school opened, innovation and digital tools have been part of our educational proposal. Google Workspace for Education supports the daily experience of students and teachers, promoting dynamic, collaborative, and organized learning from the earliest years.",
+          ],
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-google-apps", "experiencia-sic-google-reference-school", 50, "TEXTO_RICO", {
+    grupoKey: "g-exp-google-apps",
+    titulo: "Google Workspace for Education",
+    propsJson: {
+      component: "apps-grid",
+      sourceGroup: "Experiencia SIC - Google Apps",
+      apps: ["drive", "gemini", "notebookLm", "calendar", "sites", "forms", "gmail", "classroom", "sheets", "docs", "slides"],
+    },
+  }),
+  section("experiencia-sic-google-closing", "experiencia-sic-google-reference-school", 60, "TEXTO_RICO", {
+    titulo: "Cierre",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          paragraphs: [
+            "En San Isidro College creemos que innovar no significa incorporar mas tecnologia, sino generar mejores oportunidades para aprender. Ser Google Reference School es el reflejo de ese compromiso con una educacion que prepara a nuestros alumnos para el mundo que viene.",
+          ],
+        },
+        en: {
+          paragraphs: [
+            "At San Isidro College, we believe that innovating does not mean adding more technology, but creating better opportunities to learn. Being a Google Reference School reflects that commitment to an education that prepares our students for the world ahead.",
+          ],
+        },
+      },
+    },
+  }),
+]
+
+const EXPERIENCIA_SIC_INNOVACION_SECTIONS: SeedSection[] = [
+  section("experiencia-sic-innovacion-intro", "experiencia-sic-innovacion-y-robotica", 10, "TEXTO_RICO", {
+    titulo: "Laboratorio de Innovacion y Robotica",
+    subtitulo: "Un espacio donde las ideas se convierten en proyectos.",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          lead: "Un espacio donde las ideas se convierten en proyectos.",
+          paragraphs: [
+            "En San Isidro College creemos que las mejores experiencias de aprendizaje nacen cuando los alumnos tienen la oportunidad de experimentar.",
+            "Nuestro Laboratorio de Innovacion y Robotica es un espacio pensado para despertar la curiosidad, fomentar la creatividad y transformar las ideas en proyectos reales.",
+            "A traves de desafios, experiencias practicas y trabajo colaborativo, los estudiantes desarrollan habilidades que trascienden el conocimiento tecnico y los preparan para un mundo en constante evolucion.",
+          ],
+        },
+        en: {
+          lead: "A space where ideas become projects.",
+          paragraphs: [
+            "At San Isidro College, we believe the best learning experiences happen when students have the opportunity to experiment.",
+            "Our Innovation and Robotics Lab is designed to spark curiosity, encourage creativity, and turn ideas into real projects.",
+            "Through challenges, hands-on experiences, and collaborative work, students develop skills that go beyond technical knowledge and prepare them for a constantly evolving world.",
+          ],
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-innovacion-students", "experiencia-sic-innovacion-y-robotica", 20, "TEXTO_RICO", {
+    grupoKey: "g-exp-innovacion-students-icons",
+    titulo: "Que desarrollan nuestros alumnos?",
+    propsJson: {
+      component: "icon-grid",
+      sourceGroup: "Experiencia SIC - Innovacion Students Icons",
+      itemKeys: ["creativeThinking", "problemSolving", "teamwork", "computationalThinking"],
+      locales: {
+        es: {
+          title: "Que desarrollan nuestros alumnos?",
+          items: {
+            creativeThinking: {
+              title: "Pensamiento creativo",
+              description: "Aprenden a imaginar, disenar y transformar ideas en soluciones innovadoras.",
+            },
+            problemSolving: {
+              title: "Resolucion de problemas",
+              description: "Analizan desafios, experimentan diferentes alternativas y encuentran soluciones mediante el ensayo y la mejora continua.",
+            },
+            teamwork: {
+              title: "Trabajo en equipo",
+              description: "Cada proyecto fomenta la colaboracion, la comunicacion y el aprendizaje compartido.",
+            },
+            computationalThinking: {
+              title: "Pensamiento computacional",
+              description: "Desarrollan habilidades de programacion, logica y secuenciacion para comprender como funciona la tecnologia y crear con ella.",
+            },
+          },
+        },
+        en: {
+          title: "What do our students develop?",
+          items: {
+            creativeThinking: {
+              title: "Creative thinking",
+              description: "They learn to imagine, design, and transform ideas into innovative solutions.",
+            },
+            problemSolving: {
+              title: "Problem solving",
+              description: "They analyze challenges, test different alternatives, and find solutions through iteration and continuous improvement.",
+            },
+            teamwork: {
+              title: "Teamwork",
+              description: "Each project encourages collaboration, communication, and shared learning.",
+            },
+            computationalThinking: {
+              title: "Computational thinking",
+              description: "They develop programming, logic, and sequencing skills to understand how technology works and create with it.",
+            },
+          },
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-innovacion-lab", "experiencia-sic-innovacion-y-robotica", 30, "TEXTO_RICO", {
+    titulo: "Un espacio para experimentar",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          title: "Un espacio para experimentar",
+          paragraphs: [
+            "Nuestro laboratorio integra distintas herramientas y tecnologias para que los alumnos puedan investigar, construir y aprender de manera activa.",
+          ],
+        },
+        en: {
+          title: "A space to experiment",
+          paragraphs: [
+            "Our lab brings together different tools and technologies so students can investigate, build, and learn actively.",
+          ],
+        },
+      },
+    },
+  }),
+  section("experiencia-sic-innovacion-tools", "experiencia-sic-innovacion-y-robotica", 40, "TEXTO_RICO", {
+    grupoKey: "g-exp-innovacion-tools-icons",
+    titulo: "Herramientas del laboratorio",
+    propsJson: {
+      component: "tools-grid",
+      sourceGroup: "Experiencia SIC - Innovacion Tools Icons",
+      items: [
+        { key: "robotics", labelEs: "Robotica", labelEn: "Robotics" },
+        { key: "programming", labelEs: "Programacion", labelEn: "Programming" },
+        { key: "electronics", labelEs: "Electronica", labelEn: "Electronics" },
+        { key: "projectDesign", labelEs: "Diseno de proyectos", labelEn: "Project design" },
+        { key: "prototyping", labelEs: "Prototipado", labelEn: "Prototyping" },
+        { key: "challengeSolving", labelEs: "Resolucion de desafios", labelEn: "Challenge solving" },
+        { key: "printing3d", labelEs: "Impresion 3D", labelEn: "3D printing" },
+      ],
+    },
+  }),
+  section("experiencia-sic-innovacion-closing", "experiencia-sic-innovacion-y-robotica", 50, "TEXTO_RICO", {
+    titulo: "Cierre",
+    propsJson: {
+      component: "rich-text",
+      locales: {
+        es: {
+          paragraphs: [
+            "Nuestro Laboratorio de Innovacion y Robotica es una expresion del compromiso de San Isidro College con una educacion innovadora. En conjunto con nuestra propuesta tecnologica y nuestro reconocimiento como Google Reference School, este espacio impulsa a los alumnos a aprender, crear y desarrollar las habilidades que les permitiran desenvolverse con confianza en el mundo del manana.",
+          ],
+        },
+        en: {
+          paragraphs: [
+            "Our Innovation and Robotics Lab expresses San Isidro College commitment to innovative education. Together with our technological proposal and our recognition as a Google Reference School, this space encourages students to learn, create, and develop the skills that will allow them to move confidently in the world of tomorrow.",
+          ],
+        },
+      },
+    },
+  }),
+]
+
 const SECTION_DEFAULTS: SeedSection[] = [
   ...HOME_SECTIONS,
   ...COLEGIO_SECTIONS,
   ...ACADEMICOS_SECTIONS,
   ...VIDA_ESTUDIANTIL_SECTIONS,
   ...MAS_INFO_SECTIONS,
+  ...EXPERIENCIA_SIC_SECTIONS,
+  ...EXPERIENCIA_SIC_BIENESTAR_SECTIONS,
+  ...EXPERIENCIA_SIC_GOOGLE_SECTIONS,
+  ...EXPERIENCIA_SIC_INNOVACION_SECTIONS,
 ]
 
 async function upsertGruposYMedios() {
@@ -336,34 +924,34 @@ async function upsertSectionPreservingAssignments(section: SeedSection) {
   const existing = await prisma.seccion.findUnique({
     where: { slug: section.slug },
   })
+  const propsJsonValue = section.propsJson ?? Prisma.DbNull
 
   if (!existing) {
+    const createData: Prisma.SeccionUncheckedCreateInput = {
+      slug: section.slug,
+      pagina: section.pagina,
+      orden: section.orden,
+      tipo: section.tipo,
+      titulo: section.titulo ?? null,
+      subtitulo: section.subtitulo ?? null,
+      propsJson: propsJsonValue,
+      grupoId: section.grupoId ?? null,
+      medioId: section.medioId ?? null,
+    }
+
     await prisma.seccion.create({
-      data: {
-        slug: section.slug,
-        pagina: section.pagina,
-        orden: section.orden,
-        tipo: section.tipo,
-        titulo: section.titulo ?? null,
-        grupoId: section.grupoId ?? null,
-        medioId: section.medioId ?? null,
-      },
+      data: createData,
     })
     return { action: "created", slug: section.slug }
   }
 
-  const updateData: {
-    pagina: string
-    orden: number
-    tipo: SeedSection["tipo"]
-    titulo: string | null
-    grupoId?: number
-    medioId?: number
-  } = {
+  const updateData: Prisma.SeccionUncheckedUpdateInput = {
     pagina: section.pagina,
     orden: section.orden,
     tipo: section.tipo,
     titulo: section.titulo ?? null,
+    subtitulo: section.subtitulo ?? null,
+    propsJson: propsJsonValue,
   }
 
   if (typeof section.grupoId === "number") {

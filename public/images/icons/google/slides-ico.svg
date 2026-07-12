@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 41.84 45.91">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_3);
+      }
+
+      .cls-3 {
+        fill: #fec700;
+      }
+
+      .cls-4 {
+        fill: url(#Degradado_sin_nombre_16);
+      }
+
+      .cls-5 {
+        fill: #ffbe00;
+      }
+
+      .cls-7 {
+        mask: url(#mask);
+      }
+
+      .cls-6 {
+        fill: url(#Degradado_sin_nombre_2);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_16" data-name="Degradado sin nombre 16" x1="13.27" y1="2523.2" x2="31.16" y2="2489.57" gradientTransform="translate(0 2530.68) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset=".2" stop-color="#ffdb0f"/>
+      <stop offset=".67" stop-color="#ffbe00"/>
+      <stop offset=".91" stop-color="#ffa8e3"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_2" data-name="Degradado sin nombre 2" x1="21.3" y1="2523.78" x2="21.3" y2="2492.48" gradientTransform="translate(0 2530.68) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffbe00"/>
+      <stop offset="1" stop-color="#fec700"/>
+    </linearGradient>
+    <mask id="mask" x="0" y="0" width="41.84" height="45.91" maskUnits="userSpaceOnUse">
+      <g id="e">
+        <path class="cls-3" d="M.76,14.14c0-2.19,0-3.28.34-4.15.5-1.26,1.49-2.25,2.75-2.75.87-.34,1.96-.34,4.15-.34h26.6c2.19,0,3.28,0,4.15.34,1.26.5,2.25,1.49,2.75,2.75.34.87.34,1.96.34,4.15v16.82c0,2.19,0,3.28-.34,4.15-.5,1.26-1.49,2.25-2.75,2.75-.87.34-1.96.34-4.15.34H7.99c-2.19,0-3.28,0-4.15-.34-1.26-.5-2.25-1.49-2.75-2.75-.34-.87-.34-1.96-.34-4.15V14.14Z"/>
+      </g>
+    </mask>
+    <linearGradient id="Degradado_sin_nombre_3" data-name="Degradado sin nombre 3" x1="23.67" y1="2490.37" x2="17.67" y2="2525.31" gradientTransform="translate(0 2530.68) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset=".07" stop-color="#fff549"/>
+      <stop offset=".78" stop-color="#ffbe00" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <path class="cls-4" d="M.9,14.56c-.61-3.73,1.92-7.25,5.65-7.86l23.65-3.86c3.73-.61,7.25,1.92,7.86,5.65l3.6,22.05c.61,3.73-1.92,7.25-5.65,7.86l-23.65,3.86c-3.73.61-7.25-1.92-7.86-5.65L.9,14.56Z"/>
+      <path class="cls-6" d="M.76,14.14c0-2.19,0-3.28.34-4.15.5-1.26,1.49-2.25,2.75-2.75.87-.34,1.96-.34,4.15-.34h26.6c2.19,0,3.28,0,4.15.34,1.26.5,2.25,1.49,2.75,2.75.34.87.34,1.96.34,4.15v16.82c0,2.19,0,3.28-.34,4.15-.5,1.26-1.49,2.25-2.75,2.75-.87.34-1.96.34-4.15.34H7.99c-2.19,0-3.28,0-4.15-.34-1.26-.5-2.25-1.49-2.75-2.75-.34-.87-.34-1.96-.34-4.15V14.14Z"/>
+      <g class="cls-7">
+        <g>
+          <path class="cls-5" d="M6.07,45.91l35.31-5.28L35.31,0,0,5.28l6.07,40.63Z"/>
+          <path class="cls-2" d="M6.07,45.91l35.31-5.28L35.31,0,0,5.28l6.07,40.63Z"/>
+        </g>
+      </g>
+      <path class="cls-1" d="M34.01,13.26c.81,0,1.47.66,1.47,1.47v15.65c0,.81-.66,1.47-1.47,1.47H8.51c-.78-.04-1.39-.69-1.39-1.47v-15.65c0-.78.61-1.43,1.39-1.47h.08s25.43,0,25.43,0ZM10.05,28.91h22.5v-12.72H10.05v12.72Z"/>
+    </g>
+  </g>
+</svg>

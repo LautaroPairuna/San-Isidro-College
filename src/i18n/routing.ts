@@ -33,6 +33,18 @@ export const routing = defineRouting({
       es: "/experiencia-sic",
       en: "/sic-experience",
     },
+    "/experiencia-sic/bienestar-y-acompanamiento": {
+      es: "/experiencia-sic/bienestar-y-acompanamiento",
+      en: "/sic-experience/wellbeing-and-guidance",
+    },
+    "/experiencia-sic/google-reference-school": {
+      es: "/experiencia-sic/google-reference-school",
+      en: "/sic-experience/google-reference-school",
+    },
+    "/experiencia-sic/innovacion-y-robotica": {
+      es: "/experiencia-sic/innovacion-y-robotica",
+      en: "/sic-experience/innovation-and-robotics",
+    },
     "/deportes": { es: "/deportes", en: "/sports" },
     "/deportes-mas-info": {
       es: "/deportes-mas-info",

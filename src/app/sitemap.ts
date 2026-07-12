@@ -19,6 +19,9 @@ const PUBLIC_PATHS: AppPathname[] = [
   '/primary',
   '/secondary',
   '/experiencia-sic',
+  '/experiencia-sic/bienestar-y-acompanamiento',
+  '/experiencia-sic/google-reference-school',
+  '/experiencia-sic/innovacion-y-robotica',
   '/deportes',
   '/deportes-mas-info',
 ]
