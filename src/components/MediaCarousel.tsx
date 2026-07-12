@@ -72,7 +72,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
             playsInline: true,
             className: 'pointer-events-none object-contain w-full h-full relative z-10',
           }}
-          className="w-full h-full pointer-events-none"
+          className="w-full h-full object-cover pointer-events-none"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
       </div>
@@ -116,7 +116,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                   playsInline: true,
                   className: 'pointer-events-none object-contain w-full h-full relative z-10', // object-contain para respetar aspect ratio
                 }}
-                className="w-full h-full pointer-events-none"
+                className="w-full h-full object-cover pointer-events-none"
               />
               {/* Overlay gradiente sutil para mejorar visibilidad de controles si es necesario */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />

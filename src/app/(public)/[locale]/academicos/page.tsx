@@ -236,7 +236,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
             alt=""
             width={750}
             height={500}
-            className="absolute 2xl:top-32 2xl:right-44 xl:right-32 lg:top-24 top-5 -right-10 w-[650px] h-auto z-10 pointer-events-none"
+            className="absolute 2xl:top-32 xl:top-16 top-5 2xl:right-44 xl:right-0 -right-10 w-[650px] h-auto z-10 pointer-events-none"
           />
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">

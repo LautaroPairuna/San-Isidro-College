@@ -178,7 +178,7 @@ const Header: React.FC = () => {
 
             {/* Logo en menú */}
             <div className="flex flex-col md:flex-row justify-start items-center mb-6">
-              <Link href={getAlternateRoute(locale)} onClick={handleNavClick} className="flex items-center">
+              <Link href="/" onClick={handleNavClick} className="flex items-center">
                 <Image
                   id="menuLogo"
                   src={getLogoSrc()}

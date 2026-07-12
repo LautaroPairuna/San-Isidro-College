@@ -4,6 +4,29 @@
   --font-gotham: var(--font-gotham), sans-serif;
   --font-acumin: var(--font-acumin), sans-serif;
   --font-harlows: var(--font-harlows), sans-serif;
+
+  /* Paleta institucional San Isidro College.
+     Verde primario #1e804b, dorado #c19516, navy #294161.
+     Escala pensada para reemplazar los tonos genéricos en el admin. */
+  --color-brand-50:  #eef7f1;
+  --color-brand-100: #d5ece0;
+  --color-brand-200: #acd9c0;
+  --color-brand-300: #7cc09b;
+  --color-brand-400: #4ba576;
+  --color-brand-500: #2d8f57;
+  --color-brand-600: #1e804b;
+  --color-brand-700: #196b3f;
+  --color-brand-800: #155433;
+  --color-brand-900: #123f28;
+
+  --color-gold-300: #e2c15c;
+  --color-gold-400: #d9ab2e;
+  --color-gold-500: #c19516;
+  --color-gold-600: #a67f12;
+
+  --color-navy-600: #34527a;
+  --color-navy-700: #294161;
+  --color-navy-800: #1f3149;
 }
 
 /* Aplicar por defecto */

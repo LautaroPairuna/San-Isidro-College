@@ -322,7 +322,7 @@ export default async function DeportesPage({ params }: PageProps) {
           />
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
-            <div className="absolute top-20 w-[650px] z-20">
+            <div className="absolute top-20 2xl:-left-15 xl:left-5 w-[650px] z-20">
               <div className="bg-white shadow-xl rounded-xl p-8">
                 <Image
                   src="/images/logo-gym-2.svg"
@@ -472,7 +472,7 @@ export default async function DeportesPage({ params }: PageProps) {
             alt=""
             width={550}
             height={300}
-            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px]"
+            className="absolute -top-16 lg:right-44 md:-right-28 w-[550px] z-0"
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
@@ -490,7 +490,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 />
               )}
             </div>
-            <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[28%]">
+            <div className="absolute col-span-4 z-20 top-[68%] xl:left-[27%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <Image
                   src="/images/logo-SIC-play.svg"
