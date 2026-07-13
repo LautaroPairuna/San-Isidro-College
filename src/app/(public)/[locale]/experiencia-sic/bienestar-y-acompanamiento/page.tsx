@@ -6,7 +6,8 @@ import { getTranslations } from 'next-intl/server'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
-const CARD_MEDIA_SECTION_SLUG = 'academicos-mas-info-cards'
+const CARD_MEDIA_PAGE_SLUG = 'experiencia-sic-bienestar-y-acompanamiento'
+const CARD_MEDIA_SECTION_SLUG = 'experiencia-sic-bienestar-cards-1'
 
 const CARD_FALLBACK_IMAGES = [
   '/images/image-kindergarten.webp',
@@ -69,9 +70,9 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'experienciaSicBienestarDetail' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
-  const academicsSections = await getPageContentForSlug('academicos-mas-info')
+  const bienestarSections = await getPageContentForSlug(CARD_MEDIA_PAGE_SLUG)
 
-  const cardsSection = academicsSections.find(
+  const cardsSection = bienestarSections.find(
     (section: PageContentSection) => section.slug === CARD_MEDIA_SECTION_SLUG
   )
   const imageMedias = [...(cardsSection?.grupo?.medios ?? [])]

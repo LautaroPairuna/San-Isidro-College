@@ -187,6 +187,16 @@ const EXPERIENCIA_SIC_OVERVIEW_GROUPS: SeedGrupo[] = [
 ] 
 
 const EXPERIENCIA_SIC_DETAIL_GROUPS: SeedGrupo[] = [
+  group("g-exp-bienestar-cards", "Experiencia SIC - Bienestar Cards", "GALERIA", [
+    media("m-exp-bienestar-card-1", "foto-estudiantil-20250603-005440.webp", "IMAGEN", 10, "Bienestar card 1", "thumbs/foto-estudiantil-20250603-005440.webp"),
+    media("m-exp-bienestar-card-2", "foto-estudiantil-2-20250603-005502.webp", "IMAGEN", 20, "Bienestar card 2", "thumbs/foto-estudiantil-2-20250603-005502.webp"),
+    media("m-exp-bienestar-card-3", "foto-dojo-2-20250603-005253.webp", "IMAGEN", 30, "Bienestar card 3", "thumbs/foto-dojo-2-20250603-005253.webp"),
+    media("m-exp-bienestar-card-4", "foto-hockey-20250603-005057.webp", "IMAGEN", 40, "Bienestar card 4", "thumbs/foto-hockey-20250603-005057.webp"),
+    media("m-exp-bienestar-card-5", "foto-hockey-2-20250603-005124.webp", "IMAGEN", 50, "Bienestar card 5", "thumbs/foto-hockey-2-20250603-005124.webp"),
+    media("m-exp-bienestar-card-6", "foto-isidro-play-20250603-005601.webp", "IMAGEN", 60, "Bienestar card 6", "thumbs/foto-isidro-play-20250603-005601.webp"),
+    media("m-exp-bienestar-card-7", "foto-balance-1-20260217-194502.webp", "IMAGEN", 70, "Bienestar card 7", "thumbs/foto-balance-1-20260217-194502.webp"),
+    media("m-exp-bienestar-card-8", "foto-balance-2-20260217-194547.webp", "IMAGEN", 80, "Bienestar card 8", "thumbs/foto-balance-2-20260217-194547.webp"),
+  ]),
   group("g-exp-google-logo", "Experiencia SIC - Google Logo", "UNICO", [
     media("m-exp-google-logo", "google-education-logo.webp", "IMAGEN", 10, "Google for Education logo"),
   ]),
@@ -404,11 +414,11 @@ const EXPERIENCIA_SIC_BIENESTAR_SECTIONS: SeedSection[] = [
     },
   }),
   section("experiencia-sic-bienestar-cards-1", "experiencia-sic-bienestar-y-acompanamiento", 20, "GALERIA", {
-    grupoKey: "g-academicos-cards",
+    grupoKey: "g-exp-bienestar-cards",
     titulo: "Tarjetas Bienestar - Grupo 1",
     propsJson: {
       component: "flip-cards",
-      sourceGroup: "Academicos Mas Info - Cards Proyecto de Vida",
+      sourceGroup: "Experiencia SIC - Bienestar Cards",
       cardKeys: ["tutorias", "educacionEmocional", "trabajoFamilias", "desarrolloIntegral"],
     },
   }),
@@ -455,11 +465,11 @@ const EXPERIENCIA_SIC_BIENESTAR_SECTIONS: SeedSection[] = [
     },
   }),
   section("experiencia-sic-bienestar-cards-2", "experiencia-sic-bienestar-y-acompanamiento", 50, "GALERIA", {
-    grupoKey: "g-academicos-cards",
+    grupoKey: "g-exp-bienestar-cards",
     titulo: "Tarjetas Bienestar - Grupo 2",
     propsJson: {
       component: "flip-cards",
-      sourceGroup: "Academicos Mas Info - Cards Proyecto de Vida",
+      sourceGroup: "Experiencia SIC - Bienestar Cards",
       cardKeys: ["sostenEmocional", "acompanamientoPsicopedagogico", "convivenciaEscolar", "trabajoInterdisciplinario"],
     },
   }),

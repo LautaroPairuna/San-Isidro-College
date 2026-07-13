@@ -1,7 +1,7 @@
 -- Seed SQL corregido para las paginas nuevas de Experiencia SIC.
 -- Corrige dos cosas:
 -- 1. No inserta secciones de "Alianzas" dentro de cada pagina detalle.
--- 2. Inserta grupos y medios propios para Google, Innovacion y los carruseles
+-- 2. Inserta grupos y medios propios para Bienestar, Google, Innovacion y los carruseles
 --    del overview de Experiencia SIC.
 --
 -- Requiere que ya existan estos grupos base del seed principal:
@@ -9,7 +9,6 @@
 -- - Vida Estudiantil - Rugby Hockey
 -- - Vida Estudiantil - Play
 -- - Vida Estudiantil - Bienestar
--- - Academicos Mas Info - Cards Proyecto de Vida
 
 -- ============================================================================
 -- LIMPIEZA DE SECCIONES INCORRECTAS DE LA VERSION ANTERIOR
@@ -31,6 +30,7 @@ INSERT INTO `grupomedios` (`nombre`, `tipoGrupo`, `creadoEn`, `actualizadoEn`)
 VALUES
   ('Experiencia SIC - Hero', 'CARRUSEL', NOW(), NOW()),
   ('Experiencia SIC - Bienestar Carousel', 'CARRUSEL', NOW(), NOW()),
+  ('Experiencia SIC - Bienestar Cards', 'GALERIA', NOW(), NOW()),
   ('Experiencia SIC - Google Carousel', 'CARRUSEL', NOW(), NOW()),
   ('Experiencia SIC - Innovacion Carousel', 'CARRUSEL', NOW(), NOW()),
   ('Experiencia SIC - Google Logo', 'UNICO', NOW(), NOW()),
@@ -49,6 +49,7 @@ INNER JOIN `grupomedios` g ON g.`id` = m.`grupoMediosId`
 WHERE g.`nombre` IN (
   'Experiencia SIC - Hero',
   'Experiencia SIC - Bienestar Carousel',
+  'Experiencia SIC - Bienestar Cards',
   'Experiencia SIC - Google Carousel',
   'Experiencia SIC - Innovacion Carousel',
   'Experiencia SIC - Google Logo',
@@ -78,6 +79,21 @@ JOIN (
   UNION ALL SELECT 'foto-hockey-3-20250603-005153.webp', 'thumbs/foto-hockey-3-20250603-005153.webp', 'Experiencia SIC bienestar 3', 30
 ) x
 WHERE g.`nombre` = 'Experiencia SIC - Bienestar Carousel';
+
+INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
+FROM `grupomedios` g
+JOIN (
+  SELECT 'foto-estudiantil-20250603-005440.webp' AS urlArchivo, 'thumbs/foto-estudiantil-20250603-005440.webp' AS urlMiniatura, 'Bienestar card 1' AS textoAlternativo, 10 AS posicion
+  UNION ALL SELECT 'foto-estudiantil-2-20250603-005502.webp', 'thumbs/foto-estudiantil-2-20250603-005502.webp', 'Bienestar card 2', 20
+  UNION ALL SELECT 'foto-dojo-2-20250603-005253.webp', 'thumbs/foto-dojo-2-20250603-005253.webp', 'Bienestar card 3', 30
+  UNION ALL SELECT 'foto-hockey-20250603-005057.webp', 'thumbs/foto-hockey-20250603-005057.webp', 'Bienestar card 4', 40
+  UNION ALL SELECT 'foto-hockey-2-20250603-005124.webp', 'thumbs/foto-hockey-2-20250603-005124.webp', 'Bienestar card 5', 50
+  UNION ALL SELECT 'foto-isidro-play-20250603-005601.webp', 'thumbs/foto-isidro-play-20250603-005601.webp', 'Bienestar card 6', 60
+  UNION ALL SELECT 'foto-balance-1-20260217-194502.webp', 'thumbs/foto-balance-1-20260217-194502.webp', 'Bienestar card 7', 70
+  UNION ALL SELECT 'foto-balance-2-20260217-194547.webp', 'thumbs/foto-balance-2-20260217-194547.webp', 'Bienestar card 8', 80
+) x
+WHERE g.`nombre` = 'Experiencia SIC - Bienestar Cards';
 
 INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
 SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
@@ -246,8 +262,8 @@ VALUES
   'GALERIA',
   'Tarjetas Bienestar - Grupo 1',
   NULL,
-  '{"component":"flip-cards","sourceGroup":"Academicos Mas Info - Cards Proyecto de Vida","cardKeys":["tutorias","educacionEmocional","trabajoFamilias","desarrolloIntegral"]}',
-  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Academicos Mas Info - Cards Proyecto de Vida' LIMIT 1),
+  '{"component":"flip-cards","sourceGroup":"Experiencia SIC - Bienestar Cards","cardKeys":["tutorias","educacionEmocional","trabajoFamilias","desarrolloIntegral"]}',
+  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Bienestar Cards' LIMIT 1),
   NULL,
   NOW(),
   NOW()
@@ -285,8 +301,8 @@ VALUES
   'GALERIA',
   'Tarjetas Bienestar - Grupo 2',
   NULL,
-  '{"component":"flip-cards","sourceGroup":"Academicos Mas Info - Cards Proyecto de Vida","cardKeys":["sostenEmocional","acompanamientoPsicopedagogico","convivenciaEscolar","trabajoInterdisciplinario"]}',
-  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Academicos Mas Info - Cards Proyecto de Vida' LIMIT 1),
+  '{"component":"flip-cards","sourceGroup":"Experiencia SIC - Bienestar Cards","cardKeys":["sostenEmocional","acompanamientoPsicopedagogico","convivenciaEscolar","trabajoInterdisciplinario"]}',
+  (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Bienestar Cards' LIMIT 1),
   NULL,
   NOW(),
   NOW()
