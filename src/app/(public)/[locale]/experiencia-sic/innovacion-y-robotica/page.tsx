@@ -85,7 +85,7 @@ function ToolsGrid({
       {items.map((item) => (
         <div key={item.key} className="flex flex-col items-center text-center">
           <Image
-            src={toPublicImageUrl('medios', item.icon)}
+            src={item.icon}
             alt={t(`lab.tools.${item.key}` as const)}
             width={88}
             height={88}

@@ -70,7 +70,7 @@ function FeatureGrid({
         {items.map((item) => (
           <article key={item.key} className="flex flex-col items-center text-center">
             <Image
-              src={toPublicImageUrl('medios', item.icon)}
+              src={item.icon}
               alt={t(`${namespace}.items.${item.key}.title` as const)}
               width={140}
               height={140}
