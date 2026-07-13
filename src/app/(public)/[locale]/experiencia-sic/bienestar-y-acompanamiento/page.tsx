@@ -21,17 +21,17 @@ const CARD_FALLBACK_IMAGES = [
 ] as const
 
 const FIRST_GROUP_CARDS = [
-  { key: 'tutorias', icon: '/images/icons/tutorias-ico.svg', color: '#c19516' },
-  { key: 'educacionEmocional', icon: '/images/icons/educacion-emocional-ico.svg', color: '#2d8f57' },
-  { key: 'trabajoFamilias', icon: '/images/icons/trabajo-familia-ico.svg', color: '#294161' },
-  { key: 'desarrolloIntegral', icon: '/images/icons/desarrollo-integral-ico.svg', color: '#75ad76' },
+  { key: 'tutorias', icon: 'tutorias-ico.svg', color: '#c19516' },
+  { key: 'educacionEmocional', icon: 'educacion-emocional-ico.svg', color: '#2d8f57' },
+  { key: 'trabajoFamilias', icon: 'trabajo-familia-ico.svg', color: '#294161' },
+  { key: 'desarrolloIntegral', icon: 'desarrollo-integral-ico.svg', color: '#75ad76' },
 ] as const
 
 const SECOND_GROUP_CARDS = [
-  { key: 'sostenEmocional', icon: '/images/icons/sosten-emocional-ico.svg', color: '#3ba9cf' },
-  { key: 'acompanamientoPsicopedagogico', icon: '/images/icons/acompanamiento-pedagogico-ico.svg', color: '#beb465' },
-  { key: 'convivenciaEscolar', icon: '/images/icons/convivencia-escolar-ico.svg', color: '#c19516' },
-  { key: 'trabajoInterdisciplinario', icon: '/images/icons/trabajo-interdisciplinario-ico.svg', color: '#294161' },
+  { key: 'sostenEmocional', icon: 'sosten-emocional-ico.svg', color: '#3ba9cf' },
+  { key: 'acompanamientoPsicopedagogico', icon: 'acompanamiento-pedagogico-ico.svg', color: '#beb465' },
+  { key: 'convivenciaEscolar', icon: 'convivencia-escolar-ico.svg', color: '#c19516' },
+  { key: 'trabajoInterdisciplinario', icon: 'trabajo-interdisciplinario-ico.svg', color: '#294161' },
 ] as const
 
 type CardKey =
@@ -52,14 +52,15 @@ function buildCards(
 ): FlipCardItem[] {
   return cards.map((card, index) => {
     const image = imageUrls[offset + index] ?? CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length]
+    const icon = toPublicImageUrl('medios', card.icon)
 
     return {
       key: card.key,
       title: t(`cards.${card.key}.title`),
       backText: t(`cards.${card.key}.backText`),
-      icon: card.icon,
+      icon,
       image,
-      fallbackIcon: card.icon,
+      fallbackIcon: icon,
       fallbackImage: CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length],
       color: card.color,
     }

@@ -1,35 +1,36 @@
 import Image from 'next/image'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
+import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getTranslations } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 const STUDENT_FEATURES = [
-  { key: 'collaborativeLearning', icon: '/images/icons/aprendizaje-colaborativo-ico.svg' },
-  { key: 'digitalCitizenship', icon: '/images/icons/ciudadania-digital-ico.svg' },
-  { key: 'creativeThinking', icon: '/images/icons/preparacion-futuro-2-ico.svg' },
-  { key: 'futureReady', icon: '/images/icons/preparacion-futuro-ico.svg' },
+  { key: 'collaborativeLearning', icon: 'aprendizaje-colaborativo-ico.svg' },
+  { key: 'digitalCitizenship', icon: 'ciudadania-digital-ico.svg' },
+  { key: 'creativeThinking', icon: 'preparacion-futuro-2-ico.svg' },
+  { key: 'futureReady', icon: 'preparacion-futuro-ico.svg' },
 ] as const
 
 const TEACHER_FEATURES = [
-  { key: 'enhanceTeaching', icon: '/images/icons/potenciar-ensenanza-ico.svg' },
-  { key: 'innovateWithConfidence', icon: '/images/icons/innovar-confianza-ico.svg' },
-  { key: 'collaborateToGrow', icon: '/images/icons/colaborar-crecer-ico.svg' },
-  { key: 'inspireStudents', icon: '/images/icons/inspirar-alumnos-ico.svg' },
+  { key: 'enhanceTeaching', icon: 'potenciar-ensenanza-ico.svg' },
+  { key: 'innovateWithConfidence', icon: 'innovar-confianza-ico.svg' },
+  { key: 'collaborateToGrow', icon: 'colaborar-crecer-ico.svg' },
+  { key: 'inspireStudents', icon: 'inspirar-alumnos-ico.svg' },
 ] as const
 
 const GOOGLE_APPS = [
-  { key: 'drive', icon: '/images/icons/google/drive-ico.svg', label: 'Drive' },
-  { key: 'gemini', icon: '/images/icons/google/gemini-ico.svg', label: 'Gemini' },
-  { key: 'notebookLm', icon: '/images/icons/google/notebook-lm-ico.svg', label: 'NotebookLM' },
-  { key: 'calendar', icon: '/images/icons/google/calendar-ico.svg', label: 'Calendar' },
-  { key: 'sites', icon: '/images/icons/google/sites-ico.svg', label: 'Sites' },
-  { key: 'forms', icon: '/images/icons/google/forms-ico.svg', label: 'Forms' },
-  { key: 'gmail', icon: '/images/icons/google/gmail-ico.svg', label: 'Gmail' },
-  { key: 'classroom', icon: '/images/icons/google/classroom-ico.svg', label: 'Classroom' },
-  { key: 'sheets', icon: '/images/icons/google/sheets-ico.svg', label: 'Sheets' },
-  { key: 'docs', icon: '/images/icons/google/docs-ico.svg', label: 'Docs' },
-  { key: 'slides', icon: '/images/icons/google/slides-ico.svg', label: 'Slides' },
+  { key: 'drive', icon: 'google/drive-ico.svg', label: 'Drive' },
+  { key: 'gemini', icon: 'google/gemini-ico.svg', label: 'Gemini' },
+  { key: 'notebookLm', icon: 'google/notebook-lm-ico.svg', label: 'NotebookLM' },
+  { key: 'calendar', icon: 'google/calendar-ico.svg', label: 'Calendar' },
+  { key: 'sites', icon: 'google/sites-ico.svg', label: 'Sites' },
+  { key: 'forms', icon: 'google/forms-ico.svg', label: 'Forms' },
+  { key: 'gmail', icon: 'google/gmail-ico.svg', label: 'Gmail' },
+  { key: 'classroom', icon: 'google/classroom-ico.svg', label: 'Classroom' },
+  { key: 'sheets', icon: 'google/sheets-ico.svg', label: 'Sheets' },
+  { key: 'docs', icon: 'google/docs-ico.svg', label: 'Docs' },
+  { key: 'slides', icon: 'google/slides-ico.svg', label: 'Slides' },
 ] as const
 
 type PageProps = {
@@ -59,7 +60,7 @@ function FeatureGrid({
         {items.map((item) => (
           <article key={item.key} className="flex flex-col items-center text-center">
             <Image
-              src={item.icon}
+              src={toPublicImageUrl('medios', item.icon)}
               alt={t(`${namespace}.items.${item.key}.title` as const)}
               width={140}
               height={140}
@@ -132,7 +133,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
               {GOOGLE_APPS.map((app) => (
                 <div key={app.key} className="flex flex-col items-center justify-start text-center">
                   <Image
-                    src={app.icon}
+                    src={toPublicImageUrl('medios', app.icon)}
                     alt={app.label}
                     width={36}
                     height={36}

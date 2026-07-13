@@ -1,24 +1,25 @@
 import Image from 'next/image'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
+import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getTranslations } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 const STUDENT_DEVELOPMENT = [
-  { key: 'creativeThinking', icon: '/images/icons/pensamiento-creativo-ico.svg' },
-  { key: 'problemSolving', icon: '/images/icons/resolucion-problemas-ico.svg' },
-  { key: 'teamwork', icon: '/images/icons/trabajo-equipo-ico.svg' },
-  { key: 'computationalThinking', icon: '/images/icons/pensamiento-computacional-ico.svg' },
+  { key: 'creativeThinking', icon: 'pensamiento-creativo-ico.svg' },
+  { key: 'problemSolving', icon: 'resolucion-problemas-ico.svg' },
+  { key: 'teamwork', icon: 'trabajo-equipo-ico.svg' },
+  { key: 'computationalThinking', icon: 'pensamiento-computacional-ico.svg' },
 ] as const
 
 const LAB_TOOLS = [
-  { key: 'robotics', icon: '/images/icons/robotica-ico.svg' },
-  { key: 'programming', icon: '/images/icons/programacion-ico.svg' },
-  { key: 'electronics', icon: '/images/icons/electronica-ico.svg' },
-  { key: 'projectDesign', icon: '/images/icons/diseno-proyectos-ico.svg' },
-  { key: 'prototyping', icon: '/images/icons/prototipado-ico.svg' },
-  { key: 'challengeSolving', icon: '/images/icons/resolucion-desafios-ico.svg' },
-  { key: 'printing3d', icon: '/images/icons/impresion-3d-ico.svg' },
+  { key: 'robotics', icon: 'robotica-ico.svg' },
+  { key: 'programming', icon: 'programacion-ico.svg' },
+  { key: 'electronics', icon: 'electronica-ico.svg' },
+  { key: 'projectDesign', icon: 'diseno-proyectos-ico.svg' },
+  { key: 'prototyping', icon: 'prototipado-ico.svg' },
+  { key: 'challengeSolving', icon: 'resolucion-desafios-ico.svg' },
+  { key: 'printing3d', icon: 'impresion-3d-ico.svg' },
 ] as const
 
 type PageProps = {
@@ -74,7 +75,7 @@ function ToolsGrid({
       {items.map((item) => (
         <div key={item.key} className="flex flex-col items-center text-center">
           <Image
-            src={item.icon}
+            src={toPublicImageUrl('medios', item.icon)}
             alt={t(`lab.tools.${item.key}` as const)}
             width={88}
             height={88}

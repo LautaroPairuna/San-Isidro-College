@@ -81,17 +81,32 @@ JOIN (
 WHERE g.`nombre` = 'Experiencia SIC - Bienestar Carousel';
 
 INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT x.urlArchivo, NULL, x.textoAlternativo, 'ICONO', x.posicion, g.`id`, NOW(), NOW()
+FROM `grupomedios` g
+JOIN (
+  SELECT 'tutorias-ico.svg' AS urlArchivo, 'Tutorias' AS textoAlternativo, 10 AS posicion
+  UNION ALL SELECT 'educacion-emocional-ico.svg', 'Educacion emocional', 20
+  UNION ALL SELECT 'trabajo-familia-ico.svg', 'Trabajo junto a las familias', 30
+  UNION ALL SELECT 'desarrollo-integral-ico.svg', 'Desarrollo integral', 40
+  UNION ALL SELECT 'sosten-emocional-ico.svg', 'Sosten emocional', 50
+  UNION ALL SELECT 'acompanamiento-pedagogico-ico.svg', 'Acompanamiento psicopedagogico', 60
+  UNION ALL SELECT 'convivencia-escolar-ico.svg', 'Convivencia escolar', 70
+  UNION ALL SELECT 'trabajo-interdisciplinario-ico.svg', 'Trabajo interdisciplinario', 80
+) x
+WHERE g.`nombre` = 'Experiencia SIC - Bienestar Cards';
+
+INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
 SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
 FROM `grupomedios` g
 JOIN (
-  SELECT 'foto-estudiantil-20250603-005440.webp' AS urlArchivo, 'thumbs/foto-estudiantil-20250603-005440.webp' AS urlMiniatura, 'Bienestar card 1' AS textoAlternativo, 10 AS posicion
-  UNION ALL SELECT 'foto-estudiantil-2-20250603-005502.webp', 'thumbs/foto-estudiantil-2-20250603-005502.webp', 'Bienestar card 2', 20
-  UNION ALL SELECT 'foto-dojo-2-20250603-005253.webp', 'thumbs/foto-dojo-2-20250603-005253.webp', 'Bienestar card 3', 30
-  UNION ALL SELECT 'foto-hockey-20250603-005057.webp', 'thumbs/foto-hockey-20250603-005057.webp', 'Bienestar card 4', 40
-  UNION ALL SELECT 'foto-hockey-2-20250603-005124.webp', 'thumbs/foto-hockey-2-20250603-005124.webp', 'Bienestar card 5', 50
-  UNION ALL SELECT 'foto-isidro-play-20250603-005601.webp', 'thumbs/foto-isidro-play-20250603-005601.webp', 'Bienestar card 6', 60
-  UNION ALL SELECT 'foto-balance-1-20260217-194502.webp', 'thumbs/foto-balance-1-20260217-194502.webp', 'Bienestar card 7', 70
-  UNION ALL SELECT 'foto-balance-2-20260217-194547.webp', 'thumbs/foto-balance-2-20260217-194547.webp', 'Bienestar card 8', 80
+  SELECT 'foto-estudiantil-20250603-005440.webp' AS urlArchivo, 'thumbs/foto-estudiantil-20250603-005440.webp' AS urlMiniatura, 'Bienestar card 1' AS textoAlternativo, 110 AS posicion
+  UNION ALL SELECT 'foto-estudiantil-2-20250603-005502.webp', 'thumbs/foto-estudiantil-2-20250603-005502.webp', 'Bienestar card 2', 120
+  UNION ALL SELECT 'foto-dojo-2-20250603-005253.webp', 'thumbs/foto-dojo-2-20250603-005253.webp', 'Bienestar card 3', 130
+  UNION ALL SELECT 'foto-hockey-20250603-005057.webp', 'thumbs/foto-hockey-20250603-005057.webp', 'Bienestar card 4', 140
+  UNION ALL SELECT 'foto-hockey-2-20250603-005124.webp', 'thumbs/foto-hockey-2-20250603-005124.webp', 'Bienestar card 5', 150
+  UNION ALL SELECT 'foto-isidro-play-20250603-005601.webp', 'thumbs/foto-isidro-play-20250603-005601.webp', 'Bienestar card 6', 160
+  UNION ALL SELECT 'foto-balance-1-20260217-194502.webp', 'thumbs/foto-balance-1-20260217-194502.webp', 'Bienestar card 7', 170
+  UNION ALL SELECT 'foto-balance-2-20260217-194547.webp', 'thumbs/foto-balance-2-20260217-194547.webp', 'Bienestar card 8', 180
 ) x
 WHERE g.`nombre` = 'Experiencia SIC - Bienestar Cards';
 
