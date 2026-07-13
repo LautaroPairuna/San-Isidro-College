@@ -313,7 +313,7 @@ const Header: React.FC = () => {
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href={{ pathname: "/experiencia-sic", hash: "bienestar-y-acompanamiento" }}
+                      href="/experiencia-sic/bienestar-y-acompanamiento"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -322,7 +322,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/experiencia-sic", hash: "google-reference-school" }}
+                      href="/experiencia-sic/google-reference-school"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
