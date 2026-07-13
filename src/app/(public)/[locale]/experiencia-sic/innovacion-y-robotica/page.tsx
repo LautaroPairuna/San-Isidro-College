@@ -6,20 +6,20 @@ import { getTranslations } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 const STUDENT_DEVELOPMENT = [
-  { key: 'creativeThinking', icon: 'pensamiento-creativo-ico.svg' },
-  { key: 'problemSolving', icon: 'resolucion-problemas-ico.svg' },
-  { key: 'teamwork', icon: 'trabajo-equipo-ico.svg' },
-  { key: 'computationalThinking', icon: 'pensamiento-computacional-ico.svg' },
+  { key: 'creativeThinking', fallbackIcon: '/images/icons/pensamiento-creativo-ico.svg' },
+  { key: 'problemSolving', fallbackIcon: '/images/icons/resolucion-problemas-ico.svg' },
+  { key: 'teamwork', fallbackIcon: '/images/icons/trabajo-equipo-ico.svg' },
+  { key: 'computationalThinking', fallbackIcon: '/images/icons/pensamiento-computacional-ico.svg' },
 ] as const
 
 const LAB_TOOLS = [
-  { key: 'robotics', icon: 'robotica-ico.svg' },
-  { key: 'programming', icon: 'programacion-ico.svg' },
-  { key: 'electronics', icon: 'electronica-ico.svg' },
-  { key: 'projectDesign', icon: 'diseno-proyectos-ico.svg' },
-  { key: 'prototyping', icon: 'prototipado-ico.svg' },
-  { key: 'challengeSolving', icon: 'resolucion-desafios-ico.svg' },
-  { key: 'printing3d', icon: 'impresion-3d-ico.svg' },
+  { key: 'robotics', fallbackIcon: '/images/icons/robotica-ico.svg' },
+  { key: 'programming', fallbackIcon: '/images/icons/programacion-ico.svg' },
+  { key: 'electronics', fallbackIcon: '/images/icons/electronica-ico.svg' },
+  { key: 'projectDesign', fallbackIcon: '/images/icons/diseno-proyectos-ico.svg' },
+  { key: 'prototyping', fallbackIcon: '/images/icons/prototipado-ico.svg' },
+  { key: 'challengeSolving', fallbackIcon: '/images/icons/resolucion-desafios-ico.svg' },
+  { key: 'printing3d', fallbackIcon: '/images/icons/impresion-3d-ico.svg' },
 ] as const
 
 type PageProps = {
@@ -27,6 +27,16 @@ type PageProps = {
 }
 
 export const dynamic = 'force-dynamic'
+
+function resolveIcons<T extends { fallbackIcon: string }>(
+  items: readonly T[],
+  medias: Awaited<ReturnType<typeof getMediaGroupByName>>
+) {
+  return items.map((item, index) => ({
+    ...item,
+    icon: medias[index] ? toPublicImageUrl('medios', medias[index]!.urlArchivo) : item.fallbackIcon,
+  }))
+}
 
 function DevelopmentGrid({
   title,
@@ -94,6 +104,10 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'experienciaSicInnovacionRoboticaDetail' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
+  const studentIcons = await getMediaGroupByName('Experiencia SIC - Innovacion Students Icons')
+  const toolsIcons = await getMediaGroupByName('Experiencia SIC - Innovacion Tools Icons')
+  const studentDevelopment = resolveIcons(STUDENT_DEVELOPMENT, studentIcons)
+  const labTools = resolveIcons(LAB_TOOLS, toolsIcons)
 
   return (
     <>
@@ -109,12 +123,12 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
             <p>{t('intro.p3')}</p>
           </div>
 
-          <DevelopmentGrid title={t('students.title')} items={STUDENT_DEVELOPMENT} t={t} />
+          <DevelopmentGrid title={t('students.title')} items={studentDevelopment} t={t} />
 
           <section className="mt-12 text-gray-800">
             <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{t('lab.title')}</h2>
             <p className="mt-3 text-justify text-gray-700">{t('lab.p1')}</p>
-            <ToolsGrid items={LAB_TOOLS} t={t} />
+            <ToolsGrid items={labTools} t={t} />
           </section>
 
           <section className="mt-12 text-justify text-gray-800">

@@ -21,17 +21,17 @@ const CARD_FALLBACK_IMAGES = [
 ] as const
 
 const FIRST_GROUP_CARDS = [
-  { key: 'tutorias', icon: 'tutorias-ico.svg', color: '#c19516' },
-  { key: 'educacionEmocional', icon: 'educacion-emocional-ico.svg', color: '#2d8f57' },
-  { key: 'trabajoFamilias', icon: 'trabajo-familia-ico.svg', color: '#294161' },
-  { key: 'desarrolloIntegral', icon: 'desarrollo-integral-ico.svg', color: '#75ad76' },
+  { key: 'tutorias', fallbackIcon: '/images/icons/tutorias-ico.svg', color: '#c19516' },
+  { key: 'educacionEmocional', fallbackIcon: '/images/icons/educacion-emocional-ico.svg', color: '#2d8f57' },
+  { key: 'trabajoFamilias', fallbackIcon: '/images/icons/trabajo-familia-ico.svg', color: '#294161' },
+  { key: 'desarrolloIntegral', fallbackIcon: '/images/icons/desarrollo-integral-ico.svg', color: '#75ad76' },
 ] as const
 
 const SECOND_GROUP_CARDS = [
-  { key: 'sostenEmocional', icon: 'sosten-emocional-ico.svg', color: '#3ba9cf' },
-  { key: 'acompanamientoPsicopedagogico', icon: 'acompanamiento-pedagogico-ico.svg', color: '#beb465' },
-  { key: 'convivenciaEscolar', icon: 'convivencia-escolar-ico.svg', color: '#c19516' },
-  { key: 'trabajoInterdisciplinario', icon: 'trabajo-interdisciplinario-ico.svg', color: '#294161' },
+  { key: 'sostenEmocional', fallbackIcon: '/images/icons/sosten-emocional-ico.svg', color: '#3ba9cf' },
+  { key: 'acompanamientoPsicopedagogico', fallbackIcon: '/images/icons/acompanamiento-pedagogico-ico.svg', color: '#beb465' },
+  { key: 'convivenciaEscolar', fallbackIcon: '/images/icons/convivencia-escolar-ico.svg', color: '#c19516' },
+  { key: 'trabajoInterdisciplinario', fallbackIcon: '/images/icons/trabajo-interdisciplinario-ico.svg', color: '#294161' },
 ] as const
 
 type CardKey =
@@ -45,14 +45,15 @@ type PageProps = {
 export const dynamic = 'force-dynamic'
 
 function buildCards(
-  cards: ReadonlyArray<{ key: CardKey; icon: string; color: string }>,
+  cards: ReadonlyArray<{ key: CardKey; fallbackIcon: string; color: string }>,
+  iconUrls: string[],
   imageUrls: string[],
   t: Awaited<ReturnType<typeof getTranslations>>,
   offset: number
 ): FlipCardItem[] {
   return cards.map((card, index) => {
     const image = imageUrls[offset + index] ?? CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length]
-    const icon = toPublicImageUrl('medios', card.icon)
+    const icon = iconUrls[offset + index] ?? card.fallbackIcon
 
     return {
       key: card.key,
@@ -60,7 +61,7 @@ function buildCards(
       backText: t(`cards.${card.key}.backText`),
       icon,
       image,
-      fallbackIcon: icon,
+      fallbackIcon: card.fallbackIcon,
       fallbackImage: CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length],
       color: card.color,
     }
@@ -79,6 +80,10 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   const imageMedias = [...(cardsSection?.grupo?.medios ?? [])]
     .filter((media) => media.tipo === 'IMAGEN')
     .sort((a, b) => a.posicion - b.posicion)
+  const iconMedias = [...(cardsSection?.grupo?.medios ?? [])]
+    .filter((media) => media.tipo === 'ICONO')
+    .sort((a, b) => a.posicion - b.posicion)
+  const iconUrls = iconMedias.map((media) => toPublicImageUrl('medios', media.urlArchivo))
 
   const imageUrls =
     imageMedias.length > 0
@@ -87,8 +92,8 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
         )
       : [...CARD_FALLBACK_IMAGES]
 
-  const firstGroupCards = buildCards(FIRST_GROUP_CARDS, imageUrls, t, 0)
-  const secondGroupCards = buildCards(SECOND_GROUP_CARDS, imageUrls, t, 4)
+  const firstGroupCards = buildCards(FIRST_GROUP_CARDS, iconUrls, imageUrls, t, 0)
+  const secondGroupCards = buildCards(SECOND_GROUP_CARDS, iconUrls, imageUrls, t, 4)
 
   return (
     <>

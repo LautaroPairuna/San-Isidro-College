@@ -6,31 +6,31 @@ import { getTranslations } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 const STUDENT_FEATURES = [
-  { key: 'collaborativeLearning', icon: 'aprendizaje-colaborativo-ico.svg' },
-  { key: 'digitalCitizenship', icon: 'ciudadania-digital-ico.svg' },
-  { key: 'creativeThinking', icon: 'preparacion-futuro-2-ico.svg' },
-  { key: 'futureReady', icon: 'preparacion-futuro-ico.svg' },
+  { key: 'collaborativeLearning', fallbackIcon: '/images/icons/aprendizaje-colaborativo-ico.svg' },
+  { key: 'digitalCitizenship', fallbackIcon: '/images/icons/ciudadania-digital-ico.svg' },
+  { key: 'creativeThinking', fallbackIcon: '/images/icons/preparacion-futuro-2-ico.svg' },
+  { key: 'futureReady', fallbackIcon: '/images/icons/preparacion-futuro-ico.svg' },
 ] as const
 
 const TEACHER_FEATURES = [
-  { key: 'enhanceTeaching', icon: 'potenciar-ensenanza-ico.svg' },
-  { key: 'innovateWithConfidence', icon: 'innovar-confianza-ico.svg' },
-  { key: 'collaborateToGrow', icon: 'colaborar-crecer-ico.svg' },
-  { key: 'inspireStudents', icon: 'inspirar-alumnos-ico.svg' },
+  { key: 'enhanceTeaching', fallbackIcon: '/images/icons/potenciar-ensenanza-ico.svg' },
+  { key: 'innovateWithConfidence', fallbackIcon: '/images/icons/innovar-confianza-ico.svg' },
+  { key: 'collaborateToGrow', fallbackIcon: '/images/icons/colaborar-crecer-ico.svg' },
+  { key: 'inspireStudents', fallbackIcon: '/images/icons/inspirar-alumnos-ico.svg' },
 ] as const
 
 const GOOGLE_APPS = [
-  { key: 'drive', icon: 'google/drive-ico.svg', label: 'Drive' },
-  { key: 'gemini', icon: 'google/gemini-ico.svg', label: 'Gemini' },
-  { key: 'notebookLm', icon: 'google/notebook-lm-ico.svg', label: 'NotebookLM' },
-  { key: 'calendar', icon: 'google/calendar-ico.svg', label: 'Calendar' },
-  { key: 'sites', icon: 'google/sites-ico.svg', label: 'Sites' },
-  { key: 'forms', icon: 'google/forms-ico.svg', label: 'Forms' },
-  { key: 'gmail', icon: 'google/gmail-ico.svg', label: 'Gmail' },
-  { key: 'classroom', icon: 'google/classroom-ico.svg', label: 'Classroom' },
-  { key: 'sheets', icon: 'google/sheets-ico.svg', label: 'Sheets' },
-  { key: 'docs', icon: 'google/docs-ico.svg', label: 'Docs' },
-  { key: 'slides', icon: 'google/slides-ico.svg', label: 'Slides' },
+  { key: 'drive', fallbackIcon: '/images/icons/google/drive-ico.svg', label: 'Drive' },
+  { key: 'gemini', fallbackIcon: '/images/icons/google/gemini-ico.svg', label: 'Gemini' },
+  { key: 'notebookLm', fallbackIcon: '/images/icons/google/notebook-lm-ico.svg', label: 'NotebookLM' },
+  { key: 'calendar', fallbackIcon: '/images/icons/google/calendar-ico.svg', label: 'Calendar' },
+  { key: 'sites', fallbackIcon: '/images/icons/google/sites-ico.svg', label: 'Sites' },
+  { key: 'forms', fallbackIcon: '/images/icons/google/forms-ico.svg', label: 'Forms' },
+  { key: 'gmail', fallbackIcon: '/images/icons/google/gmail-ico.svg', label: 'Gmail' },
+  { key: 'classroom', fallbackIcon: '/images/icons/google/classroom-ico.svg', label: 'Classroom' },
+  { key: 'sheets', fallbackIcon: '/images/icons/google/sheets-ico.svg', label: 'Sheets' },
+  { key: 'docs', fallbackIcon: '/images/icons/google/docs-ico.svg', label: 'Docs' },
+  { key: 'slides', fallbackIcon: '/images/icons/google/slides-ico.svg', label: 'Slides' },
 ] as const
 
 type PageProps = {
@@ -41,6 +41,16 @@ export const dynamic = 'force-dynamic'
 
 type StudentFeatureKey = (typeof STUDENT_FEATURES)[number]['key']
 type TeacherFeatureKey = (typeof TEACHER_FEATURES)[number]['key']
+
+function resolveIcons<T extends { fallbackIcon: string }>(
+  items: readonly T[],
+  medias: Awaited<ReturnType<typeof getMediaGroupByName>>
+) {
+  return items.map((item, index) => ({
+    ...item,
+    icon: medias[index] ? toPublicImageUrl('medios', medias[index]!.urlArchivo) : item.fallbackIcon,
+  }))
+}
 
 function FeatureGrid({
   title,
@@ -83,6 +93,12 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'experienciaSicGoogleReferenceSchoolDetail' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
+  const studentIcons = await getMediaGroupByName('Experiencia SIC - Google Students Icons')
+  const teacherIcons = await getMediaGroupByName('Experiencia SIC - Google Teachers Icons')
+  const googleAppsIcons = await getMediaGroupByName('Experiencia SIC - Google Apps')
+  const studentFeatures = resolveIcons(STUDENT_FEATURES, studentIcons)
+  const teacherFeatures = resolveIcons(TEACHER_FEATURES, teacherIcons)
+  const googleApps = resolveIcons(GOOGLE_APPS, googleAppsIcons)
 
   return (
     <>
@@ -111,14 +127,14 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
           <FeatureGrid
             title={t('students.title')}
-            items={STUDENT_FEATURES}
+            items={studentFeatures}
             t={t}
             namespace="students"
           />
 
           <FeatureGrid
             title={t('teachers.title')}
-            items={TEACHER_FEATURES}
+            items={teacherFeatures}
             t={t}
             namespace="teachers"
           />
@@ -130,10 +146,10 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
             <p className="mt-3">{t('technology.p1')}</p>
 
             <div className="mt-8 grid grid-cols-3 gap-5 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11">
-              {GOOGLE_APPS.map((app) => (
+              {googleApps.map((app) => (
                 <div key={app.key} className="flex flex-col items-center justify-start text-center">
                   <Image
-                    src={toPublicImageUrl('medios', app.icon)}
+                    src={app.icon}
                     alt={app.label}
                     width={36}
                     height={36}
