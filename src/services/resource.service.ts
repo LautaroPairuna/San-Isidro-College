@@ -24,6 +24,11 @@ function toOptionalString(value: unknown): string | undefined {
   return typeof value === "string" && value.trim().length > 0 ? value : undefined;
 }
 
+function guessNombreArchivoFromStoredFilename(fileName: string): string {
+  const withoutExt = fileName.replace(/\.[^.]+$/, "");
+  return withoutExt.replace(/-\d{8}-\d{6}$/, "");
+}
+
 async function getFileService() {
   const fileServiceModule = await import("./file.service");
   return fileServiceModule.fileService;
@@ -302,6 +307,22 @@ export const resourceService = {
       // Simplificación: En este punto, si el usuario sube SOLO miniatura, la UI no lo permite fácilmente ahora.
       // Pero si llegara a pasar, podríamos implementarlo.
       // Por ahora, solo borramos la anterior para evitar basura.
+    }
+
+    if (tableName === "Medio" && !files?.main && existing.urlArchivo) {
+      const requestedName = toOptionalString(data.nombreArchivo);
+      if (requestedName && requestedName !== guessNombreArchivoFromStoredFilename(existing.urlArchivo)) {
+        const fileService = await getFileService();
+        const renamed = await fileService.renameMediaFiles(
+          existing.urlArchivo,
+          existing.urlMiniatura ?? null,
+          tableName,
+          requestedName
+        );
+
+        data.urlArchivo = renamed.urlArchivo;
+        data.urlMiniatura = renamed.urlMiniatura;
+      }
     }
 
     // Limpiar campos virtuales

@@ -97,6 +97,29 @@ function makeTimestamp() {
   );
 }
 
+function buildSlugName(hintName?: string) {
+  return slugify(hintName || "archivo", { lower: true, strict: true }) || "archivo";
+}
+
+function renameFilenameKeepingSuffix(currentFilename: string, hintName: string) {
+  const parsed = path.parse(currentFilename);
+  const slug = buildSlugName(hintName);
+  const thumbMatch = parsed.name.match(/^(.*)-thumb-(\d{8}-\d{6})$/);
+
+  if (thumbMatch) {
+    return `${slug}-thumb-${thumbMatch[2]}${parsed.ext}`;
+  }
+
+  if (parsed.name.startsWith("thumb-")) {
+    const withoutPrefix = parsed.name.slice("thumb-".length);
+    const timestampMatch = withoutPrefix.match(/-(\d{8}-\d{6})$/);
+    return `thumb-${slug}${timestampMatch ? `-${timestampMatch[1]}` : ""}${parsed.ext}`;
+  }
+
+  const timestampMatch = parsed.name.match(/-(\d{8}-\d{6})$/);
+  return `${slug}${timestampMatch ? `-${timestampMatch[1]}` : ""}${parsed.ext}`;
+}
+
 async function generateVideoThumbnail(videoPath: string): Promise<Buffer | null> {
   return new Promise((resolve) => {
     const tempName = `thumb-${Date.now()}-${Math.random().toString(36).substring(7)}.png`;
@@ -377,6 +400,38 @@ export const fileService = {
       tipo,
       urlMiniatura,
     };
+  },
+
+  async renameMediaFiles(
+    currentFile: string,
+    currentThumb: string | null,
+    tableName: string,
+    hintName: string
+  ) {
+    const { dir, thumbs } = await this.ensureDirectories(tableName);
+    const nextFile = renameFilenameKeepingSuffix(currentFile, hintName);
+
+    if (nextFile !== currentFile) {
+      await fs.rename(path.join(dir, currentFile), path.join(dir, nextFile));
+      await fs.rename(path.join(thumbs, currentFile), path.join(thumbs, nextFile)).catch(() => {});
+    }
+
+    if (!currentThumb) {
+      return { urlArchivo: nextFile, urlMiniatura: null };
+    }
+
+    if (currentThumb === currentFile) {
+      return { urlArchivo: nextFile, urlMiniatura: nextFile };
+    }
+
+    const nextThumb = renameFilenameKeepingSuffix(currentThumb, hintName);
+
+    if (nextThumb !== currentThumb) {
+      await fs.rename(path.join(dir, currentThumb), path.join(dir, nextThumb)).catch(() => {});
+      await fs.rename(path.join(thumbs, currentThumb), path.join(thumbs, nextThumb)).catch(() => {});
+    }
+
+    return { urlArchivo: nextFile, urlMiniatura: nextThumb };
   },
 
   async deleteFile(filename: string, tableName: string) {
