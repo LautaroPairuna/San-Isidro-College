@@ -82,7 +82,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
   return (
     <div id="container">
       {/* ═════════════ SECCIÓN 1 — HERO ═════════════ */}
-      <section className="relative w-full h-auto grid grid-cols-12 overflow-hidden" id="deportes">
+      <section className="relative w-full h-auto lg:h-screen grid grid-cols-12 overflow-hidden" id="deportes">
         {/* --- COLUMNA VERDE ------------------------------------------------ */}
         <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
           {/* Forma decorativa móvil */}
@@ -114,7 +114,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* --- COLUMNA CARRUSEL ------------------------------------------- */}
-        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px]">
+        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px] lg:h-full">
           {heroMedia.length > 0 ? (
             <MediaCarousel items={heroMedia} altText={tExperience('hero.carouselAlt')} className="w-full h-full" />
           ) : (
@@ -460,11 +460,6 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('actividadesExtracurriculares.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('actividadesExtracurriculares.description')}</p>
-              <div className="text-center mt-5">
-                <Link href="/deportes" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('actividadesExtracurriculares.readMore')}
-                </Link>
-              </div>
             </div>
           </div>
           <div className="col-span-8">
@@ -500,11 +495,6 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('actividadesExtracurriculares.description')}</p>
-              <div className="mt-5">
-                <Link href="/deportes" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('actividadesExtracurriculares.readMore')}
-                </Link>
-              </div>
             </div>
           </div>
         </div>

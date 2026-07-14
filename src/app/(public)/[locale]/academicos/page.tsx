@@ -347,21 +347,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </Link>
                 </div>
               </div>
-              <div className="absolute 2xl:top-40 2xl:-left-20 top-10 left-0 2xl:w-[355px] w-[255px] z-20 bg-white/80 p-4 rounded-xl text-[#1e804b]">
-                <h4 className="font-bold text-xl text-center">
-                  {t('secondary.dualTitle')}
-                </h4>
-                <p className="2xl:text-justify text-left">
-                  {t('secondary.dualText')}
-                </p>
-                <Image
-                  src="/images/logo-academia-internatiional-studies.svg"
-                  alt={t('secondary.dualLogoAlt')}
-                  width={128}
-                  height={128}
-                  className="mx-auto mt-5"
-                />
-              </div>
               <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px]">
                 <Image
                   src="/images/formas/forma-home-6.svg"
@@ -421,22 +406,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   height={600}
                   className="w-full h-auto rounded-md shadow-md mb-6"
                 />
-
-                <div className="bg-white/80 shadow-xl rounded-xl p-4 text-[#1e804b] mb-6">
-                  <h4 className="font-bold text-xl text-center">
-                    {t('secondary.dualTitle')}
-                  </h4>
-                  <p className="text-justify mt-2">
-                    {t('secondary.dualText')}
-                  </p>
-                  <Image
-                    src="/images/logo-academia-internatiional-studies.svg"
-                    alt={t('secondary.dualLogoAlt')}
-                    width={96}
-                    height={96}
-                    className="mx-auto mt-4"
-                  />
-                </div>
               </div>
             </div>
           </section>

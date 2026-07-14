@@ -31,7 +31,7 @@ export default async function DeportesMasInfoPage({ params }: PageProps) {
               {t('proyectoTitle')}
             </h2>
             {/* Deportes */}
-            <div className="space-y-6 leading-relaxed text-gray-800 text-justify" id="deportes">
+            <div className="space-y-6 leading-relaxed text-gray-800 text-left" id="deportes">
               <p>{t('intro.p1')}</p>
               <p>{t('intro.p2')}</p>
               <p>{t('intro.p3')}</p>

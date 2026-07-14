@@ -113,7 +113,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
     <>
       <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
         <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white px-8 pb-12 pt-24">
-          <div className="space-y-4 text-justify text-gray-800">
+          <div className="space-y-4 text-left text-gray-800">
             <h1 className="text-4xl font-bold leading-tight text-shadow-bold-movil md:text-5xl">
               {t('title')}
             </h1>
@@ -127,11 +127,11 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
 
           <section className="mt-12 text-gray-800">
             <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{t('lab.title')}</h2>
-            <p className="mt-3 text-justify text-gray-700">{t('lab.p1')}</p>
+            <p className="mt-3 text-left text-gray-700">{t('lab.p1')}</p>
             <ToolsGrid items={labTools} t={t} />
           </section>
 
-          <section className="mt-12 text-justify text-gray-800">
+          <section className="mt-12 text-left text-gray-800">
             <p className="text-lg font-semibold leading-relaxed">{t('closing.p1')}</p>
           </section>
         </div>

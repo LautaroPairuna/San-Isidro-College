@@ -264,7 +264,7 @@ const Header: React.FC = () => {
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href={`/${locale}/academicos`}
+                      href={`/${locale}/academicos-mas-info`}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 max-w-[180px]"
                     >

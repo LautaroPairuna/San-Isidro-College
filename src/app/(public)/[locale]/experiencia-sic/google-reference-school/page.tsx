@@ -104,7 +104,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
     <>
       <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
         <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white lg:px-16 px-8 pb-12 pt-24">
-          <div className="space-y-5 text-justify text-gray-800">
+          <div className="space-y-5 text-left text-gray-800">
             <Image
               src="/images/google-education-logo.webp"
               alt={t('logoAlt')}
@@ -119,7 +119,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
             <p>{t('intro.p1')}</p>
 
             <div>
-              <h2 className="text-2xl font-bold leading-tight text-gray-800">{t('whatIs.title')}</h2>
+              <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{t('whatIs.title')}</h2>
               <p className="mt-3">{t('whatIs.p1')}</p>
               <p className="mt-3">{t('whatIs.p2')}</p>
             </div>
@@ -139,7 +139,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
             namespace="teachers"
           />
 
-          <section className="mt-12 text-justify text-gray-800">
+          <section className="mt-12 text-left text-gray-800">
             <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">
               {t('technology.title')}
             </h2>

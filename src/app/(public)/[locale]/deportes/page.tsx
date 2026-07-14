@@ -75,7 +75,7 @@ export default async function DeportesPage({ params }: PageProps) {
   return (
     <div id="container">
       {/* ═════════════ SECCIÓN 1 — HERO ═════════════ */}
-      <section className="relative w-full h-auto grid grid-cols-12 overflow-hidden" id="deportes">
+      <section className="relative w-full h-auto lg:h-screen grid grid-cols-12 overflow-hidden" id="deportes">
         {/* --- COLUMNA VERDE ------------------------------------------------ */}
         <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
           {/* Forma decorativa móvil */}
@@ -107,7 +107,7 @@ export default async function DeportesPage({ params }: PageProps) {
         </div>
 
         {/* --- COLUMNA CARRUSEL ------------------------------------------- */}
-        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px]">
+        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px] lg:h-full">
           {heroMedia.length > 0 ? (
             <MediaCarousel items={heroMedia} altText={t('hero.carouselAlt')} className="w-full h-full" />
           ) : (

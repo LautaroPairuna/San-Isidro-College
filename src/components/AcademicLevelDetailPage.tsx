@@ -64,7 +64,7 @@ type AcademicLevelDetailPageProps = {
 
 function renderKindergartenContent(t: Awaited<ReturnType<typeof getTranslations>>) {
   return (
-    <div className="space-y-4 mt-8 relative text-justify">
+    <div className="space-y-4 mt-8 relative text-left">
       <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
         {t('kindergarten.titulo')}
       </h2>
@@ -106,7 +106,7 @@ function renderKindergartenContent(t: Awaited<ReturnType<typeof getTranslations>
 
 function renderPrimaryContent(t: Awaited<ReturnType<typeof getTranslations>>) {
   return (
-    <div className="space-y-4 relative mt-8 text-justify">
+    <div className="space-y-4 relative mt-8 text-left">
       <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
         {t('primary.titulo')}
       </h2>
@@ -143,37 +143,7 @@ function renderPrimaryContent(t: Awaited<ReturnType<typeof getTranslations>>) {
 function renderSecondaryContent(t: Awaited<ReturnType<typeof getTranslations>>) {
   return (
     <>
-      <div className="space-y-4 mt-8 text-justify">
-        <h2 className="text-4xl md:text-5xl font-bold my-6 text-gray-800 text-shadow-bold-movil">
-          {t('secondary.titulo')}
-        </h2>
-        <h3 className="font-bold text-xl">{t('secondary.subtitulo')}</h3>
-        <p>{t('secondary.p1')}</p>
-        <p>
-          {t('secondary.p2Part1')}
-          <span className="font-bold">{t('secondary.enfatizado')}</span>
-          {t('secondary.p2Part2')}
-        </p>
-        <div className="bg-white/80 p-4 rounded-xl text-[#1e804b] border-[#1e804b] border-2 w-full">
-          <h3 className="font-bold text-xl text-center mb-4">
-            {t('secondary.diplomaDualTitulo')}
-          </h3>
-          <p className="text-justify">{t('secondary.diplomaDualTexto')}</p>
-          <div className="mx-auto mt-5 justify-center flex">
-            <Image
-              src="/images/logo-academia-internatiional-studies.svg"
-              alt={t('secondary.diplomaDualLogoAlt')}
-              width={128}
-              height={128}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-5 mt-16 text-justify">
-        <h3 className="text-2xl font-semibold uppercase leading-tight text-gray-800 text-left">
-          We are Community
-        </h3>
+      <div className="space-y-5 mt-8 text-left">
         <h4 className="text-xl font-bold leading-tight text-gray-800 text-left">
           {t('weAreCommunity.academicProposal.title')}
         </h4>
@@ -189,7 +159,7 @@ function renderSecondaryContent(t: Awaited<ReturnType<typeof getTranslations>>) 
         </p>
       </div>
 
-      <div className="space-y-5 mt-16 text-justify">
+      <div className="space-y-5 mt-16 text-left">
         <h4 className="text-xl font-bold leading-tight text-gray-800 text-left">
           {t('weAreCommunity.internationalProjection.title')}
         </h4>
@@ -207,7 +177,7 @@ function renderSecondaryContent(t: Awaited<ReturnType<typeof getTranslations>>) 
         <p>{t('weAreCommunity.internationalProjection.closing')}</p>
       </div>
 
-      <div className="space-y-5 mt-16 text-justify">
+      <div className="space-y-5 mt-16 text-left">
         <h4 className="text-xl font-bold leading-tight text-gray-800 text-left">
           {t('weAreCommunity.identity.title')}
         </h4>

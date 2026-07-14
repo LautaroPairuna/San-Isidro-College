@@ -29,7 +29,7 @@ export default async function AcademicosMasInfoPage({ params }: PageProps) {
             {t('proyectoTitulo')}
           </h2>
 
-          <div className="space-y-4 leading-relaxed text-gray-800 text-justify">
+          <div className="space-y-4 leading-relaxed text-gray-800 text-left">
             <p>{t('introduccion.p1')}</p>
             <p>{t('introduccion.p2')}</p>
             <p>{t('introduccion.p3')}</p>
@@ -40,7 +40,7 @@ export default async function AcademicosMasInfoPage({ params }: PageProps) {
           </div>
 
           {/* Inglés, Indispensable */}
-          <div className="space-y-4 mt-10 text-justify">
+          <div className="space-y-4 mt-10 text-left">
             <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 text-shadow-bold-movil">
               {t('inglesTitulo')}
             </h3>

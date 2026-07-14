@@ -99,7 +99,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
     <>
       <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
         <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white px-8 pb-12 pt-28">
-          <div className="space-y-5 text-justify text-gray-800">
+          <div className="space-y-5 text-left text-gray-800">
             <h1 className="text-4xl font-bold leading-tight text-shadow-bold-movil md:text-5xl">
               {t('title')}
             </h1>
@@ -113,7 +113,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
           <FlipCardsGrid items={firstGroupCards} ariaLabel={t('firstGroupAriaLabel')} />
 
-          <div className="mt-10 space-y-5 text-justify text-gray-800">
+          <div className="mt-10 space-y-5 text-left text-gray-800">
             <div>
               <h2 className="text-2xl font-bold leading-tight text-gray-800">
                 {t('community.title')}
@@ -122,7 +122,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
               <p>{t('community.p2')}</p>
             </div>
 
-            <div>
+            <div className="pt-8">
               <h2 className="text-2xl font-bold leading-tight text-gray-800">
                 {t('eoe.title')}
               </h2>
@@ -132,7 +132,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
           <FlipCardsGrid items={secondGroupCards} ariaLabel={t('secondGroupAriaLabel')} />
 
-          <div className="mt-10 space-y-4 text-justify text-gray-800">
+          <div className="mt-10 space-y-4 text-left text-gray-800">
             <h2 className="text-2xl font-bold leading-tight text-gray-800">
               {t('closing.title')}
             </h2>
