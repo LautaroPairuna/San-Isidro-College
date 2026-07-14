@@ -129,7 +129,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
       {/* ─────────────────── KINDERGARTEN ─────────────────── */}
       <section
         id="kindergarten"
-        className="relative w-full h-auto py-20 bg-white overflow-hidden"
+        className="relative w-full h-auto py-20 bg-white overflow-hidden lg:min-h-[720px]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
           {/* Texto y decoraciones (idéntico pero traducido) */}
@@ -161,8 +161,8 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 src="/images/cuadro-kindergarten.svg"
                 alt={t('kinder.decorAlt')}
                 width={250}
-                height={250}
-                className="absolute top-10 left-5 z-20"
+                height={576}
+                className="absolute top-10 left-5 z-20 w-[250px] h-auto"
               />
               <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px] z-10">
                 <Image
