@@ -216,13 +216,15 @@ const AcademicosPage = async ({ params }: PageProps) => {
 
           {/* Media dinámico */}
           <div className="col-span-1 md:col-span-8 order-2 md:order-none px-5">
-            <RenderMedia
-              medio={kinderImg}
-              fallback={FALLBACKS.KINDER}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-xl shadow-lg"
-            />
+            <div className="relative w-full h-[300px] sm:h-[420px] lg:h-[600px]">
+              <RenderMedia
+                medio={kinderImg}
+                fallback={FALLBACKS.KINDER}
+                fill
+                sizes="(max-width: 1024px) 100vw, 66vw"
+                className="rounded-xl shadow-lg object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
