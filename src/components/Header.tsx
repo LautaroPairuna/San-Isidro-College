@@ -42,6 +42,30 @@ const Header: React.FC = () => {
     setMenuOpen(false)
   }
 
+  // Enlaces con ancla (#seccion): si ya estamos en la página destino,
+  // hacemos scroll suave en vez de navegar (evita el redirect que pierde el hash).
+  const handleAnchorClick = (
+    e: MouseEvent<HTMLAnchorElement>,
+    targetPath: string,
+    hash: string
+  ) => {
+    e.stopPropagation()
+    setMenuOpen(false)
+
+    if (pathname === targetPath) {
+      e.preventDefault()
+      const scrollToTarget = () => {
+        const el = document.getElementById(hash)
+        if (!el) return
+        const headerOffset = 120 // alto del header fijo
+        const top = el.getBoundingClientRect().top + window.scrollY - headerOffset
+        window.scrollTo({ top, behavior: "smooth" })
+      }
+      // Esperamos a que el menú termine de cerrarse antes de scrollear
+      requestAnimationFrame(() => requestAnimationFrame(scrollToTarget))
+    }
+  }
+
   return (
     <div id="container" className="relative bg-white w-full">
       {/* HEADER fijo */}
@@ -340,8 +364,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/experiencia-sic", hash: "san-isidro-play" }}
-                      onClick={handleNavClick}
+                      href={`/${locale}/experiencia-sic#san-isidro-play`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "san-isidro-play")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "San Isidro Play" : "San Isidro Play"}
@@ -349,8 +373,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/experiencia-sic", hash: "actividades-extracurriculares" }}
-                      onClick={handleNavClick}
+                      href={`/${locale}/experiencia-sic#actividades-extracurriculares`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "actividades-extracurriculares")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Actividades Extracurriculares" : "Extracurricular Activities"}
@@ -369,8 +393,8 @@ const Header: React.FC = () => {
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href={{ pathname: "/deportes", hash: "club" }}
-                      onClick={handleNavClick}
+                      href={`/${locale}/deportes#club`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "club")}
                       className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Club" : "Club"}
@@ -378,8 +402,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/deportes", hash: "dojo" }}
-                      onClick={handleNavClick}
+                      href={`/${locale}/deportes#dojo`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "dojo")}
                       className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Dojo" : "Dojo"}
@@ -387,8 +411,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={{ pathname: "/deportes", hash: "san-isidro-balance" }}
-                      onClick={handleNavClick}
+                      href={`/${locale}/deportes#san-isidro-balance`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "san-isidro-balance")}
                       className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "San Isidro Balance" : "San Isidro Balance"}
