@@ -81,7 +81,7 @@ function ToolsGrid({
   t: Awaited<ReturnType<typeof getTranslations>>
 }) {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+    <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
       {items.map((item) => (
         <div key={item.key} className="flex flex-col items-center text-center">
           <Image
