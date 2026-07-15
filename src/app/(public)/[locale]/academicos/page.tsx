@@ -242,13 +242,15 @@ const AcademicosPage = async ({ params }: PageProps) => {
           />
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
-              <RenderMedia
-                medio={primaryImg}
-                fallback={FALLBACKS.PRIMARY}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-md shadow-md"
-              />
+              <div className="relative w-full h-[700px]">
+                <RenderMedia
+                  medio={primaryImg}
+                  fallback={FALLBACKS.PRIMARY}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="rounded-md shadow-md object-cover"
+                />
+              </div>
             </div>
 
             <div className="absolute 2xl:top-[20%] xl:top-[15%] 2xl:left-[45%] top-[20%] left-[40%] w-[550px] z-20">
@@ -361,13 +363,15 @@ const AcademicosPage = async ({ params }: PageProps) => {
             </div>
 
             <div className="col-span-8">
-              <RenderMedia
-                medio={secondImg}
-                fallback={FALLBACKS.SECOND}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+              <div className="relative w-full h-[700px]">
+                <RenderMedia
+                  medio={secondImg}
+                  fallback={FALLBACKS.SECOND}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="rounded-xl shadow-lg object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
