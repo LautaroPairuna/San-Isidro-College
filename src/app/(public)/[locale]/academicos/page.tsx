@@ -333,7 +333,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
         <div className="hidden lg:block">
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto">
             <div className="col-span-4 relative">
-              <div className="absolute top-[10%] left-[75%] w-[450px] z-20 flex flex-col justify-center">
+              <div className="absolute top-[10%] left-[40%] w-[450px] z-20 flex flex-col justify-center">
                 <h2 className="text-5xl font-bold text-white text-left text-shadow-bold mb-5">
                   {t('secondary.title')}
                 </h2>
@@ -349,7 +349,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </Link>
                 </div>
               </div>
-              <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px]">
+              <div className="absolute -top-5 2xl:-left-15 xl:-left-15 lef w-[650px]">
                 <Image
                   src="/images/formas/forma-home-6.svg"
                   alt=""
