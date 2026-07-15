@@ -351,7 +351,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </Link>
                 </div>
               </div>
-              <div className="absolute -top-5 2xl:-left-15 xl:-left-15 lef w-[650px]">
+              <div className="absolute -top-5 2xl:-left-15 xl:-left-15 w-[650px] z-10">
                 <Image
                   src="/images/formas/forma-home-6.svg"
                   alt=""
