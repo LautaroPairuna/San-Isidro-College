@@ -20,7 +20,7 @@ export default async function AcademicosMasInfoPage({ params }: PageProps) {
     <>
       <section className="relative w-full min-h-screen bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-80 overflow-hidden">
         {/* CONTENEDOR CENTRAL CON FONDO BLANCO */}
-        <div className="relative max-w-300 mx-auto bg-white min-h-screen px-8 pb-8 pt-24">
+        <div className="relative max-w-325 mx-auto bg-white min-h-screen px-8 pb-8 pt-24">
           {/* CONTENIDO PRINCIPAL */}
           <h2
             id="proyecto"

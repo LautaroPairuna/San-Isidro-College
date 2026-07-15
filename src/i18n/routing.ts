@@ -14,8 +14,8 @@ export const routing = defineRouting({
     "/colegio": { es: "/colegio", en: "/school" },
     "/academicos": { es: "/academicos", en: "/academics" },
     "/academicos-mas-info": {
-      es: "/academicos-mas-info",
-      en: "/academics-more-info",
+      es: "/proyecto-bilingue",
+      en: "/bilingual-project",
     },
     "/kindergarden": {
       es: "/kindergarden",

@@ -21,7 +21,7 @@ export default async function DeportesMasInfoPage({ params }: PageProps) {
     <>
       <section className="relative w-full min-h-screen bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72 overflow-hidden">
         {/* CONTENEDOR CENTRAL CON FONDO BLANCO */}
-        <div className="relative max-w-[1000px] mx-auto bg-white min-h-screen px-8 pb-8 pt-40">
+        <div className="relative max-w-250 mx-auto bg-white min-h-screen px-8 pb-8 pt-40">
           {/* CONTENIDO PRINCIPAL */}
           <div>
             <h2

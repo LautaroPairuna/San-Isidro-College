@@ -37,6 +37,8 @@ const nextConfig: NextConfig = {
       { source: '/en/student-life', destination: '/en/sports', permanent: true },
       { source: '/es/vida-estudiantil-mas-info', destination: '/es/deportes-mas-info', permanent: true },
       { source: '/en/student-life-more-info', destination: '/en/sports-more-info', permanent: true },
+      { source: '/es/academicos-mas-info', destination: '/es/proyecto-bilingue', permanent: true },
+      { source: '/en/academics-more-info', destination: '/en/bilingual-project', permanent: true },
 
       // ---- Institucional ----
       { source: '/institucional.html',          destination: '/es/colegio#proyecto',                permanent: true },
@@ -47,8 +49,8 @@ const nextConfig: NextConfig = {
 
       // ---- Niveles (kindergarten, primary, secondary) ----
       { source: '/niveles.html',                destination: '/es/academicos',                      permanent: true },
-      { source: '/ingles.html',                 destination: '/es/academicos',                      permanent: true },
-      { source: '/frances.html',                destination: '/es/academicos',                      permanent: true },
+      { source: '/ingles.html',                 destination: '/es/proyecto-bilingue',               permanent: true },
+      { source: '/frances.html',                destination: '/es/proyecto-bilingue',               permanent: true },
 
       // ---- Actividades ----
       { source: '/actividades---deportes.html', destination: '/es/deportes#deportes',               permanent: true },

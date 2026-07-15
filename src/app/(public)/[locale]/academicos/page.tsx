@@ -253,7 +253,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               </div>
             </div>
 
-            <div className="absolute 2xl:top-[20%] xl:top-[15%] 2xl:left-[45%] top-[20%] left-[40%] w-[550px] z-20">
+            <div className="absolute 2xl:top-[20%] lg:top-[15%] top-[20%] 2xl:left-[45%] left-[40%] w-[550px] z-20">
               <h2 className="text-5xl font-bold text-white text-end text-shadow-bold mb-5">
                 {t('primary.title')}
               </h2>
@@ -269,7 +269,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               </div>
             </div>
 
-            <div className="absolute col-span-4 flex items-center justify-center z-20 2xl:top-[60%] xl:top-[65%] left-[50%] pointer-events-none">
+            <div className="absolute col-span-4 flex items-center justify-center z-20 2xl:top-[60%] lg:top-[65%] left-[50%] pointer-events-none">
               <Image
                 src="/images/cuadro-primary.svg"
                 alt={t('primary.decorAlt')}

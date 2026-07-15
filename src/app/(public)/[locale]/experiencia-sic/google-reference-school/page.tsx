@@ -103,7 +103,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
   return (
     <>
       <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
-        <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white lg:px-16 px-8 pb-12 pt-24">
+        <div className="relative mx-auto min-h-screen max-w-275 bg-white lg:px-16 px-8 pb-12 pt-40">
           <div className="space-y-5 text-left text-gray-800">
             <Image
               src="/images/google-education-logo.webp"

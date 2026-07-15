@@ -81,7 +81,7 @@ function ToolsGrid({
   t: Awaited<ReturnType<typeof getTranslations>>
 }) {
   return (
-    <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+    <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
       {items.map((item) => (
         <div key={item.key} className="flex flex-col items-center text-center">
           <Image
@@ -112,7 +112,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
   return (
     <>
       <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
-        <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white px-8 pb-12 pt-24">
+        <div className="relative mx-auto min-h-screen max-w-275 bg-white px-8 pb-12 pt-40">
           <div className="space-y-4 text-left text-gray-800">
             <h1 className="text-4xl font-bold leading-tight md:text-5xl">
               {t('title')}
