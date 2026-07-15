@@ -216,7 +216,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
 
           {/* Media dinámico */}
           <div className="col-span-1 md:col-span-8 order-2 md:order-none px-5">
-            <div className="relative w-full h-[300px] sm:h-[420px] lg:h-[600px]">
+            <div className="relative w-full h-[300px] sm:h-[420px] lg:h-[700px]">
               <RenderMedia
                 medio={kinderImg}
                 fallback={FALLBACKS.KINDER}
