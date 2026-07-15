@@ -49,7 +49,7 @@ function DevelopmentGrid({
 }) {
   return (
     <section className="mt-10">
-      <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-bold leading-tight text-gray-800">{title}</h2>
       <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
         {items.map((item) => (
           <article key={item.key} className="flex flex-col items-center text-center">
@@ -126,7 +126,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
           <DevelopmentGrid title={t('students.title')} items={studentDevelopment} t={t} />
 
           <section className="mt-12 text-gray-800">
-            <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{t('lab.title')}</h2>
+            <h2 className="text-2xl font-bold leading-tight text-gray-800">{t('lab.title')}</h2>
             <p className="mt-3 text-left text-gray-700">{t('lab.p1')}</p>
             <ToolsGrid items={labTools} t={t} />
           </section>

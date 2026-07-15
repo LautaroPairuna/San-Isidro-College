@@ -65,7 +65,7 @@ function FeatureGrid({
 }) {
   return (
     <section className="mt-12">
-      <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-bold leading-tight text-gray-800">{title}</h2>
       <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
         {items.map((item) => (
           <article key={item.key} className="flex flex-col items-center text-center">
@@ -119,7 +119,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
             <p>{t('intro.p1')}</p>
 
             <div>
-              <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">{t('whatIs.title')}</h2>
+              <h2 className="text-2xl font-bold leading-tight text-gray-800">{t('whatIs.title')}</h2>
               <p className="mt-3">{t('whatIs.p1')}</p>
               <p className="mt-3">{t('whatIs.p2')}</p>
             </div>
@@ -140,7 +140,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
           />
 
           <section className="mt-12 text-left text-gray-800">
-            <h2 className="text-2xl font-bold leading-tight text-gray-800 md:text-3xl">
+            <h2 className="text-2xl font-bold leading-tight text-gray-800">
               {t('technology.title')}
             </h2>
             <p className="mt-3">{t('technology.p1')}</p>
