@@ -114,7 +114,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
       <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
         <div className="relative mx-auto min-h-screen max-w-[1000px] bg-white px-8 pb-12 pt-24">
           <div className="space-y-4 text-left text-gray-800">
-            <h1 className="text-4xl font-bold leading-tight text-shadow-bold-movil md:text-5xl">
+            <h1 className="text-4xl font-bold leading-tight md:text-5xl">
               {t('title')}
             </h1>
             <p className="text-lg font-bold leading-snug text-gray-800">{t('intro.lead')}</p>
