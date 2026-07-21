@@ -1,11 +1,9 @@
 import fs from "fs/promises";
-import { createWriteStream } from "fs";
-import { pipeline } from "stream/promises";
-import { Readable } from "stream";
 import path from "path";
 import slugify from "slugify";
 import { folderNames, type PrismaTable } from "@/lib/publicConstants";
 import { mediaErrors } from "@/lib/mediaErrors";
+import type { ParsedFile } from "@/lib/multipart";
 
 const IMAGE_PUBLIC_DIR = process.env.MEDIA_DIR_IMAGES || path.resolve("public", "images");
 
@@ -17,7 +15,6 @@ const PROGRESS_DIR =
 fs.mkdir(PROGRESS_DIR, { recursive: true }).catch(() => {});
 
 type ProgressStage = 'uploading' | 'compressing' | 'generating_thumbnail' | 'done' | 'error';
-type FileNamedBlob = Blob & { name?: string };
 
 let ffmpegModulePromise: Promise<typeof import('fluent-ffmpeg')> | null = null;
 
@@ -72,13 +69,6 @@ export type UploadProgress = {
   updatedAt: number;
   error?: string;
 };
-
-function toNodeReadable(webStream: ReadableStream<Uint8Array>) {
-  const { fromWeb } = Readable as unknown as {
-    fromWeb: (stream: ReadableStream<Uint8Array>) => NodeJS.ReadableStream;
-  };
-  return fromWeb(webStream);
-}
 
 async function updateProgress(id: string, percent: number, stage: ProgressStage = 'uploading', error?: string) {
   if (!id) return;
@@ -276,20 +266,20 @@ export const fileService = {
   },
 
   async saveFile(
-    file: Blob,
+    file: ParsedFile,
     tableName: string,
     hintName?: string,
-    thumbFile?: Blob,
+    thumbFile?: ParsedFile,
     uploadId?: string
   ): Promise<SavedFile> {
     const { dir, thumbs } = await this.ensureDirectories(tableName);
     const timestamp = makeTimestamp();
     const slug = slugify(hintName || "archivo", { lower: true, strict: true });
 
-    // Casting seguro
-    const originalName = (file as FileNamedBlob).name ?? "archivo";
+    // El archivo ya está en disco (temporal), no en memoria.
+    const originalName = file.filename ?? "archivo";
     const ext = path.extname(originalName).toLowerCase();
-    
+
     const videoExts = [".mp4", ".mov", ".avi", ".mkv", ".webm"];
     const svgExts = [".svg"];
 
@@ -299,52 +289,21 @@ export const fileService = {
 
     if (svgExts.includes(ext)) {
       const out = `${slug}-${timestamp}.svg`;
-      const buf = Buffer.from(await file.arrayBuffer());
-      await fs.writeFile(path.join(dir, out), buf);
+      try {
+        await fs.copyFile(file.filepath, path.join(dir, out));
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException)?.code === 'ENOSPC') throw mediaErrors.diskFull(error);
+        throw mediaErrors.imageProcessingFailed(error);
+      }
       savedFilename = out;
       tipo = "ICONO";
     } else if (videoExts.includes(ext)) {
       const out = `${slug}-${timestamp}${ext}`;
-      const tempOut = `${slug}-${timestamp}-temp${ext}`;
-      
-      const tempPath = path.join(dir, tempOut);
       const finalPath = path.join(dir, out);
 
-      // Report initial progress
-      if (uploadId) updateProgress(uploadId, 0, 'uploading');
-
-      const webStream = file.stream();
-      const nodeStream = toNodeReadable(webStream);
-      
-      // Track upload progress
-      let loaded = 0;
-      const total = file.size;
-      
-      nodeStream.on('data', (chunk) => {
-        loaded += chunk.length;
-        if (uploadId && total > 0) {
-          const percent = Math.round((loaded / total) * 100);
-          // Throttle updates slightly to avoid disk spam
-          if (percent % 5 === 0 || percent === 100) {
-            updateProgress(uploadId, percent, 'uploading');
-          }
-        }
-      });
-
-      // Escribir el archivo temporal en disco (puede fallar por falta de espacio)
-      try {
-        await pipeline(nodeStream, createWriteStream(tempPath));
-      } catch (error) {
-        await fs.unlink(tempPath).catch(() => {});
-        if (uploadId) updateProgress(uploadId, 0, 'error', 'Error al guardar el video');
-        if ((error as NodeJS.ErrnoException)?.code === 'ENOSPC') throw mediaErrors.diskFull(error);
-        throw mediaErrors.videoProcessingFailed(error);
-      }
-
-      // Validar que el archivo no esté vacío antes de procesarlo
-      const tempStat = await fs.stat(tempPath).catch(() => null);
-      if (!tempStat || tempStat.size === 0) {
-        await fs.unlink(tempPath).catch(() => {});
+      // El video ya fue transmitido a disco por el parser multipart (sin bufferear
+      // en RAM). Validamos que no esté vacío antes de procesarlo.
+      if (file.size === 0) {
         if (uploadId) updateProgress(uploadId, 0, 'error', 'El video está vacío');
         throw mediaErrors.emptyFile();
       }
@@ -353,26 +312,23 @@ export const fileService = {
       // se conserva el video original (sin comprimir) para no perder la subida.
       let compressed = false;
       try {
-        compressed = await compressVideo(tempPath, finalPath, uploadId);
+        compressed = await compressVideo(file.filepath, finalPath, uploadId);
       } catch (error) {
         // Fallo al cargar/ejecutar el binario de ffmpeg: seguimos con el crudo.
         console.error('[FileService] ffmpeg no disponible, se guarda el video sin comprimir:', error);
         compressed = false;
       }
 
-      if (compressed) {
-        await fs.unlink(tempPath).catch(() => {});
-        savedFilename = out;
-      } else {
+      if (!compressed) {
+        // Copiamos el temporal al destino final (copyFile es seguro entre discos).
         try {
-          await fs.rename(tempPath, finalPath);
+          await fs.copyFile(file.filepath, finalPath);
         } catch (error) {
-          await fs.unlink(tempPath).catch(() => {});
           if ((error as NodeJS.ErrnoException)?.code === 'ENOSPC') throw mediaErrors.diskFull(error);
           throw mediaErrors.videoProcessingFailed(error);
         }
-        savedFilename = out;
       }
+      savedFilename = out;
 
       tipo = "VIDEO";
 
@@ -404,14 +360,14 @@ export const fileService = {
     } else {
       // Imagen por defecto
       const out = `${slug}-${timestamp}.webp`;
-      const buf = Buffer.from(await file.arrayBuffer());
 
-      if (buf.length === 0) {
+      if (file.size === 0) {
         throw mediaErrors.emptyFile();
       }
 
       try {
         const sharp = await getSharp();
+        const buf = await fs.readFile(file.filepath);
 
         // Guardar principal
         await sharp(buf).webp().toFile(path.join(dir, out));
@@ -422,7 +378,7 @@ export const fileService = {
         // Si se subió miniatura explícita, usarla
         if (thumbFile) {
           const outThumb = `${slug}-thumb-${timestamp}.webp`;
-          const bufThumb = Buffer.from(await thumbFile.arrayBuffer());
+          const bufThumb = await fs.readFile(thumbFile.filepath);
 
           // Guardar thumb explícito en carpeta principal (para acceso directo)
           await sharp(bufThumb).webp().toFile(path.join(dir, outThumb));

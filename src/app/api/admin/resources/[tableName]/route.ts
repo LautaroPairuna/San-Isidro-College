@@ -10,12 +10,9 @@ import {
   refreshPageContentCacheAll,
 } from "@/lib/pageContentCache";
 import { toMediaError } from "@/lib/mediaErrors";
+import { parseMultipartToDisk, cleanupParsed, type ParsedFile, type ParsedMultipart } from "@/lib/multipart";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
-
-function isFileLike(v: unknown): v is Blob {
-  return typeof v === "object" && v !== null && typeof (v as Blob).arrayBuffer === "function";
-}
 
 function normalizeBooleans(obj: Record<string, unknown>) {
   for (const key of BOOLEAN_FIELDS) {
@@ -90,25 +87,26 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
     return NextResponse.json({ error: "Modelo inválido" }, { status: 400 });
   }
 
+  let parsed: ParsedMultipart | null = null;
+
   try {
     await adminGuard();
 
     const ct = req.headers.get("content-type") || "";
     let data: Record<string, any> = {};
-    const filesMap: { main?: Blob; thumb?: Blob } = {};
+    const filesMap: { main?: ParsedFile; thumb?: ParsedFile } = {};
 
     if (ct.includes("multipart/form-data")) {
-      const form = await req.formData();
-      
-      for (const [k, v] of form.entries()) {
-        if (isFileLike(v)) {
-            if (k === "urlArchivo") filesMap.main = v as Blob;
-            if (k === "urlMiniatura") filesMap.thumb = v as Blob;
-        }
-        else if (typeof v === "string") data[k] = /^\d+$/.test(v) ? Number(v) : v;
-      }
+      // Transmite los archivos a disco sin bufferearlos en memoria.
+      parsed = await parseMultipartToDisk(req);
 
-      // data.nombreArchivo se mantiene en data para que el servicio lo use como hint
+      for (const [k, v] of Object.entries(parsed.fields)) {
+        // data.nombreArchivo se mantiene en data para que el servicio lo use como hint
+        data[k] = /^\d+$/.test(v) ? Number(v) : v;
+      }
+      if (parsed.files.urlArchivo) filesMap.main = parsed.files.urlArchivo;
+      if (parsed.files.urlMiniatura) filesMap.thumb = parsed.files.urlMiniatura;
+
       normalizeBooleans(data);
     } else {
       data = await req.json();
@@ -136,5 +134,8 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
     const me = toMediaError(e);
     if (me.httpStatus >= 500) console.error(e);
     return NextResponse.json({ error: me.userMessage, code: me.code }, { status: me.httpStatus });
+  } finally {
+    // Limpiar los temporales de la subida.
+    if (parsed) await cleanupParsed(parsed);
   }
 }

@@ -49,6 +49,14 @@ export const mediaErrors = {
       422,
       { cause }
     ),
+  payloadTooLarge: (maxMb?: number) =>
+    new MediaError(
+      "PAYLOAD_TOO_LARGE",
+      maxMb
+        ? `El archivo supera el tamaño máximo permitido (${maxMb} MB).`
+        : "El archivo supera el tamaño máximo permitido.",
+      413
+    ),
   unsupportedFormat: (ext?: string) =>
     new MediaError(
       "UNSUPPORTED_FORMAT",

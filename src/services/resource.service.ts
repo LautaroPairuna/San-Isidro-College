@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { GrupoMedios, Medio, Seccion, Prisma } from "@/generated/prisma/client";
+import type { ParsedFile } from "@/lib/multipart";
 
 export type PaginatedResult<T> = {
   data: T[];
@@ -192,7 +193,7 @@ export const resourceService = {
   async create(
     tableName: TableName,
     data: ResourcePayload,
-    files?: { main?: Blob; thumb?: Blob }
+    files?: { main?: ParsedFile; thumb?: ParsedFile }
   ): Promise<AllowedModels | null> {
     // Validación lógica de negocio
     if (tableName === "Medio" && data.grupoMediosId) {
@@ -253,7 +254,7 @@ export const resourceService = {
     tableName: TableName,
     id: string | number,
     data: ResourcePayload,
-    files?: { main?: Blob; thumb?: Blob }
+    files?: { main?: ParsedFile; thumb?: ParsedFile }
   ): Promise<AllowedModels | null> {
     const key = Number(id);
     if (Number.isNaN(key)) return null;
