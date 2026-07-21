@@ -11,6 +11,7 @@ import {
 } from "@/lib/pageContentCache";
 import { toMediaError } from "@/lib/mediaErrors";
 import { parseMultipartToDisk, cleanupParsed, type ParsedFile, type ParsedMultipart } from "@/lib/multipart";
+import { logIncomingUpload, logMediaError } from "@/lib/mediaLog";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -75,6 +76,7 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
       if (parsed.files.urlArchivo) filesMap.main = parsed.files.urlArchivo;
       if (parsed.files.urlMiniatura) filesMap.thumb = parsed.files.urlMiniatura;
       normalizeBooleans(data);
+      logIncomingUpload({ op: "PUT", resource: tableName, id }, parsed);
     } else {
       data = await req.json();
       for (const k in data) {
@@ -97,8 +99,7 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
     return NextResponse.json(updated);
   } catch (e: any) {
     const me = toMediaError(e);
-    // Sólo registramos en consola los errores realmente inesperados del servidor.
-    if (me.httpStatus >= 500) console.error(e);
+    logMediaError({ op: "PUT", resource: tableName, id }, e, me, parsed);
     return NextResponse.json({ error: me.userMessage, code: me.code }, { status: me.httpStatus });
   } finally {
     // Limpiar los temporales de la subida.

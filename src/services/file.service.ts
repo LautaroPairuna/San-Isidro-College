@@ -160,12 +160,12 @@ async function generateVideoThumbnail(videoPath: string): Promise<Buffer | null>
             }
           })
           .on('error', (err) => {
-            console.error("[FFmpeg] Error fatal:", err);
+            console.error("[MEDIA][FFMPEG] Error generando miniatura:", err?.message || err);
             resolve(null);
           });
       })
       .catch((err) => {
-        console.error("[FFmpeg] Error cargando módulo:", err);
+        console.error("[MEDIA][FFMPEG] Error cargando el binario de ffmpeg/ffprobe:", err);
         resolve(null);
       });
   });
@@ -198,7 +198,7 @@ async function compressVideo(inputPath: string, outputPath: string, progressId?:
         resolve(true);
       })
       .on('error', (err) => {
-        console.error("Error comprimiendo video:", err);
+        console.error("[MEDIA][FFMPEG] Error comprimiendo video:", err?.message || err);
         if (progressId) updateProgress(progressId, 0, 'error', err.message);
         resolve(false);
       });
@@ -315,7 +315,7 @@ export const fileService = {
         compressed = await compressVideo(file.filepath, finalPath, uploadId);
       } catch (error) {
         // Fallo al cargar/ejecutar el binario de ffmpeg: seguimos con el crudo.
-        console.error('[FileService] ffmpeg no disponible, se guarda el video sin comprimir:', error);
+        console.error('[MEDIA][FFMPEG] ffmpeg no disponible, se guarda el video sin comprimir:', error);
         compressed = false;
       }
 
@@ -353,7 +353,7 @@ export const fileService = {
           console.warn(`[FileService] No se pudo generar miniatura para: ${finalPath}`);
         }
       } catch (error) {
-        console.error("[FileService] Error en proceso de miniatura:", error);
+        console.error("[MEDIA][FFMPEG] Error en proceso de miniatura:", error);
       } finally {
         if (uploadId) updateProgress(uploadId, 100, 'done');
       }

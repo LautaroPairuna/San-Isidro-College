@@ -11,6 +11,7 @@ import {
 } from "@/lib/pageContentCache";
 import { toMediaError } from "@/lib/mediaErrors";
 import { parseMultipartToDisk, cleanupParsed, type ParsedFile, type ParsedMultipart } from "@/lib/multipart";
+import { logIncomingUpload, logMediaError } from "@/lib/mediaLog";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -108,6 +109,7 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
       if (parsed.files.urlMiniatura) filesMap.thumb = parsed.files.urlMiniatura;
 
       normalizeBooleans(data);
+      logIncomingUpload({ op: "POST", resource: tableName }, parsed);
     } else {
       data = await req.json();
       delete data.id;
@@ -132,7 +134,7 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
 
   } catch (e: any) {
     const me = toMediaError(e);
-    if (me.httpStatus >= 500) console.error(e);
+    logMediaError({ op: "POST", resource: tableName }, e, me, parsed);
     return NextResponse.json({ error: me.userMessage, code: me.code }, { status: me.httpStatus });
   } finally {
     // Limpiar los temporales de la subida.
