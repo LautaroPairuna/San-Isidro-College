@@ -1476,7 +1476,9 @@ const FormModal = memo(function FormModal({
       setUploadProgress(0)
     } catch (error) {
       console.error(error)
-      toast.error(isEditing ? 'Error al actualizar medio' : 'Error al crear medio')
+      const fallback = isEditing ? 'Error al actualizar medio' : 'Error al crear medio'
+      const message = error instanceof Error && error.message ? error.message : fallback
+      toast.error(message)
       setUploadPhase('IDLE')
       setUploadProgress(0)
     }

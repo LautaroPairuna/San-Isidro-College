@@ -9,6 +9,7 @@ import {
   invalidatePageContentMemoryCache,
   refreshPageContentCacheAll,
 } from "@/lib/pageContentCache";
+import { toMediaError } from "@/lib/mediaErrors";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -132,14 +133,8 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
     return NextResponse.json(created, { status: 201 });
 
   } catch (e: any) {
-    if (e.message === "Unauthorized") {
-      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
-    }
-    // Error de negocio (ej. validación UNICO)
-    if (e.message && e.message.includes("UNICO")) {
-        return NextResponse.json({ error: e.message }, { status: 400 });
-    }
-    console.error(e);
-    return NextResponse.json({ error: "Error al crear registro" }, { status: 500 });
+    const me = toMediaError(e);
+    if (me.httpStatus >= 500) console.error(e);
+    return NextResponse.json({ error: me.userMessage, code: me.code }, { status: me.httpStatus });
   }
 }

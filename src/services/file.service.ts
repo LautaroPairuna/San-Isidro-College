@@ -5,6 +5,7 @@ import { Readable } from "stream";
 import path from "path";
 import slugify from "slugify";
 import { folderNames, type PrismaTable } from "@/lib/publicConstants";
+import { mediaErrors } from "@/lib/mediaErrors";
 
 const IMAGE_PUBLIC_DIR = process.env.MEDIA_DIR_IMAGES || path.resolve("public", "images");
 
@@ -28,18 +29,35 @@ async function getSharp() {
 async function getFfmpeg() {
   if (!ffmpegModulePromise) {
     ffmpegModulePromise = (async () => {
-      const [ffmpegModule, ffmpegInstaller, ffprobeInstaller] = await Promise.all([
+      const [ffmpegModule, ffmpegStaticModule, ffprobeStaticModule] = await Promise.all([
         import('fluent-ffmpeg'),
-        import('@ffmpeg-installer/ffmpeg'),
-        import('@ffprobe-installer/ffprobe'),
+        import('ffmpeg-static'),
+        import('ffprobe-static'),
       ]);
 
       const ffmpeg = ('default' in ffmpegModule ? ffmpegModule.default : ffmpegModule) as typeof import('fluent-ffmpeg');
-      const ffmpegInstallerModule = 'default' in ffmpegInstaller ? ffmpegInstaller.default : ffmpegInstaller;
-      const ffprobeInstallerModule = 'default' in ffprobeInstaller ? ffprobeInstaller.default : ffprobeInstaller;
 
-      ffmpeg.setFfmpegPath(ffmpegInstallerModule.path);
-      ffmpeg.setFfprobePath(ffprobeInstallerModule.path);
+      // ffmpeg-static exporta directamente la ruta del binario (string) como default export.
+      const ffmpegPath = (('default' in ffmpegStaticModule
+        ? ffmpegStaticModule.default
+        : ffmpegStaticModule) as unknown) as string | null;
+
+      // ffprobe-static exporta { path }.
+      const ffprobeStatic = ('default' in ffprobeStaticModule
+        ? ffprobeStaticModule.default
+        : ffprobeStaticModule) as { path: string };
+      const ffprobePath = ffprobeStatic?.path;
+
+      if (!ffmpegPath) {
+        throw new Error(
+          'No se encontró el binario de ffmpeg-static. Verifica que la dependencia se haya instalado con su script de descarga (postinstall).'
+        );
+      }
+
+      ffmpeg.setFfmpegPath(ffmpegPath);
+      if (ffprobePath) {
+        ffmpeg.setFfprobePath(ffprobePath);
+      }
 
       return ffmpeg;
     })();
@@ -313,31 +331,55 @@ export const fileService = {
         }
       });
 
-      await pipeline(nodeStream, createWriteStream(tempPath));
+      // Escribir el archivo temporal en disco (puede fallar por falta de espacio)
+      try {
+        await pipeline(nodeStream, createWriteStream(tempPath));
+      } catch (error) {
+        await fs.unlink(tempPath).catch(() => {});
+        if (uploadId) updateProgress(uploadId, 0, 'error', 'Error al guardar el video');
+        if ((error as NodeJS.ErrnoException)?.code === 'ENOSPC') throw mediaErrors.diskFull(error);
+        throw mediaErrors.videoProcessingFailed(error);
+      }
 
-      // Comprimir video
-      const compressed = await compressVideo(tempPath, finalPath, uploadId);
-      
+      // Validar que el archivo no esté vacío antes de procesarlo
+      const tempStat = await fs.stat(tempPath).catch(() => null);
+      if (!tempStat || tempStat.size === 0) {
+        await fs.unlink(tempPath).catch(() => {});
+        if (uploadId) updateProgress(uploadId, 0, 'error', 'El video está vacío');
+        throw mediaErrors.emptyFile();
+      }
+
+      // Comprimir video. Si ffmpeg no está disponible o la compresión falla,
+      // se conserva el video original (sin comprimir) para no perder la subida.
+      let compressed = false;
+      try {
+        compressed = await compressVideo(tempPath, finalPath, uploadId);
+      } catch (error) {
+        // Fallo al cargar/ejecutar el binario de ffmpeg: seguimos con el crudo.
+        console.error('[FileService] ffmpeg no disponible, se guarda el video sin comprimir:', error);
+        compressed = false;
+      }
+
       if (compressed) {
         await fs.unlink(tempPath).catch(() => {});
         savedFilename = out;
       } else {
-        await fs.rename(tempPath, finalPath);
+        try {
+          await fs.rename(tempPath, finalPath);
+        } catch (error) {
+          await fs.unlink(tempPath).catch(() => {});
+          if ((error as NodeJS.ErrnoException)?.code === 'ENOSPC') throw mediaErrors.diskFull(error);
+          throw mediaErrors.videoProcessingFailed(error);
+        }
         savedFilename = out;
       }
 
       tipo = "VIDEO";
 
-      // Intentar generar miniatura automática de video
+      // Intentar generar miniatura automática de video (best-effort, no bloquea)
       try {
         if (uploadId) updateProgress(uploadId, 0, 'generating_thumbnail');
         console.log(`[FileService] Intentando generar miniatura para video: ${finalPath}`);
-        
-        // Verificar que el archivo existe y tiene tamaño > 0
-        const stat = await fs.stat(finalPath);
-        if (stat.size === 0) {
-             throw new Error("El archivo de video tiene tamaño 0");
-        }
 
         const thumbBuf = await generateVideoThumbnail(finalPath);
         if (thumbBuf) {
@@ -363,30 +405,40 @@ export const fileService = {
       // Imagen por defecto
       const out = `${slug}-${timestamp}.webp`;
       const buf = Buffer.from(await file.arrayBuffer());
-      const sharp = await getSharp();
-      
-      // Guardar principal
-      await sharp(buf).webp().toFile(path.join(dir, out));
-      
-      savedFilename = out;
-      tipo = "IMAGEN";
 
-      // Si se subió miniatura explícita, usarla
-      if (thumbFile) {
-        const outThumb = `${slug}-thumb-${timestamp}.webp`;
-        const bufThumb = Buffer.from(await thumbFile.arrayBuffer());
-        
-        // Guardar thumb explícito en carpeta principal (para acceso directo)
-        await sharp(bufThumb).webp().toFile(path.join(dir, outThumb));
-        
-        // También generamos versión pequeña en thumbs/ para consistencia
-        await sharp(bufThumb).resize(200).webp().toFile(path.join(thumbs, outThumb));
-        
-        urlMiniatura = outThumb;
-      } else {
-        // Si NO hay thumb explícito, generar miniatura automática de la principal
-        await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out));
-        urlMiniatura = out; 
+      if (buf.length === 0) {
+        throw mediaErrors.emptyFile();
+      }
+
+      try {
+        const sharp = await getSharp();
+
+        // Guardar principal
+        await sharp(buf).webp().toFile(path.join(dir, out));
+
+        savedFilename = out;
+        tipo = "IMAGEN";
+
+        // Si se subió miniatura explícita, usarla
+        if (thumbFile) {
+          const outThumb = `${slug}-thumb-${timestamp}.webp`;
+          const bufThumb = Buffer.from(await thumbFile.arrayBuffer());
+
+          // Guardar thumb explícito en carpeta principal (para acceso directo)
+          await sharp(bufThumb).webp().toFile(path.join(dir, outThumb));
+
+          // También generamos versión pequeña en thumbs/ para consistencia
+          await sharp(bufThumb).resize(200).webp().toFile(path.join(thumbs, outThumb));
+
+          urlMiniatura = outThumb;
+        } else {
+          // Si NO hay thumb explícito, generar miniatura automática de la principal
+          await sharp(buf).resize(200).webp().toFile(path.join(thumbs, out));
+          urlMiniatura = out;
+        }
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException)?.code === 'ENOSPC') throw mediaErrors.diskFull(error);
+        throw mediaErrors.imageProcessingFailed(error);
       }
     }
 

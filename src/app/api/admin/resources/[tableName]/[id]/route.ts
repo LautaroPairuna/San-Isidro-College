@@ -9,6 +9,7 @@ import {
   invalidatePageContentMemoryCache,
   refreshPageContentCacheAll,
 } from "@/lib/pageContentCache";
+import { toMediaError } from "@/lib/mediaErrors";
 
 const BOOLEAN_FIELDS: readonly string[] = [];
 
@@ -97,11 +98,10 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
 
     return NextResponse.json(updated);
   } catch (e: any) {
-    if (e.message === "Unauthorized") {
-        return NextResponse.json({ error: "No autorizado" }, { status: 401 });
-    }
-    console.error(e);
-    return NextResponse.json({ error: "Error al actualizar registro" }, { status: 500 });
+    const me = toMediaError(e);
+    // Sólo registramos en consola los errores realmente inesperados del servidor.
+    if (me.httpStatus >= 500) console.error(e);
+    return NextResponse.json({ error: me.userMessage, code: me.code }, { status: me.httpStatus });
   }
 }
 

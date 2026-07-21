@@ -236,6 +236,38 @@ export interface UploadPayload {
   onUploadProgress?: (progressEvent: { loaded: number; total: number }) => void
 }
 
+/**
+ * Extrae un mensaje de error entendible a partir de una respuesta fallida.
+ * Prioriza el mensaje enviado por la API; si no hay cuerpo JSON (por ejemplo
+ * cuando un proxy corta la petición), usa un mensaje según el código HTTP.
+ */
+function extractUploadError(xhr: XMLHttpRequest): string {
+  // 1) Mensaje explícito devuelto por nuestra API ({ error, code })
+  const body = xhr.response
+  if (body && typeof body === 'object' && typeof (body as { error?: unknown }).error === 'string') {
+    return (body as { error: string }).error
+  }
+
+  // 2) Sin cuerpo JSON: interpretamos el código HTTP (normalmente del proxy/servidor)
+  switch (xhr.status) {
+    case 401:
+      return 'Tu sesión expiró o no tenés permisos. Iniciá sesión nuevamente.'
+    case 413:
+      return 'El archivo es demasiado grande y el servidor lo rechazó. Reducí el peso del archivo o aumentá el límite de subida del servidor.'
+    case 429:
+      return 'Demasiadas solicitudes. Esperá unos segundos e intentá de nuevo.'
+    case 502:
+    case 503:
+    case 504:
+      return 'El servidor tardó demasiado en procesar el archivo (posible timeout al comprimir el video). Probá con un archivo más liviano.'
+    case 0:
+      return 'No se pudo conectar con el servidor. Verificá tu conexión a internet.'
+    default:
+      if (xhr.status >= 500) return 'Ocurrió un error en el servidor al procesar el archivo. Intentá nuevamente.'
+      return `No se pudo completar la operación (error ${xhr.status}).`
+  }
+}
+
 async function uploadFormData<T>(
   url: string,
   method: 'POST' | 'PUT',
@@ -261,10 +293,13 @@ async function uploadFormData<T>(
         resolve(xhr.response as T)
         return
       }
-      reject(new Error(`Error HTTP ${xhr.status}`))
+      reject(new Error(extractUploadError(xhr)))
     }
 
-    xhr.onerror = () => reject(new Error('Error de red al subir archivo'))
+    xhr.onerror = () =>
+      reject(new Error('No se pudo conectar con el servidor. Verificá tu conexión a internet.'))
+    xhr.ontimeout = () =>
+      reject(new Error('La subida tardó demasiado y se canceló. Probá con un archivo más liviano.'))
     xhr.send(formData)
   })
 }
