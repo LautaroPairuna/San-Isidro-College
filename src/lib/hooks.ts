@@ -261,7 +261,9 @@ function extractUploadError(xhr: XMLHttpRequest): string {
     case 504:
       return 'El servidor tardó demasiado en procesar el archivo (posible timeout al comprimir el video). Probá con un archivo más liviano.'
     case 0:
-      return 'No se pudo conectar con el servidor. Verificá tu conexión a internet.'
+      // status 0 = la respuesta nunca llegó: el servidor/proxy cortó la conexión
+      // (típico cuando el archivo supera el límite de tamaño del servidor).
+      return 'Se interrumpió la conexión con el servidor durante la subida. Suele pasar cuando el archivo supera el límite de tamaño permitido por el servidor. Probá con un video más liviano o pedí que aumenten el límite de subida.'
     default:
       if (xhr.status >= 500) return 'Ocurrió un error en el servidor al procesar el archivo. Intentá nuevamente.'
       return `No se pudo completar la operación (error ${xhr.status}).`
@@ -296,8 +298,7 @@ async function uploadFormData<T>(
       reject(new Error(extractUploadError(xhr)))
     }
 
-    xhr.onerror = () =>
-      reject(new Error('No se pudo conectar con el servidor. Verificá tu conexión a internet.'))
+    xhr.onerror = () => reject(new Error(extractUploadError(xhr)))
     xhr.ontimeout = () =>
       reject(new Error('La subida tardó demasiado y se canceló. Probá con un archivo más liviano.'))
     xhr.send(formData)
