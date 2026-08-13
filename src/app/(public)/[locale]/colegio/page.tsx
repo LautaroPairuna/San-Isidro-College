@@ -100,34 +100,40 @@ const ColegioPage = async ({ params }: PageProps) => {
       {/* ============ MISIÓN / VISIÓN / VALORES ============ */}
       <section className="relative w-full bg-[#dcebe0] py-16 lg:py-24 overflow-hidden">
         <div className="relative z-10 max-w-5xl mx-auto px-6 space-y-16 lg:space-y-24">
-          {/* Misión: rótulo a la izquierda, texto a la derecha */}
-          <div id="mision" className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 scroll-mt-32">
-            <h2 className="md:col-span-3 md:text-right text-xl font-bold text-[#c19516]">
+          {/* Misión: rótulo a la izquierda, filete y texto a la derecha */}
+          <div
+            id="mision"
+            className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start scroll-mt-32"
+          >
+            <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
               {t("mision.label")}
             </h2>
-            <div className="md:col-span-8 md:col-start-5 text-gray-700 leading-relaxed">
+            <div className="md:col-span-7 md:col-start-6 md:max-w-md md:border-l md:border-[#9bb5a5] md:pl-6 text-gray-700 leading-relaxed">
               <p className="italic">{t("mision.lead")}</p>
-              <p className="mt-4">{t("mision.texto")}</p>
+              <p className="mt-4 text-justify hyphens-auto">{t("mision.texto")}</p>
             </div>
           </div>
 
-          {/* Visión: texto a la izquierda, rótulo a la derecha */}
-          <div id="vision" className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 scroll-mt-32">
-            <div className="md:col-span-8 text-gray-700 leading-relaxed md:text-right md:order-1">
-              <p className="italic">{t("vision.lead")}</p>
-              <p className="mt-4">{t("vision.texto")}</p>
+          {/* Visión: texto y filete a la izquierda, rótulo a la derecha */}
+          <div
+            id="vision"
+            className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start scroll-mt-32"
+          >
+            <div className="md:col-span-7 md:col-start-2 md:order-1 md:ml-auto md:max-w-md md:border-r md:border-[#9bb5a5] md:pr-6 text-gray-700 leading-relaxed">
+              <p className="italic md:text-right">{t("vision.lead")}</p>
+              <p className="mt-4 text-justify hyphens-auto">{t("vision.texto")}</p>
             </div>
             <h2 className="md:col-span-3 md:col-start-10 md:order-2 text-xl font-bold text-[#c19516]">
               {t("vision.label")}
             </h2>
           </div>
 
-          {/* Valores: rótulo + rueda */}
-          <div id="valores" className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-center scroll-mt-32">
-            <h2 className="md:col-span-3 text-xl font-bold text-[#c19516]">
+          {/* Valores: rótulo arriba y rueda debajo */}
+          <div id="valores" className="scroll-mt-32">
+            <h2 className="text-xl font-bold text-[#c19516]">
               {t("valores.label")}
             </h2>
-            <div className="md:col-span-8 md:col-start-5 flex justify-center">
+            <div className="mt-8 flex justify-center">
               <EstudianteCentro className="w-full max-w-[420px] h-auto" />
             </div>
           </div>
