@@ -49,44 +49,74 @@
     }
   },
   "colegio": {
-    "proyectoTitle": "A solid and innovative educational project for comprehensive bilingual development",
+    "proyectoTitle": "A holistic, bilingual and innovative education",
     "introduccion": {
-      "p1": "With the aim of contributing to Salta a solid and innovative Educational Project, in 2016 San Isidro College opened its doors to the community through the design of a demanding and ambitious Educational Project, of Comprehensive Bilingual Formation and Catholic Orientation, integrating required national contents with high-standard international programs.",
-      "p2": "San Isidro College aims to achieve educational objectives in two languages. For this reason, English is taught intensively through multiple activities and contents. We guarantee natural incorporation of the second language.",
-      "p3": "From an early age, we work opening spaces so that each boy and girl achieves broad comprehension and expressive and communicative skills, along with correct pronunciation.",
-      "p4": "Due to the characteristics of the area, the establishment aspires to become a hub of school, recreational, cultural, and sports activities, thus fulfilling a significant and relevant function in its environment.",
-      "p5": "San Isidro College was conceived and developed by the most qualified and experienced professionals, with the aim of being the most solid Educational Project in our environment. Accompanied by Advisors from Salta, Bs. As. and abroad, who provide their great experience at different levels and in the English area, with agreements for the validation of International Exams and the opportunity for student exchanges with important foreign schools."
+      "p1": "San Isidro College opened its doors in 2016 with the purpose of offering the community of Salta a demanding and ambitious educational project, oriented towards a holistic, bilingual and Catholic education. Our proposal combines the contents established by the national education system with international programmes of high academic standards.",
+      "p2": "Bilingualism is part of our students' everyday experience. From the earliest years, English is incorporated intensively and naturally across different subjects, activities and learning experiences. In this way, every student progressively develops comprehension and oral expression, and gains the confidence needed to communicate in both languages.",
+      "p3": "Our proposal goes beyond the classroom. In a privileged natural setting, we create spaces for learning, meeting and participation through academic, cultural, recreational and sporting activities that foster the personal, intellectual, emotional and spiritual development of our students.",
+      "p4": "San Isidro College was conceived and developed with the support of specialised professionals and advisors from Salta, Buenos Aires and abroad. This outlook is enriched by international programmes, certifications and links with educational institutions that broaden learning opportunities and connect our students with the world."
     },
-    "instalacionesTitle": "Facilities",
-    "misionTitle": "Mission",
-    "misionText": "San Isidro College is a Humanizing School that places the person first. Its mission is to form global citizens, promoting comprehensive education that nurtures the personal, intellectual, and emotional growth of our students. We are committed to providing a learning environment and autonomy that fosters curiosity, creativity, and critical thinking. Our goal is to support our students to become agents of change in society, providing tools that enable them to develop skills, promoting bilingualism, and providing a framework of principles based on example and Christian values.",
-    "visionTitle": "Vision",
-    "visionP1": "Our vision is to form resilient and creative leaders, capable of seizing opportunities and contributing to society’s progress in a constantly changing environment.",
-    "visionP2": "San Isidro College positions itself as a reference in education in our community, establishing a standard of excellence and adapting flexibly to the constant transformation of the modern world. We create a dynamic and ever-evolving educational environment that prepares our students to face the challenges of the 21st century. We are committed to providing quality education driven by innovation, technology, and the development of relevant skills.",
-    "valoresTitle": "Values",
-    "valoresAlt": "Values diagram",
-    "educacionPersonalizadaTitle": "Personalized Education",
-    "educacionPersonalizadaItalic": "We aim to instill in students the joy of attending school",
+    "mision": {
+      "label": "Mission",
+      "lead": "People come first.",
+      "texto": "To educate global citizens through a holistic, bilingual and Catholic-oriented education that supports the personal, intellectual, emotional and spiritual growth of every student."
+    },
+    "vision": {
+      "label": "Vision",
+      "lead": "Looking towards the future.",
+      "texto": "To educate resilient and creative people, able to recognise opportunities, face new challenges, contribute to the progress of society and act with autonomy, responsibility and confidence in a constantly changing world."
+    },
+    "valores": {
+      "label": "Values"
+    },
+    "escudo": {
+      "title": "Our crest, our identity",
+      "intro": "Our crest tells who we are and what we believe in. Each of its symbols expresses a part of our identity and reminds us that educating also means sowing with love, accompanying with patience and trusting in the fruits that every student can bear."
+    },
+    "aprendizajeValores": {
+      "title": "Learning through values",
+      "p1": "One of the fundamental goals of San Isidro College is to work as a team with the professionals who make up our community in order to educate free, creative, autonomous, responsible, honest and supportive students; with critical thinking, deep ethical and Christian values, able to face everyday challenges and committed to their own life project.",
+      "p2": "We seek to educate people who are aware of their duties and rights, proud of their history and their roots, respectful of their values and traditions and, at the same time, open to the world and able to understand and respect other cultures.",
+      "p3": "We work on learning through values in a systematic and planned way, as a cross-cutting theme that sustains the bonds of the whole school community. We believe values are not merely stated: they must be practised and expressed through everyday example. School is one of the privileged spaces to develop them through daily experiences and the constant support of our teachers.",
+      "p4": "Empathy and self-control translate into respect, solidarity, love for others and temperance. These learnings allow our students to build better relationships, strengthen their bonds, make friends and work as a team. We strive for kindness to be present in every interaction and for every member of our community to feel respected and valued."
+    },
     "educacionPersonalizada": {
-      "p1": "In a systematic and designed manner, we work on learning with values, turning this premise into a transversal axis that supports every human bond.",
-      "p2": "We hold that a confident child/adolescent can develop social skills that allow them to achieve better relationships through empathy and self-control, which in other words can be understood as respect, solidarity, and love for others, and as temperance.",
-      "p3": "They will be able to strengthen their affective bonds, make friends, and work in a team, without diminishing the demand of the curriculum contents in both languages.",
-      "p4": "A student who feels heard and supported emotionally is more motivated to participate, create, intervene, exchange ideas, question, pose problems, and dare to produce. Learn to learn. Because we believe that learning is built, expanded, and opens the person to other learnings."
+      "title": "Personalised education",
+      "p1": "We believe that every student is unique: they have their own story, interests and talents, and a particular way of learning and relating to the world. That is why our educational proposal starts from knowing and listening to each person, in order to accompany them in discovering and developing their abilities.",
+      "p2": "A student who feels heard, valued and emotionally supported gains greater confidence to participate, create, raise questions and dare to produce. They learn how to learn, because they understand that knowledge is built, expands and opens the door to new learning.",
+      "p3": "Personalised education does not mean lowering expectations, but offering every student the tools and support they need to take an active role in their learning. Our teachers guide that process, progressively encourage autonomy and create opportunities to move forward and take on new challenges.",
+      "p4": "We want every student to find the pleasure of coming to school, learning, meeting others and discovering different ways of expressing themselves through knowledge, sport and art. Along this path, the close bond between school and family is essential to accompany each stage of their growth consistently.",
+      "alt1": "A San Isidro College teacher supporting her students",
+      "alt2": "A San Isidro College teacher in the classroom"
     },
-    "ultimoParrafo": "San Isidro College proposes to work fervently as a team so that every student is committed to their life project. For this, the family’s contribution is fundamental.",
+    "instalaciones": {
+      "title": "A school designed to be a school",
+      "videoAlt": "Video of the San Isidro College facilities",
+      "p1": "From the very beginning, every space at San Isidro College was designed to support school life. The layout, the classrooms, the furniture and the common areas were planned especially to favour learning, meeting, wellbeing and the safety of our students.",
+      "p2": "Since its early days, the school has integrated technology in every classroom through interactive whiteboards and screens that enrich learning experiences and encourage active participation. Classrooms also feature modern, ergonomic furniture with natural light and ventilation, creating comfortable environments suited to each stage of growth.",
+      "p3": "In Secondary, folding acoustic panels make it possible to expand or reorganise classrooms according to the needs of each activity, favouring flexible and collaborative learning experiences.",
+      "p4": "The school is surrounded by large green areas that connect students with nature and offer different environments to learn, share, play and practise sports. It also has solar panels that harness a renewable energy source and reflect our commitment to caring for the environment and building a more sustainable community.",
+      "p5": "Safety is also part of the design of our facilities. The different areas have emergency exits and doors that allow an orderly and safe evacuation whenever necessary."
+    },
     "asideTitle": "THE SCHOOL",
     "aside": {
       "proyecto": "Educational Project",
       "mision": "Mission",
       "vision": "Vision",
       "valores": "Values",
-      "educacionPersonalizada": "Personalized Education",
+      "escudo": "Our crest",
+      "aprendizajeValores": "Learning through values",
+      "educacionPersonalizada": "Personalised Education",
+      "instalaciones": "Facilities",
       "aria": {
         "proyecto": "Go to Educational Project",
         "mision": "Go to Mission",
         "vision": "Go to Vision",
         "valores": "Go to Values",
-        "educacionPersonalizada": "Go to Personalized Education"
+        "escudo": "Go to Our crest",
+        "aprendizajeValores": "Go to Learning through values",
+        "educacionPersonalizada": "Go to Personalised Education",
+        "instalaciones": "Go to Facilities"
       }
     }
   },
@@ -664,6 +694,43 @@
     "innovacion": {
       "l1": "Educational",
       "l2": "innovation"
+    }
+  },
+  "estudiante": {
+    "ariaLabel": "San Isidro College values wheel with the student at the centre of learning",
+    "titulo": {
+      "l1": "The student",
+      "l2": "at the centre",
+      "l3": "of learning"
+    },
+    "empatia": "Empathy",
+    "responsabilidad": "Responsibility",
+    "colaboracion": "Collaboration",
+    "creatividad": "Creativity",
+    "adaptabilidad": "Adaptability",
+    "autonomia": "Autonomy"
+  },
+  "escudo": {
+    "ariaLabel": "San Isidro College crest and the meaning of each of its symbols",
+    "lema": {
+      "titulo": "Our motto",
+      "texto": "Hodie labor, cras fructus. Today the work, tomorrow the fruits it may bear."
+    },
+    "cruz": {
+      "titulo": "The cross",
+      "texto": "It expresses the faith that guides us and invites us to live with love, solidarity and service towards others."
+    },
+    "espiga": {
+      "titulo": "The ear of wheat",
+      "texto": "It represents the fruits that grow when effort is sustained with patience, dedication and hope."
+    },
+    "montanas": {
+      "titulo": "The mountains",
+      "texto": "They represent our roots in Salta, the land that shelters us and the deep bond that unites us with nature."
+    },
+    "campoArado": {
+      "titulo": "The ploughed field",
+      "texto": "It reminds us that every dream, goal or project requires previous work: perseverance and the decision to sow."
     }
   }
 }

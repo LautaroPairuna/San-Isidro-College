@@ -49,44 +49,74 @@
     }
   },
   "colegio": {
-    "proyectoTitle": "Un proyecto educativo sólido e innovador para la formación integral bilingüe",
+    "proyectoTitle": "Una educación integral, bilingüe e innovadora",
     "introduccion": {
-      "p1": "Con el fin de aportar a Salta un Proyecto Educativo sólido e innovador, en 2016 San Isidro College abrió sus puertas a la comunidad, a través del Diseño de un Proyecto Educativo exigente y ambicioso, de Formación Integral Bilingüe y de Orientación Católica, integrando contenidos nacionales exigidos, con programas internacionales de altos estándares académicos.",
-      "p2": "San Isidro College se propone lograr los objetivos educativos en dos idiomas. Por este motivo es que el inglés se enseña en forma intensiva a través de múltiples actividades y contenidos. Garantizamos una incorporación natural de la segunda lengua.",
-      "p3": "Desde pequeños se trabaja abriendo espacios, para que cada niño y niña logre amplia comprensión y habilidad de expresión y comunicación, junto a una correcta pronunciación.",
-      "p4": "Debido a las características de la zona, el establecimiento aspira a transformarse en un núcleo de actividades escolares, recreativas, culturales y deportivas, para cumplir, así, con una función significativa y relevante, en el medio dentro del cual se halla inserto.",
-      "p5": "San Isidro College fue pensado y desarrollado con los más calificados y experimentados profesionales, con el fin de ser el Proyectos Educativo más sólido de nuestro medio. Acompañados por Asesores de Salta, Bs. As. y el extranjero, quienes brindan su gran experiencia en los distintos niveles y en el área de Inglés, con Convenios para la validación de los Exámenes Internacionales y la oportunidad de intercambios estudiantiles con importantes Colegios del extranjero."
+      "p1": "San Isidro College abrió sus puertas en 2016 con el propósito de ofrecer a la comunidad de Salta un proyecto educativo exigente y ambicioso, orientado a una formación integral, bilingüe y católica. Nuestra propuesta combina los contenidos establecidos por el sistema educativo nacional con programas internacionales de altos estándares académicos.",
+      "p2": "El bilingüismo forma parte de la experiencia cotidiana de nuestros estudiantes. Desde los primeros años, el inglés se incorpora de manera intensiva y natural a través de distintas áreas, actividades y experiencias de aprendizaje. Así, cada estudiante desarrolla progresivamente la comprensión, la expresión oral y adquiere la confianza necesaria para comunicarse en ambos idiomas.",
+      "p3": "Nuestra propuesta trasciende el aula. En un entorno natural privilegiado, generamos espacios de aprendizaje, encuentro y participación a través de actividades académicas, culturales, recreativas y deportivas que favorecen el desarrollo personal, intelectual, emocional y espiritual de nuestros estudiantes.",
+      "p4": "San Isidro College fue pensado y desarrollado con el acompañamiento de profesionales y asesores especializados de Salta, Buenos Aires y el exterior. Esta mirada se enriquece con programas internacionales, certificaciones y vínculos con instituciones educativas que amplían las oportunidades de aprendizaje y conectan a nuestros estudiantes con el mundo."
     },
-    "instalacionesTitle": "Instalaciones",
-    "misionTitle": "Misión",
-    "misionText": "San Isidro College es un Colegio Humanizador que ubica a la persona en primer lugar. Su misión es formar ciudadanos globales, promoviendo una educación integral que nutra el crecimiento personal, intelectual y emocional de nuestros estudiantes. Nos comprometemos a proporcionar un ambiente de aprendizaje y autonomía en el que se fomente la curiosidad, la creatividad y el pensamiento crítico. Nuestro objetivo es acompañar a nuestros estudiantes para que sean agentes de cambio en la sociedad, brindando herramientas que les permitan desarrollar habilidades, fomentando el bilingüismo y proporcionando un marco de principios basado en el ejemplo y en valores cristianos.",
-    "visionTitle": "Visión",
-    "visionP1": "Nuestra visión es formar líderes resilientes y creativos, capaces de aprovechar las oportunidades y contribuir al progreso de la sociedad en un entorno en constante cambio.",
-    "visionP2": "San Isidro College se posiciona como referente en educación en nuestra comunidad, estableciendo un estándar de excelencia y adaptándose de manera flexible a la constante transformación del mundo moderno. Creamos un entorno educativo dinámico y en constante evolución, que prepara a nuestros estudiantes para enfrentar los desafíos del siglo XXI. Nos comprometemos a proporcionar una educación de calidad, impulsada por la innovación, la tecnología y el desarrollo de habilidades relevantes.",
-    "valoresTitle": "Valores",
-    "valoresAlt": "Diagrama de valores",
-    "educacionPersonalizadaTitle": "Educación Personalizada",
-    "educacionPersonalizadaItalic": "Nos proponemos generar en los alumnos el placer de concurrir al colegio",
+    "mision": {
+      "label": "Misión",
+      "lead": "La persona en primer lugar.",
+      "texto": "Formar ciudadanos globales a través de una educación integral, bilingüe y de orientación católica, que acompañe el crecimiento personal, intelectual, emocional y espiritual de cada estudiante."
+    },
+    "vision": {
+      "label": "Visión",
+      "lead": "Una mirada hacia el futuro.",
+      "texto": "Formar personas resilientes y creativas, capaces de reconocer oportunidades, afrontar nuevos desafíos, contribuir al progreso de la sociedad y desenvolverse con autonomía, responsabilidad y confianza en un mundo en constante transformación."
+    },
+    "valores": {
+      "label": "Valores"
+    },
+    "escudo": {
+      "title": "Nuestro escudo, nuestra identidad",
+      "intro": "Nuestro escudo cuenta quiénes somos y aquello en lo que creemos. Cada uno de sus símbolos expresa una parte de nuestra identidad y nos recuerda que educar también es sembrar con amor, acompañar con paciencia y confiar en los frutos que cada estudiante puede dar."
+    },
+    "aprendizajeValores": {
+      "title": "Aprendizaje con valores",
+      "p1": "Uno de los objetivos fundamentales de San Isidro College es trabajar en equipo con los profesionales que integran nuestra comunidad para formar estudiantes libres, creativos, autónomos, responsables, honestos y solidarios; con pensamiento crítico, profundos valores éticos y cristianos, capaces de enfrentar los desafíos cotidianos y comprometidos con su propio proyecto de vida.",
+      "p2": "Buscamos formar personas conscientes de sus deberes y derechos, orgullosas de su historia y de sus raíces, respetuosas de sus valores y tradiciones y, al mismo tiempo, abiertas al mundo, capaces de comprender y respetar otras culturas.",
+      "p3": "Trabajamos los aprendizajes con valores de manera sistemática y planificada, como un eje transversal que sostiene los vínculos de toda la comunidad educativa. Creemos que no solo se enuncian: deben practicarse y expresarse mediante el ejemplo cotidiano. El colegio es uno de los espacios privilegiados para desarrollarlos a través de las experiencias diarias y del acompañamiento permanente de los docentes.",
+      "p4": "La empatía y el autodominio se traducen en respeto, solidaridad, amor al prójimo y templanza. Estos aprendizajes permiten a nuestros estudiantes construir mejores vínculos, fortalecer sus afectos, hacer amigos y trabajar en equipo. Procuramos que el buen trato esté presente en todas las interacciones y que cada integrante de nuestra comunidad se sienta respetado y valorado."
+    },
     "educacionPersonalizada": {
-      "p1": "De manera sistemática y diseñada trabajamos aprendizajes con valores, convirtiendo esta premisa en un eje transversal que sustente todo vínculo humano.",
-      "p2": "Sostenemos que un niño/adolescente seguro y con confianza en sí mismo puede desarrollar habilidades sociales que le permiten lograr mejores vínculos gracias a la empatía y el autodominio, que en otras palabras pueden entenderse como respeto, solidaridad y amor al prójimo, y como templanza.",
-      "p3": "Podrá fortalecer sus vínculos afectivos, hacerse de amigos y trabajar en equipo, sin mengua de la exigencia de los contenidos del currículum en las dos lenguas.",
-      "p4": "Un estudiante que se siente escuchado y contenido desde lo emocional, está más motivado para participar, crear, intervenir, intercambiar ideas, cuestionar, plantear problemas y arriesgarse a producir. Aprende a aprender. Porque creemos que el aprendizaje se construye, se expande y abre a la persona a otros aprendizajes."
+      "title": "Educación personalizada",
+      "p1": "Creemos que cada estudiante es único: tiene su propia historia, sus intereses, sus talentos y una manera particular de aprender y relacionarse con el mundo. Por eso, nuestra propuesta educativa parte del conocimiento y la escucha de cada persona para acompañarla en el descubrimiento y el desarrollo de sus capacidades.",
+      "p2": "Un estudiante que se siente escuchado, valorado y contenido emocionalmente adquiere mayor confianza para participar, crear, plantear problemas y animarse a producir. Aprende a aprender, porque comprende que el conocimiento se construye, se expande y abre la puerta a nuevos aprendizajes.",
+      "p3": "La educación personalizada no significa disminuir la exigencia, sino ofrecer a cada estudiante las herramientas y el acompañamiento que necesita para asumir un papel activo en su aprendizaje. Nuestros docentes orientan ese proceso, promueven progresivamente la autonomía y generan oportunidades para avanzar y superar nuevos desafíos.",
+      "p4": "Nos proponemos que cada estudiante encuentre el placer de venir al colegio, aprender, encontrarse con otros y descubrir diferentes formas de expresarse a través del conocimiento, el deporte y el arte. En este camino, el vínculo cercano entre el colegio y la familia es fundamental para acompañar de manera coherente cada etapa de su crecimiento.",
+      "alt1": "Docente de San Isidro College acompañando a sus estudiantes",
+      "alt2": "Docente de San Isidro College en el aula"
     },
-    "ultimoParrafo": "San Isidro College, propone trabajar fervientemente en equipo para que todo estudiante se encuentre comprometido con su proyecto de vida. Para ello el aporte de la familia es fundamental.",
+    "instalaciones": {
+      "title": "Un colegio pensado y diseñado para ser colegio",
+      "videoAlt": "Video de las instalaciones de San Isidro College",
+      "p1": "Desde su origen, cada espacio de San Isidro College fue proyectado para acompañar la vida escolar. La distribución, las aulas, el mobiliario y los espacios comunes fueron pensados especialmente para favorecer el aprendizaje, el encuentro, el bienestar y la seguridad de nuestros estudiantes.",
+      "p2": "Desde sus comienzos, el colegio integra tecnología en todas sus aulas mediante pizarras y pantallas interactivas que enriquecen las experiencias de aprendizaje y promueven una participación activa. Las aulas cuentan, además, con mobiliario moderno y ergonómico, con iluminación y ventilación natural, para crear ambientes cómodos y adecuados para las distintas etapas de crecimiento.",
+      "p3": "En Secundaria, los paneles plegables y acústicos permiten ampliar o reorganizar las aulas según las necesidades de cada actividad, favoreciendo experiencias de aprendizaje flexibles y colaborativas.",
+      "p4": "El colegio se encuentra rodeado de amplios espacios verdes que conectan a los estudiantes con la naturaleza y ofrecen diferentes entornos para aprender, compartir, jugar y practicar deportes. Además, cuenta con paneles solares que permiten aprovechar una fuente de energía renovable y reflejan nuestro compromiso con el cuidado del ambiente y el desarrollo de una comunidad más sustentable.",
+      "p5": "La seguridad también forma parte del diseño de nuestras instalaciones. Los diferentes sectores cuentan con salidas y puertas de emergencia que permiten una evacuación ordenada y segura cuando sea necesaria."
+    },
     "asideTitle": "EL COLEGIO",
     "aside": {
       "proyecto": "Proyecto Educativo",
       "mision": "Misión",
       "vision": "Visión",
       "valores": "Valores",
+      "escudo": "Nuestro escudo",
+      "aprendizajeValores": "Aprendizaje con valores",
       "educacionPersonalizada": "Educación Personalizada",
+      "instalaciones": "Instalaciones",
       "aria": {
         "proyecto": "Ir a Proyecto Educativo",
         "mision": "Ir a Misión",
         "vision": "Ir a Visión",
         "valores": "Ir a Valores",
-        "educacionPersonalizada": "Ir a Educación Personalizada"
+        "escudo": "Ir a Nuestro escudo",
+        "aprendizajeValores": "Ir a Aprendizaje con valores",
+        "educacionPersonalizada": "Ir a Educación Personalizada",
+        "instalaciones": "Ir a Instalaciones"
       }
     }
   },
@@ -664,6 +694,43 @@
     "innovacion": {
       "l1": "Innovación",
       "l2": "educativa"
+    }
+  },
+  "estudiante": {
+    "ariaLabel": "Rueda de valores de San Isidro College con el estudiante como centro del aprendizaje",
+    "titulo": {
+      "l1": "El estudiante",
+      "l2": "como centro",
+      "l3": "del aprendizaje"
+    },
+    "empatia": "Empatía",
+    "responsabilidad": "Responsabilidad",
+    "colaboracion": "Colaboración",
+    "creatividad": "Creatividad",
+    "adaptabilidad": "Adaptabilidad",
+    "autonomia": "Autonomía"
+  },
+  "escudo": {
+    "ariaLabel": "Escudo de San Isidro College y el significado de cada uno de sus símbolos",
+    "lema": {
+      "titulo": "Nuestro lema",
+      "texto": "Hodie labor, cras fructus. Hoy el trabajo, mañana los frutos que podrá alcanzar."
+    },
+    "cruz": {
+      "titulo": "La cruz",
+      "texto": "Expresa la fe que nos guía y nos invita a vivir con amor, solidaridad y servicio hacia los demás."
+    },
+    "espiga": {
+      "titulo": "La espiga",
+      "texto": "Representa los frutos que nacen cuando el esfuerzo se sostiene con paciencia, dedicación y esperanza."
+    },
+    "montanas": {
+      "titulo": "Las montañas",
+      "texto": "Representan nuestras raíces salteñas, la tierra que nos cobija y el profundo vínculo que nos une a la naturaleza."
+    },
+    "campoArado": {
+      "titulo": "El campo arado",
+      "texto": "Nos recuerda que todo sueño, objetivo o proyecto conlleva un trabajo previo: la constancia y la decisión de sembrar."
     }
   }
 }
