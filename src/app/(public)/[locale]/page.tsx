@@ -90,7 +90,7 @@ const HomePage = async ({ params }: PageProps) => {
             height={250}
             className="absolute top-[55%] left-[80%] -translate-x-1/2 z-40
                       max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-[50%] max-lg:left-[80%] max-sm:translate-x-0
-                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.9)]"
           />
 
         </div>
@@ -134,7 +134,7 @@ const HomePage = async ({ params }: PageProps) => {
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center max-lg:col-span-12">
-            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[475px] z-20 max-lg:relative max-lg:top-35 max-lg:left-0 max-lg:w-[90%] max-lg:mx-auto">
+            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[650px] z-20 max-lg:relative max-lg:top-35 max-lg:left-0 max-lg:w-[90%] max-lg:mx-auto">
               <h1 className="text-2xl font-bold text-gray-900 text-center">
                 {t('bienvenida.title')}
               </h1>
@@ -146,17 +146,19 @@ const HomePage = async ({ params }: PageProps) => {
               </div>
             </div>
             {/* Línea decorativa */}
-            <Image
-              src="/images/formas/forma-home-2.svg"
-              alt="Decoración"
-              width={650}
-              height={350}
-              className="absolute -top-0 -left-0 w-[650px] max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:w-[600px]"
-            />
+            <div className="absolute top-0 -left-20 h-[700px] w-[860px] max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:h-[600px] max-lg:w-[700px] max-lg:-translate-x-1/2">
+              <Image
+                src="/images/formas/forma-home-2.svg"
+                alt="Decoración"
+                fill
+                sizes="(max-width: 1024px) 800px, 860px"
+                className="object-contain object-left-top"
+              />
+            </div>
           </div>
 
           {/* Columna Derecha */}
-          <div className="col-span-8 max-lg:col-span-12 z-10 relative h-[300px] sm:h-[420px] lg:h-[560px]">
+          <div className="col-span-8 max-lg:col-span-12 z-10 relative h-[350px] sm:h-[470px] lg:h-[700px]">
             {bienvenidaArr.length > 0 ? (
               <MediaCarousel
                 items={bienvenidaArr}
@@ -177,27 +179,27 @@ const HomePage = async ({ params }: PageProps) => {
         </div>
       </section>
 
-      {/* =============== SECCIÓN 2 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
+      {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
       <section className="relative w-full bg-white py-12 lg:py-20 overflow-hidden" id="pilares">
         {/* Trazo decorativo (solo desktop) */}
         <Image
-          src="/images/formas/forma-home-4.svg"
+          src="/images/formas/forma-home-5.svg"
           alt=""
           width={650}
           height={600}
           aria-hidden="true"
-          className="hidden lg:block absolute top-0 right-0 w-[550px] h-auto pointer-events-none opacity-90"
+          className="lg:block absolute top:20 md:-top-10 right:50 lg:right-30 2xl:right-72 w-[650px] md:w-[560px] h-auto pointer-events-none opacity-90"
         />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-screen-xl mx-auto px-4">
           {/* Rueda de pilares */}
-          <div className="lg:col-span-7 flex justify-center">
-            <PilaresEducativos className="w-full max-w-[560px] h-auto" />
+          <div className="lg:col-span-5 flex justify-center">
+            <PilaresEducativos className="w-full max-w-[650px] h-auto" />
           </div>
 
           {/* Texto introductorio */}
-          <div className="lg:col-span-5">
-            <div className="bg-white shadow-xl rounded-2xl p-6 md:p-8">
+          <div className="lg:col-span-7">
+            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-2xl p-6 md:p-8">
               <p className="text-gray-700 italic leading-relaxed">
                 {t('pilares.intro')}
               </p>
@@ -316,19 +318,21 @@ const HomePage = async ({ params }: PageProps) => {
 
       {/* =========== SECCIÓN 4: DESCUBRÍ NUESTRA PROPUESTA =========== */}
       <section className="relative w-full bg-[#dfeadf] py-14 lg:py-20" id="propuesta">
-        <div className="max-w-screen-xl mx-auto px-6">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#294161]">
-            {t('propuesta.title')}
-          </h2>
-          <p className="mt-2 text-gray-700 italic">
-            {t('propuesta.subtitle')}
-          </p>
+        <div className="max-w-screen-3xl mx-auto px-6 md:px-24">
+          <div className="pb-10">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#294161]">
+              {t('propuesta.title')}
+            </h2>
+            <p className="mt-2 text-gray-700 italic">
+              {t('propuesta.subtitle')}
+            </p>
+          </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0">
+          <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-0">
             {/* Niveles educativos */}
-            <div className="flex flex-col justify-between md:px-8 md:first:pl-0">
+            <div className="flex flex-col justify-between md:col-span-6 md:px-8 md:first:pl-0">
               <div>
-                <h3 className="text-xl lg:text-2xl font-bold text-[#1e804b]">
+                <h3 className="text-xl lg:text-2xl font-bold text-[#294161]">
                   {t('propuesta.niveles.title')}
                 </h3>
                 <p className="mt-4 text-gray-700 leading-relaxed">
@@ -352,9 +356,9 @@ const HomePage = async ({ params }: PageProps) => {
             </div>
 
             {/* Experiencia SIC */}
-            <div className="flex flex-col justify-between md:px-8 md:border-l md:border-[#1e804b]/30">
+            <div className="flex flex-col justify-between border-t border-[#1e804b]/30 pt-8 md:col-span-3 md:border-l md:pt-0 md:px-8 md:border-[#1e804b]/30 md:border-t-0">
               <div>
-                <h3 className="text-xl lg:text-2xl font-bold text-[#1e804b]">
+                <h3 className="text-xl lg:text-2xl font-bold text-[#294161]">
                   {t('propuesta.experiencia.title')}
                 </h3>
                 <p className="mt-4 text-gray-700 leading-relaxed">
@@ -375,9 +379,9 @@ const HomePage = async ({ params }: PageProps) => {
             </div>
 
             {/* Deportes */}
-            <div className="flex flex-col justify-between md:px-8 md:border-l md:border-[#1e804b]/30 md:last:pr-0">
+            <div className="flex flex-col justify-between border-t border-[#1e804b]/30 pt-8 md:col-span-3 md:border-l md:pt-0 md:px-8 md:border-[#1e804b]/30 md:border-t-0 md:last:pr-0">
               <div>
-                <h3 className="text-xl lg:text-2xl font-bold text-[#1e804b]">
+                <h3 className="text-xl lg:text-2xl font-bold text-[#294161]">
                   {t('propuesta.deportes.title')}
                 </h3>
                 <p className="mt-4 text-gray-700 leading-relaxed">
@@ -404,19 +408,19 @@ const HomePage = async ({ params }: PageProps) => {
       <section className="relative w-full bg-white py-14 lg:py-20 overflow-hidden" id="conocernos">
         {/* Trazo decorativo (solo desktop) */}
         <Image
-          src="/images/formas/forma-home-5.svg"
+          src="/images/formas/forma-home-2.svg"
           alt=""
           width={600}
           height={700}
           aria-hidden="true"
-          className="hidden lg:block absolute -top-10 -left-24 w-[600px] h-auto pointer-events-none"
+          className="absolute -top-0 2xl:left-10 xl:-left-24 w-[650px] h-auto pointer-events-none"
         />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto px-4">
           {/* Columna izquierda: tarjeta de texto */}
           <div className="lg:col-span-5 relative z-20 flex items-center">
-            <div className="bg-white shadow-xl rounded-2xl p-6 md:p-8 w-full lg:w-[480px] lg:absolute lg:left-[10%] space-y-4">
-              <h2 className="text-2xl lg:text-3xl font-bold text-[#294161]">
+            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-4xl p-6 md:p-8 w-full lg:w-[680px] lg:absolute lg:left-[10%] space-y-4">
+              <h2 className="text-2xl lg:text-3xl font-bold text-[#4a4a49]">
                 {t('conocernos.title')}
               </h2>
               <p className="text-gray-700 leading-relaxed">
@@ -437,12 +441,12 @@ const HomePage = async ({ params }: PageProps) => {
           </div>
 
           {/* Columna derecha: imagen */}
-          <div className="lg:col-span-7 relative z-10 h-[280px] sm:h-[400px] lg:h-[560px]">
+          <div className="lg:col-span-7 relative z-10 h-[350px] sm:h-[400px] lg:h-[650px]">
             <RenderMedia
               medio={conocernosMedio}
               fallback="/images/fondo-bienvenida.webp"
               fill
-              sizes="(max-width: 1024px) 100vw, 58vw"
+              sizes="(max-width: 1024px) 100vw, 70vw"
               className="rounded-xl shadow-lg object-cover"
             />
           </div>
