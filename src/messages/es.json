@@ -714,7 +714,7 @@
     "ariaLabel": "Escudo de San Isidro College y el significado de cada uno de sus símbolos",
     "lema": {
       "titulo": "Nuestro lema",
-      "texto": "Hodie labor, cras fructus. Hoy el trabajo, mañana los frutos que podrá alcanzar."
+      "texto": "Hodie labor, cras fructus. Hoy el trabajo, mañana los frutos que cada estudiante podrá alcanzar."
     },
     "cruz": {
       "titulo": "La cruz",
@@ -726,11 +726,11 @@
     },
     "montanas": {
       "titulo": "Las montañas",
-      "texto": "Representan nuestras raíces salteñas, la tierra que nos cobija y el profundo vínculo que nos une a la naturaleza."
+      "texto": "Representan nuestras raíces salteñas, la tierra que nos cobija y el profundo vínculo que nos une con la naturaleza."
     },
     "campoArado": {
       "titulo": "El campo arado",
-      "texto": "Nos recuerda que todo sueño, objetivo o proyecto conlleva un trabajo previo: la constancia y la decisión de sembrar."
+      "texto": "Nos recuerda que todo sueño, objetivo o proyecto, comienza con el trabajo, la constancia y la decisión de sembrar."
     }
   }
 }
