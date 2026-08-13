@@ -20,7 +20,7 @@ let ffmpegModulePromise: Promise<typeof import('fluent-ffmpeg')> | null = null;
 
 async function getSharp() {
   const sharpModule = await import('sharp');
-  return ('default' in sharpModule ? sharpModule.default : sharpModule) as typeof import('sharp');
+  return ('default' in sharpModule ? sharpModule.default : sharpModule) as unknown as typeof import('sharp').default;
 }
 
 async function getFfmpeg() {
