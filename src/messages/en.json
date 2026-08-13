@@ -7,11 +7,45 @@
     },
     "bienvenida": {
       "title": "WELCOME TO SAN ISIDRO",
-      "paragraph": "We understand that one of the most important decisions parents face is choosing a school for their children, an instance that will have a great impact on their lives. Therefore, it is vital to make the right decision.",
+      "greeting": "Dear families,",
+      "p1": "We know that choosing a school for your children is probably one of the most important decisions you will face as parents. It means choosing the place that will accompany them through a key stage of their lives, where they will learn, grow, discover their talents and build bonds that leave a lasting mark.",
+      "p2": "We know you are entrusting us with the most valuable thing you have. That is why we are committed to accompanying, caring for and educating every student in an environment of love, respect and joy, within a holistic, bilingual and Catholic-oriented education, sustained by high academic standards.",
+      "p3": "We invite you to get to know our educational project and to discover what it means to be part of a community that grows, learns and transforms together.",
       "fallbackAlt": "Welcome Image"
     },
     "section3": {
       "fallbackAlt": "Section 3 Background"
+    },
+    "pilares": {
+      "intro": "We believe that educating is much more than teaching. It means accompanying every student in discovering who they are and everything they can become, integrating every dimension of their growth into an education that leaves a lasting mark."
+    },
+    "propuesta": {
+      "title": "Discover our proposal",
+      "subtitle": "Explore the different programmes and experiences that are part of life at our school.",
+      "niveles": {
+        "title": "Academic levels",
+        "description": "We accompany our students at every stage of their growth, from their very first learning experiences to their preparation for the challenges of the future.",
+        "kindergarden": "Kindergarten",
+        "primary": "Primary",
+        "secondary": "Secondary"
+      },
+      "experiencia": {
+        "title": "SIC Experience",
+        "description": "Wellbeing, innovation, art and new ways of learning come together in experiences that allow every student to discover their interests and develop their abilities.",
+        "cta": "Discover the SIC Experience"
+      },
+      "deportes": {
+        "title": "Sports",
+        "description": "Sport shapes, unites and teaches. Through every discipline, our students learn to challenge themselves, work as a team and grow as part of a community.",
+        "cta": "Discover our sports programme"
+      }
+    },
+    "conocernos": {
+      "title": "We invite you to get to know us",
+      "p1": "Getting to know a school also means walking through its spaces, talking with the people who are part of it and imagining your children growing, learning and building their own story there.",
+      "p2": "We invite you to discover San Isidro College, learn about our educational project and find answers to all your questions.",
+      "cta": "Request an information meeting",
+      "fallbackAlt": "Aerial view of the San Isidro College campus"
     }
   },
   "colegio": {
@@ -591,6 +625,45 @@
     "experienciaSicInnovacionRobotica": {
       "title": "Innovation and Robotics | San Isidro College",
       "description": "Explore the Innovation and Robotics Lab, its projects, tools, and the skills students develop at San Isidro College."
+    }
+  },
+  "pilares": {
+    "ariaLabel": "Wheel of the pillars of San Isidro College's holistic education",
+    "titulo": {
+      "l1": "Holistic",
+      "l2": "education"
+    },
+    "bilingue": {
+      "l1": "Bilingual",
+      "l2": "education"
+    },
+    "valores": {
+      "l1": "Learning",
+      "l2": "through values"
+    },
+    "ciudadania": {
+      "l1": "Global",
+      "l2": "citizenship"
+    },
+    "sustentabilidad": {
+      "l1": "Sustainability",
+      "l2": "and social commitment"
+    },
+    "comunidad": {
+      "l1": "Community",
+      "l2": "and belonging"
+    },
+    "arte": {
+      "l1": "Art",
+      "l2": "and creativity"
+    },
+    "deporte": {
+      "l1": "Sport",
+      "l2": "and wellbeing"
+    },
+    "innovacion": {
+      "l1": "Educational",
+      "l2": "innovation"
     }
   }
 }

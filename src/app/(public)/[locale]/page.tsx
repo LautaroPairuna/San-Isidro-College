@@ -1,11 +1,14 @@
 // /app/[locale]/page.tsx
 import Image from 'next/image'
+import { Link } from '@/i18n/navigation'
 import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
+import PilaresEducativos from '@/components/PilaresEducativos'
 import { getTranslations } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { ADMISSIONS_FORM_URL } from '@/lib/siteConfig'
 
 // SLUGS de secciones (coinciden con DB)
 const SECTION_SLUGS = {
@@ -14,6 +17,7 @@ const SECTION_SLUGS = {
   INFOGRAFIA: 'home-infografia',
   SEC3_BACKGROUND: 'home-sec3-background',
   ALIANZAS: 'home-alianzas',
+  CONOCERNOS: 'home-conocernos',
 };
 
 // Tipado auxiliar
@@ -59,8 +63,19 @@ const HomePage = async ({ params }: PageProps) => {
   // 5) Alianzas
   const alianzasMedia = getMedias(SECTION_SLUGS.ALIANZAS);
 
+  // 6) "Los invitamos a conocernos" (único)
+  const conocernosMedio =
+    pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.CONOCERNOS)?.medio
+
   // Extraemos objeto único para sección 3
   const sec3Medio = sec3Arr.length > 0 ? sec3Arr[0] : undefined
+
+  // Niveles educativos enlazados desde "Descubrí nuestra propuesta"
+  const NIVELES = [
+    { key: 'kindergarden', href: '/kindergarden' },
+    { key: 'primary', href: '/primary' },
+    { key: 'secondary', href: '/secondary' },
+  ] as const
 
   return (
     <div id="container">
@@ -115,17 +130,20 @@ const HomePage = async ({ params }: PageProps) => {
       </section>
 
       {/* =============== SECCIÓN 2: BIENVENIDA (MÉTODO UNICO) =============== */}
-      <section className="relative w-full py-10 bg-white" id="bienvenida">
+      <section className="relative w-full py-10 bg-white lg:min-h-[720px]" id="bienvenida">
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
-          <div className="col-span-4 relative flex flex-col justify-center max-sm:col-span-12">
-            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[475px] z-20 max-sm:relative max-sm:top-35 max-sm:left-0 max-sm:w-[90%] max-sm:mx-auto">
+          <div className="col-span-4 relative flex flex-col justify-center max-lg:col-span-12">
+            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[475px] z-20 max-lg:relative max-lg:top-35 max-lg:left-0 max-lg:w-[90%] max-lg:mx-auto">
               <h1 className="text-2xl font-bold text-gray-900 text-center">
                 {t('bienvenida.title')}
               </h1>
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                {t('bienvenida.paragraph')}
-              </p>
+              <div className="mt-4 space-y-3 text-gray-700 italic leading-relaxed text-[15px]">
+                <p>{t('bienvenida.greeting')}</p>
+                <p>{t('bienvenida.p1')}</p>
+                <p>{t('bienvenida.p2')}</p>
+                <p>{t('bienvenida.p3')}</p>
+              </div>
             </div>
             {/* Línea decorativa */}
             <Image
@@ -133,12 +151,12 @@ const HomePage = async ({ params }: PageProps) => {
               alt="Decoración"
               width={650}
               height={350}
-              className="absolute -top-0 -left-0 w-[650px] max-sm:absolute max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+              className="absolute -top-0 -left-0 w-[650px] max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:w-[600px]"
             />
           </div>
 
           {/* Columna Derecha */}
-          <div className="col-span-8 max-sm:col-span-12 z-10 relative h-[300px] sm:h-[420px] lg:h-[560px]">
+          <div className="col-span-8 max-lg:col-span-12 z-10 relative h-[300px] sm:h-[420px] lg:h-[560px]">
             {bienvenidaArr.length > 0 ? (
               <MediaCarousel
                 items={bienvenidaArr}
@@ -155,6 +173,35 @@ const HomePage = async ({ params }: PageProps) => {
                 />
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* =============== SECCIÓN 2 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
+      <section className="relative w-full bg-white py-12 lg:py-20 overflow-hidden" id="pilares">
+        {/* Trazo decorativo (solo desktop) */}
+        <Image
+          src="/images/formas/forma-home-4.svg"
+          alt=""
+          width={650}
+          height={600}
+          aria-hidden="true"
+          className="hidden lg:block absolute top-0 right-0 w-[550px] h-auto pointer-events-none opacity-90"
+        />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-screen-xl mx-auto px-4">
+          {/* Rueda de pilares */}
+          <div className="lg:col-span-7 flex justify-center">
+            <PilaresEducativos className="w-full max-w-[560px] h-auto" />
+          </div>
+
+          {/* Texto introductorio */}
+          <div className="lg:col-span-5">
+            <div className="bg-white shadow-xl rounded-2xl p-6 md:p-8">
+              <p className="text-gray-700 italic leading-relaxed">
+                {t('pilares.intro')}
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -264,8 +311,145 @@ const HomePage = async ({ params }: PageProps) => {
           </div>
         </div>
       </section>
-      {/* Carrusel global y Contacto */}
+      {/* Carrusel global */}
       <SectionCarrusel medios={alianzasMedia} />
+
+      {/* =========== SECCIÓN 4: DESCUBRÍ NUESTRA PROPUESTA =========== */}
+      <section className="relative w-full bg-[#dfeadf] py-14 lg:py-20" id="propuesta">
+        <div className="max-w-screen-xl mx-auto px-6">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#294161]">
+            {t('propuesta.title')}
+          </h2>
+          <p className="mt-2 text-gray-700 italic">
+            {t('propuesta.subtitle')}
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0">
+            {/* Niveles educativos */}
+            <div className="flex flex-col justify-between md:px-8 md:first:pl-0">
+              <div>
+                <h3 className="text-xl lg:text-2xl font-bold text-[#1e804b]">
+                  {t('propuesta.niveles.title')}
+                </h3>
+                <p className="mt-4 text-gray-700 leading-relaxed">
+                  {t('propuesta.niveles.description')}
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+                {NIVELES.map(({ key, href }) => (
+                  <Link
+                    key={key}
+                    href={href}
+                    className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
+                  >
+                    {t(`propuesta.niveles.${key}`)}
+                    <span aria-hidden="true" className="text-[#c19516]">
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Experiencia SIC */}
+            <div className="flex flex-col justify-between md:px-8 md:border-l md:border-[#1e804b]/30">
+              <div>
+                <h3 className="text-xl lg:text-2xl font-bold text-[#1e804b]">
+                  {t('propuesta.experiencia.title')}
+                </h3>
+                <p className="mt-4 text-gray-700 leading-relaxed">
+                  {t('propuesta.experiencia.description')}
+                </p>
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/experiencia-sic"
+                  className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
+                >
+                  {t('propuesta.experiencia.cta')}
+                  <span aria-hidden="true" className="text-[#c19516]">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Deportes */}
+            <div className="flex flex-col justify-between md:px-8 md:border-l md:border-[#1e804b]/30 md:last:pr-0">
+              <div>
+                <h3 className="text-xl lg:text-2xl font-bold text-[#1e804b]">
+                  {t('propuesta.deportes.title')}
+                </h3>
+                <p className="mt-4 text-gray-700 leading-relaxed">
+                  {t('propuesta.deportes.description')}
+                </p>
+              </div>
+              <div className="mt-8">
+                <Link
+                  href="/deportes"
+                  className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
+                >
+                  {t('propuesta.deportes.cta')}
+                  <span aria-hidden="true" className="text-[#c19516]">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========== SECCIÓN 5: LOS INVITAMOS A CONOCERNOS =========== */}
+      <section className="relative w-full bg-white py-14 lg:py-20 overflow-hidden" id="conocernos">
+        {/* Trazo decorativo (solo desktop) */}
+        <Image
+          src="/images/formas/forma-home-5.svg"
+          alt=""
+          width={600}
+          height={700}
+          aria-hidden="true"
+          className="hidden lg:block absolute -top-10 -left-24 w-[600px] h-auto pointer-events-none"
+        />
+
+        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto px-4">
+          {/* Columna izquierda: tarjeta de texto */}
+          <div className="lg:col-span-5 relative z-20 flex items-center">
+            <div className="bg-white shadow-xl rounded-2xl p-6 md:p-8 w-full lg:w-[480px] lg:absolute lg:left-[10%] space-y-4">
+              <h2 className="text-2xl lg:text-3xl font-bold text-[#294161]">
+                {t('conocernos.title')}
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                {t('conocernos.p1')}
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                {t('conocernos.p2')}
+              </p>
+              <a
+                href={ADMISSIONS_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-[#1e804b] font-semibold hover:underline"
+              >
+                {t('conocernos.cta')}
+              </a>
+            </div>
+          </div>
+
+          {/* Columna derecha: imagen */}
+          <div className="lg:col-span-7 relative z-10 h-[280px] sm:h-[400px] lg:h-[560px]">
+            <RenderMedia
+              medio={conocernosMedio}
+              fallback="/images/fondo-bienvenida.webp"
+              fill
+              sizes="(max-width: 1024px) 100vw, 58vw"
+              className="rounded-xl shadow-lg object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Contacto */}
       <Contact />
     </div>
   )

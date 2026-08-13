@@ -17,6 +17,12 @@ export function getBaseUrl(): string {
   return raw.replace(/\/+$/, '');
 }
 
+// Formulario público de admisiones / solicitud de entrevista informativa.
+// Se usa en el botón flotante y en los CTA del home, para tener un único lugar
+// donde actualizar la URL si el colegio cambia el formulario.
+export const ADMISSIONS_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdTZNnLscG2J5nk8azmzbifaCX1n-2Ft1dPHmOgyRoD9POURA/viewform';
+
 // Coordenadas tomadas de la ubicación oficial en Google Maps (San Lorenzo, Salta).
 export const GEO = {
   latitude: -24.7924737,

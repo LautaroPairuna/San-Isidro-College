@@ -7,11 +7,45 @@
     },
     "bienvenida": {
       "title": "BIENVENIDOS A SAN ISIDRO",
-      "paragraph": "Somos conscientes de que, probablemente, una de las decisiones más importantes a la que como padres se enfrentan, es la elección de un Colegio para sus hijos, instancia que generará gran impacto en sus vidas. Por ello, es vital tomar la decisión correcta.",
+      "greeting": "Queridas familias:",
+      "p1": "Somos conscientes de que elegir un colegio para sus hijos es, probablemente, una de las decisiones más importantes a las que se enfrentan como padres. Es elegir el lugar que los acompañará durante una etapa fundamental de sus vidas, donde aprenderán, crecerán, descubrirán sus talentos y construirán vínculos que dejarán huella.",
+      "p2": "Sabemos que nos confían lo más valioso que tienen. Por eso, asumimos el compromiso de acompañar, cuidar y educar a cada estudiante en un ambiente de amor, respeto y alegría, en el marco de una propuesta integral, bilingüe y de orientación católica, sostenida por altos estándares académicos.",
+      "p3": "Los invitamos a conocer nuestro proyecto educativo y a descubrir qué significa formar parte de una comunidad que crece, aprende y se transforma unida.",
       "fallbackAlt": "Imagen de Bienvenida"
     },
     "section3": {
       "fallbackAlt": "Sección 3 Fondo"
+    },
+    "pilares": {
+      "intro": "Creemos que educar es mucho más que enseñar. Es acompañar a cada estudiante en el descubrimiento de quién es y de todo lo que puede llegar a ser, integrando cada dimensión de su crecimiento en una formación que deja huella."
+    },
+    "propuesta": {
+      "title": "Descubrí nuestra propuesta",
+      "subtitle": "Conocé las distintas propuestas y experiencias que forman parte de la vida en nuestro colegio.",
+      "niveles": {
+        "title": "Niveles educativos",
+        "description": "Acompañamos a nuestros estudiantes en cada etapa de su crecimiento, desde sus primeros aprendizajes hasta su preparación para los desafíos del futuro.",
+        "kindergarden": "Inicial",
+        "primary": "Primaria",
+        "secondary": "Secundaria"
+      },
+      "experiencia": {
+        "title": "Experiencia SIC",
+        "description": "Bienestar, innovación, arte y nuevas formas de aprender se integran en experiencias que permiten a cada estudiante descubrir sus intereses y desarrollar sus capacidades.",
+        "cta": "Descubrí la Experiencia SIC"
+      },
+      "deportes": {
+        "title": "Deportes",
+        "description": "El deporte forma, une y enseña. A través de cada disciplina, nuestros estudiantes aprenden a superarse, trabajar en equipo y crecer como parte de una comunidad.",
+        "cta": "Conocé nuestra propuesta deportiva"
+      }
+    },
+    "conocernos": {
+      "title": "Los invitamos a conocernos",
+      "p1": "Conocer un colegio también es recorrer sus espacios, conversar con quienes forman parte de él e imaginar a sus hijos creciendo, aprendiendo y construyendo su propia historia allí.",
+      "p2": "Los invitamos a descubrir San Isidro College, conocer nuestra propuesta educativa y encontrar respuesta a todas sus inquietudes.",
+      "cta": "Solicitar una reunión informativa",
+      "fallbackAlt": "Vista aérea del campus de San Isidro College"
     }
   },
   "colegio": {
@@ -591,6 +625,45 @@
     "experienciaSicInnovacionRobotica": {
       "title": "Innovación y Robótica | San Isidro College",
       "description": "Conocé el Laboratorio de Innovación y Robótica, sus proyectos, herramientas y habilidades que desarrollan los alumnos en San Isidro College."
+    }
+  },
+  "pilares": {
+    "ariaLabel": "Rueda de los pilares de la formación integral de San Isidro College",
+    "titulo": {
+      "l1": "Formación",
+      "l2": "integral"
+    },
+    "bilingue": {
+      "l1": "Educación",
+      "l2": "bilingüe"
+    },
+    "valores": {
+      "l1": "Aprendizaje",
+      "l2": "con valores"
+    },
+    "ciudadania": {
+      "l1": "Ciudadanía",
+      "l2": "global"
+    },
+    "sustentabilidad": {
+      "l1": "Sustentabilidad",
+      "l2": "y compromiso social"
+    },
+    "comunidad": {
+      "l1": "Comunidad",
+      "l2": "y pertenencia"
+    },
+    "arte": {
+      "l1": "Arte",
+      "l2": "y creatividad"
+    },
+    "deporte": {
+      "l1": "Deporte",
+      "l2": "y bienestar"
+    },
+    "innovacion": {
+      "l1": "Innovación",
+      "l2": "educativa"
     }
   }
 }
