@@ -218,7 +218,7 @@ export const fileService = {
     const baseDir = IMAGE_PUBLIC_DIR;
     const tbl: PrismaTable = tableName === "GrupoMedios" ? "GrupoMedios" : "Medio";
     const keyDir = folderNames[tbl];
-    const dir = path.join(baseDir, keyDir);
+    const dir = path.join(/*turbopackIgnore: true*/ baseDir, keyDir);
     const thumbs = path.join(dir, "thumbs");
 
     await fs.mkdir(dir, { recursive: true });

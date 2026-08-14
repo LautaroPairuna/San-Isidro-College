@@ -101,19 +101,19 @@
     },
     "asideTitle": "THE SCHOOL",
     "aside": {
-      "proyecto": "A holistic, bilingual and innovative education",
+      "proyecto": "Bilingual educational project",
       "misionVisionValores": "Mission, vision and values",
       "escudo": "Our crest, our identity",
       "aprendizajeValores": "Learning through values",
       "educacionPersonalizada": "Personalised Education",
-      "instalaciones": "A school designed to be a school",
+      "instalaciones": "Facilities",
       "aria": {
-        "proyecto": "Go to A holistic, bilingual and innovative education",
+        "proyecto": "Go to Bilingual educational project",
         "misionVisionValores": "Go to Mission, vision and values",
         "escudo": "Go to Our crest, our identity",
         "aprendizajeValores": "Go to Learning through values",
         "educacionPersonalizada": "Go to Personalised Education",
-        "instalaciones": "Go to A school designed to be a school"
+        "instalaciones": "Go to Facilities"
       }
     }
   },

@@ -101,19 +101,19 @@
     },
     "asideTitle": "EL COLEGIO",
     "aside": {
-      "proyecto": "Una educación integral, bilingüe e innovadora",
+      "proyecto": "Proyecto educativo bilingüe",
       "misionVisionValores": "Misión, visión y valores",
       "escudo": "Nuestro escudo, nuestra identidad",
       "aprendizajeValores": "Aprendizaje con valores",
       "educacionPersonalizada": "Educación personalizada",
-      "instalaciones": "Un colegio pensado y diseñado para ser colegio",
+      "instalaciones": "Instalaciones",
       "aria": {
-        "proyecto": "Ir a Una educación integral, bilingüe e innovadora",
+        "proyecto": "Ir a Proyecto educativo bilingüe",
         "misionVisionValores": "Ir a Misión, visión y valores",
         "escudo": "Ir a Nuestro escudo, nuestra identidad",
         "aprendizajeValores": "Ir a Aprendizaje con valores",
         "educacionPersonalizada": "Ir a Educación personalizada",
-        "instalaciones": "Ir a Un colegio pensado y diseñado para ser colegio"
+        "instalaciones": "Ir a Instalaciones"
       }
     }
   },
