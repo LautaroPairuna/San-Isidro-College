@@ -118,22 +118,40 @@
     }
   },
   "academicosMasInfo": {
-    "proyectoTitulo": "Full-Day or Extended-Hour Bilingual Program",
-    "introduccion": {
-      "p1": "As a Bilingual School, San Isidro College aims to achieve its educational goals in two languages. For this reason, English will be taught intensively through multiple activities and content.",
-      "p2": "Our Bilingual Project develops and builds from the earliest years of life, with a strong emphasis on correct pronunciation.",
-      "p3": "From a very young age, our children come into contact with their second language, responding to their communication and interaction needs. In this way, they learn to study, carry out activities, and “live” in English, graduating with knowledge and familiarity in the language that allows them to integrate comfortably into different English-speaking academic and work environments.",
-      "p4": "For this, the integrated curriculum plan in English and Spanish includes the corresponding International Certifications.",
-      "p5": "We work to facilitate and ensure the construction of a solid bond with the second language and foster confidence in students regarding their ability to learn it.",
-      "bold1": "Through an intensive reading and oral production program, children naturally incorporate English in their daily lives, similar to the process of acquiring their mother tongue, using content that responds to their interests and needs.",
-      "bold2": "Learning English from an early age allows them to easily acquire sounds, rhythms, and intonation. This way, we train their ear, achieving proper phonetics, ensuring comprehension, and initiating oral expression in a fun and natural way."
+    "intro": {
+      "title1": "A bilingual project lived",
+      "title2": "every day",
+      "p1": "At San Isidro College, English is not learned only as a subject: it becomes part of everyday life through a comprehensive bilingual project. Our purpose is for students to develop solid competence in both Spanish and English, and to communicate with understanding, confidence and ease in both languages.",
+      "p2": "Learning begins in the earliest years and is progressively consolidated throughout Kindergarten, Primary and Secondary. The programme expands gradually according to the age and needs of each student, respecting every stage of their development.",
+      "p3": "From an early age, our students come into contact with English through familiar and meaningful situations. The process moves from the familiar to the new and from the concrete to the abstract, encouraging the natural acquisition of the sounds, rhythms and forms of expression of the language.",
+      "p4": "The progressive extension of the school day provides daily, systematic and intensive contact with English, along with many opportunities to listen, understand, read, write and express themselves. This builds a solid bond with the second language and the confidence needed to use it in different situations.",
+      "p5": "San Isidro College holds official recognition for its Foreign Language Teaching Programme: English, whose subjects are integrated into the extended school day. This recognition from the Ministry of Education endorses a planned, systematic programme aligned with the official curriculum."
     },
-    "inglesTitulo": "English: Indispensable",
-    "ingles": {
-      "p1": "In a globalized world, learning a second language is an ever-growing necessity.",
-      "p2": "According to UNESCO documentation, in numerous international experiences, it is shown that teaching two or more languages reinforces other learning, especially the mother tongue (in both formative and instrumental aspects), and represents significant linguistic, cognitive, and socio-cultural benefits for students.",
-      "p3": "On the socio-cultural level, the benefit lies in the fact that knowing other languages allows people not only to expand their scope of action by communicating with members of other cultures but also to understand and value different customs and worldviews, thereby living with diversity.",
-      "p4": "Regarding how to access learning other languages, research shows that students’ learning is more meaningful and therefore longer-lasting when the language is used as a vehicle for learning other content and not only as an object of study in itself. Hence our Bilingual Educational Project proposal. Thus, bridges are built between the teaching of English and the rest of the curriculum areas: linguistic content is taught, and simultaneously, disciplinary content is approached."
+    "aprenderIngles": {
+      "label1": "Learning English",
+      "label2": "and learning in English",
+      "p1": "We believe learning becomes more meaningful when English is presented not only as an object of study, but as a language for accessing other knowledge.",
+      "p2": "Through cross-curricular projects and interdisciplinary work, our students use the language to research, study, carry out activities, solve problems, create and share what they have learned. In this way they do not only learn English: they also learn in English.",
+      "p3": "Graphic and audiovisual resources, reading, oral productions, games, songs, drama, presentations and group work make it possible to use the language in real contexts and for concrete purposes. The arts are also part of this experience, through activities that bring together language, art, music, singing and theatre.",
+      "p4": "This journey is enriched in Secondary with internationally oriented programmes such as <b>Cambridge IGCSE</b> and the <b>Dual Diploma®</b> from Académica, which are described in the section for that level."
+    },
+    "propositos": {
+      "title": "Our Purposes",
+      "contacto": "To provide daily, systematic and intensive contact with English.",
+      "comprension": "To foster comprehension, oral expression, reading and writing.",
+      "idioma": "To promote the use of the language in meaningful communicative situations.",
+      "acceso": "To use English as a means of accessing other content and learning.",
+      "confianza": "To strengthen confidence and autonomy in communication.",
+      "articular": "To connect the foreign language with the different areas of the curriculum.",
+      "culturas": "To broaden the understanding of other cultures and ways of seeing the world.",
+      "herramientas": "To provide tools for academic, social and professional contexts that are increasingly global."
+    },
+    "niveles": {
+      "title": "Academic levels",
+      "description": "We accompany our students at every stage of their growth, from their very first learning experiences to their preparation for the challenges of the future.",
+      "kindergarden": "Kindergarten",
+      "primary": "Primary",
+      "secondary": "Secondary"
     },
     "kindergarten": {
       "titulo": "Kindergarten",
@@ -265,38 +283,48 @@
     }
   },
   "academicosHome": {
-    "intro": {
-      "title1": "A bilingual project lived",
-      "title2": "every day",
-      "p1": "At San Isidro College, English is not learned only as a subject: it becomes part of everyday life through a comprehensive bilingual project. Our purpose is for students to develop solid competence in both Spanish and English, and to communicate with understanding, confidence and ease in both languages.",
-      "p2": "Learning begins in the earliest years and is progressively consolidated throughout Kindergarten, Primary and Secondary. The programme expands gradually according to the age and needs of each student, respecting every stage of their development.",
-      "p3": "From an early age, our students come into contact with English through familiar and meaningful situations. The process moves from the familiar to the new and from the concrete to the abstract, encouraging the natural acquisition of the sounds, rhythms and forms of expression of the language.",
-      "p4": "The progressive extension of the school day provides daily, systematic and intensive contact with English, along with many opportunities to listen, understand, read, write and express themselves. This builds a solid bond with the second language and the confidence needed to use it in different situations.",
-      "p5": "San Isidro College holds official recognition for its Foreign Language Teaching Programme: English, whose subjects are integrated into the extended school day. This recognition from the Ministry of Education endorses a planned, systematic programme aligned with the official curriculum."
+    "loading": "Loading Student Life…",
+    "errorTitle": "Error loading media",
+    "hero": {
+      "alt": "I am because we are",
+      "title": "Full-Day or Extended-Hour Bilingual Program",
+      "description": "With various graphic and audiovisual resources, group and expression dynamics, exhibitions, games, dramatizations, songs, stories, etc., the expressive and productive stage is continuously strengthened, consolidated, and nourished.",
+      "readMore": "Read more"
     },
-    "aprenderIngles": {
-      "label1": "Learning English",
-      "label2": "and learning in English",
-      "p1": "We believe learning becomes more meaningful when English is presented not only as an object of study, but as a language for accessing other knowledge.",
-      "p2": "Through cross-curricular projects and interdisciplinary work, our students use the language to research, study, carry out activities, solve problems, create and share what they have learned. In this way they do not only learn English: they also learn in English.",
-      "p3": "Graphic and audiovisual resources, reading, oral productions, games, songs, drama, presentations and group work make it possible to use the language in real contexts and for concrete purposes. The arts are also part of this experience, through activities that bring together language, art, music, singing and theatre.",
-      "p4": "This journey is enriched in Secondary with internationally oriented programmes such as <b>Cambridge IGCSE</b> and the <b>Dual Diploma®</b> from Académica, which are described in the section for that level."
+    "admissions": {
+      "alt": "Admissions Icon",
+      "label": "ADMISSIONS"
     },
-    "propositos": {
-      "title": "Our Purposes",
-      "contacto": "To provide daily, systematic and intensive contact with English.",
-      "comprension": "To foster comprehension, oral expression, reading and writing.",
-      "idioma": "To promote the use of the language in meaningful communicative situations.",
-      "acceso": "To use English as a means of accessing other content and learning.",
-      "confianza": "To strengthen confidence and autonomy in communication.",
-      "articular": "To connect the foreign language with the different areas of the curriculum.",
-      "culturas": "To broaden the understanding of other cultures and ways of seeing the world.",
-      "herramientas": "To provide tools for academic, social and professional contexts that are increasingly global."
+    "kinder": {
+      "title": "KINDERGARTEN",
+      "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
+      "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language.",
+      "p3": "Furthermore, it promotes curricular articulation with the primary level, facilitating a natural and safe transition.",
+      "mobileBrief": "Our Bilingual Project starts in the nursery, K2, …",
+      "readMore": "Read more",
+      "decorAlt": "Kindergarten decoration",
+      "decorAltMobile": "Kindergarten mobile decoration"
     },
-    "niveles": {
-      "title": "Academic levels",
-      "description": "We accompany our students at every stage of their growth, from their very first learning experiences to their preparation for the challenges of the future.",
-      "kindergarden": "Kindergarten",
+    "primary": {
+      "title": "PRIMARY",
+      "p1": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
+      "readMore": "Read more",
+      "decorAlt": "Primary decoration"
+    },
+    "secondary": {
+      "title": "SECONDARY",
+      "subtitle": "Leaders of the future",
+      "p1": "We prioritize a student-centered approach to develop key 21st-century skills such as autonomy, critical thinking, and creativity. With a solid bilingual foundation, we prepare our students for international exams and advanced technical English proficiency, tailored to their fields of study. We provide a space where learning comes to life.",
+      "readMore": "Read more",
+      "dualTitle": "Dual Diploma",
+      "dualText": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",
+      "dualLogoAlt": "Academia International Studies Logo",
+      "decorAlt": "Secondary frame"
+    },
+    "aside": {
+      "title": "ACADEMIC",
+      "proyecto": "Bilingual Project",
+      "kindergarten": "Kindergarten",
       "primary": "Primary",
       "secondary": "Secondary"
     }
