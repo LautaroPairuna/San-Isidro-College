@@ -1,11 +1,18 @@
 // /app/[locale]/academicos-mas-info/page.tsx
-import Image from 'next/image'
+import RenderMedia from '@/components/RenderMedia'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import NivelesEducativos from '@/components/NivelesEducativos'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import { getMediaGroupByName } from '@/lib/pageContentCache'
+import {
+  getMediaGroupByName,
+  getPageContentForSlug,
+  type PageContentSection,
+} from '@/lib/pageContentCache'
+
+// Grupo de íconos de Propósitos en la DB.
+const SECTION_PROPOSITOS = 'academicos-mas-info-propositos'
 
 /** Íconos de "Nuestros Propósitos", en el orden del diseño (dos filas de cuatro). */
 const PROPOSITOS = [
@@ -33,6 +40,12 @@ const AcademicosMasInfoPage = async ({ params }: PageProps) => {
   const t = await getTranslations({ locale, namespace: 'academicosMasInfo' })
 
   const intro = ['p1', 'p2', 'p3', 'p4', 'p5'] as const
+
+  // Íconos de Propósitos: si el grupo está cargado en el admin, manda la DB.
+  const pageSections = await getPageContentForSlug('academicos-mas-info')
+  const propositosIconos = [
+    ...(pageSections.find((s: PageContentSection) => s.slug === SECTION_PROPOSITOS)?.grupo?.medios ?? []),
+  ].sort((a, b) => a.posicion - b.posicion)
 
   // Alianzas (grupo global)
   const alianzasMedia = await getMediaGroupByName('Alianzas')
@@ -84,12 +97,11 @@ const AcademicosMasInfoPage = async ({ params }: PageProps) => {
           </h2>
 
           <ul className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
-            {PROPOSITOS.map(({ key, icon }) => (
+            {PROPOSITOS.map(({ key, icon }, i) => (
               <li key={key} className="flex flex-col items-center text-center">
-                <Image
-                  src={`/images/academicos/${icon}`}
-                  alt=""
-                  aria-hidden="true"
+                <RenderMedia
+                  medio={propositosIconos[i]}
+                  fallback={`/images/academicos/${icon}`}
                   width={96}
                   height={96}
                   className="h-20 w-auto"
