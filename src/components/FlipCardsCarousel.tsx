@@ -19,11 +19,17 @@ export interface FlipCardItem {
   fallbackIcon: string
   fallbackImage: string
   color: string
+  /** Color del dorso. Por defecto, el mismo que el frente. */
+  backColor?: string
+  /** Color del texto. Por defecto blanco; en fondos claros conviene pasarlo. */
+  textColor?: string
 }
 
 interface FlipCardsCarouselProps {
   items: FlipCardItem[]
   ariaLabel: string
+  /** Cuántas tarjetas entran por vista. Por defecto, hasta cuatro. */
+  itemClassName?: string
 }
 
 function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallbackSrc: string; alt: string }) {
@@ -93,7 +99,10 @@ function FlipCard({ card }: { card: FlipCardItem }) {
           className="absolute inset-0 overflow-hidden rounded-3xl shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
           style={{ backgroundColor: card.color }}
         >
-          <div className="h-[40%] px-2 text-center text-white flex flex-col items-center justify-center">
+          <div
+            className="h-[40%] px-2 text-center flex flex-col items-center justify-center"
+            style={{ color: card.textColor ?? '#fff' }}
+          >
             <CardIconWithFallback src={card.icon} fallbackSrc={card.fallbackIcon} alt={card.title} />
             <h5 className="mt-3 text-sm font-bold leading-tight">{card.title}</h5>
           </div>
@@ -103,8 +112,12 @@ function FlipCard({ card }: { card: FlipCardItem }) {
         </div>
 
         <div
-          className="absolute inset-0 rounded-3xl p-6 text-white shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
-          style={{ backgroundColor: card.color, transform: 'rotateY(180deg)' }}
+          className="absolute inset-0 rounded-3xl p-6 shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
+          style={{
+            backgroundColor: card.backColor ?? card.color,
+            color: card.textColor ?? '#fff',
+            transform: 'rotateY(180deg)',
+          }}
         >
           <div className="h-full flex items-center justify-center text-center text-xs leading-snug font-semibold">
             {card.backText}
@@ -118,6 +131,7 @@ function FlipCard({ card }: { card: FlipCardItem }) {
 export default function FlipCardsCarousel({
   items,
   ariaLabel,
+  itemClassName = 'basis-full lg:basis-1/2 xl:basis-1/3 2xl:basis-1/4',
 }: FlipCardsCarouselProps) {
   const [api, setApi] = useState<CarouselApi>()
   const [slideIndex, setSlideIndex] = useState(0)
@@ -181,7 +195,7 @@ export default function FlipCardsCarousel({
           {items.map((card) => (
             <CarouselItem 
               key={`card-${card.key}`} 
-              className="basis-full lg:basis-1/2 xl:basis-1/3 2xl:basis-1/4"
+              className={itemClassName}
             >
               <div className="mx-auto w-full max-w-[320px] sm:max-w-[400px] lg:max-w-none">
                 <FlipCard card={card} />

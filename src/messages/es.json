@@ -321,6 +321,77 @@
       }
     }
   },
+  "nivelPrimario": {
+    "intro": {
+      "title": "Nivel Primario",
+      "subtitle": "Aprender, descubrir y crecer en dos idiomas",
+      "p1": "Durante esta etapa, acompañamos a nuestros estudiantes para que consoliden los aprendizajes iniciados en Kindergarten, descubran sus talentos y desarrollen progresivamente su autonomía, la responsabilidad y la confianza en sus propias capacidades.",
+      "p2": "Nuestra propuesta articula las áreas establecidas por el Diseño Curricular Jurisdiccional con el Trayecto de Enseñanza de Lengua Extranjera: Inglés. De esta manera, los estudiantes amplían sus conocimientos y desarrollan habilidades para comprender, expresarse y aprender en ambos idiomas.",
+      "p3": "Promovemos una actitud de esfuerzo, trabajo y responsabilidad frente al estudio, junto con la curiosidad y el interés por aprender. Buscamos que cada estudiante pueda reconocer sus posibilidades, asumir nuevos desafíos y construir aprendizajes verdaderamente significativos."
+    },
+    "propuesta": {
+      "label1": "Una propuesta bilingüe",
+      "label2": "de jornada completa",
+      "p1": "El plan de estudios integra las áreas curriculares oficiales —Lengua, Matemática, Ciencias Sociales, Ciencias Naturales, Educación Tecnológica, Formación Ética y Ciudadana, Educación Física, Educación Artística y Educación Religiosa— con diferentes espacios desarrollados en inglés.",
+      "p2": "La propuesta en inglés comprende <b>Language</b>, con áreas como Comprehension, Oral Language, Reading, Written Language, Creative Writing y Spelling, además de <b>Literature, Social Studies, Science y Drama</b>.",
+      "p3": "Esta integración permite que el inglés no sea solamente una materia, sino también una lengua para leer, investigar, crear, estudiar y compartir aprendizajes. A través de un contacto cotidiano e intensivo, favorecemos una comprensión amplia del idioma y el desarrollo progresivo de la expresión y la comunicación."
+    },
+    "literatura": {
+      "title": "La literatura como punto de partida",
+      "p1": "Nuestra metodología encuentra en la literatura uno de sus principales puntos de partida. La lectura permite ampliar el lenguaje, estimular la imaginación, conocer otras realidades y abrir espacios para conversar, interpretar, preguntar y expresar ideas.",
+      "p2": "Nos proponemos convertir el aula en una comunidad de lectores y escritores, donde cada estudiante pueda desarrollar sus propias posibilidades y avanzar como intérprete y productor de textos en ambos idiomas.",
+      "frase": "Se aprende a leer leyendo y a escribir escribiendo.",
+      "p3": "A través de diferentes obras y propuestas de lectura cuidadosamente seleccionadas, los estudiantes desarrollan la comprensión, la expresión oral, la escritura y el pensamiento crítico, al mismo tiempo que enriquecen su sensibilidad, su creatividad y su manera de comprender el mundo."
+    },
+    "aprendizajes": {
+      "title": "Aprendizajes significativos",
+      "p1": "Durante los primeros años del Nivel Primario, el juego continúa siendo una valiosa estrategia de aprendizaje y evoluciona progresivamente hacia actividades, proyectos y desafíos acordes con cada edad.",
+      "p2": "Nuestra propuesta contempla el desarrollo intelectual, emocional, social, psicomotriz y creativo.",
+      "p3": "Estimulamos la curiosidad, el pensamiento libre, la conciencia moral y el goce estético, creando oportunidades para que los estudiantes exploren, se expresen, relacionen conocimientos y encuentren sentido en aquello que aprenden."
+    },
+    "ejes": {
+      "title": "Ejes transversales",
+      "description": "Estos ejes atraviesan las distintas áreas y orientan el desarrollo de capacidades fundamentales durante toda la etapa.",
+      "comunicativa": {
+        "title": "Competencia comunicativa",
+        "backText": "Buscamos que puedan leer comprensivamente, producir y analizar mensajes verbales y no verbales, y obtener, seleccionar, organizar e interpretar información con diferentes propósitos y en ambos idiomas."
+      },
+      "cientifica": {
+        "title": "Alfabetización científica y tecnológica",
+        "backText": "Enseñar ciencias significa ofrecer nuevas maneras de observar, preguntar y comprender el mundo. Partimos de situaciones y fenómenos conocidos para acompañar a los estudiantes en la construcción progresiva de explicaciones y modelos científicos."
+      },
+      "problemas": {
+        "title": "Resolución de problemas",
+        "backText": "Tanto en la vida escolar como en la vida cotidiana, los estudiantes necesitan aprender a identificar, comprender y explicar problemas, imaginar posibles estrategias y analizar diferentes alternativas. Promovemos la capacidad de tomar decisiones fundamentadas, contrastar procedimientos y resultados y desarrollar el pensamiento lógico, crítico, reflexivo y creativo."
+      },
+      "ciudadana": {
+        "title": "Formación personal, social y ciudadana global",
+        "backText": "Acompañamos a nuestros estudiantes para que aprendan a relacionarse consigo mismos, con los demás y con la comunidad. Promovemos los valores que sostienen la convivencia, el respeto por los derechos y deberes y la participación responsable. Buscamos formar ciudadanos empáticos, críticos y comprometidos, capaces de trabajar junto a otros y contribuir positivamente a la transformación de la sociedad en un mundo interconectado."
+      },
+      "sustentabilidad": {
+        "title": "Educación para la Sustentabilidad",
+        "backText": "A través de iniciativas y prácticas sostenibles y proyectos medioambientales, los estudiantes comprenden la importancia de actuar con responsabilidad."
+      }
+    },
+    "recorrido": {
+      "title": "Un recorrido que continúa",
+      "description": "A lo largo del Nivel Primario, la propuesta amplía gradualmente la complejidad de los contenidos, el uso del inglés y la autonomía de los estudiantes. La articulación entre los distintos grados y con el Nivel Secundario permite dar continuidad a los aprendizajes y acompañar una transición natural y segura hacia la siguiente etapa.",
+      "cuadro": {
+        "title": "Un recorrido de 1.º a 7.º grado",
+        "jornada": "Jornada completa · Lunes a viernes",
+        "unidad": "Grado",
+        "ciclo1": "Primer ciclo",
+        "ciclo2": "Segundo ciclo",
+        "g1": "1.er",
+        "g2": "2.º",
+        "g3": "3.er",
+        "g4": "4.º",
+        "g5": "5.º",
+        "g6": "6.º",
+        "g7": "7.º"
+      }
+    }
+  },
   "academicosHome": {
     "loading": "Cargando Vida Estudiantil…",
     "errorTitle": "Error al cargar medios",

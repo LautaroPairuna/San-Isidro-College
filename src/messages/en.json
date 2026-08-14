@@ -321,6 +321,77 @@
       }
     }
   },
+  "nivelPrimario": {
+    "intro": {
+      "title": "Primary",
+      "subtitle": "Learning, discovering and growing in two languages",
+      "p1": "During this stage we accompany our students so that they consolidate the learning begun in Kindergarten, discover their talents and progressively develop their independence, their sense of responsibility and confidence in their own abilities.",
+      "p2": "Our programme brings together the areas established by the Jurisdictional Curriculum Design and the Foreign Language Teaching Programme: English. In this way, students broaden their knowledge and develop the skills to understand, express themselves and learn in both languages.",
+      "p3": "We encourage an attitude of effort, work and responsibility towards study, together with curiosity and an interest in learning. We want every student to recognise their own possibilities, take on new challenges and build genuinely meaningful learning."
+    },
+    "propuesta": {
+      "label1": "A bilingual, full-day",
+      "label2": "programme",
+      "p1": "The syllabus integrates the official curriculum areas —Language, Mathematics, Social Sciences, Natural Sciences, Technology, Ethics and Citizenship, Physical Education, Art and Religious Education— with different subjects taught in English.",
+      "p2": "The English programme comprises <b>Language</b>, with areas such as Comprehension, Oral Language, Reading, Written Language, Creative Writing and Spelling, as well as <b>Literature, Social Studies, Science and Drama</b>.",
+      "p3": "This integration means that English is not only a subject, but also a language for reading, researching, creating, studying and sharing what has been learned. Through daily, intensive contact, we foster a broad understanding of the language and the progressive development of expression and communication."
+    },
+    "literatura": {
+      "title": "Literature as a starting point",
+      "p1": "Our methodology finds one of its main starting points in literature. Reading broadens language, stimulates the imagination, introduces other realities and opens up space to talk, interpret, ask questions and express ideas.",
+      "p2": "We set out to turn the classroom into a community of readers and writers, where every student can develop their own possibilities and grow as an interpreter and producer of texts in both languages.",
+      "frase": "You learn to read by reading and to write by writing.",
+      "p3": "Through carefully selected works and reading activities, students develop comprehension, oral expression, writing and critical thinking, while enriching their sensitivity, their creativity and the way they understand the world."
+    },
+    "aprendizajes": {
+      "title": "Meaningful learning",
+      "p1": "During the first years of Primary, play continues to be a valuable learning strategy and progressively evolves into activities, projects and challenges suited to each age.",
+      "p2": "Our programme addresses intellectual, emotional, social, psychomotor and creative development.",
+      "p3": "We encourage curiosity, independent thinking, moral awareness and the enjoyment of beauty, creating opportunities for students to explore, express themselves, connect knowledge and find meaning in what they learn."
+    },
+    "ejes": {
+      "title": "Cross-curricular themes",
+      "description": "These themes run through the different areas and guide the development of fundamental skills throughout the whole stage.",
+      "comunicativa": {
+        "title": "Communicative competence",
+        "backText": "We want students to be able to read with understanding, produce and analyse verbal and non-verbal messages, and obtain, select, organise and interpret information for different purposes and in both languages."
+      },
+      "cientifica": {
+        "title": "Scientific and technological literacy",
+        "backText": "Teaching science means offering new ways of observing, questioning and understanding the world. We start from familiar situations and phenomena to accompany students in the progressive construction of scientific explanations and models."
+      },
+      "problemas": {
+        "title": "Problem solving",
+        "backText": "In school life as much as in everyday life, students need to learn to identify, understand and explain problems, imagine possible strategies and weigh up different alternatives. We foster the ability to make well-founded decisions, compare procedures and results, and develop logical, critical, reflective and creative thinking."
+      },
+      "ciudadana": {
+        "title": "Personal, social and global citizenship education",
+        "backText": "We accompany our students so that they learn to relate to themselves, to others and to the community. We promote the values that sustain living together, respect for rights and duties, and responsible participation. We seek to form empathetic, critical and committed citizens, able to work alongside others and contribute positively to the transformation of society in an interconnected world."
+      },
+      "sustentabilidad": {
+        "title": "Education for Sustainability",
+        "backText": "Through sustainable initiatives and practices and environmental projects, students come to understand the importance of acting responsibly."
+      }
+    },
+    "recorrido": {
+      "title": "A journey that continues",
+      "description": "Throughout Primary, the programme gradually increases the complexity of the content, the use of English and the independence of the students. The articulation between the different years and with Secondary gives continuity to their learning and supports a natural, secure transition to the next stage.",
+      "cuadro": {
+        "title": "A journey from 1st Form to 7th Form",
+        "jornada": "Full-day programme · Monday to Friday",
+        "unidad": "Form",
+        "ciclo1": "Junior 1",
+        "ciclo2": "Junior 2",
+        "g1": "1st",
+        "g2": "2nd",
+        "g3": "3rd",
+        "g4": "4th",
+        "g5": "5th",
+        "g6": "6th",
+        "g7": "7th"
+      }
+    }
+  },
   "academicosHome": {
     "loading": "Loading Student Life…",
     "errorTitle": "Error loading media",
