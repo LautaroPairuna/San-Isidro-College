@@ -49,7 +49,8 @@
     }
   },
   "colegio": {
-    "proyectoTitle": "Una educación integral, bilingüe e innovadora",
+    "proyectoTitle1": "Una educación integral,",
+    "proyectoTitle2": "bilingüe e innovadora",
     "introduccion": {
       "p1": "San Isidro College abrió sus puertas en 2016 con el propósito de ofrecer a la comunidad de Salta un proyecto educativo exigente y ambicioso, orientado a una formación integral, bilingüe y católica. Nuestra propuesta combina los contenidos establecidos por el sistema educativo nacional con programas internacionales de altos estándares académicos.",
       "p2": "El bilingüismo forma parte de la experiencia cotidiana de nuestros estudiantes. Desde los primeros años, el inglés se incorpora de manera intensiva y natural a través de distintas áreas, actividades y experiencias de aprendizaje. Así, cada estudiante desarrolla progresivamente la comprensión, la expresión oral y adquiere la confianza necesaria para comunicarse en ambos idiomas.",
@@ -100,23 +101,19 @@
     },
     "asideTitle": "EL COLEGIO",
     "aside": {
-      "proyecto": "Proyecto Educativo",
-      "mision": "Misión",
-      "vision": "Visión",
-      "valores": "Valores",
-      "escudo": "Nuestro escudo",
+      "proyecto": "Una educación integral, bilingüe e innovadora",
+      "misionVisionValores": "Misión, visión y valores",
+      "escudo": "Nuestro escudo, nuestra identidad",
       "aprendizajeValores": "Aprendizaje con valores",
-      "educacionPersonalizada": "Educación Personalizada",
-      "instalaciones": "Instalaciones",
+      "educacionPersonalizada": "Educación personalizada",
+      "instalaciones": "Un colegio pensado y diseñado para ser colegio",
       "aria": {
-        "proyecto": "Ir a Proyecto Educativo",
-        "mision": "Ir a Misión",
-        "vision": "Ir a Visión",
-        "valores": "Ir a Valores",
-        "escudo": "Ir a Nuestro escudo",
+        "proyecto": "Ir a Una educación integral, bilingüe e innovadora",
+        "misionVisionValores": "Ir a Misión, visión y valores",
+        "escudo": "Ir a Nuestro escudo, nuestra identidad",
         "aprendizajeValores": "Ir a Aprendizaje con valores",
-        "educacionPersonalizada": "Ir a Educación Personalizada",
-        "instalaciones": "Ir a Instalaciones"
+        "educacionPersonalizada": "Ir a Educación personalizada",
+        "instalaciones": "Ir a Un colegio pensado y diseñado para ser colegio"
       }
     }
   },

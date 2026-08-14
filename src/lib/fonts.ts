@@ -52,4 +52,11 @@ export const harlows = localFont({
   display: 'swap',
 });
 
-export const fontVariables = `${gotham.variable} ${acumin.variable} ${harlows.variable}`;
+// Configuración de fuente Myriad Pro
+export const myriadPro = localFont({
+  src: '../../public/fonts/MYRIADPRO-REGULAR.woff2',
+  variable: '--font-myriad',
+  display: 'swap',
+});
+
+export const fontVariables = `${gotham.variable} ${acumin.variable} ${harlows.variable} ${myriadPro.variable}`;

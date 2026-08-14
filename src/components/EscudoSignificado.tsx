@@ -27,10 +27,10 @@ const LINE_HEIGHT = 18.56 / 15.92; // = 1.166
 
 /** Cajas de texto en % del contenedor. Coinciden con los corchetes del SVG. */
 const BLOCKS = [
-  { key: 'lema', left: 0.658, top: 26.583, width: 25.278, align: 'center' },
+  { key: 'lema', left: 0.658, top: 26.583, width: 25.278, align: 'right' },
   { key: 'cruz', left: 42.476, top: 0.0, width: 35.799, align: 'left' },
   { key: 'espiga', left: 78.874, top: 25.352, width: 20.456, align: 'left' },
-  { key: 'montanas', left: 1.505, top: 71.379, width: 24.402, align: 'center' },
+  { key: 'montanas', left: 1.505, top: 71.379, width: 24.402, align: 'right' },
   { key: 'campoArado', left: 75.85, top: 66.284, width: 21.187, align: 'left' },
 ] as const;
 
@@ -96,6 +96,7 @@ export function EscudoSignificado({ className }: { className?: string }) {
             fontVariationSettings: `'wdth' ${FONT_WIDTH_AXIS}`,
             lineHeight: LINE_HEIGHT,
             color: '#4a4a49',
+            paddingRight: key === 'lema' || key === 'montanas' ? 20 : undefined,
           }}
         >
           <h3 className="font-bold">{t(`${key}.titulo`)}</h3>

@@ -49,7 +49,8 @@
     }
   },
   "colegio": {
-    "proyectoTitle": "A holistic, bilingual and innovative education",
+    "proyectoTitle1": "A holistic, bilingual",
+    "proyectoTitle2": "and innovative education",
     "introduccion": {
       "p1": "San Isidro College opened its doors in 2016 with the purpose of offering the community of Salta a demanding and ambitious educational project, oriented towards a holistic, bilingual and Catholic education. Our proposal combines the contents established by the national education system with international programmes of high academic standards.",
       "p2": "Bilingualism is part of our students' everyday experience. From the earliest years, English is incorporated intensively and naturally across different subjects, activities and learning experiences. In this way, every student progressively develops comprehension and oral expression, and gains the confidence needed to communicate in both languages.",
@@ -100,23 +101,19 @@
     },
     "asideTitle": "THE SCHOOL",
     "aside": {
-      "proyecto": "Educational Project",
-      "mision": "Mission",
-      "vision": "Vision",
-      "valores": "Values",
-      "escudo": "Our crest",
+      "proyecto": "A holistic, bilingual and innovative education",
+      "misionVisionValores": "Mission, vision and values",
+      "escudo": "Our crest, our identity",
       "aprendizajeValores": "Learning through values",
       "educacionPersonalizada": "Personalised Education",
-      "instalaciones": "Facilities",
+      "instalaciones": "A school designed to be a school",
       "aria": {
-        "proyecto": "Go to Educational Project",
-        "mision": "Go to Mission",
-        "vision": "Go to Vision",
-        "valores": "Go to Values",
-        "escudo": "Go to Our crest",
+        "proyecto": "Go to A holistic, bilingual and innovative education",
+        "misionVisionValores": "Go to Mission, vision and values",
+        "escudo": "Go to Our crest, our identity",
         "aprendizajeValores": "Go to Learning through values",
         "educacionPersonalizada": "Go to Personalised Education",
-        "instalaciones": "Go to Facilities"
+        "instalaciones": "Go to A school designed to be a school"
       }
     }
   },

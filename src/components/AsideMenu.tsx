@@ -14,8 +14,8 @@ const AsideMenu: React.FC<FixedAsideProps> = ({
   // Menú fijo para escritorio (se muestra a partir de lg)
   const asideDesktop = `
     hidden lg:block
-    fixed 2xl:right-20 lg:right-0 right-10 top-60 w-56 text-gray-800 z-30 transition-all duration-300
-    bg-gray-200 shadow-md p-5 rounded-lg
+    fixed lg:right-4 2xl:right-20 top-32 w-52 text-gray-800 z-30 transition-all duration-300
+    bg-gray-100/95 shadow-sm p-4 rounded-md border border-gray-200
   `;
 
   // Menú móvil (< lg) estilo off-canvas,

@@ -1,5 +1,4 @@
 // /app/[locale]/colegio/page.tsx
-import Image from "next/image"
 import SmoothLink from "@/components/SmoothLink"
 import AsideMenu from "@/components/AsideMenu"
 import RenderMedia from "@/components/RenderMedia"
@@ -66,30 +65,13 @@ const ColegioPage = async ({ params }: PageProps) => {
   return (
     <>
       {/* ============ PROYECTO EDUCATIVO ============ */}
-      <section id="proyecto" className="relative w-full bg-white pt-32 pb-16 lg:pb-24 overflow-hidden">
-        {/* Trazos decorativos (solo desktop) */}
-        <Image
-          src="/images/formas/forma-home-2.svg"
-          alt=""
-          aria-hidden="true"
-          width={420}
-          height={520}
-          className="hidden lg:block absolute top-10 left-0 w-[420px] h-auto pointer-events-none"
-        />
-        <Image
-          src="/images/formas/forma-home-4.svg"
-          alt=""
-          aria-hidden="true"
-          width={480}
-          height={560}
-          className="hidden lg:block absolute -top-10 right-0 w-[480px] h-auto pointer-events-none"
-        />
-
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+      <section id="proyecto" className="relative w-full bg-white pt-40 pb-16 lg:pb-24 overflow-hidden">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
-            {t("proyectoTitle")}
+            {t("proyectoTitle1")}
+            <span className="block">{t("proyectoTitle2")}</span>
           </h1>
-          <div className="mt-8 space-y-5 text-gray-700 leading-relaxed text-justify">
+          <div className="mt-8 max-w-3xl space-y-5 text-gray-700 leading-relaxed text-justify">
             {introduccion.map((p) => (
               <p key={p}>{t(`introduccion.${p}`)}</p>
             ))}
@@ -134,7 +116,7 @@ const ColegioPage = async ({ params }: PageProps) => {
               {t("valores.label")}
             </h2>
             <div className="mt-8 flex justify-center">
-              <EstudianteCentro className="w-full max-w-[420px] h-auto" />
+              <EstudianteCentro className="w-full max-w-[560px] h-auto" />
             </div>
           </div>
         </div>
@@ -163,7 +145,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ APRENDIZAJE CON VALORES ============ */}
       <section id="aprendizaje-con-valores" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("aprendizajeValores.title")}
           </h2>
@@ -186,34 +168,34 @@ const ColegioPage = async ({ params }: PageProps) => {
           </h2>
 
           {/* Foto a la izquierda, texto a la derecha */}
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-5 relative h-[260px] md:h-[320px] rounded-xl overflow-hidden shadow-lg">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-4 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
               <RenderMedia
                 medio={personalizada1}
                 fallback="/images/placeholder.webp"
                 fill
-                sizes="(max-width: 768px) 100vw, 40vw"
+                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
-            <div className="md:col-span-7 space-y-5 text-gray-700 leading-relaxed text-justify">
+            <div className="md:col-span-8 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed text-justify md:border-l-2 md:border-black md:pl-6">
               <p>{t("educacionPersonalizada.p1")}</p>
               <p>{t("educacionPersonalizada.p2")}</p>
             </div>
           </div>
 
           {/* Texto a la izquierda, foto a la derecha */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-7 md:order-1 space-y-5 text-gray-700 leading-relaxed text-justify">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-8 md:order-1 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed text-justify md:border-r-2 md:border-black md:pr-6">
               <p>{t("educacionPersonalizada.p3")}</p>
               <p>{t("educacionPersonalizada.p4")}</p>
             </div>
-            <div className="md:col-span-5 md:order-2 relative h-[260px] md:h-[320px] rounded-xl overflow-hidden shadow-lg">
+            <div className="md:col-span-4 md:order-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
               <RenderMedia
                 medio={personalizada2}
                 fallback="/images/placeholder.webp"
                 fill
-                sizes="(max-width: 768px) 100vw, 40vw"
+                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -223,7 +205,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ INSTALACIONES ============ */}
       <section id="instalaciones" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("instalaciones.title")}
           </h2>
@@ -247,56 +229,42 @@ const ColegioPage = async ({ params }: PageProps) => {
       {/* ASIDE SUPERPUESTO EN EL COSTADO */}
       <AsideMenu>
         <hr className="border-t border-black mb-3" />
-        <h3 className="text-xl italic text-gray-900 mb-6">
+        <h3 className="text-lg italic text-gray-900 mb-4">
           {t("asideTitle")}
         </h3>
-        <ul className="space-y-5">
-          <li className="font-bold">
+        <ul className="space-y-3">
+          <li className="font-semibold text-sm">
             <SmoothLink href="#proyecto" aria-label={t("aside.aria.proyecto")}>
               {t("aside.proyecto")}
             </SmoothLink>
           </li>
-          <li className="space-y-1 font-bold">
-            <SmoothLink href="#mision" aria-label={t("aside.aria.mision")}>
-              {t("aside.mision")}
-            </SmoothLink>
-            <br />
-            <SmoothLink href="#vision" aria-label={t("aside.aria.vision")}>
-              {t("aside.vision")}
-            </SmoothLink>
-            <br />
-            <SmoothLink href="#valores" aria-label={t("aside.aria.valores")}>
-              {t("aside.valores")}
+          <li className="font-semibold text-sm">
+            <SmoothLink href="#mision" aria-label={t("aside.aria.misionVisionValores")}>
+              {t("aside.misionVisionValores")}
             </SmoothLink>
           </li>
-          <li className="space-y-1 font-bold">
+          <li className="font-semibold text-sm">
             <SmoothLink href="#escudo" aria-label={t("aside.aria.escudo")}>
               {t("aside.escudo")}
             </SmoothLink>
-            <br />
-            <SmoothLink
-              href="#aprendizaje-con-valores"
-              aria-label={t("aside.aria.aprendizajeValores")}
-            >
+          </li>
+          <li className="font-semibold text-sm">
+            <SmoothLink href="#aprendizaje-con-valores" aria-label={t("aside.aria.aprendizajeValores")}>
               {t("aside.aprendizajeValores")}
             </SmoothLink>
-            <br />
-            <SmoothLink
-              href="#educacion-personalizada"
-              aria-label={t("aside.aria.educacionPersonalizada")}
-            >
+          </li>
+          <li className="font-semibold text-sm">
+            <SmoothLink href="#educacion-personalizada" aria-label={t("aside.aria.educacionPersonalizada")}>
               {t("aside.educacionPersonalizada")}
             </SmoothLink>
-            <br />
+          </li>
+          <li className="font-semibold text-sm">
             <SmoothLink href="#instalaciones" aria-label={t("aside.aria.instalaciones")}>
               {t("aside.instalaciones")}
             </SmoothLink>
           </li>
         </ul>
       </AsideMenu>
-
-      <SectionCarrusel medios={alianzasMedia} />
-      <Contact />
     </>
   )
 }
