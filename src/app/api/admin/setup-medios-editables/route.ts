@@ -42,6 +42,26 @@ type SeccionSeed = {
 }
 
 const SECCIONES: SeccionSeed[] = [
+  // ── Home: los invitamos a conocernos ──────────────────────────────────
+  {
+    slug: 'home-conocernos',
+    pagina: 'home',
+    orden: 60,
+    tipo: 'MEDIA_UNICA',
+    titulo: 'Los invitamos a conocernos - Foto',
+    grupo: {
+      nombre: 'Home - Los Invitamos a Conocernos',
+      tipoGrupo: 'UNICO',
+      medios: [
+        {
+          urlArchivo: 'fondo-bienvenida.webp',
+          textoAlternativo: 'Los invitamos a conocernos',
+          tipo: 'IMAGEN',
+        },
+      ],
+    },
+  },
+
   // ── Colegio: educación personalizada ──────────────────────────────────
   {
     slug: 'colegio-personalizada-1',
