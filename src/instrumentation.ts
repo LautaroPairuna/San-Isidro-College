@@ -7,7 +7,7 @@ export async function register() {
 
   try {
     const sharpModule = await import('sharp');
-    const sharp = ('default' in sharpModule ? sharpModule.default : sharpModule) as typeof import('sharp');
+    const sharp = 'default' in sharpModule ? sharpModule.default : sharpModule;
     // Desactiva el caché interno de buffers/operaciones: evita que sharp
     // retenga memoria entre peticiones (clave en un VPS con poca RAM).
     sharp.cache(false);
