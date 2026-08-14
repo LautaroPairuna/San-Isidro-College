@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
+import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 /** Íconos de "Nuestros Propósitos", en el orden del diseño (dos filas de cuatro). */
 const PROPOSITOS = [
@@ -36,6 +39,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
   const t = await getTranslations({ locale, namespace: 'academicosHome' })
 
   const intro = ['p1', 'p2', 'p3', 'p4', 'p5'] as const
+
+  // Alianzas (grupo global)
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   return (
     <div className="relative overflow-hidden">
@@ -131,6 +137,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
       </section>
 
       <FondoFormaSeccion />
+
+      <SectionCarrusel medios={alianzasMedia} />
+      <Contact />
     </div>
   )
 }
