@@ -74,18 +74,20 @@ const PrimaryPage = async ({ params }: PageProps) => {
   const literatura = pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.LITERATURA)?.medio
   const aprendizajes = pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.APRENDIZAJES)?.medio
 
-  // Fotos de las tarjetas: si el grupo está cargado en el admin, manda la DB.
+  // Íconos y fotos de las tarjetas: si el grupo está cargado en el admin,
+  // manda la DB. Van en un mismo grupo y se separan por tipo.
   const ejesMedios = [...(pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.EJES)?.grupo?.medios ?? [])]
     .sort((a, b) => a.posicion - b.posicion)
-    .filter((medio) => medio.tipo === 'IMAGEN')
+  const ejesIconos = ejesMedios.filter((medio) => medio.tipo === 'ICONO')
+  const ejesFotos = ejesMedios.filter((medio) => medio.tipo === 'IMAGEN')
 
   const ejes = EJES.map(({ key, icon, color }, i) => ({
     key,
     title: t(`ejes.${key}.title`),
     backText: t(`ejes.${key}.backText`),
-    icon: `/images/primary/${icon}`,
+    icon: ejesIconos[i] ? toPublicImageUrl('medios', ejesIconos[i].urlArchivo) : `/images/primary/${icon}`,
     fallbackIcon: `/images/primary/${icon}`,
-    image: ejesMedios[i] ? toPublicImageUrl('medios', ejesMedios[i].urlArchivo) : EJES_FALLBACK_IMG[i],
+    image: ejesFotos[i] ? toPublicImageUrl('medios', ejesFotos[i].urlArchivo) : EJES_FALLBACK_IMG[i],
     fallbackImage: EJES_FALLBACK_IMG[i],
     color,
     backColor: EJES_DORSO,
