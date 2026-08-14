@@ -146,13 +146,6 @@
       "culturas": "Ampliar la comprensión de otras culturas y formas de ver el mundo.",
       "herramientas": "Brindar herramientas para desenvolverse en contextos académicos, sociales y profesionales cada vez más globales."
     },
-    "niveles": {
-      "title": "Niveles educativos",
-      "description": "Acompañamos a nuestros estudiantes en cada etapa de su crecimiento, desde sus primeros aprendizajes hasta su preparación para los desafíos del futuro.",
-      "kindergarden": "Inicial",
-      "primary": "Primaria",
-      "secondary": "Secundaria"
-    },
     "kindergarten": {
       "titulo": "Kindergarten",
       "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continua en K3, K4 y K5.",
@@ -280,6 +273,52 @@
       "kindergarten": "Kindergarten",
       "primary": "Primary",
       "secondary": "Secondary"
+    }
+  },
+  "nivelInicial": {
+    "intro": {
+      "title": "Nivel Inicial",
+      "subtitle": "Aprender jugando, crecer en dos idiomas",
+      "p1": "El Nivel Inicial es el comienzo de una etapa llena de descubrimientos. En un ambiente cercano, seguro y afectivo, acompañamos a nuestros niños para que puedan explorar, imaginar, crear, expresarse y construir sus primeros vínculos con los demás y con el aprendizaje.",
+      "p2": "Nuestra propuesta favorece el desarrollo personal, intelectual, emocional, social, psicomotriz y creativo, respetando los tiempos, intereses y necesidades propios de cada edad. El vínculo cercano con los docentes brinda la confianza necesaria para que cada estudiante se anime a participar, descubrir y aprender."
+    },
+    "ingles": {
+      "label1": "Primeros encuentros",
+      "label2": "con el inglés",
+      "p1": "Nuestro proyecto bilingüe comienza en K2 y continúa progresivamente en K3, K4 y K5. Desde los primeros años, los estudiantes están en contacto con el español y el inglés a través de experiencias cotidianas dentro y fuera de la sala.",
+      "p2": "En esta etapa buscamos afianzar el desarrollo de la lengua materna y favorecer la incorporación temprana del inglés como segunda lengua. El proceso parte de aquello que les resulta conocido y familiar para avanzar hacia nuevas palabras, sonidos y formas de expresión.",
+      "p3": "Canciones, cuentos, títeres, rimas, juegos, dramatizaciones, frases y consignas permiten que el inglés aparezca en situaciones significativas y cercanas. De esta manera, los estudiantes comienzan a utilizarlo como una herramienta de comunicación y como una lengua a través de la cual también pueden acceder a otros aprendizajes."
+    },
+    "juego": {
+      "title": "El valor del juego",
+      "p1": "Desde K2, el juego es el eje fundamental de nuestra propuesta. Es una actividad espontánea y natural que permite acercarnos a los intereses, las necesidades y los procesos de pensamiento de cada estudiante.",
+      "p2": "Lo natural para los niños es aprender jugando. A través del juego conocen el mundo que los rodea, ponen a prueba sus ideas, ensayan diferentes roles, desarrollan destrezas y habilidades, crean sus propios significados y encuentran nuevas maneras de resolver situaciones.",
+      "p3": "Jugar también les permite encontrarse con otros, compartir experiencias, colaborar, aprender a esperar, comprender diferentes puntos de vista y fortalecer valores como la empatía y el respeto. Así, el juego contribuye al desarrollo psicomotriz, cognitivo, social, emocional y moral.",
+      "p4": "La base y el motor de todo aprendizaje profundo es el vínculo afectivo. Cuando los estudiantes se sienten acompañados y seguros, confían en sus capacidades, disfrutan del proceso y se muestran más abiertos a explorar y aprender. Por su carácter lúdico y motivador, el juego permite crear, imaginar, desarrollar la fantasía y acercarse naturalmente al lenguaje, el arte, la resolución de problemas y el aprendizaje en ambos idiomas."
+    },
+    "salas": {
+      "title": "Una propuesta que crece con ellos",
+      "description": "La jornada y las experiencias de aprendizaje se amplían progresivamente de acuerdo con la edad y las necesidades de los estudiantes.",
+      "k2": {
+        "title": "K2 Monkeys",
+        "jornada": "Jardín Maternal\nJornada Simple",
+        "detalle": "Turno mañana o turno tarde"
+      },
+      "k3": {
+        "title": "K3 Hippos",
+        "jornada": "Jardín de Infantes\nJornada Simple",
+        "detalle": "Turno mañana o turno tarde"
+      },
+      "k4": {
+        "title": "K4 Lions & Tigers",
+        "jornada": "Jardín de Infantes\nJornada simple",
+        "detalle": "Talleres optativos de extensión de jornada tres veces por semana"
+      },
+      "k5": {
+        "title": "K5 Giraffes & Pandas",
+        "jornada": "Jardín de Infantes\nJornada completa de lunes a jueves",
+        "detalle": "Viernes: Talleres optativos de extensión de jornada"
+      }
     }
   },
   "academicosHome": {
@@ -747,5 +786,12 @@
       "titulo": "El campo arado",
       "texto": "Nos recuerda que todo sueño, objetivo o proyecto, comienza con el trabajo, la constancia y la decisión de sembrar."
     }
+  },
+  "nivelesEducativos": {
+    "title": "Niveles educativos",
+    "description": "Acompañamos a nuestros estudiantes en cada etapa de su crecimiento, desde sus primeros aprendizajes hasta su preparación para los desafíos del futuro.",
+    "kindergarden": "Inicial",
+    "primary": "Primaria",
+    "secondary": "Secundaria"
   }
 }

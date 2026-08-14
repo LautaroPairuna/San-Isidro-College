@@ -1,7 +1,7 @@
 // /app/[locale]/academicos-mas-info/page.tsx
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
+import NivelesEducativos from '@/components/NivelesEducativos'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
@@ -17,12 +17,6 @@ const PROPOSITOS = [
   { key: 'articular', icon: 'articular-lengua-proposito.svg' },
   { key: 'culturas', icon: 'ampliar-comprension-proposito.svg' },
   { key: 'herramientas', icon: 'brindar-herramientas-proposito.svg' },
-] as const
-
-const NIVELES = [
-  { key: 'kindergarden', href: '/kindergarden' },
-  { key: 'primary', href: '/primary' },
-  { key: 'secondary', href: '/secondary' },
 ] as const
 
 // ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
@@ -110,31 +104,7 @@ const AcademicosMasInfoPage = async ({ params }: PageProps) => {
       </section>
 
       {/* ============ NIVELES EDUCATIVOS ============ */}
-      <section id="niveles" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#294161]">
-            {t('niveles.title')}
-          </h2>
-          <p className="mt-3 max-w-2xl text-gray-700 leading-relaxed">
-            {t('niveles.description')}
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
-            {NIVELES.map(({ key, href }) => (
-              <Link
-                key={key}
-                href={href}
-                className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
-              >
-                {t(`niveles.${key}`)}
-                <span aria-hidden="true" className="text-[#c19516]">
-                  →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <NivelesEducativos locale={locale} />
 
       <FondoFormaSeccion />
 

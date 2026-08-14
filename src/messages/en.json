@@ -146,13 +146,6 @@
       "culturas": "To broaden the understanding of other cultures and ways of seeing the world.",
       "herramientas": "To provide tools for academic, social and professional contexts that are increasingly global."
     },
-    "niveles": {
-      "title": "Academic levels",
-      "description": "We accompany our students at every stage of their growth, from their very first learning experiences to their preparation for the challenges of the future.",
-      "kindergarden": "Kindergarten",
-      "primary": "Primary",
-      "secondary": "Secondary"
-    },
     "kindergarten": {
       "titulo": "Kindergarten",
       "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
@@ -280,6 +273,52 @@
       "kindergarten": "Kindergarten",
       "primary": "Primary",
       "secondary": "Secondary"
+    }
+  },
+  "nivelInicial": {
+    "intro": {
+      "title": "Kindergarten",
+      "subtitle": "Learning through play, growing in two languages",
+      "p1": "Kindergarten is the beginning of a stage full of discovery. In a close, safe and caring environment, we accompany our children so that they can explore, imagine, create, express themselves and build their first bonds with others and with learning.",
+      "p2": "Our programme supports personal, intellectual, emotional, social, psychomotor and creative development, respecting the pace, interests and needs of each age. The close bond with their teachers gives every student the confidence to take part, discover and learn."
+    },
+    "ingles": {
+      "label1": "First encounters",
+      "label2": "with English",
+      "p1": "Our bilingual project begins in K2 and continues progressively through K3, K4 and K5. From the earliest years, students are in contact with Spanish and English through everyday experiences inside and outside the classroom.",
+      "p2": "At this stage we seek to strengthen the development of the mother tongue and to encourage the early incorporation of English as a second language. The process starts from what is known and familiar to them and moves towards new words, sounds and forms of expression.",
+      "p3": "Songs, stories, puppets, rhymes, games, role play, phrases and instructions allow English to appear in meaningful, familiar situations. In this way, students begin to use it as a tool for communication and as a language through which they can also access other learning."
+    },
+    "juego": {
+      "title": "The value of play",
+      "p1": "From K2 onwards, play is the cornerstone of our programme. It is a spontaneous, natural activity that brings us closer to the interests, needs and thought processes of each student.",
+      "p2": "What comes naturally to children is learning through play. Through play they get to know the world around them, test their ideas, try out different roles, develop skills and abilities, create their own meanings and find new ways of solving situations.",
+      "p3": "Play also allows them to meet others, share experiences, collaborate, learn to wait, understand different points of view and strengthen values such as empathy and respect. In this way, play contributes to psychomotor, cognitive, social, emotional and moral development.",
+      "p4": "The foundation and driving force of all deep learning is the affective bond. When students feel supported and safe, they trust their own abilities, enjoy the process and are more open to exploring and learning. Because it is playful and motivating, play makes it possible to create, imagine, develop fantasy and come naturally closer to language, art, problem solving and learning in both languages."
+    },
+    "salas": {
+      "title": "A programme that grows with them",
+      "description": "The school day and the learning experiences expand progressively according to the age and the needs of the students.",
+      "k2": {
+        "title": "K2 Monkeys",
+        "jornada": "Nursery\nSingle session",
+        "detalle": "Morning or afternoon shift"
+      },
+      "k3": {
+        "title": "K3 Hippos",
+        "jornada": "Kindergarten\nSingle session",
+        "detalle": "Morning or afternoon shift"
+      },
+      "k4": {
+        "title": "K4 Lions & Tigers",
+        "jornada": "Kindergarten\nSingle session",
+        "detalle": "Optional extended-day workshops three times a week"
+      },
+      "k5": {
+        "title": "K5 Giraffes & Pandas",
+        "jornada": "Kindergarten\nFull day, Monday to Thursday",
+        "detalle": "Friday: optional extended-day workshops"
+      }
     }
   },
   "academicosHome": {
@@ -747,5 +786,12 @@
       "titulo": "The ploughed field",
       "texto": "It reminds us that every dream, goal or project begins with work, perseverance and the decision to sow."
     }
+  },
+  "nivelesEducativos": {
+    "title": "Academic levels",
+    "description": "We accompany our students at every stage of their growth, from their very first learning experiences to their preparation for the challenges of the future.",
+    "kindergarden": "Kindergarten",
+    "primary": "Primary",
+    "secondary": "Secondary"
   }
 }
