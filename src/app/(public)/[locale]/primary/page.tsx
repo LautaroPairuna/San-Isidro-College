@@ -29,13 +29,17 @@ const EJES = [
 const EJES_DORSO = '#a9c69c'
 const EJES_TEXTO = '#294161'
 
-/** Fotos de las tarjetas mientras no estén cargadas desde el admin. */
+/**
+ * Fotos de las tarjetas mientras no estén cargadas desde el admin. Salen de
+ * /images y no de /images/medios: esa carpeta la maneja el servidor de medios,
+ * así que un archivo del repo puede no estar ahí.
+ */
 const EJES_FALLBACK_IMG = [
-  '/images/medios/banner-primary-20250602-202252.webp',
-  '/images/medios/foto-balance-1-20260217-194502.webp',
-  '/images/medios/foto-estudiantil-20250603-005440.webp',
-  '/images/medios/foto-hockey-20250603-005057.webp',
-  '/images/medios/foto-balance-3-20260217-194614.webp',
+  '/images/image-kindergarten.webp',
+  '/images/innovacion-tecnologia.png',
+  '/images/centro-proyecto.png',
+  '/images/Image-SIC-hockey.webp',
+  '/images/sustentabilidad.png',
 ]
 
 /**
@@ -55,7 +59,7 @@ const SECTION_SLUGS = {
 }
 
 const FALLBACKS = {
-  LITERATURA: '/images/medios/banner-primary-20250602-202252.webp',
+  LITERATURA: '/images/image-kindergarten.webp',
   APRENDIZAJES: '/images/image-SIC-play.webp',
 }
 

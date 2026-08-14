@@ -223,6 +223,22 @@ const SECCIONES: SeccionSeed[] = [
       ],
     },
   },
+  // ── Secundaria: tarjetas de "Una formación que trasciende el aula" ────
+  {
+    // Las fotos ya estaban cargadas en el grupo de las tarjetas del proyecto de
+    // vida, que es el mismo contenido. Acá solo se engancha la sección: por eso
+    // no lleva medios, para no duplicar lo que ya existe.
+    slug: 'secondary-formacion',
+    pagina: 'secondary',
+    orden: 10,
+    tipo: 'GALERIA',
+    titulo: 'Una formación que trasciende el aula - Fotos',
+    grupo: {
+      nombre: 'Academicos Mas Info - Cards Proyecto de Vida',
+      tipoGrupo: 'GALERIA',
+      medios: [],
+    },
+  },
 ]
 
 export async function GET() {
@@ -250,7 +266,9 @@ export async function GET() {
       }
 
       // 2) Medios: solo si el grupo está vacío, para no tocar lo ya subido
-      if (grupo.medios.length === 0) {
+      if (seccion.grupo.medios.length === 0) {
+        results.push(`Medios: ${seccion.grupo.nombre} se deja como está`);
+      } else if (grupo.medios.length === 0) {
         await prisma.medio.createMany({
           data: seccion.grupo.medios.map((medio, i) => ({
             urlArchivo: medio.urlArchivo,

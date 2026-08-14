@@ -1,8 +1,8 @@
 -- Secciones y grupos de medios para que las páginas nuevas sean editables
 -- desde el admin: la foto de Los invitamos a conocernos (Home), las fotos de
 -- Educación personalizada (Colegio), los íconos de Nuestros Propósitos
--- (Proyecto bilingüe), las fotos de El valor del juego (Inicial) y las fotos e
--- íconos de Primaria. Secundaria ya tenía los suyos.
+-- (Proyecto bilingüe), las fotos de El valor del juego (Inicial), las fotos e
+-- íconos de Primaria y las fotos de las tarjetas de Secundaria.
 --
 -- Equivale a GET /api/admin/setup-medios-editables; usá uno u otro, no hace
 -- falta correr los dos.
@@ -251,6 +251,23 @@ UPDATE `seccion` SET `grupoId` = @grupo, `actualizadoEn` = NOW(3)
 WHERE `slug` = 'primary-ejes' AND `grupoId` IS NULL;
 
 -- ==========================================================================
+-- Una formación que trasciende el aula - Fotos  (página: secondary)
+-- ==========================================================================
+
+INSERT IGNORE INTO `grupomedios` (`nombre`, `tipoGrupo`, `creadoEn`, `actualizadoEn`)
+VALUES ('Academicos Mas Info - Cards Proyecto de Vida', 'GALERIA', NOW(3), NOW(3));
+
+SET @grupo := (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Academicos Mas Info - Cards Proyecto de Vida');
+-- El grupo ya tiene sus medios cargados: acá solo se engancha la sección.
+
+INSERT IGNORE INTO `seccion` (`slug`, `pagina`, `orden`, `tipo`, `titulo`, `grupoId`, `medioId`, `creadoEn`, `actualizadoEn`)
+VALUES ('secondary-formacion', 'secondary', 10, 'GALERIA', 'Una formación que trasciende el aula - Fotos', @grupo, NULL, NOW(3), NOW(3));
+
+-- Si la sección ya existía sin grupo asignado, se lo completa
+UPDATE `seccion` SET `grupoId` = @grupo, `actualizadoEn` = NOW(3)
+WHERE `slug` = 'secondary-formacion' AND `grupoId` IS NULL;
+
+-- ==========================================================================
 -- Verificación
 -- ==========================================================================
 
@@ -268,6 +285,7 @@ WHERE s.`slug` IN (
   'kindergarden-juego-2',
   'primary-literatura',
   'primary-aprendizajes',
-  'primary-ejes'
+  'primary-ejes',
+  'secondary-formacion'
 )
 ORDER BY s.`pagina`, s.`orden`;

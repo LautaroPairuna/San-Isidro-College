@@ -30,14 +30,18 @@ const TARJETAS = [
 const TARJETAS_DORSO = '#a9c69c'
 const TARJETAS_TEXTO = '#294161'
 
-/** Fotos de las tarjetas mientras no estén cargadas desde el admin. */
+/**
+ * Fotos de las tarjetas mientras no estén cargadas desde el admin. Salen de
+ * /images y no de /images/medios: esa carpeta la maneja el servidor de medios,
+ * así que un archivo del repo puede no estar ahí.
+ */
 const TARJETAS_FALLBACK_IMG = [
-  '/images/medios/foto-balance-1-20260217-194502.webp',
-  '/images/medios/foto-estudiantil-20250603-005440.webp',
-  '/images/medios/foto-dojo-2-20250603-005253.webp',
-  '/images/medios/foto-hockey-20250603-005057.webp',
-  '/images/medios/foto-isidro-play-20250603-005601.webp',
-  '/images/medios/foto-balance-3-20260217-194614.webp',
+  '/images/centro-proyecto.png',
+  '/images/ciudadanos-globales.png',
+  '/images/innovacion-tecnologia.png',
+  '/images/deportes.png',
+  '/images/artes.png',
+  '/images/sustentabilidad.png',
 ]
 
 /** Los cinco años, en las dos filas del cuadro: ciclo básico y ciclo orientado. */
