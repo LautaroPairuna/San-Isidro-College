@@ -2,10 +2,9 @@
 import SmoothLink from "@/components/SmoothLink"
 import AsideMenu from "@/components/AsideMenu"
 import RenderMedia from "@/components/RenderMedia"
-import SectionCarrusel from "@/components/sectionCarrusel"
-import Contact from "@/components/sectionContact"
 import EstudianteCentro from "@/components/EstudianteCentro"
 import EscudoSignificado from "@/components/EscudoSignificado"
+import FondoFormaSeccion from "@/components/FondoFormaSeccion"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { getPageContentForSlug, type PageContentSection } from "@/lib/pageContentCache"
 
@@ -16,18 +15,7 @@ const SECTION_SLUGS = {
   INSTALACIONES: 'colegio-instalaciones',
   PERSONALIZADA_1: 'colegio-personalizada-1',
   PERSONALIZADA_2: 'colegio-personalizada-2',
-  ALIANZAS: 'colegio-alianzas'
 };
-
-/* Tipado auxiliar (copiado de otros archivos, idealmente centralizar) */
-type MedioMinimal = {
-  id: number
-  urlArchivo: string
-  textoAlternativo?: string
-  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
-  posicion: number
-  grupoMediosId: number
-}
 
 // ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
 // El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
@@ -55,15 +43,12 @@ const ColegioPage = async ({ params }: PageProps) => {
   const personalizada1 = getMedio(SECTION_SLUGS.PERSONALIZADA_1);
   const personalizada2 = getMedio(SECTION_SLUGS.PERSONALIZADA_2);
 
-  // Alianzas
-  const alianzasMedia = (pageSections.find((s: PageContentSection) => s.slug === SECTION_SLUGS.ALIANZAS)?.grupo?.medios || []) as unknown as MedioMinimal[];
-
   const introduccion = ['p1', 'p2', 'p3', 'p4'] as const
   const aprendizaje = ['p1', 'p2', 'p3', 'p4'] as const
   const instalaciones = ['p1', 'p2', 'p3', 'p4', 'p5'] as const
 
   return (
-    <>
+    <div className="relative overflow-hidden">
       {/* ============ PROYECTO EDUCATIVO ============ */}
       <section id="proyecto" className="relative w-full bg-white pt-40 pb-16 lg:pb-24 overflow-hidden">
         <div className="relative z-10 max-w-5xl mx-auto px-6">
@@ -124,7 +109,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ NUESTRO ESCUDO ============ */}
       <section id="escudo" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("escudo.title")}
           </h2>
@@ -145,7 +130,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ APRENDIZAJE CON VALORES ============ */}
       <section id="aprendizaje-con-valores" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("aprendizajeValores.title")}
           </h2>
@@ -162,7 +147,7 @@ const ColegioPage = async ({ params }: PageProps) => {
         id="educacion-personalizada"
         className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32"
       >
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("educacionPersonalizada.title")}
           </h2>
@@ -205,7 +190,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ INSTALACIONES ============ */}
       <section id="instalaciones" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("instalaciones.title")}
           </h2>
@@ -265,7 +250,9 @@ const ColegioPage = async ({ params }: PageProps) => {
           </li>
         </ul>
       </AsideMenu>
-    </>
+
+      <FondoFormaSeccion />
+    </div>
   )
 }
 

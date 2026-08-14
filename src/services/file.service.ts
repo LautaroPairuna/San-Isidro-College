@@ -20,7 +20,9 @@ let ffmpegModulePromise: Promise<typeof import('fluent-ffmpeg')> | null = null;
 
 async function getSharp() {
   const sharpModule = await import('sharp');
-  return ('default' in sharpModule ? sharpModule.default : sharpModule) as unknown as typeof import('sharp').default;
+  // sharp usa `export =`, así que el namespace no tiene `default`: el tipo del
+  // módulo ya es la función que devolvemos.
+  return ('default' in sharpModule ? sharpModule.default : sharpModule) as unknown as typeof import('sharp');
 }
 
 async function getFfmpeg() {

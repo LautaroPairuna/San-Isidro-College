@@ -265,48 +265,38 @@
     }
   },
   "academicosHome": {
-    "loading": "Loading Student Life…",
-    "errorTitle": "Error loading media",
-    "hero": {
-      "alt": "I am because we are",
-      "title": "Full-Day or Extended-Hour Bilingual Program",
-      "description": "With various graphic and audiovisual resources, group and expression dynamics, exhibitions, games, dramatizations, songs, stories, etc., the expressive and productive stage is continuously strengthened, consolidated, and nourished.",
-      "readMore": "Read more"
+    "intro": {
+      "title1": "A bilingual project lived",
+      "title2": "every day",
+      "p1": "At San Isidro College, English is not learned only as a subject: it becomes part of everyday life through a comprehensive bilingual project. Our purpose is for students to develop solid competence in both Spanish and English, and to communicate with understanding, confidence and ease in both languages.",
+      "p2": "Learning begins in the earliest years and is progressively consolidated throughout Kindergarten, Primary and Secondary. The programme expands gradually according to the age and needs of each student, respecting every stage of their development.",
+      "p3": "From an early age, our students come into contact with English through familiar and meaningful situations. The process moves from the familiar to the new and from the concrete to the abstract, encouraging the natural acquisition of the sounds, rhythms and forms of expression of the language.",
+      "p4": "The progressive extension of the school day provides daily, systematic and intensive contact with English, along with many opportunities to listen, understand, read, write and express themselves. This builds a solid bond with the second language and the confidence needed to use it in different situations.",
+      "p5": "San Isidro College holds official recognition for its Foreign Language Teaching Programme: English, whose subjects are integrated into the extended school day. This recognition from the Ministry of Education endorses a planned, systematic programme aligned with the official curriculum."
     },
-    "admissions": {
-      "alt": "Admissions Icon",
-      "label": "ADMISSIONS"
+    "aprenderIngles": {
+      "label1": "Learning English",
+      "label2": "and learning in English",
+      "p1": "We believe learning becomes more meaningful when English is presented not only as an object of study, but as a language for accessing other knowledge.",
+      "p2": "Through cross-curricular projects and interdisciplinary work, our students use the language to research, study, carry out activities, solve problems, create and share what they have learned. In this way they do not only learn English: they also learn in English.",
+      "p3": "Graphic and audiovisual resources, reading, oral productions, games, songs, drama, presentations and group work make it possible to use the language in real contexts and for concrete purposes. The arts are also part of this experience, through activities that bring together language, art, music, singing and theatre.",
+      "p4": "This journey is enriched in Secondary with internationally oriented programmes such as <b>Cambridge IGCSE</b> and the <b>Dual Diploma®</b> from Académica, which are described in the section for that level."
     },
-    "kinder": {
-      "title": "KINDERGARTEN",
-      "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
-      "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language.",
-      "p3": "Furthermore, it promotes curricular articulation with the primary level, facilitating a natural and safe transition.",
-      "mobileBrief": "Our Bilingual Project starts in the nursery, K2, …",
-      "readMore": "Read more",
-      "decorAlt": "Kindergarten decoration",
-      "decorAltMobile": "Kindergarten mobile decoration"
+    "propositos": {
+      "title": "Our Purposes",
+      "contacto": "To provide daily, systematic and intensive contact with English.",
+      "comprension": "To foster comprehension, oral expression, reading and writing.",
+      "idioma": "To promote the use of the language in meaningful communicative situations.",
+      "acceso": "To use English as a means of accessing other content and learning.",
+      "confianza": "To strengthen confidence and autonomy in communication.",
+      "articular": "To connect the foreign language with the different areas of the curriculum.",
+      "culturas": "To broaden the understanding of other cultures and ways of seeing the world.",
+      "herramientas": "To provide tools for academic, social and professional contexts that are increasingly global."
     },
-    "primary": {
-      "title": "PRIMARY",
-      "p1": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
-      "readMore": "Read more",
-      "decorAlt": "Primary decoration"
-    },
-    "secondary": {
-      "title": "SECONDARY",
-      "subtitle": "Leaders of the future",
-      "p1": "We prioritize a student-centered approach to develop key 21st-century skills such as autonomy, critical thinking, and creativity. With a solid bilingual foundation, we prepare our students for international exams and advanced technical English proficiency, tailored to their fields of study. We provide a space where learning comes to life.",
-      "readMore": "Read more",
-      "dualTitle": "Dual Diploma",
-      "dualText": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",
-      "dualLogoAlt": "Academia International Studies Logo",
-      "decorAlt": "Secondary frame"
-    },
-    "aside": {
-      "title": "ACADEMIC",
-      "proyecto": "Bilingual Project",
-      "kindergarten": "Kindergarten",
+    "niveles": {
+      "title": "Academic levels",
+      "description": "We accompany our students at every stage of their growth, from their very first learning experiences to their preparation for the challenges of the future.",
+      "kindergarden": "Kindergarten",
       "primary": "Primary",
       "secondary": "Secondary"
     }

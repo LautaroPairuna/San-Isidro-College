@@ -265,50 +265,40 @@
     }
   },
   "academicosHome": {
-    "loading": "Cargando Vida Estudiantil…",
-    "errorTitle": "Error al cargar medios",
-    "hero": {
-      "alt": "I am because we are",
-      "title": "Proyecto bilingüe de jornada Completa o extendida",
-      "description": "Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.",
-      "readMore": "Leer más"
+    "intro": {
+      "title1": "Un proyecto bilingüe que se vive",
+      "title2": "todos los días",
+      "p1": "En San Isidro College, el inglés no se aprende únicamente como una asignatura: se incorpora a la vida cotidiana a través de un proyecto integral bilingüe. Nuestro propósito es que los estudiantes desarrollen una sólida competencia tanto en español como en inglés y puedan comunicarse con comprensión, seguridad y naturalidad en ambos idiomas.",
+      "p2": "El aprendizaje comienza desde los primeros años y se consolida progresivamente a lo largo del Nivel Inicial, Primario y Secundario. La propuesta se amplía gradualmente de acuerdo con la edad y las necesidades de los estudiantes, respetando cada etapa de su desarrollo.",
+      "p3": "Desde pequeños, nuestros estudiantes toman contacto con el inglés a partir de situaciones conocidas y significativas. El proceso avanza de lo familiar a lo nuevo y de lo concreto a lo abstracto, favoreciendo la incorporación natural de sonidos, ritmos y formas de expresión propias del idioma.",
+      "p4": "La extensión progresiva de la jornada brinda un contacto cotidiano, sistemático e intensivo con el inglés, así como múltiples oportunidades para escuchar, comprender, leer, escribir y expresarse. Esto permite construir un vínculo sólido con la segunda lengua y desarrollar la confianza necesaria para utilizarla en diferentes situaciones.",
+      "p5": "San Isidro College cuenta con la oficialización del Trayecto de Enseñanza de Lengua Extranjera: Inglés, cuyas materias se integran a la extensión de la jornada escolar. Este reconocimiento del Ministerio de Educación respalda una propuesta planificada, sistemática y articulada con el diseño curricular oficial."
     },
-    "admissions": {
-      "alt": "Icono Admisiones",
-      "label": "ADMISIONES"
+    "aprenderIngles": {
+      "label1": "Aprender inglés",
+      "label2": "y aprender en inglés",
+      "p1": "Creemos que el aprendizaje adquiere mayor significado cuando el inglés no se presenta solamente como un objeto de estudio, sino como una lengua para acceder a otros conocimientos.",
+      "p2": "A través de proyectos transversales y propuestas interdisciplinarias, nuestros estudiantes utilizan el idioma para investigar, estudiar, desarrollar actividades, resolver situaciones, crear y compartir lo aprendido. Así, no solo aprenden inglés: también aprenden en inglés.",
+      "p3": "Recursos gráficos y audiovisuales, lecturas, producciones orales, juegos, canciones, dramatizaciones, exposiciones y dinámicas grupales permiten utilizar el idioma en contextos reales y con propósitos concretos. Las áreas artísticas también forman parte de esta experiencia mediante propuestas que integran el idioma, el arte, la música, el canto y el teatro.",
+      "p4": "Este recorrido se enriquece en el Nivel Secundario con programas de proyección internacional como <b>Cambridge IGCSE</b> y el <b>Diploma Dual®</b> de Académica, que se desarrollan específicamente en la sección correspondiente al nivel."
     },
-    "kinder": {
-      "title": "KINDERGARTEN",
-      "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.",
-      "p2": "Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.",
-      "p3": "Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.",
-      "mobileBrief": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, …",
-      "readMore": "Leer más",
-      "decorAlt": "Decoración Kindergarten",
-      "decorAltMobile": "Decoración Kindergarten móvil"
+    "propositos": {
+      "title": "Nuestros Propósitos",
+      "contacto": "Brindar un contacto cotidiano, sistemático e intensivo con el inglés.",
+      "comprension": "Favorecer la comprensión, la expresión oral, la lectura y la escritura.",
+      "idioma": "Promover el uso del idioma en situaciones comunicativas significativas.",
+      "acceso": "Utilizar el inglés como medio para acceder a otros contenidos y aprendizajes.",
+      "confianza": "Fortalecer la confianza y la autonomía para comunicarse.",
+      "articular": "Articular la lengua extranjera con las distintas áreas del currículo.",
+      "culturas": "Ampliar la comprensión de otras culturas y formas de ver el mundo.",
+      "herramientas": "Brindar herramientas para desenvolverse en contextos académicos, sociales y profesionales cada vez más globales."
     },
-    "primary": {
-      "title": "PRIMARY",
-      "p1": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
-      "readMore": "Leer más",
-      "decorAlt": "Decoración Primary"
-    },
-    "secondary": {
-      "title": "SECONDARY",
-      "subtitle": "Líderes del futuro",
-      "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.",
-      "readMore": "Leer más",
-      "dualTitle": "Diploma Dual",
-      "dualText": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
-      "dualLogoAlt": "Logo Academia International Studies",
-      "decorAlt": "Cuadro Secondary"
-    },
-    "aside": {
-      "title": "ACADÉMICO",
-      "proyecto": "Proyecto Bilingüe",
-      "kindergarten": "Kindergarten",
-      "primary": "Primary",
-      "secondary": "Secondary"
+    "niveles": {
+      "title": "Niveles educativos",
+      "description": "Acompañamos a nuestros estudiantes en cada etapa de su crecimiento, desde sus primeros aprendizajes hasta su preparación para los desafíos del futuro.",
+      "kindergarden": "Inicial",
+      "primary": "Primaria",
+      "secondary": "Secundaria"
     }
   },
   "academicosLevelsNav": {
