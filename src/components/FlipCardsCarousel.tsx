@@ -28,7 +28,7 @@ export interface FlipCardItem {
 interface FlipCardsCarouselProps {
   items: FlipCardItem[]
   ariaLabel: string
-  /** Cuántas tarjetas entran por vista. Por defecto, hasta cuatro. */
+  /** Cuántas tarjetas entran por vista. Por defecto, hasta tres. */
   itemClassName?: string
 }
 
@@ -119,7 +119,7 @@ function FlipCard({ card }: { card: FlipCardItem }) {
             transform: 'rotateY(180deg)',
           }}
         >
-          <div className="h-full flex items-center justify-center text-center text-xs leading-snug font-semibold">
+          <div className="h-full flex items-center justify-center text-center text-sm leading-snug font-semibold">
             {card.backText}
           </div>
         </div>
@@ -131,7 +131,7 @@ function FlipCard({ card }: { card: FlipCardItem }) {
 export default function FlipCardsCarousel({
   items,
   ariaLabel,
-  itemClassName = 'basis-full lg:basis-1/2 xl:basis-1/3 2xl:basis-1/4',
+  itemClassName = 'basis-full sm:basis-1/2 lg:basis-1/3',
 }: FlipCardsCarouselProps) {
   const [api, setApi] = useState<CarouselApi>()
   const [slideIndex, setSlideIndex] = useState(0)

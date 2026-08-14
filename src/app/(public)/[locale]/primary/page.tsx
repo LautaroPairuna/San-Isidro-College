@@ -186,12 +186,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
           <h2 className="text-xl font-bold text-[#c19516]">{t('ejes.title')}</h2>
           <p className="mt-3 max-w-2xl text-gray-700 leading-relaxed">{t('ejes.description')}</p>
 
-          {/* Son cinco y en el diseño entran en una sola fila */}
-          <FlipCardsCarousel
-            items={ejes}
-            ariaLabel={t('ejes.title')}
-            itemClassName="basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/5"
-          />
+          <FlipCardsCarousel items={ejes} ariaLabel={t('ejes.title')} />
         </div>
       </section>
 
