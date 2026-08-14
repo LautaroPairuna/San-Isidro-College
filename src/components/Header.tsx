@@ -252,7 +252,7 @@ const Header: React.FC = () => {
                       onClick={handleNavClick}
                       className="block hover:underline my-3 max-w-[180px]"
                     >
-                      {locale === "es" ? "Proyecto Educativo Bilingüe" : "Project in Bilingual Education"}
+                      {locale === "es" ? "Proyecto Educativo Bilingüe" : "Bilingual Educational Project"}
                     </Link>
                   </li>
                   <li>
@@ -262,7 +262,27 @@ const Header: React.FC = () => {
                       onClick={handleNavClick}
                       className="block hover:underline my-3 max-w-[180px]"
                     >
-                      {locale === "es" ? "Misión, Vision y Valores" : "Mission, Vision and Values"}
+                      {locale === "es" ? "Misión, Visión y Valores" : "Mission, Vision and Values"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/colegio#escudo`}
+                      id="escudo-link"
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "Nuestro Escudo, Nuestra Identidad" : "Our Crest, Our Identity"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/colegio#aprendizaje-con-valores`}
+                      id="aprendizaje-con-valores-link"
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "Aprendizaje con Valores" : "Learning through Values"}
                     </Link>
                   </li>
                   <li>
@@ -273,6 +293,16 @@ const Header: React.FC = () => {
                       className="block hover:underline my-3 max-w-[180px]"
                     >
                       {locale === "es" ? "Educación Personalizada" : "Personalized Education"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/colegio#instalaciones`}
+                      id="instalaciones-link"
+                      onClick={handleNavClick}
+                      className="block hover:underline my-3 max-w-[180px]"
+                    >
+                      {locale === "es" ? "Instalaciones" : "Facilities"}
                     </Link>
                   </li>
                 </ul>
