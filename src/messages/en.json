@@ -145,134 +145,6 @@
       "articular": "To connect the foreign language with the different areas of the curriculum.",
       "culturas": "To broaden the understanding of other cultures and ways of seeing the world.",
       "herramientas": "To provide tools for academic, social and professional contexts that are increasingly global."
-    },
-    "kindergarten": {
-      "titulo": "Kindergarten",
-      "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
-      "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language, promoting familiarization with it through daily situations inside and outside the classroom, coordinating articulation with the primary level so that the transition to the next stage of education is natural and safe.",
-      "p3": "Every day, we work with songs, dramatizations, puppets, stories, phrases, prompts, rhymes, intensified according to the group, until reaching full bilingualism at extended hours from age 5, where we work intensively with the English language to prepare them in the necessary language skills.",
-      "bold": "They can create, imagine, explore, and develop fantasy, observe their environment, develop their creative and artistic capacity, and acquire tools that foster oral and written language practices, problem-solving, and attitudes linked to empathy and respect for others.",
-      "subtituloJuego": "The Importance of Play in Early Childhood",
-      "juego": {
-        "p1": "Play, in all its forms, as content and work strategy",
-        "p2": "From the age of two, activities are based on play, the main source of learning for children. Play, spontaneous and natural in this stage, is the fundamental axis. It allows us to approach their interests, needs, and thought processes.",
-        "p3": "For them, learning through play is natural, so its value as a learning tool is indisputable.",
-        "p4": "Some benefits of play in children include its contribution to psychomotor, cognitive, social, and affective-moral development. Through play, they gain experiences about themselves and the world around them, rehearse adult roles and behaviors, train skills, practice routines and sequences of behavior that will be useful throughout their lives. They test their knowledge, learn the relevance of playing in groups, and learn to tolerate others’ viewpoints. Additionally, it helps strengthen affective bonds. The foundation and engine of all deep learning is this bond, which allows creating and strengthening trust."
-      },
-      "imagenAltDecoracion": "Kindergarten decoration",
-      "imagenAltDecoracionMovil": "Kindergarten mobile decoration"
-    },
-    "primary": {
-      "titulo": "Primary",
-      "subtitulo": "Our methodology is based on literature.",
-      "p1": "Mandatory subjects are carried out for all educational institutions (Jurisdictional Curriculum Design) and in English Areas: Language (Comprehension, Oral Language, Reading, Written Language, Creative Writing, Spelling), Drama, and Physical Education. Then the study plan adds: Literature, Social Studies, and Science.",
-      "p2": "In this level, it is important to promote the development of an attitude of effort, work, and responsibility in study and curiosity and interest in learning, strengthening confidence in one’s ability to learn.",
-      "p3": "Through play and varied activities appropriate to different ages, all aspects related to development and child evolution during the early years are covered. Special emphasis is placed on psychomotor, emotional, and intellectual development, stimulating curiosity, free thinking, moral awareness, and aesthetic enjoyment. We seek meaningful learning.",
-      "p4": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
-      "imagenAltDecoracion": "Primary decoration",
-      "imagenAltContenido": "Primary image"
-    },
-    "secondary": {
-      "titulo": "Secondary",
-      "subtitulo": "Leaders of the future",
-      "p1": "We prioritize a student-centered approach to develop key 21st-century skills such as autonomy, critical thinking, and creativity. With a solid bilingual foundation, we prepare our students for international exams and advanced technical English proficiency, tailored to their fields of study. We provide a space where learning comes to life.",
-      "p2Part1": "We integrate ",
-      "enfatizado": "Cambridge",
-      "p2Part2": " standards, ensuring international quality education. We offer exchanges and study trips that enrich their training and broaden their world view, preparing them for future challenges.",
-      "diplomaDualTitulo": "Dual Diploma",
-      "diplomaDualTexto": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",
-      "diplomaDualLogoAlt": "Academia International Studies Logo"
-    },
-    "cards": {
-      "persona": {
-        "title": "The Center of Our Project: The Person",
-        "backText": "Our premise is clear: the person comes first. We prioritize student well-being and the development of an inclusive community where each learner feels valued. We seek integral growth, shaping young people with open minds and deep sensitivity to sustainability and social impact."
-      },
-      "ciudadanos": {
-        "title": "Global Citizens with Academic Excellence",
-        "backText": "Through strong bilingual education, we prepare our students to thrive in an interconnected world. Our academic excellence strengthens teamwork as an essential 21st-century skill, curiosity to discover the world, critical thinking, and creativity to build an ethical life project."
-      },
-      "innovacion": {
-        "title": "Innovation and Cutting-Edge Technology",
-        "backText": "Real innovation: students build their own prototypes from scratch (without commercial kits), integrating engineering and electronics. Artificial intelligence: advanced projects to lead in digital environments. Infrastructure: classrooms with interactive touch screens and a fully equipped high-complexity lab."
-      },
-      "deportes": {
-        "title": "Sports",
-        "backText": "Sports and healthy living: discipline and teamwork through Rugby, Hockey, and Jiu-Jitsu. With our own gym and tournament participation, we promote values such as respect, effort, solidarity, and enjoyment, while developing motor skills. Throughout the year, students join matches, tours, and competitions with other clubs, strengthening friendship, discipline, and belonging."
-      },
-      "artes": {
-        "title": "Arts",
-        "backText": "The transformative power of art is a fundamental pillar for sensitivity and self-expression. Through different artistic languages, students develop new forms of communication, strengthening emotional intelligence, creativity, and abstract thinking. Art becomes a space of freedom that drives innovation and personal confidence."
-      },
-      "sustentabilidad": {
-        "title": "Sustainability",
-        "backText": "Sustainability is not just a concept, but a way of inhabiting the world. We educate young people with deep environmental and social awareness, capable of leading projects that create a positive impact in their surroundings. Through an ethical and responsible perspective, we integrate respect for nature and social equity, preparing global citizens committed to caring for our common home and future generations."
-      },
-      "bienestar": {
-        "title": "Well-Being",
-        "backText": "To learn, students must first feel well. That is why the integral well-being of our students is at the core of our educational commitment: the person comes first. We sustain an inclusive community where every young person feels heard, valued, and safe."
-      }
-    },
-    "weAreCommunity": {
-      "academicProposal": {
-        "title": "Academic Proposal: Excellence and International Dual Diploma",
-        "p1": "During the five years of Secondary School, we provide a full-day bilingual comprehensive education, combining the official Argentine curriculum with global competitiveness standards through international programs.",
-        "orientationsTitle": "Our proposal is diversified into two tracks:",
-        "natural": {
-          "label": "Natural Sciences:",
-          "text": "we foster scientific research and environmental commitment, using our high-complexity laboratory to transform theory into real experimentation."
-        },
-        "informatics": {
-          "label": "Informatics:",
-          "text": "focused on technological creation, where students move from being users to developers of digital solutions, AI, and original prototypes."
-        }
-      },
-      "internationalProjection": {
-        "title": "International Projection: Cambridge and High School Diploma",
-        "intro": "We understand that today's world has no borders. Therefore, we strengthen our graduates' profiles with globally valid certifications.",
-        "igcse": {
-          "label": "IGCSE Program (University of Cambridge):",
-          "text": "our students are prepared under this prestigious international standard that ensures elite academic preparation and a global mindset."
-        },
-        "dual": {
-          "label": "Academica Dual Diploma®:",
-          "text": "starting in 2nd year, we offer the possibility to pursue this international validation program. Through an online platform with native teachers, students simultaneously obtain the local high school diploma and the American High School Diploma."
-        },
-        "closing": "This linguistic and technological immersion experience positions them with a unique competitive advantage to enter the best universities in the world."
-      },
-      "identity": {
-        "title": "Our Identity: The Life Project",
-        "p1": "At San Isidro College, we understand that Secondary School is the stage where potential transforms into identity. Our goal is for each student to graduate with a solid, conscious, and autonomous Life Project.",
-        "p2": "We support each young person in discovering their purpose through a proposal that balances technological innovation and human warmth."
-      },
-      "eoe": {
-        "title": "Professional Support: School Guidance Team (EOE)",
-        "intro": "At San Isidro College, well-being is a daily practice sustained by our School Guidance Team. We have professionals specialized in Psychology and Psychopedagogy dedicated to supporting our students' trajectories.",
-        "emotional": {
-          "label": "Emotional Support:",
-          "text": "a space for listening and containment in the face of the challenges of adolescence."
-        },
-        "learning": {
-          "label": "Learning Optimization:",
-          "text": "psychopedagogical intervention to strengthen cognitive skills and study processes."
-        },
-        "coexistence": {
-          "label": "Relationships and Coexistence:",
-          "text": "support in group dynamics to sustain a healthy, inclusive, and respectful school climate."
-        },
-        "closing": "This team works in an integrated way with external teams, teachers, and families to guarantee the professional support needed throughout each young person's Life Project."
-      },
-      "club": {
-        "title": "Club and Foundation",
-        "p1": "We also open an institutional space to integrate the work of the Club and the Foundation, strengthening comprehensive development, community participation, and links with social-impact actions."
-      }
-    },
-    "aside": {
-      "titulo": "ACADEMIC",
-      "proyecto": "Bilingual Project",
-      "kindergarten": "Kindergarten",
-      "primary": "Primary",
-      "secondary": "Secondary"
     }
   },
   "nivelInicial": {
@@ -392,6 +264,95 @@
       }
     }
   },
+  "nivelSecundario": {
+    "intro": {
+      "title": "Secondary",
+      "subtitle": "An academic programme with an international outlook",
+      "p1": "Throughout the five years of Secondary, we offer a comprehensive bilingual education on a full-day schedule from Monday to Friday. Our programme brings together the official Argentine curriculum with international programmes and innovative learning experiences that broaden our students' outlook and prepare them to act as committed leaders and global citizens in an increasingly connected world.",
+      "p2": "We foster a demanding academic education, centred on the student and directed towards the development of independence, critical thinking, creativity and the ability to make decisions. We want every young person to recognise their interests and abilities, take on new challenges and progressively build their own path."
+    },
+    "orientaciones": {
+      "title": "Two orientations, different paths",
+      "p1": "In the last three years of Secondary, students can choose between two orientations that allow them to deepen their knowledge according to their interests and future plans.",
+      "p2": "Both orientations strengthen the ability to research, solve problems, work as a team and apply knowledge in concrete situations.",
+      "naturales": {
+        "label": "Natural Sciences",
+        "p1": "This orientation fosters curiosity, scientific research and commitment to the environment. Working in a fully equipped laboratory, students can observe, experiment, analyse phenomena and establish links between theoretical knowledge and its applications in the real world."
+      },
+      "informatica": {
+        "label": "Computer Science",
+        "p1": "The Computer Science orientation sets out to move from using technology to understanding and creating it. Students develop digital solutions, explore the possibilities of artificial intelligence and build prototypes that bring together programming, engineering and electronics."
+      }
+    },
+    "mundo": {
+      "title": "An education connected to the world",
+      "p1": "The bilingual journey takes on a new depth in Secondary. Students broaden their ability to study, research, produce and communicate in English, and gain access to programmes that connect their education with international educational standards.",
+      "igcse": {
+        "label": "Cambridge IGCSE",
+        "p1": "The Cambridge IGCSE programme allows our students to prepare for international certifications in different areas. Its approach fosters a deep understanding of the content, research, problem solving, critical thinking and the ability to communicate academically in English.",
+        "p2": "The certifications obtained accredit the knowledge and skills developed in each subject within an internationally recognised framework."
+      },
+      "dual": {
+        "label1": "Dual Diploma®",
+        "label2": "by Academica",
+        "p1": "From 2nd year onwards, students may choose to take Academica's Dual Diploma®. The programme is delivered online with native-speaking teachers and allows them to study for their Argentine secondary qualification and the subjects required for the American High School Diploma at the same time.",
+        "p2": "The experience strengthens their English, independence, organisation and command of digital environments, while introducing them to another educational culture and widening their future academic possibilities."
+      }
+    },
+    "proyectoVida": {
+      "title": "Building a life project of one's own",
+      "p1": "We understand that Secondary is a fundamental stage for getting to know oneself, discovering interests, recognising strengths and beginning to make decisions about the future.",
+      "p2": "Our aim is that every student graduates with a solid, conscious and independent life project. To that end, we accompany each young person with a programme that combines academic demand, innovation, opportunities to explore and the human closeness needed to grow in confidence.",
+      "p3": "We do not expect them to have all the answers at the end of this stage, but to have the tools, the values and the confidence they need to keep building their own path."
+    },
+    "formacion": {
+      "title": "An education that goes beyond the classroom",
+      "description": "A comprehensive education is also built through experiences that make it possible to create, take part, care, express oneself and grow alongside others.",
+      "cards": {
+        "persona": {
+          "title": "The Heart of Our Project: The Person",
+          "backText": "Our premise is clear: the person comes first. We prioritize student well-being and the development of an inclusive community where each learner feels valued. We seek integral growth, shaping young people with open minds and deep sensitivity to sustainability and social impact."
+        },
+        "ciudadania": {
+          "title": "Global citizenship",
+          "backText": "Through strong bilingual education, we prepare our students to thrive in an interconnected world. Our academic excellence strengthens teamwork as an essential 21st-century skill, curiosity to discover the world, critical thinking, and creativity to build an ethical life project."
+        },
+        "innovacion": {
+          "title": "Innovation and Leading-Edge Technology",
+          "backText": "Real innovation: students build their own prototypes from scratch (without commercial kits), integrating engineering and electronics. Artificial intelligence: advanced projects to lead in digital environments. Infrastructure: classrooms with interactive touch screens and a fully equipped high-complexity lab."
+        },
+        "deportes": {
+          "title": "Sports",
+          "backText": "Sports and healthy living: discipline and teamwork through Rugby, Hockey, and Jiu-Jitsu. With our own gym and tournament participation, we promote values such as respect, effort, solidarity, and enjoyment, while developing motor skills. Throughout the year, students join matches, tours, and competitions with other clubs, strengthening friendship, discipline, and belonging."
+        },
+        "artes": {
+          "title": "The Arts",
+          "backText": "The transformative power of art is a fundamental pillar for sensitivity and self-expression. Through different artistic languages, students develop new forms of communication, strengthening emotional intelligence, creativity, and abstract thinking. Art becomes a space of freedom that drives innovation and personal confidence."
+        },
+        "sustentabilidad": {
+          "title": "Sustainability and social commitment",
+          "backText": "Sustainability is not just a concept, but a way of inhabiting the world. We educate young people with deep environmental and social awareness, capable of leading projects that create a positive impact in their surroundings. Through an ethical and responsible perspective, we integrate respect for nature and social equity, preparing global citizens committed to caring for our common home and future generations."
+        }
+      }
+    },
+    "recorrido": {
+      "title": "A journey through Secondary",
+      "cuadro": {
+        "title": "A journey from Year 1 to Year 5",
+        "jornada": "Full-day programme · Monday to Friday",
+        "ciclo1": "Lower Secondary",
+        "ciclo2": "Upper Secondary",
+        "a1": "Year 1",
+        "a2": "Year 2",
+        "a3": "Year 3",
+        "a4": "Year 4",
+        "a5": "Year 5",
+        "orientacionesTitle": "Orientations",
+        "orientacion1": "Natural Sciences",
+        "orientacion2": "Computer Science"
+      }
+    }
+  },
   "academicosHome": {
     "loading": "Loading Student Life…",
     "errorTitle": "Error loading media",
@@ -437,25 +398,6 @@
       "kindergarten": "Kindergarten",
       "primary": "Primary",
       "secondary": "Secondary"
-    }
-  },
-  "academicosLevelsNav": {
-    "overviewTitle": "Explore each level",
-    "detailTitle": "Discover the other levels",
-    "cta": "View level",
-    "levels": {
-      "kindergarden": {
-        "title": "Kindergarten",
-        "description": "Early bilingual immersion, play, exploration, and integral development from the first school years."
-      },
-      "primary": {
-        "title": "Primary",
-        "description": "Bilingual academic formation with literature, science, creativity, and a strong transition toward new challenges."
-      },
-      "secondary": {
-        "title": "Secondary",
-        "description": "Life project, international projection, innovation, and preparation to lead the future."
-      }
     }
   },
   "vidaEstudiantilHome": {

@@ -145,134 +145,6 @@
       "articular": "Articular la lengua extranjera con las distintas áreas del currículo.",
       "culturas": "Ampliar la comprensión de otras culturas y formas de ver el mundo.",
       "herramientas": "Brindar herramientas para desenvolverse en contextos académicos, sociales y profesionales cada vez más globales."
-    },
-    "kindergarten": {
-      "titulo": "Kindergarten",
-      "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continua en K3, K4 y K5.",
-      "p2": "Uno de nuestros objetivos en esta etapa, es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma, favoreciendo la familiarización del mismo, a través de situaciones cotidianas dentro y fuera de la sala, coordinando la articulación con el nivel primario, para que la transición a la próxima etapa de su educación sea natural y segura.",
-      "p3": "En cada jornada, trabajamos con canciones, dramatizaciones, títeres, cuentos, frases, consignas, rimas, las que se intensifican según el grupo, hasta arribar al bilingüismo en horario extendido, a partir de los 5 años, donde trabajaremos fuertemente con la lengua inglesa, con el fin de prepararlos en las habilidades lingüísticas necesarias.",
-      "bold": "Pueden crear, imaginar, explorar y desarrollar la fantasía, la observación del ambiente que los rodea, el desarrollo de su capacidad creativa, artística, y la adquisición de herramientas que favorezcan las prácticas del lenguaje oral y escrito, la resolución de situaciones problemáticas y la promoción de actitudes vinculadas a la empatía y el respeto a los demás.ite mantener el interés sin esfuerzo.",
-      "subtituloJuego": "Valor del Juego en el nivel Inicial",
-      "juego": {
-        "p1": "El juego, en todas sus manifestaciones, como contenido y estrategia de trabajo",
-        "p2": "Desde la sala de dos años, las actividades están basadas en el juego, principal fuente de aprendizaje de los niños/as. El juego, actividad espontánea y natural en esta etapa, es el eje fundamental. Nos permite acercarnos a sus intereses, necesidades y procesos de pensamiento.",
-        "p3": "Lo natural para ellos, es aprender jugando, por eso su valor como instrumento de aprendizaje es indiscutible.",
-        "p4": "Algunos de los beneficios del juego en los niños, son su contribución al desarrollo Psicomotriz, Cognitivo, Social y Afectivo-Moral. Jugando, adquieren experiencias sobre sí mismos y el mundo que los rodea, ensayan roles y formas de actuación de la vida de los adultos, entrenan destrezas y habilidades, practican rutinas y secuencias de comportamiento que les serán útiles a lo largo de sus vidas. Ponen a prueba sus conocimientos, aprenden la relevancia de jugar en grupos, aprendiendo a tolerar la postura de los demás. Además, contribuye a estrechar los vínculos afectivos. La base y el motor de todo aprendizaje profundo es este vínculo, que permite crear y afianzar la confianza."
-      },
-      "imagenAltDecoracion": "Decoración Kindergarten",
-      "imagenAltDecoracionMovil": "Decoración Kindergarten móvil"
-    },
-    "primary": {
-      "titulo": "Primary",
-      "subtitulo": "Nuestra metodología se encuentra basada en la literatura.",
-      "p1": "Se llevan a cabo materias obligatorias para todas las Instituciones educativas (Diseño Curricular Juridiccional) y en las Áreas en Inglés: Language (Comprehension, Oral Language, Reading, Written Language, Creative Writing, Spelling), Drama y Physical Education. Luego se agregan al Plan de Estudios: Literature, Social Studies y Science.",
-      "p2": "En este Nivel es importante promover el desarrollo de una actitud de esfuerzo, trabajo y responsabilidad en el estudio y de curiosidad e interés por el aprendizaje, fortaleciendo la confianza en las propias posibilidades de aprender.",
-      "p3": "Por medio del juego, de actividades variadas y acordes a las distintas edades, se cubren todos los aspectos relacionados con el desarrollo y la evolución infantil durante los primeros años. Se pone especial acento en el desarrollo psicomotriz, emocional e intelectual, estimulando la curiosidad, el pensamiento libre, el despertar de una conciencia moral y el goce estético. Buscamos que el aprendizaje sea significativo.",
-      "p4": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
-      "imagenAltDecoracion": "Decoración Primary",
-      "imagenAltContenido": "Imagen Primary"
-    },
-    "secondary": {
-      "titulo": "Secondary",
-      "subtitulo": "Líderes del futuro",
-      "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida",
-      "p2Part1": "Integramos estándares de ",
-      "enfatizado": "Cambridge",
-      "p2Part2": ", garantizando una educación de calidad internacional. Ofrecemos intercambios y viajes de estudio que enriquecen su formación y amplían su visión del mundo, preparándolos para los desafíos del futuro.",
-      "diplomaDualTitulo": "Diploma Dual",
-      "diplomaDualTexto": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
-      "diplomaDualLogoAlt": "Logo Academia International Studies"
-    },
-    "cards": {
-      "persona": {
-        "title": "El Centro de Nuestro Proyecto: La Persona",
-        "backText": "Nuestra premisa es clara: lo primero es la persona. Priorizamos el bienestar del alumno y el desarrollo de una comunidad inclusiva, donde cada estudiante se sienta valorado. Buscamos el desarrollo integral, formando jóvenes con apertura mental y una profunda sensibilidad hacia la sustentabilidad y el impacto social."
-      },
-      "ciudadanos": {
-        "title": "Ciudadanos Globales con Excelencia Académica",
-        "backText": "A través de un sólido bilingüismo, preparamos a nuestros estudiantes para actuar en un mundo interconectado. Nuestra excelencia académica potencia el trabajo en equipo como competencia esencial del siglo XXI, la curiosidad por descubrir el mundo y el pensamiento crítico, y la creatividad para construir un proyecto de vida ético."
-      },
-      "innovacion": {
-        "title": "Innovación y Tecnología de Vanguardia",
-        "backText": "Innovación real: los alumnos construyen sus propios prototipos desde cero (sin kits comerciales), integrando ingeniería y electrónica. Inteligencia artificial: proyectos avanzados para liderar en entornos digitales. Infraestructura: aulas con pantallas interactivas touch y un laboratorio de alta complejidad totalmente equipado."
-      },
-      "deportes": {
-        "title": "Deportes",
-        "backText": "Deportes y vida sana: disciplina y trabajo en equipo a través de Rugby, Hockey y Jiu-Jitsu. Con gimnasio propio y participación en torneos, promovemos valores como el respeto, el esfuerzo, la solidaridad y la diversión, desarrollando habilidades motrices. Durante el año, los alumnos participan en encuentros, giras y competencias con otros clubes, fortaleciendo la amistad, la disciplina y el sentido de pertenencia."
-      },
-      "artes": {
-        "title": "Artes",
-        "backText": "El poder transformador del arte es un pilar fundamental para la sensibilidad y la autoexpresión. A través de distintos lenguajes, los estudiantes desarrollan nuevas formas de comunicación, fortaleciendo su inteligencia emocional, creatividad y capacidad de abstracción. El arte se convierte en un espacio de libertad que impulsa la innovación y la confianza personal."
-      },
-      "sustentabilidad": {
-        "title": "Sustentabilidad",
-        "backText": "La sustentabilidad no es solo un concepto, sino una forma de habitar el mundo. Formamos jóvenes con una profunda conciencia ambiental y social, capaces de liderar proyectos que generen un impacto positivo en su entorno. A través de una mirada ética y responsable, integramos el respeto por la naturaleza y la equidad social, preparando ciudadanos globales comprometidos con el cuidado de nuestra casa común y el bienestar de las futuras generaciones."
-      },
-      "bienestar": {
-        "title": "Bienestar",
-        "backText": "Para aprender, primero hay que estar bien. Por eso, el bienestar integral de nuestros estudiantes es el eje de nuestro compromiso educativo: lo primero es la persona. Sostenemos una comunidad inclusiva donde cada joven se sienta escuchado, valorado y seguro."
-      }
-    },
-    "weAreCommunity": {
-      "academicProposal": {
-        "title": "Propuesta Académica: Excelencia y Doble Titulación Internacional",
-        "p1": "Durante los cinco años de Secundaria, ofrecemos una educación integral bilingüe de doble jornada, fusionando el diseño curricular oficial argentino con estándares de competitividad global a través de programas internacionales.",
-        "orientationsTitle": "Nuestra propuesta se diversifica en dos Orientaciones:",
-        "natural": {
-          "label": "Ciencias Naturales:",
-          "text": "fomentamos la investigación científica y el compromiso ambiental, utilizando nuestro laboratorio de alta complejidad para transformar la teoría en experimentación real."
-        },
-        "informatics": {
-          "label": "Informática:",
-          "text": "centrada en la creación tecnológica, donde los alumnos pasan de ser usuarios a desarrolladores de soluciones digitales, IA y prototipos originales."
-        }
-      },
-      "internationalProjection": {
-        "title": "Proyección Internacional: Cambridge e High School Diploma",
-        "intro": "Entendemos que el mundo actual no tiene fronteras. Por ello, potenciamos el perfil de nuestros egresados con certificaciones de validez global.",
-        "igcse": {
-          "label": "Programa IGCSE (University of Cambridge):",
-          "text": "nuestros alumnos se preparan bajo este prestigioso estándar internacional que garantiza una formación académica de élite y una mentalidad global."
-        },
-        "dual": {
-          "label": "Diploma Dual® de Academica:",
-          "text": "a partir de 2do año ofrecemos la posibilidad de cursar este programa de convalidación internacional. Mediante una plataforma online con profesores nativos, los estudiantes obtienen simultáneamente el Bachillerato local y el American High School Diploma."
-        },
-        "closing": "Esta experiencia de inmersión lingüística y tecnológica los posiciona con una ventaja competitiva única para ingresar a las mejores universidades del mundo."
-      },
-      "identity": {
-        "title": "Nuestra identidad: El Proyecto de Vida",
-        "p1": "En San Isidro College, entendemos que el Nivel Secundario es la etapa donde el potencial se transforma en identidad. Nuestro objetivo es que cada estudiante egrese con un Proyecto de Vida sólido, consciente y autónomo.",
-        "p2": "Acompañamos a cada joven en el descubrimiento de su propósito con una propuesta que equilibra vanguardia tecnológica y calidez humana."
-      },
-      "eoe": {
-        "title": "Un Acompañamiento Profesional: Equipo de Orientación Escolar (EOE)",
-        "intro": "En San Isidro College, el bienestar es una práctica diaria sostenida por nuestro Equipo de Orientación Escolar. Contamos con profesionales especializados en Psicología y Psicopedagogía dedicados a acompañar las trayectorias de nuestros estudiantes.",
-        "emotional": {
-          "label": "Sostén Emocional:",
-          "text": "espacio de escucha y contención ante los desafíos propios de la adolescencia."
-        },
-        "learning": {
-          "label": "Optimización del Aprendizaje:",
-          "text": "intervención psicopedagógica para potenciar habilidades cognitivas y procesos de estudio."
-        },
-        "coexistence": {
-          "label": "Vinculación y Convivencia:",
-          "text": "acompañamiento en la dinámica grupal para sostener un clima escolar sano, inclusivo y respetuoso."
-        },
-        "closing": "Este equipo trabaja de manera integrada con equipos externos, docentes y familias para garantizar el respaldo profesional necesario en el camino del Proyecto de Vida de cada joven."
-      },
-      "club": {
-        "title": "Club y Fundación",
-        "p1": "También abrimos un espacio institucional para integrar el trabajo del Club y la Fundación, fortaleciendo la formación integral, la participación comunitaria y el vínculo con acciones de impacto social."
-      }
-    },
-    "aside": {
-      "titulo": "ACADÉMICO",
-      "proyecto": "Proyecto Bilingüe",
-      "kindergarten": "Kindergarten",
-      "primary": "Primary",
-      "secondary": "Secondary"
     }
   },
   "nivelInicial": {
@@ -392,6 +264,95 @@
       }
     }
   },
+  "nivelSecundario": {
+    "intro": {
+      "title": "Nivel Secundario",
+      "subtitle": "Una propuesta académica con proyección internacional",
+      "p1": "Durante los cinco años del Nivel Secundario, ofrecemos una educación integral bilingüe de jornada completa de lunes a viernes. Nuestra propuesta articula el diseño curricular oficial argentino con programas internacionales y experiencias de aprendizaje innovadoras que amplían la mirada de nuestros estudiantes y los preparan para desenvolverse como líderes comprometidos y ciudadanos globales en un mundo cada vez más conectado.",
+      "p2": "Promovemos una formación académica exigente, centrada en el estudiante y orientada al desarrollo de la autonomía, el pensamiento crítico, la creatividad y la capacidad de tomar decisiones. Buscamos que cada joven pueda reconocer sus intereses y capacidades, asumir nuevos desafíos y construir progresivamente su propio camino."
+    },
+    "orientaciones": {
+      "title": "Dos orientaciones, diferentes caminos",
+      "p1": "En los últimos tres años del Nivel Secundario, los estudiantes pueden elegir entre dos orientaciones que les permiten profundizar sus conocimientos de acuerdo con sus intereses y proyectos futuros.",
+      "p2": "Ambas orientaciones fortalecen la capacidad de investigar, resolver problemas, trabajar en equipo y aplicar los conocimientos en situaciones concretas.",
+      "naturales": {
+        "label": "Ciencias Naturales",
+        "p1": "Esta orientación promueve la curiosidad, la investigación científica y el compromiso con el ambiente. A través del trabajo en un laboratorio equipado, los estudiantes pueden observar, experimentar, analizar fenómenos y establecer vínculos entre los conocimientos teóricos y sus aplicaciones en el mundo real."
+      },
+      "informatica": {
+        "label": "Informática",
+        "p1": "La orientación en Informática propone pasar del uso de la tecnología a su comprensión y creación. Los estudiantes desarrollan soluciones digitales, exploran las posibilidades de la inteligencia artificial y crean prototipos que integran programación, ingeniería y electrónica."
+      }
+    },
+    "mundo": {
+      "title": "Una educación conectada con el mundo",
+      "p1": "El recorrido bilingüe adquiere una nueva profundidad en Nivel Secundario. Los estudiantes amplían su capacidad para estudiar, investigar, producir y comunicarse en inglés, y acceden a programas que conectan su formación con estándares educativos internacionales.",
+      "igcse": {
+        "label": "Cambridge IGCSE",
+        "p1": "El programa Cambridge IGCSE permite a nuestros estudiantes prepararse para certificaciones internacionales en diferentes áreas. Su enfoque promueve la comprensión profunda de los contenidos, la investigación, la resolución de problemas, el pensamiento crítico y la capacidad de comunicarse académicamente en inglés.",
+        "p2": "Las certificaciones obtenidas acreditan los conocimientos y habilidades desarrollados en cada asignatura dentro de un marco reconocido internacionalmente."
+      },
+      "dual": {
+        "label1": "Diploma Dual®",
+        "label2": "de Academica",
+        "p1": "A partir de 2.º año, los estudiantes pueden optar por cursar el Diploma Dual® de Academica. Este programa se desarrolla en modalidad online con profesores nativos y les permite cursar simultáneamente sus estudios secundarios argentinos y las asignaturas requeridas para obtener el American High School Diploma.",
+        "p2": "La experiencia fortalece el inglés, la autonomía, la organización y el manejo de entornos digitales, al mismo tiempo que permite conocer otra cultura educativa y ampliar las posibilidades académicas futuras."
+      }
+    },
+    "proyectoVida": {
+      "title": "Construir el propio proyecto de vida",
+      "p1": "Entendemos que Secundaria es una etapa fundamental para conocerse, descubrir intereses, reconocer fortalezas y comenzar a tomar decisiones sobre el futuro.",
+      "p2": "Nuestro objetivo es que cada estudiante egrese con un proyecto de vida sólido, consciente y autónomo. Para ello, acompañamos a cada joven con una propuesta que combina exigencia académica, innovación, oportunidades para explorar y la cercanía humana necesaria para crecer con confianza.",
+      "p3": "No buscamos que al finalizar esta etapa tengan todas las respuestas, sino que cuenten con las herramientas, los valores y la seguridad necesarios para continuar construyendo su propio camino."
+    },
+    "formacion": {
+      "title": "Una formación que trasciende el aula",
+      "description": "La formación integral también se construye a través de experiencias que permiten crear, participar, cuidar, expresarse y crecer junto a otros.",
+      "cards": {
+        "persona": {
+          "title": "El Centro de Nuestro Proyecto: La Persona",
+          "backText": "Nuestra premisa es clara: lo primero es la persona. Priorizamos el bienestar del alumno y el desarrollo de una comunidad inclusiva, donde cada estudiante se sienta valorado. Buscamos el desarrollo integral, formando jóvenes con apertura mental y una profunda sensibilidad hacia la sustentabilidad y el impacto social."
+        },
+        "ciudadania": {
+          "title": "Ciudadanía global",
+          "backText": "A través de un sólido bilingüismo, preparamos a nuestros estudiantes para actuar en un mundo interconectado. Nuestra excelencia académica potencia el trabajo en equipo como competencia esencial del siglo XXI, la curiosidad por descubrir el mundo y el pensamiento crítico, y la creatividad para construir un proyecto de vida ético."
+        },
+        "innovacion": {
+          "title": "Innovación y Tecnología de Vanguardia",
+          "backText": "Innovación real: los alumnos construyen sus propios prototipos desde cero (sin kits comerciales), integrando ingeniería y electrónica. Inteligencia artificial: proyectos avanzados para liderar en entornos digitales. Infraestructura: aulas con pantallas interactivas touch y un laboratorio de alta complejidad totalmente equipado."
+        },
+        "deportes": {
+          "title": "Deportes",
+          "backText": "Deportes y vida sana: disciplina y trabajo en equipo a través de Rugby, Hockey y Jiu-Jitsu. Con gimnasio propio y participación en torneos, promovemos valores como el respeto, el esfuerzo, la solidaridad y la diversión, desarrollando habilidades motrices. Durante el año, los alumnos participan en encuentros, giras y competencias con otros clubes, fortaleciendo la amistad, la disciplina y el sentido de pertenencia."
+        },
+        "artes": {
+          "title": "Artes",
+          "backText": "El poder transformador del arte es un pilar fundamental para la sensibilidad y la autoexpresión. A través de distintos lenguajes, los estudiantes desarrollan nuevas formas de comunicación, fortaleciendo su inteligencia emocional, creatividad y capacidad de abstracción. El arte se convierte en un espacio de libertad que impulsa la innovación y la confianza personal."
+        },
+        "sustentabilidad": {
+          "title": "Sustentabilidad y compromiso social",
+          "backText": "La sustentabilidad no es solo un concepto, sino una forma de habitar el mundo. Formamos jóvenes con una profunda conciencia ambiental y social, capaces de liderar proyectos que generen un impacto positivo en su entorno. A través de una mirada ética y responsable, integramos el respeto por la naturaleza y la equidad social, preparando ciudadanos globales comprometidos con el cuidado de nuestra casa común y el bienestar de las futuras generaciones."
+        }
+      }
+    },
+    "recorrido": {
+      "title": "Un recorrido por secundaria",
+      "cuadro": {
+        "title": "Un recorrido de 1.º a 5.º año",
+        "jornada": "Jornada completa · Lunes a viernes",
+        "ciclo1": "Ciclo Básico",
+        "ciclo2": "Ciclo Orientado",
+        "a1": "1.er\nAño",
+        "a2": "2.º\nAño",
+        "a3": "3.er\nAño",
+        "a4": "4.º\nAño",
+        "a5": "5.º\nAño",
+        "orientacionesTitle": "Orientaciones",
+        "orientacion1": "Ciencias Naturales",
+        "orientacion2": "Informática"
+      }
+    }
+  },
   "academicosHome": {
     "loading": "Cargando Vida Estudiantil…",
     "errorTitle": "Error al cargar medios",
@@ -437,25 +398,6 @@
       "kindergarten": "Kindergarten",
       "primary": "Primary",
       "secondary": "Secondary"
-    }
-  },
-  "academicosLevelsNav": {
-    "overviewTitle": "Conocé cada nivel",
-    "detailTitle": "Explorá los otros niveles",
-    "cta": "Ver nivel",
-    "levels": {
-      "kindergarden": {
-        "title": "Kindergarten",
-        "description": "Primeros años de inmersión bilingüe, juego, exploración y desarrollo integral desde el nivel inicial."
-      },
-      "primary": {
-        "title": "Primary",
-        "description": "Formación académica bilingüe con literatura, ciencia, creatividad y una transición sólida hacia nuevos desafíos."
-      },
-      "secondary": {
-        "title": "Secondary",
-        "description": "Proyecto de vida, proyección internacional, innovación y preparación para liderar el futuro."
-      }
     }
   },
   "vidaEstudiantilHome": {
