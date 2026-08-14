@@ -42,7 +42,7 @@ export default function FondoFormaSeccion({ className }: { className?: string })
         alt=""
         width={1660}
         height={3410}
-        className="w-[83.333vw] max-w-none h-auto"
+        className="w-[90vw] max-w-none h-auto"
         style={{ maskImage: MASK, WebkitMaskImage: MASK }}
       />
     </div>

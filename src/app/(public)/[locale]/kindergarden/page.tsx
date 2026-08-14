@@ -90,44 +90,39 @@ const KindergardenPage = async ({ params }: PageProps) => {
       {/* ============ EL VALOR DEL JUEGO ============ */}
       <section id="juego" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
         <div className="relative z-10 max-w-5xl mx-auto px-6">
-          {/* Alineado con la columna de la foto (col-start-2 de 12) */}
-          <h2 className="md:pl-[8.333%] text-xl font-bold text-[#c19516]">{t('juego.title')}</h2>
+          <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">{t('juego.title')}</h2>
 
           {/* Foto a la izquierda, texto a la derecha */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            <div className="md:col-span-4 md:col-start-2">
-              <div className="relative w-full aspect-[3/4]">
-                <RenderMedia
-                  medio={juego1}
-                  fallback={FALLBACKS.JUEGO_1}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 30vw"
-                  className="object-cover"
-                />
-              </div>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-4 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+              <RenderMedia
+                medio={juego1}
+                fallback={FALLBACKS.JUEGO_1}
+                fill
+                sizes="(max-width: 768px) 100vw, 25vw"
+                className="object-cover"
+              />
             </div>
-            <div className="md:col-span-6 space-y-4 text-gray-700 leading-relaxed text-justify hyphens-auto">
+            <div className="md:col-span-8 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed text-justify md:border-l-2 md:border-black md:pl-6">
               <p>{t('juego.p1')}</p>
               <p>{t('juego.p2')}</p>
             </div>
           </div>
 
           {/* Texto a la izquierda, foto a la derecha */}
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            <div className="md:col-span-6 md:col-start-1 md:border-r md:border-[#c9d6cd] md:pr-6 space-y-4 text-gray-700 leading-relaxed text-justify hyphens-auto order-2 md:order-none">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-8 md:order-1 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed text-justify md:border-r-2 md:border-black md:pr-6">
               <p>{t('juego.p3')}</p>
               <p>{t('juego.p4')}</p>
             </div>
-            <div className="md:col-span-4 md:col-start-8 order-1 md:order-none">
-              <div className="relative w-full aspect-[3/4]">
-                <RenderMedia
-                  medio={juego2}
-                  fallback={FALLBACKS.JUEGO_2}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 30vw"
-                  className="object-cover"
-                />
-              </div>
+            <div className="md:col-span-4 md:order-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+              <RenderMedia
+                medio={juego2}
+                fallback={FALLBACKS.JUEGO_2}
+                fill
+                sizes="(max-width: 768px) 100vw, 25vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
