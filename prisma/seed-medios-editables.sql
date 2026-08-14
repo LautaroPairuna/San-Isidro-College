@@ -1,7 +1,8 @@
 -- Secciones y grupos de medios para que las páginas nuevas sean editables
--- desde el admin: las fotos de Educación personalizada (Colegio), los íconos de
--- Nuestros Propósitos (Proyecto bilingüe), las fotos de El valor del juego
--- (Inicial) y las fotos e íconos de Primaria. Secundaria ya tenía los suyos.
+-- desde el admin: la foto de Los invitamos a conocernos (Home), las fotos de
+-- Educación personalizada (Colegio), los íconos de Nuestros Propósitos
+-- (Proyecto bilingüe), las fotos de El valor del juego (Inicial) y las fotos e
+-- íconos de Primaria. Secundaria ya tenía los suyos.
 --
 -- Equivale a GET /api/admin/setup-medios-editables; usá uno u otro, no hace
 -- falta correr los dos.
@@ -22,6 +23,28 @@
 -- otra carpeta, copiá esos archivos ahí o resubilos desde el admin.
 
 SET NAMES utf8mb4;
+
+-- ==========================================================================
+-- Los invitamos a conocernos - Foto  (página: home)
+-- ==========================================================================
+
+INSERT IGNORE INTO `grupomedios` (`nombre`, `tipoGrupo`, `creadoEn`, `actualizadoEn`)
+VALUES ('Home - Los Invitamos a Conocernos', 'UNICO', NOW(3), NOW(3));
+
+SET @grupo := (SELECT `id` FROM `grupomedios` WHERE `nombre` = 'Home - Los Invitamos a Conocernos');
+SET @vacio := (SELECT COUNT(*) = 0 FROM `medio` WHERE `grupoMediosId` = @grupo);
+
+INSERT INTO `medio` (`urlArchivo`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
+SELECT 'fondo-bienvenida.webp', 'Los invitamos a conocernos', 'IMAGEN', 10, @grupo, NOW(3), NOW(3) FROM DUAL WHERE @vacio;
+
+SET @medio := (SELECT `id` FROM `medio` WHERE `grupoMediosId` = @grupo ORDER BY `posicion` LIMIT 1);
+
+INSERT IGNORE INTO `seccion` (`slug`, `pagina`, `orden`, `tipo`, `titulo`, `grupoId`, `medioId`, `creadoEn`, `actualizadoEn`)
+VALUES ('home-conocernos', 'home', 60, 'MEDIA_UNICA', 'Los invitamos a conocernos - Foto', NULL, @medio, NOW(3), NOW(3));
+
+-- Si la sección ya existía sin medio asignado, se lo completa
+UPDATE `seccion` SET `medioId` = @medio, `actualizadoEn` = NOW(3)
+WHERE `slug` = 'home-conocernos' AND `medioId` IS NULL;
 
 -- ==========================================================================
 -- Educación personalizada - Foto 1  (página: colegio)
@@ -237,6 +260,7 @@ FROM `seccion` s
 LEFT JOIN `grupomedios` g ON g.`id` = s.`grupoId`
 LEFT JOIN `medio` m ON m.`id` = s.`medioId`
 WHERE s.`slug` IN (
+  'home-conocernos',
   'colegio-personalizada-1',
   'colegio-personalizada-2',
   'academicos-mas-info-propositos',
