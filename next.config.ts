@@ -54,7 +54,7 @@ const nextConfig: NextConfig = {
 
       // ---- Actividades ----
       { source: '/actividades---deportes.html', destination: '/es/deportes#deportes',               permanent: true },
-      { source: '/arte.html',                   destination: '/es/experiencia-sic#san-isidro-play', permanent: true },
+      { source: '/arte.html',                   destination: '/es/experiencia-sic#arte-y-creatividad', permanent: true },
       { source: '/tic.html',                    destination: '/es/experiencia-sic#innovacion-y-robotica', permanent: true },
       { source: '/huerta.html',                 destination: '/es/experiencia-sic#actividades-extracurriculares', permanent: true },
       { source: '/formacion-religiosa.html',    destination: '/es/colegio#valores',                 permanent: true },
@@ -64,7 +64,7 @@ const nextConfig: NextConfig = {
       // ---- Galería de fotos ----
       { source: '/deporte.html',                destination: '/es/deportes#deportes',               permanent: true },
       { source: '/family-day.html',             destination: '/es/experiencia-sic#bienestar-y-acompanamiento', permanent: true },
-      { source: '/arte-galeria.html',           destination: '/es/experiencia-sic#san-isidro-play', permanent: true },
+      { source: '/arte-galeria.html',           destination: '/es/experiencia-sic#arte-y-creatividad', permanent: true },
       { source: '/huerta-galeria.html',         destination: '/es/experiencia-sic#actividades-extracurriculares', permanent: true },
       { source: '/formacion-religiosa-galeria.html', destination: '/es/colegio#valores',           permanent: true },
       { source: '/instalaciones-galeria.html',  destination: '/es/colegio#instalaciones',           permanent: true },

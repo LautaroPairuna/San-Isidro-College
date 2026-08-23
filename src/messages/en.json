@@ -484,6 +484,25 @@
       "description": "A space where ideas become projects. Our Innovation and Robotics Lab invites students to explore, design, build, and experiment, developing the skills to solve the challenges of the present and the future.",
       "readMore": "Read more"
     },
+    "feYCompromisoSocial": {
+      "title": "Faith and Social Commitment",
+      "description": "Our Catholic orientation supports the human and spiritual growth of our students, fostering a faith expressed through love for others, care for nature, and commitment to the community. Through everyday example and service experiences, we seek to form free and caring people, able to help transform their community.",
+      "carouselAlt": "Faith and Social Commitment carousel",
+      "fallbackAlt": "Faith and social commitment at San Isidro College"
+    },
+    "arteYCreatividad": {
+      "title": "Art and Creativity",
+      "description": "Art is part of life at San Isidro College and an essential dimension of our integral education. Through Music, Singing, Visual Arts, Theatre, and Body Expression, students develop their sensitivity, discover their talents, and find new ways to communicate and create.\n\nThese disciplines come together in collective projects such as San Isidro Play, where art and English meet in an experience shared across all levels.",
+      "carouselAlt": "Art and Creativity carousel",
+      "fallbackAlt": "Art and creativity at San Isidro College"
+    },
+    "houses": {
+      "title": "Houses",
+      "description": "We believe education is built far beyond the classroom: in learning, in relationships, in shared challenges, in achievements, and in the values we practise every day.\n\nWe do not only want our students to acquire knowledge. We want to support them so they become thoughtful people, confident leaders, and active members committed to their community.\n\nWith this vision, the San Isidro College House System is born: a new tradition meant to strengthen belonging, connection, and the participation of all our students.",
+      "logosAlt": "House logos: Condor House, Owl House and Falcon House",
+      "carouselAlt": "Houses carousel",
+      "fallbackAlt": "San Isidro College House System"
+    },
     "actividadesExtracurriculares": {
       "title": "Extracurricular Activities",
       "description": "Each student has unique talents and interests. That is why our extracurricular activities create spaces where they can express themselves, challenge themselves, and grow. Through proposals such as Dance, Jiu-Jitsu, and Gym, we complement academic education with experiences that strengthen the body, mind, and confidence.",

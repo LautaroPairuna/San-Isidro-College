@@ -484,6 +484,25 @@
       "description": "Un espacio donde las ideas se convierten en proyectos. Nuestro Laboratorio de Innovación y Robótica invita a los alumnos a explorar, diseñar, construir y experimentar, desarrollando habilidades para resolver los desafíos del presente y del futuro.",
       "readMore": "Leer más"
     },
+    "feYCompromisoSocial": {
+      "title": "Fe y compromiso social",
+      "description": "Nuestra orientación católica acompaña el crecimiento humano y espiritual de los estudiantes, promoviendo una fe que se expresa en el amor al prójimo, el cuidado de la naturaleza y el compromiso con los demás. A través del ejemplo cotidiano y de experiencias de servicio, buscamos formar personas libres, solidarias y capaces de contribuir a transformar su comunidad.",
+      "carouselAlt": "Carrusel Fe y compromiso social",
+      "fallbackAlt": "Fe y compromiso social en San Isidro College"
+    },
+    "arteYCreatividad": {
+      "title": "Arte y creatividad",
+      "description": "El arte forma parte de la vida de San Isidro College y constituye una dimensión esencial de nuestra propuesta de formación integral. A través de la Música, el Canto, las Artes Visuales, el Teatro y la Expresión Corporal, los estudiantes desarrollan su sensibilidad, descubren sus talentos y encuentran nuevas maneras de comunicar y crear.\n\nEstas disciplinas se integran en proyectos colectivos como San Isidro Play, donde el arte y el inglés se encuentran en una experiencia compartida por los distintos niveles.",
+      "carouselAlt": "Carrusel Arte y creatividad",
+      "fallbackAlt": "Arte y creatividad en San Isidro College"
+    },
+    "houses": {
+      "title": "Houses",
+      "description": "Creemos que la educación se construye mucho más allá del aula: en los aprendizajes, los vínculos, los desafíos compartidos, los logros y los valores que practicamos cada día.\n\nNo buscamos solamente que nuestros estudiantes adquieran conocimientos. Queremos acompañarlos para que se conviertan en personas reflexivas, líderes seguros y miembros activos y comprometidos con su comunidad.\n\nCon esta mirada nace el Sistema de Houses de San Isidro College: una nueva tradición destinada a fortalecer la pertenencia, el encuentro y la participación de todos nuestros estudiantes.",
+      "logosAlt": "Logos de las Houses: Condor House, Owl House y Falcon House",
+      "carouselAlt": "Carrusel Houses",
+      "fallbackAlt": "Sistema de Houses de San Isidro College"
+    },
     "actividadesExtracurriculares": {
       "title": "Actividades Extracurriculares",
       "description": "Cada alumno tiene talentos e intereses únicos. Por eso, nuestras actividades extracurriculares crean espacios donde pueden expresarse, desafiarse y crecer. A través de propuestas como Danza, Jiu-Jitsu y Gimnasio, complementamos la formación académica con experiencias que fortalecen el cuerpo, la mente y la confianza.",

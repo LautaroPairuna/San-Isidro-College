@@ -394,11 +394,29 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/experiencia-sic#san-isidro-play`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "san-isidro-play")}
+                      href={`/${locale}/experiencia-sic#fe-y-compromiso-social`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "fe-y-compromiso-social")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
-                      {locale === "es" ? "San Isidro Play" : "San Isidro Play"}
+                      {locale === "es" ? "Fe y Compromiso Social" : "Faith and Social Commitment"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/experiencia-sic#arte-y-creatividad`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "arte-y-creatividad")}
+                      className="block hover:underline my-3 whitespace-nowrap"
+                    >
+                      {locale === "es" ? "Arte y Creatividad" : "Art and Creativity"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/experiencia-sic#houses`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "houses")}
+                      className="block hover:underline my-3 whitespace-nowrap"
+                    >
+                      {locale === "es" ? "Houses" : "Houses"}
                     </Link>
                   </li>
                   <li>

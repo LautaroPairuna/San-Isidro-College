@@ -15,7 +15,9 @@ const SECTION_SLUGS = {
   BIENESTAR: 'experiencia-sic-bienestar-y-acompanamiento',
   GOOGLE: 'experiencia-sic-google-reference-school',
   INNOVACION: 'experiencia-sic-innovacion-y-robotica',
-  LEGACY_PLAY: 'vida-estudiantil-play',
+  FE_Y_COMPROMISO: 'experiencia-sic-fe-y-compromiso-social',
+  ARTE_Y_CREATIVIDAD: 'experiencia-sic-arte-y-creatividad',
+  HOUSES: 'experiencia-sic-houses',
   LEGACY_BIENESTAR: 'vida-estudiantil-bienestar',
 } as const
 
@@ -63,8 +65,10 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
   const rugbyHockeyMediaRaw = getExperienceMedias(SECTION_SLUGS.BIENESTAR)
   const googleMediaRaw = getExperienceMedias(SECTION_SLUGS.GOOGLE)
   const innovacionMediaRaw = getExperienceMedias(SECTION_SLUGS.INNOVACION)
+  const feMediaRaw = getExperienceMedias(SECTION_SLUGS.FE_Y_COMPROMISO)
+  const arteMediaRaw = getExperienceMedias(SECTION_SLUGS.ARTE_Y_CREATIVIDAD)
+  const housesMediaRaw = getExperienceMedias(SECTION_SLUGS.HOUSES)
   const vidaMediaRaw = getLegacyMedias(SECTION_SLUGS.LEGACY_BIENESTAR)
-  const playMediaRaw = getLegacyMedias(SECTION_SLUGS.LEGACY_PLAY)
 
   /* ------------------------------ FILTRADO SOLO IMAGEN/VIDEO Y ORDENAMIENTO ------------------------------ */
   const filterImgOrVideo = (arr: MedioItem[]) =>
@@ -76,8 +80,10 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
   const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
   const googleMedia = filterImgOrVideo(googleMediaRaw)
   const innovacionMedia = filterImgOrVideo(innovacionMediaRaw)
+  const feMedia = filterImgOrVideo(feMediaRaw)
+  const arteMedia = filterImgOrVideo(arteMediaRaw)
+  const housesMedia = filterImgOrVideo(housesMediaRaw)
   const vidaMedia = filterImgOrVideo(vidaMediaRaw)
-  const playMedia = filterImgOrVideo(playMediaRaw)
 
   return (
     <div id="container">
@@ -359,8 +365,8 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ═════════════ SECCIÓN 5 — SAN ISIDRO PLAY ═════════════ */}
-      <section id="san-isidro-play" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
+      {/* ═════════════ SECCIÓN 5 — FE Y COMPROMISO SOCIAL ═════════════ */}
+      <section id="fe-y-compromiso-social" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <Image
@@ -372,14 +378,18 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
-              {playMedia.length > 0 ? (
+              {feMedia.length > 0 ? (
                 <div className="w-full h-[645px]">
-                  <MediaCarousel items={playMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
+                  <MediaCarousel
+                    items={feMedia}
+                    altText={tExperience('feYCompromisoSocial.carouselAlt')}
+                    className="w-full h-full rounded-md shadow-md"
+                  />
                 </div>
               ) : (
                 <Image
                   src="/images/image-SIC-play.webp"
-                  alt={t('play.fallbackAlt')}
+                  alt={tExperience('feYCompromisoSocial.fallbackAlt')}
                   width={800}
                   height={600}
                   className="w-full h-auto rounded-md shadow-md"
@@ -388,15 +398,9 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
             <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 2xl:left-96 xl:left-52 w-[550px]">
-                <Image
-                  src="/images/logo-SIC-play.svg"
-                  alt={t('play.logoAlt')}
-                  width={128}
-                  height={128}
-                  className="mx-auto mb-10 w-32"
-                />
+                <h2 className="text-2xl font-bold text-center">{tExperience('feYCompromisoSocial.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
-                  <strong>San Isidro Play</strong> {t('play.description')}
+                  {tExperience('feYCompromisoSocial.description')}
                 </p>
               </div>
             </div>
@@ -412,14 +416,18 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             height={300}
             className="absolute top-5 right-35 w-[550px]"
           />
-          {playMedia.length > 0 ? (
+          {feMedia.length > 0 ? (
             <div className="w-full h-[350px]">
-              <MediaCarousel items={playMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
+              <MediaCarousel
+                items={feMedia}
+                altText={tExperience('feYCompromisoSocial.carouselAlt')}
+                className="w-full h-full rounded-md shadow-md"
+              />
             </div>
           ) : (
             <Image
               src="/images/image-SIC-play.webp"
-              alt={t('play.fallbackAlt')}
+              alt={tExperience('feYCompromisoSocial.fallbackAlt')}
               width={800}
               height={600}
               className="w-full h-auto rounded-md shadow-md"
@@ -427,22 +435,189 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <Image
-                src="/images/logo-SIC-play.svg"
-                alt={t('play.logoAlt')}
-                width={128}
-                height={128}
-                className="mx-auto mb-10 w-32"
-              />
-              <p className="mt-4 text-gray-700 leading-relaxed">
-                <strong>San Isidro Play</strong> {t('play.descriptionMobile')}
+              <h2 className="text-xl font-bold">{tExperience('feYCompromisoSocial.title')}</h2>
+              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                {tExperience('feYCompromisoSocial.description')}
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═════════════ SECCIÓN 6 — ACTIVIDADES EXTRACURRICULARES ═════════════ */}
+      {/* ═════════════ SECCIÓN 6 — ARTE Y CREATIVIDAD ═════════════ */}
+      <section
+        id="arte-y-creatividad"
+        className="relative w-full h-auto md:py-10 pt-72 pb-12 bg-white overflow-hidden"
+      >
+        {/* Desktop */}
+        <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute top-5 2xl:left-52 left-0 w-[550px]"
+          />
+          <div className="col-span-4 relative flex flex-col justify-center">
+            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
+              <h2 className="text-2xl font-bold text-center">{tExperience('arteYCreatividad.title')}</h2>
+              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                {tExperience('arteYCreatividad.description')}
+              </p>
+            </div>
+          </div>
+          <div className="col-span-8">
+            {arteMedia.length > 0 ? (
+              <div className="w-full h-[645px]">
+                <MediaCarousel
+                  items={arteMedia}
+                  altText={tExperience('arteYCreatividad.carouselAlt')}
+                  className="w-full h-full rounded-xl shadow-lg"
+                />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-vida-estudiantil.webp"
+                alt={tExperience('arteYCreatividad.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Mobile */}
+        <div className="sm:hidden relative min-h-[350px]">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute -top-15 right-35 w-[550px]"
+          />
+          {arteMedia.length > 0 ? (
+            <div className="w-full h-[350px]">
+              <MediaCarousel
+                items={arteMedia}
+                altText={tExperience('arteYCreatividad.carouselAlt')}
+                className="w-full h-full rounded-xl shadow-lg"
+              />
+            </div>
+          ) : (
+            <Image
+              src="/images/Image-vida-estudiantil.webp"
+              alt={tExperience('arteYCreatividad.fallbackAlt')}
+              width={800}
+              height={600}
+              className="w-full h-auto rounded-xl shadow-lg"
+            />
+          )}
+          <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
+            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
+              <h2 className="text-xl font-bold">{tExperience('arteYCreatividad.title')}</h2>
+              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                {tExperience('arteYCreatividad.description')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════ SECCIÓN 7 — HOUSES ═════════════ */}
+      <section id="houses" className="relative w-full h-auto md:py-20 pt-[28rem] pb-16 bg-[#71af8d] overflow-hidden">
+        {/* Desktop */}
+        <div className="hidden sm:block relative">
+          <Image
+            src="/images/formas/forma-home-2.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0"
+          />
+          <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
+            <div className="col-span-8 flex items-center justify-center">
+              {housesMedia.length > 0 ? (
+                <div className="w-full h-[645px]">
+                  <MediaCarousel
+                    items={housesMedia}
+                    altText={tExperience('houses.carouselAlt')}
+                    className="w-full h-full rounded-md shadow-md"
+                  />
+                </div>
+              ) : (
+                <Image
+                  src="/images/image-SIC-play.webp"
+                  alt={tExperience('houses.fallbackAlt')}
+                  width={800}
+                  height={600}
+                  className="w-full h-auto rounded-md shadow-md"
+                />
+              )}
+            </div>
+            <div className="absolute col-span-4 z-20 top-1/2 -translate-y-1/2 xl:left-[30%] left-[23%]">
+              <div className="bg-white shadow-xl rounded-xl p-8 2xl:ml-96 xl:ml-52 w-[550px]">
+                <h2 className="text-2xl font-bold text-center">{tExperience('houses.title')}</h2>
+                <Image
+                  src="/images/experiencias/logos-houses.svg"
+                  alt={tExperience('houses.logosAlt')}
+                  width={458}
+                  height={125}
+                  className="mx-auto my-6 w-[85%] h-auto"
+                />
+                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                  {tExperience('houses.description')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile */}
+        <div className="sm:hidden relative">
+          <Image
+            src="/images/formas/forma-home-2.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute top-5 right-35 w-[550px]"
+          />
+          {housesMedia.length > 0 ? (
+            <div className="w-full h-[350px]">
+              <MediaCarousel
+                items={housesMedia}
+                altText={tExperience('houses.carouselAlt')}
+                className="w-full h-full rounded-md shadow-md"
+              />
+            </div>
+          ) : (
+            <Image
+              src="/images/image-SIC-play.webp"
+              alt={tExperience('houses.fallbackAlt')}
+              width={800}
+              height={600}
+              className="w-full h-auto rounded-md shadow-md"
+            />
+          )}
+          <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
+            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
+              <h2 className="text-xl font-bold">{tExperience('houses.title')}</h2>
+              <Image
+                src="/images/experiencias/logos-houses.svg"
+                alt={tExperience('houses.logosAlt')}
+                width={458}
+                height={125}
+                className="mx-auto my-5 w-full h-auto"
+              />
+              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                {tExperience('houses.description')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═════════════ SECCIÓN 8 — ACTIVIDADES EXTRACURRICULARES ═════════════ */}
       <section
         id="actividades-extracurriculares"
         className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-white overflow-hidden"
