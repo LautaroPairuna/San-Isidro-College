@@ -1,8 +1,11 @@
-import Image from 'next/image'
+// /app/[locale]/experiencia-sic/innovacion-y-robotica/page.tsx
+import BloqueRotulo from '@/components/BloqueRotulo'
+import IconoConFallback from '@/components/IconoConFallback'
+import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import { toPublicImageUrl } from '@/lib/publicConstants'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 const STUDENT_DEVELOPMENT = [
@@ -38,70 +41,9 @@ function resolveIcons<T extends { fallbackIcon: string }>(
   }))
 }
 
-function DevelopmentGrid({
-  title,
-  items,
-  t,
-}: {
-  title: string
-  items: readonly { key: string; icon: string }[]
-  t: Awaited<ReturnType<typeof getTranslations>>
-}) {
-  return (
-    <section className="mt-10">
-      <h2 className="text-2xl font-bold leading-tight text-gray-800">{title}</h2>
-      <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-        {items.map((item) => (
-          <article key={item.key} className="flex flex-col items-center text-center">
-            <Image
-              src={item.icon}
-              alt={t(`students.items.${item.key}.title` as const)}
-              width={140}
-              height={140}
-              className="h-28 w-28 object-contain md:h-32 md:w-32"
-            />
-            <h3 className="mt-4 text-lg font-bold leading-tight text-gray-800 md:text-xl">
-              {t(`students.items.${item.key}.title` as const)}
-            </h3>
-            <p className="mt-2 max-w-[220px] text-[13px] leading-snug text-gray-700 md:max-w-[240px] md:text-sm">
-              {t(`students.items.${item.key}.description` as const)}
-            </p>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function ToolsGrid({
-  items,
-  t,
-}: {
-  items: readonly { key: string; icon: string }[]
-  t: Awaited<ReturnType<typeof getTranslations>>
-}) {
-  return (
-    <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
-      {items.map((item) => (
-        <div key={item.key} className="flex flex-col items-center text-center">
-          <Image
-            src={item.icon}
-            alt={t(`lab.tools.${item.key}` as const)}
-            width={88}
-            height={88}
-            className="h-20 w-20 object-contain"
-          />
-          <span className="mt-3 text-base font-semibold leading-tight text-gray-800">
-            {t(`lab.tools.${item.key}` as const)}
-          </span>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export default async function ExperienciaSicInnovacionRoboticaPage({ params }: PageProps) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicInnovacionRoboticaDetail' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
   const studentIcons = await getMediaGroupByName('Experiencia SIC - Innovacion Students Icons')
@@ -110,35 +52,82 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
   const labTools = resolveIcons(LAB_TOOLS, toolsIcons)
 
   return (
-    <>
-      <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
-        <div className="relative mx-auto min-h-screen max-w-275 bg-white px-8 pb-12 pt-40">
-          <div className="space-y-4 text-left text-gray-800">
-            <h1 className="text-4xl font-bold leading-tight md:text-5xl">
-              {t('title')}
-            </h1>
-            <p className="text-lg font-bold leading-snug text-gray-800">{t('intro.lead')}</p>
+    <div className="relative overflow-hidden">
+      {/* ============ PRESENTACIÓN ============ */}
+      <section id="innovacion-y-robotica" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h1 className="max-w-3xl text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+            {t('title')}
+          </h1>
+
+          <BloqueRotulo className="mt-10" rotulo={t('intro.lead')}>
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
             <p>{t('intro.p3')}</p>
-          </div>
-
-          <DevelopmentGrid title={t('students.title')} items={studentDevelopment} t={t} />
-
-          <section className="mt-12 text-gray-800">
-            <h2 className="text-2xl font-bold leading-tight text-gray-800">{t('lab.title')}</h2>
-            <p className="mt-3 text-left text-gray-700">{t('lab.p1')}</p>
-            <ToolsGrid items={labTools} t={t} />
-          </section>
-
-          <section className="mt-12 text-left text-gray-800">
-            <p className="text-lg font-semibold leading-relaxed">{t('closing.p1')}</p>
-          </section>
+          </BloqueRotulo>
         </div>
       </section>
 
+      {/* ============ QUÉ DESARROLLAN NUESTROS ALUMNOS ============ */}
+      <section id="alumnos" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h2 className="text-xl font-bold text-[#c19516]">{t('students.title')}</h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {studentDevelopment.map((item) => (
+              <article key={item.key} className="flex flex-col items-center text-center">
+                <IconoConFallback
+                  src={item.icon}
+                  fallbackSrc={item.fallbackIcon}
+                  width={140}
+                  height={140}
+                  className="h-28 w-28 object-contain md:h-32 md:w-32"
+                />
+                <h3 className="mt-4 text-lg font-bold leading-tight text-[#294161]">
+                  {t(`students.items.${item.key}.title` as const)}
+                </h3>
+                <p className="mt-2 max-w-[240px] text-sm leading-snug text-gray-700">
+                  {t(`students.items.${item.key}.description` as const)}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ UN ESPACIO PARA EXPERIMENTAR ============ */}
+      <section id="laboratorio" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h2 className="text-xl font-bold text-[#c19516]">{t('lab.title')}</h2>
+          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed text-justify">{t('lab.p1')}</p>
+
+          <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-7">
+            {labTools.map((tool) => (
+              <li key={tool.key} className="flex flex-col items-center text-center">
+                <IconoConFallback
+                  src={tool.icon}
+                  fallbackSrc={tool.fallbackIcon}
+                  width={88}
+                  height={88}
+                  className="h-16 w-16 object-contain md:h-20 md:w-20"
+                />
+                <span className="mt-3 text-sm font-bold leading-tight text-[#294161]">
+                  {t(`lab.tools.${tool.key}` as const)}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-12 max-w-3xl font-bold text-[#294161] leading-relaxed">
+            {t('closing.p1')}
+          </p>
+        </div>
+      </section>
+
+      <FondoFormaSeccion />
+
       <SectionCarrusel medios={alianzasMedia} />
       <Contact />
-    </>
+    </div>
   )
 }
