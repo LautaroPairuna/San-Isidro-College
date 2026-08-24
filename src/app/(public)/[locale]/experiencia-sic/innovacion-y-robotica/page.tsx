@@ -55,7 +55,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="innovacion-y-robotica" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h1 className="max-w-3xl text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
             {t('title')}
           </h1>
@@ -70,7 +70,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
 
       {/* ============ QUÉ DESARROLLAN NUESTROS ALUMNOS ============ */}
       <section id="alumnos" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('students.title')}</h2>
 
           <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -97,9 +97,9 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
 
       {/* ============ UN ESPACIO PARA EXPERIMENTAR ============ */}
       <section id="laboratorio" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('lab.title')}</h2>
-          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed text-justify">{t('lab.p1')}</p>
+          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed">{t('lab.p1')}</p>
 
           <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-7">
             {labTools.map((tool) => (

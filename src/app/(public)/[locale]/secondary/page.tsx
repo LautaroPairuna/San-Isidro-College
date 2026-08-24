@@ -100,7 +100,7 @@ const SecondaryPage = async ({ params }: PageProps) => {
             {t('intro.title')}
           </h1>
           <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.subtitle')}</p>
-          <div className="mt-6 space-y-5 text-gray-700 leading-relaxed text-justify">
+          <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
           </div>
@@ -109,10 +109,10 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ DOS ORIENTACIONES ============ */}
       <section id="orientaciones" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <div className="max-w-3xl">
             <h2 className="text-xl font-bold text-[#c19516]">{t('orientaciones.title')}</h2>
-            <div className="mt-4 space-y-4 text-gray-700 leading-relaxed text-justify">
+            <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
               <p>{t('orientaciones.p1')}</p>
               <p>{t('orientaciones.p2')}</p>
             </div>
@@ -130,10 +130,10 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ CONECTADA CON EL MUNDO ============ */}
       <section id="mundo" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <div className="max-w-3xl">
             <h2 className="text-xl font-bold text-[#c19516]">{t('mundo.title')}</h2>
-            <p className="mt-4 text-gray-700 leading-relaxed text-justify">{t('mundo.p1')}</p>
+            <p className="mt-4 text-gray-700 leading-relaxed">{t('mundo.p1')}</p>
           </div>
 
           <BloqueRotulo className="mt-10" como="h3" rotulo={t('mundo.igcse.label')}>
@@ -162,7 +162,7 @@ const SecondaryPage = async ({ params }: PageProps) => {
       <section id="proyecto-vida" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
         <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('proyectoVida.title')}</h2>
-          <div className="mt-4 space-y-4 text-gray-700 leading-relaxed text-justify">
+          <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
             <p>{t('proyectoVida.p1')}</p>
             <p>{t('proyectoVida.p2')}</p>
             <p>{t('proyectoVida.p3')}</p>
@@ -172,7 +172,7 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ FORMACIÓN QUE TRASCIENDE EL AULA ============ */}
       <section id="formacion" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('formacion.title')}</h2>
           <p className="mt-3 max-w-2xl text-gray-700 leading-relaxed">
             {t('formacion.description')}
@@ -184,7 +184,7 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ UN RECORRIDO POR SECUNDARIA ============ */}
       <section id="recorrido" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('recorrido.title')}</h2>
 
           {/* Cuadro de años. Va en HTML y no como secondary-group.svg: el SVG

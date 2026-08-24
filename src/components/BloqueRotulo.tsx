@@ -24,8 +24,8 @@ export default function BloqueRotulo({
 }) {
   const rotuloEl = (
     <Rotulo
-      className={`md:col-span-4 text-lg font-bold text-[#c19516] ${
-        lado === 'izquierda' ? 'md:text-right' : 'md:col-start-8'
+      className={`md:col-span-3 text-lg font-bold text-[#c19516] ${
+        lado === 'izquierda' ? 'md:text-right' : 'md:col-start-10'
       }`}
     >
       {rotulo}
@@ -34,10 +34,10 @@ export default function BloqueRotulo({
 
   const textoEl = (
     <div
-      className={`md:col-span-6 space-y-4 text-gray-700 leading-relaxed hyphens-auto ${
+      className={`md:col-span-9 space-y-4 text-gray-700 leading-relaxed hyphens-auto ${
         lado === 'izquierda'
-          ? 'md:col-start-6 md:border-l md:border-[#9bb5a5] md:pl-6 text-justify'
-          : 'md:col-start-1 md:border-r md:border-[#9bb5a5] md:pr-6 text-justify md:text-right'
+          ? 'md:col-start-4 md:border-l md:border-[#9bb5a5] md:pl-6'
+          : 'md:col-start-1 md:border-r md:border-[#9bb5a5] md:pr-6 md:text-right'
       }`}
     >
       {children}

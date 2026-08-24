@@ -63,7 +63,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
             {t('intro.title')}
           </h1>
           <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.subtitle')}</p>
-          <div className="mt-6 space-y-5 text-gray-700 leading-relaxed text-justify">
+          <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
           </div>
@@ -72,13 +72,13 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ PRIMEROS ENCUENTROS CON EL INGLÉS ============ */}
       <section id="ingles" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
             <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
               {t('ingles.label1')}
               <span className="block">{t('ingles.label2')}</span>
             </h2>
-            <div className="md:col-span-7 md:col-start-6 md:max-w-md md:border-l md:border-[#9bb5a5] md:pl-6 space-y-4 text-gray-700 leading-relaxed text-justify hyphens-auto">
+            <div className="md:col-span-7 md:col-start-6 md:max-w-md md:border-l md:border-[#9bb5a5] md:pl-6 space-y-4 text-gray-700 leading-relaxed hyphens-auto">
               <p>{t('ingles.p1')}</p>
               <p>{t('ingles.p2')}</p>
               <p>{t('ingles.p3')}</p>
@@ -89,7 +89,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ EL VALOR DEL JUEGO ============ */}
       <section id="juego" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">{t('juego.title')}</h2>
 
           {/* Foto a la izquierda, texto a la derecha */}
@@ -103,7 +103,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
                 className="object-cover"
               />
             </div>
-            <div className="md:col-span-8 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed text-justify md:border-l-2 md:border-black md:pl-6">
+            <div className="md:col-span-8 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed md:border-l-2 md:border-black md:pl-6">
               <p>{t('juego.p1')}</p>
               <p>{t('juego.p2')}</p>
             </div>
@@ -111,7 +111,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
           {/* Texto a la izquierda, foto a la derecha */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-8 md:order-1 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed text-justify md:border-r-2 md:border-black md:pr-6">
+            <div className="md:col-span-8 md:order-1 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed md:border-r-2 md:border-black md:pr-6">
               <p>{t('juego.p3')}</p>
               <p>{t('juego.p4')}</p>
             </div>
