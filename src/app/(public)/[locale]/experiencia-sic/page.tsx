@@ -177,7 +177,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           {/* Carrusel (desktop) */}
           <div className="hidden sm:block col-span-8">
             {rugbyHockeyMedia.length > 0 ? (
-              <div className="w-full h-[645px]">
+              <div className="w-full h-[675px]">
                 <MediaCarousel
                   items={rugbyHockeyMedia}
                   altText={t('rugbyHockey.carouselAlt')}
@@ -243,7 +243,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
-              <div className="w-full h-[645px]">
+              <div className="w-full h-[675px]">
                 <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
               </div>
             </div>
@@ -323,7 +323,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           <div className="col-span-8">
-            <div className="w-full h-[645px]">
+            <div className="w-full h-[675px]">
               <MediaCarousel items={innovacionMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           </div>
@@ -379,7 +379,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               {feMedia.length > 0 ? (
-                <div className="w-full h-[645px]">
+                <div className="w-full h-[675px]">
                   <MediaCarousel
                     items={feMedia}
                     altText={tExperience('feYCompromisoSocial.carouselAlt')}
@@ -468,7 +468,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           </div>
           <div className="col-span-8">
             {arteMedia.length > 0 ? (
-              <div className="w-full h-[645px]">
+              <div className="w-full h-[675px]">
                 <MediaCarousel
                   items={arteMedia}
                   altText={tExperience('arteYCreatividad.carouselAlt')}
@@ -538,7 +538,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               {housesMedia.length > 0 ? (
-                <div className="w-full h-[645px]">
+                <div className="w-full h-[675px]">
                   <MediaCarousel
                     items={housesMedia}
                     altText={tExperience('houses.carouselAlt')}
@@ -556,7 +556,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               )}
             </div>
             <div className="absolute col-span-4 z-20 top-1/2 -translate-y-1/2 xl:left-[30%] left-[23%]">
-              <div className="bg-white shadow-xl rounded-xl p-8 2xl:ml-96 xl:ml-52 w-[550px]">
+              <div className="bg-white shadow-xl rounded-xl p-8 2xl:ml-96 xl:ml-52 w-[575px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('houses.title')}</h2>
                 <Image
                   src="/images/experiencias/logos-houses.svg"
@@ -638,7 +638,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           <div className="col-span-8">
-            <div className="w-full h-[645px]">
+            <div className="w-full h-[675px]">
               <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           </div>
