@@ -164,7 +164,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="absolute top-60 left-41 w-[490px] z-20">
               <div className="bg-white shadow-xl rounded-xl p-8">
                 <h2 className="text-2xl font-bold text-center">{tExperience('rugbyHockey.title')}</h2>
-                <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('rugbyHockey.description')}</p>
+                <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('rugbyHockey.description')}</p>
                 <div className="mt-5 text-center">
                   <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-[#1e804b] font-semibold hover:underline">
                     {tExperience('rugbyHockey.readMore')}
@@ -250,7 +250,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="absolute col-span-4 z-20 2xl:top-[63%] xl:top-[66%] 2xl:left-[28%] xl:left-[15%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 lg:left-96 md:left-52 w-[550px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('googleReferenceSchool.title')}</h2>
-                <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('googleReferenceSchool.description')}</p>
+                <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('googleReferenceSchool.description')}</p>
                 <div className="mt-5 text-center">
                   <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
                     {tExperience('googleReferenceSchool.readMore')}
@@ -286,7 +286,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('googleReferenceSchool.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('googleReferenceSchool.description')}</p>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('googleReferenceSchool.description')}</p>
               <div className="mt-5">
                 <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
                   {tExperience('googleReferenceSchool.readMore')}
@@ -314,7 +314,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('innovacionRobotica.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('innovacionRobotica.description')}</p>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('innovacionRobotica.description')}</p>
               <div className="text-center mt-5">
                 <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
                   {tExperience('innovacionRobotica.readMore')}
@@ -354,7 +354,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('innovacionRobotica.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('innovacionRobotica.description')}</p>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('innovacionRobotica.description')}</p>
               <div className="mt-5">
                 <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
                   {tExperience('innovacionRobotica.readMore')}
@@ -399,7 +399,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 absolute -top-85 2xl:left-96 xl:left-52 w-[550px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('feYCompromisoSocial.title')}</h2>
-                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                   {tExperience('feYCompromisoSocial.description')}
                 </p>
               </div>
@@ -436,7 +436,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('feYCompromisoSocial.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('feYCompromisoSocial.description')}
               </p>
             </div>
@@ -461,7 +461,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('arteYCreatividad.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('arteYCreatividad.description')}
               </p>
             </div>
@@ -516,7 +516,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('arteYCreatividad.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('arteYCreatividad.description')}
               </p>
             </div>
@@ -565,7 +565,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                   height={125}
                   className="mx-auto my-6 w-[85%] h-auto"
                 />
-                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                   {tExperience('houses.description')}
                 </p>
                 <div className="mt-5 text-center">
@@ -604,7 +604,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               className="w-full h-auto rounded-md shadow-md"
             />
           )}
-          <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
+          <div className="absolute -top-24 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('houses.title')}</h2>
               <Image
@@ -614,7 +614,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 height={125}
                 className="mx-auto my-5 w-full h-auto"
               />
-              <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('houses.description')}
               </p>
               <div className="mt-5">
@@ -644,7 +644,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('actividadesExtracurriculares.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('actividadesExtracurriculares.description')}</p>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
             </div>
           </div>
           <div className="col-span-8">
@@ -679,7 +679,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</h2>
-              <p className="mt-4 text-gray-700 leading-relaxed">{tExperience('actividadesExtracurriculares.description')}</p>
+              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
             </div>
           </div>
         </div>
