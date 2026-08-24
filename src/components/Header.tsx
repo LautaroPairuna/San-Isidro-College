@@ -239,7 +239,7 @@ const Header: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10 xl:gap-12">
               {/* El Colegio */}
               <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-2">
+                <h2 className="text-4xl mb-2 whitespace-nowrap">
                   <Link href={`/${locale}/colegio`} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "El Colegio" : "The School"}
                   </Link>
@@ -250,7 +250,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#proyecto`}
                       id="proyecto-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Proyecto Educativo Bilingüe" : "Bilingual Educational Project"}
                     </Link>
@@ -260,7 +260,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#mision`}
                       id="mision-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Misión, Visión y Valores" : "Mission, Vision and Values"}
                     </Link>
@@ -270,7 +270,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#escudo`}
                       id="escudo-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Nuestro Escudo, Nuestra Identidad" : "Our Crest, Our Identity"}
                     </Link>
@@ -280,7 +280,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#aprendizaje-con-valores`}
                       id="aprendizaje-con-valores-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Aprendizaje con Valores" : "Learning through Values"}
                     </Link>
@@ -290,7 +290,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#educacion-personalizada`}
                       id="educacion-personalizada-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Educación Personalizada" : "Personalized Education"}
                     </Link>
@@ -300,7 +300,7 @@ const Header: React.FC = () => {
                       href={`/${locale}/colegio#instalaciones`}
                       id="instalaciones-link"
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Instalaciones" : "Facilities"}
                     </Link>
@@ -310,7 +310,7 @@ const Header: React.FC = () => {
 
               {/* Académicos */}
               <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-2">
+                <h2 className="text-4xl mb-2 whitespace-nowrap">
                   <Link href={`/${locale}/academicos`} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "Académicos" : "Academics"}
                   </Link>
@@ -320,7 +320,7 @@ const Header: React.FC = () => {
                     <Link
                       href={locale === "es" ? "/es/proyecto-bilingue" : "/en/bilingual-project"}
                       onClick={handleNavClick}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Proyecto Bilingüe" : "Bilingual Project"}
                     </Link>
@@ -359,7 +359,7 @@ const Header: React.FC = () => {
               </div>
               {/* Experiencia SIC */}
               <div className="xl:border-l-2 lg:border-l-0 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-2">
+                <h2 className="text-4xl mb-2 whitespace-nowrap">
                   <Link href={`/${locale}/experiencia-sic`} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "Experiencia SIC" : "SIC Experience"}
                   </Link>
@@ -433,7 +433,7 @@ const Header: React.FC = () => {
 
               {/* Deportes */}
               <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
-                <h2 className="text-4xl mb-4">
+                <h2 className="text-4xl mb-4 whitespace-nowrap">
                   <Link href={`/${locale}/deportes`} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "Deportes" : "Sports"}
                   </Link>
@@ -443,7 +443,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/deportes#club`}
                       onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "club")}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Club" : "Club"}
                     </Link>
@@ -452,7 +452,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/deportes#dojo`}
                       onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "dojo")}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Dojo" : "Dojo"}
                     </Link>
@@ -461,7 +461,7 @@ const Header: React.FC = () => {
                     <Link
                       href={`/${locale}/deportes#san-isidro-balance`}
                       onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "san-isidro-balance")}
-                      className="block hover:underline my-3 max-w-[180px]"
+                      className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "San Isidro Balance" : "San Isidro Balance"}
                     </Link>
