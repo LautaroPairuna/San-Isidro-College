@@ -58,7 +58,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="nivel-inicial" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
             {t('intro.title')}
           </h1>
@@ -72,7 +72,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ PRIMEROS ENCUENTROS CON EL INGLÉS ============ */}
       <section id="ingles" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
             <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
               {t('ingles.label1')}
@@ -89,7 +89,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ EL VALOR DEL JUEGO ============ */}
       <section id="juego" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">{t('juego.title')}</h2>
 
           {/* Foto a la izquierda, texto a la derecha */}
@@ -130,7 +130,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ UNA PROPUESTA QUE CRECE CON ELLOS ============ */}
       <section id="salas" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('salas.title')}</h2>
           <p className="mt-3 text-gray-700 leading-relaxed">{t('salas.description')}</p>
 

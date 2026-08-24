@@ -112,7 +112,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="bienestar" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
             {t('title')}
           </h1>
@@ -122,7 +122,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ NUESTRA FILOSOFÍA ============ */}
       <section id="filosofia" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <BloqueRotulo rotulo={t('philosophy.title')}>
             <p>{t('philosophy.p1')}</p>
             <p>{t('philosophy.p2')}</p>
@@ -134,7 +134,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ UNA COMUNIDAD QUE ACOMPAÑA ============ */}
       <section id="comunidad" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <BloqueRotulo rotulo={t('community.title')}>
             <p>{t('community.p1')}</p>
             <p>{t('community.p2')}</p>
@@ -144,9 +144,9 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ EQUIPO DE ORIENTACIÓN ESCOLAR ============ */}
       <section id="eoe" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516] whitespace-pre-line">{t('eoe.title')}</h2>
-          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed">{t('eoe.p1')}</p>
+          <p className="mt-4 text-gray-700 leading-relaxed">{t('eoe.p1')}</p>
 
           <FlipCardsGrid items={secondGroupCards} ariaLabel={t('secondGroupAriaLabel')} />
         </div>
@@ -154,7 +154,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ ACOMPAÑAR PARA CRECER ============ */}
       <section id="cierre" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           {/* El filete va en la columna de texto y no lleva items-center: así
               se estira hasta el alto de la foto, como en Primary. */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

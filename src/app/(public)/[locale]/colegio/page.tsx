@@ -51,12 +51,12 @@ const ColegioPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PROYECTO EDUCATIVO ============ */}
       <section id="proyecto" className="relative w-full bg-white pt-40 pb-16 lg:pb-24 overflow-hidden">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
             {t("proyectoTitle1")}
             <span className="block">{t("proyectoTitle2")}</span>
           </h1>
-          <div className="mt-8 max-w-3xl space-y-5 text-gray-700 leading-relaxed">
+          <div className="mt-8 space-y-5 text-gray-700 leading-relaxed">
             {introduccion.map((p) => (
               <p key={p}>{t(`introduccion.${p}`)}</p>
             ))}
@@ -66,7 +66,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ MISIÓN / VISIÓN / VALORES ============ */}
       <section className="relative w-full bg-[#dcebe0] py-16 lg:py-24 overflow-hidden">
-        <div className="relative z-10 max-w-3xl mx-auto px-6 space-y-16 lg:space-y-24">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 space-y-16 lg:space-y-24">
           {/* Misión: rótulo a la izquierda, filete y texto a la derecha */}
           <div
             id="mision"
@@ -109,11 +109,11 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ NUESTRO ESCUDO ============ */}
       <section id="escudo" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("escudo.title")}
           </h2>
-          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed">
+          <p className="mt-4 text-gray-700 leading-relaxed">
             {t("escudo.intro")}
           </p>
 
@@ -130,7 +130,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ APRENDIZAJE CON VALORES ============ */}
       <section id="aprendizaje-con-valores" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("aprendizajeValores.title")}
           </h2>
@@ -147,7 +147,7 @@ const ColegioPage = async ({ params }: PageProps) => {
         id="educacion-personalizada"
         className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32"
       >
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("educacionPersonalizada.title")}
           </h2>
@@ -190,7 +190,7 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ INSTALACIONES ============ */}
       <section id="instalaciones" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
             {t("instalaciones.title")}
           </h2>

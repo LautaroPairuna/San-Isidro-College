@@ -102,7 +102,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="google-reference-school" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="inline-flex rounded-lg border border-gray-200 px-6 py-4 shadow-sm">
             <Image
               src="/images/google-education-logo.webp"
@@ -122,7 +122,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       {/* ============ QUÉ ES SER GOOGLE REFERENCE SCHOOL ============ */}
       <section id="que-es" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <BloqueRotulo rotulo={t('whatIs.title')}>
             <p>{t('whatIs.p1')}</p>
             <p>{t('whatIs.p2')}</p>
@@ -132,7 +132,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       {/* ============ QUÉ SIGNIFICA PARA NUESTROS ALUMNOS ============ */}
       <section id="alumnos" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('students.title')}</h2>
           <GrillaIconos items={studentFeatures} t={t} namespace="students" />
         </div>
@@ -140,7 +140,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       {/* ============ QUÉ SIGNIFICA PARA NUESTROS DOCENTES ============ */}
       <section id="docentes" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('teachers.title')}</h2>
           <GrillaIconos items={teacherFeatures} t={t} namespace="teachers" />
         </div>
@@ -148,13 +148,13 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       {/* ============ LA TECNOLOGÍA COMO PARTE DEL APRENDIZAJE ============ */}
       <section id="tecnologia" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('technology.title')}</h2>
-          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed">
+          <p className="mt-4 text-gray-700 leading-relaxed">
             {t('technology.p1')}
           </p>
 
-          <ul className="mt-10 grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-6">
+          <ul className="mt-10 grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-4 lg:grid-cols-11">
             {googleApps.map((app) => (
               <li key={app.key} className="flex flex-col items-center text-center">
                 <IconoConFallback
@@ -169,7 +169,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
             ))}
           </ul>
 
-          <p className="mt-12 max-w-3xl font-bold text-[#294161] leading-relaxed">
+          <p className="mt-12 font-bold text-[#294161] leading-relaxed">
             {t('closing.p1')}
           </p>
         </div>

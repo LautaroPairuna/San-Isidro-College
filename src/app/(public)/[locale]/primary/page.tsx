@@ -105,7 +105,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="nivel-primario" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
             {t('intro.title')}
           </h1>
@@ -120,7 +120,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
 
       {/* ============ PROPUESTA BILINGÜE ============ */}
       <section id="propuesta" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
             <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
               {t('propuesta.label1')}
@@ -141,7 +141,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
 
       {/* ============ LA LITERATURA COMO PUNTO DE PARTIDA ============ */}
       <section id="literatura" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-4 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
               <RenderMedia
@@ -165,7 +165,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
 
       {/* ============ APRENDIZAJES SIGNIFICATIVOS ============ */}
       <section id="aprendizajes" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-8 md:order-1 space-y-5 text-gray-700 leading-relaxed md:border-r-2 md:border-black md:pr-6">
               <h2 className="text-xl font-bold text-[#c19516]">{t('aprendizajes.title')}</h2>
@@ -188,9 +188,9 @@ const PrimaryPage = async ({ params }: PageProps) => {
 
       {/* ============ EJES TRANSVERSALES ============ */}
       <section id="ejes" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('ejes.title')}</h2>
-          <p className="mt-3 max-w-2xl text-gray-700 leading-relaxed">{t('ejes.description')}</p>
+          <p className="mt-3 text-gray-700 leading-relaxed">{t('ejes.description')}</p>
 
           <FlipCardsCarousel items={ejes} ariaLabel={t('ejes.title')} />
         </div>
@@ -198,7 +198,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
 
       {/* ============ UN RECORRIDO QUE CONTINÚA ============ */}
       <section id="recorrido" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h2 className="text-xl font-bold text-[#c19516]">{t('recorrido.title')}</h2>
           <p className="mt-3 text-gray-700 leading-relaxed">
             {t('recorrido.description')}

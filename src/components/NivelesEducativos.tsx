@@ -32,7 +32,7 @@ export default async function NivelesEducativos({
       id="niveles"
       className={`relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32 ${className ?? ''}`}
     >
-      <div className="relative z-10 max-w-3xl mx-auto px-6">
+      <div className="relative z-10 max-w-5xl mx-auto px-6">
         <h2 className="text-2xl lg:text-3xl font-bold text-[#294161]">{t('title')}</h2>
         <p className="mt-3 max-w-2xl text-gray-700 leading-relaxed">{t('description')}</p>
 
