@@ -76,7 +76,10 @@ function FlipCard({ card }: { card: FlipCardItem }) {
           className="absolute inset-0 overflow-hidden rounded-3xl shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
           style={{ backgroundColor: card.color }}
         >
-          <div className="flex h-[40%] flex-col items-center justify-center px-2 text-center text-white">
+          <div
+            className="flex h-[40%] flex-col items-center justify-center px-2 text-center"
+            style={{ color: card.textColor ?? '#fff' }}
+          >
             <CardIconWithFallback src={card.icon} fallbackSrc={card.fallbackIcon} alt={card.title} />
             <h3 className="mt-3 text-sm font-bold leading-tight">{card.title}</h3>
           </div>
@@ -86,8 +89,12 @@ function FlipCard({ card }: { card: FlipCardItem }) {
         </div>
 
         <div
-          className="absolute inset-0 flex items-center justify-center rounded-3xl p-6 text-center text-xs leading-snug text-white shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
-          style={{ backgroundColor: card.color, transform: 'rotateY(180deg)' }}
+          className="absolute inset-0 flex items-center justify-center rounded-3xl p-6 text-center text-xs leading-snug shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
+          style={{
+            backgroundColor: card.backColor ?? card.color,
+            color: card.textColor ?? '#fff',
+            transform: 'rotateY(180deg)',
+          }}
         >
           <p className="font-semibold">{card.backText}</p>
         </div>

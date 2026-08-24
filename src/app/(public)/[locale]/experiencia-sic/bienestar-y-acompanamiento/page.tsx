@@ -28,19 +28,29 @@ const CARD_FALLBACK_IMAGES = [
 
 const CIERRE_FALLBACK_IMG = '/images/Image-vida-estudiantil.webp'
 
+/**
+ * Tarjetas de bienestar. El frente va en pastel, con la misma paleta que las
+ * tarjetas de Secondary, así que los íconos no pueden ser los de /images/icons:
+ * esos son blancos y sobre pastel no se ven. En /images/experiencias/bienestar
+ * están los mismos dibujos recoloreados a navy.
+ */
 const FIRST_GROUP_CARDS = [
-  { key: 'tutorias', fallbackIcon: '/images/icons/tutorias-ico.svg', color: '#c19516' },
-  { key: 'educacionEmocional', fallbackIcon: '/images/icons/educacion-emocional-ico.svg', color: '#2d8f57' },
-  { key: 'trabajoFamilias', fallbackIcon: '/images/icons/trabajo-familia-ico.svg', color: '#294161' },
-  { key: 'desarrolloIntegral', fallbackIcon: '/images/icons/desarrollo-integral-ico.svg', color: '#75ad76' },
+  { key: 'tutorias', icon: 'tutorias-ico.svg', color: '#cfe0cd' },
+  { key: 'educacionEmocional', icon: 'educacion-emocional-ico.svg', color: '#ded8ee' },
+  { key: 'trabajoFamilias', icon: 'trabajo-familia-ico.svg', color: '#f7dfa0' },
+  { key: 'desarrolloIntegral', icon: 'desarrollo-integral-ico.svg', color: '#cfe2ef' },
 ] as const
 
 const SECOND_GROUP_CARDS = [
-  { key: 'sostenEmocional', fallbackIcon: '/images/icons/sosten-emocional-ico.svg', color: '#3ba9cf' },
-  { key: 'acompanamientoPsicopedagogico', fallbackIcon: '/images/icons/acompanamiento-pedagogico-ico.svg', color: '#beb465' },
-  { key: 'convivenciaEscolar', fallbackIcon: '/images/icons/convivencia-escolar-ico.svg', color: '#c19516' },
-  { key: 'trabajoInterdisciplinario', fallbackIcon: '/images/icons/trabajo-interdisciplinario-ico.svg', color: '#294161' },
+  { key: 'sostenEmocional', icon: 'sosten-emocional-ico.svg', color: '#f7dfa0' },
+  { key: 'acompanamientoPsicopedagogico', icon: 'acompanamiento-pedagogico-ico.svg', color: '#cfe2ef' },
+  { key: 'convivenciaEscolar', icon: 'convivencia-escolar-ico.svg', color: '#cfe0cd' },
+  { key: 'trabajoInterdisciplinario', icon: 'trabajo-interdisciplinario-ico.svg', color: '#f0cdb0' },
 ] as const
+
+/** Dorso y texto de las tarjetas, iguales a los de Secondary. */
+const TARJETAS_DORSO = '#a9c69c'
+const TARJETAS_TEXTO = '#294161'
 
 type CardKey =
   | (typeof FIRST_GROUP_CARDS)[number]['key']
@@ -53,15 +63,14 @@ type PageProps = {
 export const dynamic = 'force-dynamic'
 
 function buildCards(
-  cards: ReadonlyArray<{ key: CardKey; fallbackIcon: string; color: string }>,
-  iconUrls: string[],
+  cards: ReadonlyArray<{ key: CardKey; icon: string; color: string }>,
   imageUrls: string[],
   t: Awaited<ReturnType<typeof getTranslations>>,
   offset: number
 ): FlipCardItem[] {
   return cards.map((card, index) => {
     const image = imageUrls[offset + index] ?? CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length]
-    const icon = iconUrls[offset + index] ?? card.fallbackIcon
+    const icon = `/images/experiencias/bienestar/${card.icon}`
 
     return {
       key: card.key,
@@ -69,9 +78,11 @@ function buildCards(
       backText: t(`cards.${card.key}.backText`),
       icon,
       image,
-      fallbackIcon: card.fallbackIcon,
+      fallbackIcon: icon,
       fallbackImage: CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length],
       color: card.color,
+      backColor: TARJETAS_DORSO,
+      textColor: TARJETAS_TEXTO,
     }
   })
 }
@@ -93,11 +104,6 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   const imageMedias = [...(cardsSection?.grupo?.medios ?? [])]
     .filter((media) => media.tipo === 'IMAGEN')
     .sort((a, b) => a.posicion - b.posicion)
-  const iconMedias = [...(cardsSection?.grupo?.medios ?? [])]
-    .filter((media) => media.tipo === 'ICONO')
-    .sort((a, b) => a.posicion - b.posicion)
-  const iconUrls = iconMedias.map((media) => toPublicImageUrl('medios', media.urlArchivo))
-
   const imageUrls =
     imageMedias.length > 0
       ? Array.from({ length: 8 }, (_, index) =>
@@ -105,8 +111,8 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
         )
       : [...CARD_FALLBACK_IMAGES]
 
-  const firstGroupCards = buildCards(FIRST_GROUP_CARDS, iconUrls, imageUrls, t, 0)
-  const secondGroupCards = buildCards(SECOND_GROUP_CARDS, iconUrls, imageUrls, t, 4)
+  const firstGroupCards = buildCards(FIRST_GROUP_CARDS, imageUrls, t, 0)
+  const secondGroupCards = buildCards(SECOND_GROUP_CARDS, imageUrls, t, 4)
 
   return (
     <div className="relative overflow-hidden">
