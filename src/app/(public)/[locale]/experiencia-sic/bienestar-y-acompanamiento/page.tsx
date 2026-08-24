@@ -28,28 +28,35 @@ const CARD_FALLBACK_IMAGES = [
 
 const CIERRE_FALLBACK_IMG = '/images/Image-vida-estudiantil.webp'
 
+/** Paleta pastel del diseno. Cada tarjeta usa su color tanto en el frente como en el dorso. */
+const PASTEL = {
+  verde: '#c7ddb5',
+  morado: '#e4ddee',
+  amarillo: '#efdfa4',
+  celeste: '#cce6ea',
+  durazno: '#f0cdb0',
+} as const
+
 /**
- * Tarjetas de bienestar. El frente va en pastel, con la misma paleta que las
- * tarjetas de Secondary, así que los íconos no pueden ser los de /images/icons:
- * esos son blancos y sobre pastel no se ven. En /images/experiencias/bienestar
- * están los mismos dibujos recoloreados a navy.
+ * Tarjetas de bienestar. Como el frente va en pastel, los íconos no pueden ser
+ * los de /images/icons: esos son blancos y sobre pastel no se ven. En
+ * /images/experiencias/bienestar están los mismos dibujos recoloreados a navy.
  */
 const FIRST_GROUP_CARDS = [
-  { key: 'tutorias', icon: 'tutorias-ico.svg', color: '#cfe0cd' },
-  { key: 'educacionEmocional', icon: 'educacion-emocional-ico.svg', color: '#ded8ee' },
-  { key: 'trabajoFamilias', icon: 'trabajo-familia-ico.svg', color: '#f7dfa0' },
-  { key: 'desarrolloIntegral', icon: 'desarrollo-integral-ico.svg', color: '#cfe2ef' },
+  { key: 'tutorias', icon: 'tutorias-ico.svg', color: PASTEL.verde },
+  { key: 'educacionEmocional', icon: 'educacion-emocional-ico.svg', color: PASTEL.morado },
+  { key: 'trabajoFamilias', icon: 'trabajo-familia-ico.svg', color: PASTEL.amarillo },
+  { key: 'desarrolloIntegral', icon: 'desarrollo-integral-ico.svg', color: PASTEL.celeste },
 ] as const
 
 const SECOND_GROUP_CARDS = [
-  { key: 'sostenEmocional', icon: 'sosten-emocional-ico.svg', color: '#f7dfa0' },
-  { key: 'acompanamientoPsicopedagogico', icon: 'acompanamiento-pedagogico-ico.svg', color: '#cfe2ef' },
-  { key: 'convivenciaEscolar', icon: 'convivencia-escolar-ico.svg', color: '#cfe0cd' },
-  { key: 'trabajoInterdisciplinario', icon: 'trabajo-interdisciplinario-ico.svg', color: '#f0cdb0' },
+  { key: 'sostenEmocional', icon: 'sosten-emocional-ico.svg', color: PASTEL.amarillo },
+  { key: 'acompanamientoPsicopedagogico', icon: 'acompanamiento-pedagogico-ico.svg', color: PASTEL.celeste },
+  { key: 'convivenciaEscolar', icon: 'convivencia-escolar-ico.svg', color: PASTEL.verde },
+  { key: 'trabajoInterdisciplinario', icon: 'trabajo-interdisciplinario-ico.svg', color: PASTEL.durazno },
 ] as const
 
-/** Dorso y texto de las tarjetas, iguales a los de Secondary. */
-const TARJETAS_DORSO = '#a9c69c'
+/** Texto de las tarjetas: navy sobre el pastel, tanto en el frente como en el dorso. */
 const TARJETAS_TEXTO = '#294161'
 
 type CardKey =
@@ -81,7 +88,6 @@ function buildCards(
       fallbackIcon: icon,
       fallbackImage: CARD_FALLBACK_IMAGES[(offset + index) % CARD_FALLBACK_IMAGES.length],
       color: card.color,
-      backColor: TARJETAS_DORSO,
       textColor: TARJETAS_TEXTO,
     }
   })
