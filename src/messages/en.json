@@ -816,6 +816,25 @@
       "subtitle": "Actions to support those who need it most."
     }
   },
+  "deportesDetail": {
+    "title": "Sport as part of a well-rounded education",
+    "intro": {
+      "p1": "San Isidro College sits in a privileged natural setting and has its own sports field, designed specifically for its sports programme.",
+      "p2": "For us, sport is much more than physical activity. It is a fundamental dimension of the education of the whole person, as it allows our students to develop motor, cognitive, social, and emotional skills. Through movement, play, and different sporting practices, they learn to know themselves, to respect one another, to value others, and to trust their own abilities.",
+      "p3": "In Kindergarten, play and sport offer meaningful learning experiences that awaken curiosity, imagination, and problem-solving. In Primary and Secondary, the programme promotes physical activity, healthy living, social interaction, and the conscious building of habits that stay with students beyond their time at school.",
+      "p4": "The range of experiences in play, gymnastics, and sport allows each student to discover different ways of moving, taking part, and challenging themselves. We want physical activity to become a natural part of their lives, contributing to their wellbeing and to a healthy, balanced lifestyle."
+    },
+    "club": {
+      "label1": "San Isidro",
+      "label2": "College Club",
+      "lead": "A club born of a conviction",
+      "p1": "San Isidro College Club was born of a conviction held by San Isidro College: that sport could become a space to bring families together, build values, and create community.",
+      "p2": "With that vision, the School took the first steps and carried out the necessary procedures with the Salta Rugby and Hockey Union to make official competition possible.",
+      "p3": "From there, the commitment and work of the School's sports coordinator and a group of parents turned that initiative into an institution with its own independent legal status, established within the principles and conditions set out by the School.",
+      "p4": "That is how San Isidro College Club came about: from a vision driven by the School and the commitment of families who made it real, sharing from the very beginning one identity and one way of understanding sport. School and Club share the same aspiration: to sow example, discipline, hard work, and values that go beyond the pitch and accompany children and young people as they grow, within a strong, close, and committed community.",
+      "logoAlt": "San Isidro College Club crest"
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Sports",
     "intro": {
@@ -893,6 +912,10 @@
     "experienciaSicFe": {
       "title": "Faith and Social Commitment | San Isidro College",
       "description": "The Catholic orientation of San Isidro College, the legacy of Saint Isidore the Labourer, and the service and volunteering experiences that are part of school life."
+    },
+    "experienciaSicActividades": {
+      "title": "Extracurricular Activities | San Isidro College",
+      "description": "Sport as part of a well-rounded education at San Isidro College, and the origins of San Isidro College Club, the institution born from the commitment of our families."
     }
   },
   "pilares": {

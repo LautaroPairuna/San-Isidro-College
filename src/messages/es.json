@@ -816,6 +816,25 @@
       "subtitle": "Acciones para acompañar a quienes más lo necesitan."
     }
   },
+  "deportesDetail": {
+    "title": "El deporte como parte de la formación integral",
+    "intro": {
+      "p1": "San Isidro College se encuentra en un entorno natural privilegiado y cuenta con un campo de deportes propio, especialmente pensado para el desarrollo de su propuesta deportiva.",
+      "p2": "Para nosotros, el deporte representa mucho más que una actividad física. Es una dimensión fundamental de la formación integral de la persona, ya que permite a nuestros estudiantes desarrollar habilidades motrices, cognitivas, sociales y emocionales. A través del movimiento, el juego y las distintas prácticas deportivas, aprenden a conocerse, respetarse, valorar a los demás y confiar en sus propias capacidades.",
+      "p3": "En el Nivel Inicial, el juego y el deporte ofrecen experiencias de aprendizaje significativas que despiertan la curiosidad, la imaginación y la capacidad de resolver problemas. En los niveles Primario y Secundario, la propuesta promueve la actividad física, la vida saludable, la interacción social y la incorporación consciente de hábitos que acompañen a los estudiantes más allá de su paso por el colegio.",
+      "p4": "La variedad de experiencias en el juego, la gimnasia y el deporte permite que cada estudiante descubra diferentes formas de moverse, participar y superarse. Buscamos que la actividad física se convierta en una parte natural de sus vidas y contribuya a su bienestar y a la construcción de un estilo de vida saludable y equilibrado."
+    },
+    "club": {
+      "label1": "San Isidro",
+      "label2": "College Club",
+      "lead": "Un club nacido de una convicción",
+      "p1": "San Isidro College Club nació de una convicción de San Isidro College: que el deporte podía convertirse en un espacio para reunir a las familias, formar valores y construir comunidad.",
+      "p2": "Con esa visión, el Colegio dio los primeros pasos y realizó las gestiones necesarias ante la Unión de rugby y hockey de Salta, para posibilitar la participación deportiva oficial.",
+      "p3": "A partir de allí, el compromiso y el trabajo del Coordinador de deportes del colegio y de un grupo de padres, permitieron transformar aquella iniciativa en una institución con personería jurídica propia e independiente, constituida en el marco de los principios y condiciones establecidos por el Colegio.",
+      "p4": "Así nació San Isidro College Club: de una visión impulsada por el Colegio y del compromiso de familias que la hicieron realidad, compartiendo desde el comienzo una misma identidad y una misma manera de entender el deporte. Colegio y Club tienen una misma aspiración: sembrar ejemplo, disciplina, trabajo y valores que trasciendan la cancha y acompañen a niños y jóvenes en su crecimiento, dentro de una comunidad fuerte, cercana y comprometida.",
+      "logoAlt": "Escudo de San Isidro College Club"
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Deportes",
     "intro": {
@@ -893,6 +912,10 @@
     "experienciaSicFe": {
       "title": "Fe y compromiso social | San Isidro College",
       "description": "La orientación católica de San Isidro College, el legado de San Isidro Labrador y las experiencias de servicio y voluntariado que forman parte de la vida del colegio."
+    },
+    "experienciaSicActividades": {
+      "title": "Actividades Extracurriculares | San Isidro College",
+      "description": "El deporte como parte de la formación integral en San Isidro College y el origen de San Isidro College Club, la institución que nació del compromiso de las familias."
     }
   },
   "pilares": {

@@ -57,6 +57,10 @@ export const routing = defineRouting({
       es: "/experiencia-sic/fe-y-compromiso-social",
       en: "/sic-experience/faith-and-social-commitment",
     },
+    "/experiencia-sic/actividades-extracurriculares": {
+      es: "/experiencia-sic/actividades-extracurriculares",
+      en: "/sic-experience/extracurricular-activities",
+    },
     "/deportes": { es: "/deportes", en: "/sports" },
     "/deportes-mas-info": {
       es: "/deportes-mas-info",
