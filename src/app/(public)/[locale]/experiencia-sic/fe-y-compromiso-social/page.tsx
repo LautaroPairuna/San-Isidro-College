@@ -23,6 +23,24 @@ const FOTOS_FALLBACK = [
 const VERDE = '#1e804b'
 const DORADO = '#c19516'
 const NAVY = '#294161'
+/** Verde del círculo del ícono, más suave que el de los bullets. */
+const VERDE_TARJETA = '#7fa06a'
+
+/**
+ * Los íconos de las dos tarjetas son blancos, así que van dentro de un círculo
+ * de color como en el diseño: verde para instituciones y dorado para campañas.
+ */
+function IconoTarjeta({ src, fondo }: { src: string; fondo: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full"
+      style={{ backgroundColor: fondo }}
+    >
+      <Image src={src} alt="" width={56} height={56} className="h-7 w-7 object-contain" />
+    </span>
+  )
+}
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -107,10 +125,16 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
         <div className="relative z-10 mt-12 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <article className="rounded-xl bg-[#f2f1e8] p-6">
-              <h3 className="border-b border-[#9bb5a5] pb-2 text-base font-bold" style={{ color: NAVY }}>
-                {t('instituciones.title')}
-              </h3>
-              <ul className="mt-4 space-y-2">
+              <div className="flex items-center gap-4">
+                <IconoTarjeta
+                  src="/images/experiencias/fe-y-compromiso/instituciones-que-acompanamos.svg"
+                  fondo={VERDE_TARJETA}
+                />
+                <h3 className="flex-1 border-b border-[#9bb5a5] pb-2 text-base font-bold" style={{ color: NAVY }}>
+                  {t('instituciones.title')}
+                </h3>
+              </div>
+              <ul className="mt-4 space-y-2 md:ml-[72px]">
                 {INSTITUCIONES.map((key) => (
                   <li key={key} className="flex items-center gap-2 text-sm text-gray-700">
                     <span
@@ -125,10 +149,26 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
             </article>
 
             <article className="rounded-xl bg-[#fdf2e4] p-6">
-              <h3 className="border-b pb-2 text-base font-bold" style={{ color: NAVY, borderColor: DORADO }}>
-                {t('campanas.title')}
-              </h3>
-              <p className="mt-4 text-sm text-gray-700">{t('campanas.subtitle')}</p>
+              <div className="flex items-center gap-4">
+                <IconoTarjeta
+                  src="/images/experiencias/fe-y-compromiso/campanas-solidarias.svg"
+                  fondo={DORADO}
+                />
+                <h3 className="flex-1 border-b pb-2 text-base font-bold" style={{ color: NAVY, borderColor: DORADO }}>
+                  {t('campanas.title')}
+                </h3>
+              </div>
+              <div className="md:ml-[72px]">
+                <p className="mt-4 text-sm text-gray-700">{t('campanas.subtitle')}</p>
+                <Image
+                  src="/images/experiencias/fe-y-compromiso/iconos-campanas-solidarias.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={276}
+                  height={36}
+                  className="mt-4 h-9 w-auto max-w-full object-contain"
+                />
+              </div>
             </article>
           </div>
         </div>
