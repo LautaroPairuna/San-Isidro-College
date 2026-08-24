@@ -156,7 +156,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
       <section id="cierre" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-7 space-y-4 text-gray-700 leading-relaxed text-justify">
+            <div className="md:col-span-7 space-y-4 text-gray-700 leading-relaxed text-justify md:text-right md:border-r md:border-[#9bb5a5] md:pr-6">
               <h2 className="text-xl font-bold text-[#c19516]">{t('closing.title')}</h2>
               <p>{t('closing.p1')}</p>
             </div>
