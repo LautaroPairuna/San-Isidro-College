@@ -53,6 +53,10 @@ export const routing = defineRouting({
       es: "/experiencia-sic/arte-y-creatividad",
       en: "/sic-experience/art-and-creativity",
     },
+    "/experiencia-sic/fe-y-compromiso-social": {
+      es: "/experiencia-sic/fe-y-compromiso-social",
+      en: "/sic-experience/faith-and-social-commitment",
+    },
     "/deportes": { es: "/deportes", en: "/sports" },
     "/deportes-mas-info": {
       es: "/deportes-mas-info",

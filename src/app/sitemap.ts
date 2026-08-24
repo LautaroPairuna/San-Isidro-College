@@ -24,6 +24,7 @@ const PUBLIC_PATHS: AppPathname[] = [
   '/experiencia-sic/innovacion-y-robotica',
   '/experiencia-sic/houses',
   '/experiencia-sic/arte-y-creatividad',
+  '/experiencia-sic/fe-y-compromiso-social',
   '/deportes',
   '/deportes-mas-info',
 ]

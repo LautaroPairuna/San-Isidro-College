@@ -402,6 +402,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                   {tExperience('feYCompromisoSocial.description')}
                 </p>
+                <div className="mt-5 text-center">
+                  <Link href="/experiencia-sic/fe-y-compromiso-social" className="text-[#1e804b] font-semibold hover:underline">
+                    {tExperience('feYCompromisoSocial.readMore')}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -439,6 +444,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('feYCompromisoSocial.description')}
               </p>
+              <div className="mt-5">
+                <Link href="/experiencia-sic/fe-y-compromiso-social" className="text-[#1e804b] font-semibold hover:underline">
+                  {tExperience('feYCompromisoSocial.readMore')}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

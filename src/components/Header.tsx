@@ -394,8 +394,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/experiencia-sic#fe-y-compromiso-social`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "fe-y-compromiso-social")}
+                      href="/experiencia-sic/fe-y-compromiso-social"
+                      onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Fe y Compromiso Social" : "Faith and Social Commitment"}

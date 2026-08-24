@@ -17,8 +17,8 @@ import { toPublicImageUrl } from '@/lib/publicConstants'
 const MINIMO_FOTOS = 8
 
 /** Cuánto se achica y se apaga una foto al alejarse del centro de la pantalla. */
-const ESCALA_MINIMA = 0.78
-const OPACIDAD_MINIMA = 0.45
+const ESCALA_MINIMA = 0.86
+const OPACIDAD_MINIMA = 0.5
 
 type MedioMinimal = {
   id: number
@@ -142,7 +142,7 @@ export default function TiraFotos({
                   width={640}
                   height={420}
                   sizes="(max-width: 768px) 70vw, 30vw"
-                  className="h-[180px] w-auto max-w-none rounded-sm object-cover shadow-lg md:h-[220px]"
+                  className="h-[240px] w-auto max-w-none rounded-sm object-cover shadow-lg md:h-[340px]"
                 />
               </div>
             </CarouselItem>

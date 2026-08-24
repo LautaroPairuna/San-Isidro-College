@@ -488,7 +488,8 @@
       "title": "Fe y compromiso social",
       "description": "Nuestra orientación católica acompaña el crecimiento humano y espiritual de los estudiantes, promoviendo una fe que se expresa en el amor al prójimo, el cuidado de la naturaleza y el compromiso con los demás. A través del ejemplo cotidiano y de experiencias de servicio, buscamos formar personas libres, solidarias y capaces de contribuir a transformar su comunidad.",
       "carouselAlt": "Carrusel Fe y compromiso social",
-      "fallbackAlt": "Fe y compromiso social en San Isidro College"
+      "fallbackAlt": "Fe y compromiso social en San Isidro College",
+      "readMore": "Leer más"
     },
     "arteYCreatividad": {
       "title": "Arte y creatividad",
@@ -781,6 +782,40 @@
       "closing": "Porque en San Isidro Play cada aporte cuenta y todos forman parte de la obra."
     }
   },
+  "experienciaSicFeDetail": {
+    "title": "Fe y compromiso social",
+    "intro": {
+      "lead": "Una fe que se expresa en la vida",
+      "p1": "San Isidro College es un espacio creado para crecer en vínculos sanos y profundos con las personas, la naturaleza, los valores y la propia espiritualidad, reconociéndonos amados por Dios.",
+      "p2": "Nuestra orientación católica acompaña la formación integral de los estudiantes y busca fortalecer su crecimiento humano y espiritual. Trabajamos para que puedan convertirse en personas libres, capaces de discernir, elegir los valores que orientarán su vida y comprometerse con el bien de los demás.",
+      "p3": "Esta formación se construye mediante el ejemplo cotidiano, la escucha y el acompañamiento cercano de los docentes, en estrecha colaboración con las familias. La alegría, la confianza, el buen trato, la solidaridad y el amor al prójimo son expresiones concretas de la fe que deseamos transmitir."
+    },
+    "legado": {
+      "label1": "El legado de",
+      "label2": "San Isidro Labrador",
+      "p1": "La figura de San Isidro Labrador inspira nuestra identidad y nuestra manera de comprender la educación. Su vida sencilla, su fe, su humildad, su dedicación al trabajo y su vínculo con la tierra nos recuerdan el valor del esfuerzo cotidiano, el cuidado de la naturaleza y el servicio generoso a los demás.",
+      "p2": "Estos principios no se presentan solamente como palabras: buscamos que estén presentes en los vínculos, las decisiones y las experiencias que forman parte de la vida diaria del colegio."
+    },
+    "servicio": {
+      "title": "Aprender a través del servicio",
+      "p1": "Creemos que la solidaridad se aprende. A través de experiencias de voluntariado y compromiso social, los estudiantes se acercan a diferentes realidades, aprenden a escuchar y a trabajar junto a otros. Estas experiencias buscan despertar la empatía, la responsabilidad y la conciencia de que cada persona puede contribuir a transformar su comunidad. Servir también es aprender: es descubrir el valor del encuentro, reconocer al otro y comprender que nuestros talentos adquieren un sentido más profundo cuando se ponen al servicio de los demás.",
+      "logoAlt": "Community Service",
+      "carouselAlt": "Experiencias de servicio y voluntariado"
+    },
+    "instituciones": {
+      "title": "Instituciones que acompañamos",
+      "items": {
+        "hopa": "Hopa",
+        "hirpaca": "Hirpaca",
+        "laEstrella": "Asociación La Estrella",
+        "merendero": "Merendero San Rafael Arcángel"
+      }
+    },
+    "campanas": {
+      "title": "Campañas solidarias",
+      "subtitle": "Acciones para acompañar a quienes más lo necesitan."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Deportes",
     "intro": {
@@ -854,6 +889,10 @@
     "experienciaSicArte": {
       "title": "Arte y creatividad | San Isidro College",
       "description": "Los lenguajes artísticos en San Isidro College: artes visuales, música, práctica instrumental, canto, teatro y danza, y San Isidro Play, la creación que reúne a toda la comunidad."
+    },
+    "experienciaSicFe": {
+      "title": "Fe y compromiso social | San Isidro College",
+      "description": "La orientación católica de San Isidro College, el legado de San Isidro Labrador y las experiencias de servicio y voluntariado que forman parte de la vida del colegio."
     }
   },
   "pilares": {

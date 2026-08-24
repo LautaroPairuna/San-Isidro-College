@@ -488,7 +488,8 @@
       "title": "Faith and Social Commitment",
       "description": "Our Catholic orientation supports the human and spiritual growth of our students, fostering a faith expressed through love for others, care for nature, and commitment to the community. Through everyday example and service experiences, we seek to form free and caring people, able to help transform their community.",
       "carouselAlt": "Faith and Social Commitment carousel",
-      "fallbackAlt": "Faith and social commitment at San Isidro College"
+      "fallbackAlt": "Faith and social commitment at San Isidro College",
+      "readMore": "Read more"
     },
     "arteYCreatividad": {
       "title": "Art and Creativity",
@@ -781,6 +782,40 @@
       "closing": "Because at San Isidro Play every contribution counts and everyone is part of the show."
     }
   },
+  "experienciaSicFeDetail": {
+    "title": "Faith and Social Commitment",
+    "intro": {
+      "lead": "A faith expressed in everyday life",
+      "p1": "San Isidro College is a place created to grow in healthy, deep bonds with people, with nature, with values, and with one's own spirituality, knowing ourselves loved by God.",
+      "p2": "Our Catholic orientation supports the integral education of our students and seeks to strengthen their human and spiritual growth. We work so they can become free people, able to discern, to choose the values that will guide their lives, and to commit themselves to the good of others.",
+      "p3": "This formation is built through everyday example, listening, and the close support of teachers, in close collaboration with families. Joy, trust, kindness, solidarity, and love for others are concrete expressions of the faith we want to pass on."
+    },
+    "legado": {
+      "label1": "The legacy of",
+      "label2": "Saint Isidore the Labourer",
+      "p1": "The figure of Saint Isidore the Labourer inspires our identity and the way we understand education. His simple life, his faith, his humility, his dedication to work, and his bond with the land remind us of the value of daily effort, the care of nature, and generous service to others.",
+      "p2": "These principles are not offered as words alone: we want them present in the relationships, the decisions, and the experiences that make up daily life at school."
+    },
+    "servicio": {
+      "title": "Learning through service",
+      "p1": "We believe solidarity is learned. Through volunteering and social commitment, students come close to different realities, learn to listen, and work alongside others. These experiences seek to awaken empathy, responsibility, and the awareness that every person can help transform their community. To serve is also to learn: it is discovering the value of encounter, recognising the other, and understanding that our talents take on a deeper meaning when they are placed at the service of others.",
+      "logoAlt": "Community Service",
+      "carouselAlt": "Service and volunteering experiences"
+    },
+    "instituciones": {
+      "title": "Institutions we support",
+      "items": {
+        "hopa": "Hopa",
+        "hirpaca": "Hirpaca",
+        "laEstrella": "Asociación La Estrella",
+        "merendero": "Merendero San Rafael Arcángel"
+      }
+    },
+    "campanas": {
+      "title": "Solidarity campaigns",
+      "subtitle": "Actions to support those who need it most."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Sports",
     "intro": {
@@ -854,6 +889,10 @@
     "experienciaSicArte": {
       "title": "Art and Creativity | San Isidro College",
       "description": "The artistic languages at San Isidro College: visual arts, music, instrumental practice, singing, drama, and dance, plus San Isidro Play, the creation that brings the whole community together."
+    },
+    "experienciaSicFe": {
+      "title": "Faith and Social Commitment | San Isidro College",
+      "description": "The Catholic orientation of San Isidro College, the legacy of Saint Isidore the Labourer, and the service and volunteering experiences that are part of school life."
     }
   },
   "pilares": {
