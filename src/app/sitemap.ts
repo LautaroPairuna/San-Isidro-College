@@ -23,6 +23,7 @@ const PUBLIC_PATHS: AppPathname[] = [
   '/experiencia-sic/google-reference-school',
   '/experiencia-sic/innovacion-y-robotica',
   '/experiencia-sic/houses',
+  '/experiencia-sic/arte-y-creatividad',
   '/deportes',
   '/deportes-mas-info',
 ]

@@ -494,7 +494,8 @@
       "title": "Arte y creatividad",
       "description": "El arte forma parte de la vida de San Isidro College y constituye una dimensión esencial de nuestra propuesta de formación integral. A través de la Música, el Canto, las Artes Visuales, el Teatro y la Expresión Corporal, los estudiantes desarrollan su sensibilidad, descubren sus talentos y encuentran nuevas maneras de comunicar y crear.\n\nEstas disciplinas se integran en proyectos colectivos como San Isidro Play, donde el arte y el inglés se encuentran en una experiencia compartida por los distintos niveles.",
       "carouselAlt": "Carrusel Arte y creatividad",
-      "fallbackAlt": "Arte y creatividad en San Isidro College"
+      "fallbackAlt": "Arte y creatividad en San Isidro College",
+      "readMore": "Leer más"
     },
     "houses": {
       "title": "Houses",
@@ -745,6 +746,41 @@
       "p2": "El Sistema de Houses promueve la competencia sana, el liderazgo, la colaboración, el servicio y el crecimiento personal, al mismo tiempo que fortalece los valores que identifican al colegio. Cada desafío, cada logro, cada gesto de compañerismo y cada oportunidad de ayudar a otros contribuye no solo a la propia House, sino también a toda la comunidad."
     }
   },
+  "experienciaSicArteDetail": {
+    "title": "Arte y creatividad",
+    "intro": {
+      "lead": "Crear, expresar y transformar",
+      "p1": "En San Isidro College, el arte es una dimensión fundamental de la formación integral. Contribuye al desarrollo de la sensibilidad, la creatividad y la capacidad de expresar ideas, emociones y diferentes maneras de mirar el mundo.",
+      "p2": "La experiencia artística integra distintos aspectos de la persona. Permite descubrir talentos, fortalecer la confianza, enriquecer el mundo interior y encontrar nuevas formas de comunicación. También enseña a observar, interpretar, crear y trabajar junto a otros, comprendiendo que toda producción colectiva requiere compromiso, responsabilidad y respeto.",
+      "p3": "Creemos que el arte es manifestación, encuentro, patrimonio cultural y espacio de libertad. Por eso, desde los primeros años generamos oportunidades para que nuestros estudiantes puedan descubrirse, conocerse, comunicar, crear y transformar.",
+      "p4Lead": "El arte es parte de la vida del colegio.",
+      "p4": "A través de diferentes lenguajes y experiencias, acompañamos a cada estudiante para que encuentre su propia forma de expresarse y aprenda a reconocer y valorar la belleza en sus múltiples manifestaciones."
+    },
+    "lenguajes": {
+      "title": "Lenguajes artísticos",
+      "p1": "Nuestra propuesta integra diferentes lenguajes artísticos que se relacionan y enriquecen mutuamente:",
+      "p2": "Estos lenguajes forman parte de las experiencias de los distintos niveles y se desarrollan progresivamente de acuerdo con la edad, los intereses y las posibilidades expresivas de los estudiantes.",
+      "items": {
+        "artesVisuales": "Artes visuales",
+        "musica": "Música",
+        "practicaInstrumental": "Práctica instrumental y banda",
+        "canto": "Canto",
+        "teatro": "Teatro",
+        "danza": "Danza y expresión corporal"
+      }
+    },
+    "play": {
+      "title": "San Isidro Play",
+      "subtitle": "Una creación que reúne a toda la comunidad",
+      "carouselAlt": "Fotos de San Isidro Play",
+      "p1": "San Isidro Play es el momento en el que los distintos lenguajes artísticos trabajados en el colegio se encuentran y cobran vida en una producción compartida.",
+      "p2": "Cada Concert se realiza en inglés y se construye con la participación de los estudiantes. La banda interpreta la música en vivo; otros cantan, actúan o bailan; hay quienes crean la escenografía y colaboran en los diferentes aspectos visuales y expresivos de la puesta en escena. Cada estudiante puede encontrar un lugar protagónico desde el cual aportar sus talentos, ideas y creatividad.",
+      "p3": "La propuesta integra Música, Canto, Teatro, Danza, Expresión Corporal y Artes Visuales en un proceso que requiere compromiso, responsabilidad y trabajo en equipo. Al mismo tiempo, ofrece una nueva oportunidad para poner el inglés en práctica dentro de un contexto real y significativo. A través de los ensayos y de la presentación, los estudiantes desarrollan su expresión oral, enriquecen su vocabulario y adquieren mayor seguridad para comunicarse en la segunda lengua.",
+      "p4": "A lo largo del año, los diferentes niveles realizan sus propios Concerts, adecuados a las características y posibilidades de cada etapa. La obra que finalmente se presenta es el resultado visible de un recorrido de aprendizaje, creación y colaboración.",
+      "p5": "Más allá de lo que sucede sobre el escenario, San Isidro Play permite que los estudiantes descubran nuevas formas de expresarse, confíen en sus capacidades y experimenten la alegría de construir algo valioso junto a otros.",
+      "closing": "Porque en San Isidro Play cada aporte cuenta y todos forman parte de la obra."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Deportes",
     "intro": {
@@ -814,6 +850,10 @@
     "experienciaSicHouses": {
       "title": "Houses | San Isidro College",
       "description": "Conocé el Sistema de Houses de San Isidro College: Condors, Owls y Falcons, tres comunidades que fortalecen la pertenencia, el liderazgo y la participación."
+    },
+    "experienciaSicArte": {
+      "title": "Arte y creatividad | San Isidro College",
+      "description": "Los lenguajes artísticos en San Isidro College: artes visuales, música, práctica instrumental, canto, teatro y danza, y San Isidro Play, la creación que reúne a toda la comunidad."
     }
   },
   "pilares": {

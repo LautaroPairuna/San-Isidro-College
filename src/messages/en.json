@@ -494,7 +494,8 @@
       "title": "Art and Creativity",
       "description": "Art is part of life at San Isidro College and an essential dimension of our integral education. Through Music, Singing, Visual Arts, Theatre, and Body Expression, students develop their sensitivity, discover their talents, and find new ways to communicate and create.\n\nThese disciplines come together in collective projects such as San Isidro Play, where art and English meet in an experience shared across all levels.",
       "carouselAlt": "Art and Creativity carousel",
-      "fallbackAlt": "Art and creativity at San Isidro College"
+      "fallbackAlt": "Art and creativity at San Isidro College",
+      "readMore": "Read more"
     },
     "houses": {
       "title": "Houses",
@@ -745,6 +746,41 @@
       "p2": "The House System promotes healthy competition, leadership, collaboration, service, and personal growth, while strengthening the values that define our school. Every challenge, every achievement, every act of companionship, and every chance to help others contributes not only to their own House, but to the whole community."
     }
   },
+  "experienciaSicArteDetail": {
+    "title": "Art and Creativity",
+    "intro": {
+      "lead": "Create, express, and transform",
+      "p1": "At San Isidro College, art is a fundamental dimension of a well-rounded education. It develops sensitivity, creativity, and the ability to express ideas, emotions, and different ways of looking at the world.",
+      "p2": "The artistic experience brings together every side of a person. It allows students to discover talents, build confidence, enrich their inner world, and find new ways to communicate. It also teaches them to observe, interpret, create, and work alongside others, understanding that any collective production calls for commitment, responsibility, and respect.",
+      "p3": "We believe art is expression, encounter, cultural heritage, and a space of freedom. That is why, from the earliest years, we create opportunities for our students to discover themselves, get to know one another, communicate, create, and transform.",
+      "p4Lead": "Art is part of school life.",
+      "p4": "Through different languages and experiences, we support every student in finding their own way to express themselves and learning to recognise and value beauty in its many forms."
+    },
+    "lenguajes": {
+      "title": "Artistic languages",
+      "p1": "Our proposal brings together different artistic languages that connect with and enrich one another:",
+      "p2": "These languages are part of the experience at every level and develop progressively according to the age, interests, and expressive possibilities of each student.",
+      "items": {
+        "artesVisuales": "Visual arts",
+        "musica": "Music",
+        "practicaInstrumental": "Instrumental practice and band",
+        "canto": "Singing",
+        "teatro": "Drama",
+        "danza": "Dance and body expression"
+      }
+    },
+    "play": {
+      "title": "San Isidro Play",
+      "subtitle": "A creation that brings the whole community together",
+      "carouselAlt": "San Isidro Play photos",
+      "p1": "San Isidro Play is the moment when the different artistic languages worked on at school come together and come alive in a shared production.",
+      "p2": "Each Concert is performed in English and built with the students taking part. The band plays the music live; others sing, act, or dance; some create the set design and contribute to the visual and expressive sides of the staging. Every student can find a leading place from which to bring their talents, ideas, and creativity.",
+      "p3": "The project brings together Music, Singing, Drama, Dance, Body Expression, and Visual Arts in a process that calls for commitment, responsibility, and teamwork. At the same time, it offers a new opportunity to put English into practice in a real and meaningful context. Through rehearsals and the performance itself, students develop their speaking skills, enrich their vocabulary, and gain confidence communicating in their second language.",
+      "p4": "Throughout the year, each level puts on its own Concerts, suited to the characteristics and possibilities of that stage. The show that is finally performed is the visible result of a journey of learning, creation, and collaboration.",
+      "p5": "Beyond what happens on stage, San Isidro Play lets students discover new ways to express themselves, trust their own abilities, and experience the joy of building something valuable together.",
+      "closing": "Because at San Isidro Play every contribution counts and everyone is part of the show."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Sports",
     "intro": {
@@ -814,6 +850,10 @@
     "experienciaSicHouses": {
       "title": "Houses | San Isidro College",
       "description": "Discover the San Isidro College House System: Condors, Owls, and Falcons, three communities that strengthen belonging, leadership, and participation."
+    },
+    "experienciaSicArte": {
+      "title": "Art and Creativity | San Isidro College",
+      "description": "The artistic languages at San Isidro College: visual arts, music, instrumental practice, singing, drama, and dance, plus San Isidro Play, the creation that brings the whole community together."
     }
   },
   "pilares": {

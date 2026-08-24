@@ -403,8 +403,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/experiencia-sic#arte-y-creatividad`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "arte-y-creatividad")}
+                      href="/experiencia-sic/arte-y-creatividad"
+                      onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Arte y Creatividad" : "Art and Creativity"}
