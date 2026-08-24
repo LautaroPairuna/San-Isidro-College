@@ -29,35 +29,29 @@ WHERE g.`nombre` IN (
   'Experiencia SIC - Houses Carousel'
 );
 
-INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
-SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
-FROM `grupomedios` g
-JOIN (
-  SELECT 'foto-isidro-play-20250603-005601.webp' AS urlArchivo, 'thumbs/foto-isidro-play-20250603-005601.webp' AS urlMiniatura, 'Fe y compromiso social 1' AS textoAlternativo, 10 AS posicion
-  UNION ALL SELECT 'foto-isidro-play-2-20250603-005640.webp', 'thumbs/foto-isidro-play-2-20250603-005640.webp', 'Fe y compromiso social 2', 20
-  UNION ALL SELECT 'foto-isidro-play-3-20250603-005706.webp', 'thumbs/foto-isidro-play-3-20250603-005706.webp', 'Fe y compromiso social 3', 30
-) x
-WHERE g.`nombre` = 'Experiencia SIC - Fe y Compromiso Carousel';
+-- Las fotos iniciales se copian del grupo que ya usaba San Isidro Play, asi los
+-- carruseles arrancan con contenido real en cualquier entorno (los nombres de
+-- archivo difieren entre local y produccion, por eso se copian en vez de
+-- escribirlos a mano). Desde el admin se reemplazan sin tocar la base.
 
 INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
-SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
-FROM `grupomedios` g
-JOIN (
-  SELECT 'foto-isidro-play-2-20250603-005640.webp' AS urlArchivo, 'thumbs/foto-isidro-play-2-20250603-005640.webp' AS urlMiniatura, 'Arte y creatividad 1' AS textoAlternativo, 10 AS posicion
-  UNION ALL SELECT 'foto-isidro-play-3-20250603-005706.webp', 'thumbs/foto-isidro-play-3-20250603-005706.webp', 'Arte y creatividad 2', 20
-  UNION ALL SELECT 'foto-isidro-play-20250603-005601.webp', 'thumbs/foto-isidro-play-20250603-005601.webp', 'Arte y creatividad 3', 30
-) x
-WHERE g.`nombre` = 'Experiencia SIC - Arte y Creatividad Carousel';
-
-INSERT INTO `medio` (`urlArchivo`, `urlMiniatura`, `textoAlternativo`, `tipo`, `posicion`, `grupoMediosId`, `creadoEn`, `actualizadoEn`)
-SELECT x.urlArchivo, x.urlMiniatura, x.textoAlternativo, 'IMAGEN', x.posicion, g.`id`, NOW(), NOW()
-FROM `grupomedios` g
-JOIN (
-  SELECT 'foto-isidro-play-3-20250603-005706.webp' AS urlArchivo, 'thumbs/foto-isidro-play-3-20250603-005706.webp' AS urlMiniatura, 'Houses 1' AS textoAlternativo, 10 AS posicion
-  UNION ALL SELECT 'foto-isidro-play-20250603-005601.webp', 'thumbs/foto-isidro-play-20250603-005601.webp', 'Houses 2', 20
-  UNION ALL SELECT 'foto-isidro-play-2-20250603-005640.webp', 'thumbs/foto-isidro-play-2-20250603-005640.webp', 'Houses 3', 30
-) x
-WHERE g.`nombre` = 'Experiencia SIC - Houses Carousel';
+SELECT
+  src.`urlArchivo`,
+  src.`urlMiniatura`,
+  CONCAT(destino.`etiqueta`, ' ', ROW_NUMBER() OVER (PARTITION BY destino.`etiqueta` ORDER BY src.`posicion`, src.`id`)),
+  src.`tipo`,
+  src.`posicion`,
+  destino.`id`,
+  NOW(),
+  NOW()
+FROM `medio` src
+INNER JOIN `grupomedios` origen ON origen.`id` = src.`grupoMediosId`
+CROSS JOIN (
+  SELECT `id`, 'Fe y compromiso social' AS `etiqueta` FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Fe y Compromiso Carousel'
+  UNION ALL SELECT `id`, 'Arte y creatividad' FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Arte y Creatividad Carousel'
+  UNION ALL SELECT `id`, 'Houses' FROM `grupomedios` WHERE `nombre` = 'Experiencia SIC - Houses Carousel'
+) destino
+WHERE origen.`nombre` = 'Vida Estudiantil - Play';
 
 -- ============================================================================
 -- SECCIONES DEL OVERVIEW
