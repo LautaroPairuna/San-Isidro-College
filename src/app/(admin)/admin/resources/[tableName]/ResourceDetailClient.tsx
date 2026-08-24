@@ -22,6 +22,7 @@ import { FaPlus, FaTrash, FaPencilAlt, FaEye } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import FileDropZone from '@/components/ui/FileDropZone'
+import PaginacionTabla from '@/components/PaginacionTabla'
 import { folderNames, toPublicImageUrl } from '@/lib/publicConstants'
 import {
   useCreateGrupoMedios,
@@ -746,27 +747,13 @@ export default function ResourceDetailClient({
 
         {/* Paginación */}
         {pageData.length > 0 && (
-          <footer className="flex items-center justify-between px-4 py-3 bg-brand-50 border-t border-brand-200">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              className="px-3 py-1 border border-brand-300 rounded disabled:opacity-50 hover:bg-brand-100 transition"
-              aria-label="Página anterior"
-            >
-              ‹
-            </button>
-            <span className="text-sm text-gray-700">
-              Página {page} de {totalPages}
-            </span>
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-              className="px-3 py-1 border border-brand-300 rounded disabled:opacity-50 hover:bg-brand-100 transition"
-              aria-label="Página siguiente"
-            >
-              ›
-            </button>
-          </footer>
+          <PaginacionTabla
+            pagina={page}
+            totalPaginas={totalPages}
+            total={paginatedData?.meta.total ?? pageData.length}
+            porPagina={pageSize}
+            onCambiar={setPage}
+          />
         )}
       </div>
 
