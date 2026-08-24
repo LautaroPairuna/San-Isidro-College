@@ -1,13 +1,19 @@
+// /app/[locale]/experiencia-sic/bienestar-y-acompanamiento/page.tsx
 import type { FlipCardItem } from '@/components/FlipCardsCarousel'
+import BloqueRotulo from '@/components/BloqueRotulo'
 import FlipCardsGrid from '@/components/FlipCardsGrid'
+import FondoFormaSeccion from '@/components/FondoFormaSeccion'
+import RenderMedia from '@/components/RenderMedia'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 const CARD_MEDIA_PAGE_SLUG = 'experiencia-sic-bienestar-y-acompanamiento'
 const CARD_MEDIA_SECTION_SLUG = 'experiencia-sic-bienestar-cards-1'
+/** Foto de cierre, editable desde el admin como medio único. */
+const CIERRE_SECTION_SLUG = 'experiencia-sic-bienestar-cierre'
 
 const CARD_FALLBACK_IMAGES = [
   '/images/image-kindergarten.webp',
@@ -19,6 +25,8 @@ const CARD_FALLBACK_IMAGES = [
   '/images/medios/foto-balance-2-20260217-194547.webp',
   '/images/medios/foto-hockey-20250603-005057.webp',
 ] as const
+
+const CIERRE_FALLBACK_IMG = '/images/Image-vida-estudiantil.webp'
 
 const FIRST_GROUP_CARDS = [
   { key: 'tutorias', fallbackIcon: '/images/icons/tutorias-ico.svg', color: '#c19516' },
@@ -70,6 +78,7 @@ function buildCards(
 
 export default async function ExperienciaSicBienestarPage({ params }: PageProps) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicBienestarDetail' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
   const bienestarSections = await getPageContentForSlug(CARD_MEDIA_PAGE_SLUG)
@@ -77,6 +86,10 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   const cardsSection = bienestarSections.find(
     (section: PageContentSection) => section.slug === CARD_MEDIA_SECTION_SLUG
   )
+  const cierreMedio = bienestarSections.find(
+    (section: PageContentSection) => section.slug === CIERRE_SECTION_SLUG
+  )?.medio
+
   const imageMedias = [...(cardsSection?.grupo?.medios ?? [])]
     .filter((media) => media.tipo === 'IMAGEN')
     .sort((a, b) => a.posicion - b.posicion)
@@ -96,53 +109,74 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   const secondGroupCards = buildCards(SECOND_GROUP_CARDS, iconUrls, imageUrls, t, 4)
 
   return (
-    <>
-      <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
-        <div className="relative mx-auto min-h-screen max-w-275 bg-white px-8 pb-12 pt-40">
-          <div className="space-y-5 text-left text-gray-800">
-            <h1 className="text-4xl font-bold leading-tight md:text-5xl">
-              {t('title')}
-            </h1>
-            <p>{t('intro.p1')}</p>
-            <h2 className="pt-2 text-2xl font-bold leading-tight text-gray-800">
-              {t('philosophy.title')}
-            </h2>
+    <div className="relative overflow-hidden">
+      {/* ============ PRESENTACIÓN ============ */}
+      <section id="bienestar" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+            {t('title')}
+          </h1>
+          <p className="mt-6 text-gray-700 leading-relaxed text-justify">{t('intro.p1')}</p>
+        </div>
+      </section>
+
+      {/* ============ NUESTRA FILOSOFÍA ============ */}
+      <section id="filosofia" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <BloqueRotulo rotulo={t('philosophy.title')}>
             <p>{t('philosophy.p1')}</p>
             <p>{t('philosophy.p2')}</p>
-          </div>
+          </BloqueRotulo>
 
           <FlipCardsGrid items={firstGroupCards} ariaLabel={t('firstGroupAriaLabel')} />
+        </div>
+      </section>
 
-          <div className="mt-10 space-y-5 text-left text-gray-800">
-            <div>
-              <h2 className="text-2xl font-bold leading-tight text-gray-800">
-                {t('community.title')}
-              </h2>
-              <p className="mt-2">{t('community.p1')}</p>
-              <p>{t('community.p2')}</p>
-            </div>
+      {/* ============ UNA COMUNIDAD QUE ACOMPAÑA ============ */}
+      <section id="comunidad" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <BloqueRotulo rotulo={t('community.title')}>
+            <p>{t('community.p1')}</p>
+            <p>{t('community.p2')}</p>
+          </BloqueRotulo>
+        </div>
+      </section>
 
-            <div className="pt-8">
-              <h2 className="text-2xl font-bold leading-tight text-gray-800">
-                {t('eoe.title')}
-              </h2>
-              <p className="mt-2">{t('eoe.p1')}</p>
-            </div>
-          </div>
+      {/* ============ EQUIPO DE ORIENTACIÓN ESCOLAR ============ */}
+      <section id="eoe" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h2 className="text-xl font-bold text-[#c19516] whitespace-pre-line">{t('eoe.title')}</h2>
+          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed text-justify">{t('eoe.p1')}</p>
 
           <FlipCardsGrid items={secondGroupCards} ariaLabel={t('secondGroupAriaLabel')} />
+        </div>
+      </section>
 
-          <div className="mt-10 space-y-4 text-left text-gray-800">
-            <h2 className="text-2xl font-bold leading-tight text-gray-800">
-              {t('closing.title')}
-            </h2>
-            <p>{t('closing.p1')}</p>
+      {/* ============ ACOMPAÑAR PARA CRECER ============ */}
+      <section id="cierre" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-7 space-y-4 text-gray-700 leading-relaxed text-justify">
+              <h2 className="text-xl font-bold text-[#c19516]">{t('closing.title')}</h2>
+              <p>{t('closing.p1')}</p>
+            </div>
+            <div className="md:col-span-5 relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+              <RenderMedia
+                medio={cierreMedio}
+                fallback={CIERRE_FALLBACK_IMG}
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
+      <FondoFormaSeccion />
+
       <SectionCarrusel medios={alianzasMedia} />
       <Contact />
-    </>
+    </div>
   )
 }

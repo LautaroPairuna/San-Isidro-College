@@ -1,5 +1,5 @@
 // /app/[locale]/secondary/page.tsx
-import type { ReactNode } from 'react'
+import BloqueRotulo from '@/components/BloqueRotulo'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import NivelesEducativos from '@/components/NivelesEducativos'
 import FlipCardsCarousel from '@/components/FlipCardsCarousel'
@@ -61,58 +61,6 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-/**
- * Rótulo dorado y texto separados por un filete, alternando de lado. Se repite
- * en las orientaciones y en los programas internacionales.
- */
-function BloqueRotulo({
-  rotulo,
-  children,
-  lado = 'izquierda',
-}: {
-  rotulo: ReactNode
-  children: ReactNode
-  lado?: 'izquierda' | 'derecha'
-}) {
-  const rotuloEl = (
-    <h3
-      className={`md:col-span-4 text-lg font-bold text-[#c19516] ${
-        lado === 'izquierda' ? 'md:text-right' : 'md:col-start-8'
-      }`}
-    >
-      {rotulo}
-    </h3>
-  )
-
-  const textoEl = (
-    <div
-      className={`md:col-span-6 space-y-4 text-gray-700 leading-relaxed hyphens-auto ${
-        lado === 'izquierda'
-          ? 'md:col-start-6 md:border-l md:border-[#9bb5a5] md:pl-6 text-justify'
-          : 'md:col-start-1 md:border-r md:border-[#9bb5a5] md:pr-6 text-justify md:text-right'
-      }`}
-    >
-      {children}
-    </div>
-  )
-
-  return (
-    <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
-      {lado === 'izquierda' ? (
-        <>
-          {rotuloEl}
-          {textoEl}
-        </>
-      ) : (
-        <>
-          {textoEl}
-          {rotuloEl}
-        </>
-      )}
-    </div>
-  )
-}
-
 const SecondaryPage = async ({ params }: PageProps) => {
   const { locale } = await params
   setRequestLocale(locale)
@@ -170,11 +118,11 @@ const SecondaryPage = async ({ params }: PageProps) => {
             </div>
           </div>
 
-          <BloqueRotulo rotulo={t('orientaciones.naturales.label')}>
+          <BloqueRotulo className="mt-10" como="h3" rotulo={t('orientaciones.naturales.label')}>
             <p>{t('orientaciones.naturales.p1')}</p>
           </BloqueRotulo>
 
-          <BloqueRotulo rotulo={t('orientaciones.informatica.label')} lado="derecha">
+          <BloqueRotulo className="mt-10" como="h3" rotulo={t('orientaciones.informatica.label')} lado="derecha">
             <p>{t('orientaciones.informatica.p1')}</p>
           </BloqueRotulo>
         </div>
@@ -188,12 +136,14 @@ const SecondaryPage = async ({ params }: PageProps) => {
             <p className="mt-4 text-gray-700 leading-relaxed text-justify">{t('mundo.p1')}</p>
           </div>
 
-          <BloqueRotulo rotulo={t('mundo.igcse.label')}>
+          <BloqueRotulo className="mt-10" como="h3" rotulo={t('mundo.igcse.label')}>
             <p>{t('mundo.igcse.p1')}</p>
             <p>{t('mundo.igcse.p2')}</p>
           </BloqueRotulo>
 
           <BloqueRotulo
+            className="mt-10"
+            como="h3"
             lado="derecha"
             rotulo={
               <>

@@ -1,8 +1,12 @@
+// /app/[locale]/experiencia-sic/google-reference-school/page.tsx
 import Image from 'next/image'
+import BloqueRotulo from '@/components/BloqueRotulo'
+import IconoConFallback from '@/components/IconoConFallback'
+import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import { toPublicImageUrl } from '@/lib/publicConstants'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 const STUDENT_FEATURES = [
@@ -39,9 +43,6 @@ type PageProps = {
 
 export const dynamic = 'force-dynamic'
 
-type StudentFeatureKey = (typeof STUDENT_FEATURES)[number]['key']
-type TeacherFeatureKey = (typeof TEACHER_FEATURES)[number]['key']
-
 function resolveIcons<T extends { fallbackIcon: string }>(
   items: readonly T[],
   medias: Awaited<ReturnType<typeof getMediaGroupByName>>
@@ -52,45 +53,42 @@ function resolveIcons<T extends { fallbackIcon: string }>(
   }))
 }
 
-function FeatureGrid({
-  title,
+/** Fila de íconos con título y detalle, igual para alumnos y docentes. */
+function GrillaIconos({
   items,
   t,
   namespace,
 }: {
-  title: string
-  items: readonly { key: string; icon: string }[]
+  items: readonly { key: string; icon: string; fallbackIcon: string }[]
   t: Awaited<ReturnType<typeof getTranslations>>
   namespace: 'students' | 'teachers'
 }) {
   return (
-    <section className="mt-12">
-      <h2 className="text-2xl font-bold leading-tight text-gray-800">{title}</h2>
-      <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4">
-        {items.map((item) => (
-          <article key={item.key} className="flex flex-col items-center text-center">
-            <Image
-              src={item.icon}
-              alt={t(`${namespace}.items.${item.key}.title` as const)}
-              width={140}
-              height={140}
-              className="h-32 w-32 object-contain md:h-36 md:w-36"
-            />
-            <h3 className="mt-4 text-lg font-bold leading-tight text-gray-800 md:text-xl">
-              {t(`${namespace}.items.${item.key}.title` as const)}
-            </h3>
-            <p className="mt-2 max-w-[220px] text-[13px] leading-snug text-gray-700 md:max-w-[240px] md:text-sm">
-              {t(`${namespace}.items.${item.key}.description` as const)}
-            </p>
-          </article>
-        ))}
-      </div>
-    </section>
+    <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((item) => (
+        <article key={item.key} className="flex flex-col items-center text-center">
+          <IconoConFallback
+            src={item.icon}
+            fallbackSrc={item.fallbackIcon}
+            width={140}
+            height={140}
+            className="h-28 w-28 object-contain md:h-32 md:w-32"
+          />
+          <h3 className="mt-4 text-lg font-bold leading-tight text-[#294161]">
+            {t(`${namespace}.items.${item.key}.title` as const)}
+          </h3>
+          <p className="mt-2 max-w-[240px] text-sm leading-snug text-gray-700">
+            {t(`${namespace}.items.${item.key}.description` as const)}
+          </p>
+        </article>
+      ))}
+    </div>
   )
 }
 
 export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }: PageProps) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicGoogleReferenceSchoolDetail' })
   const alianzasMedia = await getMediaGroupByName('Alianzas')
   const studentIcons = await getMediaGroupByName('Experiencia SIC - Google Students Icons')
@@ -101,72 +99,86 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
   const googleApps = resolveIcons(GOOGLE_APPS, googleAppsIcons)
 
   return (
-    <>
-      <section className="relative w-full min-h-screen overflow-hidden bg-[#71af8d] px-5 md:px-24 lg:px-60 xl:px-72">
-        <div className="relative mx-auto min-h-screen max-w-275 bg-white lg:px-16 px-8 pb-12 pt-40">
-          <div className="space-y-5 text-left text-gray-800">
+    <div className="relative overflow-hidden">
+      {/* ============ PRESENTACIÓN ============ */}
+      <section id="google-reference-school" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <div className="inline-flex rounded-lg border border-gray-200 px-6 py-4 shadow-sm">
             <Image
               src="/images/google-education-logo.webp"
               alt={t('logoAlt')}
               width={280}
               height={90}
-              className="mx-auto h-auto w-[220px] object-contain md:w-[280px]"
+              className="h-auto w-[200px] object-contain md:w-[240px]"
             />
-
-            <h1 className="text-4xl font-bold leading-tight md:text-5xl">
-              {t('title')}
-            </h1>
-            <p>{t('intro.p1')}</p>
-
-            <div>
-              <h2 className="text-2xl font-bold leading-tight text-gray-800">{t('whatIs.title')}</h2>
-              <p className="mt-3">{t('whatIs.p1')}</p>
-              <p className="mt-3">{t('whatIs.p2')}</p>
-            </div>
           </div>
 
-          <FeatureGrid
-            title={t('students.title')}
-            items={studentFeatures}
-            t={t}
-            namespace="students"
-          />
-
-          <FeatureGrid
-            title={t('teachers.title')}
-            items={teacherFeatures}
-            t={t}
-            namespace="teachers"
-          />
-
-          <section className="mt-12 text-left text-gray-800">
-            <h2 className="text-2xl font-bold leading-tight text-gray-800">
-              {t('technology.title')}
-            </h2>
-            <p className="mt-3">{t('technology.p1')}</p>
-
-            <div className="mt-8 grid grid-cols-3 gap-5 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11">
-              {googleApps.map((app) => (
-                <div key={app.key} className="flex flex-col items-center justify-start text-center">
-                  <Image
-                    src={app.icon}
-                    alt={app.label}
-                    width={36}
-                    height={36}
-                    className="h-9 w-9 object-contain"
-                  />
-                  <span className="mt-2 text-xs font-medium text-gray-700">{app.label}</span>
-                </div>
-              ))}
-            </div>
-
-            <p className="mt-8 font-semibold">{t('closing.p1')}</p>
-          </section>
+          <h1 className="mt-8 text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+            {t('title')}
+          </h1>
+          <p className="mt-6 text-gray-700 leading-relaxed text-justify">{t('intro.p1')}</p>
         </div>
       </section>
 
+      {/* ============ QUÉ ES SER GOOGLE REFERENCE SCHOOL ============ */}
+      <section id="que-es" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <BloqueRotulo rotulo={t('whatIs.title')}>
+            <p>{t('whatIs.p1')}</p>
+            <p>{t('whatIs.p2')}</p>
+          </BloqueRotulo>
+        </div>
+      </section>
+
+      {/* ============ QUÉ SIGNIFICA PARA NUESTROS ALUMNOS ============ */}
+      <section id="alumnos" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h2 className="text-xl font-bold text-[#c19516]">{t('students.title')}</h2>
+          <GrillaIconos items={studentFeatures} t={t} namespace="students" />
+        </div>
+      </section>
+
+      {/* ============ QUÉ SIGNIFICA PARA NUESTROS DOCENTES ============ */}
+      <section id="docentes" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h2 className="text-xl font-bold text-[#c19516]">{t('teachers.title')}</h2>
+          <GrillaIconos items={teacherFeatures} t={t} namespace="teachers" />
+        </div>
+      </section>
+
+      {/* ============ LA TECNOLOGÍA COMO PARTE DEL APRENDIZAJE ============ */}
+      <section id="tecnologia" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h2 className="text-xl font-bold text-[#c19516]">{t('technology.title')}</h2>
+          <p className="mt-4 max-w-3xl text-gray-700 leading-relaxed text-justify">
+            {t('technology.p1')}
+          </p>
+
+          <ul className="mt-10 grid grid-cols-3 gap-6 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-11">
+            {googleApps.map((app) => (
+              <li key={app.key} className="flex flex-col items-center text-center">
+                <IconoConFallback
+                  src={app.icon}
+                  fallbackSrc={app.fallbackIcon}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 object-contain"
+                />
+                <span className="mt-2 text-xs font-medium text-gray-700">{app.label}</span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-12 max-w-3xl font-bold text-[#294161] leading-relaxed">
+            {t('closing.p1')}
+          </p>
+        </div>
+      </section>
+
+      <FondoFormaSeccion />
+
       <SectionCarrusel medios={alianzasMedia} />
       <Contact />
-    </>
+    </div>
   )
 }
