@@ -464,6 +464,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('arteYCreatividad.description')}
               </p>
+              <div className="mt-5 text-center">
+                <Link href="/experiencia-sic/arte-y-creatividad" className="text-[#1e804b] font-semibold hover:underline">
+                  {tExperience('arteYCreatividad.readMore')}
+                </Link>
+              </div>
             </div>
           </div>
           <div className="col-span-8">
@@ -519,6 +524,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('arteYCreatividad.description')}
               </p>
+              <div className="mt-5">
+                <Link href="/experiencia-sic/arte-y-creatividad" className="text-[#1e804b] font-semibold hover:underline">
+                  {tExperience('arteYCreatividad.readMore')}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
