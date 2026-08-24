@@ -2,8 +2,10 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import MediaCarousel from '@/components/MediaCarousel'
+import Contact from '@/components/sectionContact'
+import SectionCarrusel from '@/components/sectionCarrusel'
 import { getTranslations } from 'next-intl/server'
-import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
  *  SLUGS DE SECCIONES (Coinciden con DB)
@@ -47,6 +49,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
   const experienceSections = await getPageContentForSlug('experiencia-sic')
   const legacySections = await getPageContentForSlug('vida-estudiantil')
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   const getExperienceMedias = (slug: string): MedioItem[] => {
     const section = experienceSections.find((s: PageContentSection) => s.slug === slug)
@@ -692,6 +695,9 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Carrusel genérico + contacto */}
+      <SectionCarrusel medios={alianzasMedia} />
+      <Contact />
     </div>
   )
 }
