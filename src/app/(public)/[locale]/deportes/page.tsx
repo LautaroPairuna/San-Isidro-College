@@ -1,19 +1,22 @@
 // /app/[locale]/deportes/page.tsx
 import Image from 'next/image'
-import BloqueRotulo from '@/components/BloqueRotulo'
-import FondoFormaSeccion from '@/components/FondoFormaSeccion'
+import { Link } from '@/i18n/navigation'
 import MediaCarousel from '@/components/MediaCarousel'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
  *  SLUGS DE SECCIONES (Coinciden con DB)
  * ------------------------------------------------------------------*/
 const SECTION_SLUGS = {
+  HERO: 'vida-estudiantil-hero',
+  RUGBY: 'vida-estudiantil-rugby',
   DOJO: 'vida-estudiantil-dojo',
   GYM: 'vida-estudiantil-gym',
+  BIENESTAR: 'vida-estudiantil-bienestar',
+  PLAY: 'vida-estudiantil-play',
 } as const
 
 /**
@@ -38,157 +41,351 @@ type PageProps = {
 
 export default async function DeportesPage({ params }: PageProps) {
   const { locale } = await params
-  setRequestLocale(locale)
-  // Los textos nuevos (deporte y club) viven en su propio namespace; el Dojo y
-  // San Isidro Balance siguen usando los que ya existían.
-  const t = await getTranslations({ locale, namespace: 'deportesDetail' })
-  const tVida = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
+  const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
   const pageSections = await getPageContentForSlug('vida-estudiantil')
   const alianzasMedia = await getMediaGroupByName('Alianzas')
 
-  const getMedias = (slug: string): MedioItem[] =>
-    ((pageSections.find((s: PageContentSection) => s.slug === slug)?.grupo?.medios ?? []) as MedioItem[])
+  const getMedias = (slug: string): MedioItem[] => {
+    const section = pageSections.find((s: PageContentSection) => s.slug === slug)
+    return (section?.grupo?.medios ?? []) as MedioItem[]
+  }
+
+  const heroMediaRaw = getMedias(SECTION_SLUGS.HERO)
+  const rugbyHockeyMediaRaw = getMedias(SECTION_SLUGS.RUGBY)
+  const dojoMediaRaw = getMedias(SECTION_SLUGS.DOJO)
+  const gymMediaRaw = getMedias(SECTION_SLUGS.GYM)
+  const vidaMediaRaw = getMedias(SECTION_SLUGS.BIENESTAR)
+  const playMediaRaw = getMedias(SECTION_SLUGS.PLAY)
+
+  /* ------------------------------ FILTRADO SOLO IMAGEN/VIDEO Y ORDENAMIENTO ------------------------------ */
+  const filterImgOrVideo = (arr: MedioItem[]) =>
+    arr
       .filter((m) => m.tipo === 'IMAGEN' || m.tipo === 'VIDEO')
       .sort((a, b) => a.posicion - b.posicion)
 
-  const dojoMedia = getMedias(SECTION_SLUGS.DOJO)
-  const gymMedia = getMedias(SECTION_SLUGS.GYM)
+  const heroMedia = filterImgOrVideo(heroMediaRaw)
+  const rugbyHockeyMedia = filterImgOrVideo(rugbyHockeyMediaRaw)
+  const dojoMedia = filterImgOrVideo(dojoMediaRaw)
+  const gymMedia = filterImgOrVideo(gymMediaRaw)
+  const vidaMedia = filterImgOrVideo(vidaMediaRaw)
+  const playMedia = filterImgOrVideo(playMediaRaw)
 
   return (
-    <div className="relative overflow-hidden">
-      {/* ============ PRESENTACIÓN ============ */}
-      <section id="deportes" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">{t('title')}</h1>
-          <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
-            <p>{t('intro.p1')}</p>
-            <p>{t('intro.p2')}</p>
-            <p>{t('intro.p3')}</p>
-            <p>{t('intro.p4')}</p>
+    <div id="container">
+      {/* ═════════════ SECCIÓN 1 — HERO ═════════════ */}
+      <section className="relative w-full h-auto lg:h-screen grid grid-cols-12 overflow-hidden" id="deportes">
+        {/* --- COLUMNA VERDE ------------------------------------------------ */}
+        <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
+          {/* Forma decorativa móvil */}
+          <div className="block lg:hidden absolute inset-0 pointer-events-none">
+            <Image src="/images/formas/forma-home-1.svg" alt="" fill className="object-cover" />
+          </div>
+
+          {/* Slogan + botón (móvil) */}
+          <div className="lg:hidden relative flex justify-between items-end h-full pt-40 pb-12 z-20 md:w-[80%] w-full">
+            <Image
+              src="/images/eslogan.svg"
+              alt={t('hero.alt')}
+              width={250}
+              height={250}
+              className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+            />
+          </div>
+
+          {/* Slogan (desktop) */}
+          <div className="hidden lg:block">
+            <Image
+              src="/images/eslogan.svg"
+              alt={t('hero.alt')}
+              width={250}
+              height={250}
+              className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
+            />
           </div>
         </div>
-      </section>
 
-      {/* ============ SAN ISIDRO COLLEGE CLUB ============ */}
-      <section id="club" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <BloqueRotulo
-            rotulo={
-              <>
-                {t('club.label1')}
-                <span className="block">{t('club.label2')}</span>
-              </>
-            }
+        {/* --- COLUMNA CARRUSEL ------------------------------------------- */}
+        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px] lg:h-full">
+          {heroMedia.length > 0 ? (
+            <MediaCarousel items={heroMedia} altText={t('hero.carouselAlt')} className="w-full h-full" />
+          ) : (
+            <Image src="/images/Image-deportes.webp" alt={t('hero.fallbackAlt')} fill className="object-cover" />
+          )}
+
+          {/* Recuadro blanco centrado */}
+          <div
+            className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
+                        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                        z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]"
           >
-            <p className="italic">{t('club.lead')}</p>
-            <p>{t('club.p1')}</p>
-            <p>{t('club.p2')}</p>
-          </BloqueRotulo>
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">{t('hero.title')}</h1>
+            <p className="text-gray-700 mb-4 text-sm md:text-base">{t('hero.description')}</p>
+            <div className="text-center mt-5">
+              <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                {t('hero.readMore')}
+              </Link>
+            </div>
+          </div>
         </div>
+
+        {/* Forma decorativa escritorio */}
+        <Image
+          src="/images/formas/forma-home-1.svg"
+          alt=""
+          width={700}
+          height={700}
+          className="hidden lg:block absolute top-0 left-[32%] -translate-x-1/2 pointer-events-none z-0"
+        />
       </section>
 
-      {/* ============ ASÍ NACIÓ EL CLUB ============ */}
-      <section id="club-origen" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          {/* Texto contra el filete y, del otro lado, el escudo del club. */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-7 space-y-4 text-gray-700 leading-relaxed md:text-right md:border-r md:border-[#9bb5a5] md:pr-6">
-              <p>{t('club.p3')}</p>
-              <p>{t('club.p4')}</p>
-            </div>
-            <div className="md:col-span-5 flex items-center justify-center">
+      {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
+      <section id="club" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+        <Image
+          src="/images/formas/forma-home-2.svg"
+          alt=""
+          width={550}
+          height={300}
+          className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+        />
+
+        <div className="relative z-10 grid grid-cols-12 gap-8">
+          {/* Texto (desktop) */}
+          <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
+            <div className="absolute top-32 left-41 w-[490px] z-20">
               <Image
                 src="/images/logo-club-rugby-hockey.svg"
-                alt={t('club.logoAlt')}
-                width={220}
-                height={260}
-                className="h-auto w-40 object-contain md:w-52"
+                alt={t('rugbyHockey.logoAlt')}
+                width={128}
+                height={128}
+                className="mx-auto mb-5"
               />
+              <div className="bg-white shadow-xl rounded-xl p-8">
+                <h2 className="text-2xl font-bold text-center">{t('rugbyHockey.title')}</h2>
+                <p className="mt-4 text-gray-700 leading-relaxed">{t('rugbyHockey.description')}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Carrusel (desktop) */}
+          <div className="hidden sm:block col-span-8">
+            {rugbyHockeyMedia.length > 0 ? (
+              <div className="w-full h-[645px]">
+                <MediaCarousel
+                  items={rugbyHockeyMedia}
+                  altText={t('rugbyHockey.carouselAlt')}
+                  className="w-full h-full rounded-xl shadow-lg"
+                />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-SIC-hockey.webp"
+                alt={t('rugbyHockey.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            )}
+          </div>
+
+          {/* Móvil */}
+          <div className="sm:hidden col-span-12 relative pt-16">
+            {rugbyHockeyMedia.length > 0 ? (
+              <div className="w-full h-[300px]">
+                <MediaCarousel
+                  items={rugbyHockeyMedia}
+                  altText={t('rugbyHockey.carouselAlt')}
+                  className="w-full h-full rounded-md shadow-lg"
+                />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-SIC-hockey.webp"
+                alt={t('rugbyHockey.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-md shadow-lg"
+              />
+            )}
+
+            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
+              <Image
+                src="/images/logo-club-rugby-hockey.svg"
+                alt={t('rugbyHockey.logoAlt')}
+                width={128}
+                height={128}
+                className="mx-auto mb-5 w-32"
+              />
+              <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
+                <h2 className="text-xl font-bold">{t('rugbyHockey.title')}</h2>
+                <p className="mt-4 text-gray-700">{t('rugbyHockey.description')}</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============ SAN ISIDRO COLLEGE DOJO ============ */}
-      <section id="dojo" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-5">
+      {/* ═════════════ SECCIÓN 3 — SIC DOJO ═════════════ */}
+      <section id="dojo" className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden">
+        {/* Desktop */}
+        <div className="hidden sm:block max-w-[1200px] mx-auto relative">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute top-5 -right-24 w-[550px]"
+          />
+          <div className="grid grid-cols-12 gap-8">
+            <div className="col-span-8">
               {dojoMedia.length > 0 ? (
-                <div className="h-[280px] w-full overflow-hidden rounded-xl shadow-lg md:h-[340px]">
-                  <MediaCarousel
-                    items={dojoMedia}
-                    altText={tVida('dojo.carouselAlt')}
-                    className="h-full w-full"
-                  />
+                <div className="w-full h-[645px]">
+                  <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
                 </div>
               ) : (
                 <Image
                   src="/images/Image-SIC-dojo.webp"
-                  alt={tVida('dojo.fallbackAlt')}
+                  alt={t('dojo.fallbackAlt')}
                   width={800}
                   height={600}
-                  className="h-auto w-full rounded-xl shadow-lg"
+                  className="w-full h-auto rounded-md shadow-md"
                 />
               )}
             </div>
-            <div className="md:col-span-7 space-y-4 text-gray-700 leading-relaxed">
-              <Image
-                src="/images/logo-dojo.svg"
-                alt={tVida('dojo.logoAlt')}
-                width={160}
-                height={80}
-                className="h-16 w-auto object-contain"
-              />
-              <h2 className="text-xl font-bold text-[#c19516]">{tVida('dojo.title')}</h2>
-              <p style={{ whiteSpace: 'pre-line' }}>{tVida('dojo.description')}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ SAN ISIDRO BALANCE ============ */}
-      <section id="san-isidro-balance" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-7 md:order-1 space-y-4 text-gray-700 leading-relaxed">
-              <Image
-                src="/images/logo-gym-2.svg"
-                alt={tVida('gym.logoAlt')}
-                width={160}
-                height={80}
-                className="h-16 w-auto object-contain"
-              />
-              <h2 className="text-xl font-bold text-[#c19516]">{tVida('gym.title')}</h2>
-              <p style={{ whiteSpace: 'pre-line' }}>{tVida('gym.description')}</p>
-            </div>
-            <div className="md:col-span-5 md:order-2">
-              {gymMedia.length > 0 ? (
-                <div className="h-[280px] w-full overflow-hidden rounded-xl shadow-lg md:h-[340px]">
-                  <MediaCarousel
-                    items={gymMedia}
-                    altText={tVida('gym.carouselAlt')}
-                    className="h-full w-full"
-                  />
-                </div>
-              ) : (
+            <div className="absolute col-span-4 top-65 left-[37%] z-20">
+              <div className="absolute -top-[180px] left-[115px] w-[475px]">
                 <Image
-                  src="/images/Image-deportes.webp"
-                  alt={tVida('gym.fallbackAlt')}
-                  width={800}
-                  height={600}
-                  className="h-auto w-full rounded-xl shadow-lg"
+                  src="/images/logo-dojo.svg"
+                  alt={t('dojo.logoAlt')}
+                  width={128}
+                  height={128}
+                  className="mx-auto mb-5 w-32"
                 />
-              )}
+                <div className="bg-white shadow-xl rounded-xl p-8">
+                  <h2 className="text-2xl font-bold text-center">{t('dojo.title')}</h2>
+                  <p className="mt-4 text-gray-700 leading-relaxed">{t('dojo.description')}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile */}
+        <div className="sm:hidden relative min-h-[350px]">
+          <Image
+            src="/images/formas/forma-home-5.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute -top-72 -right-0 w-[550px]"
+          />
+          {dojoMedia.length > 0 ? (
+            <div className="w-full h-[350px]">
+              <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
+            </div>
+          ) : (
+            <Image
+              src="/images/Image-SIC-dojo.webp"
+              alt={t('dojo.fallbackAlt')}
+              width={800}
+              height={600}
+              className="w-full h-auto rounded-md shadow-md"
+            />
+          )}
+          <div className="absolute -top-8 left-0 w-full px-4 z-20 -translate-y-1/2">
+            <Image
+              src="/images/logo-dojo.svg"
+              alt={t('dojo.logoAlt')}
+              width={128}
+              height={128}
+              className="mx-auto mb-5 w-24"
+            />
+            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
+              <h2 className="text-xl font-bold">{t('dojo.title')}</h2>
+              <p className="mt-4 text-gray-700">{t('dojo.descriptionMobile')}</p>
             </div>
           </div>
         </div>
       </section>
 
-      <FondoFormaSeccion />
+      {/* ═════════════ SECCIÓN 4 — SAN ISIDRO BALANCE ═════════════ */}
+      <section id="san-isidro-balance" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
 
+        <div className="relative z-10 grid grid-cols-12 gap-8">
+          <Image
+            src="/images/formas/forma-home-2.svg"
+            alt=""
+            width={550}
+            height={300}
+            className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
+          />
+          {/* Texto (desktop) */}
+          <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
+            <div className="absolute top-20 2xl:left-5 xl:left-5 w-[650px] z-20">
+              <div className="bg-white shadow-xl rounded-xl p-8">
+                <Image
+                  src="/images/logo-gym-2.svg"
+                  alt={t('gym.logoAlt')}
+                  width={128}
+                  height={128}
+                  className="mx-auto mb-5"
+                />
+                <h2 className="text-2xl font-bold text-center">{t('gym.title')}</h2>
+                <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                  {t('gym.description')}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Carrusel (desktop) */}
+          <div className="hidden sm:block col-span-8">
+            {gymMedia.length > 0 ? (
+              <div className="w-full h-[645px]">
+                <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-SIC-hockey.webp"
+                alt={t('gym.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            )}
+          </div>
+
+          {/* Móvil */}
+          <div className="sm:hidden col-span-12 relative pt-16">
+            {gymMedia.length > 0 ? (
+              <div className="w-full h-[300px]">
+                <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-md shadow-lg" />
+              </div>
+            ) : (
+              <Image
+                src="/images/Image-SIC-hockey.webp"
+                alt={t('gym.fallbackAlt')}
+                width={800}
+                height={600}
+                className="w-full h-auto rounded-md shadow-lg"
+              />
+            )}
+
+            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
+              <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
+                <Image src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
+                <h2 className="text-xl font-bold">{t('gym.title')}</h2>
+                <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
+                  {t('gym.descriptionMobile')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Carrusel genérico + contacto */}
       <SectionCarrusel medios={alianzasMedia} />
       <Contact />
     </div>
