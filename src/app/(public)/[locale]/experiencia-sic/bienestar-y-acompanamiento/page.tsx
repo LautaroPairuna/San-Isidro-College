@@ -4,11 +4,9 @@ import BloqueRotulo from '@/components/BloqueRotulo'
 import FlipCardsGrid from '@/components/FlipCardsGrid'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import RenderMedia from '@/components/RenderMedia'
-import Contact from '@/components/sectionContact'
-import SectionCarrusel from '@/components/sectionCarrusel'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { toPublicImageUrl } from '@/lib/publicConstants'
-import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 const CARD_MEDIA_PAGE_SLUG = 'experiencia-sic-bienestar-y-acompanamiento'
 const CARD_MEDIA_SECTION_SLUG = 'experiencia-sic-bienestar-cards-1'
@@ -97,7 +95,6 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicBienestarDetail' })
-  const alianzasMedia = await getMediaGroupByName('Alianzas')
   const bienestarSections = await getPageContentForSlug(CARD_MEDIA_PAGE_SLUG)
 
   const cardsSection = bienestarSections.find(
@@ -189,8 +186,6 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       <FondoFormaSeccion />
 
-      <SectionCarrusel medios={alianzasMedia} />
-      <Contact />
     </div>
   )
 }

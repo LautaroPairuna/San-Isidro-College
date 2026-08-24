@@ -2,8 +2,6 @@
 import BloqueRotulo from '@/components/BloqueRotulo'
 import IconoConFallback from '@/components/IconoConFallback'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
-import Contact from '@/components/sectionContact'
-import SectionCarrusel from '@/components/sectionCarrusel'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
@@ -45,7 +43,6 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicInnovacionRoboticaDetail' })
-  const alianzasMedia = await getMediaGroupByName('Alianzas')
   const studentIcons = await getMediaGroupByName('Experiencia SIC - Innovacion Students Icons')
   const toolsIcons = await getMediaGroupByName('Experiencia SIC - Innovacion Tools Icons')
   const studentDevelopment = resolveIcons(STUDENT_DEVELOPMENT, studentIcons)
@@ -126,8 +123,6 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
 
       <FondoFormaSeccion />
 
-      <SectionCarrusel medios={alianzasMedia} />
-      <Contact />
     </div>
   )
 }

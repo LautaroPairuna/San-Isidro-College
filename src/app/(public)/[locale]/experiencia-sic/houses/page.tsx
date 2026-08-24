@@ -2,10 +2,7 @@
 import BloqueRotulo from '@/components/BloqueRotulo'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import HousesFlipCards, { type HouseCardItem } from '@/components/HousesFlipCards'
-import Contact from '@/components/sectionContact'
-import SectionCarrusel from '@/components/sectionCarrusel'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { getMediaGroupByName } from '@/lib/pageContentCache'
 
 /**
  * Las tres Houses. El frente lleva el escudo en blanco sobre el color de la
@@ -30,7 +27,6 @@ export default async function ExperienciaSicHousesPage({ params }: PageProps) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicHousesDetail' })
-  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   const casas: HouseCardItem[] = HOUSES.map(({ key, color, headerColor }) => {
     const item = (campo: string) => t(`casas.items.${key as HouseKey}.${campo}`)
@@ -107,8 +103,6 @@ export default async function ExperienciaSicHousesPage({ params }: PageProps) {
 
       <FondoFormaSeccion />
 
-      <SectionCarrusel medios={alianzasMedia} />
-      <Contact />
     </div>
   )
 }
