@@ -501,7 +501,8 @@
       "description": "We believe education is built far beyond the classroom: in learning, in relationships, in shared challenges, in achievements, and in the values we practise every day.\n\nWe do not only want our students to acquire knowledge. We want to support them so they become thoughtful people, confident leaders, and active members committed to their community.\n\nWith this vision, the San Isidro College House System is born: a new tradition meant to strengthen belonging, connection, and the participation of all our students.",
       "logosAlt": "House logos: Condor House, Owl House and Falcon House",
       "carouselAlt": "Houses carousel",
-      "fallbackAlt": "San Isidro College House System"
+      "fallbackAlt": "San Isidro College House System",
+      "readMore": "Read more"
     },
     "actividadesExtracurriculares": {
       "title": "Extracurricular Activities",
@@ -676,6 +677,74 @@
       "p1": "Our Innovation and Robotics Lab expresses San Isidro College's commitment to innovative education. Together with our technological proposal and our recognition as a Google Reference School, this space encourages students to learn, create, and develop the skills that will allow them to move confidently in the world of tomorrow."
     }
   },
+  "experienciaSicHousesDetail": {
+    "title": "Houses",
+    "intro": {
+      "lead": "A new tradition begins",
+      "p1": "We believe education is built far beyond the classroom: in learning, in relationships, in shared challenges, in achievements, and in the values we practise every day.",
+      "p2": "We do not only want our students to acquire knowledge. We want to support them so they become thoughtful people, confident leaders, and active members committed to their community.",
+      "p3": "With this vision, the San Isidro College House System is born: a new tradition meant to strengthen belonging, connection, and the participation of all our students."
+    },
+    "comunidad": {
+      "label1": "Three Houses,",
+      "label2": "one community",
+      "p1": "Houses are much more than teams. They are communities within the school that bring together students from different years and create opportunities to collaborate, take on responsibilities, develop leadership, build friendships, and learn from one another.",
+      "p2": "Each House represents a different quality, but none is more important than the others. Together they express what we want to awaken in our students."
+    },
+    "casas": {
+      "title": "Different strengths. One community. One shared purpose.",
+      "school": "San Isidro College",
+      "purposeLabel": "Purpose",
+      "qualitiesLabel": "Qualities",
+      "symbolsLabel": "Symbols",
+      "ariaLabel": "The three San Isidro College Houses",
+      "items": {
+        "condor": {
+          "house": "Condor House",
+          "name": "Condors",
+          "traits": "VISION · INSPIRATION · LEADERSHIP",
+          "description": "The condor invites us to look beyond the horizon, discover new possibilities, and inspire others through our actions.",
+          "purpose": "To inspire our students to go beyond their own limits, pursue excellence with purpose, and lead others through vision and example.",
+          "qualities": "Vision · Inspiration · Leadership · Excellence · Purpose · Perspective",
+          "symbol1Name": "Star",
+          "symbol1Text": "represents guidance, aspiration, and the pursuit of excellence.",
+          "symbol2Name": "Compass rose",
+          "symbol2Text": "represents direction, purpose, and the ability to find a path forward.",
+          "motto": "SEE BEYOND"
+        },
+        "owl": {
+          "house": "Owl House",
+          "name": "Owls",
+          "traits": "WISDOM · REFLECTION · UNDERSTANDING",
+          "description": "The owl reminds us that growth involves listening, asking questions, observing, and learning from every experience to make sound decisions.",
+          "purpose": "To encourage our students to become lifelong learners, think critically, and lead with understanding and integrity.",
+          "qualities": "Wisdom · Curiosity · Understanding · Reflection · Knowledge · Integrity",
+          "symbol1Name": "Moon",
+          "symbol1Text": "represents reflection, insight, and clarity.",
+          "symbol2Name": "Feather",
+          "symbol2Text": "represents learning, knowledge, communication, and the exchange of ideas.",
+          "motto": "LEAD WISELY"
+        },
+        "falcon": {
+          "house": "Falcon House",
+          "name": "Falcons",
+          "traits": "COURAGE · DETERMINATION · RESILIENCE",
+          "description": "The falcon reminds us that courage means turning vision into action, facing challenges with confidence, and persevering despite fear.",
+          "purpose": "To inspire our students to face challenges with courage, act with confidence, and pursue their goals with determination.",
+          "qualities": "Courage · Determination · Resilience · Initiative · Confidence · Perseverance",
+          "symbol1Name": "Lightning bolt",
+          "symbol1Text": "represents action, energy, initiative, and determination.",
+          "symbol2Name": "Flame",
+          "symbol2Text": "represents passion, resilience, and inner strength.",
+          "motto": "ACT BRAVELY"
+        }
+      }
+    },
+    "closing": {
+      "p1": "Although each student belongs to a House, they are all part of one community: San Isidro College.",
+      "p2": "The House System promotes healthy competition, leadership, collaboration, service, and personal growth, while strengthening the values that define our school. Every challenge, every achievement, every act of companionship, and every chance to help others contributes not only to their own House, but to the whole community."
+    }
+  },
   "vidaEstudiantilMasInfo": {
     "proyectoTitle": "Sports",
     "intro": {
@@ -741,6 +810,10 @@
     "experienciaSicInnovacionRobotica": {
       "title": "Innovation and Robotics | San Isidro College",
       "description": "Explore the Innovation and Robotics Lab, its projects, tools, and the skills students develop at San Isidro College."
+    },
+    "experienciaSicHouses": {
+      "title": "Houses | San Isidro College",
+      "description": "Discover the San Isidro College House System: Condors, Owls, and Falcons, three communities that strengthen belonging, leadership, and participation."
     }
   },
   "pilares": {

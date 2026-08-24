@@ -45,6 +45,10 @@ export const routing = defineRouting({
       es: "/experiencia-sic/innovacion-y-robotica",
       en: "/sic-experience/innovation-and-robotics",
     },
+    "/experiencia-sic/houses": {
+      es: "/experiencia-sic/houses",
+      en: "/sic-experience/houses",
+    },
     "/deportes": { es: "/deportes", en: "/sports" },
     "/deportes-mas-info": {
       es: "/deportes-mas-info",
