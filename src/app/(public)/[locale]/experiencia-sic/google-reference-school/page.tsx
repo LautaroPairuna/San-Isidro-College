@@ -3,8 +3,6 @@ import Image from 'next/image'
 import BloqueRotulo from '@/components/BloqueRotulo'
 import IconoConFallback from '@/components/IconoConFallback'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
-import Contact from '@/components/sectionContact'
-import SectionCarrusel from '@/components/sectionCarrusel'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
@@ -90,7 +88,6 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicGoogleReferenceSchoolDetail' })
-  const alianzasMedia = await getMediaGroupByName('Alianzas')
   const studentIcons = await getMediaGroupByName('Experiencia SIC - Google Students Icons')
   const teacherIcons = await getMediaGroupByName('Experiencia SIC - Google Teachers Icons')
   const googleAppsIcons = await getMediaGroupByName('Experiencia SIC - Google Apps')
@@ -177,8 +174,6 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       <FondoFormaSeccion />
 
-      <SectionCarrusel medios={alianzasMedia} />
-      <Contact />
     </div>
   )
 }
