@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import type { ComponentProps } from 'react'
 import { Link } from '@/i18n/navigation'
 
@@ -42,13 +41,7 @@ export default function AcademicLevelCards({
                 className="relative overflow-hidden"
                 style={{ backgroundColor: item.color, height: '280px' }}
               >
-                <Image
-                  src={item.imageSrc}
-                  alt={item.imageAlt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className="object-cover"
-                />
+                <img src={item.imageSrc} alt={item.imageAlt} className="absolute inset-0 h-full w-full object-cover" />
                 <div
                   className="absolute inset-0"
                   style={{ background: `linear-gradient(to bottom, ${item.color}e6 0%, ${item.color}bf 34%, transparent 72%)` }}

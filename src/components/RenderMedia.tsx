@@ -2,7 +2,6 @@
 
 // src/components/RenderMedia.tsx
 import React, { memo, useState } from 'react'
-import Image from 'next/image'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 
 /**
@@ -46,8 +45,6 @@ interface Props {
   videoMode?: 'cover' | 'contain-blur'
   videoProps?: React.VideoHTMLAttributes<HTMLVideoElement>
   priority?: boolean
-  unoptimized?: boolean
-  sizes?: string
   fetchPriority?: 'high' | 'low' | 'auto'
   loading?: 'eager' | 'lazy'
 }
@@ -60,13 +57,17 @@ interface ImageWithFallbackProps {
   width: number
   height: number
   fill: boolean
-  sizes?: string
   priority: boolean
   loading: 'eager' | 'lazy'
-  unoptimized?: boolean
   fetchPriority?: 'high' | 'low' | 'auto'
 }
 
+/**
+ * Las imágenes ya salen optimizadas de sharp al subirlas desde el admin, así
+ * que un <img> nativo alcanza: no hace falta que Next las vuelva a procesar.
+ * En modo `fill`, el posicionamiento absoluto reemplaza a la prop `fill` de
+ * next/image (el contenedor ya viene `relative` en todos los usos actuales).
+ */
 function ImageWithFallback({
   src,
   fallback,
@@ -75,30 +76,25 @@ function ImageWithFallback({
   width,
   height,
   fill,
-  sizes,
   priority,
   loading,
-  unoptimized,
   fetchPriority,
 }: ImageWithFallbackProps) {
   const [failed, setFailed] = useState(false)
   const activeSrc = failed ? fallback : src
-  const basePath = activeSrc.split('?')[0] ?? activeSrc
-  const isSvg = basePath.toLowerCase().endsWith('.svg')
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={activeSrc}
       alt={alt}
-      {...(fill ? { fill: true, sizes: sizes || '100vw' } : { width, height })}
-      className={className}
-      unoptimized={unoptimized ?? isSvg}
-      priority={priority}
+      {...(fill ? {} : { width, height })}
+      className={fill ? `absolute inset-0 h-full w-full ${className ?? ''}` : className}
       loading={loading}
+      fetchPriority={fetchPriority ?? (priority ? 'high' : undefined)}
       onError={() => {
         if (!failed && src !== fallback) setFailed(true)
       }}
-      {...(fetchPriority ? { fetchPriority } : {})}
     />
   )
 }
@@ -111,10 +107,8 @@ interface VideoWithFallbackProps {
   width: number
   height: number
   fill: boolean
-  sizes?: string
   priority: boolean
   loading: 'eager' | 'lazy'
-  unoptimized?: boolean
   fetchPriority?: 'high' | 'low' | 'auto'
   mode: 'cover' | 'contain-blur'
   videoProps: React.VideoHTMLAttributes<HTMLVideoElement>
@@ -128,10 +122,8 @@ function VideoWithFallback({
   width,
   height,
   fill,
-  sizes,
   priority,
   loading,
-  unoptimized,
   fetchPriority,
   mode,
   videoProps,
@@ -148,10 +140,8 @@ function VideoWithFallback({
         width={width}
         height={height}
         fill={fill}
-        sizes={sizes}
         priority={priority}
         loading={loading}
-        unoptimized={unoptimized}
         fetchPriority={fetchPriority}
       />
     )
@@ -230,8 +220,6 @@ const RenderMedia = memo(function RenderMedia({
   videoMode,
   videoProps = {},
   priority = false,
-  unoptimized,
-  sizes,
   fetchPriority,
   loading,
 }: Props) {
@@ -248,10 +236,8 @@ const RenderMedia = memo(function RenderMedia({
         width={width}
         height={height}
         fill={fill}
-        sizes={sizes}
         priority={priority}
         loading={effectiveLoading}
-        unoptimized={unoptimized}
         fetchPriority={fetchPriority}
       />
     )
@@ -273,10 +259,8 @@ const RenderMedia = memo(function RenderMedia({
         width={width}
         height={height}
         fill={fill}
-        sizes={sizes}
         priority={priority}
         loading={effectiveLoading}
-        unoptimized={unoptimized}
         fetchPriority={fetchPriority}
         mode={mode}
         videoProps={videoProps}
@@ -295,10 +279,8 @@ const RenderMedia = memo(function RenderMedia({
       width={width}
       height={height}
       fill={fill}
-      sizes={sizes}
       priority={priority}
       loading={effectiveLoading}
-      unoptimized={unoptimized}
       fetchPriority={fetchPriority}
     />
   )

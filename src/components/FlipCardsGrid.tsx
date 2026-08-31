@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import FlipCardsCarousel, { type FlipCardItem } from '@/components/FlipCardsCarousel'
 
@@ -18,16 +17,9 @@ function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallback
 
   return (
     <div className="flex h-16 w-16 shrink-0 items-center justify-center">
-      <Image
-        src={currentSrc}
-        alt={alt}
-        width={64}
-        height={64}
-        className="h-full w-full object-contain"
-        onError={() => {
+      <img src={currentSrc} alt={alt} width={64} height={64} onError={() => {
           if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-        }}
-      />
+        }} className="h-full w-full object-contain" />
     </div>
   )
 }
@@ -41,16 +33,9 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
 
   return (
     <div className="absolute inset-0">
-      <Image
-        src={currentSrc}
-        alt={alt}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-        className="rounded-b-3xl object-cover"
-        onError={() => {
+      <img src={currentSrc} alt={alt} onError={() => {
           if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-        }}
-      />
+        }} className="absolute inset-0 h-full w-full rounded-b-3xl object-cover" />
     </div>
   )
 }

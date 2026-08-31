@@ -6,7 +6,6 @@ import { SessionProvider, useSession, signOut } from 'next-auth/react';
 import { useRouter, usePathname }                from 'next/navigation';
 import { QueryClient, QueryClientProvider }       from '@tanstack/react-query';
 import Link                                      from 'next/link';
-import Image                                     from 'next/image';
 import type { IconType }                         from 'react-icons';
 import {
   HiPhotograph,
@@ -124,14 +123,7 @@ function InnerAdminProviders({ children }: ClientAdminProvidersProps) {
           <div className="h-full flex flex-col">
             {/* Header Sidebar con logo institucional */}
             <div className="flex items-center justify-center h-24 px-6 border-b border-white/10 bg-brand-900/40">
-              <Image
-                src="/images/logo-san-isidro-3.svg"
-                alt="San Isidro College"
-                width={408}
-                height={194}
-                priority
-                className="h-14 w-auto"
-              />
+              <img src="/images/logo-san-isidro-3.svg" alt="San Isidro College" width={408} height={194} className="h-14 w-auto" fetchPriority="high" />
             </div>
 
             {/* Nav Links */}

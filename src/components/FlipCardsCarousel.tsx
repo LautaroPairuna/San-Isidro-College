@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import {
@@ -41,16 +40,9 @@ function CardIconWithFallback({ src, fallbackSrc, alt }: { src: string; fallback
 
   return (
     <div className="h-16 w-16 flex items-center justify-center shrink-0">
-      <Image
-        src={currentSrc}
-        alt={alt}
-        width={64}
-        height={64}
-        className="w-full h-full object-contain"
-        onError={() => {
+      <img src={currentSrc} alt={alt} width={64} height={64} onError={() => {
           if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-        }}
-      />
+        }} className="w-full h-full object-contain" />
     </div>
   )
 }
@@ -64,16 +56,9 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
 
   return (
     <div className="absolute inset-0">
-      <Image
-        src={currentSrc}
-        alt={alt}
-        fill
-        sizes="(max-width: 640px) 280px, (max-width: 1280px) 45vw, 280px"
-        className="object-cover rounded-b-3xl"
-        onError={() => {
+      <img src={currentSrc} alt={alt} onError={() => {
           if (currentSrc !== fallbackSrc) setCurrentSrc(fallbackSrc)
-        }}
-      />
+        }} className="absolute inset-0 h-full w-full object-cover rounded-b-3xl" />
     </div>
   )
 }

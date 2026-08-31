@@ -1,4 +1,3 @@
-import Image from 'next/image'
 
 /**
  * Trazo punteado decorativo que acompaña el fondo de Colegio y Académicos.
@@ -37,14 +36,7 @@ export default function FondoFormaSeccion({ className }: { className?: string })
       aria-hidden="true"
       className={`pointer-events-none absolute inset-x-0 top-0 flex justify-center ${className ?? ''}`}
     >
-      <Image
-        src="/images/forma-seccion-1.svg"
-        alt=""
-        width={1660}
-        height={3410}
-        className="w-[90vw] max-w-none h-auto"
-        style={{ maskImage: MASK, WebkitMaskImage: MASK }}
-      />
+      <img src="/images/forma-seccion-1.svg" alt="" width={1660} height={3410} style={{ maskImage: MASK, WebkitMaskImage: MASK }} className="w-[90vw] max-w-none h-auto" />
     </div>
   )
 }

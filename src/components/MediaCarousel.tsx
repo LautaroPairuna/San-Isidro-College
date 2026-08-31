@@ -62,7 +62,6 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
           fill={true}
           priority={true}
           fetchPriority="high"
-          sizes="100vw"
           videoMode="contain-blur"
           videoProps={{
             autoPlay: true,
@@ -106,7 +105,6 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                 fill={true}
                 priority={idx === 0}
                 fetchPriority={idx === 0 ? 'high' : 'auto'}
-                sizes="100vw"
                 videoMode="contain-blur" // Forzar modo contain-blur
                 videoProps={{
                   autoPlay: true,

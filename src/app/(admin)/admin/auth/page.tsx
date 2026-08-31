@@ -2,7 +2,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import {
@@ -50,10 +49,10 @@ export default function AuthPage() {
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900 p-6">
       {/* Formas decorativas de marca */}
       <div className="pointer-events-none absolute -top-24 -right-24 w-[520px] max-w-[70vw] opacity-20">
-        <Image src="/images/formas/forma-home-3.svg" alt="" width={750} height={500} className="w-full h-auto" />
+        <img src="/images/formas/forma-home-3.svg" alt="" width={750} height={500} className="w-full h-auto" />
       </div>
       <div className="pointer-events-none absolute -bottom-28 -left-24 w-[440px] max-w-[60vw] opacity-10">
-        <Image src="/images/formas/forma-home-2.svg" alt="" width={650} height={500} className="w-full h-auto" />
+        <img src="/images/formas/forma-home-2.svg" alt="" width={650} height={500} className="w-full h-auto" />
       </div>
 
       <motion.div
@@ -64,14 +63,7 @@ export default function AuthPage() {
       >
         {/* Cabecera con logo institucional */}
         <div className="flex flex-col items-center gap-3 px-8 pt-8 pb-6 border-b border-gray-100">
-          <Image
-            src="/images/logo-san-isidro-2.svg"
-            alt="San Isidro College"
-            width={226}
-            height={108}
-            priority
-            className="h-16 w-auto"
-          />
+          <img src="/images/logo-san-isidro-2.svg" alt="San Isidro College" width={226} height={108} className="h-16 w-auto" fetchPriority="high" />
           <div className="text-center">
             <h2 className="text-xl font-bold text-navy-700">Panel de Administración</h2>
             <p className="text-sm text-gray-500">Ingresá para gestionar el contenido del sitio</p>

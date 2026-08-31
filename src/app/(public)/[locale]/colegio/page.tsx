@@ -160,7 +160,6 @@ const ColegioPage = async ({ params }: PageProps) => {
                 medio={personalizada1}
                 fallback="/images/placeholder.webp"
                 fill
-                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -181,7 +180,6 @@ const ColegioPage = async ({ params }: PageProps) => {
                 medio={personalizada2}
                 fallback="/images/placeholder.webp"
                 fill
-                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>

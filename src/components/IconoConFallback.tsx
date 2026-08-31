@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 /**
@@ -33,16 +32,8 @@ export default function IconoConFallback({
   }, [src])
 
   return (
-    <Image
-      src={actual}
-      alt=""
-      aria-hidden="true"
-      width={width}
-      height={height}
-      className={className}
-      onError={() => {
+    <img src={actual} alt="" aria-hidden="true" width={width} height={height} onError={() => {
         if (actual !== fallbackSrc) setActual(fallbackSrc)
-      }}
-    />
+      }} className={className} />
   )
 }

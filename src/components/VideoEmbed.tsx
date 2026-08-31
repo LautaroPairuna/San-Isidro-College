@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 
 interface VideoEmbedProps {
   videoId: string;
@@ -42,15 +41,7 @@ export default function VideoEmbed({ videoId, placeholderSrc }: VideoEmbedProps)
           loading="lazy"
         />
       ) : (
-        <Image
-          src={placeholderSrc}
-          alt="Previsualización del vídeo"
-          fill
-          style={{ objectFit: "cover" }}
-          placeholder="blur"
-          blurDataURL="/placeholder.png"
-          className="rounded-lg shadow-lg"
-        />
+        <img src={placeholderSrc} alt="Previsualización del vídeo" style={{ objectFit: "cover" }} className="absolute inset-0 h-full w-full rounded-lg shadow-lg" />
       )}
     </div>
   );

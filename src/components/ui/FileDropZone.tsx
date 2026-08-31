@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import clsx from 'clsx'
@@ -146,12 +145,7 @@ export default function FileDropZone({
               />
               ) : (
                 <div className="relative w-full h-full">
-                  <Image
-                    src={preview}
-                    alt="preview"
-                    fill
-                    className="object-contain p-2"
-                  />
+                  <img src={preview} alt="preview" className="absolute inset-0 h-full w-full object-contain p-2" />
                 </div>
               )}
             </div>

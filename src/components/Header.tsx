@@ -3,7 +3,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { useLocale } from "next-intl"
 import { usePathname } from "next/navigation"
 import type { MouseEvent } from "react"
@@ -86,17 +85,7 @@ const Header: React.FC = () => {
               `}
             >
               <Link href={`/${locale}#home`} onClick={() => setMenuOpen(false)}>
-                <Image
-                  id="logo"
-                  src={getLogoSrc()}
-                  alt="Logo de San Isidro"
-                  width={180}
-                  height={90}
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
-                  className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-500 ease-in-out"
-                />
+                <img id="logo" src={getLogoSrc()} alt="Logo de San Isidro" width={180} height={90} loading="eager" fetchPriority="high" className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-500 ease-in-out" />
               </Link>
             </div>
 
@@ -203,14 +192,7 @@ const Header: React.FC = () => {
             {/* Logo en menú */}
             <div className="flex flex-col md:flex-row justify-start items-center mb-6">
               <Link href="/" onClick={handleNavClick} className="flex items-center">
-                <Image
-                  id="menuLogo"
-                  src={getLogoSrc()}
-                  alt="Logo de San Isidro"
-                  width={180}
-                  height={90}
-                  className="h-20 w-auto"
-                />
+                <img id="menuLogo" src={getLogoSrc()} alt="Logo de San Isidro" width={180} height={90} className="h-20 w-auto" />
               </Link>
               {/* Mobile: idiomas debajo del logo */}
               <div className="flex gap-2 mt-4 md:hidden">

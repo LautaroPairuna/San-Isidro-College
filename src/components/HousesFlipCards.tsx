@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
 
 export type HouseCardItem = {
@@ -82,13 +81,7 @@ function HouseCard({ card }: { card: HouseCardItem }) {
             </span>
           </div>
           <div className="flex flex-1 items-center justify-center p-6" style={{ backgroundColor: card.color }}>
-            <Image
-              src={card.crest}
-              alt={card.house}
-              width={320}
-              height={380}
-              className="h-full w-auto max-w-full object-contain"
-            />
+            <img src={card.crest} alt={card.house} width={320} height={380} className="h-full w-auto max-w-full object-contain" />
           </div>
         </div>
 
@@ -97,14 +90,7 @@ function HouseCard({ card }: { card: HouseCardItem }) {
           className="absolute inset-0 overflow-hidden rounded-2xl border bg-white px-5 py-5 text-center shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
           style={{ borderColor: card.color, transform: 'rotateY(180deg)' }}
         >
-          <Image
-            src={card.badge}
-            alt=""
-            aria-hidden="true"
-            width={72}
-            height={72}
-            className="mx-auto h-14 w-14 object-contain"
-          />
+          <img src={card.badge} alt="" aria-hidden="true" width={72} height={72} className="mx-auto h-14 w-14 object-contain" />
           <h3 className="mt-2 text-lg font-bold" style={{ color: card.color }}>
             {card.name}
           </h3>

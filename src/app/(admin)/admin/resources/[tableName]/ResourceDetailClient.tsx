@@ -20,7 +20,6 @@ import { toast } from 'react-hot-toast'
 import { HiCheckCircle, HiXCircle, HiCalendar, HiPhotograph, HiChevronUp, HiChevronDown } from 'react-icons/hi'
 import { FaPlus, FaTrash, FaPencilAlt, FaEye } from 'react-icons/fa'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import FileDropZone from '@/components/ui/FileDropZone'
 import PaginacionTabla from '@/components/PaginacionTabla'
 import { folderNames, toPublicImageUrl } from '@/lib/publicConstants'
@@ -1011,15 +1010,7 @@ const FotoCellPreview = memo(function FotoCellPreview({
           onError={handleError}
         />
       ) : (
-        <Image
-          src={src}
-          alt={fileName}
-          width={64}
-          height={64}
-          onLoad={handleLoad}
-          onError={handleError}
-          className={`rounded shadow object-cover transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
-        />
+        <img src={src} alt={fileName} width={64} height={64} onLoad={handleLoad} onError={handleError} className={`rounded shadow object-cover transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`} />
       )}
       <span className="text-xs text-gray-600 truncate group-hover:whitespace-normal group-hover:absolute group-hover:bg-white group-hover:z-20 group-hover:p-1 group-hover:shadow group-hover:rounded group-hover:left-16 transition-all" style={{ maxWidth: 100 }}>
         {fileName}

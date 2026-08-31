@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
 import {
@@ -136,14 +135,7 @@ export default function TiraFotos({
           {items.map((foto) => (
             <CarouselItem key={foto.key} className="basis-auto pl-2">
               <div className="origin-center will-change-transform">
-                <Image
-                  src={foto.src}
-                  alt={foto.alt}
-                  width={640}
-                  height={420}
-                  sizes="(max-width: 768px) 70vw, 30vw"
-                  className="h-[240px] w-auto max-w-none rounded-sm object-cover shadow-lg md:h-[340px]"
-                />
+                <img src={foto.src} alt={foto.alt} width={640} height={420} className="h-[240px] w-auto max-w-none rounded-sm object-cover shadow-lg md:h-[340px]" />
               </div>
             </CarouselItem>
           ))}
