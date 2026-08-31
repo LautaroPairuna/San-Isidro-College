@@ -130,7 +130,7 @@ const HomePage = async ({ params }: PageProps) => {
       </section>
 
       {/* =============== SECCIÓN 2: BIENVENIDA (MÉTODO UNICO) =============== */}
-      <section className="relative w-full py-10 bg-white lg:min-h-[720px]" id="bienvenida">
+      <section className="relative w-full py-10 bg-white lg:min-h-[720px] overflow-x-hidden" id="bienvenida">
         <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
           {/* Columna Izquierda */}
           <div className="col-span-4 relative flex flex-col justify-center max-lg:col-span-12">
