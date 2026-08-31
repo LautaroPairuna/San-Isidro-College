@@ -11,6 +11,7 @@ import {
   getPageContentForSlug,
   type PageContentSection,
 } from '@/lib/pageContentCache'
+import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION, TITULO_TARJETA } from '@/lib/tipografia'
 
 /**
  * Salas, en el orden del diseño. Los íconos salen de kindergarten-group.svg:
@@ -58,11 +59,11 @@ const KindergardenPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="nivel-inicial" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>
             {t('intro.title')}
           </h1>
-          <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.subtitle')}</p>
+          <p className={`mt-3 ${BAJADA_PAGINA}`}>{t('intro.subtitle')}</p>
           <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
@@ -72,9 +73,9 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ PRIMEROS ENCUENTROS CON EL INGLÉS ============ */}
       <section id="ingles" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
-            <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
+            <h2 className={`md:col-span-4 md:text-right ${TITULO_SECCION}`}>
               {t('ingles.label1')}
               <span className="block">{t('ingles.label2')}</span>
             </h2>
@@ -89,8 +90,8 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ EL VALOR DEL JUEGO ============ */}
       <section id="juego" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">{t('juego.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('juego.title')}</h2>
 
           {/* Foto a la izquierda, texto a la derecha */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -130,8 +131,8 @@ const KindergardenPage = async ({ params }: PageProps) => {
 
       {/* ============ UNA PROPUESTA QUE CRECE CON ELLOS ============ */}
       <section id="salas" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('salas.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('salas.title')}</h2>
           <p className="mt-3 text-gray-700 leading-relaxed">{t('salas.description')}</p>
 
           {/* Cuatro columnas en desktop; abajo de lg pasan a dos, que es donde
@@ -147,7 +148,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
                   height={72}
                   className="h-16 w-auto"
                 />
-                <h3 className="mt-4 text-lg font-bold text-[#1e804b] leading-tight">
+                <h3 className={`mt-4 ${TITULO_TARJETA} text-[#1e804b]`}>
                   {t(`salas.${key}.title`)}
                 </h3>
                 <p className="mt-1 text-sm text-[#1e804b] leading-snug whitespace-pre-line">

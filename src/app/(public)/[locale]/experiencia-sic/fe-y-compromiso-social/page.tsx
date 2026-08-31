@@ -5,6 +5,7 @@ import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import TiraFotos from '@/components/TiraFotos'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION, TITULO_TARJETA } from '@/lib/tipografia'
 
 /** Sección con las fotos de servicio, editable desde el admin. */
 const PAGE_SLUG = 'experiencia-sic-fe-y-compromiso-social'
@@ -68,9 +69,9 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="fe-y-compromiso-social" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">{t('title')}</h1>
-          <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.lead')}</p>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>{t('title')}</h1>
+          <p className={`mt-3 ${BAJADA_PAGINA}`}>{t('intro.lead')}</p>
           <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
@@ -81,7 +82,7 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
 
       {/* ============ EL LEGADO DE SAN ISIDRO LABRADOR ============ */}
       <section id="legado" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <BloqueRotulo
             rotulo={
               <>
@@ -98,11 +99,11 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
 
       {/* ============ APRENDER A TRAVÉS DEL SERVICIO ============ */}
       <section id="servicio" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           {/* Texto contra el filete y, del otro lado, el sello de Community Service. */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-8 space-y-4 text-gray-700 leading-relaxed md:text-right md:border-r md:border-[#9bb5a5] md:pr-6">
-              <h2 className="text-xl font-bold text-[#c19516]">{t('servicio.title')}</h2>
+              <h2 className={TITULO_SECCION}>{t('servicio.title')}</h2>
               <p>{t('servicio.p1')}</p>
             </div>
             <div className="md:col-span-4 flex items-start justify-center md:justify-start">
@@ -122,7 +123,7 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
         </div>
 
         {/* ============ INSTITUCIONES Y CAMPAÑAS ============ */}
-        <div className="relative z-10 mt-12 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 mt-12 max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <article className="rounded-xl bg-[#f2f1e8] p-6">
               <div className="flex items-center gap-4">
@@ -130,7 +131,7 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
                   src="/images/experiencias/fe-y-compromiso/instituciones-que-acompanamos.svg"
                   fondo={VERDE_TARJETA}
                 />
-                <h3 className="flex-1 border-b border-[#9bb5a5] pb-2 text-base font-bold" style={{ color: NAVY }}>
+                <h3 className={`flex-1 border-b border-[#9bb5a5] pb-2 ${TITULO_TARJETA}`} style={{ color: NAVY }}>
                   {t('instituciones.title')}
                 </h3>
               </div>
@@ -154,7 +155,7 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
                   src="/images/experiencias/fe-y-compromiso/campanas-solidarias.svg"
                   fondo={DORADO}
                 />
-                <h3 className="flex-1 border-b pb-2 text-base font-bold" style={{ color: NAVY, borderColor: DORADO }}>
+                <h3 className={`flex-1 border-b pb-2 ${TITULO_TARJETA}`} style={{ color: NAVY, borderColor: DORADO }}>
                   {t('campanas.title')}
                 </h3>
               </div>

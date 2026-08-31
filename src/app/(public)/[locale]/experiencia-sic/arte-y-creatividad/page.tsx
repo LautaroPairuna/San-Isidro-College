@@ -4,6 +4,7 @@ import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import TiraFotos from '@/components/TiraFotos'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 /** Sección con las fotos de San Isidro Play, editable desde el admin. */
 const PAGE_SLUG = 'experiencia-sic-arte-y-creatividad'
@@ -52,9 +53,9 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="arte-y-creatividad" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">{t('title')}</h1>
-          <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.lead')}</p>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>{t('title')}</h1>
+          <p className={`mt-3 ${BAJADA_PAGINA}`}>{t('intro.lead')}</p>
           <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
@@ -68,8 +69,8 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
 
       {/* ============ LENGUAJES ARTÍSTICOS ============ */}
       <section id="lenguajes" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('lenguajes.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('lenguajes.title')}</h2>
           <p className="mt-4 text-gray-700 leading-relaxed">{t('lenguajes.p1')}</p>
 
           <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
@@ -96,8 +97,8 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
 
       {/* ============ SAN ISIDRO PLAY ============ */}
       <section id="san-isidro-play" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('play.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('play.title')}</h2>
           <p className="mt-2 text-sm font-bold italic text-[#294161]">{t('play.subtitle')}</p>
         </div>
 
@@ -109,7 +110,7 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
           />
         </div>
 
-        <div className="relative z-10 mt-12 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 mt-12 max-w-4xl mx-auto px-6">
           <div className="space-y-5 text-gray-700 leading-relaxed">
             <p>{t('play.p1')}</p>
             <p>{t('play.p2')}</p>

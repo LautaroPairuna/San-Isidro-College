@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { TITULO_SECCION } from '@/lib/tipografia'
 
 /**
  * Rótulo dorado y texto separados por un filete, alternando de lado.
@@ -24,7 +25,7 @@ export default function BloqueRotulo({
 }) {
   const rotuloEl = (
     <Rotulo
-      className={`md:col-span-4 text-lg font-bold text-[#c19516] ${
+      className={`md:col-span-4 ${TITULO_SECCION} ${
         lado === 'izquierda' ? 'md:text-right' : 'md:col-start-8'
       }`}
     >

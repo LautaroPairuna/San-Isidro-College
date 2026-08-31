@@ -12,6 +12,7 @@ import {
   getPageContentForSlug,
   type PageContentSection,
 } from '@/lib/pageContentCache'
+import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION, TITULO_TARJETA } from '@/lib/tipografia'
 
 /**
  * Tarjetas de "Una formación que trasciende el aula". Son las mismas tarjetas
@@ -95,11 +96,11 @@ const SecondaryPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="nivel-secundario" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>
             {t('intro.title')}
           </h1>
-          <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.subtitle')}</p>
+          <p className={`mt-3 ${BAJADA_PAGINA}`}>{t('intro.subtitle')}</p>
           <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
@@ -109,9 +110,9 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ DOS ORIENTACIONES ============ */}
       <section id="orientaciones" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div>
-            <h2 className="text-xl font-bold text-[#c19516]">{t('orientaciones.title')}</h2>
+            <h2 className={TITULO_SECCION}>{t('orientaciones.title')}</h2>
             <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
               <p>{t('orientaciones.p1')}</p>
               <p>{t('orientaciones.p2')}</p>
@@ -130,9 +131,9 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ CONECTADA CON EL MUNDO ============ */}
       <section id="mundo" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div>
-            <h2 className="text-xl font-bold text-[#c19516]">{t('mundo.title')}</h2>
+            <h2 className={TITULO_SECCION}>{t('mundo.title')}</h2>
             <p className="mt-4 text-gray-700 leading-relaxed">{t('mundo.p1')}</p>
           </div>
 
@@ -160,8 +161,8 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ PROYECTO DE VIDA ============ */}
       <section id="proyecto-vida" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('proyectoVida.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('proyectoVida.title')}</h2>
           <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
             <p>{t('proyectoVida.p1')}</p>
             <p>{t('proyectoVida.p2')}</p>
@@ -172,8 +173,8 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ FORMACIÓN QUE TRASCIENDE EL AULA ============ */}
       <section id="formacion" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('formacion.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('formacion.title')}</h2>
           <p className="mt-3 text-gray-700 leading-relaxed">
             {t('formacion.description')}
           </p>
@@ -184,13 +185,13 @@ const SecondaryPage = async ({ params }: PageProps) => {
 
       {/* ============ UN RECORRIDO POR SECUNDARIA ============ */}
       <section id="recorrido" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('recorrido.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('recorrido.title')}</h2>
 
           {/* Cuadro de años. Va en HTML y no como secondary-group.svg: el SVG
               trae el texto dibujado y solo en español. */}
           <div className="mt-8 rounded-2xl bg-[#1e804b]/80 px-6 py-8 md:px-10 md:py-10 text-white">
-            <h3 className="text-lg md:text-xl font-bold">{t('recorrido.cuadro.title')}</h3>
+            <h3 className={TITULO_TARJETA}>{t('recorrido.cuadro.title')}</h3>
             <p className="mt-2 inline-block bg-white/20 px-3 py-1 text-sm">
               {t('recorrido.cuadro.jornada')}
             </p>

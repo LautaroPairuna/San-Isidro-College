@@ -3,6 +3,7 @@ import BloqueRotulo from '@/components/BloqueRotulo'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import HousesFlipCards, { type HouseCardItem } from '@/components/HousesFlipCards'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 /**
  * Las tres Houses. El frente lleva el escudo en blanco sobre el color de la
@@ -59,9 +60,9 @@ export default async function ExperienciaSicHousesPage({ params }: PageProps) {
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="houses" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">{t('title')}</h1>
-          <p className="mt-3 text-base font-bold text-[#c19516]">{t('intro.lead')}</p>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>{t('title')}</h1>
+          <p className={`mt-3 ${BAJADA_PAGINA}`}>{t('intro.lead')}</p>
           <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
             <p>{t('intro.p1')}</p>
             <p>{t('intro.p2')}</p>
@@ -72,7 +73,7 @@ export default async function ExperienciaSicHousesPage({ params }: PageProps) {
 
       {/* ============ TRES HOUSES, UNA COMUNIDAD ============ */}
       <section id="comunidad" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <BloqueRotulo
             rotulo={
               <>
@@ -89,8 +90,8 @@ export default async function ExperienciaSicHousesPage({ params }: PageProps) {
 
       {/* ============ LAS TRES HOUSES ============ */}
       <section id="las-houses" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('casas.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('casas.title')}</h2>
 
           <HousesFlipCards items={casas} ariaLabel={t('casas.ariaLabel')} />
 

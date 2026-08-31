@@ -6,6 +6,7 @@ import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
+import { TITULO_PAGINA, TITULO_SECCION, TITULO_TARJETA } from '@/lib/tipografia'
 
 const STUDENT_FEATURES = [
   { key: 'collaborativeLearning', fallbackIcon: '/images/icons/aprendizaje-colaborativo-ico.svg' },
@@ -72,7 +73,7 @@ function GrillaIconos({
             height={140}
             className="h-28 w-28 object-contain md:h-32 md:w-32"
           />
-          <h3 className="mt-4 text-lg font-bold leading-tight text-[#294161]">
+          <h3 className={`mt-4 ${TITULO_TARJETA} text-[#294161]`}>
             {t(`${namespace}.items.${item.key}.title` as const)}
           </h3>
           <p className="mt-2 max-w-[240px] text-sm leading-snug text-gray-700">
@@ -99,7 +100,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="google-reference-school" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="inline-flex rounded-lg border border-gray-200 px-6 py-4 shadow-sm">
             <Image
               src="/images/google-education-logo.webp"
@@ -110,7 +111,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
             />
           </div>
 
-          <h1 className="mt-8 text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+          <h1 className={`mt-8 ${TITULO_PAGINA}`}>
             {t('title')}
           </h1>
           <p className="mt-6 text-gray-700 leading-relaxed">{t('intro.p1')}</p>
@@ -119,7 +120,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       {/* ============ QUÉ ES SER GOOGLE REFERENCE SCHOOL ============ */}
       <section id="que-es" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <BloqueRotulo rotulo={t('whatIs.title')}>
             <p>{t('whatIs.p1')}</p>
             <p>{t('whatIs.p2')}</p>
@@ -129,24 +130,24 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
 
       {/* ============ QUÉ SIGNIFICA PARA NUESTROS ALUMNOS ============ */}
       <section id="alumnos" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('students.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('students.title')}</h2>
           <GrillaIconos items={studentFeatures} t={t} namespace="students" />
         </div>
       </section>
 
       {/* ============ QUÉ SIGNIFICA PARA NUESTROS DOCENTES ============ */}
       <section id="docentes" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('teachers.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('teachers.title')}</h2>
           <GrillaIconos items={teacherFeatures} t={t} namespace="teachers" />
         </div>
       </section>
 
       {/* ============ LA TECNOLOGÍA COMO PARTE DEL APRENDIZAJE ============ */}
       <section id="tecnologia" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516]">{t('technology.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>{t('technology.title')}</h2>
           <p className="mt-4 text-gray-700 leading-relaxed">
             {t('technology.p1')}
           </p>

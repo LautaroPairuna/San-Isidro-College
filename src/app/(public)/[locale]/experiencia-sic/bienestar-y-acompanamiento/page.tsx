@@ -7,6 +7,7 @@ import RenderMedia from '@/components/RenderMedia'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 const CARD_MEDIA_PAGE_SLUG = 'experiencia-sic-bienestar-y-acompanamiento'
 const CARD_MEDIA_SECTION_SLUG = 'experiencia-sic-bienestar-cards-1'
@@ -121,8 +122,8 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
     <div className="relative overflow-hidden">
       {/* ============ PRESENTACIÓN ============ */}
       <section id="bienestar" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>
             {t('title')}
           </h1>
           <p className="mt-6 text-gray-700 leading-relaxed">{t('intro.p1')}</p>
@@ -131,7 +132,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ NUESTRA FILOSOFÍA ============ */}
       <section id="filosofia" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <BloqueRotulo rotulo={t('philosophy.title')}>
             <p>{t('philosophy.p1')}</p>
             <p>{t('philosophy.p2')}</p>
@@ -143,7 +144,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ UNA COMUNIDAD QUE ACOMPAÑA ============ */}
       <section id="comunidad" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <BloqueRotulo rotulo={t('community.title')}>
             <p>{t('community.p1')}</p>
             <p>{t('community.p2')}</p>
@@ -153,8 +154,8 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ EQUIPO DE ORIENTACIÓN ESCOLAR ============ */}
       <section id="eoe" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-[#c19516] whitespace-pre-line">{t('eoe.title')}</h2>
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={`${TITULO_SECCION} whitespace-pre-line`}>{t('eoe.title')}</h2>
           <p className="mt-4 text-gray-700 leading-relaxed">{t('eoe.p1')}</p>
 
           <FlipCardsGrid items={secondGroupCards} ariaLabel={t('secondGroupAriaLabel')} />
@@ -163,12 +164,12 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       {/* ============ ACOMPAÑAR PARA CRECER ============ */}
       <section id="cierre" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           {/* El filete va en la columna de texto y no lleva items-center: así
               se estira hasta el alto de la foto, como en Primary. */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <div className="md:col-span-7 flex flex-col justify-center space-y-4 text-gray-700 leading-relaxed md:text-right md:border-r-2 md:border-black md:pr-6">
-              <h2 className="text-xl font-bold text-[#c19516]">{t('closing.title')}</h2>
+              <h2 className={TITULO_SECCION}>{t('closing.title')}</h2>
               <p>{t('closing.p1')}</p>
             </div>
             <div className="md:col-span-5 relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">

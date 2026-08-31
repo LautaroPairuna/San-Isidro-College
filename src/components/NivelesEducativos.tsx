@@ -1,5 +1,6 @@
 import { Link } from '@/i18n/navigation'
 import { getTranslations } from 'next-intl/server'
+import { TITULO_BLOQUE } from '@/lib/tipografia'
 
 const NIVELES = [
   { key: 'kindergarden', href: '/kindergarden' },
@@ -32,8 +33,8 @@ export default async function NivelesEducativos({
       id="niveles"
       className={`relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32 ${className ?? ''}`}
     >
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
-        <h2 className="text-2xl lg:text-3xl font-bold text-[#294161]">{t('title')}</h2>
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
+        <h2 className={TITULO_BLOQUE}>{t('title')}</h2>
         <p className="mt-3 max-w-2xl text-gray-700 leading-relaxed">{t('description')}</p>
 
         <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">

@@ -7,6 +7,7 @@ import EscudoSignificado from "@/components/EscudoSignificado"
 import FondoFormaSeccion from "@/components/FondoFormaSeccion"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { getPageContentForSlug, type PageContentSection } from "@/lib/pageContentCache"
+import { TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 /* --------------------------------------------------------------------
  *  SLUGS DE SECCIONES
@@ -51,8 +52,8 @@ const ColegioPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PROYECTO EDUCATIVO ============ */}
       <section id="proyecto" className="relative w-full bg-white pt-40 pb-16 lg:pb-24 overflow-hidden">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>
             {t("proyectoTitle1")}
             <span className="block">{t("proyectoTitle2")}</span>
           </h1>
@@ -66,13 +67,13 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ MISIÓN / VISIÓN / VALORES ============ */}
       <section className="relative w-full bg-[#dcebe0] py-16 lg:py-24 overflow-hidden">
-        <div className="relative z-10 max-w-5xl mx-auto px-6 space-y-16 lg:space-y-24">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 space-y-16 lg:space-y-24">
           {/* Misión: rótulo a la izquierda, filete y texto a la derecha */}
           <div
             id="mision"
             className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start scroll-mt-32"
           >
-            <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
+            <h2 className={`md:col-span-4 md:text-right ${TITULO_SECCION}`}>
               {t("mision.label")}
             </h2>
             <div className="md:col-span-7 md:col-start-6 md:max-w-md md:border-l md:border-[#9bb5a5] md:pl-6 text-gray-700 leading-relaxed">
@@ -90,14 +91,14 @@ const ColegioPage = async ({ params }: PageProps) => {
               <p className="italic md:text-right">{t("vision.lead")}</p>
               <p className="mt-4 hyphens-auto">{t("vision.texto")}</p>
             </div>
-            <h2 className="md:col-span-3 md:col-start-10 md:order-2 text-xl font-bold text-[#c19516]">
+            <h2 className={`md:col-span-3 md:col-start-10 md:order-2 ${TITULO_SECCION}`}>
               {t("vision.label")}
             </h2>
           </div>
 
           {/* Valores: rótulo arriba y rueda debajo */}
           <div id="valores" className="scroll-mt-32">
-            <h2 className="text-xl font-bold text-[#c19516]">
+            <h2 className={TITULO_SECCION}>
               {t("valores.label")}
             </h2>
             <div className="mt-8 flex justify-center">
@@ -109,8 +110,8 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ NUESTRO ESCUDO ============ */}
       <section id="escudo" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>
             {t("escudo.title")}
           </h2>
           <p className="mt-4 text-gray-700 leading-relaxed">
@@ -130,8 +131,8 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ APRENDIZAJE CON VALORES ============ */}
       <section id="aprendizaje-con-valores" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>
             {t("aprendizajeValores.title")}
           </h2>
           <div className="mt-6 space-y-5 text-gray-700 leading-relaxed">
@@ -147,8 +148,8 @@ const ColegioPage = async ({ params }: PageProps) => {
         id="educacion-personalizada"
         className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32"
       >
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>
             {t("educacionPersonalizada.title")}
           </h2>
 
@@ -190,8 +191,8 @@ const ColegioPage = async ({ params }: PageProps) => {
 
       {/* ============ INSTALACIONES ============ */}
       <section id="instalaciones" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[#c19516]">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h2 className={TITULO_SECCION}>
             {t("instalaciones.title")}
           </h2>
 

@@ -10,6 +10,7 @@ import {
   getPageContentForSlug,
   type PageContentSection,
 } from '@/lib/pageContentCache'
+import { TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 // Grupo de íconos de Propósitos en la DB.
 const SECTION_PROPOSITOS = 'academicos-mas-info-propositos'
@@ -54,8 +55,8 @@ const AcademicosMasInfoPage = async ({ params }: PageProps) => {
     <div className="relative overflow-hidden">
       {/* ============ PROYECTO BILINGÜE ============ */}
       <section id="proyecto-bilingue" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[#294161] leading-tight">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
+          <h1 className={TITULO_PAGINA}>
             {t('intro.title1')}
             <span className="block">{t('intro.title2')}</span>
           </h1>
@@ -69,9 +70,9 @@ const AcademicosMasInfoPage = async ({ params }: PageProps) => {
 
       {/* ============ APRENDER INGLÉS Y APRENDER EN INGLÉS ============ */}
       <section id="aprender-ingles" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
-            <h2 className="md:col-span-4 md:text-right text-xl font-bold text-[#c19516]">
+            <h2 className={`md:col-span-4 md:text-right ${TITULO_SECCION}`}>
               {t('aprenderIngles.label1')}
               <span className="block">{t('aprenderIngles.label2')}</span>
             </h2>
@@ -91,7 +92,7 @@ const AcademicosMasInfoPage = async ({ params }: PageProps) => {
 
       {/* ============ NUESTROS PROPÓSITOS ============ */}
       <section id="propositos" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
-        <div className="relative z-10 max-w-3xl mx-auto px-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <h2 className="text-xl lg:text-2xl font-bold text-[#c19516]">
             {t('propositos.title')}
           </h2>
