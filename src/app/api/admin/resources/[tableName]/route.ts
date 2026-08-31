@@ -8,6 +8,7 @@ import { resourceService, isValidTableName } from "@/services/resource.service";
 import {
   invalidatePageContentMemoryCache,
   refreshPageContentCacheAll,
+  revalidateIsrPages,
 } from "@/lib/pageContentCache";
 import { toMediaError } from "@/lib/mediaErrors";
 import { parseMultipartToDisk, cleanupParsed, type ParsedFile, type ParsedMultipart } from "@/lib/multipart";
@@ -128,6 +129,7 @@ export async function POST(req: NextRequest, ctx: ParamsPromise<{ tableName: str
     if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
       invalidatePageContentMemoryCache();
       await refreshPageContentCacheAll();
+      revalidateIsrPages();
     }
 
     return NextResponse.json(created, { status: 201 });

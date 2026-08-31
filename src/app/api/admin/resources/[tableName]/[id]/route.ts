@@ -8,6 +8,7 @@ import { resourceService, isValidTableName } from "@/services/resource.service";
 import {
   invalidatePageContentMemoryCache,
   refreshPageContentCacheAll,
+  revalidateIsrPages,
 } from "@/lib/pageContentCache";
 import { toMediaError } from "@/lib/mediaErrors";
 import { parseMultipartToDisk, cleanupParsed, type ParsedFile, type ParsedMultipart } from "@/lib/multipart";
@@ -94,6 +95,7 @@ export async function PUT(req: NextRequest, ctx: ParamsPromise<{ tableName: stri
     if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
       invalidatePageContentMemoryCache();
       await refreshPageContentCacheAll();
+      revalidateIsrPages();
     }
 
     return NextResponse.json(updated);
@@ -125,6 +127,7 @@ export async function DELETE(_req: NextRequest, ctx: ParamsPromise<{ tableName: 
     if (tableName === "Seccion" || tableName === "GrupoMedios" || tableName === "Medio") {
       invalidatePageContentMemoryCache();
       await refreshPageContentCacheAll();
+      revalidateIsrPages();
     }
 
     return NextResponse.json({ success: true });

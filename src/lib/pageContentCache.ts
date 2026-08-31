@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 type PageContentCache = Record<string, PageContentSection[]>;
@@ -239,4 +240,27 @@ export async function refreshPageContentCacheAll(): Promise<void> {
 
   await writeCache(grouped);
   hydrateMemoryCache(grouped);
+}
+
+/**
+ * Únicas páginas públicas con ISR (`export const revalidate = 3600`); el
+ * resto usa `force-dynamic` y siempre lee de la DB en cada request, así que
+ * no les hace falta esto.
+ *
+ * Sin este `revalidatePath`, un cambio del admin en Seccion/GrupoMedios/Medio
+ * quedaba guardado en la DB y en el caché de disco, pero el HTML de estas dos
+ * páginas ya estaba pre-renderizado: no se volvía a ver hasta que pasara la
+ * hora de `revalidate` o se redesplegara.
+ */
+const ISR_PAGE_PATHS = [
+  "/es/colegio",
+  "/en/school",
+  "/es/proyecto-bilingue",
+  "/en/bilingual-project",
+];
+
+export function revalidateIsrPages(): void {
+  for (const path of ISR_PAGE_PATHS) {
+    revalidatePath(path);
+  }
 }
