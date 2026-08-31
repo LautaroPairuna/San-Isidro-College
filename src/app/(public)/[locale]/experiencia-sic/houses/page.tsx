@@ -22,7 +22,9 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 export default async function ExperienciaSicHousesPage({ params }: PageProps) {
   const { locale } = await params

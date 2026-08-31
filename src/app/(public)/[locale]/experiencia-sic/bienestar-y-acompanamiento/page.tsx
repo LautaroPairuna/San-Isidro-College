@@ -66,7 +66,9 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 function buildCards(
   cards: ReadonlyArray<{ key: CardKey; icon: string; color: string }>,
@@ -177,7 +179,6 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
                 medio={cierreMedio}
                 fallback={CIERRE_FALLBACK_IMG}
                 fill
-                sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
               />
             </div>

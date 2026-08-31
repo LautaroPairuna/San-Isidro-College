@@ -1,10 +1,9 @@
 // /app/[locale]/experiencia-sic/page.tsx
-import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import MediaCarousel from '@/components/MediaCarousel'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
@@ -35,7 +34,9 @@ type MedioItem = {
   grupoMediosId: number
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -43,6 +44,8 @@ type PageProps = {
 
 export default async function ExperienciaSicPage({ params }: PageProps) {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
   const tExperience = await getTranslations({ locale, namespace: 'experienciaSicHome' })
 
@@ -93,29 +96,17 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
           {/* Forma decorativa móvil */}
           <div className="block lg:hidden absolute inset-0 pointer-events-none">
-            <Image src="/images/formas/forma-home-1.svg" alt="" fill className="object-cover" />
+            <img src="/images/formas/forma-home-1.svg" alt="" className="absolute inset-0 h-full w-full object-cover" />
           </div>
 
           {/* Slogan + botón (móvil) */}
           <div className="lg:hidden relative flex justify-between items-end h-full pt-40 pb-12 z-20 md:w-[80%] w-full">
-            <Image
-              src="/images/eslogan.svg"
-              alt={tExperience('hero.alt')}
-              width={250}
-              height={250}
-              className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-            />
+            <img src="/images/eslogan.svg" alt={tExperience('hero.alt')} width={250} height={250} className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           </div>
 
           {/* Slogan (desktop) */}
           <div className="hidden lg:block">
-            <Image
-              src="/images/eslogan.svg"
-              alt={tExperience('hero.alt')}
-              width={250}
-              height={250}
-              className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-            />
+            <img src="/images/eslogan.svg" alt={tExperience('hero.alt')} width={250} height={250} className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           </div>
         </div>
 
@@ -124,7 +115,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           {heroMedia.length > 0 ? (
             <MediaCarousel items={heroMedia} altText={tExperience('hero.carouselAlt')} className="w-full h-full" />
           ) : (
-            <Image src="/images/Image-deportes.webp" alt={tExperience('hero.fallbackAlt')} fill className="object-cover" />
+            <img src="/images/Image-deportes.webp" alt={tExperience('hero.fallbackAlt')} className="absolute inset-0 h-full w-full object-cover" />
           )}
 
           {/* Recuadro blanco centrado */}
@@ -139,24 +130,12 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Forma decorativa escritorio */}
-        <Image
-          src="/images/formas/forma-home-1.svg"
-          alt=""
-          width={700}
-          height={700}
-          className="hidden lg:block absolute top-0 left-[32%] -translate-x-1/2 pointer-events-none z-0"
-        />
+        <img src="/images/formas/forma-home-1.svg" alt="" width={700} height={700} className="hidden lg:block absolute top-0 left-[32%] -translate-x-1/2 pointer-events-none z-0" />
       </section>
 
       {/* ═════════════ SECCIÓN 2 — BIENESTAR ESTUDIANTIL ═════════════ */}
       <section id="bienestar-y-acompanamiento" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
-        <Image
-          src="/images/formas/forma-home-2.svg"
-          alt=""
-          width={550}
-          height={300}
-          className="absolute -top-5 -left-20 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
-        />
+        <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-20 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
           {/* Texto (desktop) */}
@@ -185,13 +164,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 />
               </div>
             ) : (
-              <Image
-                src="/images/Image-SIC-hockey.webp"
-                alt={t('rugbyHockey.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
             )}
           </div>
 
@@ -206,13 +179,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 />
               </div>
             ) : (
-              <Image
-                src="/images/Image-SIC-hockey.webp"
-                alt={t('rugbyHockey.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-md shadow-lg"
-              />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-lg" />
             )}
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
@@ -234,13 +201,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       <section id="google-reference-school" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-16 2xl:right-80 xl:right-20 md:-right-28 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-16 2xl:right-80 xl:right-20 md:-right-28 w-[550px]" />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               <div className="w-full h-[675px]">
@@ -263,25 +224,13 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
 
         {/* Mobile */}
         <div className="sm:hidden relative">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-20 right-35 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-20 right-35 w-[550px]" />
           {googleMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
             </div>
           ) : (
-            <Image
-              src="/images/image-SIC-play.webp"
-              alt={t('play.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-md shadow-md"
-            />
+            <img src="/images/image-SIC-play.webp" alt={t('play.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
           )}
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
@@ -304,13 +253,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute top-5 2xl:left-52 left-0 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute top-5 2xl:left-52 left-0 w-[550px]" />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('innovacionRobotica.title')}</h2>
@@ -331,25 +274,13 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
 
         {/* Mobile */}
         <div className="sm:hidden relative min-h-[350px]">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-15 right-35 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px]" />
           {innovacionMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel items={innovacionMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
-            <Image
-              src="/images/Image-vida-estudiantil.webp"
-              alt={t('vida.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-xl shadow-lg"
-            />
+            <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
@@ -369,13 +300,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       <section id="fe-y-compromiso-social" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
-          <Image
-            src="/images/formas/forma-home-2.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0"
-          />
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0" />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               {feMedia.length > 0 ? (
@@ -387,13 +312,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                   />
                 </div>
               ) : (
-                <Image
-                  src="/images/image-SIC-play.webp"
-                  alt={tExperience('feYCompromisoSocial.fallbackAlt')}
-                  width={800}
-                  height={600}
-                  className="w-full h-auto rounded-md shadow-md"
-                />
+                <img src="/images/image-SIC-play.webp" alt={tExperience('feYCompromisoSocial.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
               )}
             </div>
             <div className="absolute col-span-4 z-20 top-[68%] xl:left-[30%] left-[23%]">
@@ -414,13 +333,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
 
         {/* Mobile */}
         <div className="sm:hidden relative">
-          <Image
-            src="/images/formas/forma-home-2.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute top-5 right-35 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute top-5 right-35 w-[550px]" />
           {feMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel
@@ -430,13 +343,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <Image
-              src="/images/image-SIC-play.webp"
-              alt={tExperience('feYCompromisoSocial.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-md shadow-md"
-            />
+            <img src="/images/image-SIC-play.webp" alt={tExperience('feYCompromisoSocial.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
           )}
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
@@ -461,13 +368,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute top-5 2xl:left-52 left-0 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute top-5 2xl:left-52 left-0 w-[550px]" />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('arteYCreatividad.title')}</h2>
@@ -491,26 +392,14 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 />
               </div>
             ) : (
-              <Image
-                src="/images/Image-vida-estudiantil.webp"
-                alt={tExperience('arteYCreatividad.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+              <img src="/images/Image-vida-estudiantil.webp" alt={tExperience('arteYCreatividad.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
             )}
           </div>
         </div>
 
         {/* Mobile */}
         <div className="sm:hidden relative min-h-[350px]">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-15 right-35 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px]" />
           {arteMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel
@@ -520,13 +409,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <Image
-              src="/images/Image-vida-estudiantil.webp"
-              alt={tExperience('arteYCreatividad.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-xl shadow-lg"
-            />
+            <img src="/images/Image-vida-estudiantil.webp" alt={tExperience('arteYCreatividad.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
@@ -548,13 +431,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       <section id="houses" className="relative w-full h-auto md:py-20 pt-[28rem] pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
-          <Image
-            src="/images/formas/forma-home-2.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0"
-          />
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0" />
           <div className="grid grid-cols-12 gap-8 max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               {housesMedia.length > 0 ? (
@@ -566,25 +443,13 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                   />
                 </div>
               ) : (
-                <Image
-                  src="/images/image-SIC-play.webp"
-                  alt={tExperience('houses.fallbackAlt')}
-                  width={800}
-                  height={600}
-                  className="w-full h-auto rounded-md shadow-md"
-                />
+                <img src="/images/image-SIC-play.webp" alt={tExperience('houses.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
               )}
             </div>
             <div className="absolute col-span-4 z-20 top-1/2 -translate-y-1/2 xl:left-[30%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 2xl:ml-96 xl:ml-52 w-[575px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('houses.title')}</h2>
-                <Image
-                  src="/images/experiencias/logos-houses.svg"
-                  alt={tExperience('houses.logosAlt')}
-                  width={458}
-                  height={125}
-                  className="mx-auto my-6 w-[85%] h-auto"
-                />
+                <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={458} height={125} className="mx-auto my-6 w-[85%] h-auto" />
                 <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                   {tExperience('houses.description')}
                 </p>
@@ -600,13 +465,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
 
         {/* Mobile */}
         <div className="sm:hidden relative">
-          <Image
-            src="/images/formas/forma-home-2.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute top-5 right-35 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute top-5 right-35 w-[550px]" />
           {housesMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel
@@ -616,24 +475,12 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <Image
-              src="/images/image-SIC-play.webp"
-              alt={tExperience('houses.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-md shadow-md"
-            />
+            <img src="/images/image-SIC-play.webp" alt={tExperience('houses.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
           )}
           <div className="absolute -top-24 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('houses.title')}</h2>
-              <Image
-                src="/images/experiencias/logos-houses.svg"
-                alt={tExperience('houses.logosAlt')}
-                width={458}
-                height={125}
-                className="mx-auto my-5 w-full h-auto"
-              />
+              <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={458} height={125} className="mx-auto my-5 w-full h-auto" />
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('houses.description')}
               </p>
@@ -654,13 +501,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute top-5 2xl:left-52 left-0 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute top-5 2xl:left-52 left-0 w-[550px]" />
           <div className="col-span-4 relative flex flex-col justify-center">
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('actividadesExtracurriculares.title')}</h2>
@@ -681,25 +522,13 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
 
         {/* Mobile */}
         <div className="sm:hidden relative min-h-[350px]">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-15 right-35 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px]" />
           {vidaMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
-            <Image
-              src="/images/Image-vida-estudiantil.webp"
-              alt={t('vida.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-xl shadow-lg"
-            />
+            <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">

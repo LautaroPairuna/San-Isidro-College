@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { routing } from "@/i18n/routing";
 
 type PageContentCache = Record<string, PageContentSection[]>;
 type MediaGroupCache = Record<string, MediaGroupMedios>;
@@ -243,24 +244,21 @@ export async function refreshPageContentCacheAll(): Promise<void> {
 }
 
 /**
- * Únicas páginas públicas con ISR (`export const revalidate = 3600`); el
- * resto usa `force-dynamic` y siempre lee de la DB en cada request, así que
- * no les hace falta esto.
+ * Todas las páginas públicas usan ISR (`export const revalidate = 3600`), así
+ * que un cambio del admin en Seccion/GrupoMedios/Medio queda guardado en la
+ * DB y en el caché de disco, pero el HTML ya estaba pre-renderizado: sin este
+ * `revalidatePath` no se volvía a ver hasta que pasara la hora de
+ * `revalidate` o se redesplegara.
  *
- * Sin este `revalidatePath`, un cambio del admin en Seccion/GrupoMedios/Medio
- * quedaba guardado en la DB y en el caché de disco, pero el HTML de estas dos
- * páginas ya estaba pre-renderizado: no se volvía a ver hasta que pasara la
- * hora de `revalidate` o se redesplegara.
+ * Las rutas salen de `routing.pathnames` en vez de estar repetidas acá, así
+ * una página nueva no se puede olvidar de agregar a esta lista.
  */
-const ISR_PAGE_PATHS = [
-  "/es/colegio",
-  "/en/school",
-  "/es/proyecto-bilingue",
-  "/en/bilingual-project",
-];
-
 export function revalidateIsrPages(): void {
-  for (const path of ISR_PAGE_PATHS) {
-    revalidatePath(path);
+  for (const value of Object.values(routing.pathnames)) {
+    for (const locale of routing.locales) {
+      const slug = typeof value === "string" ? value : value[locale];
+      const path = slug === "/" ? `/${locale}` : `/${locale}${slug}`;
+      revalidatePath(path);
+    }
   }
 }

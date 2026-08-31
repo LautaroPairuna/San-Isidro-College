@@ -1,5 +1,4 @@
 // /app/[locale]/experiencia-sic/fe-y-compromiso-social/page.tsx
-import Image from 'next/image'
 import BloqueRotulo from '@/components/BloqueRotulo'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import TiraFotos from '@/components/TiraFotos'
@@ -38,7 +37,7 @@ function IconoTarjeta({ src, fondo }: { src: string; fondo: string }) {
       className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full"
       style={{ backgroundColor: fondo }}
     >
-      <Image src={src} alt="" width={56} height={56} className="h-7 w-7 object-contain" />
+      <img src={src} alt="" width={56} height={56} className="h-7 w-7 object-contain" />
     </span>
   )
 }
@@ -47,7 +46,9 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 export default async function ExperienciaSicFePage({ params }: PageProps) {
   const { locale } = await params
@@ -107,13 +108,7 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
               <p>{t('servicio.p1')}</p>
             </div>
             <div className="md:col-span-4 flex items-start justify-center md:justify-start">
-              <Image
-                src="/images/experiencias/fe-y-compromiso/aprender-atraves-servicio.svg"
-                alt={t('servicio.logoAlt')}
-                width={200}
-                height={200}
-                className="h-auto w-40 object-contain md:w-44"
-              />
+              <img src="/images/experiencias/fe-y-compromiso/aprender-atraves-servicio.svg" alt={t('servicio.logoAlt')} width={200} height={200} className="h-auto w-40 object-contain md:w-44" />
             </div>
           </div>
         </div>
@@ -161,14 +156,7 @@ export default async function ExperienciaSicFePage({ params }: PageProps) {
               </div>
               <div className="md:ml-[72px]">
                 <p className="mt-4 text-sm text-gray-700">{t('campanas.subtitle')}</p>
-                <Image
-                  src="/images/experiencias/fe-y-compromiso/iconos-campanas-solidarias.svg"
-                  alt=""
-                  aria-hidden="true"
-                  width={276}
-                  height={36}
-                  className="mt-4 h-9 w-auto max-w-full object-contain"
-                />
+                <img src="/images/experiencias/fe-y-compromiso/iconos-campanas-solidarias.svg" alt="" aria-hidden="true" width={276} height={36} className="mt-4 h-9 w-auto max-w-full object-contain" />
               </div>
             </article>
           </div>

@@ -1,5 +1,4 @@
 // /app/[locale]/experiencia-sic/arte-y-creatividad/page.tsx
-import Image from 'next/image'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import TiraFotos from '@/components/TiraFotos'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
@@ -31,7 +30,9 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 export default async function ExperienciaSicArtePage({ params }: PageProps) {
   const { locale } = await params
@@ -76,14 +77,7 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
           <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
             {LENGUAJES.map(({ key, icon }) => (
               <li key={key} className="flex flex-col items-center text-center">
-                <Image
-                  src={`/images/experiencias/arte-y-creatividad/${icon}`}
-                  alt=""
-                  aria-hidden="true"
-                  width={96}
-                  height={96}
-                  className="h-16 w-16 object-contain md:h-20 md:w-20"
-                />
+                <img src={`/images/experiencias/arte-y-creatividad/${icon}`} alt="" aria-hidden="true" width={96} height={96} className="h-16 w-16 object-contain md:h-20 md:w-20" />
                 <span className="mt-3 text-sm font-bold leading-tight text-[#294161]">
                   {t(`lenguajes.items.${key}` as const)}
                 </span>

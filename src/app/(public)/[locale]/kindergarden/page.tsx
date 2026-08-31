@@ -1,5 +1,4 @@
 // /app/[locale]/kindergarden/page.tsx
-import Image from 'next/image'
 import RenderMedia from '@/components/RenderMedia'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import NivelesEducativos from '@/components/NivelesEducativos'
@@ -37,7 +36,9 @@ const FALLBACKS = {
   JUEGO_2: '/images/image-SIC-play.webp',
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -100,7 +101,6 @@ const KindergardenPage = async ({ params }: PageProps) => {
                 medio={juego1}
                 fallback={FALLBACKS.JUEGO_1}
                 fill
-                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -121,7 +121,6 @@ const KindergardenPage = async ({ params }: PageProps) => {
                 medio={juego2}
                 fallback={FALLBACKS.JUEGO_2}
                 fill
-                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -140,14 +139,7 @@ const KindergardenPage = async ({ params }: PageProps) => {
           <ul className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
             {SALAS.map(({ key, icon }) => (
               <li key={key} className="flex flex-col">
-                <Image
-                  src={`/images/kindergarten/${icon}`}
-                  alt=""
-                  aria-hidden="true"
-                  width={160}
-                  height={72}
-                  className="h-16 w-auto"
-                />
+                <img src={`/images/kindergarten/${icon}`} alt="" aria-hidden="true" width={160} height={72} className="h-16 w-auto" />
                 <h3 className={`mt-4 ${TITULO_TARJETA} text-[#1e804b]`}>
                   {t(`salas.${key}.title`)}
                 </h3>

@@ -1,12 +1,11 @@
 // /app/[locale]/page.tsx
-import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
 import PilaresEducativos from '@/components/PilaresEducativos'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 import { ADMISSIONS_FORM_URL } from '@/lib/siteConfig'
 
@@ -30,7 +29,9 @@ type MedioMinimal = {
   grupoMediosId: number
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -38,6 +39,8 @@ type PageProps = {
 
 const HomePage = async ({ params }: PageProps) => {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'home' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
@@ -83,15 +86,9 @@ const HomePage = async ({ params }: PageProps) => {
       <section className="relative w-full lg:h-screen grid grid-cols-12 max-lg:flex max-lg:flex-col overflow-hidden">
         {/* --- Columna Izquierda: texto estático sobre fondo verde --- */}
         <div className="col-span-5 flex flex-col justify-center items-start px-16 bg-[#71af8d] relative max-sm:items-center max-sm:px-6 max-sm:py-24 max-lg:w-full max-lg:h-[300px]">
-          <Image
-            src="/images/eslogan.svg"
-            alt={t('hero.alt')}
-            width={250}
-            height={250}
-            className="absolute top-[55%] left-[80%] -translate-x-1/2 z-40
+          <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="absolute top-[55%] left-[80%] -translate-x-1/2 z-40
                       max-sm:relative max-sm:top-15 max-sm:-left-16 max-lg:top-[50%] max-lg:left-[80%] max-sm:translate-x-0
-                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.9)]"
-          />
+                      max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.9)]" />
 
         </div>
 
@@ -104,29 +101,15 @@ const HomePage = async ({ params }: PageProps) => {
               className="w-full h-full"
             />
           ) : (
-            <Image
-              src="/images/fondo-home.webp"
-              alt={t('hero.alt')}
-              fill
-              className="object-cover"
-              priority
-            />
+            <img src="/images/fondo-home.webp" alt={t('hero.alt')} className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
           )}
 
 
         </div>
 
         {/* --- SVG decorativo encima del carrusel --- */}
-        <Image
-          src="/images/formas/forma-home-1.svg"
-          alt="Forma decorativa"
-          width={1000}
-          height={1000}
-          priority
-          sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 100vw"
-          className="absolute top-0 left-4/12 -translate-x-1/2 h-full pointer-events-none
-                    max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2"
-        />
+        <img src="/images/formas/forma-home-1.svg" alt="Forma decorativa" width={1000} height={1000} className="absolute top-0 left-4/12 -translate-x-1/2 h-full pointer-events-none
+                    max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2" fetchPriority="high" />
       </section>
 
       {/* =============== SECCIÓN 2: BIENVENIDA (MÉTODO UNICO) =============== */}
@@ -147,13 +130,7 @@ const HomePage = async ({ params }: PageProps) => {
             </div>
             {/* Línea decorativa */}
             <div className="absolute top-0 -left-20 h-[700px] w-[860px] max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:h-[600px] max-lg:w-[700px] max-lg:-translate-x-1/2">
-              <Image
-                src="/images/formas/forma-home-2.svg"
-                alt="Decoración"
-                fill
-                sizes="(max-width: 1024px) 800px, 860px"
-                className="object-contain object-left-top"
-              />
+              <img src="/images/formas/forma-home-2.svg" alt="Decoración" className="absolute inset-0 h-full w-full object-contain object-left-top" />
             </div>
           </div>
 
@@ -167,12 +144,7 @@ const HomePage = async ({ params }: PageProps) => {
               />
             ) : (
               <div className="relative w-full h-full rounded-xl shadow-lg overflow-hidden">
-                <Image
-                  src="/images/fondo-bienvenida.webp"
-                  alt={t('bienvenida.title')}
-                  fill
-                  className="object-cover"
-                />
+                <img src="/images/fondo-bienvenida.webp" alt={t('bienvenida.title')} className="absolute inset-0 h-full w-full object-cover" />
               </div>
             )}
           </div>
@@ -182,14 +154,7 @@ const HomePage = async ({ params }: PageProps) => {
       {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
       <section className="relative w-full bg-white py-12 lg:py-20 overflow-hidden" id="pilares">
         {/* Trazo decorativo (solo desktop) */}
-        <Image
-          src="/images/formas/forma-home-5.svg"
-          alt=""
-          width={650}
-          height={600}
-          aria-hidden="true"
-          className="lg:block absolute top:20 md:-top-10 right:50 lg:right-30 2xl:right-72 w-[650px] md:w-[560px] h-auto pointer-events-none opacity-90"
-        />
+        <img src="/images/formas/forma-home-5.svg" alt="" width={650} height={600} aria-hidden="true" className="lg:block absolute top:20 md:-top-10 right:50 lg:right-30 2xl:right-72 w-[650px] md:w-[560px] h-auto pointer-events-none opacity-90" />
 
         {/* La rueda queda chica si el contenedor se corta en 1280, así que en
             pantallas grandes se ensancha. La proporción de columnas no cambia. */}
@@ -254,13 +219,7 @@ const HomePage = async ({ params }: PageProps) => {
 
             {/* Imagen de fondo principal (invisible detrás del video/imagen) */}
             <div className="col-span-8 flex items-center justify-center z-10 pointer-events-none">
-              <Image
-                src="/images/fondo-iconos.webp"
-                alt="Imagen infograma"
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-md shadow-md"
-              />
+              <img src="/images/fondo-iconos.webp" alt="Imagen infograma" width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
             </div>
           </div>
 
@@ -293,25 +252,11 @@ const HomePage = async ({ params }: PageProps) => {
               </div>
             </div>
             <div className="mt-4 flex justify-center">
-              <Image
-                src="/images/fondo-iconos.webp"
-                alt="Imagen infograma móvil"
-                width={665}
-                height={546}
-                className="w-full h-auto rounded-md shadow-md"
-                sizes="(max-width: 768px) 100vw, 665px"
-              />
+              <img src="/images/fondo-iconos.webp" alt="Imagen infograma móvil" width={665} height={546} className="w-full h-auto rounded-md shadow-md" />
             </div>
           </div>
           <div className="absolute -top-5 2xl:-right-20 -right-0 xl:w-[650px] lg:w-[550px] md:w-[475px] w-[300px] z-0 md:z-10">
-            <Image
-              src="/images/formas/forma-home-3.svg"
-              alt=""
-              width={650}
-              height={100}
-              className="w-full h-full"
-              loading="lazy"
-            />
+            <img src="/images/formas/forma-home-3.svg" alt="" width={650} height={100} loading="lazy" className="w-full h-full" />
           </div>
         </div>
       </section>
@@ -409,14 +354,7 @@ const HomePage = async ({ params }: PageProps) => {
       {/* =========== SECCIÓN 5: LOS INVITAMOS A CONOCERNOS =========== */}
       <section className="relative w-full bg-white py-14 lg:py-20 overflow-hidden" id="conocernos">
         {/* Trazo decorativo (solo desktop) */}
-        <Image
-          src="/images/formas/forma-home-2.svg"
-          alt=""
-          width={600}
-          height={700}
-          aria-hidden="true"
-          className="absolute -top-0 2xl:left-10 xl:-left-24 w-[650px] h-auto pointer-events-none"
-        />
+        <img src="/images/formas/forma-home-2.svg" alt="" width={600} height={700} aria-hidden="true" className="absolute -top-0 2xl:left-10 xl:-left-24 w-[650px] h-auto pointer-events-none" />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto px-4">
           {/* Columna izquierda: tarjeta de texto */}
@@ -448,7 +386,6 @@ const HomePage = async ({ params }: PageProps) => {
               medio={conocernosMedio}
               fallback="/images/fondo-bienvenida.webp"
               fill
-              sizes="(max-width: 1024px) 100vw, 70vw"
               className="rounded-xl shadow-lg object-cover"
             />
           </div>

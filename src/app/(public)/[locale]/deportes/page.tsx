@@ -1,10 +1,9 @@
 // /app/[locale]/deportes/page.tsx
-import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import MediaCarousel from '@/components/MediaCarousel'
 import Contact from '@/components/sectionContact'
 import SectionCarrusel from '@/components/sectionCarrusel'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 /* --------------------------------------------------------------------
@@ -33,7 +32,9 @@ type MedioItem = {
   grupoMediosId: number
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -41,6 +42,8 @@ type PageProps = {
 
 export default async function DeportesPage({ params }: PageProps) {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'vidaEstudiantilHome' })
 
   /* ------------------------------ CARGA DE MEDIOS DINÁMICA ------------------------------ */
@@ -80,29 +83,17 @@ export default async function DeportesPage({ params }: PageProps) {
         <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
           {/* Forma decorativa móvil */}
           <div className="block lg:hidden absolute inset-0 pointer-events-none">
-            <Image src="/images/formas/forma-home-1.svg" alt="" fill className="object-cover" />
+            <img src="/images/formas/forma-home-1.svg" alt="" className="absolute inset-0 h-full w-full object-cover" />
           </div>
 
           {/* Slogan + botón (móvil) */}
           <div className="lg:hidden relative flex justify-between items-end h-full pt-40 pb-12 z-20 md:w-[80%] w-full">
-            <Image
-              src="/images/eslogan.svg"
-              alt={t('hero.alt')}
-              width={250}
-              height={250}
-              className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-            />
+            <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           </div>
 
           {/* Slogan (desktop) */}
           <div className="hidden lg:block">
-            <Image
-              src="/images/eslogan.svg"
-              alt={t('hero.alt')}
-              width={250}
-              height={250}
-              className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-            />
+            <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           </div>
         </div>
 
@@ -111,7 +102,7 @@ export default async function DeportesPage({ params }: PageProps) {
           {heroMedia.length > 0 ? (
             <MediaCarousel items={heroMedia} altText={t('hero.carouselAlt')} className="w-full h-full" />
           ) : (
-            <Image src="/images/Image-deportes.webp" alt={t('hero.fallbackAlt')} fill className="object-cover" />
+            <img src="/images/Image-deportes.webp" alt={t('hero.fallbackAlt')} className="absolute inset-0 h-full w-full object-cover" />
           )}
 
           {/* Recuadro blanco centrado */}
@@ -131,36 +122,18 @@ export default async function DeportesPage({ params }: PageProps) {
         </div>
 
         {/* Forma decorativa escritorio */}
-        <Image
-          src="/images/formas/forma-home-1.svg"
-          alt=""
-          width={700}
-          height={700}
-          className="hidden lg:block absolute top-0 left-[32%] -translate-x-1/2 pointer-events-none z-0"
-        />
+        <img src="/images/formas/forma-home-1.svg" alt="" width={700} height={700} className="hidden lg:block absolute top-0 left-[32%] -translate-x-1/2 pointer-events-none z-0" />
       </section>
 
       {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
       <section id="club" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
-        <Image
-          src="/images/formas/forma-home-2.svg"
-          alt=""
-          width={550}
-          height={300}
-          className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
-        />
+        <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
             <div className="absolute top-32 left-41 w-[490px] z-20">
-              <Image
-                src="/images/logo-club-rugby-hockey.svg"
-                alt={t('rugbyHockey.logoAlt')}
-                width={128}
-                height={128}
-                className="mx-auto mb-5"
-              />
+              <img src="/images/logo-club-rugby-hockey.svg" alt={t('rugbyHockey.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
               <div className="bg-white shadow-xl rounded-xl p-8">
                 <h2 className="text-2xl font-bold text-center">{t('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{t('rugbyHockey.description')}</p>
@@ -179,13 +152,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 />
               </div>
             ) : (
-              <Image
-                src="/images/Image-SIC-hockey.webp"
-                alt={t('rugbyHockey.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
             )}
           </div>
 
@@ -200,23 +167,11 @@ export default async function DeportesPage({ params }: PageProps) {
                 />
               </div>
             ) : (
-              <Image
-                src="/images/Image-SIC-hockey.webp"
-                alt={t('rugbyHockey.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-md shadow-lg"
-              />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-lg" />
             )}
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
-              <Image
-                src="/images/logo-club-rugby-hockey.svg"
-                alt={t('rugbyHockey.logoAlt')}
-                width={128}
-                height={128}
-                className="mx-auto mb-5 w-32"
-              />
+              <img src="/images/logo-club-rugby-hockey.svg" alt={t('rugbyHockey.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-32" />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
                 <h2 className="text-xl font-bold">{t('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700">{t('rugbyHockey.description')}</p>
@@ -230,13 +185,7 @@ export default async function DeportesPage({ params }: PageProps) {
       <section id="dojo" className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block max-w-[1200px] mx-auto relative">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute top-5 -right-24 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute top-5 -right-24 w-[550px]" />
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-8">
               {dojoMedia.length > 0 ? (
@@ -244,24 +193,12 @@ export default async function DeportesPage({ params }: PageProps) {
                   <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
                 </div>
               ) : (
-                <Image
-                  src="/images/Image-SIC-dojo.webp"
-                  alt={t('dojo.fallbackAlt')}
-                  width={800}
-                  height={600}
-                  className="w-full h-auto rounded-md shadow-md"
-                />
+                <img src="/images/Image-SIC-dojo.webp" alt={t('dojo.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
               )}
             </div>
             <div className="absolute col-span-4 top-65 left-[37%] z-20">
               <div className="absolute -top-[180px] left-[115px] w-[475px]">
-                <Image
-                  src="/images/logo-dojo.svg"
-                  alt={t('dojo.logoAlt')}
-                  width={128}
-                  height={128}
-                  className="mx-auto mb-5 w-32"
-                />
+                <img src="/images/logo-dojo.svg" alt={t('dojo.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-32" />
                 <div className="bg-white shadow-xl rounded-xl p-8">
                   <h2 className="text-2xl font-bold text-center">{t('dojo.title')}</h2>
                   <p className="mt-4 text-gray-700 leading-relaxed">{t('dojo.description')}</p>
@@ -273,34 +210,16 @@ export default async function DeportesPage({ params }: PageProps) {
 
         {/* Mobile */}
         <div className="sm:hidden relative min-h-[350px]">
-          <Image
-            src="/images/formas/forma-home-5.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-72 -right-0 w-[550px]"
-          />
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-72 -right-0 w-[550px]" />
           {dojoMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
             </div>
           ) : (
-            <Image
-              src="/images/Image-SIC-dojo.webp"
-              alt={t('dojo.fallbackAlt')}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-md shadow-md"
-            />
+            <img src="/images/Image-SIC-dojo.webp" alt={t('dojo.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
           )}
           <div className="absolute -top-8 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <Image
-              src="/images/logo-dojo.svg"
-              alt={t('dojo.logoAlt')}
-              width={128}
-              height={128}
-              className="mx-auto mb-5 w-24"
-            />
+            <img src="/images/logo-dojo.svg" alt={t('dojo.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-24" />
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{t('dojo.title')}</h2>
               <p className="mt-4 text-gray-700">{t('dojo.descriptionMobile')}</p>
@@ -313,24 +232,12 @@ export default async function DeportesPage({ params }: PageProps) {
       <section id="san-isidro-balance" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
-          <Image
-            src="/images/formas/forma-home-2.svg"
-            alt=""
-            width={550}
-            height={300}
-            className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]"
-          />
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
           {/* Texto (desktop) */}
           <div className="hidden sm:flex col-span-4 relative flex-col justify-center">
             <div className="absolute top-20 2xl:left-5 xl:left-5 w-[650px] z-20">
               <div className="bg-white shadow-xl rounded-xl p-8">
-                <Image
-                  src="/images/logo-gym-2.svg"
-                  alt={t('gym.logoAlt')}
-                  width={128}
-                  height={128}
-                  className="mx-auto mb-5"
-                />
+                <img src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
                 <h2 className="text-2xl font-bold text-center">{t('gym.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.description')}
@@ -346,13 +253,7 @@ export default async function DeportesPage({ params }: PageProps) {
                 <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
               </div>
             ) : (
-              <Image
-                src="/images/Image-SIC-hockey.webp"
-                alt={t('gym.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-xl shadow-lg"
-              />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('gym.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
             )}
           </div>
 
@@ -363,18 +264,12 @@ export default async function DeportesPage({ params }: PageProps) {
                 <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-md shadow-lg" />
               </div>
             ) : (
-              <Image
-                src="/images/Image-SIC-hockey.webp"
-                alt={t('gym.fallbackAlt')}
-                width={800}
-                height={600}
-                className="w-full h-auto rounded-md shadow-lg"
-              />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('gym.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-lg" />
             )}
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <Image src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
+                <img src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
                 <h2 className="text-xl font-bold">{t('gym.title')}</h2>
                 <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.descriptionMobile')}

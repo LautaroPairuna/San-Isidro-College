@@ -1,5 +1,4 @@
 // /app/[locale]/experiencia-sic/google-reference-school/page.tsx
-import Image from 'next/image'
 import BloqueRotulo from '@/components/BloqueRotulo'
 import IconoConFallback from '@/components/IconoConFallback'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
@@ -40,7 +39,9 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 function resolveIcons<T extends { fallbackIcon: string }>(
   items: readonly T[],
@@ -102,13 +103,7 @@ export default async function ExperienciaSicGoogleReferenceSchoolPage({ params }
       <section id="google-reference-school" className="relative w-full bg-white pt-40 pb-16 lg:pb-24">
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="inline-flex rounded-lg border border-gray-200 px-6 py-4 shadow-sm">
-            <Image
-              src="/images/google-education-logo.webp"
-              alt={t('logoAlt')}
-              width={280}
-              height={90}
-              className="h-auto w-[200px] object-contain md:w-[240px]"
-            />
+            <img src="/images/google-education-logo.webp" alt={t('logoAlt')} width={280} height={90} className="h-auto w-[200px] object-contain md:w-[240px]" />
           </div>
 
           <h1 className={`mt-8 ${TITULO_PAGINA}`}>

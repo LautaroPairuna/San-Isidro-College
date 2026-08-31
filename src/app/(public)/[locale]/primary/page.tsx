@@ -64,7 +64,9 @@ const FALLBACKS = {
   APRENDIZAJES: '/images/image-SIC-play.webp',
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -149,7 +151,6 @@ const PrimaryPage = async ({ params }: PageProps) => {
                 medio={literatura}
                 fallback={FALLBACKS.LITERATURA}
                 fill
-                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -179,7 +180,6 @@ const PrimaryPage = async ({ params }: PageProps) => {
                 medio={aprendizajes}
                 fallback={FALLBACKS.APRENDIZAJES}
                 fill
-                sizes="(max-width: 768px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>

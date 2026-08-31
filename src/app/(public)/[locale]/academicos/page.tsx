@@ -1,9 +1,8 @@
-import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import RenderMedia from '@/components/RenderMedia'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 
 // Slugs de secciones (coinciden con DB)
@@ -34,7 +33,9 @@ type MedioMinimal = {
   actualizadoEn?: string
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 type PageProps = {
   params: Promise<{ locale: string }>
@@ -42,6 +43,8 @@ type PageProps = {
 
 const AcademicosPage = async ({ params }: PageProps) => {
   const { locale } = await params
+  // Habilita el render estático (ISR) fijando el locale sin leer headers().
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'academicosHome' })
 
   const pageSections = await getPageContentForSlug('academicos')
@@ -58,21 +61,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
       <section className="relative w-full h-[640px] lg:h-screen grid grid-cols-1 md:grid-cols-12 overflow-hidden">
         {/* Columna izquierda */}
         <div className="relative col-span-1 md:col-span-4 bg-[#71af8d] flex items-end justify-end">
-          <Image
-            src="/images/eslogan.svg"
-            alt={t('hero.alt')}
-            width={250}
-            height={250}
-            className="hidden lg:block absolute top-[60%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-          />
+          <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="hidden lg:block absolute top-[60%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           <div className="flex lg:hidden p-6 z-20 justify-between items-start mt-28 relative w-full">
-            <Image
-              src="/images/eslogan.svg"
-              alt={t('hero.alt')}
-              width={250}
-              height={250}
-              className="transform z-40 max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]"
-            />
+            <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="transform z-40 max-sm:w-[110px] max-sm:h-[120px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
 
           </div>
         </div>
@@ -115,14 +106,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
         </div>
 
         <div className="absolute top-0 left-[32%] -translate-x-1/2 h-full pointer-events-none">
-          <Image
-            src="/images/formas/forma-home-1.svg"
-            alt=""
-            width={800}
-            height={800}
-            className="h-full w-auto"
-            priority
-          />
+          <img src="/images/formas/forma-home-1.svg" alt="" width={800} height={800} className="h-full w-auto" fetchPriority="high" />
         </div>
       </section>
 
@@ -157,21 +141,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </Link>
                 </div>
               </div>
-              <Image
-                src="/images/cuadro-kindergarten.svg"
-                alt={t('kinder.decorAlt')}
-                width={250}
-                height={576}
-                className="absolute top-10 left-5 z-20 w-[250px] h-auto"
-              />
+              <img src="/images/cuadro-kindergarten.svg" alt={t('kinder.decorAlt')} width={250} height={576} className="absolute top-10 left-5 z-20 w-[250px] h-auto" />
               <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px] z-10">
-                <Image
-                  src="/images/formas/forma-home-6.svg"
-                  alt=""
-                  width={650}
-                  height={100}
-                  className="w-full h-full"
-                />
+                <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={100} className="w-full h-full" />
               </div>
             </div>
 
@@ -196,22 +168,10 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 </div>
               </div>
               <div className="absolute top-44 -left-30 w-[550px] z-0">
-                <Image
-                  src="/images/formas/forma-home-6.svg"
-                  alt=""
-                  width={550}
-                  height={100}
-                  className="w-full h-full"
-                />
+                <img src="/images/formas/forma-home-6.svg" alt="" width={550} height={100} className="w-full h-full" />
               </div>
             </div>
-            <Image
-              src="/images/cuadro-kindergarten-movil.svg"
-              alt={t('kinder.decorAltMobile')}
-              width={500}
-              height={300}
-              className="block lg:hidden w-full px-5 mt-5 mb-3 z-10"
-            />
+            <img src="/images/cuadro-kindergarten-movil.svg" alt={t('kinder.decorAltMobile')} width={500} height={300} className="block lg:hidden w-full px-5 mt-5 mb-3 z-10" />
           </div>
 
           {/* Media dinámico */}
@@ -221,7 +181,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 medio={kinderImg}
                 fallback={FALLBACKS.KINDER}
                 fill
-                sizes="(max-width: 1024px) 100vw, 66vw"
                 className="rounded-xl shadow-lg object-cover"
               />
             </div>
@@ -233,13 +192,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
       <section id="primary" className="bg-white overflow-hidden">
         {/* Desktop */}
         <div className="hidden lg:block relative w-full h-screen">
-          <Image
-            src="/images/formas/forma-home-3.svg"
-            alt=""
-            width={750}
-            height={500}
-            className="absolute 2xl:top-32 xl:top-16 top-5 2xl:right-44 xl:right-0 -right-10 w-[650px] h-auto z-10 pointer-events-none"
-          />
+          <img src="/images/formas/forma-home-3.svg" alt="" width={750} height={500} className="absolute 2xl:top-32 xl:top-16 top-5 2xl:right-44 xl:right-0 -right-10 w-[650px] h-auto z-10 pointer-events-none" />
           <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
             <div className="col-span-8 flex items-center justify-center">
               <div className="relative w-full h-[700px]">
@@ -247,7 +200,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   medio={primaryImg}
                   fallback={FALLBACKS.PRIMARY}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 66vw"
                   className="rounded-md shadow-md object-cover"
                 />
               </div>
@@ -270,13 +222,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
             </div>
 
             <div className="absolute col-span-4 flex items-center justify-center z-20 2xl:top-[60%] lg:top-[65%] left-[50%] pointer-events-none">
-              <Image
-                src="/images/cuadro-primary.svg"
-                alt={t('primary.decorAlt')}
-                width={450}
-                height={450}
-                className="w-[450px] h-auto"
-              />
+              <img src="/images/cuadro-primary.svg" alt={t('primary.decorAlt')} width={450} height={450} className="w-[450px] h-auto" />
             </div>
           </div>
         </div>
@@ -284,13 +230,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
         {/* Mobile */}
         <div className="block lg:hidden relative w-full">
           <div className="absolute top-15 -left-30 w-[650px] z-0">
-            <Image
-              src="/images/formas/forma-home-6.svg"
-              alt=""
-              width={650}
-              height={400}
-              className="w-full h-full object-cover"
-            />
+            <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={400} className="w-full h-full object-cover" />
           </div>
           <div className="relative z-10 px-5">
             <h2 className="text-5xl font-bold text-left mb-5 mt-10 text-shadow-bold-movil">
@@ -307,13 +247,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               </Link>
             </div>
 
-            <Image
-              src="/images/cuadro-primary.svg"
-              alt={t('primary.decorAlt')}
-              width={450}
-              height={450}
-              className="w-[450px] mx-auto h-auto mb-6"
-            />
+            <img src="/images/cuadro-primary.svg" alt={t('primary.decorAlt')} width={450} height={450} className="w-[450px] mx-auto h-auto mb-6" />
 
             <RenderMedia
               medio={primaryImg}
@@ -352,13 +286,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 </div>
               </div>
               <div className="absolute -top-5 2xl:-left-15 xl:-left-15 w-[650px] z-10">
-                <Image
-                  src="/images/formas/forma-home-6.svg"
-                  alt=""
-                  width={650}
-                  height={100}
-                  className="w-full h-full pointer-events-none"
-                />
+                <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={100} className="w-full h-full pointer-events-none" />
               </div>
             </div>
 
@@ -368,7 +296,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   medio={secondImg}
                   fallback={FALLBACKS.SECOND}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 66vw"
                   className="rounded-xl shadow-lg object-cover"
                 />
               </div>
@@ -379,13 +306,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
         {/* Mobile */}
         <div className="block lg:hidden relative w-full">
           <div className="absolute top-15 -left-30 w-[650px] z-0">
-            <Image
-              src="/images/formas/forma-home-6.svg"
-                  alt=""
-                  width={650}
-                  height={400}
-                  className="w-full h-full object-cover pointer-events-none"
-                />
+            <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={400} className="w-full h-full object-cover pointer-events-none" />
               </div>
               <div className="relative z-10 px-5">
                 <h2 className="text-5xl font-bold text-left text-shadow-bold-movil mb-5 mt-10">

@@ -1,5 +1,4 @@
 // /app/[locale]/experiencia-sic/actividades-extracurriculares/page.tsx
-import Image from 'next/image'
 import BloqueRotulo from '@/components/BloqueRotulo'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
@@ -9,7 +8,9 @@ type PageProps = {
   params: Promise<{ locale: string }>
 }
 
-export const dynamic = 'force-dynamic'
+// ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
+// El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
+export const revalidate = 3600
 
 /**
  * Los textos son los mismos que muestra /deportes, así que se leen del namespace
@@ -67,13 +68,7 @@ export default async function ExperienciaSicActividadesPage({ params }: PageProp
               <p>{t('club.p4')}</p>
             </div>
             <div className="md:col-span-5 flex items-center justify-center">
-              <Image
-                src="/images/logo-club-rugby-hockey.svg"
-                alt={t('club.logoAlt')}
-                width={220}
-                height={260}
-                className="h-auto w-40 object-contain md:w-52"
-              />
+              <img src="/images/logo-club-rugby-hockey.svg" alt={t('club.logoAlt')} width={220} height={260} className="h-auto w-40 object-contain md:w-52" />
             </div>
           </div>
         </div>
