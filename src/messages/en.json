@@ -508,8 +508,7 @@
     },
     "actividadesExtracurriculares": {
       "title": "Extracurricular Activities",
-      "description": "Each student has unique talents and interests. That is why our extracurricular activities create spaces where they can express themselves, challenge themselves, and grow. Through proposals such as Dance, Jiu-Jitsu, and Gym, we complement academic education with experiences that strengthen the body, mind, and confidence.",
-      "readMore": "Read more"
+      "description": "Each student has unique talents and interests. That is why our extracurricular activities create spaces where they can express themselves, challenge themselves, and grow. Through proposals such as Dance, Jiu-Jitsu, and Gym, we complement academic education with experiences that strengthen the body, mind, and confidence."
     }
   },
   "experienciaSicBienestarDetail": {
@@ -835,27 +834,6 @@
       "logoAlt": "San Isidro College Club crest"
     }
   },
-  "vidaEstudiantilMasInfo": {
-    "proyectoTitle": "Sports",
-    "intro": {
-      "p1": "San Isidro College, located in a privileged natural setting, develops a varied Physical Education program as part of the Pedagogical Project, which aims to contribute to shaping a life plan.",
-      "p2": "Physical Education represents much more than a curriculum area at our school. It becomes a fundamental discipline for the comprehensive education and formation of the human being, especially when implemented at an early age, as it allows children and adolescents to develop motor, cognitive, and affective skills essential for daily life and as part of a healthy lifestyle and social interaction. Through it, they express their spontaneity and learn to know, respect, and value themselves and others.",
-      "p3": "Therefore, it is essential to include and experience different activities in play, gymnastics, and sports, in order to implement them continuously, either in class or through educational projects. Creating a habit of physical activity allows students, beyond school, to feel healthy and active, incorporating these practices into their free time."
-    },
-    "bienestar": {
-      "title": "Student Well-Being",
-      "p1": "At San Isidro College, we value the well-being of our students, considering it essential for their holistic development. We strive to create an environment where they feel safe, content, and happy—key factors for them to excel and achieve success.",
-      "p2": "We promote student well-being through a patient, positive, and proactive approach led by trained and experienced teachers, involving the entire educational community. Our educational system, based on diversity and the PSHE curriculum, is designed to focus on each student’s comprehensive well-being.",
-      "p3": "Tutors play a crucial role by getting to know each student and building a trusting relationship, providing both practical and emotional support. Our tutoring system aims to foster personal and social growth, instilling a sense of responsibility and health awareness. We monitor academic progress and encourage good study habits.",
-      "p4": "We encourage parents to communicate with tutors about any concern, no matter how small, related to their child’s health and well-being. Through an enriching environment, we help students thrive both academically and emotionally."
-    },
-    "aside": {
-      "title": "ACADEMIC",
-      "deportes": "Sports",
-      "vidaEstudiantil": "Student Well-Being",
-      "play": "San Isidro Play"
-    }
-  },
   "seo": {
     "home": {
       "title": "San Isidro College",
@@ -865,8 +843,12 @@
       "title": "The School | San Isidro College",
       "description": "Discover the educational project, mission, vision, values, and comprehensive formation proposal of San Isidro College."
     },
-    "academicosMasInfo": {
+    "academicos": {
       "title": "Academics | San Isidro College",
+      "description": "Discover San Isidro College's academic program across Kindergarten, Primary, and Secondary, with its full-day or extended-hour bilingual program."
+    },
+    "academicosMasInfo": {
+      "title": "Bilingual Program | San Isidro College",
       "description": "Explore the bilingual program, academic journey, and English-language formation at San Isidro College."
     },
     "kindergarden": {
@@ -885,9 +867,13 @@
       "title": "Sports | San Isidro College",
       "description": "Explore sports, wellbeing, San Isidro Play, and the experiences that complement school life at San Isidro College."
     },
-    "vidaEstudiantilMasInfo": {
-      "title": "Sports and Wellbeing | San Isidro College",
-      "description": "Learn about the sports program, student wellbeing, and integral support approach at San Isidro College."
+    "deportesMasInfo": {
+      "title": "Sport and San Isidro College Club | San Isidro College",
+      "description": "Sport as part of a well-rounded education at San Isidro College, and the origins of San Isidro College Club, the institution born from the commitment of our families."
+    },
+    "experienciaSicHome": {
+      "title": "San Isidro Experience | San Isidro College",
+      "description": "The experience of growing, learning, and sharing goes far beyond the classroom: wellbeing, innovation, art, faith, and social commitment at San Isidro College."
     },
     "experienciaSicBienestar": {
       "title": "Wellbeing and Guidance | San Isidro College",
@@ -912,10 +898,6 @@
     "experienciaSicFe": {
       "title": "Faith and Social Commitment | San Isidro College",
       "description": "The Catholic orientation of San Isidro College, the legacy of Saint Isidore the Labourer, and the service and volunteering experiences that are part of school life."
-    },
-    "experienciaSicActividades": {
-      "title": "Extracurricular Activities | San Isidro College",
-      "description": "Sport as part of a well-rounded education at San Isidro College, and the origins of San Isidro College Club, the institution born from the commitment of our families."
     }
   },
   "pilares": {

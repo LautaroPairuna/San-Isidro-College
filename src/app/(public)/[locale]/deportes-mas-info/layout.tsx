@@ -6,7 +6,7 @@ import { buildPageMetadata } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'seo.vidaEstudiantilMasInfo' });
+  const t = await getTranslations({ locale, namespace: 'seo.deportesMasInfo' });
   return buildPageMetadata({ locale, href: '/deportes-mas-info', title: t('title'), description: t('description') });
 }
 

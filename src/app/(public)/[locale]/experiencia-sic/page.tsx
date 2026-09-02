@@ -506,11 +506,6 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="bg-white shadow-xl rounded-xl p-8 absolute top-55 left-25 w-[550px] z-20">
               <h2 className="text-2xl font-bold text-center">{tExperience('actividadesExtracurriculares.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
-              <div className="mt-5 text-center">
-                <Link href="/experiencia-sic/actividades-extracurriculares" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('actividadesExtracurriculares.readMore')}
-                </Link>
-              </div>
             </div>
           </div>
           <div className="col-span-8">
@@ -534,11 +529,6 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <h2 className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</h2>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
-              <div className="mt-5">
-                <Link href="/experiencia-sic/actividades-extracurriculares" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('actividadesExtracurriculares.readMore')}
-                </Link>
-              </div>
             </div>
           </div>
         </div>

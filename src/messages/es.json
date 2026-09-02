@@ -508,8 +508,7 @@
     },
     "actividadesExtracurriculares": {
       "title": "Actividades Extracurriculares",
-      "description": "Cada alumno tiene talentos e intereses únicos. Por eso, nuestras actividades extracurriculares crean espacios donde pueden expresarse, desafiarse y crecer. A través de propuestas como Danza, Jiu-Jitsu y Gimnasio, complementamos la formación académica con experiencias que fortalecen el cuerpo, la mente y la confianza.",
-      "readMore": "Leer más"
+      "description": "Cada alumno tiene talentos e intereses únicos. Por eso, nuestras actividades extracurriculares crean espacios donde pueden expresarse, desafiarse y crecer. A través de propuestas como Danza, Jiu-Jitsu y Gimnasio, complementamos la formación académica con experiencias que fortalecen el cuerpo, la mente y la confianza."
     }
   },
   "experienciaSicBienestarDetail": {
@@ -835,27 +834,6 @@
       "logoAlt": "Escudo de San Isidro College Club"
     }
   },
-  "vidaEstudiantilMasInfo": {
-    "proyectoTitle": "Deportes",
-    "intro": {
-      "p1": "San Isidro College, ubicado en un marco natural privilegiado, desarrolla un variado programa en el área de Educación Física, como parte del Proyecto Pedagógico que propone contribuir a la elaboración de un proyecto de vida.",
-      "p2": "La Educación Física representa en nuestro Colegio, mucho más que un área curricular. Se constituye como disciplina fundamental para la educación y formación integral del ser humano, especialmente si es implementada en edad temprana, por cuanto posibilita en el niño y adolescente, desarrollar destrezas motoras, cognitivas y afectivas, esenciales para su diario vivir y como proceso para su proyecto de vida, en el marco de una vida saludable y de interacción social. A través de ella, expresan su espontaneidad y aprenden a conocer, respetar y valorarse a sí mismos y a los demás.",
-      "p3": "Por ello, es indispensable la variedad y vivencia de las diferentes actividades en el juego, la gimnasia y el deporte, con el fin de implementarlas continuamente, ya sea en clase o mediante proyectos lúdico-pedagógicos. Generar el hábito por la actividad física para que los alumnos, más allá del Colegio, puedan sentirse sanos y activos, incorporando estas prácticas como parte de su tiempo libre."
-    },
-    "bienestar": {
-      "title": "Bienestar Estudiantil",
-      "p1": "En San Isidro College, valoramos el bienestar de nuestros estudiantes, considerándolo esencial para su desarrollo integral. Nos esforzamos en crear un entorno donde se sientan seguros, satisfechos y felices, clave para que puedan sobresalir y alcanzar el éxito.",
-      "p2": "Promovemos el bienestar estudiantil a través de un enfoque paciente, positivo y proactivo, dirigido por docentes capacitados y con experiencia, involucrando a toda la comunidad educativa. Nuestro sistema educativo, basado en la diversidad y el plan de estudios PSHE, está diseñado para centrarse en el bienestar integral de cada alumno.",
-      "p3": "Los tutores juegan un papel crucial, conociendo a cada estudiante y desarrollando una relación de confianza, brindando apoyo tanto práctico como moral. Nuestro sistema de tutoría busca promover el crecimiento personal y social, inculcando un sentido de responsabilidad y conciencia sobre la salud. Supervisamos el progreso académico y fomentamos buenos hábitos de estudio.",
-      "p4": "Alentamos a los padres a comunicarse con los tutores sobre cualquier inquietud, por mínima que sea, relacionada con la salud y bienestar de sus hijos. A través de un entorno enriquecedor, ayudamos a los estudiantes a prosperar tanto académica como emocionalmente."
-    },
-    "aside": {
-      "title": "ACADÉMICO",
-      "deportes": "Deportes",
-      "vidaEstudiantil": "Bienestar Estudiantil",
-      "play": "San Isidro Play"
-    }
-  },
   "seo": {
     "home": {
       "title": "San Isidro College",
@@ -865,8 +843,12 @@
       "title": "El Colegio | San Isidro College",
       "description": "Conocé el proyecto educativo, la misión, la visión, los valores y la propuesta de formación integral de San Isidro College."
     },
-    "academicosMasInfo": {
+    "academicos": {
       "title": "Académicos | San Isidro College",
+      "description": "Conocé la propuesta académica de San Isidro College en Kindergarten, Primary y Secondary, con su programa bilingüe de jornada completa o extendida."
+    },
+    "academicosMasInfo": {
+      "title": "Proyecto Bilingüe | San Isidro College",
       "description": "Descubrí la propuesta bilingüe, el recorrido académico y la formación en inglés de San Isidro College."
     },
     "kindergarden": {
@@ -885,9 +867,13 @@
       "title": "Deportes | San Isidro College",
       "description": "Explorá deportes, bienestar, San Isidro Play y las experiencias que complementan la vida escolar en San Isidro College."
     },
-    "vidaEstudiantilMasInfo": {
-      "title": "Deportes y Bienestar | San Isidro College",
-      "description": "Conocé el enfoque de deportes, bienestar estudiantil y acompañamiento integral de San Isidro College."
+    "deportesMasInfo": {
+      "title": "Deporte y San Isidro College Club | San Isidro College",
+      "description": "El deporte como parte de la formación integral en San Isidro College y el origen de San Isidro College Club, la institución que nació del compromiso de las familias."
+    },
+    "experienciaSicHome": {
+      "title": "Experiencia San Isidro | San Isidro College",
+      "description": "La experiencia de crecer, aprender y compartir va mucho más allá del aula: bienestar, innovación, arte, fe y compromiso social en San Isidro College."
     },
     "experienciaSicBienestar": {
       "title": "Bienestar y Acompañamiento | San Isidro College",
@@ -912,10 +898,6 @@
     "experienciaSicFe": {
       "title": "Fe y compromiso social | San Isidro College",
       "description": "La orientación católica de San Isidro College, el legado de San Isidro Labrador y las experiencias de servicio y voluntariado que forman parte de la vida del colegio."
-    },
-    "experienciaSicActividades": {
-      "title": "Actividades Extracurriculares | San Isidro College",
-      "description": "El deporte como parte de la formación integral en San Isidro College y el origen de San Isidro College Club, la institución que nació del compromiso de las familias."
     }
   },
   "pilares": {

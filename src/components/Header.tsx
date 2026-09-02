@@ -401,15 +401,6 @@ const Header: React.FC = () => {
                       {locale === "es" ? "Houses" : "Houses"}
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      href="/experiencia-sic/actividades-extracurriculares"
-                      onClick={handleNavClick}
-                      className="block hover:underline my-3 whitespace-nowrap"
-                    >
-                      {locale === "es" ? "Actividades Extracurriculares" : "Extracurricular Activities"}
-                    </Link>
-                  </li>
                 </ul>
               </div>
 
