@@ -449,7 +449,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <div className="absolute col-span-4 z-20 top-1/2 -translate-y-1/2 xl:left-[30%] left-[23%]">
               <div className="bg-white shadow-xl rounded-xl p-8 2xl:ml-96 xl:ml-52 w-[575px]">
                 <h2 className="text-2xl font-bold text-center">{tExperience('houses.title')}</h2>
-                <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={458} height={125} className="mx-auto my-6 w-[85%] h-auto" />
+                <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={360} height={80} className="mx-auto my-2 w-[60%]" />
                 <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                   {tExperience('houses.description')}
                 </p>
