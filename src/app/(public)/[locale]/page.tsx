@@ -265,7 +265,7 @@ const HomePage = async ({ params }: PageProps) => {
 
       {/* =========== SECCIÓN 4: DESCUBRÍ NUESTRA PROPUESTA =========== */}
       <section className="relative w-full bg-[#dfeadf] py-14 lg:py-20" id="propuesta">
-        <div className="max-w-screen-3xl mx-auto px-6 md:px-24">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-24">
           <div className="pb-10">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#294161]">
               {t('propuesta.title')}
