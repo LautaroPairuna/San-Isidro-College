@@ -4,7 +4,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useLocale } from "next-intl"
-import { usePathname } from "next/navigation"
+import { usePathname, getPathname } from "@/i18n/navigation"
+import type { AppPathname } from "@/i18n/routing"
 import type { MouseEvent } from "react"
 
 const Header: React.FC = () => {
@@ -12,22 +13,23 @@ const Header: React.FC = () => {
 
   // next-intl: devuelve el locale actual ('es' o 'en')
   const locale = useLocale() as "es" | "en"
-  // Obtiene la ruta completa incluyendo el prefijo de idioma, p.ej. "/es/colegio", "/en/contacto"
-  const pathname = usePathname() || "/"
+  // Ruta interna (la clave de routing.pathnames, sin prefijo de locale ni slug
+  // traducido), p.ej. "/colegio" o "/academicos-mas-info" sea cual sea el idioma
+  // o el slug público real.
+  const pathname = usePathname()
 
-  // Calcula la ruta con el otro idioma, reemplazando el primer segmento
-  const getAlternateRoute = (targetLocale: "es" | "en") => {
-    // Separamos la ruta en segmentos: ["", "es", "colegio", "mision", ...]
-    const segments = pathname.split("/")
-    // Si el primer segmento tras la "/" coincide con el locale, lo reemplazamos
-    if (segments[1] === locale) {
-      segments[1] = targetLocale
-    } else {
-      // Si no tiene prefijo (p.ej. pathname === "/"), lo anteponemos
-      segments.splice(1, 0, targetLocale)
-    }
-    return segments.join("/") || `/${targetLocale}`
+  // Resuelve la URL pública real de una ruta interna para un locale dado,
+  // respetando tanto el prefijo (as-needed: es sin /es, en con /en) como los
+  // slugs que difieren entre idiomas (p.ej. /academicos-mas-info -> /proyecto-bilingue
+  // en es, /bilingual-project en en).
+  const path = (internalHref: AppPathname, hash?: string) => {
+    const base = getPathname({ locale, href: internalHref })
+    return hash ? `${base}#${hash}` : base
   }
+
+  // Ruta de la página actual en el otro idioma, respetando el mismo slug traducido.
+  const getAlternateRoute = (targetLocale: "es" | "en") =>
+    getPathname({ locale: targetLocale, href: pathname })
 
   // Seleccionar logo según estado
   const getLogoSrc = () => {
@@ -84,7 +86,7 @@ const Header: React.FC = () => {
                 logo-container bg-white py-3 sm:py-6 md:py-8 px-4 sm:px-8 md:px-12 drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)] rounded-br-4xl ms-0
               `}
             >
-              <Link href={`/${locale}#home`} onClick={() => setMenuOpen(false)}>
+              <Link href={path('/', 'home')} onClick={() => setMenuOpen(false)}>
                 <img id="logo" src={getLogoSrc()} alt="Logo de San Isidro" width={180} height={90} loading="eager" fetchPriority="high" className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-500 ease-in-out" />
               </Link>
             </div>
@@ -191,7 +193,7 @@ const Header: React.FC = () => {
 
             {/* Logo en menú */}
             <div className="flex flex-col md:flex-row justify-start items-center mb-6">
-              <Link href="/" onClick={handleNavClick} className="flex items-center">
+              <Link href={path('/')} onClick={handleNavClick} className="flex items-center">
                 <img id="menuLogo" src={getLogoSrc()} alt="Logo de San Isidro" width={180} height={90} className="h-20 w-auto" />
               </Link>
               {/* Mobile: idiomas debajo del logo */}
@@ -222,14 +224,14 @@ const Header: React.FC = () => {
               {/* El Colegio */}
               <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-2 whitespace-nowrap">
-                  <Link href={`/${locale}/colegio`} onClick={handleNavClick} className="hover:underline">
+                  <Link href={path('/colegio')} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "El Colegio" : "The School"}
                   </Link>
                 </h2>
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href={`/${locale}/colegio#proyecto`}
+                      href={path('/colegio', 'proyecto')}
                       id="proyecto-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
@@ -239,7 +241,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#mision`}
+                      href={path('/colegio', 'mision')}
                       id="mision-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
@@ -249,7 +251,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#escudo`}
+                      href={path('/colegio', 'escudo')}
                       id="escudo-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
@@ -259,7 +261,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#aprendizaje-con-valores`}
+                      href={path('/colegio', 'aprendizaje-con-valores')}
                       id="aprendizaje-con-valores-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
@@ -269,7 +271,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#educacion-personalizada`}
+                      href={path('/colegio', 'educacion-personalizada')}
                       id="educacion-personalizada-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
@@ -279,7 +281,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/colegio#instalaciones`}
+                      href={path('/colegio', 'instalaciones')}
                       id="instalaciones-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
@@ -293,14 +295,14 @@ const Header: React.FC = () => {
               {/* Académicos */}
               <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-2 whitespace-nowrap">
-                  <Link href={`/${locale}/academicos`} onClick={handleNavClick} className="hover:underline">
+                  <Link href={path('/academicos')} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "Académicos" : "Academics"}
                   </Link>
                 </h2>
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href={locale === "es" ? "/es/proyecto-bilingue" : "/en/bilingual-project"}
+                      href={path('/academicos-mas-info')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -309,32 +311,32 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/kindergarden`}
+                      href={path('/kindergarden')}
                       id="kindergarten-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3"
                     >
-                      {locale === "es" ? "Kindergarten" : "Kindergarten"}
+                      {locale === "es" ? "Inicial" : "Kindergarten"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/primary`}
+                      href={path('/primary')}
                       id="primary-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3"
                     >
-                      {locale === "es" ? "Primary" : "Primary"}
+                      {locale === "es" ? "Primaria" : "Primary"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/secondary`}
+                      href={path('/secondary')}
                       id="secondary-link"
                       onClick={handleNavClick}
                       className="block hover:underline my-3"
                     >
-                      {locale === "es" ? "Secondary" : "Secondary"}
+                      {locale === "es" ? "Secundaria" : "Secondary"}
                     </Link>
                   </li>
                 </ul>
@@ -342,14 +344,14 @@ const Header: React.FC = () => {
               {/* Experiencia SIC */}
               <div className="xl:border-l-2 lg:border-l-0 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-2 whitespace-nowrap">
-                  <Link href={`/${locale}/experiencia-sic`} onClick={handleNavClick} className="hover:underline">
+                  <Link href={path('/experiencia-sic')} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "Experiencia SIC" : "SIC Experience"}
                   </Link>
                 </h2>
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href="/experiencia-sic/bienestar-y-acompanamiento"
+                      href={path('/experiencia-sic/bienestar-y-acompanamiento')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -358,7 +360,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href="/experiencia-sic/google-reference-school"
+                      href={path('/experiencia-sic/google-reference-school')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -367,7 +369,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href="/experiencia-sic/innovacion-y-robotica"
+                      href={path('/experiencia-sic/innovacion-y-robotica')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -376,7 +378,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href="/experiencia-sic/fe-y-compromiso-social"
+                      href={path('/experiencia-sic/fe-y-compromiso-social')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -385,7 +387,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href="/experiencia-sic/arte-y-creatividad"
+                      href={path('/experiencia-sic/arte-y-creatividad')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -394,7 +396,7 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href="/experiencia-sic/houses"
+                      href={path('/experiencia-sic/houses')}
                       onClick={handleNavClick}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
@@ -403,8 +405,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/experiencia-sic#actividades-extracurriculares`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "actividades-extracurriculares")}
+                      href={path('/experiencia-sic', 'actividades-extracurriculares')}
+                      onClick={(e) => handleAnchorClick(e, '/experiencia-sic', "actividades-extracurriculares")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Actividades Extracurriculares" : "Extracurricular Activities"}
@@ -416,15 +418,15 @@ const Header: React.FC = () => {
               {/* Deportes */}
               <div className="md:border-l-2 md:border-white/70 md:pl-10 first:md:border-l-0">
                 <h2 className="text-4xl mb-4 whitespace-nowrap">
-                  <Link href={`/${locale}/deportes`} onClick={handleNavClick} className="hover:underline">
+                  <Link href={path('/deportes')} onClick={handleNavClick} className="hover:underline">
                     {locale === "es" ? "Deportes" : "Sports"}
                   </Link>
                 </h2>
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href={`/${locale}/deportes#club`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "club")}
+                      href={path('/deportes', 'club')}
+                      onClick={(e) => handleAnchorClick(e, '/deportes', "club")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Club" : "Club"}
@@ -432,8 +434,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/deportes#dojo`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "dojo")}
+                      href={path('/deportes', 'dojo')}
+                      onClick={(e) => handleAnchorClick(e, '/deportes', "dojo")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Dojo" : "Dojo"}
@@ -441,8 +443,8 @@ const Header: React.FC = () => {
                   </li>
                   <li>
                     <Link
-                      href={`/${locale}/deportes#san-isidro-balance`}
-                      onClick={(e) => handleAnchorClick(e, `/${locale}/deportes`, "san-isidro-balance")}
+                      href={path('/deportes', 'san-isidro-balance')}
+                      onClick={(e) => handleAnchorClick(e, '/deportes', "san-isidro-balance")}
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "San Isidro Balance" : "San Isidro Balance"}

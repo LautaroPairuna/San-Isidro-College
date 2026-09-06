@@ -4,8 +4,10 @@ import { defineRouting } from "next-intl/routing";
 export const routing = defineRouting({
   locales: ["es", "en"],
   defaultLocale: "es",
-  // Siempre anteponemos el prefijo de locale (incluso para el defaultLocale).
-  localePrefix: "always",
+  // El locale por defecto (es) se sirve sin prefijo (sanisidrocollege.com.ar/colegio,
+  // no /es/colegio); en sirve con prefijo (/en/school). Evita contenido duplicado
+  // para SEO y hace que el dominio raíz sea la versión canónica en español.
+  localePrefix: "as-needed",
   // Rutas localizadas: la CLAVE es el pathname interno (coincide con la carpeta
   // dentro de app/[locale]), y el valor define el slug público por idioma.
   // Así /es/colegio se sirve como /en/school, /es/academicos como /en/academics, etc.
