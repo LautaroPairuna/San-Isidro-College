@@ -202,7 +202,7 @@ const Header: React.FC = () => {
                       locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                     }`}
                   >
-                    ESP
+                    ES
                   </button>
                 </Link>
                 <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
@@ -211,7 +211,7 @@ const Header: React.FC = () => {
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                     }`}
                   >
-                    ENG
+                    EN
                   </button>
                 </Link>
               </div>
