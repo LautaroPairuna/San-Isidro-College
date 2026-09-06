@@ -178,7 +178,7 @@ export default async function DeportesPage({ params }: PageProps) {
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
               <img src="/images/logo-club-rugby-hockey.svg" alt={t('rugbyHockey.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-32" />
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <h2 className="text-xl font-bold">{t('rugbyHockey.title')}</h2>
+                <p className="text-xl font-bold">{t('rugbyHockey.title')}</p>
                 <p className="mt-4 text-gray-700">{t('rugbyHockey.description')}</p>
                 <div className="mt-5">
                   <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
@@ -231,7 +231,7 @@ export default async function DeportesPage({ params }: PageProps) {
           <div className="absolute -top-8 left-0 w-full px-4 z-20 -translate-y-1/2">
             <img src="/images/logo-dojo.svg" alt={t('dojo.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-24" />
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{t('dojo.title')}</h2>
+              <p className="text-xl font-bold">{t('dojo.title')}</p>
               <p className="mt-4 text-gray-700">{t('dojo.descriptionMobile')}</p>
             </div>
           </div>
@@ -280,7 +280,7 @@ export default async function DeportesPage({ params }: PageProps) {
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
                 <img src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
-                <h2 className="text-xl font-bold">{t('gym.title')}</h2>
+                <p className="text-xl font-bold">{t('gym.title')}</p>
                 <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
                   {t('gym.descriptionMobile')}
                 </p>

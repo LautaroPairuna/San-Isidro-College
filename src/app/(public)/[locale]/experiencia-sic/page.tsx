@@ -184,7 +184,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
 
             <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <h2 className="text-xl font-bold">{tExperience('rugbyHockey.title')}</h2>
+                <p className="text-xl font-bold">{tExperience('rugbyHockey.title')}</p>
                 <p className="mt-4 text-gray-700">{tExperience('rugbyHockey.description')}</p>
                 <div className="mt-5">
                   <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-[#1e804b] font-semibold hover:underline">
@@ -234,7 +234,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{tExperience('googleReferenceSchool.title')}</h2>
+              <p className="text-xl font-bold">{tExperience('googleReferenceSchool.title')}</p>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('googleReferenceSchool.description')}</p>
               <div className="mt-5">
                 <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
@@ -284,7 +284,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{tExperience('innovacionRobotica.title')}</h2>
+              <p className="text-xl font-bold">{tExperience('innovacionRobotica.title')}</p>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('innovacionRobotica.description')}</p>
               <div className="mt-5">
                 <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
@@ -347,7 +347,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{tExperience('feYCompromisoSocial.title')}</h2>
+              <p className="text-xl font-bold">{tExperience('feYCompromisoSocial.title')}</p>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('feYCompromisoSocial.description')}
               </p>
@@ -413,7 +413,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{tExperience('arteYCreatividad.title')}</h2>
+              <p className="text-xl font-bold">{tExperience('arteYCreatividad.title')}</p>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('arteYCreatividad.description')}
               </p>
@@ -479,7 +479,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute -top-24 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{tExperience('houses.title')}</h2>
+              <p className="text-xl font-bold">{tExperience('houses.title')}</p>
               <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={458} height={125} className="mx-auto my-5 w-full h-auto" />
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
                 {tExperience('houses.description')}
@@ -527,7 +527,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           )}
           <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <h2 className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</h2>
+              <p className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</p>
               <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
             </div>
           </div>

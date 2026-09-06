@@ -87,9 +87,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
           </div>
 
           <div className="block md:hidden mt-auto mb-6 bg-white p-6 w-[90%] rounded-3xl shadow-lg z-40">
-            <h1 className="text-xl font-bold mb-2 text-left">
+            <p className="text-xl font-bold mb-2 text-left">
               {t('hero.title')}
-            </h1>
+            </p>
             <p className="text-gray-700 mb-4 text-sm">
               {t('hero.description')}
             </p>
@@ -149,9 +149,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
             {/* Mobile */}
             <div className="block lg:hidden w-full px-4 mt-32">
               <div className="relative z-10">
-                <h2 className="xs:text-5xl text-4xl font-bold text-left mb-5 text-shadow-bold-movil space-y-4">
+                <p className="xs:text-5xl text-4xl font-bold text-left mb-5 text-shadow-bold-movil space-y-4">
                   {t('kinder.title')}
-                </h2>
+                </p>
                 <div className="bg-white shadow-xl rounded-3xl p-6 space-y-4">
                   <p className="text-gray-700 leading-relaxed">
                     {t('kinder.p1')}
@@ -227,9 +227,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
             <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={400} className="w-full h-full object-cover" />
           </div>
           <div className="relative z-10 px-5">
-            <h2 className="text-5xl font-bold text-left mb-5 mt-10 text-shadow-bold-movil">
+            <p className="text-5xl font-bold text-left mb-5 mt-10 text-shadow-bold-movil">
               {t('primary.title')}
-            </h2>
+            </p>
             <div className="bg-white shadow-xl rounded-3xl p-6 mb-6 space-y-4">
               <p className="leading-relaxed text-gray-800">
                 {t('primary.p1')}
@@ -301,13 +301,13 @@ const AcademicosPage = async ({ params }: PageProps) => {
             <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={400} className="w-full h-full object-cover pointer-events-none" />
               </div>
               <div className="relative z-10 px-5">
-                <h2 className="text-5xl font-bold text-left text-shadow-bold-movil mb-5 mt-10">
+                <p className="text-5xl font-bold text-left text-shadow-bold-movil mb-5 mt-10">
                   {t('secondary.title')}
-                </h2>
+                </p>
                 <div className="bg-white shadow-xl rounded-3xl p-6 mb-6 space-y-4">
-                  <h4 className="font-bold text-xl text-left">
+                  <p className="font-bold text-xl text-left">
                     {t('secondary.subtitle')}
-                  </h4>
+                  </p>
                   <p className="leading-relaxed text-gray-800">
                     {t('secondary.p1')}
                   </p>
