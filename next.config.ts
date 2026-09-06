@@ -57,8 +57,13 @@ const nextConfig: NextConfig = {
       // ---- Renombre de rutas públicas ----
       // Nota: los destinos van sin prefijo /es porque el español es el locale
       // por defecto (localePrefix: "as-needed") y se sirve desde la raíz.
-      { source: '/es/kindergarden', destination: '/kindergarten', permanent: true },
+      { source: '/es/kindergarden', destination: '/inicial', permanent: true },
       { source: '/en/kindergarden', destination: '/en/kindergarten', permanent: true },
+      // Los slugs en español de los niveles pasan de la palabra en inglés a su
+      // traducción, para que la URL quede en el mismo idioma que el contenido.
+      { source: '/kindergarten', destination: '/inicial', permanent: true },
+      { source: '/primary', destination: '/primaria', permanent: true },
+      { source: '/secondary', destination: '/secundaria', permanent: true },
       { source: '/es/vida-estudiantil', destination: '/deportes', permanent: true },
       { source: '/en/student-life', destination: '/en/sports', permanent: true },
       { source: '/es/vida-estudiantil-mas-info', destination: '/deportes-mas-info', permanent: true },

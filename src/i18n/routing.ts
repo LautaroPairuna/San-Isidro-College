@@ -20,15 +20,15 @@ export const routing = defineRouting({
       en: "/bilingual-project",
     },
     "/kindergarden": {
-      es: "/kindergarten",
+      es: "/inicial",
       en: "/kindergarten",
     },
     "/primary": {
-      es: "/primary",
+      es: "/primaria",
       en: "/primary",
     },
     "/secondary": {
-      es: "/secondary",
+      es: "/secundaria",
       en: "/secondary",
     },
     "/experiencia-sic": {
