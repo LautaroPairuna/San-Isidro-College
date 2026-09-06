@@ -198,7 +198,7 @@
     "intro": {
       "title": "Nivel Primario",
       "subtitle": "Aprender, descubrir y crecer en dos idiomas",
-      "p1": "Durante esta etapa, acompañamos a nuestros estudiantes para que consoliden los aprendizajes iniciados en Kindergarten, descubran sus talentos y desarrollen progresivamente su autonomía, la responsabilidad y la confianza en sus propias capacidades.",
+      "p1": "Durante esta etapa, acompañamos a nuestros estudiantes para que consoliden los aprendizajes iniciados en el Nivel Inicial, descubran sus talentos y desarrollen progresivamente su autonomía, la responsabilidad y la confianza en sus propias capacidades.",
       "p2": "Nuestra propuesta articula las áreas establecidas por el Diseño Curricular Jurisdiccional con el Trayecto de Enseñanza de Lengua Extranjera: Inglés. De esta manera, los estudiantes amplían sus conocimientos y desarrollan habilidades para comprender, expresarse y aprender en ambos idiomas.",
       "p3": "Promovemos una actitud de esfuerzo, trabajo y responsabilidad frente al estudio, junto con la curiosidad y el interés por aprender. Buscamos que cada estudiante pueda reconocer sus posibilidades, asumir nuevos desafíos y construir aprendizajes verdaderamente significativos."
     },
@@ -388,14 +388,14 @@
       "dualTitle": "Diploma Dual",
       "dualText": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
       "dualLogoAlt": "Logo Academia International Studies",
-      "decorAlt": "Cuadro Secondary"
+      "decorAlt": "Cuadro Secundaria"
     },
     "aside": {
       "title": "ACADÉMICO",
       "proyecto": "Proyecto Bilingüe",
-      "kindergarten": "Kindergarten",
-      "primary": "Primary",
-      "secondary": "Secondary"
+      "kindergarten": "Inicial",
+      "primary": "Primaria",
+      "secondary": "Secundaria"
     }
   },
   "vidaEstudiantilHome": {
@@ -844,23 +844,23 @@
     },
     "academicos": {
       "title": "Académicos | San Isidro College",
-      "description": "Conocé la propuesta académica de San Isidro College en Kindergarten, Primary y Secondary, con su programa bilingüe de jornada completa o extendida."
+      "description": "Conocé la propuesta académica de San Isidro College en Inicial, Primaria y Secundaria, con su programa bilingüe de jornada completa o extendida."
     },
     "academicosMasInfo": {
       "title": "Proyecto Bilingüe | San Isidro College",
       "description": "Descubrí la propuesta bilingüe, el recorrido académico y la formación en inglés de San Isidro College."
     },
     "kindergarden": {
-      "title": "Kindergarten | San Isidro College",
-      "description": "Conocé el nivel Kindergarten, la inmersión bilingüe temprana y el valor del juego en San Isidro College."
+      "title": "Inicial | San Isidro College",
+      "description": "Conocé el Nivel Inicial, la inmersión bilingüe temprana y el valor del juego en San Isidro College."
     },
     "primary": {
-      "title": "Primary | San Isidro College",
-      "description": "Explorá la propuesta de Primary, su metodología basada en literatura y la formación bilingüe de San Isidro College."
+      "title": "Primaria | San Isidro College",
+      "description": "Explorá la propuesta de Primaria, su metodología basada en literatura y la formación bilingüe de San Isidro College."
     },
     "secondary": {
-      "title": "Secondary | San Isidro College",
-      "description": "Descubrí Secondary, su proyección internacional, innovación y propuesta académica integral en San Isidro College."
+      "title": "Secundaria | San Isidro College",
+      "description": "Descubrí Secundaria, su proyección internacional, innovación y propuesta académica integral en San Isidro College."
     },
     "vidaEstudiantil": {
       "title": "Deportes | San Isidro College",
