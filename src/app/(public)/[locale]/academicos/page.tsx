@@ -141,7 +141,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   </Link>
                 </div>
               </div>
-              <img src="/images/cuadro-kindergarten.svg" alt={t('kinder.decorAlt')} width={250} height={576} className="absolute top-10 left-5 z-20 w-[250px] h-auto" />
               <div className="absolute -top-5 2xl:-left-20 -left-15 w-[650px] z-10">
                 <img src="/images/formas/forma-home-6.svg" alt="" width={650} height={100} className="w-full h-full" />
               </div>
@@ -171,7 +170,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 <img src="/images/formas/forma-home-6.svg" alt="" width={550} height={100} className="w-full h-full" />
               </div>
             </div>
-            <img src="/images/cuadro-kindergarten-movil.svg" alt={t('kinder.decorAltMobile')} width={500} height={300} className="block lg:hidden w-full px-5 mt-5 mb-3 z-10" />
           </div>
 
           {/* Media dinámico */}
@@ -220,10 +218,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 </Link>
               </div>
             </div>
-
-            <div className="absolute col-span-4 flex items-center justify-center z-20 2xl:top-[60%] lg:top-[65%] left-[50%] pointer-events-none">
-              <img src="/images/cuadro-primary.svg" alt={t('primary.decorAlt')} width={450} height={450} className="w-[450px] h-auto" />
-            </div>
           </div>
         </div>
 
@@ -246,8 +240,6 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 </span>
               </Link>
             </div>
-
-            <img src="/images/cuadro-primary.svg" alt={t('primary.decorAlt')} width={450} height={450} className="w-[450px] mx-auto h-auto mb-6" />
 
             <RenderMedia
               medio={primaryImg}
