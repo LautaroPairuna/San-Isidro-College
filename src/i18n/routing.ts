@@ -18,8 +18,8 @@ export const routing = defineRouting({
       en: "/bilingual-project",
     },
     "/kindergarden": {
-      es: "/kindergarden",
-      en: "/kindergarden",
+      es: "/kindergarten",
+      en: "/kindergarten",
     },
     "/primary": {
       es: "/primary",

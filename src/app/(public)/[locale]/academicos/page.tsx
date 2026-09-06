@@ -71,9 +71,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
         {/* Columna derecha */}
         <div className="relative col-span-1 md:col-span-8 bg-[#71af8d] w-full h-full flex flex-col items-center md:items-start">
           <div className="hidden md:block absolute 2xl:top-[70%] 2xl:left-[30%] top-[60%] left-[45%] -translate-x-1/2 -translate-y-1/2 z-40 bg-white p-6 md:p-8 w-[400px] md:w-[550px] rounded-3xl shadow-lg">
-            <h2 className="text-3xl font-bold mb-2 text-left">
+            <h1 className="text-3xl font-bold mb-2 text-left">
               {t('hero.title')}
-            </h2>
+            </h1>
             <p className="text-gray-700 mb-4">
               {t('hero.description')}
             </p>
@@ -87,9 +87,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
           </div>
 
           <div className="block md:hidden mt-auto mb-6 bg-white p-6 w-[90%] rounded-3xl shadow-lg z-40">
-            <h2 className="text-xl font-bold mb-2 text-left">
+            <h1 className="text-xl font-bold mb-2 text-left">
               {t('hero.title')}
-            </h2>
+            </h1>
             <p className="text-gray-700 mb-4 text-sm">
               {t('hero.description')}
             </p>

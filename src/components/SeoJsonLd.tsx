@@ -19,7 +19,7 @@ export default function SeoJsonLd({ locale }: { locale: string }) {
     email: siteConfig.email,
     inLanguage: locale,
     image: `${baseUrl}${siteConfig.defaultOgImage}`,
-    logo: `${baseUrl}/images/eslogan.svg`,
+    logo: `${baseUrl}/images/logo-san-isidro-2.svg`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.address.streetAddress,

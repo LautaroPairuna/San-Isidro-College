@@ -137,6 +137,11 @@ export default async function DeportesPage({ params }: PageProps) {
               <div className="bg-white shadow-xl rounded-xl p-8">
                 <h2 className="text-2xl font-bold text-center">{t('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700 leading-relaxed">{t('rugbyHockey.description')}</p>
+                <div className="text-center mt-5">
+                  <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                    {t('rugbyHockey.readMore')}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -175,6 +180,11 @@ export default async function DeportesPage({ params }: PageProps) {
               <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
                 <h2 className="text-xl font-bold">{t('rugbyHockey.title')}</h2>
                 <p className="mt-4 text-gray-700">{t('rugbyHockey.description')}</p>
+                <div className="mt-5">
+                  <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                    {t('rugbyHockey.readMore')}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

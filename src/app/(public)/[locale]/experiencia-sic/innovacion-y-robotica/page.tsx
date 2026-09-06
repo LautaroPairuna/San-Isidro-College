@@ -2,6 +2,8 @@
 import BloqueRotulo from '@/components/BloqueRotulo'
 import IconoConFallback from '@/components/IconoConFallback'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getMediaGroupByName } from '@/lib/pageContentCache'
@@ -50,6 +52,7 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
   const toolsIcons = await getMediaGroupByName('Experiencia SIC - Innovacion Tools Icons')
   const studentDevelopment = resolveIcons(STUDENT_DEVELOPMENT, studentIcons)
   const labTools = resolveIcons(LAB_TOOLS, toolsIcons)
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   return (
     <div className="relative overflow-hidden">
@@ -126,6 +129,8 @@ export default async function ExperienciaSicInnovacionRoboticaPage({ params }: P
 
       <FondoFormaSeccion />
 
+      <SectionCarrusel medios={alianzasMedia} />
+      <Contact />
     </div>
   )
 }

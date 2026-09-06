@@ -154,7 +154,7 @@ const PrimaryPage = async ({ params }: PageProps) => {
                 className="object-cover"
               />
             </div>
-            <div className="md:col-span-8 space-y-5 text-gray-700 leading-relaxed md:border-l-2 md:border-black md:pl-6">
+            <div className="md:col-span-8 space-y-5 text-gray-700 leading-relaxed md:border-l md:border-[#9bb5a5] md:pl-6">
               <h2 className={TITULO_SECCION}>{t('literatura.title')}</h2>
               <p>{t('literatura.p1')}</p>
               <p>{t('literatura.p2')}</p>
@@ -169,13 +169,13 @@ const PrimaryPage = async ({ params }: PageProps) => {
       <section id="aprendizajes" className="relative w-full bg-white pb-16 lg:pb-24 scroll-mt-32">
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-8 md:order-1 space-y-5 text-gray-700 leading-relaxed md:border-r-2 md:border-black md:pr-6">
+            <div className="md:col-span-8 order-2 md:order-1 space-y-5 text-gray-700 leading-relaxed md:border-r md:border-[#9bb5a5] md:pr-6">
               <h2 className={TITULO_SECCION}>{t('aprendizajes.title')}</h2>
               <p>{t('aprendizajes.p1')}</p>
               <p>{t('aprendizajes.p2')}</p>
               <p>{t('aprendizajes.p3')}</p>
             </div>
-            <div className="md:col-span-4 md:order-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+            <div className="md:col-span-4 order-1 md:order-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
               <RenderMedia
                 medio={aprendizajes}
                 fallback={FALLBACKS.APRENDIZAJES}

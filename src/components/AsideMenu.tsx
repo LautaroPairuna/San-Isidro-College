@@ -14,7 +14,7 @@ const AsideMenu: React.FC<FixedAsideProps> = ({
   // Menú fijo para escritorio (se muestra a partir de lg)
   const asideDesktop = `
     hidden lg:block
-    fixed lg:right-4 2xl:right-20 top-32 w-52 text-gray-800 z-30 transition-all duration-300
+    fixed lg:right-4 2xl:right-20 top-32 w-52 text-[#294161] z-30 transition-all duration-300
     bg-gray-100/95 shadow-sm p-4 rounded-md border border-gray-200
   `;
 
@@ -24,7 +24,7 @@ const AsideMenu: React.FC<FixedAsideProps> = ({
   const asideMobile = `
     block lg:hidden
     fixed right-0 top-[250px]
-    w-64 max-h-[80%] bg-white z-50 shadow-lg
+    w-64 max-h-[80%] bg-white text-[#294161] z-50 shadow-lg
     transform transition-transform duration-300
     ${openMobile ? 'translate-x-0' : 'translate-x-full'}
   `;

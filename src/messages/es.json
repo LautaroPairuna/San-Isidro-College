@@ -2,11 +2,11 @@
   "home": {
     "hero": {
       "alt": "Carrusel Principal",
-      "admisionButton": "ADMISIONES",
+      "admisionButton": "Postulaciones",
       "loading": "Cargando Home…"
     },
     "bienvenida": {
-      "title": "BIENVENIDOS A SAN ISIDRO",
+      "title": "Bienvenidos a San Isidro College",
       "greeting": "Queridas familias:",
       "p1": "Somos conscientes de que elegir un colegio para sus hijos es, probablemente, una de las decisiones más importantes a las que se enfrentan como padres. Es elegir el lugar que los acompañará durante una etapa fundamental de sus vidas, donde aprenderán, crecerán, descubrirán sus talentos y construirán vínculos que dejarán huella.",
       "p2": "Sabemos que nos confían lo más valioso que tienen. Por eso, asumimos el compromiso de acompañar, cuidar y educar a cada estudiante en un ambiente de amor, respeto y alegría, en el marco de una propuesta integral, bilingüe y de orientación católica, sostenida por altos estándares académicos.",
@@ -42,9 +42,10 @@
     },
     "conocernos": {
       "title": "Los invitamos a conocernos",
-      "p1": "Conocer un colegio también es recorrer sus espacios, conversar con quienes forman parte de él e imaginar a sus hijos creciendo, aprendiendo y construyendo su propia historia allí.",
-      "p2": "Los invitamos a descubrir San Isidro College, conocer nuestra propuesta educativa y encontrar respuesta a todas sus inquietudes.",
-      "cta": "Solicitar una reunión informativa",
+      "p1": "Elegir un colegio también es conocer su propuesta, sus valores y a las personas que acompañarán a sus hijos a lo largo de su crecimiento.",
+      "p2": "Los invitamos a descubrir San Isidro College y nuestro proyecto pedagógico bilingüe, católico, mixto y de jornada completa. Para dar el primer paso, pueden completar nuestro formulario de registro de interés.",
+      "cta": "Completar formulario de interés",
+      "disclaimer": "El envío del formulario no implica una reserva de vacante.",
       "fallbackAlt": "Vista aérea del campus de San Isidro College"
     }
   },
@@ -367,7 +368,7 @@
       "label": "ADMISIONES"
     },
     "kinder": {
-      "title": "KINDERGARTEN",
+      "title": "Inicial",
       "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.",
       "p2": "Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.",
       "p3": "Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.",
@@ -377,13 +378,13 @@
       "decorAltMobile": "Decoración Kindergarten móvil"
     },
     "primary": {
-      "title": "PRIMARY",
+      "title": "Primaria",
       "p1": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
       "readMore": "Leer más",
       "decorAlt": "Decoración Primary"
     },
     "secondary": {
-      "title": "SECONDARY",
+      "title": "Secundaria",
       "subtitle": "Líderes del futuro",
       "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.",
       "readMore": "Leer más",
@@ -427,7 +428,8 @@
       "title": "CLUB DE RUGBY Y HOCKEY",
       "description": "Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.",
       "carouselAlt": "Carrusel Club Rugby y Hockey",
-      "fallbackAlt": "Fondo Club Rugby y Hockey"
+      "fallbackAlt": "Fondo Club Rugby y Hockey",
+      "readMore": "Leer más"
     },
     "dojo": {
       "logoAlt": "Logo SIC Dojo",
@@ -629,7 +631,7 @@
       "p1": "En San Isidro College la tecnología no reemplaza al docente: potencia la enseñanza. Desde la apertura del colegio, la innovación y las herramientas digitales forman parte de nuestra propuesta educativa. Google Workspace for Education acompaña la experiencia diaria de alumnos y docentes, promoviendo un aprendizaje dinámico, colaborativo y organizado desde los primeros años."
     },
     "closing": {
-      "p1": "En San Isidro College creemos que innovar no significa incorporar más tecnología, sino generar mejores oportunidades para aprender. Ser Google Reference School es el reflejo de ese compromiso con una educación que prepara a nuestros alumnos para el mundo que viene."
+      "p1": "Creemos que innovar no significa incorporar más tecnología, sino generar mejores oportunidades para aprender. Ser Google Reference School es el reflejo de ese compromiso con una educación que prepara a nuestros alumnos para el mundo que viene."
     }
   },
   "experienciaSicInnovacionRoboticaDetail": {
@@ -804,8 +806,8 @@
     "instituciones": {
       "title": "Instituciones que acompañamos",
       "items": {
-        "hopa": "Hopa",
-        "hirpaca": "Hirpaca",
+        "hopa": "Hope",
+        "hirpaca": "Hirpace",
         "laEstrella": "Asociación La Estrella",
         "merendero": "Merendero San Rafael Arcángel"
       }
@@ -836,7 +838,7 @@
   },
   "seo": {
     "home": {
-      "title": "San Isidro College",
+      "title": "San Isidro College | Colegio bilingüe en Salta",
       "description": "San Isidro College en Salta: educación bilingüe, formación integral y una propuesta académica orientada al desarrollo humano."
     },
     "colegio": {
@@ -865,7 +867,7 @@
     },
     "vidaEstudiantil": {
       "title": "Deportes | San Isidro College",
-      "description": "Explorá deportes, bienestar, San Isidro Play y las experiencias que complementan la vida escolar en San Isidro College."
+      "description": "Explorá el Club de Rugby y Hockey, el SIC Dojo, San Isidro Balance y las experiencias deportivas que complementan la vida escolar en San Isidro College."
     },
     "deportesMasInfo": {
       "title": "Deporte y San Isidro College Club | San Isidro College",

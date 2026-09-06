@@ -13,6 +13,34 @@ const nextConfig: NextConfig = {
     'ffprobe-static'
   ],
 
+  async headers() {
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com data:",
+      "img-src 'self' data: blob: https:",
+      "media-src 'self' data: blob: https:",
+      "frame-src 'self' https://www.google.com https://docs.google.com",
+      "connect-src 'self' https:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "frame-ancestors 'self'",
+    ].join('; ');
+
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Content-Security-Policy', value: csp },
+        ],
+      },
+    ];
+  },
+
   async rewrites() {
     return [
       // IMÁGENES dinámicas (preferido)
@@ -27,6 +55,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // ---- Renombre de rutas públicas ----
+      { source: '/es/kindergarden', destination: '/es/kindergarten', permanent: true },
+      { source: '/en/kindergarden', destination: '/en/kindergarten', permanent: true },
       { source: '/es/vida-estudiantil', destination: '/es/deportes', permanent: true },
       { source: '/en/student-life', destination: '/en/sports', permanent: true },
       { source: '/es/vida-estudiantil-mas-info', destination: '/es/deportes-mas-info', permanent: true },

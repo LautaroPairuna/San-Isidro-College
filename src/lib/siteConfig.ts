@@ -56,6 +56,7 @@ export const siteConfig = {
   socials: [
     'https://www.instagram.com/sanisidrocollegesalta',
     'https://www.facebook.com/sanisidrocollege',
+    'https://ar.linkedin.com/school/sanisidrocollege',
   ],
 } as const;
 

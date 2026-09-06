@@ -5,6 +5,7 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useLocale } from "next-intl"
 
 import { cn } from "@/lib/utils"
 
@@ -204,6 +205,7 @@ const CarouselPrevious = React.forwardRef<
   CarouselControlProps
 >(({ className, ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const locale = useLocale()
 
   return (
     <button
@@ -221,7 +223,7 @@ const CarouselPrevious = React.forwardRef<
       {...props}
     >
       <ArrowLeft className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
+      <span className="sr-only">{locale === "es" ? "Anterior" : "Previous slide"}</span>
     </button>
   )
 })
@@ -232,6 +234,7 @@ const CarouselNext = React.forwardRef<
   CarouselControlProps
 >(({ className, ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const locale = useLocale()
 
   return (
     <button
@@ -249,7 +252,7 @@ const CarouselNext = React.forwardRef<
       {...props}
     >
       <ArrowRight className="h-4 w-4" />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">{locale === "es" ? "Siguiente" : "Next slide"}</span>
     </button>
   )
 })

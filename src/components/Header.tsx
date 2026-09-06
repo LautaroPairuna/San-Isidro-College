@@ -211,7 +211,7 @@ const Header: React.FC = () => {
                       locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                     }`}
                   >
-                    ING
+                    ENG
                   </button>
                 </Link>
               </div>
@@ -399,6 +399,15 @@ const Header: React.FC = () => {
                       className="block hover:underline my-3 whitespace-nowrap"
                     >
                       {locale === "es" ? "Houses" : "Houses"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/${locale}/experiencia-sic#actividades-extracurriculares`}
+                      onClick={(e) => handleAnchorClick(e, `/${locale}/experiencia-sic`, "actividades-extracurriculares")}
+                      className="block hover:underline my-3 whitespace-nowrap"
+                    >
+                      {locale === "es" ? "Actividades Extracurriculares" : "Extracurricular Activities"}
                     </Link>
                   </li>
                 </ul>

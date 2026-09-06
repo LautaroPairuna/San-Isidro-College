@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-import { TITULO_TARJETA } from '@/lib/tipografia'
 
 /**
  * Recurso_3 — escudo del colegio y el significado de cada simbolo.
@@ -100,7 +99,7 @@ export function EscudoSignificado({ className }: { className?: string }) {
             paddingRight: key === 'lema' || key === 'montanas' ? 20 : undefined,
           }}
         >
-          <h3 className={TITULO_TARJETA}>{t(`${key}.titulo`)}</h3>
+          <h3 className="font-bold" style={{ fontSize: `${FONT_SIZE_CQW * 1.2}cqw` }}>{t(`${key}.titulo`)}</h3>
           <p className="text-pretty hyphens-auto">{t(`${key}.texto`)}</p>
         </div>
       ))}

@@ -66,7 +66,7 @@ function HouseCard({ card }: { card: HouseCardItem }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="relative h-[600px] w-full transition-transform duration-700 [transform-style:preserve-3d]"
+        className="relative h-[660px] w-full transition-transform duration-700 [transform-style:preserve-3d]"
         style={{ transform: showBack ? 'rotateY(180deg)' : 'rotateY(0deg)' }}
       >
         {/* Frente */}
@@ -87,7 +87,7 @@ function HouseCard({ card }: { card: HouseCardItem }) {
 
         {/* Dorso */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-2xl border bg-white px-5 py-5 text-center shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
+          className="absolute inset-0 overflow-hidden rounded-2xl border bg-white px-5 pt-5 pb-8 text-center shadow-lg [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
           style={{ borderColor: card.color, transform: 'rotateY(180deg)' }}
         >
           <img src={card.badge} alt="" aria-hidden="true" width={72} height={72} className="mx-auto h-14 w-14 object-contain" />

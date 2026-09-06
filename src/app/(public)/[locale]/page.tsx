@@ -158,7 +158,7 @@ const HomePage = async ({ params }: PageProps) => {
 
         {/* La rueda queda chica si el contenedor se corta en 1280, así que en
             pantallas grandes se ensancha. La proporción de columnas no cambia. */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl xl:max-w-[1440px] 2xl:max-w-[1560px] mx-auto px-4">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
           {/* Rueda de pilares */}
           <div className="lg:col-span-5 flex justify-center">
             <PilaresEducativos className="w-full max-w-[780px] h-auto" />
@@ -377,6 +377,9 @@ const HomePage = async ({ params }: PageProps) => {
               >
                 {t('conocernos.cta')}
               </a>
+              <p className="text-sm italic text-gray-500">
+                {t('conocernos.disclaimer')}
+              </p>
             </div>
           </div>
 

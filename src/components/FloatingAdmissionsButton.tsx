@@ -13,14 +13,14 @@ export default function FloatingAdmissionsButton() {
       target="_blank"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 bg-[#1e804b] text-white rounded-full shadow-lg hover:bg-[#166038] transition-all duration-300 hover:scale-105 group"
     >
-      <div className="relative w-8 h-8">
-        <img src="/images/ico-admisiones.svg" alt={t('hero.admisionButton')} className="absolute inset-0 h-full w-full object-contain" />
+      <div className="relative w-8 h-8" aria-hidden="true">
+        <img src="/images/ico-admisiones.svg" alt="" className="absolute inset-0 h-full w-full object-contain" />
       </div>
       <span className="font-medium hidden sm:inline-block">
         {t('hero.admisionButton')}
       </span>
       <span className="font-medium sm:hidden">
-        Admisiones
+        {t('hero.admisionButton')}
       </span>
     </Link>
   );

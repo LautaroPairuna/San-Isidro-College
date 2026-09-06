@@ -4,9 +4,11 @@ import BloqueRotulo from '@/components/BloqueRotulo'
 import FlipCardsGrid from '@/components/FlipCardsGrid'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import RenderMedia from '@/components/RenderMedia'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { toPublicImageUrl } from '@/lib/publicConstants'
-import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 import { TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 const CARD_MEDIA_PAGE_SLUG = 'experiencia-sic-bienestar-y-acompanamiento'
@@ -99,6 +101,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
   setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'experienciaSicBienestarDetail' })
   const bienestarSections = await getPageContentForSlug(CARD_MEDIA_PAGE_SLUG)
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
 
   const cardsSection = bienestarSections.find(
     (section: PageContentSection) => section.slug === CARD_MEDIA_SECTION_SLUG
@@ -135,10 +138,11 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
       {/* ============ NUESTRA FILOSOFÍA ============ */}
       <section id="filosofia" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <BloqueRotulo rotulo={t('philosophy.title')}>
+          <h2 className={TITULO_SECCION}>{t('philosophy.title')}</h2>
+          <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
             <p>{t('philosophy.p1')}</p>
             <p>{t('philosophy.p2')}</p>
-          </BloqueRotulo>
+          </div>
 
           <FlipCardsGrid items={firstGroupCards} ariaLabel={t('firstGroupAriaLabel')} />
         </div>
@@ -170,7 +174,7 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
           {/* El filete va en la columna de texto y no lleva items-center: así
               se estira hasta el alto de la foto, como en Primary. */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-7 flex flex-col justify-center space-y-4 text-gray-700 leading-relaxed md:text-right md:border-r-2 md:border-black md:pr-6">
+            <div className="md:col-span-7 flex flex-col justify-center space-y-4 text-gray-700 leading-relaxed md:text-right md:border-r md:border-[#9bb5a5] md:pr-6">
               <h2 className={TITULO_SECCION}>{t('closing.title')}</h2>
               <p>{t('closing.p1')}</p>
             </div>
@@ -188,6 +192,8 @@ export default async function ExperienciaSicBienestarPage({ params }: PageProps)
 
       <FondoFormaSeccion />
 
+      <SectionCarrusel medios={alianzasMedia} />
+      <Contact />
     </div>
   )
 }

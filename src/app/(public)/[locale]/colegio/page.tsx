@@ -87,11 +87,11 @@ const ColegioPage = async ({ params }: PageProps) => {
             id="vision"
             className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start scroll-mt-32"
           >
-            <div className="md:col-span-7 md:col-start-2 md:order-1 md:ml-auto md:max-w-md md:border-r md:border-[#9bb5a5] md:pr-6 text-gray-700 leading-relaxed">
+            <div className="md:col-span-7 md:col-start-2 order-2 md:order-1 md:ml-auto md:max-w-md md:border-r md:border-[#9bb5a5] md:pr-6 text-gray-700 leading-relaxed">
               <p className="italic md:text-right">{t("vision.lead")}</p>
               <p className="mt-4 hyphens-auto">{t("vision.texto")}</p>
             </div>
-            <h2 className={`md:col-span-3 md:col-start-10 md:order-2 ${TITULO_SECCION}`}>
+            <h2 className={`md:col-span-3 md:col-start-10 order-1 md:order-2 ${TITULO_SECCION}`}>
               {t("vision.label")}
             </h2>
           </div>
@@ -124,7 +124,7 @@ const ColegioPage = async ({ params }: PageProps) => {
               la traducción, desbordan por debajo de la figura; como el contenedor
               scrollea en horizontal también recorta en vertical, hay que darles aire. */}
           <div className="mt-10 -mx-6 px-6 pb-24 overflow-x-auto">
-            <EscudoSignificado className="w-full min-w-[700px]" />
+            <EscudoSignificado className="w-full min-w-[700px] md:min-w-0 md:max-w-[560px] md:mx-auto" />
           </div>
         </div>
       </section>
@@ -163,7 +163,7 @@ const ColegioPage = async ({ params }: PageProps) => {
                 className="object-cover"
               />
             </div>
-            <div className="md:col-span-8 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed md:border-l-2 md:border-black md:pl-6">
+            <div className="md:col-span-8 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed md:border-l md:border-[#9bb5a5] md:pl-6">
               <p>{t("educacionPersonalizada.p1")}</p>
               <p>{t("educacionPersonalizada.p2")}</p>
             </div>
@@ -171,11 +171,11 @@ const ColegioPage = async ({ params }: PageProps) => {
 
           {/* Texto a la izquierda, foto a la derecha */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-8 md:order-1 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed md:border-r-2 md:border-black md:pr-6">
+            <div className="md:col-span-8 order-2 md:order-1 flex flex-col justify-center space-y-5 font-myriad text-[20px] text-gray-700 leading-relaxed md:border-r md:border-[#9bb5a5] md:pr-6">
               <p>{t("educacionPersonalizada.p3")}</p>
               <p>{t("educacionPersonalizada.p4")}</p>
             </div>
-            <div className="md:col-span-4 md:order-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
+            <div className="md:col-span-4 order-1 md:order-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-lg">
               <RenderMedia
                 medio={personalizada2}
                 fallback="/images/placeholder.webp"

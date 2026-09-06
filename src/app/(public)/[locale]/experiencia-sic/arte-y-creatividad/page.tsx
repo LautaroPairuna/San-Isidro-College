@@ -1,8 +1,10 @@
 // /app/[locale]/experiencia-sic/arte-y-creatividad/page.tsx
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import TiraFotos from '@/components/TiraFotos'
+import SectionCarrusel from '@/components/sectionCarrusel'
+import Contact from '@/components/sectionContact'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
+import { getMediaGroupByName, getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
 
 /** Sección con las fotos de San Isidro Play, editable desde el admin. */
@@ -40,6 +42,7 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
   const t = await getTranslations({ locale, namespace: 'experienciaSicArteDetail' })
 
   const secciones = await getPageContentForSlug(PAGE_SLUG)
+  const alianzasMedia = await getMediaGroupByName('Alianzas')
   const playMedios = (
     secciones.find((seccion: PageContentSection) => seccion.slug === PLAY_SECTION_SLUG)?.grupo?.medios ?? []
   ).map((medio) => ({
@@ -118,6 +121,8 @@ export default async function ExperienciaSicArtePage({ params }: PageProps) {
 
       <FondoFormaSeccion />
 
+      <SectionCarrusel medios={alianzasMedia} />
+      <Contact />
     </div>
   )
 }
