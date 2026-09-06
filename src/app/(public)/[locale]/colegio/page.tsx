@@ -96,11 +96,15 @@ const ColegioPage = async ({ params }: PageProps) => {
             </h2>
           </div>
 
-          {/* Valores: rótulo arriba y rueda debajo */}
+          {/* Valores: rótulo arriba y rueda debajo. El rótulo se alinea con la
+              misma columna donde arranca el texto de Misión/Visión (col-start-2),
+              en vez de pegarse al borde izquierdo del contenedor. */}
           <div id="valores" className="scroll-mt-32">
-            <h2 className={TITULO_SECCION}>
-              {t("valores.label")}
-            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+              <h2 className={`md:col-start-2 md:col-span-8 ${TITULO_SECCION}`}>
+                {t("valores.label")}
+              </h2>
+            </div>
             <div className="mt-8 flex justify-center">
               <EstudianteCentro className="w-full max-w-[560px] h-auto" />
             </div>
