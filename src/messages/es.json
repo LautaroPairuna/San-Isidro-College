@@ -2,7 +2,7 @@
   "home": {
     "hero": {
       "alt": "Carrusel Principal",
-      "admisionButton": "ADMISIONES",
+      "admisionButton": "POSTULACIONES",
       "loading": "Cargando Home…"
     },
     "bienvenida": {
@@ -363,8 +363,8 @@
       "readMore": "Leer más"
     },
     "admissions": {
-      "alt": "Icono Admisiones",
-      "label": "ADMISIONES"
+      "alt": "Icono Postulaciones",
+      "label": "POSTULACIONES"
     },
     "kinder": {
       "title": "Inicial",
@@ -417,8 +417,8 @@
       "readMore": "Leer más"
     },
     "admissions": {
-      "alt": "Ícono Admisiones",
-      "label": "ADMISIONES"
+      "alt": "Ícono Postulaciones",
+      "label": "POSTULACIONES"
     },
     "rugbyHockey": {
       "logoAlt": "Logo Club Rugby y Hockey",
