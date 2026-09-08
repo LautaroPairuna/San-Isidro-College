@@ -425,7 +425,8 @@
       "title": "CLUB DE RUGBY Y HOCKEY",
       "description": "Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.",
       "carouselAlt": "Carrusel Club Rugby y Hockey",
-      "fallbackAlt": "Fondo Club Rugby y Hockey"
+      "fallbackAlt": "Fondo Club Rugby y Hockey",
+      "readMore": "Leer más"
     },
     "dojo": {
       "logoAlt": "Logo SIC Dojo",
@@ -863,8 +864,12 @@
       "title": "El Colegio | San Isidro College",
       "description": "Conocé el proyecto educativo, la misión, la visión, los valores y la propuesta de formación integral de San Isidro College."
     },
-    "academicosMasInfo": {
+    "academicos": {
       "title": "Académicos | San Isidro College",
+      "description": "Conocé la propuesta académica de San Isidro College en Kindergarten, Primary y Secondary, con su programa bilingüe de jornada completa o extendida."
+    },
+    "academicosMasInfo": {
+      "title": "Proyecto Bilingüe | San Isidro College",
       "description": "Descubrí la propuesta bilingüe, el recorrido académico y la formación en inglés de San Isidro College."
     },
     "kindergarden": {
@@ -883,9 +888,13 @@
       "title": "Deportes | San Isidro College",
       "description": "Explorá deportes, bienestar, San Isidro Play y las experiencias que complementan la vida escolar en San Isidro College."
     },
-    "vidaEstudiantilMasInfo": {
+    "deportesMasInfo": {
       "title": "Deportes y Bienestar | San Isidro College",
       "description": "Conocé el enfoque de deportes, bienestar estudiantil y acompañamiento integral de San Isidro College."
+    },
+    "experienciaSicHome": {
+      "title": "Experiencia SIC | San Isidro College",
+      "description": "La experiencia de crecer, aprender y compartir va mucho más allá del aula: bienestar, innovación, arte, fe y compromiso social en San Isidro College."
     },
     "experienciaSicBienestar": {
       "title": "Bienestar y Acompañamiento | San Isidro College",

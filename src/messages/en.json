@@ -425,7 +425,8 @@
       "title": "RUGBY & HOCKEY CLUB",
       "description": "School and Club united, building and sowing values that transcend the field. A strong, committed community for the benefit of our students.",
       "carouselAlt": "Rugby & Hockey Club carousel",
-      "fallbackAlt": "Rugby & Hockey background"
+      "fallbackAlt": "Rugby & Hockey background",
+      "readMore": "Read more"
     },
     "dojo": {
       "logoAlt": "SIC Dojo logo",
@@ -863,8 +864,12 @@
       "title": "The School | San Isidro College",
       "description": "Discover the educational project, mission, vision, values, and comprehensive formation proposal of San Isidro College."
     },
-    "academicosMasInfo": {
+    "academicos": {
       "title": "Academics | San Isidro College",
+      "description": "Discover San Isidro College's academic program across Kindergarten, Primary, and Secondary, with its full-day or extended-hour bilingual program."
+    },
+    "academicosMasInfo": {
+      "title": "Bilingual Program | San Isidro College",
       "description": "Explore the bilingual program, academic journey, and English-language formation at San Isidro College."
     },
     "kindergarden": {
@@ -883,9 +888,13 @@
       "title": "Sports | San Isidro College",
       "description": "Explore sports, wellbeing, San Isidro Play, and the experiences that complement school life at San Isidro College."
     },
-    "vidaEstudiantilMasInfo": {
+    "deportesMasInfo": {
       "title": "Sports and Wellbeing | San Isidro College",
       "description": "Learn about the sports program, student wellbeing, and integral support approach at San Isidro College."
+    },
+    "experienciaSicHome": {
+      "title": "SIC Experience | San Isidro College",
+      "description": "The experience of growing, learning, and sharing goes far beyond the classroom: wellbeing, innovation, art, faith, and social commitment at San Isidro College."
     },
     "experienciaSicBienestar": {
       "title": "Wellbeing and Guidance | San Isidro College",
