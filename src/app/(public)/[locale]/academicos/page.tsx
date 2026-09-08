@@ -125,14 +125,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   {t('kinder.title')}
                 </h2>
                 <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
+                  <h4 className="font-bold text-xl">{t('kinder.subtitle')}</h4>
                   <p className="text-gray-700 leading-relaxed">
                     {t('kinder.p1')}
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('kinder.p2')}
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('kinder.p3')}
                   </p>
                   <Link href="/kindergarden">
                     <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
@@ -153,11 +148,9 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   {t('kinder.title')}
                 </p>
                 <div className="bg-white shadow-xl rounded-3xl p-6 space-y-4">
+                  <p className="font-bold text-xl text-left">{t('kinder.subtitle')}</p>
                   <p className="text-gray-700 leading-relaxed">
                     {t('kinder.p1')}
-                  </p>
-                  <p className="text-gray-700 leading-relaxed">
-                    {t('kinder.mobileBrief')}
                   </p>
                   <Link href="/kindergarden">
                     <span className="text-[#1e804b] font-semibold hover:underline cursor-pointer">
@@ -208,6 +201,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                 {t('primary.title')}
               </h2>
               <div className="bg-white shadow-xl rounded-3xl p-8 space-y-4">
+                <h4 className="font-bold text-xl">{t('primary.subtitle')}</h4>
                 <p className="text-gray-700 leading-relaxed">
                   {t('primary.p1')}
                 </p>
@@ -231,6 +225,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               {t('primary.title')}
             </p>
             <div className="bg-white shadow-xl rounded-3xl p-6 mb-6 space-y-4">
+              <p className="font-bold text-xl text-left">{t('primary.subtitle')}</p>
               <p className="leading-relaxed text-gray-800">
                 {t('primary.p1')}
               </p>

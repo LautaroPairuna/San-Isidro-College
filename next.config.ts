@@ -64,6 +64,10 @@ const nextConfig: NextConfig = {
       { source: '/kindergarten', destination: '/inicial', permanent: true },
       { source: '/primary', destination: '/primaria', permanent: true },
       { source: '/secondary', destination: '/secundaria', permanent: true },
+      // Actividades Extracurriculares ya no tiene vista de detalle propia:
+      // pasó a ser una sección con anchor dentro de /experiencia-sic.
+      { source: '/experiencia-sic/actividades-extracurriculares', destination: '/experiencia-sic#actividades-extracurriculares', permanent: true },
+      { source: '/en/sic-experience/extracurricular-activities', destination: '/en/sic-experience#actividades-extracurriculares', permanent: true },
       { source: '/es/vida-estudiantil', destination: '/deportes', permanent: true },
       { source: '/en/student-life', destination: '/en/sports', permanent: true },
       { source: '/es/vida-estudiantil-mas-info', destination: '/deportes-mas-info', permanent: true },
