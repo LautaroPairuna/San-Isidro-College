@@ -60,4 +60,7 @@
       </g>
     </g>
   </g>
+  <!-- Línea divisoria entre el escudo y el texto (misma proporción que
+       logo-san-isidro-3.svg, que ya la traía). -->
+  <rect class="cls-1" x="106" y="6" width="2.11" height="97.3"/>
 </svg>
