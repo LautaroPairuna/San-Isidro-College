@@ -42,10 +42,10 @@ const ContactSection = () => {
             </div>
           </div>
           <div className="block lg:hidden absolute top-0 left-0 pointer-events-none">
-            <img src="/images/formas/forma-home-4.svg" alt="Decoración" width={620} height={300} className="w-[620px] max-w-none h-auto" />
+            <img src="/images/formas/forma-home-4.svg" alt="" aria-hidden="true" width={620} height={300} className="w-[620px] max-w-none h-auto" />
           </div>
           <div className="hidden lg:block absolute -top-5 -left-[70%] pointer-events-none w-210">
-            <img src="/images/formas/forma-home-4.svg" alt="Decoración" width={210} height={210} className="w-full h-auto" />
+            <img src="/images/formas/forma-home-4.svg" alt="" aria-hidden="true" width={210} height={210} className="w-full h-auto" />
           </div>
         </div>
 

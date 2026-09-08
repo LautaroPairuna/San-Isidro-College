@@ -108,7 +108,7 @@ const HomePage = async ({ params }: PageProps) => {
         </div>
 
         {/* --- SVG decorativo encima del carrusel --- */}
-        <img src="/images/formas/forma-home-1.svg" alt="Forma decorativa" width={1000} height={1000} className="absolute top-0 left-4/12 -translate-x-1/2 h-full pointer-events-none
+        <img src="/images/formas/forma-home-1.svg" alt="" aria-hidden="true" width={1000} height={1000} className="absolute top-0 left-4/12 -translate-x-1/2 h-full pointer-events-none
                     max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2" fetchPriority="high" />
       </section>
 
@@ -130,7 +130,7 @@ const HomePage = async ({ params }: PageProps) => {
             </div>
             {/* Línea decorativa */}
             <div className="absolute top-0 -left-20 h-[700px] w-[860px] max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:h-[600px] max-lg:w-[700px] max-lg:-translate-x-1/2">
-              <img src="/images/formas/forma-home-2.svg" alt="Decoración" className="absolute inset-0 h-full w-full object-contain object-left-top" />
+              <img src="/images/formas/forma-home-2.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-contain object-left-top" />
             </div>
           </div>
 
@@ -219,7 +219,7 @@ const HomePage = async ({ params }: PageProps) => {
 
             {/* Imagen de fondo principal (invisible detrás del video/imagen) */}
             <div className="col-span-8 flex items-center justify-center z-10 pointer-events-none">
-              <img src="/images/fondo-iconos.webp" alt="Imagen infograma" width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
+              <img src="/images/fondo-iconos.webp" alt="" aria-hidden="true" width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
             </div>
           </div>
 
@@ -252,7 +252,7 @@ const HomePage = async ({ params }: PageProps) => {
               </div>
             </div>
             <div className="mt-4 flex justify-center">
-              <img src="/images/fondo-iconos.webp" alt="Imagen infograma móvil" width={665} height={546} className="w-full h-auto rounded-md shadow-md" />
+              <img src="/images/fondo-iconos.webp" alt="" aria-hidden="true" width={665} height={546} className="w-full h-auto rounded-md shadow-md" />
             </div>
           </div>
           <div className="absolute -top-5 2xl:-right-20 -right-0 xl:w-[650px] lg:w-[550px] md:w-[475px] w-[300px] z-0 md:z-10">

@@ -5,6 +5,8 @@ import RenderMedia from "@/components/RenderMedia"
 import EstudianteCentro from "@/components/EstudianteCentro"
 import EscudoSignificado from "@/components/EscudoSignificado"
 import FondoFormaSeccion from "@/components/FondoFormaSeccion"
+import SectionCarrusel from "@/components/sectionCarrusel"
+import Contact from "@/components/sectionContact"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { getPageContentForSlug, type PageContentSection } from "@/lib/pageContentCache"
 import { TITULO_PAGINA, TITULO_SECCION } from '@/lib/tipografia'
@@ -16,7 +18,18 @@ const SECTION_SLUGS = {
   INSTALACIONES: 'colegio-instalaciones',
   PERSONALIZADA_1: 'colegio-personalizada-1',
   PERSONALIZADA_2: 'colegio-personalizada-2',
+  ALIANZAS: 'colegio-alianzas',
 };
+
+// Tipado auxiliar (mismo que usa el home para el carrusel de alianzas)
+type MedioMinimal = {
+  id: number
+  urlArchivo: string
+  textoAlternativo?: string
+  tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
+  posicion: number
+  grupoMediosId: number
+}
 
 // ISR: se renderiza una vez y se sirve desde caché (menos RAM/CPU por request).
 // El admin regenera al instante con revalidatePath(); 1h es solo el respaldo.
@@ -36,6 +49,9 @@ const ColegioPage = async ({ params }: PageProps) => {
   const pageSections = await getPageContentForSlug("colegio");
   const getMedio = (slug: string) =>
     pageSections.find((s: PageContentSection) => s.slug === slug)?.medio ?? null;
+  const getMedios = (slug: string) =>
+    (pageSections.find((s: PageContentSection) => s.slug === slug)?.grupo?.medios ??
+      []) as unknown as MedioMinimal[];
 
   // Video de instalaciones
   const instalacionesMedio = getMedio(SECTION_SLUGS.INSTALACIONES);
@@ -43,6 +59,9 @@ const ColegioPage = async ({ params }: PageProps) => {
   // Fotos de educación personalizada
   const personalizada1 = getMedio(SECTION_SLUGS.PERSONALIZADA_1);
   const personalizada2 = getMedio(SECTION_SLUGS.PERSONALIZADA_2);
+
+  // Logos de alianzas (mismo grupo que el home)
+  const alianzasMedia = getMedios(SECTION_SLUGS.ALIANZAS);
 
   const introduccion = ['p1', 'p2', 'p3', 'p4'] as const
   const aprendizaje = ['p1', 'p2', 'p3', 'p4'] as const
@@ -214,6 +233,12 @@ const ColegioPage = async ({ params }: PageProps) => {
           </div>
         </div>
       </section>
+
+      {/* ============ ALIANZAS ============ */}
+      <SectionCarrusel medios={alianzasMedia} />
+
+      {/* ============ UBICACIÓN Y CONTACTO ============ */}
+      <Contact />
 
       {/* ASIDE SUPERPUESTO EN EL COSTADO */}
       <AsideMenu>

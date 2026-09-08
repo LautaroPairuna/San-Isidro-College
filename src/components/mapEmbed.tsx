@@ -35,7 +35,7 @@ export default function MapEmbed() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Ubicación del colegio"
+          title={t("title")}
         />
       ) : (
         <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg shadow-lg flex items-center justify-center">

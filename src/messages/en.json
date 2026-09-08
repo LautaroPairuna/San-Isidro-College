@@ -1009,6 +1009,7 @@
     "secondary": "Secondary"
   },
   "mapEmbed": {
-    "loading": "Loading map..."
+    "loading": "Loading map...",
+    "title": "Location of the school"
   }
 }

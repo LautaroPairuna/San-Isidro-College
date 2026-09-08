@@ -108,7 +108,7 @@ const Header: React.FC = () => {
               `}
             >
               <Link href={path('/', 'home')} onClick={() => setMenuOpen(false)}>
-                <img id="logo" src={getLogoSrc()} alt="Logo de San Isidro" width={180} height={90} loading="eager" fetchPriority="high" className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-500 ease-in-out" />
+                <img id="logo" src={getLogoSrc()} alt={locale === "es" ? "Logo de San Isidro College" : "San Isidro College logo"} width={180} height={90} loading="eager" fetchPriority="high" className="h-14 sm:h-16 md:h-20 w-auto transition-all duration-500 ease-in-out" />
               </Link>
             </div>
 
@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   href={getAlternateRoute("en")}
-                  aria-label="Cambiar a Inglés"
+                  aria-label="Switch to English"
                   className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                   }`}
@@ -192,7 +192,7 @@ const Header: React.FC = () => {
               </Link>
               <Link
                 href={getAlternateRoute("en")}
-                aria-label="Cambiar a Inglés"
+                aria-label="Switch to English"
                 className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                   locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                 }`}
@@ -203,7 +203,7 @@ const Header: React.FC = () => {
                 id="closeMenu"
                 className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
                 onClick={() => setMenuOpen(false)}
-                aria-label="Cerrar menú"
+                aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}
               >
                 X
               </button>
@@ -213,7 +213,7 @@ const Header: React.FC = () => {
               id="closeMenu"
               className="absolute top-4 right-6 md:hidden w-10 h-10 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
               onClick={() => setMenuOpen(false)}
-              aria-label="Cerrar menú"
+              aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}
             >
               X
             </button>
@@ -221,7 +221,7 @@ const Header: React.FC = () => {
             {/* Logo en menú */}
             <div className="flex flex-col md:flex-row justify-start items-center mb-6">
               <Link href={path('/')} onClick={handleNavClick} className="flex items-center">
-                <img id="menuLogo" src={getLogoSrc()} alt="Logo de San Isidro" width={180} height={90} className="h-20 w-auto" />
+                <img id="menuLogo" src={getLogoSrc()} alt={locale === "es" ? "Logo de San Isidro College" : "San Isidro College logo"} width={180} height={90} className="h-20 w-auto" />
               </Link>
               {/* Mobile: idiomas debajo del logo */}
               <div className="flex gap-2 mt-4 md:hidden">
@@ -236,7 +236,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   href={getAlternateRoute("en")}
-                  aria-label="Cambiar a Inglés"
+                  aria-label="Switch to English"
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                   }`}

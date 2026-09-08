@@ -1009,6 +1009,7 @@
     "secondary": "Secundaria"
   },
   "mapEmbed": {
-    "loading": "Cargando mapa..."
+    "loading": "Cargando mapa...",
+    "title": "Ubicación del colegio"
   }
 }
