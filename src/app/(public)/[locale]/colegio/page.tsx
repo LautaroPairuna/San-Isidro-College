@@ -124,10 +124,11 @@ const ColegioPage = async ({ params }: PageProps) => {
 
           {/* En pantallas chicas el esquema se desplaza en horizontal:
               los textos van anclados al dibujo y a menos de 700px quedarían ilegibles. */}
-          {/* pb-24: los bloques de texto se anclan al dibujo y, según el largo de
-              la traducción, desbordan por debajo de la figura; como el contenedor
-              scrollea en horizontal también recorta en vertical, hay que darles aire. */}
-          <div className="mt-10 -mx-6 px-6 pb-24 overflow-x-auto">
+          {/* pt-8 / pb-24: los bloques de texto se anclan al dibujo y, según el largo
+              de la traducción, desbordan por arriba ("La cruz", que se apoya sobre su
+              línea guía) y por debajo de la figura; como el contenedor scrollea en
+              horizontal también recorta en vertical, hay que darles aire. */}
+          <div className="mt-10 -mx-6 px-6 pt-8 pb-24 overflow-x-auto">
             <EscudoSignificado className="w-full min-w-[700px] md:min-w-0 md:max-w-[560px] md:mx-auto" />
           </div>
         </div>

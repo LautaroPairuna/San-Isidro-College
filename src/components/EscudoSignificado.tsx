@@ -16,28 +16,50 @@ import { useTranslations } from 'next-intl';
  */
 
 /**
- * Tamaño de los bloques de texto en cqw. El valor original (2.326cqw, sacado
- * de los 15.92px del diseño) estaba calculado para Acumin condensada al 75%
- * de ancho; con la Gotham normal del resto del sitio cada palabra ocupa más
- * lugar, así que a ese tamaño el texto de "La espiga"/"El campo arado"
- * desbordaba su caja y se pisaba con el bloque de al lado. Se baja un poco
- * el tamaño para que vuelva a entrar en el mismo espacio disponible.
+ * Tamaño de los bloques de texto en cqw. El diseño original marcaba 15.92px
+ * (2.326cqw) pero con Acumin condensada al 75% de ancho; en Gotham, que es
+ * la del resto del sitio, cada renglón ocupa más y a ese tamaño "La espiga"
+ * se pisaba con "El campo arado" en inglés. 2.15cqw es lo más grande que
+ * entra sin que ningún bloque invada al de abajo.
  */
-const FONT_SIZE_CQW = 2.0;
+const FONT_SIZE_CQW = 2.15;
 const LINE_HEIGHT = 18.56 / 15.92; // = 1.166
 
+/** Separación entre el texto y su línea guía, en px del contenedor. */
+const INNER_GAP = 20;
+
+type Block = {
+  key: 'lema' | 'cruz' | 'espiga' | 'montanas' | 'campoArado';
+  left: number;
+  /** Los laterales se anclan por arriba; "cruz" por abajo (ver más abajo). */
+  top?: number;
+  bottom?: number;
+  width: number;
+  align: 'left' | 'right';
+};
+
 /**
- * Cajas de texto en % del contenedor, ancladas a las líneas guía del SVG.
- * Ensanchadas respecto al diseño original (pensado para Acumin condensada)
- * para que el texto en Gotham, más ancho, no se corte en tantos renglones.
+ * Cajas de texto en % del contenedor. El borde interno de cada caja (el que
+ * mira al escudo) tiene que caer justo sobre su línea guía del SVG, que es lo
+ * que hace que el texto se lea alineado con el dibujo:
+ *
+ *   lema        borde derecho  -> línea vertical x=177.5   (25.936%)
+ *   montanas    borde derecho  -> línea vertical x=177.1   (25.877%)
+ *   espiga      borde izquierdo-> línea vertical x=530.93  (77.578%)
+ *   campoArado  borde izquierdo-> línea vertical x=505.11  (73.805%)
+ *   cruz        borde inferior -> línea horizontal y=80.1  (19.715%)
+ *
+ * Por eso "cruz" se ancla por abajo y no por arriba: el alto del bloque
+ * cambia con el idioma, y anclándolo por arriba la última línea de texto
+ * dejaba de apoyarse sobre la horizontal.
  */
-const BLOCKS = [
-  { key: 'lema', left: 0.658, top: 26.583, width: 32.0, align: 'right' },
-  { key: 'cruz', left: 40.0, top: 0.0, width: 40.0, align: 'left' },
-  { key: 'espiga', left: 74.0, top: 25.352, width: 26.0, align: 'left' },
-  { key: 'montanas', left: 1.505, top: 71.379, width: 31.0, align: 'right' },
-  { key: 'campoArado', left: 71.0, top: 66.284, width: 29.0, align: 'left' },
-] as const;
+const BLOCKS: Block[] = [
+  { key: 'lema', left: 0.658, top: 26.583, width: 25.278, align: 'right' },
+  { key: 'cruz', left: 42.324, bottom: 80.285, width: 35.799, align: 'left' },
+  { key: 'espiga', left: 77.578, top: 25.352, width: 22.422, align: 'left' },
+  { key: 'montanas', left: 1.475, top: 71.379, width: 24.402, align: 'right' },
+  { key: 'campoArado', left: 73.805, top: 66.284, width: 26.195, align: 'left' },
+];
 
 export function EscudoSignificado({ className }: { className?: string }) {
   const t = useTranslations('escudo');
@@ -88,19 +110,21 @@ export function EscudoSignificado({ className }: { className?: string }) {
         <line x1="530.93" y1="212.28" x2="530.93" y2="107.22" fill="none" stroke="#7e8580" strokeMiterlimit={10} />
       </svg>
 
-      {BLOCKS.map(({ key, left, top, width, align }) => (
+      {BLOCKS.map(({ key, left, top, bottom, width, align }) => (
         <div
           key={key}
           className="absolute"
           style={{
             left: `${left}%`,
-            top: `${top}%`,
+            ...(bottom === undefined ? { top: `${top}%` } : { bottom: `${bottom}%` }),
             width: `${width}%`,
             textAlign: align,
             fontSize: `${FONT_SIZE_CQW}cqw`,
             lineHeight: LINE_HEIGHT,
             color: '#4a4a49',
-            paddingRight: key === 'lema' || key === 'montanas' ? 20 : undefined,
+            // "cruz" no lleva separación: su línea guía va por debajo, no al costado.
+            paddingRight: align === 'right' ? INNER_GAP : undefined,
+            paddingLeft: align === 'left' && key !== 'cruz' ? INNER_GAP : undefined,
           }}
         >
           <h3 className="font-bold" style={{ fontSize: `${FONT_SIZE_CQW * 1.2}cqw` }}>{t(`${key}.titulo`)}</h3>
