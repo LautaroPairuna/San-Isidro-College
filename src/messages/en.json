@@ -359,8 +359,8 @@
     "errorTitle": "Error loading media",
     "hero": {
       "alt": "I am because we are",
-      "title": "Full-Day or Extended-Hour Bilingual Program",
-      "description": "With various graphic and audiovisual resources, group and expression dynamics, exhibitions, games, dramatizations, songs, stories, etc., the expressive and productive stage is continuously strengthened, consolidated, and nourished.",
+      "title": "Full-Day Bilingual Program",
+      "description": "English is incorporated from the earliest years as a language for communication and learning. Through a proposal that progressively extends the school day, our students develop the comprehension, expression, and confidence needed to learn and communicate naturally in both languages.",
       "readMore": "Read more"
     },
     "admissions": {
@@ -369,21 +369,20 @@
     },
     "kinder": {
       "title": "KINDERGARTEN",
-      "p1": "Our Bilingual Project starts in the nursery, K2, so that children are exposed to both languages throughout the day. The process continues in K3, K4, and K5.",
-      "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language.",
-      "p3": "Furthermore, it promotes curricular articulation with the primary level, facilitating a natural and safe transition.",
-      "mobileBrief": "Our Bilingual Project starts in the nursery, K2, …",
+      "subtitle": "Learning through play, growing in two languages",
+      "p1": "In a close, safe, and caring environment, we support our students as they explore, imagine, create, and build their first connections with learning. From K2, play and everyday experiences foster the natural acquisition of English as a second language.",
       "readMore": "Read more"
     },
     "primary": {
       "title": "PRIMARY",
-      "p1": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
+      "subtitle": "Learning, discovering, and growing in two languages",
+      "p1": "From 1st to 7th grade, our full-day program integrates the official curriculum with learning in English. We support each student in discovering their talents and developing knowledge, autonomy, critical thinking, and confidence in their own abilities.",
       "readMore": "Read more"
     },
     "secondary": {
       "title": "SECONDARY",
-      "subtitle": "Leaders of the future",
-      "p1": "We prioritize a student-centered approach to develop key 21st-century skills such as autonomy, critical thinking, and creativity. With a solid bilingual foundation, we prepare our students for international exams and advanced technical English proficiency, tailored to their fields of study. We provide a space where learning comes to life.",
+      "subtitle": "An academic program with international reach",
+      "p1": "A full-day, comprehensive bilingual education that combines the official curriculum, two tracks, and international programs. We support each student in developing autonomy, critical thinking, and creativity, discovering their interests, and beginning to build their own life project.",
       "readMore": "Read more",
       "dualTitle": "Dual Diploma",
       "dualText": "Our students independently pursue the dual United States High School Diploma. This option gives them a competitive edge, allowing them to obtain both an Argentine and a U.S. high school diploma simultaneously, expanding their academic and professional opportunities internationally.",

@@ -359,8 +359,8 @@
     "errorTitle": "Error al cargar medios",
     "hero": {
       "alt": "I am because we are",
-      "title": "Proyecto bilingüe de jornada Completa o extendida",
-      "description": "Con variados recursos gráficos y audiovisuales, dinámicas grupales y de expresión, exposiciones, juegos, dramatizaciones, canciones, cuentos, etc., la etapa expresiva y productiva, se fortalece, afianza y nutre permanentemente.",
+      "title": "Proyecto bilingüe de jornada completa",
+      "description": "El inglés se incorpora desde los primeros años como lengua de comunicación y aprendizaje. A través de una propuesta que amplía progresivamente la jornada, nuestros estudiantes desarrollan la comprensión, la expresión y la confianza necesarias para aprender y desenvolverse con naturalidad en ambos idiomas.",
       "readMore": "Leer más"
     },
     "admissions": {
@@ -369,21 +369,20 @@
     },
     "kinder": {
       "title": "Inicial",
-      "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.",
-      "p2": "Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.",
-      "p3": "Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.",
-      "mobileBrief": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, …",
+      "subtitle": "Aprender jugando, crecer en dos idiomas",
+      "p1": "En un ambiente cercano, seguro y afectivo, acompañamos a nuestros estudiantes para que exploren, imaginen, creen y construyan sus primeros vínculos con el aprendizaje. Desde K2, el juego y las experiencias cotidianas favorecen la incorporación natural del inglés como segunda lengua.",
       "readMore": "Leer más"
     },
     "primary": {
       "title": "Primaria",
-      "p1": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
+      "subtitle": "Aprender, descubrir y crecer en dos idiomas",
+      "p1": "De 1.º a 7.º grado, nuestra propuesta de jornada completa integra los contenidos curriculares oficiales con el aprendizaje en inglés. Acompañamos a cada estudiante para que descubra sus talentos y desarrolle conocimientos, autonomía, pensamiento crítico y confianza en sus propias capacidades.",
       "readMore": "Leer más"
     },
     "secondary": {
       "title": "Secundaria",
-      "subtitle": "Líderes del futuro",
-      "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.",
+      "subtitle": "Una propuesta académica con proyección internacional",
+      "p1": "Una formación integral bilingüe de jornada completa que articula el diseño curricular oficial, dos orientaciones y programas internacionales. Acompañamos a cada estudiante para que desarrolle autonomía, pensamiento crítico y creatividad, descubra sus intereses y comience a construir su propio proyecto de vida.",
       "readMore": "Leer más",
       "dualTitle": "Diploma Dual",
       "dualText": "Nuestros alumnos, de manera independiente, cursan la doble titulación del Bachillerato de Estados Unidos. Esta opción les brinda una ventaja competitiva, permitiéndoles obtener un diploma secundario argentino y estadounidense al mismo tiempo, ampliando sus oportunidades académicas y profesionales a nivel internacional.",
