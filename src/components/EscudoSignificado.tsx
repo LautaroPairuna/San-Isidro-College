@@ -16,19 +16,27 @@ import { useTranslations } from 'next-intl';
  */
 
 /**
- * Tamaño de los bloques de texto en cqw, calculado a partir de los 15.92px
- * del diseño original para que escalen junto con el escudo.
+ * Tamaño de los bloques de texto en cqw. El valor original (2.326cqw, sacado
+ * de los 15.92px del diseño) estaba calculado para Acumin condensada al 75%
+ * de ancho; con la Gotham normal del resto del sitio cada palabra ocupa más
+ * lugar, así que a ese tamaño el texto de "La espiga"/"El campo arado"
+ * desbordaba su caja y se pisaba con el bloque de al lado. Se baja un poco
+ * el tamaño para que vuelva a entrar en el mismo espacio disponible.
  */
-const FONT_SIZE_CQW = (15.92 / 684.38) * 100; // = 2.326cqw, los 15.92px del original
+const FONT_SIZE_CQW = 2.0;
 const LINE_HEIGHT = 18.56 / 15.92; // = 1.166
 
-/** Cajas de texto en % del contenedor. Coinciden con los corchetes del SVG. */
+/**
+ * Cajas de texto en % del contenedor, ancladas a las líneas guía del SVG.
+ * Ensanchadas respecto al diseño original (pensado para Acumin condensada)
+ * para que el texto en Gotham, más ancho, no se corte en tantos renglones.
+ */
 const BLOCKS = [
-  { key: 'lema', left: 0.658, top: 26.583, width: 25.278, align: 'right' },
-  { key: 'cruz', left: 42.476, top: 0.0, width: 35.799, align: 'left' },
-  { key: 'espiga', left: 78.874, top: 25.352, width: 20.456, align: 'left' },
-  { key: 'montanas', left: 1.505, top: 71.379, width: 24.402, align: 'right' },
-  { key: 'campoArado', left: 75.85, top: 66.284, width: 21.187, align: 'left' },
+  { key: 'lema', left: 0.658, top: 26.583, width: 32.0, align: 'right' },
+  { key: 'cruz', left: 40.0, top: 0.0, width: 40.0, align: 'left' },
+  { key: 'espiga', left: 74.0, top: 25.352, width: 26.0, align: 'left' },
+  { key: 'montanas', left: 1.505, top: 71.379, width: 31.0, align: 'right' },
+  { key: 'campoArado', left: 71.0, top: 66.284, width: 29.0, align: 'left' },
 ] as const;
 
 export function EscudoSignificado({ className }: { className?: string }) {
