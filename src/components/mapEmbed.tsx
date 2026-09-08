@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function MapEmbed() {
+  const t = useTranslations("mapEmbed");
   const ref = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -37,7 +39,7 @@ export default function MapEmbed() {
         />
       ) : (
         <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg shadow-lg flex items-center justify-center">
-          <span className="text-gray-400">Cargando mapa...</span>
+          <span className="text-gray-400">{t("loading")}</span>
         </div>
       )}
     </div>

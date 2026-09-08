@@ -16,12 +16,9 @@ import { useTranslations } from 'next-intl';
  */
 
 /**
- * Los bloques van en Acumin condensada al 75% de su eje de ancho: asi cortan
- * los renglones en el mismo lugar que la referencia del diseño. Con la fuente
- * a ancho normal cada bloque gana renglones y termina pisando las lineas guia,
- * que en el SVG estan a una altura fija.
+ * Tamaño de los bloques de texto en cqw, calculado a partir de los 15.92px
+ * del diseño original para que escalen junto con el escudo.
  */
-const FONT_WIDTH_AXIS = 75;
 const FONT_SIZE_CQW = (15.92 / 684.38) * 100; // = 2.326cqw, los 15.92px del original
 const LINE_HEIGHT = 18.56 / 15.92; // = 1.166
 
@@ -86,14 +83,13 @@ export function EscudoSignificado({ className }: { className?: string }) {
       {BLOCKS.map(({ key, left, top, width, align }) => (
         <div
           key={key}
-          className="absolute font-acumin"
+          className="absolute"
           style={{
             left: `${left}%`,
             top: `${top}%`,
             width: `${width}%`,
             textAlign: align,
             fontSize: `${FONT_SIZE_CQW}cqw`,
-            fontVariationSettings: `'wdth' ${FONT_WIDTH_AXIS}`,
             lineHeight: LINE_HEIGHT,
             color: '#4a4a49',
             paddingRight: key === 'lema' || key === 'montanas' ? 20 : undefined,

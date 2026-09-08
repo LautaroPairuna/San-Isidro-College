@@ -1,7 +1,7 @@
 // /components/Header.tsx
 'use client'
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useLocale } from "next-intl"
 import { usePathname, getPathname } from "@/i18n/navigation"
@@ -10,6 +10,27 @@ import type { MouseEvent } from "react"
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuToggleRef = useRef<HTMLButtonElement>(null)
+  const wasMenuOpenRef = useRef(false)
+
+  // Cerrar con Escape mientras el menú está abierto.
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false)
+    }
+    document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [menuOpen])
+
+  // Al cerrar el menú (por Escape, click en un link o en la X), devolver el
+  // foco al botón que lo abrió en vez de perderlo en el <body>.
+  useEffect(() => {
+    if (!menuOpen && wasMenuOpenRef.current) {
+      menuToggleRef.current?.focus()
+    }
+    wasMenuOpenRef.current = menuOpen
+  }, [menuOpen])
 
   // next-intl: devuelve el locale actual ('es' o 'en')
   const locale = useLocale() as "es" | "en"
@@ -94,31 +115,34 @@ const Header: React.FC = () => {
             {/* Idiomas y menú */}
             <div className="flex items-center space-x-2 sm:me-10 me-3">
               <div className="hidden md:flex items-center gap-3 me-5">
-                {/* Botones de cambio de idioma: estilo circular ESP/ING */}
-                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
-                  <button
-                    className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
-                      locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
-                    }`}
-                  >
-                    ES
-                  </button>
+                {/* Botones de cambio de idioma: un único link estilizado como botón */}
+                <Link
+                  href={getAlternateRoute("es")}
+                  aria-label="Cambiar a Español"
+                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                    locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
+                  }`}
+                >
+                  ES
                 </Link>
-                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
-                  <button
-                    className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
-                      locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
-                    }`}
-                  >
-                    EN
-                  </button>
+                <Link
+                  href={getAlternateRoute("en")}
+                  aria-label="Cambiar a Inglés"
+                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                    locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
+                  }`}
+                >
+                  EN
                 </Link>
               </div>
 
               <button
                 id="menuToggle"
+                ref={menuToggleRef}
                 className="bg-[#c19516] px-8 py-3 rounded-full text-white cursor-pointer"
                 onClick={() => setMenuOpen(true)}
+                aria-expanded={menuOpen}
+                aria-controls="dropdownContainer"
               >
                 ☰ MENÚ
               </button>
@@ -130,6 +154,9 @@ const Header: React.FC = () => {
       {/* Overlay y panel de menú */}
       <div
         id="dropdownContainer"
+        // Cerrado: además de invisible, queda fuera del árbol de accesibilidad
+        // y del orden de tabulación (antes se podía tabular a sus links igual).
+        inert={!menuOpen}
         className={`
           fixed inset-0 z-80 bg-black/50
           transition-opacity duration-500 ease-in-out
@@ -154,23 +181,23 @@ const Header: React.FC = () => {
                 <span className="font-semibold">Trabajá con nosotros:</span>{" "}
                 <span className="font-normal">cv@colegiosanisidrosalta.edu.ar</span>
               </a>
-              <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
-                <button
-                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
-                    locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
-                  }`}
-                >
-                  ES
-                </button>
+              <Link
+                href={getAlternateRoute("es")}
+                aria-label="Cambiar a Español"
+                className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                  locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
+                }`}
+              >
+                ES
               </Link>
-              <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
-                <button
-                  className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
-                    locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
-                  }`}
-                >
-                  EN
-                </button>
+              <Link
+                href={getAlternateRoute("en")}
+                aria-label="Cambiar a Inglés"
+                className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                  locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
+                }`}
+              >
+                EN
               </Link>
               <button
                 id="closeMenu"
@@ -198,23 +225,23 @@ const Header: React.FC = () => {
               </Link>
               {/* Mobile: idiomas debajo del logo */}
               <div className="flex gap-2 mt-4 md:hidden">
-                <Link href={getAlternateRoute("es")} aria-label="Cambiar a Español">
-                  <button
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
-                      locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
-                    }`}
-                  >
-                    ES
-                  </button>
+                <Link
+                  href={getAlternateRoute("es")}
+                  aria-label="Cambiar a Español"
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                    locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
+                  }`}
+                >
+                  ES
                 </Link>
-                <Link href={getAlternateRoute("en")} aria-label="Cambiar a Inglés">
-                  <button
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
-                      locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
-                    }`}
-                  >
-                    EN
-                  </button>
+                <Link
+                  href={getAlternateRoute("en")}
+                  aria-label="Cambiar a Inglés"
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
+                    locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
+                  }`}
+                >
+                  EN
                 </Link>
               </div>
             </div>

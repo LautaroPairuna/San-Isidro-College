@@ -11,7 +11,6 @@ import { hasLocale } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import ClientAppProviders from './ClientAppProviders';
-import FloatingAdmissionsButton from '@/components/FloatingAdmissionsButton';
 import SeoJsonLd from '@/components/SeoJsonLd';
 import { buildPageMetadata } from '@/lib/seo';
 import { fontVariables } from '@/lib/fonts';
@@ -59,10 +58,17 @@ export default async function PublicLayout({ children, params }: Props) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </head>
       <body className="font-gotham antialiased">
+        {/* Visualmente oculto hasta recibir foco: permite saltar el header
+            y el menú de navegación e ir directo al contenido con el teclado. */}
+        <a
+          href="#contenido-principal"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg"
+        >
+          {locale === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
+        </a>
+        <SeoJsonLd locale={locale} />
         <ClientAppProviders locale={locale} messages={messages}>
-          <SeoJsonLd locale={locale} />
           {children}
-          <FloatingAdmissionsButton />
         </ClientAppProviders>
         <Toaster position="top-right" />
       </body>

@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
   cacheMaxMemorySize: 0,
+  // Oculta el header "X-Powered-By: Next.js" (no aporta valor y expone stack).
+  poweredByHeader: false,
   serverExternalPackages: [
     'prisma',
     '@prisma/client',
@@ -14,9 +16,13 @@ const nextConfig: NextConfig = {
   ],
 
   async headers() {
+    // 'unsafe-eval' sólo se habilita en desarrollo: el dev server de Next usa
+    // eval() para el source-map de Fast Refresh/HMR, pero el build de
+    // producción no lo necesita.
+    const isDev = process.env.NODE_ENV !== 'production';
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: blob: https:",
@@ -36,6 +42,8 @@ const nextConfig: NextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Content-Security-Policy', value: csp },
+          // Deshabilita APIs del navegador que el sitio no usa.
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()' },
         ],
       },
     ];
@@ -59,6 +67,7 @@ const nextConfig: NextConfig = {
       // por defecto (localePrefix: "as-needed") y se sirve desde la raíz.
       { source: '/es/kindergarden', destination: '/inicial', permanent: true },
       { source: '/en/kindergarden', destination: '/en/kindergarten', permanent: true },
+      { source: '/kindergarden', destination: '/inicial', permanent: true },
       // Los slugs en español de los niveles pasan de la palabra en inglés a su
       // traducción, para que la URL quede en el mismo idioma que el contenido.
       { source: '/kindergarten', destination: '/inicial', permanent: true },
@@ -74,6 +83,13 @@ const nextConfig: NextConfig = {
       { source: '/en/student-life-more-info', destination: '/en/sports-more-info', permanent: true },
       { source: '/es/academicos-mas-info', destination: '/proyecto-bilingue', permanent: true },
       { source: '/en/academics-more-info', destination: '/en/bilingual-project', permanent: true },
+
+      // Catch-all: cualquier otra URL vieja con el prefijo /es (de cuando
+      // localePrefix era "always") redirige de forma permanente a la misma
+      // ruta sin prefijo. Va al final de este bloque para que las reglas
+      // específicas de arriba (que además cambian el slug) se apliquen primero.
+      { source: '/es', destination: '/', permanent: true },
+      { source: '/es/:path*', destination: '/:path*', permanent: true },
 
       // ---- Institucional ----
       { source: '/institucional.html',          destination: '/colegio#proyecto',                permanent: true },

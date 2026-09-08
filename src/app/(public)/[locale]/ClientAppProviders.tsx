@@ -4,6 +4,7 @@
 import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import HeaderWrapper from '@/components/HeaderWrapper';
+import FloatingAdmissionsButton from '@/components/FloatingAdmissionsButton';
 
 // Define bien el tipo de props
 interface ClientAppProvidersProps {
@@ -20,7 +21,8 @@ export default function ClientAppProviders({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <HeaderWrapper />
-      {children}
+      <main id="contenido-principal">{children}</main>
+      <FloatingAdmissionsButton />
     </NextIntlClientProvider>
   );
 }

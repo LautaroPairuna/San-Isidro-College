@@ -354,12 +354,12 @@ const HomePage = async ({ params }: PageProps) => {
       {/* =========== SECCIÓN 5: LOS INVITAMOS A CONOCERNOS =========== */}
       <section className="relative w-full bg-white py-14 lg:py-20 overflow-hidden" id="conocernos">
         {/* Trazo decorativo (solo desktop) */}
-        <img src="/images/formas/forma-home-2.svg" alt="" width={600} height={700} aria-hidden="true" className="absolute -top-0 2xl:left-10 xl:-left-24 w-[650px] h-auto pointer-events-none" />
+        <img src="/images/formas/forma-home-2.svg" alt="" width={600} height={700} aria-hidden="true" className="absolute -top-0 2xl:right-10 xl:-right-24 w-[650px] h-auto pointer-events-none scale-x-[-1]" />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto px-4">
-          {/* Columna izquierda: tarjeta de texto */}
-          <div className="lg:col-span-5 relative z-20 flex items-center">
-            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-4xl p-6 md:p-8 w-full lg:w-[680px] lg:absolute lg:left-[10%] space-y-4">
+          {/* Tarjeta de texto: en desktop queda a la derecha de la imagen */}
+          <div className="lg:col-span-5 lg:order-2 relative z-20 flex items-center">
+            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-4xl p-6 md:p-8 w-full lg:w-[680px] lg:absolute lg:right-[10%] space-y-4">
               <h2 className="text-2xl lg:text-3xl font-bold text-[#4a4a49]">
                 {t('conocernos.title')}
               </h2>
@@ -383,8 +383,8 @@ const HomePage = async ({ params }: PageProps) => {
             </div>
           </div>
 
-          {/* Columna derecha: imagen */}
-          <div className="lg:col-span-7 relative z-10 h-[350px] sm:h-[400px] lg:h-[650px]">
+          {/* Imagen: en desktop queda a la izquierda de la tarjeta de texto */}
+          <div className="lg:col-span-7 lg:order-1 relative z-10 h-[350px] sm:h-[400px] lg:h-[650px]">
             <RenderMedia
               medio={conocernosMedio}
               fallback="/images/fondo-bienvenida.webp"

@@ -980,5 +980,8 @@
     "kindergarden": "Inicial",
     "primary": "Primaria",
     "secondary": "Secundaria"
+  },
+  "mapEmbed": {
+    "loading": "Cargando mapa..."
   }
 }
