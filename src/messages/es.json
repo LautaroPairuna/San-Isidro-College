@@ -368,28 +368,11 @@
     },
     "kinder": {
       "title": "KINDERGARTEN",
-      "p1": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, a fin de que los niños estén expuestos a ambas lenguas durante la jornada. El proceso continúa en K3, K4 y K5.",
-      "p2": "Uno de nuestros objetivos en esta etapa es afianzar el manejo de la lengua madre y trabajar en la temprana adquisición del inglés como segundo idioma.",
-      "p3": "Además, se favorece la articulación del aprendizaje con el nivel primario, facilitando una transición natural y segura.",
-      "mobileBrief": "Nuestro Proyecto Bilingüe inicia desde el jardín maternal, K2, …",
+      "subtitle": "Aprender jugando, crecer en dos idiomas",
+      "p1": "En un ambiente cercano, seguro y afectivo, acompañamos a nuestros estudiantes para que exploren, imaginen, creen y construyan sus primeros vínculos con el aprendizaje. Desde K2, el juego y las experiencias cotidianas favorecen la incorporación natural del inglés como segunda lengua.",
       "readMore": "Leer más",
       "decorAlt": "Decoración Kindergarten",
       "decorAltMobile": "Decoración Kindergarten móvil"
-    },
-    "primary": {
-      "title": "PRIMARY",
-      "p1": "Con una Propuesta Bilingüe trabajamos a fin de posibilitar que los niños descubran sus talentos y capacidades. Como Colegio preparado y asesorado por experimentados profesionales, garantizamos una incorporación natural del idioma inglés como segunda lengua. Se logra así, en cada uno de los estudiantes, una amplia comprensión del idioma y la habilidad de expresión y comunicación.",
-      "readMore": "Leer más",
-      "decorAlt": "Decoración Primary"
-    },
-    "secondary": {
-      "title": "SECONDARY",
-      "subtitle": "Líderes del futuro",
-      "p1": "Priorizamos un enfoque centrado en el estudiante para desarrollar competencias claves del siglo XXI como autonomía, pensamiento crítico y creatividad. Con una sólida base bilingüe, preparamos a nuestros alumnos para exámenes internacionales y el dominio avanzado del inglés técnico, adaptado a sus áreas de estudio. Brindamos un espacio donde el aprendizaje cobra vida.",
-      "title": "Inicial",
-      "subtitle": "Aprender jugando, crecer en dos idiomas",
-      "p1": "En un ambiente cercano, seguro y afectivo, acompañamos a nuestros estudiantes para que exploren, imaginen, creen y construyan sus primeros vínculos con el aprendizaje. Desde K2, el juego y las experiencias cotidianas favorecen la incorporación natural del inglés como segunda lengua.",
-      "readMore": "Leer más"
     },
     "primary": {
       "title": "Primaria",
