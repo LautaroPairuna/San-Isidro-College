@@ -19,14 +19,19 @@ import { useTranslations } from 'next-intl';
  * Tamaño de los bloques de texto en cqw. El diseño original marcaba 15.92px
  * (2.326cqw) pero con Acumin condensada al 75% de ancho; en Gotham, que es
  * la del resto del sitio, cada renglón ocupa más y a ese tamaño "La espiga"
- * se pisaba con "El campo arado" en inglés. 2.15cqw es lo más grande que
- * entra sin que ningún bloque invada al de abajo.
+ * se pisaba con "El campo arado" en inglés. 2cqw es lo más grande que entra
+ * dejando separados todos los bloques en los dos idiomas.
  */
-const FONT_SIZE_CQW = 2.15;
+const FONT_SIZE_CQW = 2;
 const LINE_HEIGHT = 18.56 / 15.92; // = 1.166
 
-/** Separación entre el texto y su línea guía, en px del contenedor. */
-const INNER_GAP = 20;
+/**
+ * Aire entre el texto y su línea guía, en cqw para que escale con el escudo.
+ * Los bloques de la izquierda y "La cruz" van más justos contra su línea; los
+ * de la derecha, un poco más sueltos.
+ */
+const GAP_IZQUIERDA = 1.4;
+const GAP_DERECHA = 2.2;
 
 type Block = {
   key: 'lema' | 'cruz' | 'espiga' | 'montanas' | 'campoArado';
@@ -122,9 +127,10 @@ export function EscudoSignificado({ className }: { className?: string }) {
             fontSize: `${FONT_SIZE_CQW}cqw`,
             lineHeight: LINE_HEIGHT,
             color: '#4a4a49',
-            // "cruz" no lleva separación: su línea guía va por debajo, no al costado.
-            paddingRight: align === 'right' ? INNER_GAP : undefined,
-            paddingLeft: align === 'left' && key !== 'cruz' ? INNER_GAP : undefined,
+            // "cruz" separa por abajo, que es donde tiene su línea guía.
+            paddingBottom: key === 'cruz' ? `${GAP_IZQUIERDA}cqw` : undefined,
+            paddingRight: align === 'right' ? `${GAP_IZQUIERDA}cqw` : undefined,
+            paddingLeft: align === 'left' && key !== 'cruz' ? `${GAP_DERECHA}cqw` : undefined,
           }}
         >
           <h3 className="font-bold" style={{ fontSize: `${FONT_SIZE_CQW * 1.2}cqw` }}>{t(`${key}.titulo`)}</h3>
