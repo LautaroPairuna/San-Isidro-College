@@ -6,7 +6,7 @@
       "loading": "Loading Home…"
     },
     "bienvenida": {
-      "title": "Welcome to San Isidro College",
+      "title": "WELCOME TO SAN ISIDRO",
       "greeting": "Dear families,",
       "p1": "We know that choosing a school for your children is probably one of the most important decisions you will face as parents. It means choosing the place that will accompany them through a key stage of their lives, where they will learn, grow, discover their talents and build bonds that leave a lasting mark.",
       "p2": "We know you are entrusting us with the most valuable thing you have. That is why we are committed to accompanying, caring for and educating every student in an environment of love, respect and joy, within a holistic, bilingual and Catholic-oriented education, sustained by high academic standards.",
@@ -42,10 +42,9 @@
     },
     "conocernos": {
       "title": "We invite you to get to know us",
-      "p1": "Choosing a school also means getting to know its approach, its values, and the people who will accompany your children as they grow.",
-      "p2": "We invite you to discover San Isidro College and our bilingual, Catholic, co-ed, full-day pedagogical project. To take the first step, you can fill out our interest registration form.",
-      "cta": "Fill out interest form",
-      "disclaimer": "Submitting the form does not imply a reserved spot.",
+      "p1": "Getting to know a school also means walking through its spaces, talking with the people who are part of it and imagining your children growing, learning and building their own story there.",
+      "p2": "We invite you to discover San Isidro College, learn about our educational project and find answers to all your questions.",
+      "cta": "Request an information meeting",
       "fallbackAlt": "Aerial view of the San Isidro College campus"
     }
   },
@@ -373,12 +372,15 @@
       "p2": "One of our objectives at this stage is to strengthen the mother tongue and work on the early acquisition of English as a second language.",
       "p3": "Furthermore, it promotes curricular articulation with the primary level, facilitating a natural and safe transition.",
       "mobileBrief": "Our Bilingual Project starts in the nursery, K2, …",
-      "readMore": "Read more"
+      "readMore": "Read more",
+      "decorAlt": "Kindergarten decoration",
+      "decorAltMobile": "Kindergarten mobile decoration"
     },
     "primary": {
       "title": "PRIMARY",
       "p1": "With a Bilingual Proposal, we work so that children can discover their talents and abilities. As a school prepared and advised by experienced professionals, we guarantee a natural incorporation of the English language as a second language. Thus, each student achieves broad language comprehension and expressive and communication skills.",
-      "readMore": "Read more"
+      "readMore": "Read more",
+      "decorAlt": "Primary decoration"
     },
     "secondary": {
       "title": "SECONDARY",
@@ -425,8 +427,7 @@
       "title": "RUGBY & HOCKEY CLUB",
       "description": "School and Club united, building and sowing values that transcend the field. A strong, committed community for the benefit of our students.",
       "carouselAlt": "Rugby & Hockey Club carousel",
-      "fallbackAlt": "Rugby & Hockey background",
-      "readMore": "Read more"
+      "fallbackAlt": "Rugby & Hockey background"
     },
     "dojo": {
       "logoAlt": "SIC Dojo logo",
@@ -507,7 +508,8 @@
     },
     "actividadesExtracurriculares": {
       "title": "Extracurricular Activities",
-      "description": "Each student has unique talents and interests. That is why our extracurricular activities create spaces where they can express themselves, challenge themselves, and grow. Through proposals such as Dance, Jiu-Jitsu, and Gym, we complement academic education with experiences that strengthen the body, mind, and confidence."
+      "description": "Each student has unique talents and interests. That is why our extracurricular activities create spaces where they can express themselves, challenge themselves, and grow. Through proposals such as Dance, Jiu-Jitsu, and Gym, we complement academic education with experiences that strengthen the body, mind, and confidence.",
+      "readMore": "Read more"
     }
   },
   "experienciaSicBienestarDetail": {
@@ -628,7 +630,7 @@
       "p1": "At San Isidro College, technology does not replace the teacher: it strengthens teaching. Since the school opened, innovation and digital tools have been part of our educational proposal. Google Workspace for Education supports the daily experience of students and teachers, promoting dynamic, collaborative, and organized learning from the earliest years."
     },
     "closing": {
-      "p1": "We believe that innovating does not mean adding more technology, but creating better opportunities to learn. Being a Google Reference School reflects that commitment to an education that prepares our students for the world ahead."
+      "p1": "At San Isidro College, we believe that innovating does not mean adding more technology, but creating better opportunities to learn. Being a Google Reference School reflects that commitment to an education that prepares our students for the world ahead."
     }
   },
   "experienciaSicInnovacionRoboticaDetail": {
@@ -803,8 +805,8 @@
     "instituciones": {
       "title": "Institutions we support",
       "items": {
-        "hopa": "Hope",
-        "hirpaca": "Hirpace",
+        "hopa": "Hopa",
+        "hirpaca": "Hirpaca",
         "laEstrella": "Asociación La Estrella",
         "merendero": "Merendero San Rafael Arcángel"
       }
@@ -833,21 +835,38 @@
       "logoAlt": "San Isidro College Club crest"
     }
   },
+  "vidaEstudiantilMasInfo": {
+    "proyectoTitle": "Sports",
+    "intro": {
+      "p1": "San Isidro College, located in a privileged natural setting, develops a varied Physical Education program as part of the Pedagogical Project, which aims to contribute to shaping a life plan.",
+      "p2": "Physical Education represents much more than a curriculum area at our school. It becomes a fundamental discipline for the comprehensive education and formation of the human being, especially when implemented at an early age, as it allows children and adolescents to develop motor, cognitive, and affective skills essential for daily life and as part of a healthy lifestyle and social interaction. Through it, they express their spontaneity and learn to know, respect, and value themselves and others.",
+      "p3": "Therefore, it is essential to include and experience different activities in play, gymnastics, and sports, in order to implement them continuously, either in class or through educational projects. Creating a habit of physical activity allows students, beyond school, to feel healthy and active, incorporating these practices into their free time."
+    },
+    "bienestar": {
+      "title": "Student Well-Being",
+      "p1": "At San Isidro College, we value the well-being of our students, considering it essential for their holistic development. We strive to create an environment where they feel safe, content, and happy—key factors for them to excel and achieve success.",
+      "p2": "We promote student well-being through a patient, positive, and proactive approach led by trained and experienced teachers, involving the entire educational community. Our educational system, based on diversity and the PSHE curriculum, is designed to focus on each student’s comprehensive well-being.",
+      "p3": "Tutors play a crucial role by getting to know each student and building a trusting relationship, providing both practical and emotional support. Our tutoring system aims to foster personal and social growth, instilling a sense of responsibility and health awareness. We monitor academic progress and encourage good study habits.",
+      "p4": "We encourage parents to communicate with tutors about any concern, no matter how small, related to their child’s health and well-being. Through an enriching environment, we help students thrive both academically and emotionally."
+    },
+    "aside": {
+      "title": "ACADEMIC",
+      "deportes": "Sports",
+      "vidaEstudiantil": "Student Well-Being",
+      "play": "San Isidro Play"
+    }
+  },
   "seo": {
     "home": {
-      "title": "San Isidro College | Bilingual School in Salta",
+      "title": "San Isidro College",
       "description": "San Isidro College in Salta: bilingual education, holistic formation, and an academic proposal focused on human development."
     },
     "colegio": {
       "title": "The School | San Isidro College",
       "description": "Discover the educational project, mission, vision, values, and comprehensive formation proposal of San Isidro College."
     },
-    "academicos": {
-      "title": "Academics | San Isidro College",
-      "description": "Discover San Isidro College's academic program across Kindergarten, Primary, and Secondary, with its full-day or extended-hour bilingual program."
-    },
     "academicosMasInfo": {
-      "title": "Bilingual Program | San Isidro College",
+      "title": "Academics | San Isidro College",
       "description": "Explore the bilingual program, academic journey, and English-language formation at San Isidro College."
     },
     "kindergarden": {
@@ -864,15 +883,11 @@
     },
     "vidaEstudiantil": {
       "title": "Sports | San Isidro College",
-      "description": "Explore the Rugby and Hockey Club, SIC Dojo, San Isidro Balance, and the sports experiences that complement school life at San Isidro College."
+      "description": "Explore sports, wellbeing, San Isidro Play, and the experiences that complement school life at San Isidro College."
     },
-    "deportesMasInfo": {
-      "title": "Sport and San Isidro College Club | San Isidro College",
-      "description": "Sport as part of a well-rounded education at San Isidro College, and the origins of San Isidro College Club, the institution born from the commitment of our families."
-    },
-    "experienciaSicHome": {
-      "title": "SIC Experience | San Isidro College",
-      "description": "The experience of growing, learning, and sharing goes far beyond the classroom: wellbeing, innovation, art, faith, and social commitment at San Isidro College."
+    "vidaEstudiantilMasInfo": {
+      "title": "Sports and Wellbeing | San Isidro College",
+      "description": "Learn about the sports program, student wellbeing, and integral support approach at San Isidro College."
     },
     "experienciaSicBienestar": {
       "title": "Wellbeing and Guidance | San Isidro College",
@@ -897,6 +912,10 @@
     "experienciaSicFe": {
       "title": "Faith and Social Commitment | San Isidro College",
       "description": "The Catholic orientation of San Isidro College, the legacy of Saint Isidore the Labourer, and the service and volunteering experiences that are part of school life."
+    },
+    "experienciaSicActividades": {
+      "title": "Extracurricular Activities | San Isidro College",
+      "description": "Sport as part of a well-rounded education at San Isidro College, and the origins of San Isidro College Club, the institution born from the commitment of our families."
     }
   },
   "pilares": {
