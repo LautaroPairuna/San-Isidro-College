@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLocale } from 'next-intl'
 import Autoplay from 'embla-carousel-autoplay'
 import {
   Carousel,
@@ -23,6 +24,7 @@ type MedioMinimal = {
   id: number
   urlArchivo: string
   textoAlternativo?: string | null
+  textoAlternativoEn?: string | null
   tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
   posicion: number
 }
@@ -100,13 +102,14 @@ export default function TiraFotos({
 }) {
   const [api, setApi] = useState<CarouselApi>()
   useProfundidad(api)
+  const locale = useLocale()
 
   const fotos = medios
     .filter((medio) => medio.tipo === 'IMAGEN')
     .sort((a, b) => a.posicion - b.posicion)
     .map((medio) => ({
       src: toPublicImageUrl('medios', medio.urlArchivo),
-      alt: medio.textoAlternativo ?? altText,
+      alt: (locale === 'en' ? medio.textoAlternativoEn : undefined) || medio.textoAlternativo || altText,
     }))
 
   const disponibles = fotos.length > 0 ? fotos : fallbacks.map((src) => ({ src, alt: altText }))

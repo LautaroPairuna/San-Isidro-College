@@ -104,6 +104,7 @@ const DEFAULT_COLUMNS: Record<string, string[]> = {
     'urlArchivo',
     'urlMiniatura',
     'textoAlternativo',
+    'textoAlternativoEn',
     'tipo',
     'posicion',
     'creadoEn',
@@ -1236,6 +1237,7 @@ const FormModal = memo(function FormModal({
             urlArchivo: undefined,
             urlMiniatura: undefined,
             textoAlternativo: (initialData as MedioType).textoAlternativo ?? '',
+            textoAlternativoEn: (initialData as MedioType).textoAlternativoEn ?? '',
             tipo: (initialData as MedioType).tipo,
             posicion: (initialData as MedioType).posicion,
             grupoMediosId: (initialData as MedioType).grupoMediosId,
@@ -1244,6 +1246,7 @@ const FormModal = memo(function FormModal({
             urlArchivo: undefined,
             urlMiniatura: undefined,
             textoAlternativo: '',
+            textoAlternativoEn: '',
             tipo: 'IMAGEN',
             posicion: 0,
             grupoMediosId: parentId ?? 0,
@@ -1346,6 +1349,7 @@ const FormModal = memo(function FormModal({
     if (values.urlArchivo) fd.append('urlArchivo', values.urlArchivo)
     if (values.urlMiniatura) fd.append('urlMiniatura', values.urlMiniatura)
     fd.append('textoAlternativo', values.textoAlternativo ?? '')
+    fd.append('textoAlternativoEn', values.textoAlternativoEn ?? '')
     fd.append('tipo', values.tipo)
     fd.append('posicion', String(values.posicion))
     fd.append('grupoMediosId', String(values.grupoMediosId))
@@ -1639,13 +1643,25 @@ const FormModal = memo(function FormModal({
 
           {/* textoAlternativo */}
           <div className="flex flex-col">
-            <label className="mb-1 text-gray-700 font-medium">Texto Alternativo</label>
+            <label className="mb-1 text-gray-700 font-medium">Texto Alternativo (Español)</label>
             <InputBase
               {...registerMedio('textoAlternativo')}
               placeholder="Texto alternativo (opcional)"
             />
             {errorsMedio.textoAlternativo && (
               <p className="text-red-600 text-sm">{errorsMedio.textoAlternativo.message}</p>
+            )}
+          </div>
+
+          {/* textoAlternativoEn */}
+          <div className="flex flex-col">
+            <label className="mb-1 text-gray-700 font-medium">Texto Alternativo (Inglés)</label>
+            <InputBase
+              {...registerMedio('textoAlternativoEn')}
+              placeholder="Alt text en inglés (opcional, si se deja vacío se usa el texto en español)"
+            />
+            {errorsMedio.textoAlternativoEn && (
+              <p className="text-red-600 text-sm">{errorsMedio.textoAlternativoEn.message}</p>
             )}
           </div>
 

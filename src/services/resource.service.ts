@@ -37,7 +37,7 @@ async function getFileService() {
 
 const SEARCH_CONFIG: Record<TableName, string[]> = {
   GrupoMedios: ["nombre"],
-  Medio: ["textoAlternativo", "urlArchivo"],
+  Medio: ["textoAlternativo", "textoAlternativoEn", "urlArchivo"],
   Seccion: ["titulo", "slug"],
 };
 
@@ -49,7 +49,7 @@ const DEFAULT_ORDER: Record<TableName, { field: string; direction: "asc" | "desc
 
 const SORT_ALLOWLIST: Record<TableName, string[]> = {
   GrupoMedios: ["id", "nombre", "tipoGrupo", "creadoEn", "actualizadoEn"],
-  Medio: ["id", "urlArchivo", "urlMiniatura", "textoAlternativo", "tipo", "posicion", "creadoEn", "actualizadoEn"],
+  Medio: ["id", "urlArchivo", "urlMiniatura", "textoAlternativo", "textoAlternativoEn", "tipo", "posicion", "creadoEn", "actualizadoEn"],
   Seccion: ["id", "slug", "pagina", "orden", "tipo", "titulo", "creadoEn", "actualizadoEn"],
 };
 

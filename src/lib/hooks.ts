@@ -24,6 +24,7 @@ export interface Medio {
   urlArchivo: string
   urlMiniatura?: string | null
   textoAlternativo?: string | null
+  textoAlternativoEn?: string | null
   tipo: 'IMAGEN' | 'VIDEO' | 'ICONO'
   posicion: number
   grupoMediosId: number

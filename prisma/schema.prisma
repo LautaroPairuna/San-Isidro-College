@@ -45,7 +45,8 @@ model Medio {
   id               Int           @id @default(autoincrement())
   urlArchivo       String        // Ruta pública: "/uploads/media/video.mp4" o "/images/media/logo.webp"
   urlMiniatura     String?       // Solo para imágenes: "/images/media/thumbs/logo.webp"
-  textoAlternativo String?       // Texto alternativo descriptivo
+  textoAlternativo String?       // Texto alternativo descriptivo (español)
+  textoAlternativoEn String?     // Texto alternativo en inglés (opcional, cae a textoAlternativo si no se carga)
   tipo             TipoMedio     @default(IMAGEN)          // Define si es imagen, video o ícono
   posicion         Int           @default(0)                // Orden dentro del grupo
   grupoMediosId    Int

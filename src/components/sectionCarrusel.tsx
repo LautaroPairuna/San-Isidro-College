@@ -18,6 +18,7 @@ interface MedioMinimal {
   id: number;
   urlArchivo: string;
   textoAlternativo?: string | null;
+  textoAlternativoEn?: string | null;
   tipo: 'IMAGEN' | 'VIDEO' | 'ICONO';
   posicion: number;
   grupoMediosId: number;

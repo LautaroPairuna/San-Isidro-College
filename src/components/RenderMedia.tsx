@@ -2,6 +2,7 @@
 
 // src/components/RenderMedia.tsx
 import React, { memo, useState } from 'react'
+import { useLocale } from 'next-intl'
 import { toPublicImageUrl } from '@/lib/publicConstants'
 
 /**
@@ -15,6 +16,7 @@ export interface MedioBase {
   urlArchivo: string
   urlMiniatura?: string | null
   textoAlternativo?: string | null
+  textoAlternativoEn?: string | null
   tipo: MedioKind
   posicion: number
   grupoMediosId: number
@@ -224,6 +226,10 @@ const RenderMedia = memo(function RenderMedia({
   loading,
 }: Props) {
   const effectiveLoading = loading ?? (priority ? 'eager' : 'lazy')
+  const locale = useLocale()
+  // En inglés usamos textoAlternativoEn si está cargado; si no, caemos al
+  // texto en español antes que dejar el alt vacío.
+  const alt = (locale === 'en' ? medio?.textoAlternativoEn : undefined) || medio?.textoAlternativo
 
   // Si no hay objeto `medio`, o no tiene urlArchivo válida, usamos fallback como imagen
   if (!medio?.urlArchivo) {
@@ -254,7 +260,7 @@ const RenderMedia = memo(function RenderMedia({
         key={`video:${src}`}
         src={src}
         fallback={fallback}
-        alt={medio.textoAlternativo || 'Media Fallback'}
+        alt={alt || 'Media Fallback'}
         className={className}
         width={width}
         height={height}
@@ -274,7 +280,7 @@ const RenderMedia = memo(function RenderMedia({
       key={`image:${src}`}
       src={src}
       fallback={fallback}
-      alt={medio.textoAlternativo || 'Medio'}
+      alt={alt || 'Medio'}
       className={className}
       width={width}
       height={height}

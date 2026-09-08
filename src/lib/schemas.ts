@@ -55,6 +55,8 @@ export const MedioSchema = z.object({
 
   textoAlternativo: z.string().trim().max(200, 'Máximo 200 caracteres').optional(),
 
+  textoAlternativoEn: z.string().trim().max(200, 'Máximo 200 caracteres').optional(),
+
   tipo: z.enum(['IMAGEN', 'VIDEO', 'ICONO'], { message: 'Selecciona un tipo de medio' }),
 
   posicion: z.number({ message: 'Debe ser un número' })
