@@ -61,7 +61,7 @@ const Header: React.FC = () => {
   // Seleccionar logo según estado
   const getLogoSrc = () => {
     if (menuOpen) return "/images/logo-san-isidro-3.svg"
-    return "/images/logo-san-isidro-2.svg"
+    return "/images/logo-san-isidro-5.svg"
   }
 
   // Cerrar menú al hacer click en enlace
