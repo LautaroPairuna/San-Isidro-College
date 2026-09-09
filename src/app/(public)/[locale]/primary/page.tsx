@@ -17,7 +17,8 @@ import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION, TITULO_TARJETA } from '@/
 /**
  * Ejes transversales. Usan las mismas tarjetas giratorias que el resto del
  * sitio; lo único propio son los íconos (navy sobre pastel, como el diseño) y
- * el color de cada frente. El dorso va en verde para las cinco.
+ * el color de cada frente. El dorso va del mismo color que el frente
+ * (FlipCardsCarousel ya lo hace así por defecto si no se pasa backColor).
  */
 const EJES = [
   { key: 'comunicativa', icon: 'competencia-comunicativa-primary-card.svg', color: '#cfe0cd' },
@@ -26,8 +27,6 @@ const EJES = [
   { key: 'ciudadana', icon: 'formacion-personal-primary-card.svg', color: '#cfe2ef' },
   { key: 'sustentabilidad', icon: 'sustentabilidad-primary-card.svg', color: '#d8e4c0' },
 ] as const
-
-const EJES_DORSO = '#a9c69c'
 const EJES_TEXTO = '#294161'
 
 /**
@@ -97,7 +96,6 @@ const PrimaryPage = async ({ params }: PageProps) => {
     image: ejesFotos[i] ? toPublicImageUrl('medios', ejesFotos[i].urlArchivo) : EJES_FALLBACK_IMG[i],
     fallbackImage: EJES_FALLBACK_IMG[i],
     color,
-    backColor: EJES_DORSO,
     textColor: EJES_TEXTO,
   }))
 

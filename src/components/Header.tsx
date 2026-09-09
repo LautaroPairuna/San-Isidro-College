@@ -52,6 +52,12 @@ const Header: React.FC = () => {
   const getAlternateRoute = (targetLocale: "es" | "en") =>
     getPathname({ locale: targetLocale, href: pathname })
 
+  // Etiqueta accesible de cada botón de idioma: si ya es el idioma activo,
+  // solo lo identifica ("Español"); si es el otro, describe la acción de
+  // cambiar a él, en el idioma al que se está por cambiar.
+  const esButtonLabel = locale === "es" ? "Español" : "Switch to Spanish"
+  const enButtonLabel = locale === "en" ? "English" : "Cambiar a inglés"
+
   // Seleccionar logo según estado
   const getLogoSrc = () => {
     if (menuOpen) return "/images/logo-san-isidro-3.svg"
@@ -118,7 +124,7 @@ const Header: React.FC = () => {
                 {/* Botones de cambio de idioma: un único link estilizado como botón */}
                 <Link
                   href={getAlternateRoute("es")}
-                  aria-label="Cambiar a Español"
+                  aria-label={esButtonLabel}
                   className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                   }`}
@@ -127,7 +133,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   href={getAlternateRoute("en")}
-                  aria-label="Switch to English"
+                  aria-label={enButtonLabel}
                   className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                   }`}
@@ -183,7 +189,7 @@ const Header: React.FC = () => {
               </a>
               <Link
                 href={getAlternateRoute("es")}
-                aria-label="Cambiar a Español"
+                aria-label={esButtonLabel}
                 className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                   locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                 }`}
@@ -192,7 +198,7 @@ const Header: React.FC = () => {
               </Link>
               <Link
                 href={getAlternateRoute("en")}
-                aria-label="Switch to English"
+                aria-label={enButtonLabel}
                 className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                   locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                 }`}
@@ -227,7 +233,7 @@ const Header: React.FC = () => {
               <div className="flex gap-2 mt-4 md:hidden">
                 <Link
                   href={getAlternateRoute("es")}
-                  aria-label="Cambiar a Español"
+                  aria-label={esButtonLabel}
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "es" ? "bg-[#1e804b]" : "bg-[#1e804b]/70 hover:bg-[#1e804b]"
                   }`}
@@ -236,7 +242,7 @@ const Header: React.FC = () => {
                 </Link>
                 <Link
                   href={getAlternateRoute("en")}
-                  aria-label="Switch to English"
+                  aria-label={enButtonLabel}
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white shadow-sm transition-colors ${
                     locale === "en" ? "bg-[#294161]" : "bg-[#294161]/70 hover:bg-[#294161]"
                   }`}

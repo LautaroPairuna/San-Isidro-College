@@ -17,7 +17,9 @@ import { BAJADA_PAGINA, TITULO_PAGINA, TITULO_SECCION, TITULO_TARJETA } from '@/
 /**
  * Tarjetas de "Una formación que trasciende el aula". Son las mismas tarjetas
  * giratorias del resto del sitio; los íconos son los de siempre recoloreados a
- * navy, porque acá el frente va en pastel y los originales son blancos.
+ * navy, porque acá el frente va en pastel y los originales son blancos. El
+ * dorso va del mismo color que el frente (FlipCardsCarousel ya lo hace así
+ * por defecto si no se pasa backColor).
  */
 const TARJETAS = [
   { key: 'persona', icon: 'persona-secondary-card.svg', color: '#cfe0cd' },
@@ -27,8 +29,6 @@ const TARJETAS = [
   { key: 'artes', icon: 'artes-secondary-card.svg', color: '#cfe0cd' },
   { key: 'sustentabilidad', icon: 'sustentabilidad-secondary-card.svg', color: '#f0cdb0' },
 ] as const
-
-const TARJETAS_DORSO = '#a9c69c'
 const TARJETAS_TEXTO = '#294161'
 
 /**
@@ -87,7 +87,6 @@ const SecondaryPage = async ({ params }: PageProps) => {
       : TARJETAS_FALLBACK_IMG[i],
     fallbackImage: TARJETAS_FALLBACK_IMG[i],
     color,
-    backColor: TARJETAS_DORSO,
     textColor: TARJETAS_TEXTO,
   }))
 

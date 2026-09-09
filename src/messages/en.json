@@ -367,7 +367,7 @@
       "label": "ADMISSIONS"
     },
     "kinder": {
-      "title": "KINDERGARTEN",
+      "title": "Kindergarten",
       "subtitle": "Learning through play, growing in two languages",
       "p1": "In a close, safe, and caring environment, we support our students as they explore, imagine, create, and build their first connections with learning. From K2, play and everyday experiences foster the natural acquisition of English as a second language.",
       "readMore": "Read more",
@@ -375,13 +375,13 @@
       "decorAltMobile": "Kindergarten mobile decoration"
     },
     "primary": {
-      "title": "PRIMARY",
+      "title": "Primary",
       "subtitle": "Learning, discovering, and growing in two languages",
       "p1": "From 1st to 7th grade, our full-day program integrates the official curriculum with learning in English. We support each student in discovering their talents and developing knowledge, autonomy, critical thinking, and confidence in their own abilities.",
       "readMore": "Read more"
     },
     "secondary": {
-      "title": "SECONDARY",
+      "title": "Secondary",
       "subtitle": "An academic program with international reach",
       "p1": "A full-day, comprehensive bilingual education that combines the official curriculum, two tracks, and international programs. We support each student in developing autonomy, critical thinking, and creativity, discovering their interests, and beginning to build their own life project.",
       "readMore": "Read more",
@@ -413,7 +413,7 @@
       "carouselAlt": "Sports carousel",
       "fallbackAlt": "Sports background",
       "title": "Sports",
-      "description": "San Isidro College, located in a privileged natural environment, develops a varied Physical Education program. As part of our Pedagogical Project, we aim to contribute to shaping a life plan.",
+      "description": "In a privileged natural setting with our own sports fields, sport is an essential part of our educational proposal. Through play, movement and different sporting practices, our students learn to know themselves, work alongside others, push their limits and build healthy habits that stay with them throughout their lives.",
       "readMore": "Read more"
     },
     "admissions": {
@@ -422,7 +422,7 @@
     },
     "rugbyHockey": {
       "logoAlt": "Rugby & Hockey Club logo",
-      "title": "RUGBY & HOCKEY CLUB",
+      "title": "Rugby & Hockey Club",
       "description": "School and Club united, building and sowing values that transcend the field. A strong, committed community for the benefit of our students.",
       "carouselAlt": "Rugby & Hockey Club carousel",
       "fallbackAlt": "Rugby & Hockey background",
@@ -430,7 +430,7 @@
     },
     "dojo": {
       "logoAlt": "SIC Dojo logo",
-      "title": "SAN ISIDRO COLLEGE DOJO",
+      "title": "San Isidro College Dojo",
       "description": "The San Isidro Dojo is the place where our students develop discipline, respect, and strength through judo. As part of our comprehensive education, we promote essential values and encourage physical and emotional growth in an atmosphere of camaraderie and dedication. A place to learn, grow, and excel every day!",
       "descriptionMobile": "We develop discipline, respect, and strength through judo, promoting essential values in an environment of camaraderie and effort.",
       "carouselAlt": "SIC Dojo carousel",
@@ -438,7 +438,7 @@
     },
     "gym": {
       "logoAlt": "San Isidro Balance logo",
-      "title": "SAN ISIDRO BALANCE",
+      "title": "San Isidro Balance",
       "description": "San Isidro Balance is a comprehensive training and wellness space designed to support the school’s students and also open to parents and teachers who want to reach their full physical potential. \n\n Here we combine high-quality training, specific physical conditioning, skill work, and nutritional support, integrating everything a modern gym offers within a professional and well-cared-for program. Each activity is designed to enhance performance, prevent injuries, and promote healthy habits. \n\n San Isidro Balance is movement, balance, and evolution.",
       "descriptionMobile": "San Isidro Balance is a comprehensive training and wellness space designed to support the school’s students and also open to parents and teachers who want to reach their full physical potential.",
       "carouselAlt": "San Isidro Balance carousel",
@@ -469,7 +469,7 @@
       "description": "The experience of growing, learning, and sharing goes far beyond the classroom. At San Isidro College, each activity complements academic development and creates new opportunities to build talents, strengthen bonds, and enjoy a community that inspires growth."
     },
     "rugbyHockey": {
-      "title": "Wellbeing And Guidance",
+      "title": "Wellbeing and Guidance",
       "description": "We believe every student learns better when they feel safe, heard, and supported. That is why we promote an environment of trust, respect, and closeness, where wellbeing is part of the educational experience every day.",
       "readMore": "Read more"
     },
@@ -857,7 +857,7 @@
   },
   "seo": {
     "home": {
-      "title": "San Isidro College",
+      "title": "San Isidro College | Bilingual School in Salta",
       "description": "San Isidro College in Salta: bilingual education, holistic formation, and an academic proposal focused on human development."
     },
     "colegio": {
@@ -886,11 +886,11 @@
     },
     "vidaEstudiantil": {
       "title": "Sports | San Isidro College",
-      "description": "Explore sports, wellbeing, San Isidro Play, and the experiences that complement school life at San Isidro College."
+      "description": "Explore the Rugby and Hockey Club, SIC Dojo, San Isidro Balance, and the sports experiences that complement school life at San Isidro College."
     },
     "deportesMasInfo": {
-      "title": "Sports and Wellbeing | San Isidro College",
-      "description": "Learn about the sports program, student wellbeing, and integral support approach at San Isidro College."
+      "title": "Sport and San Isidro College Club | San Isidro College",
+      "description": "Sport as part of a well-rounded education at San Isidro College, and the origins of San Isidro College Club, the institution born from the commitment of our families."
     },
     "experienciaSicHome": {
       "title": "SIC Experience | San Isidro College",
