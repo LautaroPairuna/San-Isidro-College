@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import FlipCardsCarousel, { type FlipCardItem } from '@/components/FlipCardsCarousel'
+import { useSupportsHover } from '@/lib/hooks/useSupportsHover'
 
 type FlipCardsGridProps = {
   items: FlipCardItem[]
@@ -43,7 +44,10 @@ function CardCoverWithFallback({ src, fallbackSrc, alt }: { src: string; fallbac
 function FlipCard({ card }: { card: FlipCardItem }) {
   const [isFlipped, setIsFlipped] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
-  const showBack = isFlipped || isHovered
+  // En touch no hay hover real: si se suma al toggle del click, el toque
+  // queda "hovered" para siempre y el segundo toque no vuelve al frente.
+  const supportsHover = useSupportsHover()
+  const showBack = isFlipped || (supportsHover && isHovered)
 
   return (
     <article
