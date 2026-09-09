@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useSupportsHover } from '@/lib/hooks/useSupportsHover'
 
 export type HouseCardItem = {
   key: string
@@ -46,16 +47,21 @@ function RotuloDorso({ children }: { children: string }) {
 }
 
 /**
- * Tarjeta de House. Muestra el escudo y al pasar el mouse (o al tocarla) gira
- * y deja ver el propósito, las cualidades y los símbolos.
+ * Tarjeta de House. Muestra el escudo y al pasar el mouse gira y deja ver el
+ * propósito, las cualidades y los símbolos; al tocarla en celular, el tap
+ * hace lo mismo.
  *
- * `isHovered` acompaña al `isFlipped` para que en desktop alcance con pasar por
- * encima y en touch, donde no hay hover, funcione el tap.
+ * `isHovered` solo se suma al toggle del click cuando el dispositivo soporta
+ * hover de verdad (mouse): en touch no hay hover real, el navegador simula un
+ * mouseenter en el toque y no siempre dispara el mouseleave, así que sin este
+ * chequeo la tarjeta quedaba "hovered" para siempre y el segundo toque no
+ * volvía a mostrar el frente.
  */
 function HouseCard({ card }: { card: HouseCardItem }) {
   const [isFlipped, setIsFlipped] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
-  const showBack = isFlipped || isHovered
+  const supportsHover = useSupportsHover()
+  const showBack = isFlipped || (supportsHover && isHovered)
 
   return (
     <article

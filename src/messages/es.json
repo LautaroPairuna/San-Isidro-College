@@ -2,7 +2,7 @@
   "home": {
     "hero": {
       "alt": "Carrusel Principal",
-      "admisionButton": "ADMISIONES",
+      "admisionButton": "POSTULACIONES",
       "loading": "Cargando Home…"
     },
     "bienvenida": {
@@ -42,9 +42,10 @@
     },
     "conocernos": {
       "title": "Los invitamos a conocernos",
-      "p1": "Conocer un colegio también es recorrer sus espacios, conversar con quienes forman parte de él e imaginar a sus hijos creciendo, aprendiendo y construyendo su propia historia allí.",
-      "p2": "Los invitamos a descubrir San Isidro College, conocer nuestra propuesta educativa y encontrar respuesta a todas sus inquietudes.",
-      "cta": "Solicitar una reunión informativa",
+      "p1": "Elegir un colegio también es conocer su propuesta, sus valores y a las personas que acompañarán a sus hijos a lo largo de su crecimiento.",
+      "p2": "Los invitamos a descubrir San Isidro College y nuestro proyecto pedagógico bilingüe, católico, mixto y de jornada completa. Para dar el primer paso, pueden completar nuestro formulario de registro de interés.",
+      "cta": "Completar formulario de interés",
+      "disclaimer": "El envío del formulario no implica una reserva de vacante.",
       "fallbackAlt": "Vista aérea del campus de San Isidro College"
     }
   },
@@ -363,11 +364,11 @@
       "readMore": "Leer más"
     },
     "admissions": {
-      "alt": "Icono Admisiones",
-      "label": "ADMISIONES"
+      "alt": "Icono Postulaciones",
+      "label": "POSTULACIONES"
     },
     "kinder": {
-      "title": "KINDERGARTEN",
+      "title": "Inicial",
       "subtitle": "Aprender jugando, crecer en dos idiomas",
       "p1": "En un ambiente cercano, seguro y afectivo, acompañamos a nuestros estudiantes para que exploren, imaginen, creen y construyan sus primeros vínculos con el aprendizaje. Desde K2, el juego y las experiencias cotidianas favorecen la incorporación natural del inglés como segunda lengua.",
       "readMore": "Leer más",
@@ -413,16 +414,16 @@
       "carouselAlt": "Carrusel Deportes",
       "fallbackAlt": "Fondo Deportes",
       "title": "Deportes",
-      "description": "San Isidro College, ubicado en un marco natural privilegiado, desarrolla un variado programa en el área de Educación Física. Como parte del Proyecto Pedagógico, se propone contribuir a la elaboración de un proyecto de vida.",
+      "description": "En un entorno natural privilegiado y con un campo de deportes propio, el deporte forma parte esencial de nuestra propuesta educativa. A través del juego, el movimiento y las distintas prácticas deportivas, nuestros estudiantes aprenden a conocerse, trabajar junto a otros, superarse y construir hábitos saludables que los acompañen a lo largo de sus vidas.",
       "readMore": "Leer más"
     },
     "admissions": {
-      "alt": "Ícono Admisiones",
-      "label": "ADMISIONES"
+      "alt": "Ícono Postulaciones",
+      "label": "POSTULACIONES"
     },
     "rugbyHockey": {
       "logoAlt": "Logo Club Rugby y Hockey",
-      "title": "CLUB DE RUGBY Y HOCKEY",
+      "title": "Club de Rugby y Hockey",
       "description": "Colegio y Club unidos, construyendo y sembrando valores que trascienden la cancha. Una comunidad fuerte y comprometida en beneficio de nuestros chicos.",
       "carouselAlt": "Carrusel Club Rugby y Hockey",
       "fallbackAlt": "Fondo Club Rugby y Hockey",
@@ -430,7 +431,7 @@
     },
     "dojo": {
       "logoAlt": "Logo SIC Dojo",
-      "title": "SAN ISIDRO COLLEGE DOJO",
+      "title": "San Isidro College Dojo",
       "description": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!",
       "descriptionMobile": "El San Isidro Dojo es el espacio donde nuestros estudiantes desarrollan disciplina, respeto y fortaleza a través del judo. Como parte de nuestra formación integral, promovemos valores esenciales y fomentamos el crecimiento físico y emocional en un ambiente de camaradería y esfuerzo. ¡Un lugar para aprender, crecer y superarse cada día!",
       "carouselAlt": "Carrusel SIC Dojo",
@@ -438,7 +439,7 @@
     },
     "gym": {
       "logoAlt": "Logo Gimnasio",
-      "title": "SAN ISIDRO BALANCE",
+      "title": "San Isidro Balance",
       "description": "San Isidro Balance es un espacio integral de entrenamiento y bienestar, pensado para acompañar a los alumnos del colegio y abierto también a padres y docentes que buscan desarrollar su máximo potencial físico. \n\n Aquí combinamos entrenamiento de calidad, preparación física específica, trabajo de destrezas y acompañamiento en nutrición, integrando todo lo que ofrece un gimnasio moderno dentro de una propuesta profesional y cuidada. Cada actividad está diseñada para potenciar el rendimiento, prevenir lesiones y promover hábitos saludables. \n\n San Isidro Balance es movimiento, equilibrio y evolución.",
       "descriptionMobile": "San Isidro Balance es un espacio integral de entrenamiento y bienestar, pensado para acompañar a los alumnos del colegio y abierto también a padres y docentes que buscan desarrollar su máximo potencial físico.",
       "carouselAlt": "Carrusel San Isidro Balance",
@@ -469,7 +470,7 @@
       "description": "La experiencia de crecer, aprender y compartir va mucho más allá del aula. En San Isidro College, cada actividad complementa la formación académica y ofrece nuevas oportunidades para desarrollar talentos, fortalecer vínculos y disfrutar de una comunidad que inspira a crecer."
     },
     "rugbyHockey": {
-      "title": "Bienestar Y Acompañamiento",
+      "title": "Bienestar y Acompañamiento",
       "description": "Creemos que cada alumno aprende mejor cuando se siente seguro, escuchado y acompañado. Por eso promovemos un entorno de confianza, respeto y cercanía, donde el bienestar forma parte de la experiencia educativa de todos los días.",
       "readMore": "Leer más"
     },
@@ -857,7 +858,7 @@
   },
   "seo": {
     "home": {
-      "title": "San Isidro College",
+      "title": "San Isidro College | Colegio bilingüe en Salta",
       "description": "San Isidro College en Salta: educación bilingüe, formación integral y una propuesta académica orientada al desarrollo humano."
     },
     "colegio": {
@@ -866,31 +867,31 @@
     },
     "academicos": {
       "title": "Académicos | San Isidro College",
-      "description": "Conocé la propuesta académica de San Isidro College en Kindergarten, Primary y Secondary, con su programa bilingüe de jornada completa o extendida."
+      "description": "Conocé la propuesta académica de San Isidro College: un proyecto bilingüe, católico, mixto y de jornada completa para Inicial, Primaria y Secundaria."
     },
     "academicosMasInfo": {
       "title": "Proyecto Bilingüe | San Isidro College",
       "description": "Descubrí la propuesta bilingüe, el recorrido académico y la formación en inglés de San Isidro College."
     },
     "kindergarden": {
-      "title": "Kindergarten | San Isidro College",
-      "description": "Conocé el nivel Kindergarten, la inmersión bilingüe temprana y el valor del juego en San Isidro College."
+      "title": "Inicial | San Isidro College",
+      "description": "Conocé el Nivel Inicial, la inmersión bilingüe temprana y el valor del juego en San Isidro College."
     },
     "primary": {
-      "title": "Primary | San Isidro College",
-      "description": "Explorá la propuesta de Primary, su metodología basada en literatura y la formación bilingüe de San Isidro College."
+      "title": "Primaria | San Isidro College",
+      "description": "Explorá la propuesta de Primaria, su metodología basada en literatura y la formación bilingüe de San Isidro College."
     },
     "secondary": {
-      "title": "Secondary | San Isidro College",
-      "description": "Descubrí Secondary, su proyección internacional, innovación y propuesta académica integral en San Isidro College."
+      "title": "Secundaria | San Isidro College",
+      "description": "Descubrí Secundaria, su proyección internacional, innovación y propuesta académica integral en San Isidro College."
     },
     "vidaEstudiantil": {
       "title": "Deportes | San Isidro College",
-      "description": "Explorá deportes, bienestar, San Isidro Play y las experiencias que complementan la vida escolar en San Isidro College."
+      "description": "Explorá el Club de Rugby y Hockey, el SIC Dojo, San Isidro Balance y las experiencias deportivas que complementan la vida escolar en San Isidro College."
     },
     "deportesMasInfo": {
-      "title": "Deportes y Bienestar | San Isidro College",
-      "description": "Conocé el enfoque de deportes, bienestar estudiantil y acompañamiento integral de San Isidro College."
+      "title": "Deporte y San Isidro College Club | San Isidro College",
+      "description": "El deporte como parte de la formación integral en San Isidro College y el origen de San Isidro College Club, la institución que nació del compromiso de las familias."
     },
     "experienciaSicHome": {
       "title": "Experiencia SIC | San Isidro College",

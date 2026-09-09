@@ -164,9 +164,11 @@ const HomePage = async ({ params }: PageProps) => {
             <PilaresEducativos className="w-full max-w-[780px] h-auto" />
           </div>
 
-          {/* Texto introductorio */}
-          <div className="lg:col-span-7">
-            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-2xl p-6 md:p-8">
+          {/* Texto introductorio: el cuadro no ocupa toda la columna, para que
+              no quede un renglón de texto larguísimo y descentrado respecto
+              a la rueda; se limita su ancho y se centra dentro de la columna. */}
+          <div className="lg:col-span-7 flex justify-center">
+            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-2xl p-6 md:p-8 max-w-md lg:max-w-lg">
               <p className="text-gray-700 italic leading-relaxed">
                 {t('pilares.intro')}
               </p>
@@ -377,6 +379,9 @@ const HomePage = async ({ params }: PageProps) => {
               >
                 {t('conocernos.cta')}
               </a>
+              <p className="text-sm italic text-gray-500">
+                {t('conocernos.disclaimer')}
+              </p>
             </div>
           </div>
 
