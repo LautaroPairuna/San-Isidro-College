@@ -379,6 +379,9 @@ const HomePage = async ({ params }: PageProps) => {
               >
                 {t('conocernos.cta')}
               </a>
+              <p className="text-sm italic text-gray-500">
+                {t('conocernos.disclaimer')}
+              </p>
             </div>
           </div>
 

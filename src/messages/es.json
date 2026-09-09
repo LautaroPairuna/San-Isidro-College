@@ -42,9 +42,10 @@
     },
     "conocernos": {
       "title": "Los invitamos a conocernos",
-      "p1": "Conocer un colegio también es recorrer sus espacios, conversar con quienes forman parte de él e imaginar a sus hijos creciendo, aprendiendo y construyendo su propia historia allí.",
-      "p2": "Los invitamos a descubrir San Isidro College, conocer nuestra propuesta educativa y encontrar respuesta a todas sus inquietudes.",
-      "cta": "Solicitar una reunión informativa",
+      "p1": "Elegir un colegio también es conocer su propuesta, sus valores y a las personas que acompañarán a sus hijos a lo largo de su crecimiento.",
+      "p2": "Los invitamos a descubrir San Isidro College y nuestro proyecto pedagógico bilingüe, católico, mixto y de jornada completa. Para dar el primer paso, pueden completar nuestro formulario de registro de interés.",
+      "cta": "Completar formulario de interés",
+      "disclaimer": "El envío del formulario no implica una reserva de vacante.",
       "fallbackAlt": "Vista aérea del campus de San Isidro College"
     }
   },

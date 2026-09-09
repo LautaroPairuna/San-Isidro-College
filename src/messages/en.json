@@ -42,9 +42,10 @@
     },
     "conocernos": {
       "title": "We invite you to get to know us",
-      "p1": "Getting to know a school also means walking through its spaces, talking with the people who are part of it and imagining your children growing, learning and building their own story there.",
-      "p2": "We invite you to discover San Isidro College, learn about our educational project and find answers to all your questions.",
-      "cta": "Request an information meeting",
+      "p1": "Choosing a school also means getting to know its approach, its values, and the people who will accompany your children as they grow.",
+      "p2": "We invite you to discover San Isidro College and our bilingual, Catholic, co-ed, full-day pedagogical project. To take the first step, you can fill out our interest registration form.",
+      "cta": "Fill out interest form",
+      "disclaimer": "Submitting the form does not imply a reserved spot.",
       "fallbackAlt": "Aerial view of the San Isidro College campus"
     }
   },
