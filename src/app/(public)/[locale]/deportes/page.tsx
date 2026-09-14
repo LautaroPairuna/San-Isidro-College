@@ -225,7 +225,9 @@ export default async function DeportesPage({ params }: PageProps) {
             <img src="/images/logo-dojo.svg" alt={t('dojo.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-24" />
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <p className="text-xl font-bold">{t('dojo.title')}</p>
-              <p className="mt-4 text-gray-700">{t('dojo.descriptionMobile')}</p>
+              <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
+                {t('dojo.description')}
+              </p>
             </div>
           </div>
           {dojoMedia.length > 0 ? (
@@ -273,7 +275,7 @@ export default async function DeportesPage({ params }: PageProps) {
               <img src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
               <p className="text-xl font-bold">{t('gym.title')}</p>
               <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
-                {t('gym.descriptionMobile')}
+                {t('gym.description')}
               </p>
             </div>
 
