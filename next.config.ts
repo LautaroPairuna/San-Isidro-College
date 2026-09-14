@@ -62,6 +62,16 @@ const nextConfig: NextConfig = {
   
   async redirects() {
     return [
+      // ---- Canonicalización de host: apex -> www ----
+      // Va primero para resolver el host en un solo salto: las reglas de ruta
+      // de abajo se evalúan después, ya sobre www.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'sanisidrocollege.com.ar' }],
+        destination: 'https://www.sanisidrocollege.com.ar/:path*',
+        permanent: true,
+      },
+
       // ---- Renombre de rutas públicas ----
       // Nota: los destinos van sin prefijo /es porque el español es el locale
       // por defecto (localePrefix: "as-needed") y se sirve desde la raíz.

@@ -142,12 +142,12 @@ const AcademicosPage = async ({ params }: PageProps) => {
             </div>
 
             {/* Mobile */}
-            <div className="block lg:hidden w-full px-4 mt-32">
+            <div className="block lg:hidden w-full px-5 mt-32">
               <div className="relative z-10">
-                <p className="xs:text-5xl text-4xl font-bold text-left mb-5 text-shadow-bold-movil space-y-4">
+                <p className="text-5xl font-bold text-left mb-5 text-shadow-bold-movil">
                   {t('kinder.title')}
                 </p>
-                <div className="bg-white shadow-xl rounded-3xl p-6 space-y-4">
+                <div className="bg-white shadow-xl rounded-3xl p-6 mb-6 space-y-4">
                   <p className="font-bold text-xl text-left">{t('kinder.subtitle')}</p>
                   <p className="text-gray-700 leading-relaxed">
                     {t('kinder.p1')}
@@ -166,7 +166,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
           </div>
 
           {/* Media dinámico */}
-          <div className="col-span-1 md:col-span-8 order-2 md:order-none px-5">
+          <div className="col-span-1 md:col-span-8 order-2 md:order-none px-5 lg:px-0">
             <div className="relative w-full h-[300px] sm:h-[420px] lg:h-[700px]">
               <RenderMedia
                 medio={kinderImg}
@@ -184,14 +184,14 @@ const AcademicosPage = async ({ params }: PageProps) => {
         {/* Desktop */}
         <div className="hidden lg:block relative w-full h-screen">
           <img src="/images/formas/forma-home-3.svg" alt="" width={750} height={500} className="absolute 2xl:top-32 xl:top-16 top-5 2xl:right-44 xl:right-0 -right-10 w-[650px] h-auto z-10 pointer-events-none" />
-          <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full px-4">
+          <div className="grid grid-cols-12 gap-8 2xl:max-w-[1400px] max-w-[1200px] mx-auto h-full">
             <div className="col-span-8 flex items-center justify-center">
               <div className="relative w-full h-[700px]">
                 <RenderMedia
                   medio={primaryImg}
                   fallback={FALLBACKS.PRIMARY}
                   fill
-                  className="rounded-md shadow-md object-cover"
+                  className="rounded-xl shadow-lg object-cover"
                 />
               </div>
             </div>
@@ -241,7 +241,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
               fallback={FALLBACKS.PRIMARY}
               width={800}
               height={600}
-              className="w-full h-auto rounded-md shadow-md mb-6"
+              className="w-full h-auto rounded-xl shadow-lg mb-6"
             />
           </div>
         </div>
@@ -318,7 +318,7 @@ const AcademicosPage = async ({ params }: PageProps) => {
                   fallback={FALLBACKS.SECOND}
                   width={800}
                   height={600}
-                  className="w-full h-auto rounded-md shadow-md mb-6"
+                  className="w-full h-auto rounded-xl shadow-lg mb-6"
                 />
               </div>
             </div>

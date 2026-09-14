@@ -23,43 +23,30 @@ export default function BloqueRotulo({
   como?: 'h2' | 'h3'
   className?: string
 }) {
-  const rotuloEl = (
-    <Rotulo
-      className={`md:col-span-4 ${TITULO_SECCION} ${
-        lado === 'izquierda' ? 'md:text-right' : 'md:col-start-8'
-      }`}
-    >
-      {rotulo}
-    </Rotulo>
-  )
-
-  const textoEl = (
-    <div
-      className={`md:col-span-6 space-y-4 text-gray-700 leading-relaxed hyphens-auto ${
-        lado === 'izquierda'
-          ? 'md:col-start-6 md:border-l md:border-[#9bb5a5] md:pl-6'
-          : 'md:col-start-1 md:border-r md:border-[#9bb5a5] md:pr-6 md:text-right'
-      }`}
-    >
-      {children}
-    </div>
-  )
-
+  // El rótulo va siempre primero en el DOM para que al apilarse en móvil quede
+  // sobre su texto. En desktop la posición la fija la grilla (columna y fila
+  // explícitas), así el lado no depende del orden de los nodos.
   return (
     <div
       className={`grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start ${className ?? ''}`}
     >
-      {lado === 'izquierda' ? (
-        <>
-          {rotuloEl}
-          {textoEl}
-        </>
-      ) : (
-        <>
-          {textoEl}
-          {rotuloEl}
-        </>
-      )}
+      <Rotulo
+        className={`md:col-span-4 md:row-start-1 ${TITULO_SECCION} ${
+          lado === 'izquierda' ? 'md:col-start-1 md:text-right' : 'md:col-start-8'
+        }`}
+      >
+        {rotulo}
+      </Rotulo>
+
+      <div
+        className={`md:col-span-6 md:row-start-1 space-y-4 text-gray-700 leading-relaxed hyphens-auto ${
+          lado === 'izquierda'
+            ? 'md:col-start-6 md:border-l md:border-[#9bb5a5] md:pl-6'
+            : 'md:col-start-1 md:border-r md:border-[#9bb5a5] md:pr-6 md:text-right'
+        }`}
+      >
+        {children}
+      </div>
     </div>
   )
 }

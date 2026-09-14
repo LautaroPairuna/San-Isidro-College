@@ -13,7 +13,7 @@ const PAGE_SLUG = 'experiencia-sic-fe-y-compromiso-social'
 const FOTOS_SECTION_SLUG = 'experiencia-sic-fe-servicio-fotos'
 
 /** Instituciones, en el orden del diseño. */
-const INSTITUCIONES = ['hopa', 'hirpaca', 'laEstrella', 'merendero'] as const
+const INSTITUCIONES = ['hope', 'hirpace', 'laEstrella', 'merendero'] as const
 
 /** Fotos del repo para cuando el grupo del admin todavía está vacío. */
 const FOTOS_FALLBACK = [

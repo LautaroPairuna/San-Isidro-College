@@ -630,7 +630,7 @@
       "p1": "En San Isidro College la tecnología no reemplaza al docente: potencia la enseñanza. Desde la apertura del colegio, la innovación y las herramientas digitales forman parte de nuestra propuesta educativa. Google Workspace for Education acompaña la experiencia diaria de alumnos y docentes, promoviendo un aprendizaje dinámico, colaborativo y organizado desde los primeros años."
     },
     "closing": {
-      "p1": "En San Isidro College creemos que innovar no significa incorporar más tecnología, sino generar mejores oportunidades para aprender. Ser Google Reference School es el reflejo de ese compromiso con una educación que prepara a nuestros alumnos para el mundo que viene."
+      "p1": "Creemos que innovar no significa incorporar más tecnología, sino generar mejores oportunidades para aprender. Ser Google Reference School es el reflejo de ese compromiso con una educación que prepara a nuestros alumnos para el mundo que viene."
     }
   },
   "experienciaSicInnovacionRoboticaDetail": {
@@ -805,8 +805,8 @@
     "instituciones": {
       "title": "Instituciones que acompañamos",
       "items": {
-        "hopa": "Hopa",
-        "hirpaca": "Hirpaca",
+        "hope": "Hope",
+        "hirpace": "Hirpace",
         "laEstrella": "Asociación La Estrella",
         "merendero": "Merendero San Rafael Arcángel"
       }

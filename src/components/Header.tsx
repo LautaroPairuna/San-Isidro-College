@@ -95,7 +95,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <div id="container" className="relative bg-white w-full">
+    <div className="relative bg-white w-full">
       {/* HEADER fijo */}
       <header
         id="header"
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
                 aria-expanded={menuOpen}
                 aria-controls="dropdownContainer"
               >
-                ☰ MENÚ
+                ☰ {locale === "es" ? "MENÚ" : "MENU"}
               </button>
             </div>
           </div>
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
                 href="mailto:cv@colegiosanisidrosalta.edu.ar"
                 className="text-base lg:text-lg text-white/90 hover:text-white transition-colors whitespace-nowrap"
               >
-                <span className="font-semibold">Trabajá con nosotros:</span>{" "}
+                <span className="font-semibold">{locale === "es" ? "Trabajá con nosotros:" : "Work with us:"}</span>{" "}
                 <span className="font-normal">cv@colegiosanisidrosalta.edu.ar</span>
               </a>
               <Link
@@ -206,7 +206,6 @@ const Header: React.FC = () => {
                 EN
               </Link>
               <button
-                id="closeMenu"
                 className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
                 onClick={() => setMenuOpen(false)}
                 aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}
@@ -216,7 +215,6 @@ const Header: React.FC = () => {
             </div>
             {/* Mobile: botón cerrar arriba derecha */}
             <button
-              id="closeMenu"
               className="absolute top-4 right-6 md:hidden w-10 h-10 rounded-full flex items-center justify-center text-white bg-black/80 hover:bg-black shadow-sm"
               onClick={() => setMenuOpen(false)}
               aria-label={locale === "es" ? "Cerrar menú" : "Close menu"}

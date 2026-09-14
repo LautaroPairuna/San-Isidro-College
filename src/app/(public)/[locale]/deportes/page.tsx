@@ -126,7 +126,7 @@ export default async function DeportesPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — RUGBY & HOCKEY ═════════════ */}
-      <section id="club" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="club" className="relative w-full max-w-[1200px] h-auto pt-12 sm:pt-96 md:py-10 bg-white mx-auto overflow-hidden scroll-mt-32">
         <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
@@ -161,23 +161,11 @@ export default async function DeportesPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Móvil */}
-          <div className="sm:hidden col-span-12 relative pt-16">
-            {rugbyHockeyMedia.length > 0 ? (
-              <div className="w-full h-[300px]">
-                <MediaCarousel
-                  items={rugbyHockeyMedia}
-                  altText={t('rugbyHockey.carouselAlt')}
-                  className="w-full h-full rounded-md shadow-lg"
-                />
-              </div>
-            ) : (
-              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-lg" />
-            )}
-
-            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
+          {/* Móvil: cuadro de texto y debajo la imagen del mismo ancho */}
+          <div className="sm:hidden col-span-12 relative px-4">
+            <div className="relative z-20 mb-6">
               <img src="/images/logo-club-rugby-hockey.svg" alt={t('rugbyHockey.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-32" />
-              <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
+              <div className="bg-white shadow-xl rounded-xl p-6 w-full text-center">
                 <p className="text-xl font-bold">{t('rugbyHockey.title')}</p>
                 <p className="mt-4 text-gray-700">{t('rugbyHockey.description')}</p>
                 <div className="mt-5">
@@ -187,12 +175,24 @@ export default async function DeportesPage({ params }: PageProps) {
                 </div>
               </div>
             </div>
+
+            {rugbyHockeyMedia.length > 0 ? (
+              <div className="w-full h-[300px]">
+                <MediaCarousel
+                  items={rugbyHockeyMedia}
+                  altText={t('rugbyHockey.carouselAlt')}
+                  className="w-full h-full rounded-xl shadow-lg"
+                />
+              </div>
+            ) : (
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            )}
           </div>
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 3 — SIC DOJO ═════════════ */}
-      <section id="dojo" className="relative w-full bg-white md:py-5 pt-80 pb-12 overflow-hidden">
+      <section id="dojo" className="relative w-full bg-white md:py-5 pt-12 sm:pt-80 pb-12 overflow-hidden scroll-mt-32">
         {/* Desktop */}
         <div className="hidden sm:block max-w-[1200px] mx-auto relative">
           <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute top-5 -right-24 w-[550px]" />
@@ -219,27 +219,27 @@ export default async function DeportesPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative min-h-[350px]">
-          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-72 -right-0 w-[550px]" />
-          {dojoMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
-              <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
-            </div>
-          ) : (
-            <img src="/images/Image-SIC-dojo.webp" alt={t('dojo.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
-          )}
-          <div className="absolute -top-8 left-0 w-full px-4 z-20 -translate-y-1/2">
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-72 -right-0 w-[550px] pointer-events-none" />
+          <div className="relative z-20 mb-6">
             <img src="/images/logo-dojo.svg" alt={t('dojo.logoAlt')} width={128} height={128} className="mx-auto mb-5 w-24" />
             <div className="bg-white shadow-xl rounded-xl p-4 text-center">
               <p className="text-xl font-bold">{t('dojo.title')}</p>
               <p className="mt-4 text-gray-700">{t('dojo.descriptionMobile')}</p>
             </div>
           </div>
+          {dojoMedia.length > 0 ? (
+            <div className="w-full h-[350px]">
+              <MediaCarousel items={dojoMedia} altText={t('dojo.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
+            </div>
+          ) : (
+            <img src="/images/Image-SIC-dojo.webp" alt={t('dojo.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+          )}
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 4 — SAN ISIDRO BALANCE ═════════════ */}
-      <section id="san-isidro-balance" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="san-isidro-balance" className="relative w-full max-w-[1200px] h-auto pt-12 sm:pt-96 md:py-10 bg-white mx-auto overflow-hidden scroll-mt-32">
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
           <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-0 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
@@ -267,25 +267,23 @@ export default async function DeportesPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Móvil */}
-          <div className="sm:hidden col-span-12 relative pt-16">
+          {/* Móvil: cuadro de texto y debajo la imagen del mismo ancho */}
+          <div className="sm:hidden col-span-12 relative px-4">
+            <div className="relative z-20 bg-white shadow-xl rounded-xl p-6 w-full text-center mb-6">
+              <img src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
+              <p className="text-xl font-bold">{t('gym.title')}</p>
+              <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
+                {t('gym.descriptionMobile')}
+              </p>
+            </div>
+
             {gymMedia.length > 0 ? (
               <div className="w-full h-[300px]">
-                <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-md shadow-lg" />
+                <MediaCarousel items={gymMedia} altText={t('gym.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
               </div>
             ) : (
-              <img src="/images/Image-SIC-hockey.webp" alt={t('gym.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-lg" />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('gym.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
             )}
-
-            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
-              <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <img src="/images/logo-gym-2.svg" alt={t('gym.logoAlt')} width={128} height={128} className="mx-auto mb-5" />
-                <p className="text-xl font-bold">{t('gym.title')}</p>
-                <p className="mt-4 text-gray-700" style={{ whiteSpace: 'pre-line' }}>
-                  {t('gym.descriptionMobile')}
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

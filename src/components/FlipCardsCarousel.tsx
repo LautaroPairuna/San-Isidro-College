@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLocale } from 'next-intl'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import {
   Carousel as UICarousel,
@@ -122,6 +123,7 @@ export default function FlipCardsCarousel({
   ariaLabel,
   itemClassName = 'basis-full sm:basis-1/2 lg:basis-1/3',
 }: FlipCardsCarouselProps) {
+  const locale = useLocale()
   const [api, setApi] = useState<CarouselApi>()
   const [slideIndex, setSlideIndex] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
@@ -207,7 +209,7 @@ export default function FlipCardsCarousel({
               }}
             >
               <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Anterior</span>
+              <span className="sr-only">{locale === 'es' ? 'Anterior' : 'Previous slide'}</span>
             </button>
 
             <button
@@ -222,7 +224,7 @@ export default function FlipCardsCarousel({
               }}
             >
               <ArrowRight className="h-4 w-4" />
-              <span className="sr-only">Siguiente</span>
+              <span className="sr-only">{locale === 'es' ? 'Siguiente' : 'Next slide'}</span>
             </button>
 
             <div className="mt-6 flex justify-center gap-2">
@@ -232,7 +234,7 @@ export default function FlipCardsCarousel({
                   <button
                     key={`dot-${index}`}
                     onClick={() => api?.scrollTo(pageSnapIndex)}
-                    aria-label={`Ir a la página ${index + 1}`}
+                    aria-label={`${locale === 'es' ? 'Ir a la página' : 'Go to page'} ${index + 1}`}
                     className={`h-2.5 rounded-full transition-all ${
                       isActive ? 'w-7 bg-black/75' : 'w-2.5 bg-black/25 hover:bg-black/45'
                     }`}

@@ -134,7 +134,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — BIENESTAR ESTUDIANTIL ═════════════ */}
-      <section id="bienestar-y-acompanamiento" className="relative w-full max-w-[1200px] h-auto pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="bienestar-y-acompanamiento" className="relative w-full scroll-mt-32 max-w-[1200px] h-auto pt-12 sm:pt-96 md:py-10 bg-white mx-auto overflow-hidden">
         <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-20 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
@@ -168,37 +168,35 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Móvil */}
-          <div className="sm:hidden col-span-12 relative pt-16">
+          {/* Móvil: cuadro de texto y debajo la imagen del mismo ancho */}
+          <div className="sm:hidden col-span-12 relative px-4">
+            <div className="relative z-20 bg-white shadow-xl rounded-xl p-6 w-full text-center mb-6">
+              <p className="text-xl font-bold">{tExperience('rugbyHockey.title')}</p>
+              <p className="mt-4 text-gray-700">{tExperience('rugbyHockey.description')}</p>
+              <div className="mt-5">
+                <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-[#1e804b] font-semibold hover:underline">
+                  {tExperience('rugbyHockey.readMore')}
+                </Link>
+              </div>
+            </div>
+
             {rugbyHockeyMedia.length > 0 ? (
               <div className="w-full h-[300px]">
                 <MediaCarousel
                   items={rugbyHockeyMedia}
                   altText={t('rugbyHockey.carouselAlt')}
-                  className="w-full h-full rounded-md shadow-lg"
+                  className="w-full h-full rounded-xl shadow-lg"
                 />
               </div>
             ) : (
-              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-lg" />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
             )}
-
-            <div className="absolute -top-20 left-0 w-full px-4 z-20 -translate-y-1/2">
-              <div className="bg-white shadow-xl rounded-xl p-8 w-full text-center">
-                <p className="text-xl font-bold">{tExperience('rugbyHockey.title')}</p>
-                <p className="mt-4 text-gray-700">{tExperience('rugbyHockey.description')}</p>
-                <div className="mt-5">
-                  <Link href="/experiencia-sic/bienestar-y-acompanamiento" className="text-[#1e804b] font-semibold hover:underline">
-                    {tExperience('rugbyHockey.readMore')}
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {	/* ═════════════ SECCIÓN 3 — GOOGLE REFERENCEW SCHOOL  ═════════════ */}
-      <section id="google-reference-school" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
+      <section id="google-reference-school" className="relative w-full scroll-mt-32 h-auto md:py-10 pt-12 sm:pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-16 2xl:right-80 xl:right-20 md:-right-28 w-[550px]" />
@@ -223,33 +221,31 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative">
-          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-20 right-35 w-[550px]" />
-          {googleMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
-              <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-md shadow-md" />
-            </div>
-          ) : (
-            <img src="/images/image-SIC-play.webp" alt={t('play.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
-          )}
-          <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <p className="text-xl font-bold">{tExperience('googleReferenceSchool.title')}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('googleReferenceSchool.description')}</p>
-              <div className="mt-5">
-                <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('googleReferenceSchool.readMore')}
-                </Link>
-              </div>
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-20 right-35 w-[550px] pointer-events-none" />
+          <div className="relative z-20 bg-white shadow-xl rounded-xl p-4 text-center mb-6">
+            <p className="text-xl font-bold">{tExperience('googleReferenceSchool.title')}</p>
+            <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('googleReferenceSchool.description')}</p>
+            <div className="mt-5">
+              <Link href="/experiencia-sic/google-reference-school" className="text-[#1e804b] font-semibold hover:underline">
+                {tExperience('googleReferenceSchool.readMore')}
+              </Link>
             </div>
           </div>
+          {googleMedia.length > 0 ? (
+            <div className="w-full h-[350px]">
+              <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
+            </div>
+          ) : (
+            <img src="/images/image-SIC-play.webp" alt={t('play.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+          )}
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 4 — INNOVACION Y ROBOTICA ═════════════ */}
       <section
         id="innovacion-y-robotica"
-        className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-white overflow-hidden"
+        className="relative w-full scroll-mt-32 h-auto md:py-10 pt-12 sm:pt-60 pb-12 bg-white overflow-hidden"
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
@@ -273,8 +269,17 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative min-h-[350px]">
-          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px]" />
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px] pointer-events-none" />
+          <div className="relative z-20 bg-white shadow-xl rounded-xl p-4 text-center mb-6">
+            <p className="text-xl font-bold">{tExperience('innovacionRobotica.title')}</p>
+            <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('innovacionRobotica.description')}</p>
+            <div className="mt-5">
+              <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
+                {tExperience('innovacionRobotica.readMore')}
+              </Link>
+            </div>
+          </div>
           {innovacionMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel items={innovacionMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
@@ -282,22 +287,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           ) : (
             <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
-          <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <p className="text-xl font-bold">{tExperience('innovacionRobotica.title')}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('innovacionRobotica.description')}</p>
-              <div className="mt-5">
-                <Link href="/experiencia-sic/innovacion-y-robotica" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('innovacionRobotica.readMore')}
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 5 — FE Y COMPROMISO SOCIAL ═════════════ */}
-      <section id="fe-y-compromiso-social" className="relative w-full h-auto md:py-10 pt-72 pb-16 bg-[#71af8d] overflow-hidden">
+      <section id="fe-y-compromiso-social" className="relative w-full scroll-mt-32 h-auto md:py-10 pt-12 sm:pt-72 pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0" />
@@ -332,39 +326,37 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative">
-          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute top-5 right-35 w-[550px]" />
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute top-5 right-35 w-[550px] pointer-events-none" />
+          <div className="relative z-20 bg-white shadow-xl rounded-xl p-4 text-center mb-6">
+            <p className="text-xl font-bold">{tExperience('feYCompromisoSocial.title')}</p>
+            <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
+              {tExperience('feYCompromisoSocial.description')}
+            </p>
+            <div className="mt-5">
+              <Link href="/experiencia-sic/fe-y-compromiso-social" className="text-[#1e804b] font-semibold hover:underline">
+                {tExperience('feYCompromisoSocial.readMore')}
+              </Link>
+            </div>
+          </div>
           {feMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel
                 items={feMedia}
                 altText={tExperience('feYCompromisoSocial.carouselAlt')}
-                className="w-full h-full rounded-md shadow-md"
+                className="w-full h-full rounded-xl shadow-lg"
               />
             </div>
           ) : (
-            <img src="/images/image-SIC-play.webp" alt={tExperience('feYCompromisoSocial.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
+            <img src="/images/image-SIC-play.webp" alt={tExperience('feYCompromisoSocial.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
-          <div className="absolute -top-10 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <p className="text-xl font-bold">{tExperience('feYCompromisoSocial.title')}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
-                {tExperience('feYCompromisoSocial.description')}
-              </p>
-              <div className="mt-5">
-                <Link href="/experiencia-sic/fe-y-compromiso-social" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('feYCompromisoSocial.readMore')}
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 6 — ARTE Y CREATIVIDAD ═════════════ */}
       <section
         id="arte-y-creatividad"
-        className="relative w-full h-auto md:py-10 pt-72 pb-12 bg-white overflow-hidden"
+        className="relative w-full scroll-mt-32 h-auto md:py-10 pt-12 sm:pt-72 pb-12 bg-white overflow-hidden"
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
@@ -398,8 +390,19 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative min-h-[350px]">
-          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px]" />
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px] pointer-events-none" />
+          <div className="relative z-20 bg-white shadow-xl rounded-xl p-4 text-center mb-6">
+            <p className="text-xl font-bold">{tExperience('arteYCreatividad.title')}</p>
+            <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
+              {tExperience('arteYCreatividad.description')}
+            </p>
+            <div className="mt-5">
+              <Link href="/experiencia-sic/arte-y-creatividad" className="text-[#1e804b] font-semibold hover:underline">
+                {tExperience('arteYCreatividad.readMore')}
+              </Link>
+            </div>
+          </div>
           {arteMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel
@@ -411,24 +414,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           ) : (
             <img src="/images/Image-vida-estudiantil.webp" alt={tExperience('arteYCreatividad.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
-          <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <p className="text-xl font-bold">{tExperience('arteYCreatividad.title')}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
-                {tExperience('arteYCreatividad.description')}
-              </p>
-              <div className="mt-5">
-                <Link href="/experiencia-sic/arte-y-creatividad" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('arteYCreatividad.readMore')}
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 7 — HOUSES ═════════════ */}
-      <section id="houses" className="relative w-full h-auto md:py-20 pt-[28rem] pb-16 bg-[#71af8d] overflow-hidden">
+      <section id="houses" className="relative w-full scroll-mt-32 h-auto md:py-20 pt-12 sm:pt-[28rem] pb-16 bg-[#71af8d] overflow-hidden">
         {/* Desktop */}
         <div className="hidden sm:block relative">
           <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-16 2xl:right-52 xl:right-0 md:-right-28 w-[550px] z-0" />
@@ -464,40 +454,38 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative">
-          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute top-5 right-35 w-[550px]" />
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute top-5 right-35 w-[550px] pointer-events-none" />
+          <div className="relative z-20 bg-white shadow-xl rounded-xl p-4 text-center mb-6">
+            <p className="text-xl font-bold">{tExperience('houses.title')}</p>
+            <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={458} height={125} className="mx-auto my-5 w-full h-auto" />
+            <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
+              {tExperience('houses.description')}
+            </p>
+            <div className="mt-5">
+              <Link href="/experiencia-sic/houses" className="text-[#1e804b] font-semibold hover:underline">
+                {tExperience('houses.readMore')}
+              </Link>
+            </div>
+          </div>
           {housesMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel
                 items={housesMedia}
                 altText={tExperience('houses.carouselAlt')}
-                className="w-full h-full rounded-md shadow-md"
+                className="w-full h-full rounded-xl shadow-lg"
               />
             </div>
           ) : (
-            <img src="/images/image-SIC-play.webp" alt={tExperience('houses.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-md shadow-md" />
+            <img src="/images/image-SIC-play.webp" alt={tExperience('houses.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
-          <div className="absolute -top-24 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <p className="text-xl font-bold">{tExperience('houses.title')}</p>
-              <img src="/images/experiencias/logos-houses.svg" alt={tExperience('houses.logosAlt')} width={458} height={125} className="mx-auto my-5 w-full h-auto" />
-              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm" style={{ whiteSpace: 'pre-line' }}>
-                {tExperience('houses.description')}
-              </p>
-              <div className="mt-5">
-                <Link href="/experiencia-sic/houses" className="text-[#1e804b] font-semibold hover:underline">
-                  {tExperience('houses.readMore')}
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ═════════════ SECCIÓN 8 — ACTIVIDADES EXTRACURRICULARES ═════════════ */}
       <section
         id="actividades-extracurriculares"
-        className="relative w-full h-auto md:py-10 pt-60 pb-12 bg-white overflow-hidden"
+        className="relative w-full scroll-mt-32 h-auto md:py-10 pt-12 sm:pt-60 pb-12 bg-white overflow-hidden"
       >
         {/* Desktop */}
         <div className="hidden sm:grid grid-cols-12 gap-8 max-w-[1200px] mx-auto">
@@ -516,8 +504,12 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
         </div>
 
         {/* Mobile */}
-        <div className="sm:hidden relative min-h-[350px]">
-          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px]" />
+        <div className="sm:hidden relative px-4">
+          <img src="/images/formas/forma-home-5.svg" alt="" width={550} height={300} className="absolute -top-15 right-35 w-[550px] pointer-events-none" />
+          <div className="relative z-20 bg-white shadow-xl rounded-xl p-4 text-center mb-6">
+            <p className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</p>
+            <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
+          </div>
           {vidaMedia.length > 0 ? (
             <div className="w-full h-[350px]">
               <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
@@ -525,12 +517,6 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
           ) : (
             <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
           )}
-          <div className="absolute top-0 left-0 w-full px-4 z-20 -translate-y-1/2">
-            <div className="bg-white shadow-xl rounded-xl p-4 text-center">
-              <p className="text-xl font-bold">{tExperience('actividadesExtracurriculares.title')}</p>
-              <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
-            </div>
-          </div>
         </div>
       </section>
 

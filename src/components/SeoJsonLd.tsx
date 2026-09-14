@@ -15,7 +15,7 @@ export default function SeoJsonLd({ locale }: { locale: string }) {
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     url: baseUrl,
-    description: siteConfig.description,
+    description: locale === 'en' ? siteConfig.descriptionEn : siteConfig.description,
     email: siteConfig.email,
     inLanguage: locale,
     image: `${baseUrl}${siteConfig.defaultOgImage}`,

@@ -2,6 +2,7 @@
 'use client';
 
 import { useMemo, useState, useEffect } from 'react';
+import { useLocale } from 'next-intl';
 import RenderMedia from '@/components/RenderMedia';
 import {
   Carousel,
@@ -29,6 +30,7 @@ interface SectionCarruselProps {
 }
 
 export default function SectionCarrusel({ medios }: SectionCarruselProps) {
+  const locale = useLocale();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -128,7 +130,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
                     ? 'bg-[#71af8d] w-8' // Activo: Verde y alargado
                     : 'bg-[#71af8d]/30 w-2.5 hover:bg-[#71af8d]/60' // Inactivo: Verde transparente
                 )}
-                aria-label={`Ir al slide ${index + 1}`}
+                aria-label={`${locale === 'es' ? 'Ir al slide' : 'Go to slide'} ${index + 1}`}
               />
             ))}
           </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useLocale } from 'next-intl';
 import {
   Carousel,
   CarouselContent,
@@ -35,6 +36,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
   altText = '',
   className = '',
 }) => {
+  const locale = useLocale();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -143,7 +145,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
                     ? 'bg-white w-8 h-2.5'
                     : 'bg-white/50 w-2.5 h-2.5 hover:bg-white/80'
                 )}
-                aria-label={`Ir al slide ${index + 1}`}
+                aria-label={`${locale === 'es' ? 'Ir al slide' : 'Go to slide'} ${index + 1}`}
               />
             ))}
           </div>
