@@ -80,14 +80,14 @@ export default async function DeportesPage({ params }: PageProps) {
       {/* ═════════════ SECCIÓN 1 — HERO ═════════════ */}
       <section className="relative w-full h-auto lg:h-screen grid grid-cols-12 overflow-hidden" id="deportes">
         {/* --- COLUMNA VERDE ------------------------------------------------ */}
-        <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex justify-center items-center px-4 md:px-16">
+        <div className="col-span-12 md:col-span-4 bg-[#71af8d] relative flex flex-col justify-center items-center gap-6 px-4 md:px-16 pt-28 pb-8 md:pt-0 md:pb-0">
           {/* Forma decorativa móvil */}
           <div className="block lg:hidden absolute inset-0 pointer-events-none">
             <img src="/images/formas/forma-home-1.svg" alt="" className="absolute inset-0 h-full w-full object-cover" />
           </div>
 
           {/* Slogan + botón (móvil) */}
-          <div className="lg:hidden relative flex justify-between items-end h-full pt-40 pb-12 z-20 md:w-[80%] w-full">
+          <div className="lg:hidden relative flex justify-between items-end z-20 md:w-[80%] w-full md:h-full md:pt-40 md:pb-12">
             <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="z-40 max-sm:w-[100px] max-sm:h-[100px] max-lg:w-[150px] max-lg:h-[150px] drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           </div>
 
@@ -95,20 +95,32 @@ export default async function DeportesPage({ params }: PageProps) {
           <div className="hidden lg:block">
             <img src="/images/eslogan.svg" alt={t('hero.alt')} width={250} height={250} className="absolute top-[65%] left-[77%] -translate-x-1/2 z-40 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.8)]" />
           </div>
+
+          {/* Recuadro: SÓLO en celular (menos de md). Desde md el recuadro
+              original vuelve a superponerse centrado sobre el carrusel. */}
+          <div className="md:hidden relative z-20 bg-white rounded-3xl shadow-lg p-6 max-w-sm text-left">
+            <h1 className="text-2xl font-bold mb-2">{t('hero.title')}</h1>
+            <p className="text-gray-700 text-sm">{t('hero.description')}</p>
+            <div className="text-center mt-5">
+              <Link href="/deportes-mas-info" className="text-[#1e804b] font-semibold hover:underline">
+                {t('hero.readMore')}
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* --- COLUMNA CARRUSEL ------------------------------------------- */}
-        <div className="col-span-12 md:col-span-8 relative w-full h-[450px] md:h-[900px] lg:h-full">
+        <div className="col-span-12 md:col-span-8 relative w-full h-[320px] md:h-[900px] lg:h-full">
           {heroMedia.length > 0 ? (
             <MediaCarousel items={heroMedia} altText={t('hero.carouselAlt')} className="w-full h-full" />
           ) : (
             <img src="/images/Image-deportes.webp" alt={t('hero.fallbackAlt')} className="absolute inset-0 h-full w-full object-cover" />
           )}
 
-          {/* Recuadro blanco centrado */}
+          {/* Recuadro blanco centrado: SÓLO desde md (como estaba originalmente) */}
           <div
-            className="bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg 
-                        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+            className="hidden md:block bg-white p-4 md:p-8 w-[90%] md:w-[550px] rounded-3xl shadow-lg
+                        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                         z-40 lg:top-[60%] lg:left-[50%] xl:top-[70%] xl:left-[35%]"
           >
             <h1 className="text-2xl md:text-3xl font-bold mb-2">{t('hero.title')}</h1>
