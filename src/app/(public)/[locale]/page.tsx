@@ -5,6 +5,7 @@ import MediaCarousel from '@/components/MediaCarousel'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
 import PilaresEducativos from '@/components/PilaresEducativos'
+import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
 import { ADMISSIONS_FORM_URL } from '@/lib/siteConfig'
@@ -113,25 +114,8 @@ const HomePage = async ({ params }: PageProps) => {
         className="relative w-full bg-[#dcebe0] py-24 lg:py-32 lg:min-h-[620px] overflow-hidden flex items-center"
         id="bienvenida"
       >
-        {/* Forma sólida asomando apenas desde arriba, detrás del texto */}
-        <img
-          src="/images/formas/forma-home-1.svg"
-          alt=""
-          aria-hidden="true"
-          width={300}
-          height={402}
-          className="absolute -top-[340px] left-[8%] w-[300px] h-auto pointer-events-none z-0 max-sm:w-[180px] max-sm:-top-[210px]"
-        />
-        {/* Trazos punteados decorativos, confinados al margen izquierdo para
-            no cruzar el texto */}
-        <img
-          src="/images/formas/forma-home-5.svg"
-          alt=""
-          aria-hidden="true"
-          width={480}
-          height={640}
-          className="absolute top-1/2 -translate-y-1/2 -left-16 w-[480px] max-w-none h-auto pointer-events-none z-0 opacity-60 max-sm:hidden"
-        />
+        {/* Mismo trazo punteado decorativo que Colegio y Académicos */}
+        <FondoFormaSeccion />
 
         <div className="relative z-10 max-w-screen-xl mx-auto px-6 w-full">
           <div className="max-w-xl lg:ml-[30%]">
