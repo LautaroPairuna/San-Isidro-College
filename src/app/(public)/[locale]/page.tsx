@@ -118,45 +118,39 @@ const HomePage = async ({ params }: PageProps) => {
           className="relative w-full bg-[#dcebe0] py-24 lg:py-32 lg:min-h-[620px] flex items-center"
           id="bienvenida"
         >
-          {/* Misma grilla de 12 columnas que Pilares, así el texto queda en
-              la misma columna donde después cae la rueda (col 6-12): todo
-              el bloque Bienvenida+Pilares comparte una única columna. */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 max-w-screen-xl mx-auto px-4 w-full">
-            <div className="lg:col-start-6 lg:col-span-7 max-w-xl">
-              <h1 className="text-2xl lg:text-3xl font-bold text-[#294161]">
-                {t('bienvenida.title')}
-              </h1>
-              <p className="mt-3 font-bold text-[#c19516]">
-                {t('bienvenida.greeting')}
-              </p>
-              <div className="mt-4 space-y-3 text-[#294161] italic leading-relaxed text-[15px]">
-                <p>{t('bienvenida.p1')}</p>
-                <p>{t('bienvenida.p2')}</p>
-                <p>{t('bienvenida.p3')}</p>
-              </div>
+          {/* Columna centrada en la pantalla, compartida con Pilares
+              (mismo max-w y mismo padding), en vez de desplazada a un lado. */}
+          <div className="relative z-10 max-w-2xl mx-auto px-4 w-full">
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#294161]">
+              {t('bienvenida.title')}
+            </h1>
+            <p className="mt-3 font-bold text-[#c19516]">
+              {t('bienvenida.greeting')}
+            </p>
+            <div className="mt-4 space-y-3 text-[#294161] italic leading-relaxed text-[15px]">
+              <p>{t('bienvenida.p1')}</p>
+              <p>{t('bienvenida.p2')}</p>
+              <p>{t('bienvenida.p3')}</p>
             </div>
           </div>
         </section>
 
         {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
         <section className="relative w-full bg-white py-12 lg:py-20" id="pilares">
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
-            {/* Los dos contenidos (texto + rueda), como conjunto, quedan
-                dentro de la misma columna que el párrafo de Bienvenida
-                (col 6-12, max-w-xl) — no cada uno centrado por separado. */}
-            <div className="lg:col-start-6 lg:col-span-7 max-w-xl">
-              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-6">
-                {/* Texto: contra el filete, como en el resto del sitio (BloqueRotulo) */}
-                <div className="lg:flex-1 lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-6 order-2 lg:order-1">
-                  <p className="text-gray-700 italic leading-relaxed">
-                    {t('pilares.intro')}
-                  </p>
-                </div>
+          {/* Mismo max-w y padding que Bienvenida, así el texto queda en la
+              misma columna, centrada en la pantalla. */}
+          <div className="relative z-10 max-w-2xl mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-6">
+              {/* Texto: contra el filete, como en el resto del sitio (BloqueRotulo) */}
+              <div className="lg:flex-1 lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-6 order-2 lg:order-1">
+                <p className="text-gray-700 italic leading-relaxed">
+                  {t('pilares.intro')}
+                </p>
+              </div>
 
-                {/* Rueda de pilares */}
-                <div className="lg:flex-1 flex justify-center order-1 lg:order-2">
-                  <PilaresEducativos className="w-full max-w-[280px] h-auto" />
-                </div>
+              {/* Rueda de pilares */}
+              <div className="lg:flex-1 flex justify-center order-1 lg:order-2">
+                <PilaresEducativos className="w-full max-w-[340px] h-auto" />
               </div>
             </div>
           </div>
@@ -343,13 +337,14 @@ const HomePage = async ({ params }: PageProps) => {
           </div>
         </div>
 
-        {/* Filete divisorio entre "propuesta" y "conocernos" */}
-        <div className="max-w-screen-xl mx-auto px-6 md:px-24">
+        {/* Filete divisorio entre "propuesta" y "conocernos", con el mismo
+            aire arriba y abajo para que no quede pegado a los enlaces */}
+        <div className="max-w-screen-xl mx-auto px-6 md:px-24 my-10 lg:my-14">
           <hr className="border-t border-[#1e804b]/30" />
         </div>
 
         {/* =========== LOS INVITAMOS A CONOCERNOS =========== */}
-        <div className="max-w-screen-xl mx-auto px-6 md:px-24 pt-14 lg:pt-20" id="conocernos">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-24" id="conocernos">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Texto */}
             <div className="lg:col-span-7 space-y-4">
