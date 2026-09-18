@@ -67,7 +67,7 @@ export default function SectionCarrusel({ medios }: SectionCarruselProps) {
 
   return (
     <section id="alianzas">
-      <div className="relative w-full mx-auto py-10 border-t-4 border-b-4 border-[#71af8d]">
+      <div className="relative w-full mx-auto py-10">
         <Carousel
           setApi={setApi}
           opts={{

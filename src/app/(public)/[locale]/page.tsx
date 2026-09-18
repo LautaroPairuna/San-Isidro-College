@@ -138,8 +138,8 @@ const HomePage = async ({ params }: PageProps) => {
         {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
         <section className="relative w-full bg-white py-12 lg:py-20" id="pilares">
           {/* Contenedor más ancho que el de Bienvenida (pero también centrado
-              en la pantalla) para poder alojar la rueda a ~760px. */}
-          <div className="relative z-10 max-w-[1200px] mx-auto px-4">
+              en la pantalla) para poder alojar la rueda a ~560px. */}
+          <div className="relative z-10 max-w-[1024px] mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 lg:gap-10">
               {/* Texto: contra el filete, como en el resto del sitio (BloqueRotulo).
                   El filete estira su altura para igualar la de la rueda. */}
@@ -150,7 +150,7 @@ const HomePage = async ({ params }: PageProps) => {
               </div>
 
               {/* Rueda de pilares */}
-              <div className="w-full lg:w-[760px] shrink-0 flex justify-center order-1 lg:order-2">
+              <div className="w-full lg:w-[560px] shrink-0 flex justify-center order-1 lg:order-2">
                 <PilaresEducativos className="w-full max-w-[340px] lg:max-w-none h-auto" />
               </div>
             </div>
