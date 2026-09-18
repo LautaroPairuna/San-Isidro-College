@@ -12,7 +12,6 @@ import { ADMISSIONS_FORM_URL } from '@/lib/siteConfig'
 // SLUGS de secciones (coinciden con DB)
 const SECTION_SLUGS = {
   HERO: 'home-hero',
-  BIENVENIDA: 'home-bienvenida',
   INFOGRAFIA: 'home-infografia',
   SEC3_BACKGROUND: 'home-sec3-background',
   ALIANZAS: 'home-alianzas',
@@ -53,9 +52,6 @@ const HomePage = async ({ params }: PageProps) => {
 
   // 1) Hero (carrousel)
   const heroMedia = getMedias(SECTION_SLUGS.HERO);
-
-  // 2) Bienvenida (único)
-  const bienvenidaArr = getMedias(SECTION_SLUGS.BIENVENIDA);
 
   // 3) Infografía íconos
   const infografiaIcons = getMedias(SECTION_SLUGS.INFOGRAFIA);
@@ -112,41 +108,44 @@ const HomePage = async ({ params }: PageProps) => {
                     max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2" fetchPriority="high" />
       </section>
 
-      {/* =============== SECCIÓN 2: BIENVENIDA (MÉTODO UNICO) =============== */}
-      <section className="relative w-full py-10 bg-white lg:min-h-[720px] overflow-x-hidden" id="bienvenida">
-        <div className="grid grid-cols-12 gap-8 max-w-screen-xl mx-auto">
-          {/* Columna Izquierda */}
-          <div className="col-span-4 relative flex flex-col justify-center max-lg:col-span-12">
-            <div className="bg-white shadow-xl rounded-xl p-8 absolute top-10 left-[55%] w-[650px] z-20 max-lg:relative max-lg:top-35 max-lg:left-0 max-lg:w-[90%] max-lg:mx-auto">
-              <h1 className="text-2xl font-bold text-gray-900 text-center">
-                {t('bienvenida.title')}
-              </h1>
-              <div className="mt-4 space-y-3 text-gray-700 italic leading-relaxed text-[15px]">
-                <p>{t('bienvenida.greeting')}</p>
-                <p>{t('bienvenida.p1')}</p>
-                <p>{t('bienvenida.p2')}</p>
-                <p>{t('bienvenida.p3')}</p>
-              </div>
-            </div>
-            {/* Línea decorativa */}
-            <div className="absolute top-0 -left-20 h-[700px] w-[860px] max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:h-[600px] max-lg:w-[700px] max-lg:-translate-x-1/2">
-              <img src="/images/formas/forma-home-2.svg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-contain object-left-top" />
-            </div>
-          </div>
+      {/* =============== SECCIÓN 2: BIENVENIDA =============== */}
+      <section
+        className="relative w-full bg-[#dcebe0] py-24 lg:py-32 lg:min-h-[620px] overflow-hidden flex items-center"
+        id="bienvenida"
+      >
+        {/* Forma sólida asomando apenas desde arriba, detrás del texto */}
+        <img
+          src="/images/formas/forma-home-1.svg"
+          alt=""
+          aria-hidden="true"
+          width={300}
+          height={402}
+          className="absolute -top-[340px] left-[8%] w-[300px] h-auto pointer-events-none z-0 max-sm:w-[180px] max-sm:-top-[210px]"
+        />
+        {/* Trazos punteados decorativos, confinados al margen izquierdo para
+            no cruzar el texto */}
+        <img
+          src="/images/formas/forma-home-5.svg"
+          alt=""
+          aria-hidden="true"
+          width={480}
+          height={640}
+          className="absolute top-1/2 -translate-y-1/2 -left-16 w-[480px] max-w-none h-auto pointer-events-none z-0 opacity-60 max-sm:hidden"
+        />
 
-          {/* Columna Derecha */}
-          <div className="col-span-8 max-lg:col-span-12 z-10 relative h-[350px] sm:h-[470px] lg:h-[700px]">
-            {bienvenidaArr.length > 0 ? (
-              <MediaCarousel
-                items={bienvenidaArr}
-                altText={t('bienvenida.title')}
-                className="w-full h-full rounded-xl shadow-lg"
-              />
-            ) : (
-              <div className="relative w-full h-full rounded-xl shadow-lg overflow-hidden">
-                <img src="/images/fondo-bienvenida.webp" alt={t('bienvenida.title')} className="absolute inset-0 h-full w-full object-cover" />
-              </div>
-            )}
+        <div className="relative z-10 max-w-screen-xl mx-auto px-6 w-full">
+          <div className="max-w-xl lg:ml-[30%]">
+            <h1 className="text-2xl lg:text-3xl font-bold text-[#294161]">
+              {t('bienvenida.title')}
+            </h1>
+            <p className="mt-3 font-bold text-[#c19516]">
+              {t('bienvenida.greeting')}
+            </p>
+            <div className="mt-4 space-y-3 text-[#294161] italic leading-relaxed text-[15px]">
+              <p>{t('bienvenida.p1')}</p>
+              <p>{t('bienvenida.p2')}</p>
+              <p>{t('bienvenida.p3')}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -159,20 +158,19 @@ const HomePage = async ({ params }: PageProps) => {
         {/* La rueda queda chica si el contenedor se corta en 1280, así que en
             pantallas grandes se ensancha. La proporción de columnas no cambia. */}
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
-          {/* Rueda de pilares */}
-          <div className="lg:col-span-5 flex justify-center">
-            <PilaresEducativos className="w-full max-w-[780px] h-auto" />
-          </div>
-
-          {/* Texto introductorio: el cuadro no ocupa toda la columna, para que
-              no quede un renglón de texto larguísimo y descentrado respecto
-              a la rueda; se limita su ancho y se centra dentro de la columna. */}
-          <div className="lg:col-span-7 flex justify-center">
-            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-2xl p-6 md:p-8 max-w-md lg:max-w-lg">
+          {/* Texto introductorio: contra el filete, como en el resto del sitio
+              (BloqueRotulo), en vez de una tarjeta flotante. */}
+          <div className="lg:col-span-5 flex lg:justify-end order-2 lg:order-1">
+            <div className="max-w-md lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-8">
               <p className="text-gray-700 italic leading-relaxed">
                 {t('pilares.intro')}
               </p>
             </div>
+          </div>
+
+          {/* Rueda de pilares */}
+          <div className="lg:col-span-7 flex justify-center order-1 lg:order-2">
+            <PilaresEducativos className="w-full max-w-[780px] h-auto" />
           </div>
         </div>
       </section>
@@ -265,8 +263,10 @@ const HomePage = async ({ params }: PageProps) => {
       {/* Carrusel global */}
       <SectionCarrusel medios={alianzasMedia} />
 
-      {/* =========== SECCIÓN 4: DESCUBRÍ NUESTRA PROPUESTA =========== */}
-      <section className="relative w-full bg-[#dfeadf] py-14 lg:py-20" id="propuesta">
+      {/* =========== SECCIÓN 4: DESCUBRÍ NUESTRA PROPUESTA + CONOCERNOS ===========
+          Una única sección con fondo verde continuo: "propuesta" arriba y
+          "conocernos" abajo, separadas sólo por un filete (como en el diseño). */}
+      <section className="relative w-full bg-[#dcebe0] py-14 lg:py-20" id="propuesta">
         <div className="max-w-screen-xl mx-auto px-6 md:px-24">
           <div className="pb-10">
             <h2 className="text-3xl lg:text-4xl font-bold text-[#294161]">
@@ -351,18 +351,18 @@ const HomePage = async ({ params }: PageProps) => {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* =========== SECCIÓN 5: LOS INVITAMOS A CONOCERNOS =========== */}
-      <section className="relative w-full bg-white py-14 lg:py-20 overflow-hidden" id="conocernos">
-        {/* Trazo decorativo (solo desktop) */}
-        <img src="/images/formas/forma-home-2.svg" alt="" width={600} height={700} aria-hidden="true" className="absolute -top-0 2xl:right-10 xl:-right-24 w-[650px] h-auto pointer-events-none scale-x-[-1]" />
+        {/* Filete divisorio entre "propuesta" y "conocernos" */}
+        <div className="max-w-screen-xl mx-auto px-6 md:px-24">
+          <hr className="border-t border-[#1e804b]/30" />
+        </div>
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-screen-xl mx-auto px-4">
-          {/* Tarjeta de texto: en desktop queda a la derecha de la imagen */}
-          <div className="lg:col-span-5 lg:order-2 relative z-20 flex items-center">
-            <div className="bg-white shadow-[0_0_20px_-4px_rgba(0,0,0,0.9)] rounded-4xl p-6 md:p-8 w-full lg:w-[680px] lg:absolute lg:right-[10%] space-y-4">
-              <h2 className="text-2xl lg:text-3xl font-bold text-[#4a4a49]">
+        {/* =========== LOS INVITAMOS A CONOCERNOS =========== */}
+        <div className="max-w-screen-xl mx-auto px-6 md:px-24 pt-14 lg:pt-20" id="conocernos">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Texto */}
+            <div className="lg:col-span-7 space-y-4">
+              <h2 className="text-2xl lg:text-3xl font-bold text-[#294161]">
                 {t('conocernos.title')}
               </h2>
               <p className="text-gray-700 leading-relaxed">
@@ -375,24 +375,27 @@ const HomePage = async ({ params }: PageProps) => {
                 href={ADMISSIONS_FORM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-[#1e804b] font-semibold hover:underline"
+                className="inline-flex items-center gap-2 text-[#294161] font-semibold hover:text-[#1e804b] transition-colors"
               >
                 {t('conocernos.cta')}
+                <span aria-hidden="true" className="text-[#c19516]">
+                  →
+                </span>
               </a>
-              <p className="text-sm italic text-gray-500">
+              <p className="text-sm italic text-gray-600">
                 {t('conocernos.disclaimer')}
               </p>
             </div>
-          </div>
 
-          {/* Imagen: en desktop queda a la izquierda de la tarjeta de texto */}
-          <div className="lg:col-span-7 lg:order-1 relative z-10 h-[350px] sm:h-[400px] lg:h-[650px]">
-            <RenderMedia
-              medio={conocernosMedio}
-              fallback="/images/fondo-bienvenida.webp"
-              fill
-              className="rounded-xl shadow-lg object-cover"
-            />
+            {/* Foto */}
+            <div className="lg:col-span-5 relative h-[280px] sm:h-[340px] lg:h-[380px]">
+              <RenderMedia
+                medio={conocernosMedio}
+                fallback="/images/fondo-bienvenida.webp"
+                fill
+                className="rounded-xl shadow-lg object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

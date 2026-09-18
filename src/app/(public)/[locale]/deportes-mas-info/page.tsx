@@ -56,7 +56,9 @@ export default async function DeportesMasInfoPage({ params }: PageProps) {
       </section>
 
       {/* ============ ASÍ NACIÓ EL CLUB ============ */}
-      <section id="club-origen" className="relative w-full bg-white py-16 lg:py-24 scroll-mt-32">
+      {/* Mismo fondo que "San Isidro College Club": es la continuación de esa
+          misma sección, no un bloque nuevo. */}
+      <section id="club-origen" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           {/* Texto contra el filete y, del otro lado, el escudo del club. */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -64,8 +66,16 @@ export default async function DeportesMasInfoPage({ params }: PageProps) {
               <p>{t('club.p3')}</p>
               <p>{t('club.p4')}</p>
             </div>
-            <div className="md:col-span-5 flex items-center justify-center">
+            <div className="md:col-span-5 flex flex-col items-center justify-center gap-4">
               <img src="/images/logo-club-rugby-hockey.svg" alt={t('club.logoAlt')} width={220} height={260} className="h-auto w-40 object-contain md:w-52" />
+              <a
+                href="https://www.siccsalta.com.ar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1e804b] font-semibold hover:underline"
+              >
+                {t('club.website')}
+              </a>
             </div>
           </div>
         </div>

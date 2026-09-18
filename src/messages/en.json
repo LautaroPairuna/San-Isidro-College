@@ -6,7 +6,7 @@
       "loading": "Loading Home…"
     },
     "bienvenida": {
-      "title": "WELCOME TO SAN ISIDRO",
+      "title": "Welcome to San Isidro College",
       "greeting": "Dear families,",
       "p1": "We know that choosing a school for your children is probably one of the most important decisions you will face as parents. It means choosing the place that will accompany them through a key stage of their lives, where they will learn, grow, discover their talents and build bonds that leave a lasting mark.",
       "p2": "We know you are entrusting us with the most valuable thing you have. That is why we are committed to accompanying, caring for and educating every student in an environment of love, respect and joy, within a holistic, bilingual and Catholic-oriented education, sustained by high academic standards.",
@@ -662,7 +662,7 @@
     },
     "lab": {
       "title": "A space to experiment",
-      "p1": "Our lab brings together different tools and technologies so students can investigate, build, and learn actively.",
+      "p1": "We bring together different tools and technologies so students can investigate, build, and learn actively.",
       "tools": {
         "robotics": "Robotics",
         "programming": "Programming",
@@ -830,7 +830,8 @@
       "p2": "With that vision, the School took the first steps and carried out the necessary procedures with the Salta Rugby and Hockey Union to make official competition possible.",
       "p3": "From there, the commitment and work of the School's sports coordinator and a group of parents turned that initiative into an institution with its own independent legal status, established within the principles and conditions set out by the School.",
       "p4": "That is how San Isidro College Club came about: from a vision driven by the School and the commitment of families who made it real, sharing from the very beginning one identity and one way of understanding sport. School and Club share the same aspiration: to sow example, discipline, hard work, and values that go beyond the pitch and accompany children and young people as they grow, within a strong, close, and committed community.",
-      "logoAlt": "San Isidro College Club crest"
+      "logoAlt": "San Isidro College Club crest",
+      "website": "Visit the Club's website"
     }
   },
   "vidaEstudiantilMasInfo": {

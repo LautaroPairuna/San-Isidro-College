@@ -6,7 +6,7 @@
       "loading": "Cargando Home…"
     },
     "bienvenida": {
-      "title": "BIENVENIDOS A SAN ISIDRO",
+      "title": "Bienvenidos a San Isidro College",
       "greeting": "Queridas familias:",
       "p1": "Somos conscientes de que elegir un colegio para sus hijos es, probablemente, una de las decisiones más importantes a las que se enfrentan como padres. Es elegir el lugar que los acompañará durante una etapa fundamental de sus vidas, donde aprenderán, crecerán, descubrirán sus talentos y construirán vínculos que dejarán huella.",
       "p2": "Sabemos que nos confían lo más valioso que tienen. Por eso, asumimos el compromiso de acompañar, cuidar y educar a cada estudiante en un ambiente de amor, respeto y alegría, en el marco de una propuesta integral, bilingüe y de orientación católica, sostenida por altos estándares académicos.",
@@ -662,7 +662,7 @@
     },
     "lab": {
       "title": "Un espacio para experimentar",
-      "p1": "Nuestro laboratorio integra distintas herramientas y tecnologías para que los alumnos puedan investigar, construir y aprender de manera activa.",
+      "p1": "Integramos distintas herramientas y tecnologías para que los alumnos puedan investigar, construir y aprender de manera activa.",
       "tools": {
         "robotics": "Robótica",
         "programming": "Programación",
@@ -830,7 +830,8 @@
       "p2": "Con esa visión, el Colegio dio los primeros pasos y realizó las gestiones necesarias ante la Unión de rugby y hockey de Salta, para posibilitar la participación deportiva oficial.",
       "p3": "A partir de allí, el compromiso y el trabajo del Coordinador de deportes del colegio y de un grupo de padres, permitieron transformar aquella iniciativa en una institución con personería jurídica propia e independiente, constituida en el marco de los principios y condiciones establecidos por el Colegio.",
       "p4": "Así nació San Isidro College Club: de una visión impulsada por el Colegio y del compromiso de familias que la hicieron realidad, compartiendo desde el comienzo una misma identidad y una misma manera de entender el deporte. Colegio y Club tienen una misma aspiración: sembrar ejemplo, disciplina, trabajo y valores que trasciendan la cancha y acompañen a niños y jóvenes en su crecimiento, dentro de una comunidad fuerte, cercana y comprometida.",
-      "logoAlt": "Escudo de San Isidro College Club"
+      "logoAlt": "Escudo de San Isidro College Club",
+      "website": "Visitar el sitio del Club"
     }
   },
   "vidaEstudiantilMasInfo": {
