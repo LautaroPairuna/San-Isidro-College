@@ -154,7 +154,7 @@ const HomePage = async ({ params }: PageProps) => {
 
           {/* Rueda de pilares */}
           <div className="lg:col-span-7 flex justify-center order-1 lg:order-2">
-            <PilaresEducativos className="w-full max-w-[780px] h-auto" />
+            <PilaresEducativos className="w-full max-w-[420px] h-auto" />
           </div>
         </div>
       </section>
