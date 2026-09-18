@@ -141,7 +141,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
       </section>
 
       {/* ═════════════ SECCIÓN 2 — BIENESTAR ESTUDIANTIL ═════════════ */}
-      <section id="bienestar-y-acompanamiento" className="relative w-full scroll-mt-32 max-w-[1200px] h-auto pt-12 sm:pt-96 md:py-10 bg-white mx-auto overflow-hidden">
+      <section id="bienestar-y-acompanamiento" className="relative w-full scroll-mt-32 max-w-[1200px] h-auto pt-12 pb-12 sm:pt-96 sm:pb-0 md:py-10 bg-white mx-auto overflow-hidden">
         <img src="/images/formas/forma-home-2.svg" alt="" width={550} height={300} className="absolute -top-5 -left-20 w-[550px] max-sm:top-0 max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:w-[600px]" />
 
         <div className="relative z-10 grid grid-cols-12 gap-8">
@@ -188,7 +188,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
 
             {rugbyHockeyMedia.length > 0 ? (
-              <div className="w-full h-[300px]">
+              <div className="w-full h-[300px] mb-10">
                 <MediaCarousel
                   items={rugbyHockeyMedia}
                   altText={t('rugbyHockey.carouselAlt')}
@@ -196,7 +196,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
                 />
               </div>
             ) : (
-              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+              <img src="/images/Image-SIC-hockey.webp" alt={t('rugbyHockey.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
             )}
           </div>
         </div>
@@ -240,11 +240,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           {googleMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] mb-10">
               <MediaCarousel items={googleMedia} altText={t('play.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
-            <img src="/images/image-SIC-play.webp" alt={t('play.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            <img src="/images/image-SIC-play.webp" alt={t('play.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
           )}
         </div>
       </section>
@@ -288,11 +288,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           {innovacionMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] mb-10">
               <MediaCarousel items={innovacionMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
-            <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
           )}
         </div>
       </section>
@@ -347,7 +347,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           {feMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] mb-10">
               <MediaCarousel
                 items={feMedia}
                 altText={tExperience('feYCompromisoSocial.carouselAlt')}
@@ -355,7 +355,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <img src="/images/image-SIC-play.webp" alt={tExperience('feYCompromisoSocial.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            <img src="/images/image-SIC-play.webp" alt={tExperience('feYCompromisoSocial.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
           )}
         </div>
       </section>
@@ -411,7 +411,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           {arteMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] mb-10">
               <MediaCarousel
                 items={arteMedia}
                 altText={tExperience('arteYCreatividad.carouselAlt')}
@@ -419,7 +419,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <img src="/images/Image-vida-estudiantil.webp" alt={tExperience('arteYCreatividad.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            <img src="/images/Image-vida-estudiantil.webp" alt={tExperience('arteYCreatividad.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
           )}
         </div>
       </section>
@@ -476,7 +476,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             </div>
           </div>
           {housesMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] mb-10">
               <MediaCarousel
                 items={housesMedia}
                 altText={tExperience('houses.carouselAlt')}
@@ -484,7 +484,7 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
               />
             </div>
           ) : (
-            <img src="/images/image-SIC-play.webp" alt={tExperience('houses.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            <img src="/images/image-SIC-play.webp" alt={tExperience('houses.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
           )}
         </div>
       </section>
@@ -518,11 +518,11 @@ export default async function ExperienciaSicPage({ params }: PageProps) {
             <p className="mt-4 text-gray-700 leading-relaxed lg:text-base text-sm">{tExperience('actividadesExtracurriculares.description')}</p>
           </div>
           {vidaMedia.length > 0 ? (
-            <div className="w-full h-[350px]">
+            <div className="w-full h-[350px] mb-10">
               <MediaCarousel items={vidaMedia} altText={t('vida.carouselAlt')} className="w-full h-full rounded-xl shadow-lg" />
             </div>
           ) : (
-            <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg" />
+            <img src="/images/Image-vida-estudiantil.webp" alt={t('vida.fallbackAlt')} width={800} height={600} className="w-full h-auto rounded-xl shadow-lg mb-10" />
           )}
         </div>
       </section>
