@@ -140,26 +140,23 @@ const HomePage = async ({ params }: PageProps) => {
 
         {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
         <section className="relative w-full bg-white py-12 lg:py-20" id="pilares">
-          {/* La rueda queda chica si el contenedor se corta en 1280, así que en
-              pantallas grandes se ensancha. La proporción de columnas no cambia. */}
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
-            {/* Texto introductorio: centrado en su columna, igual que la
-                rueda en la suya, para que ambos contenidos (imagen y
-                texto) sigan la misma lógica de centrado. */}
-            <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
-              <div className="max-w-md text-center">
-                <p className="text-gray-700 italic leading-relaxed">
-                  {t('pilares.intro')}
-                </p>
-              </div>
-            </div>
+            {/* Los dos contenidos (texto + rueda), como conjunto, quedan
+                dentro de la misma columna que el párrafo de Bienvenida
+                (col 6-12, max-w-xl) — no cada uno centrado por separado. */}
+            <div className="lg:col-start-6 lg:col-span-7 max-w-xl">
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-6">
+                {/* Texto: contra el filete, como en el resto del sitio (BloqueRotulo) */}
+                <div className="lg:flex-1 lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-6 order-2 lg:order-1">
+                  <p className="text-gray-700 italic leading-relaxed">
+                    {t('pilares.intro')}
+                  </p>
+                </div>
 
-            {/* Rueda de pilares: mismo ancho de referencia (max-w-xl) que el
-                texto de Bienvenida arriba, para que ambas queden centradas
-                en el mismo punto y no solo compartan el borde de columna. */}
-            <div className="lg:col-span-7 flex justify-center lg:justify-start order-1 lg:order-2">
-              <div className="w-full max-w-xl flex justify-center">
-                <PilaresEducativos className="w-full max-w-[420px] h-auto" />
+                {/* Rueda de pilares */}
+                <div className="lg:flex-1 flex justify-center order-1 lg:order-2">
+                  <PilaresEducativos className="w-full max-w-[280px] h-auto" />
+                </div>
               </div>
             </div>
           </div>
