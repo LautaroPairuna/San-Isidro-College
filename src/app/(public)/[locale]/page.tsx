@@ -143,10 +143,11 @@ const HomePage = async ({ params }: PageProps) => {
           {/* La rueda queda chica si el contenedor se corta en 1280, así que en
               pantallas grandes se ensancha. La proporción de columnas no cambia. */}
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
-            {/* Texto introductorio: contra el filete, como en el resto del sitio
-                (BloqueRotulo), en vez de una tarjeta flotante. */}
-            <div className="lg:col-span-5 flex lg:justify-end order-2 lg:order-1">
-              <div className="max-w-md lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-8">
+            {/* Texto introductorio: centrado en su columna, igual que la
+                rueda en la suya, para que ambos contenidos (imagen y
+                texto) sigan la misma lógica de centrado. */}
+            <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
+              <div className="max-w-md text-center">
                 <p className="text-gray-700 italic leading-relaxed">
                   {t('pilares.intro')}
                 </p>
