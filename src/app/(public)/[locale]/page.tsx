@@ -118,8 +118,11 @@ const HomePage = async ({ params }: PageProps) => {
           className="relative w-full bg-[#dcebe0] py-24 lg:py-32 lg:min-h-[620px] flex items-center"
           id="bienvenida"
         >
-          <div className="relative z-10 max-w-screen-xl mx-auto px-6 w-full">
-            <div className="max-w-xl lg:ml-[30%]">
+          {/* Misma grilla de 12 columnas que Pilares, así el texto queda en
+              la misma columna donde después cae la rueda (col 6-12): todo
+              el bloque Bienvenida+Pilares comparte una única columna. */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 max-w-screen-xl mx-auto px-4 w-full">
+            <div className="lg:col-start-6 lg:col-span-7 max-w-xl">
               <h1 className="text-2xl lg:text-3xl font-bold text-[#294161]">
                 {t('bienvenida.title')}
               </h1>
@@ -150,9 +153,13 @@ const HomePage = async ({ params }: PageProps) => {
               </div>
             </div>
 
-            {/* Rueda de pilares */}
-            <div className="lg:col-span-7 flex justify-center order-1 lg:order-2">
-              <PilaresEducativos className="w-full max-w-[420px] h-auto" />
+            {/* Rueda de pilares: mismo ancho de referencia (max-w-xl) que el
+                texto de Bienvenida arriba, para que ambas queden centradas
+                en el mismo punto y no solo compartan el borde de columna. */}
+            <div className="lg:col-span-7 flex justify-center lg:justify-start order-1 lg:order-2">
+              <div className="w-full max-w-xl flex justify-center">
+                <PilaresEducativos className="w-full max-w-[420px] h-auto" />
+              </div>
             </div>
           </div>
         </section>
