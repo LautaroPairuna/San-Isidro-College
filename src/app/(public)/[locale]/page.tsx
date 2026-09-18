@@ -109,55 +109,57 @@ const HomePage = async ({ params }: PageProps) => {
                     max-sm:w-3/4 max-sm:-top-35 max-sm:left-40 max-sm:-translate-x-1/2" fetchPriority="high" />
       </section>
 
-      {/* =============== SECCIÓN 2: BIENVENIDA =============== */}
-      <section
-        className="relative w-full bg-[#dcebe0] py-24 lg:py-32 lg:min-h-[620px] overflow-hidden flex items-center"
-        id="bienvenida"
-      >
+      {/* Bienvenida + Pilares comparten un mismo trazo punteado de fondo
+          (FondoFormaSeccion), como Colegio y Académicos: una sola instancia
+          que atraviesa ambas secciones en vez de una figura por sección. */}
+      <div className="relative overflow-hidden">
+        {/* =============== SECCIÓN 2: BIENVENIDA =============== */}
+        <section
+          className="relative w-full bg-[#dcebe0] py-24 lg:py-32 lg:min-h-[620px] flex items-center"
+          id="bienvenida"
+        >
+          <div className="relative z-10 max-w-screen-xl mx-auto px-6 w-full">
+            <div className="max-w-xl lg:ml-[30%]">
+              <h1 className="text-2xl lg:text-3xl font-bold text-[#294161]">
+                {t('bienvenida.title')}
+              </h1>
+              <p className="mt-3 font-bold text-[#c19516]">
+                {t('bienvenida.greeting')}
+              </p>
+              <div className="mt-4 space-y-3 text-[#294161] italic leading-relaxed text-[15px]">
+                <p>{t('bienvenida.p1')}</p>
+                <p>{t('bienvenida.p2')}</p>
+                <p>{t('bienvenida.p3')}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
+        <section className="relative w-full bg-white py-12 lg:py-20" id="pilares">
+          {/* La rueda queda chica si el contenedor se corta en 1280, así que en
+              pantallas grandes se ensancha. La proporción de columnas no cambia. */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
+            {/* Texto introductorio: contra el filete, como en el resto del sitio
+                (BloqueRotulo), en vez de una tarjeta flotante. */}
+            <div className="lg:col-span-5 flex lg:justify-end order-2 lg:order-1">
+              <div className="max-w-md lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-8">
+                <p className="text-gray-700 italic leading-relaxed">
+                  {t('pilares.intro')}
+                </p>
+              </div>
+            </div>
+
+            {/* Rueda de pilares */}
+            <div className="lg:col-span-7 flex justify-center order-1 lg:order-2">
+              <PilaresEducativos className="w-full max-w-[420px] h-auto" />
+            </div>
+          </div>
+        </section>
+
         {/* Mismo trazo punteado decorativo que Colegio y Académicos */}
         <FondoFormaSeccion />
-
-        <div className="relative z-10 max-w-screen-xl mx-auto px-6 w-full">
-          <div className="max-w-xl lg:ml-[30%]">
-            <h1 className="text-2xl lg:text-3xl font-bold text-[#294161]">
-              {t('bienvenida.title')}
-            </h1>
-            <p className="mt-3 font-bold text-[#c19516]">
-              {t('bienvenida.greeting')}
-            </p>
-            <div className="mt-4 space-y-3 text-[#294161] italic leading-relaxed text-[15px]">
-              <p>{t('bienvenida.p1')}</p>
-              <p>{t('bienvenida.p2')}</p>
-              <p>{t('bienvenida.p3')}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =============== SECCIÓN 3 BIS: PILARES (FORMACIÓN INTEGRAL) =============== */}
-      <section className="relative w-full bg-white py-12 lg:py-20 overflow-hidden" id="pilares">
-        {/* Trazo decorativo (solo desktop) */}
-        <img src="/images/formas/forma-home-5.svg" alt="" width={650} height={600} aria-hidden="true" className="lg:block absolute top:20 md:-top-10 right:50 lg:right-30 2xl:right-72 w-[650px] md:w-[560px] h-auto pointer-events-none opacity-90" />
-
-        {/* La rueda queda chica si el contenedor se corta en 1280, así que en
-            pantallas grandes se ensancha. La proporción de columnas no cambia. */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center max-w-screen-xl mx-auto px-4">
-          {/* Texto introductorio: contra el filete, como en el resto del sitio
-              (BloqueRotulo), en vez de una tarjeta flotante. */}
-          <div className="lg:col-span-5 flex lg:justify-end order-2 lg:order-1">
-            <div className="max-w-md lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-8">
-              <p className="text-gray-700 italic leading-relaxed">
-                {t('pilares.intro')}
-              </p>
-            </div>
-          </div>
-
-          {/* Rueda de pilares */}
-          <div className="lg:col-span-7 flex justify-center order-1 lg:order-2">
-            <PilaresEducativos className="w-full max-w-[420px] h-auto" />
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* =========== SECCIÓN 3: FONDO UNICO + MARQUEE ÍCONOS =========== */}
       <section className="relative w-full bg-[#71af8d] py-10" id="infograma">
