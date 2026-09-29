@@ -17,7 +17,8 @@
       "fallbackAlt": "Section 3 Background"
     },
     "pilares": {
-      "intro": "We believe that educating is much more than teaching. It means accompanying every student in discovering who they are and everything they can become, integrating every dimension of their growth into an education that leaves a lasting mark."
+      "intro": "We believe that educating is much more than teaching. It means accompanying every student in discovering who they are and everything they can become, integrating every dimension of their growth into an education that leaves a lasting mark.",
+      "titulo": "An education that leaves a lasting mark."
     },
     "propuesta": {
       "title": "Discover our proposal",
@@ -933,35 +934,43 @@
     },
     "bilingue": {
       "l1": "Bilingual",
-      "l2": "education"
+      "l2": "education",
+      "texto": "English is introduced from the earliest years as a language for communication and learning. We support every student to understand, express themselves, and communicate confidently and naturally in both languages."
     },
     "valores": {
       "l1": "Learning",
-      "l2": "through values"
+      "l2": "through values",
+      "texto": "We teach through example and everyday life. We promote empathy, responsibility, respect, and solidarity so that every student learns to choose and act with freedom and commitment."
     },
     "ciudadania": {
       "l1": "Global",
-      "l2": "citizenship"
+      "l2": "citizenship",
+      "texto": "We prepare students to understand different realities, communicate with others, and take responsible part in an interconnected world. We promote curiosity, critical thinking, and respect for diversity."
     },
     "sustentabilidad": {
       "l1": "Sustainability",
-      "l2": "and social commitment"
+      "l2": "and social commitment",
+      "texto": "We promote care for nature and commitment to others. Through hands-on experiences, our students discover that their actions can help positively transform their community."
     },
     "comunidad": {
       "l1": "Community",
-      "l2": "and belonging"
+      "l2": "and belonging",
+      "texto": "We believe in a close-knit community, where every person is known, valued, and supported. We strengthen the bonds, participation, and sense of belonging that let us grow together."
     },
     "arte": {
       "l1": "Art",
-      "l2": "and creativity"
+      "l2": "and creativity",
+      "texto": "Art opens new ways of seeing, feeling, and expressing oneself. Through music, visual arts, theater, and dance, every student discovers their talents and learns to create alongside others."
     },
     "deporte": {
       "l1": "Sport",
-      "l2": "and wellbeing"
+      "l2": "and wellbeing",
+      "texto": "Sport builds character, brings people together, and teaches. Through movement and play, our students learn to push themselves, work as a team, and build habits that support their physical and emotional wellbeing."
     },
     "innovacion": {
       "l1": "Educational",
-      "l2": "innovation"
+      "l2": "innovation",
+      "texto": "We bring together technology, creativity, and hands-on learning to turn ideas into projects. We want our students to research, experiment, solve problems, and prepare for the challenges of the future."
     }
   },
   "estudiante": {

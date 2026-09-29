@@ -17,7 +17,8 @@
       "fallbackAlt": "Sección 3 Fondo"
     },
     "pilares": {
-      "intro": "Creemos que educar es mucho más que enseñar. Es acompañar a cada estudiante en el descubrimiento de quién es y de todo lo que puede llegar a ser, integrando cada dimensión de su crecimiento en una formación que deja huella."
+      "intro": "Creemos que educar es mucho más que enseñar. Es acompañar a cada estudiante en el descubrimiento de quién es y de todo lo que puede llegar a ser, integrando cada dimensión de su crecimiento en una formación que deja huella.",
+      "titulo": "Una formación que deja huella."
     },
     "propuesta": {
       "title": "Descubrí nuestra propuesta",
@@ -933,35 +934,43 @@
     },
     "bilingue": {
       "l1": "Educación",
-      "l2": "bilingüe"
+      "l2": "bilingüe",
+      "texto": "El inglés se incorpora desde los primeros años como lengua de comunicación y aprendizaje. Acompañamos a cada estudiante para que pueda comprender, expresarse y desenvolverse con confianza y naturalidad en ambos idiomas."
     },
     "valores": {
       "l1": "Aprendizaje",
-      "l2": "con valores"
+      "l2": "con valores",
+      "texto": "Educamos desde el ejemplo y la vida cotidiana. Promovemos la empatía, la responsabilidad, el respeto y la solidaridad para que cada estudiante aprenda a elegir y actuar con libertad y compromiso."
     },
     "ciudadania": {
       "l1": "Ciudadanía",
-      "l2": "global"
+      "l2": "global",
+      "texto": "Formamos estudiantes capaces de comprender distintas realidades, comunicarse con otros y participar responsablemente en un mundo interconectado. Promovemos la curiosidad, el pensamiento crítico y el respeto por la diversidad."
     },
     "sustentabilidad": {
       "l1": "Sustentabilidad",
-      "l2": "y compromiso social"
+      "l2": "y compromiso social",
+      "texto": "Promovemos el cuidado de la naturaleza y el compromiso con los demás. A través de experiencias concretas, nuestros estudiantes descubren que sus acciones pueden contribuir a transformar positivamente su comunidad."
     },
     "comunidad": {
       "l1": "Comunidad",
-      "l2": "y pertenencia"
+      "l2": "y pertenencia",
+      "texto": "Creemos en una comunidad cercana, donde cada persona es conocida, valorada y acompañada. Fortalecemos los vínculos, la participación y el sentido de pertenencia que nos permite crecer juntos."
     },
     "arte": {
       "l1": "Arte",
-      "l2": "y creatividad"
+      "l2": "y creatividad",
+      "texto": "El arte abre nuevas formas de mirar, sentir y expresarse. A través de la música, las artes visuales, el teatro y la danza, cada estudiante descubre sus talentos y aprende a crear con otros."
     },
     "deporte": {
       "l1": "Deporte",
-      "l2": "y bienestar"
+      "l2": "y bienestar",
+      "texto": "El deporte forma, une y enseña. A través del movimiento y el juego, nuestros estudiantes aprenden a superarse, trabajar en equipo y desarrollar hábitos que favorecen su bienestar físico y emocional."
     },
     "innovacion": {
       "l1": "Innovación",
-      "l2": "educativa"
+      "l2": "educativa",
+      "texto": "Integramos tecnología, creatividad y aprendizaje práctico para transformar ideas en proyectos. Buscamos que nuestros estudiantes investiguen, experimenten, resuelvan problemas y se preparen para los desafíos del futuro."
     }
   },
   "estudiante": {

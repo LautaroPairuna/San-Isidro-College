@@ -4,7 +4,7 @@ import RenderMedia from '@/components/RenderMedia'
 import MediaCarousel from '@/components/MediaCarousel'
 import SectionCarrusel from '@/components/sectionCarrusel'
 import Contact from '@/components/sectionContact'
-import PilaresEducativos from '@/components/PilaresEducativos'
+import PilaresIntegral from '@/components/PilaresIntegral'
 import FondoFormaSeccion from '@/components/FondoFormaSeccion'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getPageContentForSlug, type PageContentSection } from '@/lib/pageContentCache'
@@ -140,20 +140,7 @@ const HomePage = async ({ params }: PageProps) => {
           {/* Contenedor más ancho que el de Bienvenida (pero también centrado
               en la pantalla) para poder alojar la rueda a ~560px. */}
           <div className="relative z-10 max-w-[1024px] mx-auto px-4">
-            <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 lg:gap-10">
-              {/* Texto: contra el filete, como en el resto del sitio (BloqueRotulo).
-                  El filete estira su altura para igualar la de la rueda. */}
-              <div className="lg:flex-1 lg:flex lg:flex-col lg:justify-center lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-8 order-2 lg:order-1">
-                <p className="text-gray-700 italic leading-relaxed">
-                  {t('pilares.intro')}
-                </p>
-              </div>
-
-              {/* Rueda de pilares */}
-              <div className="w-full lg:w-[560px] shrink-0 flex justify-center order-1 lg:order-2">
-                <PilaresEducativos className="w-full max-w-[340px] lg:max-w-none h-auto" />
-              </div>
-            </div>
+            <PilaresIntegral tituloDefault={t('pilares.titulo')} textoDefault={t('pilares.intro')} />
           </div>
         </section>
 
@@ -279,7 +266,7 @@ const HomePage = async ({ params }: PageProps) => {
                   <Link
                     key={key}
                     href={href}
-                    className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
+                    className="inline-flex items-center gap-2 font-semibold text-[#1e804b] hover:text-[#294161] transition-colors"
                   >
                     {t(`propuesta.niveles.${key}`)}
                     <span aria-hidden="true" className="text-[#c19516]">
@@ -303,7 +290,7 @@ const HomePage = async ({ params }: PageProps) => {
               <div className="mt-8">
                 <Link
                   href="/experiencia-sic"
-                  className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
+                  className="inline-flex items-center gap-2 font-semibold text-[#1e804b] hover:text-[#294161] transition-colors"
                 >
                   {t('propuesta.experiencia.cta')}
                   <span aria-hidden="true" className="text-[#c19516]">
@@ -326,7 +313,7 @@ const HomePage = async ({ params }: PageProps) => {
               <div className="mt-8">
                 <Link
                   href="/deportes"
-                  className="inline-flex items-center gap-2 font-semibold text-[#294161] hover:text-[#1e804b] transition-colors"
+                  className="inline-flex items-center gap-2 font-semibold text-[#1e804b] hover:text-[#294161] transition-colors"
                 >
                   {t('propuesta.deportes.cta')}
                   <span aria-hidden="true" className="text-[#c19516]">
@@ -362,7 +349,7 @@ const HomePage = async ({ params }: PageProps) => {
                 href={ADMISSIONS_FORM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#294161] font-semibold hover:text-[#1e804b] transition-colors"
+                className="inline-flex items-center gap-2 text-[#1e804b] font-semibold hover:text-[#294161] transition-colors"
               >
                 {t('conocernos.cta')}
                 <span aria-hidden="true" className="text-[#c19516]">
