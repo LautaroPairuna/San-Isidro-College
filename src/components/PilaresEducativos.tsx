@@ -91,8 +91,8 @@ export function PilaresEducativos({ className, activeKey, onPilarChange }: Pilar
           strokeWidth={4}
           strokeMiterlimit={10}
           filter={`url(#pilares-shadow${w.inner ? '-inner' : ''})`}
-          opacity={!activeKey || activeKey === w.key ? 1 : 0.55}
-          style={onPilarChange ? { cursor: 'pointer', transition: 'opacity 0.2s' } : undefined}
+          opacity={!activeKey || activeKey === w.key ? 1 : 0.4}
+          style={onPilarChange ? { cursor: 'pointer', transition: 'opacity 0.25s ease' } : undefined}
           onMouseEnter={onPilarChange ? () => onPilarChange(w.key) : undefined}
           onMouseLeave={onPilarChange ? () => onPilarChange(null) : undefined}
         />
@@ -159,8 +159,8 @@ export function PilaresEducativos({ className, activeKey, onPilarChange }: Pilar
           fill="#fff"
           fontSize={LABEL_SIZE}
           fontWeight={700}
-          opacity={!activeKey || activeKey === key ? 1 : 0.55}
-          style={{ transition: 'opacity 0.2s', pointerEvents: 'none' }}
+          opacity={!activeKey || activeKey === key ? 1 : 0.4}
+          style={{ transition: 'opacity 0.25s ease', pointerEvents: 'none' }}
           className="font-gotham"
         >
           <tspan x={x}>{t(`${key}.l1`)}</tspan>

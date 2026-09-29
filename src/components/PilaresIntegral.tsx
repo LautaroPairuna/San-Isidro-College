@@ -1,15 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { PilaresEducativos, type PilarKey } from './PilaresEducativos';
 import { TITULO_SECCION } from '@/lib/tipografia';
+
+const FADE_MS = 150;
 
 /**
  * Texto + rueda de "Formación integral", con interacción: al pasar el mouse
  * por un gajo de la rueda, el título y el texto de la izquierda cambian para
  * mostrar el pilar correspondiente. Sin hover, muestran el título y la bajada
  * por defecto.
+ *
+ * El resaltado de la rueda (activeKey) es inmediato, pero el texto usa un
+ * estado propio (displayKey) que espera a que termine el fade-out para
+ * cambiar el contenido, así el cambio de texto se ve como un crossfade en
+ * vez de un salto.
  */
 export default function PilaresIntegral({
   tituloDefault,
@@ -20,17 +27,37 @@ export default function PilaresIntegral({
 }) {
   const t = useTranslations('pilares');
   const [activeKey, setActiveKey] = useState<PilarKey | null>(null);
+  const [displayKey, setDisplayKey] = useState<PilarKey | null>(null);
+  const [fading, setFading] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const titulo = activeKey ? `${t(`${activeKey}.l1`)} ${t(`${activeKey}.l2`)}` : tituloDefault;
-  const texto = activeKey ? t(`${activeKey}.texto`) : textoDefault;
+  useEffect(() => {
+    if (activeKey === displayKey) return;
+    setFading(true);
+    timeoutRef.current = setTimeout(() => {
+      setDisplayKey(activeKey);
+      setFading(false);
+    }, FADE_MS);
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [activeKey, displayKey]);
+
+  const titulo = displayKey ? `${t(`${displayKey}.l1`)} ${t(`${displayKey}.l2`)}` : tituloDefault;
+  const texto = displayKey ? t(`${displayKey}.texto`) : textoDefault;
 
   return (
     <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 lg:gap-10">
       {/* Texto: contra el filete, como en el resto del sitio (BloqueRotulo).
           El filete estira su altura para igualar la de la rueda. */}
       <div className="lg:flex-1 lg:flex lg:flex-col lg:justify-center lg:text-right lg:border-r lg:border-[#9bb5a5] lg:pr-8 order-2 lg:order-1">
-        <h2 className={TITULO_SECCION}>{titulo}</h2>
-        <p className="mt-3 text-gray-700 italic leading-relaxed">{texto}</p>
+        <div
+          className="transition-opacity ease-in-out"
+          style={{ opacity: fading ? 0 : 1, transitionDuration: `${FADE_MS}ms` }}
+        >
+          <h2 className={TITULO_SECCION}>{titulo}</h2>
+          <p className="mt-3 text-gray-700 italic leading-relaxed">{texto}</p>
+        </div>
       </div>
 
       {/* Rueda de pilares */}
