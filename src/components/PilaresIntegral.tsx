@@ -49,7 +49,9 @@ export default function PilaresIntegral({
     return () => clearTimeout(timeout);
   }, [activeKey, displayKey]);
 
-  const titulo = displayKey ? `${t(`${displayKey}.l1`)} ${t(`${displayKey}.l2`)}` : tituloDefault;
+  // Título en dos renglones (l1/l2), igual que las etiquetas de la rueda;
+  // whitespace-pre-line en el h2 respeta el salto de línea.
+  const titulo = displayKey ? `${t(`${displayKey}.l1`)}\n${t(`${displayKey}.l2`)}` : tituloDefault;
   const texto = displayKey ? t(`${displayKey}.texto`) : textoDefault;
 
   return (
@@ -61,7 +63,7 @@ export default function PilaresIntegral({
           className="transition-opacity ease-in-out"
           style={{ opacity: fading ? 0 : 1, transitionDuration: `${FADE_MS}ms` }}
         >
-          <h2 className={TITULO_SECCION}>{titulo}</h2>
+          <h2 className={`${TITULO_SECCION} whitespace-pre-line`}>{titulo}</h2>
           <p className="mt-3 text-gray-700 italic leading-relaxed">{texto}</p>
         </div>
       </div>

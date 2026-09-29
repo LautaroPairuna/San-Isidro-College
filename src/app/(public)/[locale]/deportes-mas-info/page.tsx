@@ -38,7 +38,7 @@ export default async function DeportesMasInfoPage({ params }: PageProps) {
       </section>
 
       {/* ============ SAN ISIDRO COLLEGE CLUB ============ */}
-      <section id="club" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+      <section id="club" className="relative w-full bg-[#dcebe0] pt-16 lg:pt-24 scroll-mt-32">
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <BloqueRotulo
             rotulo={
@@ -58,7 +58,7 @@ export default async function DeportesMasInfoPage({ params }: PageProps) {
       {/* ============ ASÍ NACIÓ EL CLUB ============ */}
       {/* Mismo fondo que "San Isidro College Club": es la continuación de esa
           misma sección, no un bloque nuevo. */}
-      <section id="club-origen" className="relative w-full bg-[#dcebe0] py-16 lg:py-24 scroll-mt-32">
+      <section id="club-origen" className="relative w-full bg-[#dcebe0] pt-6 lg:pt-8 pb-16 lg:pb-24 scroll-mt-32">
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           {/* Texto contra el filete y, del otro lado, el escudo del club. */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

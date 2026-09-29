@@ -68,10 +68,12 @@ export function PilaresEducativos({ className, activeKey, onPilarChange }: Pilar
       viewBox="0 0 753 753"
       className={className}
       role="img"
-      aria-labelledby="pilares-title"
+      aria-label={t('ariaLabel')}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <title id="pilares-title">{t('ariaLabel')}</title>
+      {/* Antes había un <title> acá, pero el navegador lo muestra como un
+          tooltip nativo (el cartel negro) al pasar el mouse por cualquier
+          gajo. aria-label da el mismo nombre accesible sin ese tooltip. */}
 
       <defs>
         <filter id="pilares-shadow" filterUnits="userSpaceOnUse">
