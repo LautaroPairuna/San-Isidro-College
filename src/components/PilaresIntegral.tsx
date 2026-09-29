@@ -49,9 +49,12 @@ export default function PilaresIntegral({
     return () => clearTimeout(timeout);
   }, [activeKey, displayKey]);
 
-  // Título en dos renglones (l1/l2), igual que las etiquetas de la rueda;
-  // whitespace-pre-line en el h2 respeta el salto de línea.
-  const titulo = displayKey ? `${t(`${displayKey}.l1`)}\n${t(`${displayKey}.l2`)}` : tituloDefault;
+  // Solo "sustentabilidad" pidió el salto de línea explícito (PDF de
+  // correcciones); el resto de los pilares no lo mencionó, así que siguen
+  // en un solo renglón como antes.
+  const titulo = displayKey
+    ? `${t(`${displayKey}.l1`)}${displayKey === 'sustentabilidad' ? '\n' : ' '}${t(`${displayKey}.l2`)}`
+    : tituloDefault;
   const texto = displayKey ? t(`${displayKey}.texto`) : textoDefault;
 
   return (
