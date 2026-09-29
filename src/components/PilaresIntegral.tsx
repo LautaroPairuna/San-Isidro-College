@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { PilaresEducativos, type PilarKey } from './PilaresEducativos';
 import { TITULO_SECCION } from '@/lib/tipografia';
@@ -29,18 +29,24 @@ export default function PilaresIntegral({
   const [activeKey, setActiveKey] = useState<PilarKey | null>(null);
   const [displayKey, setDisplayKey] = useState<PilarKey | null>(null);
   const [fading, setFading] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (activeKey === displayKey) return;
+    // Si el hover vuelve al mismo pilar que ya está mostrado antes de que
+    // termine el fade (típico con scroll, que dispara varios cambios de
+    // hover en poco tiempo), hay que reponer fading=false acá: si solo
+    // hiciéramos "return" el timeout pendiente ya fue cancelado por el
+    // cleanup del efecto anterior y nada volvía a sacar el texto de
+    // opacity 0, dejando el bloque en blanco para siempre.
+    if (activeKey === displayKey) {
+      setFading(false);
+      return;
+    }
     setFading(true);
-    timeoutRef.current = setTimeout(() => {
+    const timeout = setTimeout(() => {
       setDisplayKey(activeKey);
       setFading(false);
     }, FADE_MS);
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    return () => clearTimeout(timeout);
   }, [activeKey, displayKey]);
 
   const titulo = displayKey ? `${t(`${displayKey}.l1`)} ${t(`${displayKey}.l2`)}` : tituloDefault;
