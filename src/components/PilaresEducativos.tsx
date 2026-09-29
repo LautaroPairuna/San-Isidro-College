@@ -43,6 +43,15 @@ const WEDGES = [
 /** Claves de los 8 gajos, en el mismo orden que WEDGES/LABELS. */
 export type PilarKey = (typeof WEDGES)[number]['key'];
 
+/** Oscurece un color hex un poco, para el gajo activo (sin tocar los demás). */
+function darken(hex: string, factor: number): string {
+  const n = parseInt(hex.slice(1), 16);
+  const r = Math.round(((n >> 16) & 255) * factor);
+  const g = Math.round(((n >> 8) & 255) * factor);
+  const b = Math.round((n & 255) * factor);
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+}
+
 type PilaresEducativosProps = {
   className?: string;
   /** Gajo actualmente resaltado (hover). */
@@ -81,18 +90,17 @@ export function PilaresEducativos({ className, activeKey, onPilarChange }: Pilar
         </filter>
       </defs>
 
-      {/* Gajos de color */}
+      {/* Gajos de color: sin transparencia entre ellos, el activo solo se oscurece un poco. */}
       {WEDGES.map((w) => (
         <path
           key={w.key}
           d={w.d}
-          fill={w.fill}
+          fill={activeKey === w.key ? darken(w.fill, 0.82) : w.fill}
           stroke="#fff"
           strokeWidth={4}
           strokeMiterlimit={10}
           filter={`url(#pilares-shadow${w.inner ? '-inner' : ''})`}
-          opacity={!activeKey || activeKey === w.key ? 1 : 0.4}
-          style={onPilarChange ? { cursor: 'pointer', transition: 'opacity 0.25s ease' } : undefined}
+          style={onPilarChange ? { cursor: 'pointer', transition: 'fill 0.25s ease' } : undefined}
           onMouseEnter={onPilarChange ? () => onPilarChange(w.key) : undefined}
           onMouseLeave={onPilarChange ? () => onPilarChange(null) : undefined}
         />
@@ -159,8 +167,7 @@ export function PilaresEducativos({ className, activeKey, onPilarChange }: Pilar
           fill="#fff"
           fontSize={LABEL_SIZE}
           fontWeight={700}
-          opacity={!activeKey || activeKey === key ? 1 : 0.4}
-          style={{ transition: 'opacity 0.25s ease', pointerEvents: 'none' }}
+          style={{ pointerEvents: 'none' }}
           className="font-gotham"
         >
           <tspan x={x}>{t(`${key}.l1`)}</tspan>
