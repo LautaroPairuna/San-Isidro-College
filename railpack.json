@@ -1,5 +1,6 @@
 {
   "$schema": "https://schema.railpack.com",
+  "packages": { "node": "24.22.1" },
   "steps": {
     "install": {
       "commands": ["npm install -g npm@11.21.1", "..."]
