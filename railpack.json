@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "steps": {
+    "install": {
+      "commands": ["npm install -g npm@11.21.1", "..."]
+    }
+  },
+  "deploy": {
+    "startCommand": "./node_modules/.bin/prisma db push && exec node --max-old-space-size=256 ./node_modules/.bin/next start",
+    "variables": { "MALLOC_ARENA_MAX": "2" }
+  }
+}
