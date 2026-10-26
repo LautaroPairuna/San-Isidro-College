@@ -4,6 +4,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   cacheMaxMemorySize: 0,
   // Oculta el header "X-Powered-By: Next.js" (no aporta valor y expone stack).
   poweredByHeader: false,
@@ -14,6 +15,25 @@ const nextConfig: NextConfig = {
     'ffmpeg-static',
     'ffprobe-static'
   ],
+  // El rastreo de standalone no ve los binarios: los paquetes los exponen como ruta.
+  outputFileTracingIncludes: {
+    '/**': [
+      './node_modules/ffmpeg-static/ffmpeg',
+      './node_modules/ffprobe-static/bin/linux/x64/ffprobe',
+    ],
+  },
+  // Las rutas de disco del admin hacen que Turbopack rastree el proyecto entero;
+  // public/ se copia aparte en el build y el resto no se usa en runtime.
+  outputFileTracingExcludes: {
+    '/**': [
+      './public/**',
+      './src/**',
+      './prisma/**',
+      './package-lock.json',
+      './railpack.json',
+      './tsconfig.json',
+    ],
+  },
 
   async headers() {
     // 'unsafe-eval' sólo se habilita en desarrollo: el dev server de Next usa
