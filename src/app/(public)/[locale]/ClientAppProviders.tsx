@@ -19,7 +19,7 @@ export default function ClientAppProviders({
   messages
 }: ClientAppProvidersProps) {
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages} timeZone="America/Argentina/Salta">
       <HeaderWrapper />
       <main id="contenido-principal">{children}</main>
       <FloatingAdmissionsButton />
