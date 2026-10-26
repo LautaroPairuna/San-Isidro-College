@@ -25,14 +25,7 @@ const nextConfig: NextConfig = {
   // Las rutas de disco del admin hacen que Turbopack rastree el proyecto entero;
   // public/ se copia aparte en el build y el resto no se usa en runtime.
   outputFileTracingExcludes: {
-    '/**': [
-      './public/**',
-      './src/**',
-      './prisma/**',
-      './package-lock.json',
-      './railpack.json',
-      './tsconfig.json',
-    ],
+    '/**': ['./public/**'],
   },
 
   async headers() {
