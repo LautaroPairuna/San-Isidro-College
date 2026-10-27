@@ -12,6 +12,11 @@ function withConnectionLimit(url: string): string {
     if (!parsed.searchParams.has("connectionLimit")) {
       parsed.searchParams.set("connectionLimit", "5");
     }
+    // MySQL 8 sin SSL: sin esto, con la caché de autenticación vacía (después de
+    // reiniciar MySQL) el driver no se puede autenticar.
+    if (!parsed.searchParams.has("allowPublicKeyRetrieval")) {
+      parsed.searchParams.set("allowPublicKeyRetrieval", "true");
+    }
     return parsed.toString();
   } catch {
     return url;

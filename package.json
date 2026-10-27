@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
+    "@prisma/adapter-mariadb": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "@tanstack/react-query": "^5.101.4",
     "bcrypt": "^6.0.0",
@@ -44,7 +45,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
-    "@prisma/adapter-mariadb": "^7.10.1",
     "@prisma/config": "^7.10.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/bcrypt": "^6.0.0",
@@ -65,5 +65,10 @@
   "engines": {
     "node": "^24.22.1",
     "npm": "^11.21.1"
+  },
+  "allowScripts": {
+    "@prisma/engines": true,
+    "ffmpeg-static": true,
+    "prisma": true
   }
 }
