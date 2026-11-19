@@ -2,6 +2,7 @@
 import { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { ipDelPedido, limpiarFallos, registrarFallo, segundosDeBloqueo } from "./login-throttle";
 
 /**
  * Credenciales del admin: ahora salen del entorno, no del código.
@@ -27,7 +28,7 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Contraseña", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!ADMIN_EMAIL || !ADMIN_PASSWORD_HASH) {
           // NextAuth le devuelve al navegador un error genérico, así que la
           // causa real queda en el log del servidor: si no, un deploy sin las
@@ -40,9 +41,14 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials.password) {
           throw new Error("Faltan credenciales");
         }
+        const ip = ipDelPedido(req?.headers);
+        if (segundosDeBloqueo(ip) > 0) {
+          throw new Error("Demasiados intentos fallidos. Esperá 15 minutos y volvé a intentar.");
+        }
         if (
           credentials.email.trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase()
         ) {
+          registrarFallo(ip);
           throw new Error("Email incorrecto");
         }
         const isValid = await bcrypt.compare(
@@ -50,8 +56,10 @@ export const authOptions: AuthOptions = {
           ADMIN_PASSWORD_HASH
         );
         if (!isValid) {
+          registrarFallo(ip);
           throw new Error("Contraseña incorrecta");
         }
+        limpiarFallos(ip);
         return { id: "1", name: "Admin", email: credentials.email };
       },
     }),
