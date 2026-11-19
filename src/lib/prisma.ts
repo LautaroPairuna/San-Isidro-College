@@ -12,6 +12,15 @@ function withConnectionLimit(url: string): string {
     if (!parsed.searchParams.has("connectionLimit")) {
       parsed.searchParams.set("connectionLimit", "5");
     }
+    // El driver deja abiertas todas las conexiones del pool aunque no se usen
+    // (minimumIdle = connectionLimit). Así se cierran al minuto sin uso: la base
+    // es compartida con otros sitios.
+    if (!parsed.searchParams.has("minimumIdle")) {
+      parsed.searchParams.set("minimumIdle", "0");
+    }
+    if (!parsed.searchParams.has("idleTimeout")) {
+      parsed.searchParams.set("idleTimeout", "60");
+    }
     // MySQL 8 sin SSL: sin esto, con la caché de autenticación vacía (después de
     // reiniciar MySQL) el driver no se puede autenticar.
     if (!parsed.searchParams.has("allowPublicKeyRetrieval")) {
@@ -29,11 +38,9 @@ const prismaLogs: Prisma.LogLevel[] =
     ? ["query", "error", "warn"]
     : ["error", "warn"];
 
-export const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    adapter,
-    log: prismaLogs,
-  });
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+// También en producción: un solo pool por proceso aunque el módulo se cargue
+// desde más de un bundle.
+export const prisma = (globalForPrisma.prisma ||= new PrismaClient({
+  adapter,
+  log: prismaLogs,
+}));
